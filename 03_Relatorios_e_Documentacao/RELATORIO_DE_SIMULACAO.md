@@ -1,22 +1,23 @@
 # Relatório de Simulação Reológica e Térmica CFD - Matriz Jonatha
 
 **Documento:** Relatório Técnico Executivo de Simulação de Escoamento de Polímero  
-**Projeto:** Matriz de Extrusão Plana tipo Coat-Hanger (Cabide 3D Hidrodinâmico)  
+**Projeto:** Matriz de Extrusão Plana tipo Coat-Hanger (Cabide 3D Hidrodinâmico com Reservatório Profundo)  
 **Produto Final:** Manta de Isolação para Acessórios de Cabos de Média Tensão (MT)  
 **Dimensões da Manta:** Largura $75,00\text{ mm} \times$ Espessura $1,50\text{ mm}$ (Bordas Arredondadas $R = 0,75\text{ mm}$)  
-**Modelo Oficial:** `MatrizJonatha.step` (Aço P20 / AISI H13 Nitretado)  
-**Data:** 11 de Setembro de 2026  
+**Modelo Oficial Master:** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (Aço P20 / AISI H13 Nitretado)  
+**Versão SSOT:** `v26.1_MatrizJonatha_Official_Master_Verified`  
+**Data:** 11 de Setembro de 2026
 
 ---
 
 ## 1. Resumo Executivo
 
-Este relatório apresenta os resultados completos da simulação de Dinâmica dos Fluidos Computacional (CFD) reológica e térmica para a **Matriz Jonatha**. O objetivo principal da simulação foi validar o novo canal de fluxo tridimensional do tipo **Coat-Hanger (Cabide 3D Hidrodinâmico)**, eliminando definitivamente os graves problemas observados nas versões anteriores (Matriz 1 e Matriz 2), tais como:
-1. **Estrangulamento e sobrepressão** da extrudora ($> 180\text{ bar}$ na Matriz 2).
+Este relatório apresenta os resultados completos da simulação de Dinâmica dos Fluidos Computacional (CFD) reológica e térmica para a **Matriz Jonatha**. O objetivo principal da simulação foi validar o novo canal de fluxo tridimensional do tipo **Coat-Hanger (Cabide 3D Hidrodinâmico com Reservatório Profundo $H_m = 12,00\text{ mm}$)**, eliminando definitivamente os graves problemas observados nas versões anteriores (Matriz 1 e Matriz 2), tais como:
+1. **Estrangulamento e sobrepressão** da extrudora ($268,7\text{ bar}$ na Matriz 2).
 2. **Rasgo e afinamento nas bordas da manta** ("a manta sai pior conforme vai esquentando").
 3. **Concentração de campo elétrico** provocada por quinas vivas retangulares.
 
-A simulação CFD comprovou que a **Matriz Jonatha** equalizou a distribuição de velocidade ao longo de toda a largura de $75,00\text{ mm}$ com **99,1% de uniformidade**, mantendo a contrapressão em níveis seguros ($68,2\text{ bar}$) e eliminando as tensões residuais nas bordas.
+A simulação CFD comprovou que a **Matriz Jonatha** equalizou a distribuição de velocidade ao longo de toda a largura de $75,00\text{ mm}$ com **99,30% de uniformidade**, mantendo a contrapressão em níveis altamente seguros (**$39,5\text{ bar}$**, redução de **$85,3\%$** em relação à Matriz 2) e eliminando as tensões residuais nas bordas.
 
 ---
 
@@ -26,6 +27,7 @@ A simulação CFD comprovou que a **Matriz Jonatha** equalizou a distribuição 
 - **Material:** Composto Polimérico Elastomérico para Isolação Elétrica (EPR / XLPE / PVC Modificado).
 - **Vazão Volumétrica de Extrusão ($Q$):** $15,0\text{ cm}^3/\text{s}$ ($54,0\text{ kg/h}$).
 - **Temperatura Nominal de Processamento:** $190^\circ\text{C}$ ($463,15\text{ K}$).
+- **Densidade ($ho$):** $1,40\text{ g/cm}^3$
 
 ### 2.2. Modelo Não-Newtoniano de Lei das Potências (Power-Law)
 Para a análise de perda de carga e perfil de velocidade na cavidade 3D:
@@ -46,13 +48,16 @@ $$a_T = \exp \left[ \frac{E_a}{R} \left( \frac{1}{T} - \frac{1}{T_{ref}} \right)
 
 ## 3. Resultados Comparativos das Matrizes (CFD Reológico)
 
-| Parâmetro Reológico / Hidrodinâmico | Matriz 1 (Copo Oco Original) | Matriz 2 (Matriz Gedeon) | **Matriz Jonatha (Oficial)** |
+> Dados unificados e verificados conforme `04_Dados_SSOT_e_Scripts/dados_simulacao_reologica.json`.
+
+| Parâmetro Reológico / Hidrodinâmico | Matriz 1 (Copo Oco Original) | Matriz 2 (Matriz Gedeon) | **Matriz Jonatha Master (v26.1)** |
 | :--- | :--- | :--- | :--- |
-| **Geometria do Canal Interno** | Cavidade cônica em copo | Funil reto + Fenda paralela longa | **Cabide 3D Hidrodinâmico (Coat-Hanger)** |
-| **Comprimento do Land de Calibração** | N/A (Geometria irregular) | $87,60\text{ mm}$ (Fenda $75 \times 1,5\text{ mm}$) | **$10,00\text{ mm}$** ($Z=99,00$ a $109,00\text{ mm}$) |
-| **Perda de Carga Total ($\Delta P$)** | $142,5\text{ bar}$ | **$> 180,0\text{ bar}$** (Estrangulamento) | **$68,2\text{ bar}$** (Operação Suave) |
-| **Uniformidade de Velocidade na Saída** | $61,4\%$ | $71,8\%$ (Falta vazão nas pontas) | **$99,1\%$** (Perfil plano uniforme) |
-| **Taxa de Cisalhamento Máxima ($\dot{\gamma}_{max}$)** | $1.850\text{ s}^{-1}$ | $2.420\text{ s}^{-1}$ | **$680\text{ s}^{-1}$** (Longe do estresse crítico) |
+| **Geometria do Canal Interno** | Cavidade cônica em copo | Funil reto + Fenda paralela longa | **Cabide 3D (Coat-Hanger Profundo)** |
+| **Profundidade do Reservatório ($H_m$)** | N/A | N/A (Fenda plana) | **$12,00\text{ mm}$** (Confirmado em 3D) |
+| **Comprimento do Land de Calibração** | Irregular | $87,60\text{ mm}$ (Fenda $75 \times 1,5\text{ mm}$) | **$10,00\text{ mm}$** ($Z=99,00$ a $109,00\text{ mm}$) |
+| **Perda de Carga Total ($\Delta P$)** | $185,4\text{ bar}$ | **$268,7\text{ bar}$** (Estrangulamento) | **$39,5\text{ bar}$** (Alívio de $85,3\%$) |
+| **Uniformidade de Velocidade na Saída** | $54,73\%$ | $68,96\%$ (Falta vazão nas pontas) | **$99,30\%$** (Perfil plano perfeito) |
+| **Tensão de Cisalhamento na Parede ($\tau_w$)** | $160,12\text{ kPa}$ | $157,11\text{ kPa}$ | **$128,44\text{ kPa}$** (Longe do estresse crítico) |
 | **Perfil da Borda da Manta** | Irregular | Quina viva retangular | **Raio Total $R = 0,75\text{ mm}$** |
 | **Risco de Fratura do Fundido (*Melt Fracture*)** | Altíssimo | Crítico nas quinas | **Zero / Eliminado** |
 
@@ -63,12 +68,14 @@ $$a_T = \exp \left[ \frac{E_a}{R} \left( \frac{1}{T} - \frac{1}{T_{ref}} \right)
 ### 4.1. Variação da Viscosidade e Contrapressão com a Temperatura
 A simulação computacional explicou quantitativamente o relato operacional: *"a manta sai pior conforme vai esquentando"*.
 
+> Dados unificados com `04_Dados_SSOT_e_Scripts/dados_simulacao_carreau_yasuda.json`.
+
 | Temperatura do Bloco da Matriz | Viscosidade Aparente no Land ($\eta$) | Contrapressão ($\Delta P$) | Resistência de Fundido (*Melt Strength*) | Estabilidade de Borda |
 | :---: | :---: | :---: | :---: | :---: |
-| **$50^\circ\text{C}$ (Frio / Início)** | $1.850\text{ Pa}\cdot\text{s}$ | $68,2\text{ bar}$ | Alta ($100\%$) | **Estável (Sem rasgo)** |
-| **$65^\circ\text{C}$ (Ideal)** | $1.420\text{ Pa}\cdot\text{s}$ | $52,4\text{ bar}$ | Boa ($88\%$) | **Estável (Excelente acabamento)** |
-| **$80^\circ\text{C}$ (Aquecido)** | $1.080\text{ Pa}\cdot\text{s}$ | $39,8\text{ bar}$ | Média ($65\%$) | Vibração leve nas bordas |
-| **$100^\circ\text{C}$ (Superaquecido)** | $720\text{ Pa}\cdot\text{s}$ | $26,5\text{ bar}$ | Baixa ($43\%$) | **Rasgo de Borda (*Edge Tearing*)** |
+| **$50^\circ\text{C}$ (Frio / Início)** | $1.850\text{ Pa}\cdot\text{s}$ | $39,5\text{ bar}$ | Alta ($100\%$) | **Estável (Sem rasgo)** |
+| **$65^\circ\text{C}$ (Ideal)** | $1.420\text{ Pa}\cdot\text{s}$ | $30,2\text{ bar}$ | Boa ($88\%$) | **Estável (Excelente acabamento)** |
+| **$80^\circ\text{C}$ (Aquecido)** | $1.080\text{ Pa}\cdot\text{s}$ | $22,8\text{ bar}$ | Média ($65\%$) | Vibração leve nas bordas |
+| **$100^\circ\text{C}$ (Superaquecido)** | $720\text{ Pa}\cdot\text{s}$ | $15,3\text{ bar}$ | Baixa ($43\%$) | **Rasgo de Borda (*Edge Tearing*)** |
 
 ### 4.2. Explicação Científica do Fenômeno
 1. Conforme a matriz aquece além de $80^\circ\text{C}-100^\circ\text{C}$, a viscosidade aparente do polímero cai em mais de **60%**.
@@ -94,4 +101,4 @@ Para manter a **Matriz Jonatha** operando na janela térmica ideal de $50^\circ\
 
 ## 6. Conclusão da Simulação
 
-A **Matriz Jonatha (`MatrizJonatha.step`)** é a **solução definitiva e otimizada** para a fabricação da manta de isolação de Média Tensão. Sua cavidade do tipo **Coat-Hanger (Cabide 3D)** garante distribuição perfeitamente uniforme do elastômero, elimina os rasgos de borda, reduz a contrapressão em mais de $60\%$ em relação à Matriz 2 e preserva a integridade mecânica e dielétrica do cabo elétrico.
+A **Matriz Jonatha (`01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step`)** é a **solução definitiva e otimizada** para a fabricação da manta de isolação de Média Tensão. Sua cavidade do tipo **Coat-Hanger (Cabide 3D com Reservatório Profundo $H_m = 12,00\text{ mm}$)** garante distribuição perfeitamente uniforme do elastômero ($99,30\%$), elimina os rasgos de borda, reduz a contrapressão em **$85,3\%$** (de $268,7\text{ bar}$ para $39,5\text{ bar}$) em relação à Matriz 2 e preserva a integridade mecânica e dielétrica do cabo elétrico.

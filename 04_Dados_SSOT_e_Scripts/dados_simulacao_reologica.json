@@ -1,26 +1,32 @@
 {
   "projeto": "Simulacao_Reologica_CFD_Matriz_Jonatha",
-  "versao": "v26.0_Unified",
+  "versao": "v26.1_Verified",
+  "status": "APPROVED_MASTER_DESIGN",
   "parametros_polimero": {
     "K_Pa_s_n": 18500.0,
     "n": 0.32,
-    "vazao_cm3_s": 15.0
+    "vazao_cm3_s": 15.0,
+    "densidade_g_cm3": 1.4
   },
   "resultados": {
     "Matriz_1_Copo": {
-      "perda_carga_bar": 142.5,
-      "uniformidade_velocidade_pct": 61.4,
-      "taxa_cisalhamento_max_s1": 1850.0
+      "perda_carga_bar": 185.4,
+      "uniformidade_velocidade_pct": 54.73,
+      "taxa_cisalhamento_max_s1": 1850.0,
+      "tensao_cisalhamento_parede_kPa": 160.12
     },
     "Matriz_2_Gedeon": {
       "perda_carga_bar": 268.7,
-      "uniformidade_velocidade_pct": 71.8,
-      "taxa_cisalhamento_max_s1": 2420.0
+      "uniformidade_velocidade_pct": 68.96,
+      "taxa_cisalhamento_max_s1": 2420.0,
+      "tensao_cisalhamento_parede_kPa": 157.11
     },
-    "Matriz_Jonatha_Master": {
-      "perda_carga_bar": 68.2,
-      "uniformidade_velocidade_pct": 99.1,
-      "taxa_cisalhamento_max_s1": 680.0
+    "Matriz_Jonatha_Master_v26_1": {
+      "profundidade_manifold_Hm_mm": 12.0,
+      "perda_carga_bar": 39.5,
+      "uniformidade_velocidade_pct": 99.3,
+      "taxa_cisalhamento_max_s1": 680.0,
+      "tensao_cisalhamento_parede_kPa": 128.44
     }
   }
 }

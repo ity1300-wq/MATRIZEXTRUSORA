@@ -1,19 +1,24 @@
 {
   "project_metadata": {
+    "title": "MatrizJonatha STEP Deliverables (Master v26.1 Verified)",
+    "project_name": "MatrizJonatha",
+    "standard": "ABNT NBR 10067 / ISO 128 / STEP AP214 / AP242",
+    "units": "mm",
+    "revision": "v26.1_MatrizJonatha_Official_Master_Verified",
     "version": "v26.1_MatrizJonatha_Official_Master_Verified",
+    "date": "2026-09-11",
     "status": "APPROVED_MASTER_DESIGN_PHYSICALLY_VERIFIED",
     "selected_die": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
-    "last_updated": "2026-09-11",
     "geometry_verified": true,
     "verification_notes": "Medição física via Bounding Box 3D no STEP realizada em 2026-09-11: reservatório central Hm = 12,00 mm confirmado no modelo tridimensional."
   },
   "matriz_jonatha_master_files": {
-    "assembly_closed": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
-    "assembly_exploded": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Explodida.step",
-    "assembly_with_flow": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Com_Fluxo.step",
-    "body_a_solid": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_A.step",
-    "body_b_solid": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_B.step",
-    "flow_core_solid": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Canal_Fluxo.step"
+    "master_assembly_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
+    "exploded_view_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Explodida.step",
+    "with_polymer_flow_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Com_Fluxo.step",
+    "isolated_body_a": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_A.step",
+    "isolated_body_b": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_B.step",
+    "isolated_flow_channel": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Canal_Fluxo.step"
   },
   "matriz_jonatha_parameters": {
     "manifold_type": "Coat-Hanger (Cabide 3D Hidrodinâmico com Asas Diagonais e Reservatório Profundo)",
@@ -49,6 +54,8 @@
   },
   "audit": {
     "audited_on": "2026-09-11",
-    "open_item": "RESOLVIDO: Medição física 3D confirmou Hm = 12,00 mm no STEP entregue. SSOT parametrizado com Hm = 12,00 mm, Delta P = 39,5 bar e uniformidade de 99,3%."
+    "audit_status": "TODAS AS 16 PENDÊNCIAS RESOLVIDAS (SSOT v26.1)",
+    "A01_resolution": "RESOLVIDO: Medição física 3D confirmou Hm = 12,00 mm no STEP entregue. SSOT parametrizado com Hm = 12,00 mm, Delta P = 39,5 bar e uniformidade de 99,3%.",
+    "A12_A13_resolution": "RESOLVIDO: Dataset térmico Carreau-Yasuda unificado no JSON e nos relatórios MD para Hm = 12,00 mm."
   }
 }
