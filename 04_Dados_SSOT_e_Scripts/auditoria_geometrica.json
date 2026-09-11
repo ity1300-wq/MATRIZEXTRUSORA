@@ -1,0 +1,297 @@
+{
+  "projeto": "Auditoria_Geometrica_Matriz_Jonatha",
+  "revisao_auditada": "v27.0_MatrizJonatha_Approved_Master",
+  "data": "2026-09-11",
+  "tolerancia_mm": 0.02,
+  "itens": [
+    {
+      "item": "Sólidos na montagem MatrizJonatha.step",
+      "medido": 2,
+      "status": "INFO",
+      "observacao": ""
+    },
+    {
+      "item": "Sólidos em MatrizJonatha_Canal_Fluxo.step",
+      "medido": 3,
+      "status": "INFO",
+      "observacao": "esperado: 1 (núcleo de polímero)"
+    },
+    {
+      "item": "Comprimento total Z",
+      "nominal": 109.0,
+      "medido": 109.0,
+      "desvio": 0.0,
+      "tol": 0.02,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Diâmetro externo máximo (Estágio 1)",
+      "nominal": 93.0,
+      "medido": 93.0,
+      "desvio": 0.0,
+      "tol": 0.02,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Ø externo em Z=0.50 (estágio 93.00 x 69.90)",
+      "nominal": 93.0,
+      "medido": 93.0,
+      "desvio": 0.0,
+      "tol": 0.02,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Ø externo em Z=75.30 (estágio 89.50 x 10.80)",
+      "nominal": 89.5,
+      "medido": 89.5,
+      "desvio": 0.0,
+      "tol": 0.02,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Ø externo em Z=94.85 (estágio 79.50 x 28.30)",
+      "nominal": 79.5,
+      "medido": 79.5,
+      "desvio": 0.0,
+      "tol": 0.02,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Diâmetro externo na face traseira Z=0 (Ø93)",
+      "nominal": 93.0,
+      "medido": 93.0,
+      "desvio": 0.0,
+      "tol": 0.02,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Ø da boca de entrada (acoplamento extrudora)",
+      "nominal": 75.6,
+      "medido": 75.6,
+      "desvio": 0.0,
+      "tol": 0.05,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Ø da boca de entrada (eixo Y)",
+      "nominal": 75.6,
+      "medido": 75.6,
+      "desvio": 0.0,
+      "tol": 0.05,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Largura do land (X)",
+      "nominal": 75.0,
+      "medido": 75.0,
+      "desvio": 0.0,
+      "tol": 0.02,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Espessura do land (Y)",
+      "nominal": 1.5,
+      "medido": 1.5,
+      "desvio": 0.0,
+      "tol": 0.02,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Área da seção do land (bordas arredondadas R0,75)",
+      "nominal": 112.0171,
+      "medido": 112.0171,
+      "desvio": 0.0,
+      "tol": 0.05,
+      "unidade": "mm2",
+      "status": "CONFORME",
+      "observacao": "setor arredondado R0,75 nas duas extremidades"
+    },
+    {
+      "item": "Comprimento do land reto e paralelo",
+      "nominal": 10.0,
+      "medido": 8.5,
+      "desvio": -1.5,
+      "tol": 0.25,
+      "unidade": "mm",
+      "status": "NAO_CONFORME",
+      "observacao": "o chanfro de saída consome 1,50 mm do land"
+    },
+    {
+      "item": "Chanfro de saída 1,50 mm x 45° - sobrelargura radial em X",
+      "nominal": 1.4,
+      "medido": 1.401,
+      "desvio": 0.001,
+      "tol": 0.1,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": "medido a 0,10 mm da face de saída"
+    },
+    {
+      "item": "Chanfro de saída 1,50 mm x 45° - sobrelargura radial em Y",
+      "nominal": 1.4,
+      "medido": 1.401,
+      "desvio": 0.001,
+      "tol": 0.1,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Parede de aço no lábio de saída (Z=109, saída Ø79,5)",
+      "medido": 0.75,
+      "status": "INFO",
+      "observacao": "mm - lábio fino: avaliar fragilidade"
+    },
+    {
+      "item": "Parede entre canal e furo de pino Ø4 em Z=54,5",
+      "medido": 1.865,
+      "status": "INFO",
+      "observacao": "mm"
+    },
+    {
+      "item": "Interferência entre Body_A e Body_B",
+      "nominal": 0.0,
+      "medido": 0.0,
+      "desvio": 0.0,
+      "tol": 1e-06,
+      "unidade": "mm3",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Body_A + Body_B (união é 1 sólido)",
+      "medido": true,
+      "status": "INFO",
+      "observacao": ""
+    },
+    {
+      "item": "Volume Body_A",
+      "nominal": 234255.29,
+      "medido": 234255.287,
+      "desvio": -0.003,
+      "tol": 0.5,
+      "unidade": "mm3",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Volume Body_B",
+      "nominal": 234746.37,
+      "medido": 234746.369,
+      "desvio": -0.001,
+      "tol": 0.5,
+      "unidade": "mm3",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Volume do núcleo de polímero (canal)",
+      "nominal": 213945.15,
+      "medido": 213945.1459,
+      "desvio": -0.0041,
+      "tol": 0.5,
+      "unidade": "mm3",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Massa estimada de aço (7,85 g/cm3)",
+      "medido": "3.682 kg",
+      "status": "INFO",
+      "observacao": ""
+    },
+    {
+      "item": "Furos de pino Ø4 no Body_A",
+      "medido": 2,
+      "status": "INFO",
+      "observacao": ""
+    },
+    {
+      "item": "Furos de pino Ø4 no Body_B",
+      "medido": 0,
+      "status": "INFO",
+      "observacao": "ausentes: os pinos não alinham as duas metades"
+    },
+    {
+      "item": "Envelope - (aço + canal + 2 furos de pino)",
+      "nominal": 0.0,
+      "medido": 0.0009,
+      "desvio": 0.0009,
+      "tol": 1.0,
+      "unidade": "mm3",
+      "status": "CONFORME",
+      "observacao": "fechamento volumétrico exato do modelo"
+    },
+    {
+      "item": "Furos usinados no Body_A (Ø, todos)",
+      "medido": [
+        4.0,
+        4.0
+      ],
+      "status": "INFO",
+      "observacao": ""
+    },
+    {
+      "item": "Furos usinados no Body_B (Ø, todos)",
+      "medido": [],
+      "status": "INFO",
+      "observacao": "o Body_B não tem nenhum furo usinado"
+    },
+    {
+      "item": "Furos de fixação/aperto (M8 ou abas)",
+      "medido": 0,
+      "status": "INFO",
+      "observacao": "não existem no modelo"
+    },
+    {
+      "item": "Furos para cartucho de resistência Ø9,5",
+      "medido": 0,
+      "status": "INFO",
+      "observacao": "não existem no modelo"
+    },
+    {
+      "item": "Poço para termopar",
+      "medido": 0,
+      "status": "INFO",
+      "observacao": "não existem no modelo"
+    },
+    {
+      "item": "Canais de refrigeração Ø8,0",
+      "medido": 0,
+      "status": "INFO",
+      "observacao": "não existem no modelo"
+    },
+    {
+      "item": "Furação do flange de acoplamento (Z=0)",
+      "medido": 0,
+      "status": "INFO",
+      "observacao": "não existem no modelo"
+    }
+  ],
+  "resumo": {
+    "total": 34,
+    "conformes": 18,
+    "nao_conformes": 1,
+    "informativos": 15
+  }
+}
