@@ -1,0 +1,434 @@
+{
+  "revisao": "v28.0_PROPOSTA",
+  "itens": 64,
+  "conformes": 64,
+  "nao_conformes": 0,
+  "checagens": [
+    {
+      "item": "Canal entregue com 1 único sólido (o v27 tinha 3)",
+      "medido": "1 sólido(s)",
+      "observacao": "necessário p/ eletrodo de EDM e malha de CFD",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Comprimento total Z",
+      "nominal": 109.0,
+      "medido": 109.0,
+      "desvio": 0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Ø externo máximo (estágio 1)",
+      "nominal": 93.0,
+      "medido": 93.0,
+      "desvio": 0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Ø externo em Z=0.50 (estágio Ø93.0)",
+      "nominal": 93.0,
+      "medido": 93.0,
+      "desvio": 0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Ø externo em Z=75.30 (estágio Ø89.5)",
+      "nominal": 89.5,
+      "medido": 89.5,
+      "desvio": 0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Ø externo em Z=94.85 (estágio Ø79.5)",
+      "nominal": 79.5,
+      "medido": 79.5,
+      "desvio": 0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Ø da boca de entrada (Z=0)",
+      "nominal": 75.6,
+      "medido": 75.6,
+      "desvio": 0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Largura da fenda (X)",
+      "nominal": 75.0,
+      "medido": 75.0,
+      "desvio": 0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Espessura da fenda (Y)",
+      "nominal": 1.5,
+      "medido": 1.5,
+      "desvio": 0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Área da seção da fenda (R0,75 nas bordas)",
+      "nominal": 112.0171,
+      "medido": 112.0171,
+      "desvio": 0.0,
+      "unidade": "mm2",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Funil (Z<99) geometricamente idêntico ao master v27.0",
+      "medido": "Δmáx entre superfícies = 0,000000 mm",
+      "observacao": "a revisão não mexe no aprovado",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Volume do funil v28 vs v27",
+      "medido": "diferença = 0,0278 mm³",
+      "observacao": "mesmo sólido abaixo de Z=99",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Assimetria do canal em torno do plano de partição Y=0",
+      "medido": "|A-B| = 199,22 mm³ (0,093 % do canal)",
+      "observacao": "herdado do loft do v27.0: as metades não são espelhos exatos",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Arquivos STEP entregues (nomes + nº de sólidos)",
+      "medido": "7/7 exatos",
+      "observacao": "mestr=2 · explodida=2 · com_fluxo=3 · pinos=4 · canal=1 · corpo=1",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Land reto e paralelo (v27.0: 8,50)",
+      "nominal": 9.2,
+      "medido": 9.2,
+      "desvio": -0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": "P8 resolvido no modelo"
+    },
+    {
+      "item": "Chanfro de saída (v27.0: 1,50)",
+      "nominal": 0.8,
+      "medido": 0.8,
+      "desvio": 0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": "P7: lâmina mais robusta"
+    },
+    {
+      "item": "Sobrelargura do chanfro a 0,10 mm da face",
+      "nominal": 0.7,
+      "medido": 0.702,
+      "desvio": 0.002,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": "chanfro de 45°"
+    },
+    {
+      "item": "Lâmina de aço no lábio de saída (v27.0: 0,75)",
+      "medido": "1,450 mm",
+      "observacao": "P7 resolvido: ≥ 1,40 mm era o critério",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Shells no Body_A (v27.0 tinha 3 = 2 bolhas seladas)",
+      "medido": "1",
+      "observacao": "1 = sólido limpo, sem cavidade interna",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Shells no Body_B (v27.0 tinha 1, mas sem furo nenhum)",
+      "medido": "1",
+      "observacao": "1 = sólido limpo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Interferência Body_A ∩ Body_B",
+      "nominal": 0.0,
+      "medido": 0.0,
+      "desvio": 0.0,
+      "unidade": "mm3",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
+      "item": "Pino em X=-42.10 Z=30.00",
+      "medido": "A: bolso vazio 0.0000 mm³, aço sob o fundo 12.6/12.6 mm³ | B: 0.0000 / 12.6 mm³",
+      "observacao": "aberto no plano de partição e cego sob o fundo nas DUAS metades",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Pino em X=+42.10 Z=30.00",
+      "medido": "A: bolso vazio 0.0000 mm³, aço sob o fundo 12.6/12.6 mm³ | B: 0.0000 / 12.6 mm³",
+      "observacao": "aberto no plano de partição e cego sob o fundo nas DUAS metades",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Pino em X=-42.10 Z=60.00",
+      "medido": "A: bolso vazio 0.0000 mm³, aço sob o fundo 12.6/12.6 mm³ | B: 0.0000 / 12.6 mm³",
+      "observacao": "aberto no plano de partição e cego sob o fundo nas DUAS metades",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Pino em X=+42.10 Z=60.00",
+      "medido": "A: bolso vazio 0.0000 mm³, aço sob o fundo 12.6/12.6 mm³ | B: 0.0000 / 12.6 mm³",
+      "observacao": "aberto no plano de partição e cego sob o fundo nas DUAS metades",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Pinos conjugados nas duas metades",
+      "medido": "4/4 no Body_A e 4/4 no Body_B",
+      "observacao": "v27.0: bolsões selados só no A e nada no B (P2)",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Fechamento: env − (aço + canal) = volume dos furos",
+      "nominal": 12506.6595,
+      "medido": 12506.671,
+      "desvio": 0.0115,
+      "unidade": "mm3",
+      "status": "CONFORME",
+      "observacao": "prova que todo furo removido existe no corpo e nada mais foi tirado"
+    },
+    {
+      "item": "parede mínima até o canal - pino_alinhamento X=-42.10 Z=30.00",
+      "medido": "2,391 mm",
+      "observacao": "alvo ≥ 2,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - pino_alinhamento X=-42.10 Z=30.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - pino_alinhamento X=+42.10 Z=30.00",
+      "medido": "2,392 mm",
+      "observacao": "alvo ≥ 2,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - pino_alinhamento X=+42.10 Z=30.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - pino_alinhamento X=-42.10 Z=60.00",
+      "medido": "2,482 mm",
+      "observacao": "alvo ≥ 2,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - pino_alinhamento X=-42.10 Z=60.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - pino_alinhamento X=+42.10 Z=60.00",
+      "medido": "2,483 mm",
+      "observacao": "alvo ≥ 2,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - pino_alinhamento X=+42.10 Z=60.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - cartucho X=+0.00 Z=97.00",
+      "medido": "8,196 mm",
+      "observacao": "alvo ≥ 4,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - cartucho X=+0.00 Z=97.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - cartucho X=+0.00 Z=97.00",
+      "medido": "8,196 mm",
+      "observacao": "alvo ≥ 4,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - cartucho X=+0.00 Z=97.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - cartucho X=-22.00 Z=97.00",
+      "medido": "9,313 mm",
+      "observacao": "alvo ≥ 4,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - cartucho X=-22.00 Z=97.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - cartucho X=-22.00 Z=97.00",
+      "medido": "9,324 mm",
+      "observacao": "alvo ≥ 4,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - cartucho X=-22.00 Z=97.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - cartucho X=+22.00 Z=97.00",
+      "medido": "9,356 mm",
+      "observacao": "alvo ≥ 4,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - cartucho X=+22.00 Z=97.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - cartucho X=+22.00 Z=97.00",
+      "medido": "9,324 mm",
+      "observacao": "alvo ≥ 4,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - cartucho X=+22.00 Z=97.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - termopar X=-11.00 Z=103.00",
+      "medido": "17,033 mm",
+      "observacao": "alvo ≥ 3,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - termopar X=-11.00 Z=103.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - termopar X=-11.00 Z=103.00",
+      "medido": "17,033 mm",
+      "observacao": "alvo ≥ 3,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - termopar X=-11.00 Z=103.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - termopar X=+11.00 Z=103.00",
+      "medido": "17,033 mm",
+      "observacao": "alvo ≥ 3,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - termopar X=+11.00 Z=103.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "parede mínima até o canal - termopar X=+11.00 Z=103.00",
+      "medido": "17,033 mm",
+      "observacao": "alvo ≥ 3,00 mm | invadiu o canal em 0,000000 mm³",
+      "status": "CONFORME"
+    },
+    {
+      "item": "  ∩ volume do canal - termopar X=+11.00 Z=103.00",
+      "medido": "0,000000 mm³",
+      "observacao": "zero = o furo não comunica com o fluxo",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Furos de aquecimento: abertos na face externa, cegos, sem romper as faces",
+      "medido": "OK - todos os 14",
+      "observacao": "atravessar a peça = vazamento; ficar enterrado = não usinável",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Menor web de aço entre dois furos",
+      "medido": "5,380 mm",
+      "observacao": "par: cartucho X=+0.0 Z=97.0 × termopar X=-11.0 Z=103.0 | mínimo 3.00 mm",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Massa de aço (7,85 g/cm³)",
+      "medido": "3,587 kg",
+      "observacao": "v27.0: 3,682 kg | aços: P20 pré / H13 temperado",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Área projetada do canal no plano XZ (medida)",
+      "medido": "8168 mm²",
+      "observacao": "é a área sobre a qual a pressão empurra as metades uma contra a outra",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Força que abre a bipartição",
+      "medido": "55,7 kN no limite (pressão plena em toda a área) · 30,6 kN sobre a boca Ø75,60",
+      "observacao": "por isso a fixação não é opcional (ver relatório DFM)",
+      "status": "CONFORME"
+    },
+    {
+      "item": "ΔP 1D - lei das potências (método do próprio projeto)",
+      "medido": "v28.0 = 43,9 bar | v27.0 = 41,9 bar",
+      "observacao": "land 9,20 vs 8,50 paralelos → +2.0 bar; maior gradiente em Z≈99,2 mm",
+      "status": "CONFORME"
+    },
+    {
+      "item": "τ na parede do land",
+      "medido": "163,8 kPa (γ̇_ap = 911 s⁻¹)",
+      "observacao": "não depende do comprimento do land: mesma fenda, mesma vazão",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Faixa de aço entre o canal e o Ø93",
+      "medido": "8.70 mm",
+      "observacao": "sem espaço para furo de pressão: Ø9,5 + parede 4 + parede 4 = 11,5 mm",
+      "status": "CONFORME"
+    },
+    {
+      "item": "Cotas de usinagem do land",
+      "medido": "paralelo Z=99,00→108,20 mm (9,20) · chanfro 0,80×45° Z=108,20→109,00 mm",
+      "observacao": "conferir no desenho antes de cortar o aço",
+      "status": "CONFORME"
+    }
+  ]
+}

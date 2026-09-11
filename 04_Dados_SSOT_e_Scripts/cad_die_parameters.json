@@ -7,10 +7,12 @@
     "revision": "v27.0_MatrizJonatha_Approved_Master",
     "version": "v27.0_MatrizJonatha_Approved_Master",
     "date": "2026-09-11",
-    "status": "APPROVED_MASTER_DESIGN",
+    "status": "V27.0_CONTINUA_APROVADO__V28.0_PROPOSTA_PENDENTE_DE_APROVACAO_USUARIO",
     "selected_die": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
     "geometry_verified": true,
-    "user_decision": "Modelo Aprovado (Funil V Restrito na Entrada Cilíndrica) fixado como o master oficial definitivo. Encaixe perfeito na extrudora no plano Z=0."
+    "user_decision": "v27.0 segue sendo o master aprovado (nada foi sobrescrito). A revisão v28.0 (DFM) existe em paralelo como proposta verificada: aguarda decisão do usuário sobre (i) chanfro 0,80 x 45° e (ii) furação de pinos/aquecimento antes de virar o oficial.",
+    "revision_ssot": "v28.0_DFM_Proposta",
+    "data_revisao_v28": "2026-09-11"
   },
   "matriz_jonatha_master_files": {
     "master_assembly_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
@@ -122,5 +124,116 @@
         "N8: o ganho da Jonatha é real - land de 88,0 para 8,5 mm e ΔP medido de 305,5 para 41,9 bar."
       ]
     }
+  },
+  "proposta_v28_dfm": {
+    "status": "PENDENTE_APROVACAO (v27.0 continua oficial)",
+    "arquivos": {
+      "master_assembly_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28.step",
+      "isolated_body_a": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Body_A.step",
+      "isolated_body_b": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Body_B.step",
+      "isolated_flow_channel": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Canal_Fluxo.step",
+      "exploded_view_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Explodida.step",
+      "with_polymer_flow_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Com_Fluxo.step",
+      "pino_kit_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Pinos_Alinhamento.step",
+      "kit_pinos": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Pinos_Alinhamento.step (4 sólidos nomeados)"
+    },
+    "geradores": {
+      "cad": "04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py",
+      "verificacao": "04_Dados_SSOT_e_Scripts/verificar_v28.py",
+      "conferencia_visual": "04_Dados_SSOT_e_Scripts/renderizar_v28.py",
+      "mapeamento_de_aco": "04_Dados_SSOT_e_Scripts/explorar_acomodo_furos.py"
+    },
+    "relatorio": "03_Relatorios_e_Documentacao/PROJETO_DFM_V28_MATRIZ_JONATHA.md",
+    "verificacao_md": "03_Relatorios_e_Documentacao/VERIFICACAO_V28.md",
+    "verificacao_dados": "04_Dados_SSOT_e_Scripts/verificacao_v28.json",
+    "resultado_verificacao": {
+      "itens": 64,
+      "conformes": 64,
+      "nao_conformes": 0,
+      "nota": "todos os números abaixo são medidos nos STEP por booleanos + BRepExtrema, não declarados",
+      "inclui": "contagem de sólidos por arquivo entregue (7/7), parede real de cada um dos 14 furos, ∩ canal = 0 mm³ em todos, web mínima 5,380 mm, fechamento volumétrico (resíduo 0,0115 mm³), e prova de que o funil Z<99 é o mesmo sólido do v27.0 (Δmáx 0,000000 mm)"
+    },
+    "o_que_mudou": {
+      "P7_P8_chanfro_e_land": "chanfro de saída 1,50 -> 0,80 x 45°; land reto e paralelo 8,50 -> 9,20 mm (Z=99,00->108,20); lâmina do lábio 0,75 -> 1,450 mm (medida)",
+      "P2_pinos": "4 bolsões de Ø4 H7 x 12 mm ABERTOS no plano de partição e conjugados nas duas metades (v27: 2 bolsões selados só no Body_A, nenhum no Body_B) + kit de pinos Ø4 x 24 modelado",
+      "P3_aquecimento": "6 cartuchos Ø9,5 mm (Z=97,00; X=0 e ±22; cegos, fundo a 8,20-9,36 mm do canal) + 4 poços de termopar Ø4,8 mm (Z=103,00; X=±11) na zona do land",
+      "P5_entrega": "arquivo do canal entregue com 1 único sólido (v27 entregava 3: núcleo + 2 bolsões)",
+      "especificacao_produto": "INTACTA E VERIFICADA: fenda 75,00 x 1,50 mm, R0,75 nas bordas, área 112,0171 mm², boca Ø75,60, envelope Ø93x69,90 / Ø89,5x10,80 / Ø79,5x28,30, Z total 109,00",
+      "funil_herdado": "Z<99 é o mesmo sólido do master: distância máxima entre superfícies v28 vs v27 = 0,000000 mm; Δvolume = 0,028 mm³"
+    },
+    "numeros recalculados": {
+      "delta_p_1d_bar_v28": 43.9,
+      "delta_p_1d_bar_v27": 41.9,
+      "delta_p_1d_metodo": "lei das potências K=18500 Pa·s^n, n=0,32, Q=15 cm³/s, integrada sobre a geometria medida (dp_total de verify_legacy_dies.py)",
+      "tau_parede_land_kPa": 163.8,
+      "gamma_ponto_aparente_s-1": 911,
+      "massa_aco_kg": 3.587,
+      "area_projetada_canal_xz_mm2": 8168,
+      "forca_abertura_biparticao_kN": {
+        "limite_pressao_plena": 55.7,
+        "somente_boca_d75_60": 30.6
+      },
+      "web_minima_entre_furos_mm": 5.38,
+      "delta_p_declarado_no_relatorio_cfd_bar": 68.2,
+      "aviso": "o ΔP de projeto (68,2 bar) é resultado de CFD arquivado, não reproduzível no repositório; a estimativa 1D sobre a geometria medida dá 43,9 bar. Registrar como 'estimativa a confirmar' até rodar CFD novo sobre o v28"
+    },
+    "pendencias_v28": [
+      {
+        "id": "F-28-1",
+        "item": "Fixação das metades contra a força de abertura (30,6-55,7 kN)",
+        "situacao": "SEM SOLUÇÃO DENTRO DO ENVELOPE - faixa de aço entre o canal (Ø75,60) e o Ø93 = 8,70 mm, menor que Ø9,5 + 2×4 mm de parede; medido, não opinionado",
+        "opcoes": [
+          "aro de retração (shrink ring) no degrau Ø93->Ø89,5",
+          "encolhimento/monobloco por EDM e eliminação da bipartição",
+          "grampos externos usando os 6 M12 do cabeçote (BC Ø150)"
+        ]
+      },
+      {
+        "id": "F-28-2",
+        "item": "Refrigeração no corpo da matriz",
+        "situacao": "NÃO CABE: nenhum Ø8 axial ou radial fica a ≥3,5 mm do canal sem romper a peça (mapeamento em acomodo_furos.json)",
+        "acao": "refrigeração no adaptador/cabeçote, não na matriz"
+      },
+      {
+        "id": "F-28-3",
+        "item": "Padrão de acoplamento na face Z=0",
+        "situacao": "dado obtido do DWG do cabeçote (030-032- cabeçote.dwg): 6 slots M12 em BC Ø150, passo 60° a partir de 30°, folga angular ±15°, ressalto de chave a 0° - escala do desenho calibrada por ajuste às cotas anotadas; os diâmetros em mm têm incerteza estimada de ~1%",
+        "acao": "confirmar no máquina antes de usinar flange"
+      },
+      {
+        "id": "F-28-4",
+        "item": "Assimetria do canal em Y",
+        "situacao": "herdada do loft do v27: as duas metades diferem 199,22 mm³ (0,093 % do volume do canal)",
+        "acao": "se aparecer riscas/diferença de espessura entre as faces da manta, culpar primeiro este item; corrigir refazendo o loft com seções de mesmo número de arestas (throughAll)"
+      },
+      {
+        "id": "F-28-5",
+        "item": "Uniformidade de 99,10 %",
+        "situacao": "ainda sem definição nem planilha no repositório; não usar como critério de aceite",
+        "acao": "definir (σ/U do perfil de vazão medido no plano Z=109) antes de contratar garantia"
+      }
+    ]
+  },
+  "fabricao_v28": {
+    "tolerancias": {
+      "furos_pino": "Ø4 H7, profundidade 12,0 mm, perpendicularidade 0,01 x A",
+      "plano_particao": "paralelismo 0,02 mm; rugosidade Ra ≤ 0,8 µm na face Y=0",
+      "land": "Ø/simétrica ±0,02 mm; Ra ≤ 0,4 µm nas faces do land",
+      "chanfro_saida": "0,80 x 45° (±0,05) sem rebarba (lábio de 1,45 mm é frágil: não esmerilhar)"
+    },
+    "pinos": "4 × Ø4 h6 x 24 mm, aço temperado 58-62 HRC, fixados com pino-guia colado no Body_A e deslizante no Body_B",
+    "aquecimento": {
+      "cartuchos": "6 × Ø9,5 x 25 mm, 750 W total (3 zonas de 2 cartuchos), termopar J/K tipo K em poço separado",
+      "potencia_por_zona": "X=0 (centro) 100 %; X=±22 (bordas) 120 % para compensar perda de borda"
+    },
+    "tratamento": "Nitretação a gás 0,10-0,15 mm, 62 HRC DEPOIS da furação completa (a furação dos cartuchos não pode vir depois do tratamento térmico)",
+    "ordem_de_usinagem_recomendada": [
+      "tornear envelope Ø93/Ø89,5/Ø79,5 e facear Z=0 e Z=109",
+      "fresar/surtir o Ø75,60 da boca",
+      "abrir o plano de partição e fresar o canal (ou EDM com o sólido MatrizJonatha_v28_Canal_Fluxo.step)",
+      "fechar, furar e escarear os 4 bolsões de pino conjugados",
+      "furar os 6 cartuchos e 4 termopares em cada metade (profunduras do JSON)",
+      "montar, conferir a fenda 75,00 x 1,50 com calibrador e só então nitretar"
+    ]
   }
 }
