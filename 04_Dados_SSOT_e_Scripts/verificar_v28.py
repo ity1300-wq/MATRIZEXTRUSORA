@@ -173,7 +173,7 @@ def main():
     for (z0, z1, d) in ENVELOPE:
         zc = 0.5 if z0 == 0 else (z0 + z1) / 2
         s, _ = secao(aco, zc)
-        checar(f"Ø externo em Z={zc:.2f} (estágio Ø{d})", s.xmax - s.xmin, d)
+        checar(f"Ø externo em Z={n(zc)} (estágio Ø{n(d, 1)})", s.xmax - s.xmin, d)
     s0, _ = secao(canal, 0.002)
     checar("Ø da boca de entrada (Z=0)", s0.xmax - s0.xmin, 75.60, tol=0.05)
     sl, al = secao(canal, 100.0)

@@ -9,9 +9,9 @@ Medida nos STEP gerados por `gerar_matriz_v28.py` (booleanos + BRepExtrema; nada
 | Canal entregue com 1 único sólido (o v27 tinha 3) | — | 1 sólido(s) | ✅ | necessário p/ eletrodo de EDM e malha de CFD |
 | Comprimento total Z | 109 | 109 | ✅ |  |
 | Ø externo máximo (estágio 1) | 93 | 93 | ✅ |  |
-| Ø externo em Z=0.50 (estágio Ø93.0) | 93 | 93 | ✅ |  |
-| Ø externo em Z=75.30 (estágio Ø89.5) | 89,5 | 89,5 | ✅ |  |
-| Ø externo em Z=94.85 (estágio Ø79.5) | 79,5 | 79,5 | ✅ |  |
+| Ø externo em Z=0,500 (estágio Ø93,0) | 93 | 93 | ✅ |  |
+| Ø externo em Z=75,300 (estágio Ø89,5) | 89,5 | 89,5 | ✅ |  |
+| Ø externo em Z=94,850 (estágio Ø79,5) | 79,5 | 79,5 | ✅ |  |
 | Ø da boca de entrada (Z=0) | 75,6 | 75,6 | ✅ |  |
 | Largura da fenda (X) | 75 | 75 | ✅ |  |
 | Espessura da fenda (Y) | 1,5 | 1,5 | ✅ |  |

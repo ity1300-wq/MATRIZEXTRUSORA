@@ -29,7 +29,7 @@
       "observacao": ""
     },
     {
-      "item": "Ø externo em Z=0.50 (estágio Ø93.0)",
+      "item": "Ø externo em Z=0,500 (estágio Ø93,0)",
       "nominal": 93.0,
       "medido": 93.0,
       "desvio": 0.0,
@@ -38,7 +38,7 @@
       "observacao": ""
     },
     {
-      "item": "Ø externo em Z=75.30 (estágio Ø89.5)",
+      "item": "Ø externo em Z=75,300 (estágio Ø89,5)",
       "nominal": 89.5,
       "medido": 89.5,
       "desvio": 0.0,
@@ -47,7 +47,7 @@
       "observacao": ""
     },
     {
-      "item": "Ø externo em Z=94.85 (estágio Ø79.5)",
+      "item": "Ø externo em Z=94,850 (estágio Ø79,5)",
       "nominal": 79.5,
       "medido": 79.5,
       "desvio": 0.0,
