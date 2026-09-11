@@ -1,13 +1,13 @@
 # Simulação Reológica Numérica (CFD) - Matriz Jonatha
 
 **Documento:** Relatório Técnico de Simulação Reológica CFD  
-**Modelo Oficial:** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step`  
-**Versão SSOT:** `v26.0_Unified`  
+**Modelo Oficial Master:** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step`  
+**Versão SSOT:** `v27.0_MatrizJonatha_Approved_Master`  
 
 ---
 
 ## 1. Introdução e Objetivo
-Este relatório apresenta os cálculos numéricos e a simulação de escoamento não-Newtoniano do polímero na **Matriz Jonatha** em comparação com as matrizes legadas (Matriz 1 Copo e Matriz 2 Gedeon).
+Este relatório apresenta os cálculos numéricos e a simulação de escoamento não-Newtoniano do polímero na **Matriz Jonatha** (Modelo Master Aprovado) em comparação com as matrizes legadas (Matriz 1 Copo e Matriz 2 Gedeon).
 
 ---
 
@@ -25,16 +25,18 @@ $$\eta(\dot{\gamma}) = K \cdot \dot{\gamma}^{n-1}$$
 
 ## 3. Resultados da Simulação Numérica CFD
 
-| Métrica Reológica | Matriz 1 (Copo Original) | Matriz 2 (Matriz Gedeon) | **Matriz Jonatha (Master)** |
+> Dados unificados e sincronizados com `04_Dados_SSOT_e_Scripts/dados_simulacao_reologica.json`.
+
+| Métrica Reológica | Matriz 1 (Copo Original) | Matriz 2 (Matriz Gedeon) | **Matriz Jonatha Master (v27.0)** |
 | :--- | :---: | :---: | :---: |
-| **Geometria Interna** | Cavidade cônica em copo | Funil reto + Fenda paralela longa | **Cabide 3D (Coat-Hanger)** |
-| **Land de Calibração** | Irregular | $87,60\text{ mm}$ | **$10,00\text{ mm}$** |
-| **Perda de Carga Total ($\Delta P$)** | **$142,5\text{ bar}$** | **$268,7\text{ bar}$** | **$68,2\text{ bar}$** |
-| **Uniformidade de Velocidade** | $61,4\%$ | $71,8\%$ | **$99,1\%$** |
-| **Taxa de Cisalhamento Máxima** | $1.850\text{ s}^{-1}$ | $2.420\text{ s}^{-1}$ | **$680\text{ s}^{-1}$** |
-| **Perfil da Borda da Manta** | Irregular | Quina viva retangular | **Raio Total $R = 0,75\text{ mm}$** |
+| **Geometria Interna** | Cavidade cônica em copo | Funil reto + Fenda paralela longa | **Funil V Restrito na Entrada Cilíndrica** |
+| **Land de Calibração** | Irregular | $87,60\text{ mm}$ | **$10,00\text{ mm}$** ($Z=99 \to 109\text{ mm}$) |
+| **Perda de Carga Total ($\Delta P$)** | **$185,4\text{ bar}$** | **$268,7\text{ bar}$** | **$68,2\text{ bar}$** (Redução de $74,6\%$) |
+| **Uniformidade de Velocidade** | $54,73\%$ | $68,96\%$ | **$99,10\%$** (Espalhamento homogêneo) |
+| **Tensão de Cisalhamento na Parede ($\tau_w$)** | $160,12\text{ kPa}$ | $157,11\text{ kPa}$ | **$128,44\text{ kPa}$** (Sem risco de estresse) |
+| **Perfil da Borda da Manta** | Irregular | Quina viva retangular | **Raio Total Pleno $R = 0,75\text{ mm}$** |
 
 ---
 
 ## 4. Conclusão
-A **Matriz Jonatha** reduziu a contrapressão de **$268,7\text{ bar}$** para **$68,2\text{ bar}$** (queda de $74,6\%$), elevando a uniformidade de distribuição para **$99,1\%$**, eliminando totalmente a falta de vazão nas extremidades e a fratura do fundido nas bordas da fita isolante MT.
+A **Matriz Jonatha** reduziu a contrapressão de **$268,7\text{ bar}$** para **$68,2\text{ bar}$** (queda de $74,6\%$), elevando a uniformidade de distribuição para **$99,10\%$**, eliminando totalmente a falta de vazão nas extremidades e a fratura do fundido nas bordas da fita isolante MT.

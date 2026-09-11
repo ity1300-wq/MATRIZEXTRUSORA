@@ -1,3 +1,5 @@
+> **📜 DOCUMENTO TÉCNICO DE REFERÊNCIA DE REFRIGERAÇÃO:** Este documento apresenta a análise térmica Carreau-Yasuda e as recomendações de canais de refrigeração ($50^\circ\text{C}-60^\circ\text{C}$). O modelo master oficial é o **`01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (SSOT v27.0)**.
+
 # COMPARATIVO DE SIMULAÇÕES REOLÓGICAS E ANÁLISE TÉRMICA DE REFRIGERÇÃO
 **Projeto**: MatrizJonatha Master  
 **Data**: 2026-09-10  

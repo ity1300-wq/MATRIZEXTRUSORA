@@ -4,7 +4,7 @@
     "project_name": "MatrizJonatha",
     "standard": "ABNT NBR 10067 / ISO 128 / STEP AP214 / AP242",
     "units": "mm",
-    "revision": "v27.0_MatrizJonatha_Approved_Master",
+    "revision": "v27.0_MatrizJonatha_Approved_Master_Harmonized",
     "version": "v27.0_MatrizJonatha_Approved_Master",
     "date": "2026-09-11",
     "status": "APPROVED_MASTER_DESIGN",
@@ -35,7 +35,8 @@
     "pressure_drop_bar": 68.2,
     "velocity_uniformity_percent": 99.1,
     "matriz_2_baseline_pressure_drop_bar": 268.7,
-    "material": "Aço Ferramenta P20 / AISI H13 Nitretado"
+    "material": "Aço Ferramenta P20 / AISI H13 Nitretado",
+    "pre_land_transition_depth_mm": 3.5
   },
   "rheological_model_parameters": {
     "polymer": "EPR/XLPE/PVC Modificado (Média Tensão)",
@@ -56,8 +57,10 @@
   },
   "audit": {
     "audited_on": "2026-09-11",
-    "audit_status": "TODAS AS 16 PENDÊNCIAS RESOLVIDAS (SSOT v26.1)",
-    "A01_resolution": "RESOLVIDO: Medição física 3D confirmou Hm = 12,00 mm no STEP entregue. SSOT parametrizado com Hm = 12,00 mm, Delta P = 39,5 bar e uniformidade de 99,3%.",
-    "A12_A13_resolution": "RESOLVIDO: Dataset térmico Carreau-Yasuda unificado no JSON e nos relatórios MD para Hm = 12,00 mm."
+    "audit_status": "100% DAS PENDÊNCIAS E R-ITEMS RESOLVIDAS",
+    "R01_resolution": "RESOLVIDO: SIMULACAO_REOLOGICA_MATRIZ_JONATHA.md harmonizado com o dataset canônico.",
+    "R02_resolution": "RESOLVIDO: Todos os scripts geradores Python foram sincronizados e idempotentes com os docs v27.0.",
+    "R03_resolution": "RESOLVIDO: pre_land_transition_depth_mm fixado em 3.5 mm.",
+    "R04_resolution": "RESOLVIDO: Banner histórico adicionado ao COMPARATIVO."
   }
 }
