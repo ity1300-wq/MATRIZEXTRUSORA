@@ -1,0 +1,30 @@
+{
+  "40C": {
+    "temperatura_C": 40,
+    "viscosidade_media_Pa_s": 550.8,
+    "pressao_entrada_bar": 9.9,
+    "tensao_parede_max_kPa": 503.6,
+    "resistencia_coesao_fundido_pct": 25.3
+  },
+  "60C": {
+    "temperatura_C": 60,
+    "viscosidade_media_Pa_s": 436.2,
+    "pressao_entrada_bar": 7.9,
+    "tensao_parede_max_kPa": 398.9,
+    "resistencia_coesao_fundido_pct": 20.0
+  },
+  "80C": {
+    "temperatura_C": 80,
+    "viscosidade_media_Pa_s": 354.8,
+    "pressao_entrada_bar": 6.4,
+    "tensao_parede_max_kPa": 324.4,
+    "resistencia_coesao_fundido_pct": 16.3
+  },
+  "100C": {
+    "temperatura_C": 100,
+    "viscosidade_media_Pa_s": 295.0,
+    "pressao_entrada_bar": 5.3,
+    "tensao_parede_max_kPa": 269.7,
+    "resistencia_coesao_fundido_pct": 13.6
+  }
+}

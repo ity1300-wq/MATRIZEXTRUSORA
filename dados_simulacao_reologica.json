@@ -1,0 +1,30 @@
+{
+  "parametros_simulacao": {
+    "fluido": "Mastique Resistivo Não-Linear Carregado",
+    "modelo_viscosidade": "Lei das Potencias (Power-Law)",
+    "indice_de_fluxo_n": 0.35,
+    "consistencia_K_Pa_s_n": 12000.0,
+    "vazao_volumetrica_cm3_s": 15.0,
+    "fenda_saida_mm": "75.00 x 1.50"
+  },
+  "resultados_comparativos": {
+    "matriz_1_copo": {
+      "pressao_entrada_bar": 185.4,
+      "uniformidade_velocidade_pct": 54.73,
+      "tensao_cisalhamento_max_kPa": 160.12,
+      "diagnostico": "Velocidade desbalançada gerando arrasto nas bordas (Sharkskin / Serrilhado)"
+    },
+    "matriz_2_gedeon": {
+      "pressao_entrada_bar": 268.7,
+      "uniformidade_velocidade_pct": 68.96,
+      "tensao_cisalhamento_max_kPa": 157.11,
+      "diagnostico": "Pico de pressão > 200 bar excedendo o limite da extrusora (Refluxo no Funil)"
+    },
+    "matriz_3_jonatha": {
+      "pressao_entrada_bar": 68.2,
+      "uniformidade_velocidade_pct": 99.14,
+      "tensao_cisalhamento_max_kPa": 128.44,
+      "diagnostico": "Escoamento iso-distribuído, pressão aliviada de 68.2 bar, fita lisa sem rebarbas nem refluxo"
+    }
+  }
+}

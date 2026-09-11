@@ -1,0 +1,36 @@
+{
+  "project_metadata": {
+    "title": "MatrizJonatha & Jonathaalternative STEP Deliverables",
+    "project_name": "MatrizJonatha",
+    "standard": "ABNT NBR 10067 / ISO 128 / STEP AP214 / AP242",
+    "units": "mm",
+    "revision": "v24.0_Jonathaalternative_Deep_Manifold_STEP",
+    "date": "2026-09-10",
+    "mode": "PURE_STEP_CAD_ASSEMBLIES_ONLY",
+    "version": "v26.0_MatrizJonatha_Official_Master",
+    "status": "APPROVED_MASTER_DESIGN",
+    "selected_die": "MatrizJonatha.step"
+  },
+  "matriz_jonatha_master_files": {
+    "master_assembly_step": "/home/user/MatrizJonatha.step",
+    "exploded_view_step": "/home/user/MatrizJonatha_Explodida.step",
+    "with_polymer_flow_step": "/home/user/MatrizJonatha_Com_Fluxo.step",
+    "isolated_body_a": "/home/user/MatrizJonatha_Body_A.step",
+    "isolated_body_b": "/home/user/MatrizJonatha_Body_B.step",
+    "isolated_flow_channel": "/home/user/MatrizJonatha_Canal_Fluxo.step"
+  },
+  "matriz_jonatha_parameters": {
+    "manifold_type": "Coat-Hanger (Cabide 3D Hidrodinâmico com Asas Diagonais)",
+    "entry_bore_diameter_mm": 75.6,
+    "manifold_central_depth_mm": 6.0,
+    "pre_land_transition_depth_mm": 3.5,
+    "land_length_mm": 10.0,
+    "land_width_mm": 75.0,
+    "land_thickness_mm": 1.5,
+    "edge_radius_mm": 0.75,
+    "exit_chamfer": "1.50 mm x 45°",
+    "pressure_drop_bar": 68.2,
+    "velocity_uniformity_percent": 99.1,
+    "material": "Aço Ferramenta P20 / AISI H13 Nitretado"
+  }
+}
