@@ -1,30 +1,26 @@
 {
-  "parametros_simulacao": {
-    "fluido": "Mastique Resistivo Não-Linear Carregado",
-    "modelo_viscosidade": "Lei das Potencias (Power-Law)",
-    "indice_de_fluxo_n": 0.35,
-    "consistencia_K_Pa_s_n": 12000.0,
-    "vazao_volumetrica_cm3_s": 15.0,
-    "fenda_saida_mm": "75.00 x 1.50"
+  "projeto": "Simulacao_Reologica_CFD_Matriz_Jonatha",
+  "versao": "v26.0_Unified",
+  "parametros_polimero": {
+    "K_Pa_s_n": 18500.0,
+    "n": 0.32,
+    "vazao_cm3_s": 15.0
   },
-  "resultados_comparativos": {
-    "matriz_1_copo": {
-      "pressao_entrada_bar": 185.4,
-      "uniformidade_velocidade_pct": 54.73,
-      "tensao_cisalhamento_max_kPa": 160.12,
-      "diagnostico": "Velocidade desbalançada gerando arrasto nas bordas (Sharkskin / Serrilhado)"
+  "resultados": {
+    "Matriz_1_Copo": {
+      "perda_carga_bar": 142.5,
+      "uniformidade_velocidade_pct": 61.4,
+      "taxa_cisalhamento_max_s1": 1850.0
     },
-    "matriz_2_gedeon": {
-      "pressao_entrada_bar": 268.7,
-      "uniformidade_velocidade_pct": 68.96,
-      "tensao_cisalhamento_max_kPa": 157.11,
-      "diagnostico": "Pico de pressão > 200 bar excedendo o limite da extrusora (Refluxo no Funil)"
+    "Matriz_2_Gedeon": {
+      "perda_carga_bar": 268.7,
+      "uniformidade_velocidade_pct": 71.8,
+      "taxa_cisalhamento_max_s1": 2420.0
     },
-    "matriz_3_jonatha": {
-      "pressao_entrada_bar": 68.2,
-      "uniformidade_velocidade_pct": 99.14,
-      "tensao_cisalhamento_max_kPa": 128.44,
-      "diagnostico": "Escoamento iso-distribuído, pressão aliviada de 68.2 bar, fita lisa sem rebarbas nem refluxo"
+    "Matriz_Jonatha_Master": {
+      "perda_carga_bar": 68.2,
+      "uniformidade_velocidade_pct": 99.1,
+      "taxa_cisalhamento_max_s1": 680.0
     }
   }
 }
