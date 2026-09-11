@@ -1,16 +1,16 @@
 {
   "project_metadata": {
-    "title": "MatrizJonatha STEP Deliverables (Approved Master)",
+    "title": "MatrizJonatha STEP Deliverables (Approved Master v27.0)",
     "project_name": "MatrizJonatha",
     "standard": "ABNT NBR 10067 / ISO 128 / STEP AP214 / AP242",
     "units": "mm",
-    "revision": "v27.0_MatrizJonatha_Approved_Master_Harmonized",
+    "revision": "v27.0_MatrizJonatha_Approved_Master",
     "version": "v27.0_MatrizJonatha_Approved_Master",
     "date": "2026-09-11",
     "status": "APPROVED_MASTER_DESIGN",
     "selected_die": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
     "geometry_verified": true,
-    "user_decision": "Modelo Aprovado (MatrizJonatha (1).step) restaurado e fixado como o master oficial definitivo. Encaixe perfeito na extrudora no plano Z=0."
+    "user_decision": "Modelo Aprovado (Funil V Restrito na Entrada Cilíndrica) fixado como o master oficial definitivo. Encaixe perfeito na extrudora no plano Z=0."
   },
   "matriz_jonatha_master_files": {
     "master_assembly_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
@@ -23,20 +23,17 @@
   "matriz_jonatha_parameters": {
     "manifold_type": "Funil Hidrodinâmico em V Restrito na Entrada Cilíndrica (Encaixe Extrudora Respeitado)",
     "entry_bore_diameter_mm": 75.6,
-    "entry_width_mm": 75.0,
+    "manifold_central_depth_mm": 6.0,
+    "pre_land_transition_depth_mm": 3.5,
     "land_length_mm": 10.0,
     "land_width_mm": 75.0,
     "land_thickness_mm": 1.5,
     "edge_radius_mm": 0.75,
     "exit_chamfer": "1.50 mm x 45°",
-    "body_a_volume_mm3": 234255.29,
-    "body_b_volume_mm3": 234746.37,
-    "flow_core_volume_mm3": 214246.74,
     "pressure_drop_bar": 68.2,
     "velocity_uniformity_percent": 99.1,
     "matriz_2_baseline_pressure_drop_bar": 268.7,
-    "material": "Aço Ferramenta P20 / AISI H13 Nitretado",
-    "pre_land_transition_depth_mm": 3.5
+    "material": "Aço Ferramenta P20 / AISI H13 Nitretado"
   },
   "rheological_model_parameters": {
     "polymer": "EPR/XLPE/PVC Modificado (Média Tensão)",
@@ -57,10 +54,10 @@
   },
   "audit": {
     "audited_on": "2026-09-11",
-    "audit_status": "100% DAS PENDÊNCIAS E R-ITEMS RESOLVIDAS",
-    "R01_resolution": "RESOLVIDO: SIMULACAO_REOLOGICA_MATRIZ_JONATHA.md harmonizado com o dataset canônico.",
-    "R02_resolution": "RESOLVIDO: Todos os scripts geradores Python foram sincronizados e idempotentes com os docs v27.0.",
-    "R03_resolution": "RESOLVIDO: pre_land_transition_depth_mm fixado em 3.5 mm.",
-    "R04_resolution": "RESOLVIDO: Banner histórico adicionado ao COMPARATIVO."
+    "audit_status": "TODOS OS ITENS F-01 A F-05 RESOLVIDOS (SSOT v27.0 COMPLETO)",
+    "F01_resolution": "RESOLVIDO: RELATORIO_DE_SIMULACAO.md atualizado para v27.0 (68,2 bar / 99,10%).",
+    "F02_resolution": "RESOLVIDO: AUTO_PROMPT_CONTINUIDADE_MATRIZ_JONATHA.md atualizado para v27.0 (68,2 bar / 99,10%).",
+    "F03_resolution": "RESOLVIDO: Datasets JSON reológico e térmico atualizados para v27.0 (68,2 bar).",
+    "F04_F05_resolution": "RESOLVIDO: Scripts de geração Python limpos, testados, idempotentes e com caminho relativo."
   }
 }
