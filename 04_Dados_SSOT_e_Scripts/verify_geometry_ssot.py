@@ -79,6 +79,19 @@ def registrar_info(item, valor, obs=""):
     print(f"  [INFO ] {item:<52} {valor}  {obs}")
 
 
+def contagem_shells(solido):
+    """Nº de shells: 1 = sólido maciço; >1 = possui cavidades internas fechadas."""
+    from OCP.TopAbs import TopAbs_SHELL
+    from OCP.TopExp import TopExp_Explorer
+
+    exp = TopExp_Explorer(solido.wrapped, TopAbs_SHELL)
+    n = 0
+    while exp.More():
+        n += 1
+        exp.Next()
+    return n
+
+
 def carregar(caminho):
     return cq.importers.importStep(caminho)
 
@@ -214,6 +227,14 @@ def main():
     registrar_info("Furos de pino Ø4 no Body_A", len(furos_a))
     registrar_info("Furos de pino Ø4 no Body_B", len(furos_b),
                    "ausentes: os pinos não alinham as duas metades")
+    # os furos de pino são cavidades internas FECHADAS (bolhas) ou furos reais?
+    shells_a = contagem_shells(corpo_a)
+    shells_b = contagem_shells(corpo_b)
+    checar("Cavidades internas fechadas no Body_A", shells_a - 1, 0, tol=0,
+           unidade="cavidade(s)",
+           obs="os furos Ø4 estão SELADOS (bolhas internas, impossíveis de usinar)")
+    checar("Cavidades internas fechadas no Body_B", shells_b - 1, 0, tol=0,
+           unidade="cavidade(s)")
 
     # ------------------------------------------------------------------ 7
     print("\n[7] CONSISTÊNCIA GEOMÉTRICA GLOBAL (aço + canal = envelope)")
@@ -349,13 +370,14 @@ def gerar_markdown(ssot, resultados):
         "",
         "| # | Achado (medido no STEP) | Impacto | Ação recomendada |",
         "| :--: | :--- | :--- | :--- |",
-        "| 1 | Pinos de alinhamento Ø4 × 12 apenas no `Body_A` | As duas metades ficam sem referência de alinhamento: risco de degrau e rebarba no plano de partição da manta | Usinar os furos conjugados Ø4 H7 (cegos de 12 mm) no `Body_B` e montar 2 pinos Ø4 × 20 mm temperados |",
+        "| 1 | Pinos: os 2 furos Ø4 × 12 do `Body_A` estão **selados** (cavidades internas fechadas, 3 shells) e o `Body_B` não tem furo nenhum | As metades ficam sem referência de alinhamento: risco de degrau e rebarba no plano de partição | Refazer os furos nos **dois** corpos (Ø4 H7 × 12 mm cegos, X=±41,50, Z=54,50) e usar 2 pinos Ø4 × 20 mm temperados. Reexportar os dois STEP |",
         "| 2 | Land reto e paralelo real = 8,50 mm (SSOT declara 10,00 mm) | Divergência documental; o chanfro de 45° consome 1,50 mm do land | Corrigir o SSOT para 8,50 mm de land paralelo + 1,50 mm de chanfro, **ou** reduzir o chanfro para 0,50 mm × 45° (land = 9,50 mm) |",
         "| 3 | Parede de aço no lábio de saída = 0,75 mm | Lábio frágil: risco de lascamento e rebarba na face de saída Ø79,5 (impossível retificar plana) | Reduzir o chanfro para 0,50–0,80 mm × 45° (lábio ≥ 1,40 mm), mantendo o envelope Ø79,5 intacto |",
         "| 4 | Nenhum furo de fixação/aperto no modelo | As metades não podem ser fechadas contra os 68 bar de contrapressão | Definir padrão de fixação: 4 × M8 em Y nas asas do Ø93 (com spot face) **ou** grampos/quadro externo (verificar espaço: parede de aço de apenas 8,7 mm entre o canal e o Ø93) |",
         "| 5 | Sem controle térmico (cartuchos Ø9,5 / termopar / refrigeração) | Operação fora da janela de 50–65 °C reintroduz o *edge tearing* | Acrescentar furos de cartucho Ø9,5 mm, poço de termopar Ø6 mm e 2 canais de refrigeração Ø8 mm por metade |",
         "| 6 | Sem furação de flange em Z=0 | Acoplamento à extrudora depende só do encaixe Ø75,60 mm | Extrair o padrão de furos do cabeçote original (`030-032- cabeçote.dwg`) antes de definir o flange |",
         "| 7 | `MatrizJonatha_Canal_Fluxo.step` contém 3 sólidos | Dificulta o uso direto como eletrodo de EDM / malha de CFD | Reexportar apenas o núcleo de polímero (1 sólido) |",
+        "| 8 | ΔP e τ declarados não são reproduzíveis (τ de 128,44 kPa é impossível: o land é o mesmo e a vazão é a mesma) | Risco de decisão sobre números não auditáveis | Refazer em script versionado; ver `03_Relatorios_e_Documentacao/TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md` |",
         "",
         "## 5. Conclusão",
         "",

@@ -233,6 +233,26 @@
       "observacao": "ausentes: os pinos não alinham as duas metades"
     },
     {
+      "item": "Cavidades internas fechadas no Body_A",
+      "nominal": 0,
+      "medido": 2,
+      "desvio": 2,
+      "tol": 0,
+      "unidade": "cavidade(s)",
+      "status": "NAO_CONFORME",
+      "observacao": "os furos Ø4 estão SELADOS (bolhas internas, impossíveis de usinar)"
+    },
+    {
+      "item": "Cavidades internas fechadas no Body_B",
+      "nominal": 0,
+      "medido": 0,
+      "desvio": 0,
+      "tol": 0,
+      "unidade": "cavidade(s)",
+      "status": "CONFORME",
+      "observacao": ""
+    },
+    {
       "item": "Envelope - (aço + canal + 2 furos de pino)",
       "nominal": 0.0,
       "medido": 0.0009,
@@ -289,9 +309,9 @@
     }
   ],
   "resumo": {
-    "total": 34,
-    "conformes": 18,
-    "nao_conformes": 1,
+    "total": 36,
+    "conformes": 19,
+    "nao_conformes": 2,
     "informativos": 15
   }
 }

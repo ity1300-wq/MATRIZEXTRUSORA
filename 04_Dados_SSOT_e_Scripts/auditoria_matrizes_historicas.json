@@ -1,0 +1,98 @@
+{
+  "projeto": "Auditoria_Comparativa_Das_Matrizes",
+  "data": "2026-09-11",
+  "metodo": "Medição direta das seções dos STEP + lei das potências 1D (escoamento desenvolvido) com K=18500 Pa.s^n, n=0,32, Q=15 cm3/s",
+  "limitacoes": "Modelo 1D não captura contração brusca de 90° nem perdas de entrada (Bagley); use para ordem de grandeza, não como CFD.",
+  "matrizes": [
+    {
+      "matriz": "Matriz 1 - Copo (original)",
+      "z_total_mm": 80.7,
+      "diametro_externo_mm": 93.0,
+      "canal_arquivo_solidos": 1,
+      "canal_arquivo_vol_mm3": 318480.68,
+      "canal_montagem_vol_mm3": 318480.68,
+      "canal_consistente": true,
+      "canal_usado": "arquivo isolado",
+      "canal_arquivo_vol_total_mm3": 318480.68,
+      "entrada": "circular Ø75.60",
+      "entrada_area_mm2": 4488.8,
+      "secao_em_z1_mm": [
+        75.6,
+        75.6
+      ],
+      "z_inicio_land": 70.75,
+      "comprimento_land_mm": 9.95,
+      "dp_estimado_1d_bar": 37.1,
+      "dp_declarado_bar": 185.4,
+      "uniformidade_declarada_pct": 54.73,
+      "tau_parede_land_kpa": 164.0
+    },
+    {
+      "matriz": "Matriz 2 - Gedeon",
+      "z_total_mm": 109.0,
+      "diametro_externo_mm": 93.0,
+      "canal_arquivo_solidos": 1,
+      "canal_arquivo_vol_mm3": 213790.03,
+      "canal_montagem_vol_mm3": 43067.67,
+      "canal_consistente": false,
+      "canal_usado": "montagem",
+      "canal_arquivo_vol_total_mm3": 213790.03,
+      "entrada": "circular Ø75.57",
+      "entrada_area_mm2": 4484.6,
+      "secao_em_z1_mm": [
+        75.0,
+        72.07
+      ],
+      "z_inicio_land": 21.0,
+      "comprimento_land_mm": 88.0,
+      "dp_estimado_1d_bar": 305.5,
+      "dp_declarado_bar": 268.7,
+      "uniformidade_declarada_pct": 68.96,
+      "tau_parede_land_kpa": 164.0
+    },
+    {
+      "matriz": "Matriz Desenvolvimento",
+      "z_total_mm": 109.0,
+      "diametro_externo_mm": 93.0,
+      "canal_arquivo_solidos": 1,
+      "canal_arquivo_vol_mm3": 155370.37,
+      "canal_montagem_vol_mm3": 155671.97,
+      "canal_consistente": true,
+      "canal_usado": "montagem",
+      "canal_arquivo_vol_total_mm3": 155370.37,
+      "entrada": "retangular/slot 75.0 x 40.0",
+      "entrada_area_mm2": 2999.7,
+      "secao_em_z1_mm": [
+        75.0,
+        39.61
+      ],
+      "z_inicio_land": 99.0,
+      "comprimento_land_mm": 10.0,
+      "dp_estimado_1d_bar": 49.3,
+      "tau_parede_land_kpa": 164.0
+    },
+    {
+      "matriz": "Matriz Jonatha v27 (oficial)",
+      "z_total_mm": 109.0,
+      "diametro_externo_mm": 93.0,
+      "canal_arquivo_solidos": 3,
+      "canal_arquivo_vol_mm3": 213945.15,
+      "canal_montagem_vol_mm3": 214246.74,
+      "canal_consistente": true,
+      "canal_usado": "montagem",
+      "canal_arquivo_vol_total_mm3": 214246.74,
+      "entrada": "circular Ø75.60",
+      "entrada_area_mm2": 4488.3,
+      "secao_em_z1_mm": [
+        75.59,
+        74.85
+      ],
+      "z_inicio_land": 99.0,
+      "comprimento_land_mm": 10.0,
+      "dp_estimado_1d_bar": 41.9,
+      "dp_declarado_bar": 68.2,
+      "uniformidade_declarada_pct": 99.1,
+      "tau_parede_land_kpa": 164.0
+    }
+  ]
+}

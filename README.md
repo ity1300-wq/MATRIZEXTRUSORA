@@ -54,6 +54,7 @@ MATRIZEXTRUSORA/
 ├── 📂 03_Relatorios_e_Documentacao/       -> DOCUMENTAÇÃO TÉCNICA E SIMULAÇÕES
 │   ├── AUTO_PROMPT_CONTINUIDADE_MATRIZ_JONATHA.md -> Prompt de handover para continuidade em IA
 │   ├── AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md -> Auditoria dimensional automática dos STEP vs. SSOT
+│   ├── TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md -> O que é problema real e o que não é, nas 4 matrizes
 │   ├── RELATORIO_DE_SIMULACAO.md          -> Relatório executivo completo de CFD reológico e térmico
 │   ├── CAD_SPECIFICATION_BACKUP_SSOT.md  -> Especificação técnica unificada SSOT v27.0
 │   └── SIMULACAO_REOLOGICA_MATRIZ_JONATHA.md -> Detalhamento dos modelos reológicos
@@ -62,6 +63,8 @@ MATRIZEXTRUSORA/
     ├── cad_die_parameters.json            -> JSON da Fonte Única da Verdade (SSOT v27.0)
     ├── auditoria_geometrica.json          -> Resultado numérico da auditoria dimensional dos STEP
     ├── verify_geometry_ssot.py            -> Auditoria automática: mede os STEP e compara com o SSOT
+    ├── verify_legacy_dies.py              -> Mede as 4 matrizes, confere os arquivos e recalcula o ΔP
+    ├── auditoria_matrizes_historicas.json -> Resultado numérico da comparação entre as 4 matrizes
     ├── setup_headless_gl.sh               -> Ambiente CAD headless (stub libGL para servidores/CI)
     ├── dados_simulacao_reologica.json     -> Dados numéricos de simulação em JSON
     └── dados_simulacao_carreau_yasuda.json -> Dados numéricos térmicos em JSON
@@ -80,5 +83,10 @@ export LD_LIBRARY_PATH="$PWD/04_Dados_SSOT_e_Scripts/.headless_gl:$LD_LIBRARY_PA
 python 04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py --json --md
 ```
 
-Última execução (v27.0): **34 itens verificados, 18 conformes, 1 não conforme, 15 informativos**.
-Resultado completo em `03_Relatorios_e_Documentacao/AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md`.
+```bash
+python 04_Dados_SSOT_e_Scripts/verify_legacy_dies.py --json   # compara as 4 matrizes
+```
+
+Última execução (v27.0): **36 itens verificados, 19 conformes, 2 não conformes, 15 informativos**.
+Resultado completo em `03_Relatorios_e_Documentacao/AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md` e
+diagnóstico comparativo em `03_Relatorios_e_Documentacao/TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md`.

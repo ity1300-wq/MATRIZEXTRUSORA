@@ -22,9 +22,21 @@
   },
   "envelope_externo_mm": {
     "comprimento_total_z_mm": 109.0,
-    "estagio_1": { "diametro_mm": 93.0, "z_de_mm": 0.0, "z_ate_mm": 69.9 },
-    "estagio_2": { "diametro_mm": 89.5, "z_de_mm": 69.9, "z_ate_mm": 80.7 },
-    "estagio_3": { "diametro_mm": 79.5, "z_de_mm": 80.7, "z_ate_mm": 109.0 },
+    "estagio_1": {
+      "diametro_mm": 93.0,
+      "z_de_mm": 0.0,
+      "z_ate_mm": 69.9
+    },
+    "estagio_2": {
+      "diametro_mm": 89.5,
+      "z_de_mm": 69.9,
+      "z_ate_mm": 80.7
+    },
+    "estagio_3": {
+      "diametro_mm": 79.5,
+      "z_de_mm": 80.7,
+      "z_ate_mm": 109.0
+    },
     "observacao": "Envelope 100% idêntico à Matriz 2 (Gedeon) para montagem direta na extrusora. Medido e confirmado por auditoria automática nos STEP oficiais."
   },
   "matriz_jonatha_parameters": {
@@ -72,16 +84,42 @@
       "script": "04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py",
       "relatorio": "03_Relatorios_e_Documentacao/AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md",
       "dados": "04_Dados_SSOT_e_Scripts/auditoria_geometrica.json",
-      "itens_verificados": 34,
-      "conformes": 18,
-      "nao_conformes": 1,
+      "itens_verificados": 36,
+      "conformes": 19,
+      "nao_conformes": 2,
       "resultado": "Geometria dos STEP oficiais confirmada: envelope 93/89,5/79,5 x 109 mm, boca de entrada Ø75,60 mm, land 75,00 x 1,50 mm com bordas R0,75, bipartição sem interferência e fechamento volumétrico exato (aço + canal + furos de pino = envelope).",
       "achados_pendentes_de_decisao": [
         "G-01: land reto e paralelo real de 8,50 mm (SSOT declara 10,00 mm) - chanfro de saída consome 1,50 mm.",
         "G-02: lábio de saída com apenas 0,75 mm de parede de aço (fragilidade na face Ø79,5).",
-        "G-03: furos de pino Ø4 x 12 existem apenas no Body_A - o Body_B não tem furos conjugados (pinos não alinham as metades).",
+        "G-03: os furos de pino Ø4 x 12 do Body_A estão SELADOS (cavidades internas fechadas: 3 shells) e o Body_B não possui furos conjugados - os pinos não alinham as metades.",
         "G-04: nenhum recurso de fixação/aperto, controle térmico (cartuchos Ø9,5, termopar, refrigeração Ø8,0) ou flange de entrada presente no CAD.",
         "G-05: MatrizJonatha_Canal_Fluxo.step contém 3 sólidos (núcleo de polímero + 2 furos de pino) em vez de 1."
+      ]
+    },
+    "triagem_de_problemas_2026_09_11": {
+      "documento": "03_Relatorios_e_Documentacao/TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md",
+      "script": "04_Dados_SSOT_e_Scripts/verify_legacy_dies.py",
+      "dados": "04_Dados_SSOT_e_Scripts/auditoria_matrizes_historicas.json",
+      "resumo": "Medição das 4 matrizes (1 Copo, 2 Gedeon, Desenvolvimento e Jonatha v27). Separadas as alegações que se sustentam das que não se sustentam.",
+      "problemas_reais": [
+        "P1 (bloqueador): Matriz Jonatha sem nenhum recurso de fixação/aperto - a força de abertura das metades é da ordem de 30 kN (68,2 bar x 4.489 mm2).",
+        "P2 (bloqueador): furos de pino selados no Body_A (cavidades internas) e ausentes no Body_B; a Matriz 2 tinha pino Ø1,78 x 10 mm atravessando as duas metades.",
+        "P3 (risco): sem controle térmico (cartuchos Ø9,5, termopar, refrigeração Ø8,0).",
+        "P4 (dependência): sem padrão de flange/acoplamento em Z=0.",
+        "P5 (entrega): MatrizGedeon_Canal_Fluxo.step está errado - 213.790,03 mm3 contra 43.017,90 mm3 do canal real (4,96x maior), com geometria igual à da Jonatha.",
+        "P6 (decisão): números de CFD não reproduzíveis - τ de 128,44 kPa é impossível (mesmo land e mesma vazão dão 164,0 kPa); Matriz 1 com 185,4 bar contra 37,1 bar medidos em 1D.",
+        "P7 (robustez): lábio de saída com 0,75 mm de aço - sugerido chanfro de 0,8 x 45°.",
+        "P8 (documentação): land paralelo real de 8,50 mm e não 10,00 mm."
+      ],
+      "nao_sao_problemas": [
+        "N1: envelope Ø93/89,5/79,5 x 109 mm idêntico à Matriz 2 (compatibilidade comprovada por medição).",
+        "N2: fenda 75,00 x 1,50 com R0,75 - área 112,017 mm2 igual ao cálculo analítico.",
+        "N3: canal da Jonatha sem arestas frágeis; a boca Ø75,60 é o envelope máximo do canal.",
+        "N4: bipartição sem interferência (0,000 mm3) e fechamento volumétrico com 0,001 mm3 de resíduo.",
+        "N5: volumes e massa conferem com o SSOT (3,682 kg de aço).",
+        "N6: canal isolado confere com o corpo na Matriz 1, Desenvolvimento e Jonatha.",
+        "N7: a Matriz 1 não perdia carga por atrito (37,1 bar em 1D); o defeito é o degrau de 90°.",
+        "N8: o ganho da Jonatha é real - land de 88,0 para 8,5 mm e ΔP medido de 305,5 para 41,9 bar."
       ]
     }
   }
