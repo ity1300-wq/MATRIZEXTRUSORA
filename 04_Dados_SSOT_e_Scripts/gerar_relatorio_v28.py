@@ -53,6 +53,13 @@ def tbl(v):
     return str(pt(v)).replace(" | ", " · ").replace("|", "/")
 
 
+def mil(v, dec=0):
+    """1.234.567,89 - como dim(), mas com separador de milhar."""
+    if not isinstance(v, (int, float)):
+        return pt(v)
+    return f"{float(v):,.{dec}f}".replace(",", "@").replace(".", ",").replace("@", ".")
+
+
 def dim(v, dec=2):
     if isinstance(v, (int, float)):
         return f"{float(v):.{dec}f}".replace(".", ",")
@@ -182,6 +189,43 @@ def main():
     f_proj = nz["dp_1d_bar"] / 10 * nz["area_projetada_mm2"] / 1e3
     meta, m = ft["meta"], ssot["matriz_jonatha_parameters"]
     rot = ssot["proposta_v28_dfm"].get("rotulo", "v28.1")
+    try:
+        estudo = carregar("funil_coathanger.json")
+    except FileNotFoundError:
+        estudo = None
+    if estudo:
+        fa, fn = estudo["medicoes"]
+        r_dp = fn["dp_1d_bar"] / fa["dp_1d_bar"]
+        dp_ch = dim(fn["dp_1d_bar"], 1)
+        txt_funil = (
+            f"**7.1b — a opção (b) já foi modelada e medida (D3).** `estudar_funis.py` refez o funil das "
+            f"seções declaradas com loft por **todas** as estações (passo de 5 mm, que é o que faltava no "
+            f"script antigo) e mediu com a mesma trena: **ΔP 1D de {dim(fn['dp_1d_bar'], 1)} bar** contra "
+            f"{dim(fa['dp_1d_bar'], 1)} bar do funil atual (**{dim(r_dp)}×**), canal {mil(fn['volume_mm3'])} mm³ "
+            f"contra {mil(fa['volume_mm3'])} mm³, residência {dim(fn['residencia_s'], 0)} s contra "
+            f"{dim(fa['residencia_s'], 0)} s, e **a espessura da manta é a mesma** — a fenda e o land não mudam, "
+            f"então o gancho de uniformidade que justificaria o cabide não aparece na medição. Invasão do "
+            f"envelope nos dois: {dim(fn['invasao_envelope_mm'], 4)} mm. Comparação completa em "
+            f"`03_Relatorios_e_Documentacao/ESTUDO_FUNIL_COATHANGER.md`; os STEP do estudo ficam em "
+            f"`05_Variantes_Em_Estudo/` e não tocam o modelo oficial. Restam as duas saídas: (a) admitir no "
+            f"SSOT \"funil cônico linear com largura constante\" e corrigir o texto; (b) desenhar um cabide "
+            f"compensado de verdade (alturas das asas decrescentes do centro para as pontas), o que obriga a "
+            f"CFD novo porque o ΔP saiu de {dim(fa['dp_1d_bar'], 1)} para {dim(fn['dp_1d_bar'], 1)} bar só com a "
+            f"troca de forma.")
+        txt_d3_estado = (f"**MEDIDO, esperando sua escolha** — os dois funis modelados e comparados: ΔP "
+                         f"{dim(fn['dp_1d_bar'], 1)} bar contra {dim(fa['dp_1d_bar'], 1)} bar, residência "
+                         f"{dim(fn['residencia_s'], 0)} s contra {dim(fa['residencia_s'], 0)} s, espessura da "
+                         f"manta igual nos dois (a fenda manda, e ela não muda)")
+        txt_d3_conseq = ("a v28.1 mantém o funil do master. Escolher (a) é só texto; escolher (b) é CFD novo "
+                         "e o ΔP acima de 68,2 bar do relatório de projeto")
+    else:
+        txt_funil = ("**7.1b — a comparação dos dois funis ainda não foi medida.** Rode "
+                     "`python 04_Dados_SSOT_e_Scripts/estudar_funis.py` (sem tocar no oficial) para gerar "
+                     "`ESTUDO_FUNIL_COATHANGER.md` com ΔP, residência e espessura medidos nos sólidos.")
+        dp_ch = "—"
+        txt_d3_estado = "**EM ANDAMENTO a seu pedido**: vou modelar os dois e trazer ΔP, tempo de residência e espessura da manta medidos lado a lado"
+        txt_d3_conseq = "a v28.1 mantém o funil do master; a comparação decide se ele vira v29"
+
 
     land = achar(vf, "Land reto e paralelo")
     cha = achar(vf, "Chanfro de saída (v27")
@@ -388,8 +432,9 @@ seção** (as seções intermediárias do `slot2D` não entram no loft sem `thro
 arestas compatíveis), de modo que o modelo aprovado e o texto que o descreve divergem. A boa
 notícia: o funil linear em V **também** distribui por toda a largura (a largura nunca afunila), o
 que é coerente com a uniformidade alta alegada — mas o projeto não pode alegar "cabide" enquanto o
-sólido é um cone. Escolha: (a) admitir no SSOT "funil cônico linear com largura constante";
-(b) refazer de fato o coat-hanger com `loft(throughAll=True)` e re-medir ΔP e uniformidade.
+sólido é um cone.
+
+{txt_funil}
 
 **7.2 As duas metades não são espelhos.** O volume do canal acima e abaixo de Y=0 difere
 **{un(assim.get('medido'))}** (0,093 % do volume do canal), herança do loft do v27.0. Se a manta apresentar
@@ -410,8 +455,10 @@ termopar ou o polímero.
   novo chanfro deve ser corrigido.
 * Antes de usar "99,10 % de uniformidade" como critério de aceite, é preciso publicar a definição
   (σ/U do perfil de velocidade medido em que plano) e a planilha. Sem isso, não é especificação.
-* A matriz nova **exige CFD novo** só se a opção coat-hanger (7.1b) for adotada; para a {rot} como
-  está, a variação de land (0,70 mm) cabe na incerteza do método 1D.
+* **Não há CFD pendente por esta revisão**: o lábio ficou igual ao do master (decisão D2) e o ΔP 1D
+  medido nos dois sólidos é o mesmo, {tbl(dp.get('medido'))}. CFD novo só entra na conta se a opção
+  coat-hanger (7.1b) for adotada — e aí o ΔP medido no estudo é {dp_ch} bar, acima do limite
+  de 68,2 bar usado no relatório de projeto.
 
 ---
 
@@ -423,7 +470,7 @@ termopar ou o polímero.
 | **D1b** | Anel do nariz do cabeçote (Ø68,30 do desenho, variante 9"×65 mm) | **FECHADA por medição sua na máquina**: sobram 2,5 mm por lado na fenda, o que só casa com a passagem Ø80,00 do próprio cabeçote | a matriz de 75 mm monta como está; o Ø68,30 fica registrado como coisa do cabeçote de 65 mm |
 | **D2** | Chanfro da saída 0,80 ou 1,50 | **DECIDIDO: mantém 1,50 × 45°** (land 8,50, lâmina 0,75) como no master | a v28.1 não altera a região de saída; o lascamento na limpeza vira item de procedimento, não de geometria |
 | **D4** | Promover a v28 para oficial | **DECIDIDO: não** — v27.0 segue master | a v28 fica ao lado, verificada, esperando você conferir a máquina |
-| **D3** | Funil: o cone linear do modelo atual **ou** o coat-hanger de 6,00 mm do texto | **EM ANDAMENTO a seu pedido**: vou modelar os dois e trazer ΔP, tempo de residência e espessura da manta medidos lado a lado | a v28.1 mantém o funil do master; a comparação decide se ele vira v29 |
+| **D3** | Funil: o cone linear do modelo atual **ou** o coat-hanger de 6,00 mm do texto | {txt_d3_estado} | {txt_d3_conseq} |
 | **medir** | Comprimento do bico do cabeçote (14,00 mm no desenho) | **ABERTA — é a única que pode mexer nos furos** | se o bico chegar até a face da matriz, os 6 cartuchos (Z=97,00) e os 4 termopares (Z=103,00) ficam enterrados no cabeçote e o aquecimento muda de peça |
 
 Enquanto D3 estiver em aberto, **nada é promovido**: `MatrizJonatha.step` continua sendo o v27.0 e a

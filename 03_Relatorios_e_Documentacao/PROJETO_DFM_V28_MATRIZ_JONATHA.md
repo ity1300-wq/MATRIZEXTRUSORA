@@ -217,8 +217,9 @@ seção** (as seções intermediárias do `slot2D` não entram no loft sem `thro
 arestas compatíveis), de modo que o modelo aprovado e o texto que o descreve divergem. A boa
 notícia: o funil linear em V **também** distribui por toda a largura (a largura nunca afunila), o
 que é coerente com a uniformidade alta alegada — mas o projeto não pode alegar "cabide" enquanto o
-sólido é um cone. Escolha: (a) admitir no SSOT "funil cônico linear com largura constante";
-(b) refazer de fato o coat-hanger com `loft(throughAll=True)` e re-medir ΔP e uniformidade.
+sólido é um cone.
+
+**7.1b — a opção (b) já foi modelada e medida (D3).** `estudar_funis.py` refez o funil das seções declaradas com loft por **todas** as estações (passo de 5 mm, que é o que faltava no script antigo) e mediu com a mesma trena: **ΔP 1D de 100,9 bar** contra 41,9 bar do funil atual (**2,41×**), canal 76.010 mm³ contra 213.945 mm³, residência 5 s contra 14 s, e **a espessura da manta é a mesma** — a fenda e o land não mudam, então o gancho de uniformidade que justificaria o cabide não aparece na medição. Invasão do envelope nos dois: 0,0000 mm. Comparação completa em `03_Relatorios_e_Documentacao/ESTUDO_FUNIL_COATHANGER.md`; os STEP do estudo ficam em `05_Variantes_Em_Estudo/` e não tocam o modelo oficial. Restam as duas saídas: (a) admitir no SSOT "funil cônico linear com largura constante" e corrigir o texto; (b) desenhar um cabide compensado de verdade (alturas das asas decrescentes do centro para as pontas), o que obriga a CFD novo porque o ΔP saiu de 41,9 para 100,9 bar só com a troca de forma.
 
 **7.2 As duas metades não são espelhos.** O volume do canal acima e abaixo de Y=0 difere
 **|A-B| = 199,22 mm³ (0,093 % do canal)** (0,093 % do volume do canal), herança do loft do v27.0. Se a manta apresentar
@@ -239,8 +240,10 @@ termopar ou o polímero.
   novo chanfro deve ser corrigido.
 * Antes de usar "99,10 % de uniformidade" como critério de aceite, é preciso publicar a definição
   (σ/U do perfil de velocidade medido em que plano) e a planilha. Sem isso, não é especificação.
-* A matriz nova **exige CFD novo** só se a opção coat-hanger (7.1b) for adotada; para a v28.1 como
-  está, a variação de land (0,70 mm) cabe na incerteza do método 1D.
+* **Não há CFD pendente por esta revisão**: o lábio ficou igual ao do master (decisão D2) e o ΔP 1D
+  medido nos dois sólidos é o mesmo, v28.1 = 41,9 bar · v27.0 = 41,9 bar. CFD novo só entra na conta se a opção
+  coat-hanger (7.1b) for adotada — e aí o ΔP medido no estudo é 100,9 bar, acima do limite
+  de 68,2 bar usado no relatório de projeto.
 
 ---
 
@@ -252,7 +255,7 @@ termopar ou o polímero.
 | **D1b** | Anel do nariz do cabeçote (Ø68,30 do desenho, variante 9"×65 mm) | **FECHADA por medição sua na máquina**: sobram 2,5 mm por lado na fenda, o que só casa com a passagem Ø80,00 do próprio cabeçote | a matriz de 75 mm monta como está; o Ø68,30 fica registrado como coisa do cabeçote de 65 mm |
 | **D2** | Chanfro da saída 0,80 ou 1,50 | **DECIDIDO: mantém 1,50 × 45°** (land 8,50, lâmina 0,75) como no master | a v28.1 não altera a região de saída; o lascamento na limpeza vira item de procedimento, não de geometria |
 | **D4** | Promover a v28 para oficial | **DECIDIDO: não** — v27.0 segue master | a v28 fica ao lado, verificada, esperando você conferir a máquina |
-| **D3** | Funil: o cone linear do modelo atual **ou** o coat-hanger de 6,00 mm do texto | **EM ANDAMENTO a seu pedido**: vou modelar os dois e trazer ΔP, tempo de residência e espessura da manta medidos lado a lado | a v28.1 mantém o funil do master; a comparação decide se ele vira v29 |
+| **D3** | Funil: o cone linear do modelo atual **ou** o coat-hanger de 6,00 mm do texto | **MEDIDO, esperando sua escolha** — os dois funis modelados e comparados: ΔP 100,9 bar contra 41,9 bar, residência 5 s contra 14 s, espessura da manta igual nos dois (a fenda manda, e ela não muda) | a v28.1 mantém o funil do master. Escolher (a) é só texto; escolher (b) é CFD novo e o ΔP acima de 68,2 bar do relatório de projeto |
 | **medir** | Comprimento do bico do cabeçote (14,00 mm no desenho) | **ABERTA — é a única que pode mexer nos furos** | se o bico chegar até a face da matriz, os 6 cartuchos (Z=97,00) e os 4 termopares (Z=103,00) ficam enterrados no cabeçote e o aquecimento muda de peça |
 
 Enquanto D3 estiver em aberto, **nada é promovido**: `MatrizJonatha.step` continua sendo o v27.0 e a

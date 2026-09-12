@@ -63,6 +63,14 @@ sólidos (booleanos + `BRepExtrema`), não declarando:
   "coat-hanger com reservatório de 6,00 mm" descrito — as seções intermediárias do loft nunca entraram
   no sólido. Item de decisão **D3**.
 
+### 🧪 Variantes em estudo (não são o modelo oficial)
+
+`05_Variantes_Em_Estudo/` guarda os STEP de comparações pedidas antes de qualquer mudança de geometria.
+Hoje há uma: o **funil coat-hanger** medido contra o cone linear do master (ΔP 1D, tempo de residência,
+volume estacionado nas pontas, invasão do envelope e aço cortado) — tabela e leitura em
+`03_Relatorios_e_Documentacao/ESTUDO_FUNIL_COATHANGER.md`, gerador em `04_Dados_SSOT_e_Scripts/estudar_funis.py`.
+Nada disso substitui `MatrizJonatha.step`.
+
 ### 🔩 Interface com o cabeçote EX-030 — medida no DWG e provada nos sólidos
 
 O `030-032- cabeçote.dwg` (HIDEALL, PED:2257) foi convertido e **medido entidade por entidade**. A

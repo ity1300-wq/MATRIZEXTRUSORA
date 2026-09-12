@@ -1,0 +1,86 @@
+{
+  "metodo": "cortes do solido com secao() de verify_legacy_dies.py (a mesma que o dp_total usa, para tabela e Delta-P saírem do mesmo corte); Delta-P 1D com dp_total() de verify_legacy_dies.py (K = 18.500,00 Pa·s^n, n = 0,32, Q = 15.000 mm³/s); mesmo land 8,50 mm e chanfro 1,50 × 45 nos dois lados da comparação; lei de projeto do funil novo nas estações Z=0, Z=25, Z=70, Z=99 mm",
+  "geometria_labios": {
+    "land_paralelo_mm": 8.5,
+    "chanfro_saida_mm": 1.5,
+    "z_inicio_land_mm": 99.0,
+    "z_fim_mm": 109.0,
+    "origem": "decisao D2 do usuario em 2026-09-11: manter o labio do master. gerador e verificador leem estes valores - nao ha numero datilografado no script"
+  },
+  "secoes_declaradas": [
+    [
+      0.0,
+      [
+        "circulo",
+        75.6,
+        75.6
+      ]
+    ],
+    [
+      25.0,
+      [
+        "slot",
+        35.0,
+        12.0
+      ]
+    ],
+    [
+      70.0,
+      [
+        "slot",
+        75.0,
+        3.5
+      ]
+    ],
+    [
+      99.0,
+      [
+        "slot",
+        75.0,
+        1.5
+      ]
+    ]
+  ],
+  "medicoes": [
+    {
+      "nome": "funil atual - reduzor conico linear do master",
+      "dp_1d_bar": 41.85441538197364,
+      "z_pico_mm": 99.25,
+      "pico_bar_por_mm": 1.7205873685611524,
+      "volume_mm3": 213945.14565358867,
+      "residencia_s": 14.263009710239244,
+      "altura_em_z25_mm": 56.888627457520066,
+      "altura_em_z70_mm": 23.20680928494977,
+      "largura_em_z70_mm": 75.17518794047687,
+      "altura_min_mm": 1.5,
+      "z_altura_min_mm": 99.5,
+      "volume_pontas_mm3": 18336.51049143555,
+      "frac_volume_pontas": 0.08570659752722451,
+      "centroide_y_mm": -0.007056080716510847,
+      "invasao_envelope_mm": 0.0,
+      "z_invasao_mm": 0.0,
+      "corpo_mm3": 456796.5735859843,
+      "corpo_kg": 3.5858531026499763
+    },
+    {
+      "nome": "variante coat-hanger - secoes declaradas, loft por todas as estacoes",
+      "dp_1d_bar": 100.85807811285044,
+      "z_pico_mm": 98.75,
+      "pico_bar_por_mm": 1.931341482347086,
+      "volume_mm3": 76009.52810027546,
+      "residencia_s": 5.067301873351697,
+      "altura_em_z25_mm": 12.002544200000042,
+      "altura_em_z70_mm": 3.5001890888889156,
+      "largura_em_z70_mm": 75.0000002,
+      "altura_min_mm": 1.5,
+      "z_altura_min_mm": 99.5,
+      "volume_pontas_mm3": 2391.0451064259864,
+      "frac_volume_pontas": 0.031457176043398184,
+      "centroide_y_mm": 7.427278937780271e-16,
+      "invasao_envelope_mm": 0.0,
+      "z_invasao_mm": 0.0,
+      "corpo_mm3": 607238.8665927674,
+      "corpo_kg": 4.766825102753224
+    }
+  ]
+}

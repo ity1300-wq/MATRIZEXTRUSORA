@@ -415,7 +415,36 @@
     "D3_funil": {
       "decisao": "MODELAR AS DUAS VARIANTES E COMPARAR: o funil conico linear que o modelo atual tem x o coat-hanger de 6,00 mm que o texto descreve",
       "status": "ABERTA - proximo trabalho de CAD + 1D",
-      "entregavel": "comparativo medido nos solidos: dP, tempo de residencia e espessura da manta lado a lado, para entao escolher entre manter ou virar v29"
+      "entregavel": "comparativo medido nos solidos: dP, tempo de residencia e espessura da manta lado a lado, para entao escolher entre manter ou virar v29",
+      "resultado_medido": {
+        "data": "2026-09-12",
+        "metodo": "cortes do solido com secao() de verify_legacy_dies.py (a mesma que o dp_total usa, para tabela e Delta-P saírem do mesmo corte); Delta-P 1D com dp_total() de verify_legacy_dies.py (K = 18.500,00 Pa·s^n, n = 0,32, Q = 15.000 mm³/s); mesmo land 8,50 mm e chanfro 1,50 × 45 nos dois lados da comparação; lei de projeto do funil novo nas estações Z=0, Z=25, Z=70, Z=99 mm",
+        "funil_atual": {
+          "dp_1d_bar": 41.9,
+          "volume_mm3": 213945.0,
+          "residencia_s": 14.3,
+          "altura_secao_z25_mm": 56.89,
+          "frac_volume_pontas": 0.086,
+          "invasao_envelope_mm": 0.0
+        },
+        "variante_coathanger": {
+          "dp_1d_bar": 100.9,
+          "volume_mm3": 76010.0,
+          "residencia_s": 5.1,
+          "altura_secao_z25_mm": 12.0,
+          "frac_volume_pontas": 0.031,
+          "invasao_envelope_mm": 0.0
+        },
+        "conclusao": "o coat-hanger das secoes declaradas custa 2,41x de pressao, nao muda a espessura da manta (fenda e land identicos) e so reduz residencia porque o canal e menor. Nenhum dos dois e o reservatorio de 6,00 mm do texto. Recomendado: opcao (a) - manter o funil do master e corrigir o texto. Se for (b), CFD novo e obrigatorio (100,9 bar passa o limite de 68,2 bar do proprio projeto).",
+        "arquivos": [
+          "04_Dados_SSOT_e_Scripts/estudar_funis.py",
+          "04_Dados_SSOT_e_Scripts/funil_coathanger.json",
+          "03_Relatorios_e_Documentacao/ESTUDO_FUNIL_COATHANGER.md",
+          "05_Variantes_Em_Estudo/ESTUDO_funil_coathanger_Matriz.step",
+          "05_Variantes_Em_Estudo/ESTUDO_funil_coathanger_Canal_Fluxo.step"
+        ],
+        "estado": "comparacao entregue; a escolha (a) ou (b) e do usuario - nenhuma geometria foi alterada"
+      }
     },
     "D4_promover": {
       "decisao": "NAO promover: o v27.0 continua sendo o master aprovado e a v28 fica ao lado como proposta verificada"

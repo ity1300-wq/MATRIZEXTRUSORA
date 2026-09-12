@@ -64,15 +64,24 @@ cálculo/medição que o produziria.
    - **F-28-6** — Anel do nariz do cabeçote (variante 9" × 65 mm): FECHADA PELO USUARIO por medição na máquina: sobram ~2,5 mm em cada extremidade da fenda, o que só acontece com a passagem em Ø80,00 (75,00 + 2 × 2,50). Com o anel Ø68,30 lido no corte faltariam 3,35 mm por lado. O Ø68,30 é da variante de 65 mm do carimbo 9"X65MM e não participa da montagem de 75 mm
    - **F-28-7** — Especificação de aperto da bucha cônica EX-031: Pendente no lado da máquina: o aperto da banda Ø93 é o que fecha o plano de partição, mas o desenho do cabeçote não dá curso nem torque de aperto. A pressão necessária é 8,58 MPa para equilibrar a partição e 9,76 MPa para segurar o empuxo axial só por atrito; sem controle, o collete cônico pode apertar muito acima disso
 
-**Decisões que precisam do usuário:**
-   1. **D1** — Fixação das metades: monobloco + EDM (recomendado) | aro de retração | grampos no BC Ø150
-   2. **D2** — Chanfro de saída: manter 0,80 × 45° (land 9,20) ou voltar a 1,50 × 45° (land 8,50)
-   3. **D3** — Descrição do funil no SSOT: admitir "cônico linear de largura constante" ou refazer o coat-hanger de verdade com `loft(throughAll=True)` e seções de mesmo nº de arestas
+**Decisões já tomadas pelo usuário (não re-propor o que ele rejeitou):**
+   * **Fixação das metades**: FECHADA PELA MAQUINA: a matriz nao leva flange, grampo nem furo de fixacao; a retencao vem da bucha conica EX-031 (collete) e do degrau do cabecote
+   * **Lábio de saída (land e chanfro)**: MANTER COMO NO MASTER: chanfro de saida 1,50 x 45 graus e land paralelo 8,50 mm (lamina de 0,75 mm). A reducao para 0,80 x 45 que a v28.0 propunha foi REJEITADA — risco assumido conscientemente: a lamina de 0,75 mm continua fragil na limpeza da matriz: registrar como procedimento de manutencao (nao esmerilhar, nao usar metal duro na face)
+   * **Funil: cone atual × coat-hanger**: MODELAR AS DUAS VARIANTES E COMPARAR: o funil conico linear que o modelo atual tem x o coat-hanger de 6,00 mm que o texto descreve — MEDIDO: ΔP 100,9 bar (cabide) contra 41,9 bar (atual); residência 5 s contra 14 s; espessura da manta igual nos dois. o coat-hanger das secoes declaradas custa 2,41x de pressao, nao muda a espessura da manta (fenda e land identicos) e so reduz residencia porque o canal e menor. Nenhum dos dois e o reservatorio de 6,00 mm do texto. Recomendado: opcao (a) - manter o funil do master e corrigir o texto. Se for (b), CFD novo e obrigatorio (100,9 bar passa o limite de 68,2 bar do proprio projeto).
+   * **Promover a revisão a oficial**: NAO promover: o v27.0 continua sendo o master aprovado e a v28 fica ao lado como proposta verificada
+   * **Medidas conferidas na máquina**: as duas medidas do usuario confirmam o modelo medido no DWG por caminhos independentes e descartam o anel do nariz de 65 mm para o produto de 75 mm
+   * **Consequência medida da decisão do lábio**: manter o chanfro 1,50 x 45 abre a boca de 75,00 para 78,00 mm. Enquanto o bico do cabecote terminar antes da face da matriz (14,00 mm no desenho) isso nao encosta em nada; se o bico for mais comprido, a folga vira 1,00 mm por lado e nao 2,50 mm. Por isso a medida do comprimento do bico e a unica que ainda pode mexer nos furos.
+
+**O que ainda precisa dele:**
+   1. **Funil: cone atual × coat-hanger** — escolher (a) manter o funil do master e corrigir o texto, ou (b) cabide compensado de verdade, o que obriga CFD novo. Comparação: `03_Relatorios_e_Documentacao/ESTUDO_FUNIL_COATHANGER.md`.
+   2. **Medida que falta** — comprimento do bico do cabecote: o desenho da nariz de 14,00 mm de profundidade, o que deixa 14,30 mm do nariz da matriz para fora - e e nessa faixa que estao os 6 cartuchos (Z = 97,00) e os 4 termopares (Z = 103,00). Se na maquina o bico do cabecote chegar ate a face da matriz, esses furos ficam enterrados no cabecote e o aquecimento tera de mudar de lugar
 
 ## 6. MAPA DE ARQUIVOS
 - `01_CAD_MatrizJonatha_Oficial/MatrizJonatha*.step` — v27.0 aprovado (intocado)
 - `01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28*.step` — proposta DFM (corpo A/B, canal 1 sólido,
   explodida, com fluxo, kit de pinos)
+- `05_Variantes_Em_Estudo/` — STEP de comparações pedidas antes de mexer em geometria (hoje: funil
+  coat-hanger). **Não** substituem o oficial nem entram no `MatrizJonatha.step`
 - `02_CAD_Modelos_Historicos/` — Matriz 1 Copo, Matriz 2 Gedeon, Desenvolvimento (somente leitura)
 - `03_Relatorios_e_Documentacao/` — `PROJETO_DFM_V28_MATRIZ_JONATHA.md` (esta revisão),
   `VERIFICACAO_V28.md` (as 64 medições), `TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md`
@@ -80,6 +89,7 @@ cálculo/medição que o produziria.
   `RELATORIO_DE_SIMULACAO.md`, `V28_CONFERENCIA_VISUAL.png`, e os relatórios de CFD
 - `04_Dados_SSOT_e_Scripts/` — `cad_die_parameters.json` (SSOT), `gerar_matriz_v28.py`,
   `verificar_v28.py`, `explorar_acomodo_furos.py`, `gerar_relatorio_v28.py`, `renderizar_v28.py`,
+  `estudar_funis.py` (comparativo de funis da D3), `verificar_interface_cabecote.py`,
   `verify_geometry_ssot.py` (auditoria v27), `verify_legacy_dies.py` (as 4 matrizes + ΔP 1D),
   `acomodo_furos.json`, `matriz_v28_features.json`, `verificacao_v28.json`
 - `030-032- cabeçote.dwg` — cabeçote Hideall EX-030/031/032: **6 × M12 em BC Ø150, passo 60° a

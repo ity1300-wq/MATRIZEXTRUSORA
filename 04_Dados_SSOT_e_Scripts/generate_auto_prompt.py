@@ -54,13 +54,39 @@ def main():
     rev_prop = pm.get("revision_ssot", "v28.1")
     pend = "\n".join(f"   - **{x['id']}** — {x['item']}: {x['situacao']}"
                      for x in v28.get("pendencias_v28", []))
-    decisoes = [
-        "Fixação das metades: monobloco + EDM (recomendado) | aro de retração | grampos no BC Ø150",
-        "Chanfro de saída: manter 0,80 × 45° (land 9,20) ou voltar a 1,50 × 45° (land 8,50)",
-        "Descrição do funil no SSOT: admitir \"cônico linear de largura constante\" ou refazer "
-        "o coat-hanger de verdade com `loft(throughAll=True)` e seções de mesmo nº de arestas",
-    ]
-    decisoes = "\n".join(f"   {i}. **D{i}** — {d}" for i, d in enumerate(decisoes, start=1))
+    # NADA digitado aqui: as decisoes saem de decisoes_usuario no SSOT. A lista anterior era
+    # prosa chutada e chegou a continuar oferecendo o chanfro de 0,80 mm que o usuario rejeitou.
+    du = ssot.get("decisoes_usuario", {})
+    ROT = [("D1_fixacao", "Fixação das metades"), ("D2_labio_saida", "Lábio de saída (land e chanfro)"),
+           ("D3_funil", "Funil: cone atual × coat-hanger"), ("D4_promover", "Promover a revisão a oficial"),
+           ("medicao_na_maquina", "Medidas conferidas na máquina"),
+           ("consequencia_d2_mediata", "Consequência medida da decisão do lábio")]
+    decididas, abertas = [], []
+    for chave, titulo in ROT:
+        v = du.get(chave)
+        if not isinstance(v, dict):
+            continue
+        dec = v.get("decisao") or v.get("conclusao") or v.get("nota") or "(sem campo decisao no SSOT)"
+        extra = ""
+        if chave == "D3_funil" and v.get("resultado_medido"):
+            r = v["resultado_medido"]
+            a = r.get("funil_atual", {})
+            b = r.get("variante_coathanger", {})
+            extra = (f" — MEDIDO: ΔP {n(b.get('dp_1d_bar', 0), 1)} bar (cabide) contra "
+                     f"{n(a.get('dp_1d_bar', 0), 1)} bar (atual); residência {n(b.get('residencia_s', 0), 0)} s "
+                     f"contra {n(a.get('residencia_s', 0), 0)} s; espessura da manta igual nos dois. "
+                     + r.get("conclusao", ""))
+            abertas.append(f"**{titulo}** — escolher (a) manter o funil do master e corrigir o texto, ou "
+                           f"(b) cabide compensado de verdade, o que obriga CFD novo. "
+                           f"Comparação: `03_Relatorios_e_Documentacao/ESTUDO_FUNIL_COATHANGER.md`.")
+        if chave == "D2_labio_saida" and v.get("risco_assumido"):
+            extra += " — risco assumido conscientemente: " + v["risco_assumido"]
+        if chave == "medicao_na_maquina" and v.get("fica_para_conferir"):
+            abertas.append("**Medida que falta** — " + v["fica_para_conferir"])
+        decididas.append(f"   * **{titulo}**: {dec}{extra}")
+    decisoes = ("\n".join(f"   {i}. {d}" for i, d in enumerate(abertas, start=1))
+                or "   (nenhuma pendencia de decisao registrada no SSOT)")
+    decididas_txt = "\n".join(decididas) or "   (bloco decisoes_usuario ausente do SSOT)"
 
     texto = f"""# PROMPT DE HANDOVER E CONTINUIDADE DO PROJETO - MATRIZ JONATHA
 
@@ -122,13 +148,18 @@ cálculo/medição que o produziria.
 ## 5. PENDÊNCIAS ABERTAS
 {pend}
 
-**Decisões que precisam do usuário:**
+**Decisões já tomadas pelo usuário (não re-propor o que ele rejeitou):**
+{decididas_txt}
+
+**O que ainda precisa dele:**
 {decisoes}
 
 ## 6. MAPA DE ARQUIVOS
 - `01_CAD_MatrizJonatha_Oficial/MatrizJonatha*.step` — v27.0 aprovado (intocado)
 - `01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28*.step` — proposta DFM (corpo A/B, canal 1 sólido,
   explodida, com fluxo, kit de pinos)
+- `05_Variantes_Em_Estudo/` — STEP de comparações pedidas antes de mexer em geometria (hoje: funil
+  coat-hanger). **Não** substituem o oficial nem entram no `MatrizJonatha.step`
 - `02_CAD_Modelos_Historicos/` — Matriz 1 Copo, Matriz 2 Gedeon, Desenvolvimento (somente leitura)
 - `03_Relatorios_e_Documentacao/` — `PROJETO_DFM_V28_MATRIZ_JONATHA.md` (esta revisão),
   `VERIFICACAO_V28.md` (as {ver.get('itens', 0)} medições), `TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md`
@@ -136,6 +167,7 @@ cálculo/medição que o produziria.
   `RELATORIO_DE_SIMULACAO.md`, `V28_CONFERENCIA_VISUAL.png`, e os relatórios de CFD
 - `04_Dados_SSOT_e_Scripts/` — `cad_die_parameters.json` (SSOT), `gerar_matriz_v28.py`,
   `verificar_v28.py`, `explorar_acomodo_furos.py`, `gerar_relatorio_v28.py`, `renderizar_v28.py`,
+  `estudar_funis.py` (comparativo de funis da D3), `verificar_interface_cabecote.py`,
   `verify_geometry_ssot.py` (auditoria v27), `verify_legacy_dies.py` (as 4 matrizes + ΔP 1D),
   `acomodo_furos.json`, `matriz_v28_features.json`, `verificacao_v28.json`
 - `030-032- cabeçote.dwg` — cabeçote Hideall EX-030/031/032: **6 × M12 em BC Ø150, passo 60° a
