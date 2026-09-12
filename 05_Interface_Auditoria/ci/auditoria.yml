@@ -1,0 +1,109 @@
+name: Auditoria de propostas
+
+# Modo A do Protocolo de Auditoria (§7): qualquer proposta nova é auditada automaticamente.
+# O veredito volta como comentário no PR e como artefato baixável.
+
+on:
+  pull_request:
+    paths:
+      - "05_Interface_Auditoria/propostas/**.json"
+      - "01_CAD_MatrizJonatha_Oficial/**.step"
+  workflow_dispatch:
+    inputs:
+      proposta:
+        description: "Caminho da proposta a auditar (ex.: 05_Interface_Auditoria/propostas/PRP-0001-*.json)"
+        required: true
+        default: "05_Interface_Auditoria/propostas/PRP-0001-land-10-chanfro-08.json"
+      com_cfd:
+        description: "Incluir CFD 2D na auditoria (~6 min a mais)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  auditar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Ambiente CAD + CFD (headless)
+        run: bash 04_Dados_SSOT_e_Scripts/setup_cfd_env.sh
+
+      - name: Definir LD_LIBRARY_PATH dos stubs gráficos
+        run: |
+          echo "LD_LIBRARY_PATH=$PWD/04_Dados_SSOT_e_Scripts/.headless_gl:${LD_LIBRARY_PATH}" >> "$GITHUB_ENV"
+          echo "VENV_PY=$HOME/.venv/bin/python" >> "$GITHUB_ENV"
+
+      - name: Descobrir as propostas do PR
+        id: propostas
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            ALVOS="${{ github.event.inputs.proposta }}"
+          else
+            git fetch --no-tags origin "${{ github.base_ref }}"
+            ALVOS=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD" \
+                    -- '05_Interface_Auditoria/propostas/*.json' | tr '\n' ' ')
+          fi
+          echo "alvos=$ALVOS" >> "$GITHUB_OUTPUT"
+          echo "Propostas encontradas: ${ALVOS:-nenhuma}"
+
+      - name: Auditar (uma proposta por vez, medições refeitas do zero)
+        if: steps.propostas.outputs.alvos != ''
+        run: |
+          set +e
+          mkdir -p saida
+          for p in ${{ steps.propostas.outputs.alvos }}; do
+            echo "::group::Auditando $p"
+            EXTRA=""
+            if [ "${{ github.event.inputs.com_cfd }}" = "true" ]; then EXTRA="--com-cfd"; fi
+            "$VENV_PY" 05_Interface_Auditoria/scripts/auditar_proposta.py "$p" \
+                       --json --md $EXTRA --saida-dir saida
+            echo "codigo de saida: $? (0 aprovado/ressalvas, 2 reprovado, 3 bloqueado)"
+            echo "::endgroup::"
+          done
+          cp saida/*.json saida/*.md 05_Interface_Auditoria/vereditos/ 2>/dev/null || true
+          exit 0
+
+      - name: Publicar artefatos do veredito
+        if: steps.propostas.outputs.alvos != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: vereditos
+          path: saida/*
+          if-no-files-found: warn
+
+      - name: Comentar o veredito no PR
+        if: github.event_name == 'pull_request' && steps.propostas.outputs.alvos != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const dir = 'saida';
+            let corpo = '';
+            for (const f of fs.readdirSync(dir).filter(x => x.endsWith('.md')).sort()) {
+              corpo += fs.readFileSync(`${dir}/${f}`, 'utf8') + '\n\n---\n\n';
+            }
+            corpo += '_Comentário gerado automaticamente pelo Auditor (Protocolo v1.0). ' +
+                     'O veredito acima é o contrato; este texto é a cortesia._';
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: corpo
+            });
+
+      - name: Resumo no painel do Actions
+        if: steps.propostas.outputs.alvos != ''
+        run: |
+          for f in saida/*.md; do cat "$f" >> "$GITHUB_STEP_SUMMARY"; done

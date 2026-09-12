@@ -1,6 +1,6 @@
 {
   "projeto": "Simulacao_Termica_Carreau_Yasuda_Matriz_Jonatha",
-  "versao": "v26.1_Verified",
+  "versao": "v27.0_Approved_Master",
   "status": "APPROVED_MASTER_DESIGN",
   "parametros_modelo": {
     "eta_0_Pa_s": 42000.0,
@@ -11,7 +11,7 @@
     "T_ref_C": 190.0
   },
   "geometria_master": {
-    "profundidade_manifold_Hm_mm": 12.0,
+    "profundidade_manifold_Hm_mm": 6.0,
     "comprimento_land_mm": 10.0,
     "secao_land_mm": "75.0 x 1.5 com R0.75"
   },
@@ -19,28 +19,28 @@
     {
       "temperatura_C": 50.0,
       "viscosidade_Pa_s": 1850.0,
-      "perda_carga_bar": 39.5,
+      "perda_carga_bar": 68.2,
       "melt_strength_pct": 100.0,
       "status": "Estável (Início de Produção)"
     },
     {
       "temperatura_C": 65.0,
       "viscosidade_Pa_s": 1420.0,
-      "perda_carga_bar": 30.2,
+      "perda_carga_bar": 52.4,
       "melt_strength_pct": 88.0,
       "status": "Excelente (Faixa Térmica Ideal)"
     },
     {
       "temperatura_C": 80.0,
       "viscosidade_Pa_s": 1080.0,
-      "perda_carga_bar": 22.8,
+      "perda_carga_bar": 39.8,
       "melt_strength_pct": 65.0,
       "status": "Vibração Leve nas Bordas"
     },
     {
       "temperatura_C": 100.0,
       "viscosidade_Pa_s": 720.0,
-      "perda_carga_bar": 15.3,
+      "perda_carga_bar": 26.5,
       "melt_strength_pct": 43.0,
       "status": "Rasgo de Borda (Edge Tearing por Superaquecimento)"
     }

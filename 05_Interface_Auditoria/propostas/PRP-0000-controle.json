@@ -1,0 +1,34 @@
+{
+  "protocolo": "1.0",
+  "id": "PRP-0000",
+  "titulo": "Proposta de controle: nao altera nada (teste de fumaca do pipeline)",
+  "autor": "Auditor IA (fixture de verificacao)",
+  "data": "2026-09-12",
+  "tipo": "calculo",
+  "base_commit": "2759786f27938630b57f4c98a498a78361d7e926",
+  "objetivo": "Verificar que o pipeline de auditoria esta verde: sem mudanca de geometria, todas as metricas declaradas devem ser verificaveis e nenhuma deve degradar frente ao baseline.",
+  "arquivos": [],
+  "parametros": {
+    "land_total_mm": 10.0,
+    "chanfro_mm": 1.5
+  },
+  "esperado": {
+    "land_util_mm": 8.5,
+    "parede_labio_mm": 0.75,
+    "dp_total_bar": 26.68
+  },
+  "nao_muda": [
+    "largura_fenda_mm",
+    "espessura_fenda_mm",
+    "raio_borda_mm",
+    "area_fenda_mm2",
+    "boca_entrada_mm",
+    "volume_canal_mm3",
+    "uniformidade_nucleo_pct"
+  ],
+  "justificativa": "Fixture do protocolo. Reproduz exatamente o estado aprovado (v27): se este veredito sair diferente de APROVADO, ha algo errado no auditor, no baseline ou no ambiente - e nao na matriz.",
+  "riscos": [
+    "Nenhum: a proposta nao propoe alteracao."
+  ],
+  "observacoes": "Use depois de qualquer re-selo ou mudanca de ambiente, para confirmar que o pipeline esta saudavel."
+}

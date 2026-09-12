@@ -1,0 +1,138 @@
+{
+  "projeto": "Avaliacao_Alivio_De_Borda_Matriz_3",
+  "metodo": "p-Laplaciano 2D adimensionalizado por seção transversal; geometria paramétrica com rampa de alívio a partir de |x| = 30.0 mm; malha None mm",
+  "parametros": {
+    "K_Pa_s_n": 18500.0,
+    "n": 0.32,
+    "Q_mm3_s": 15000.0
+  },
+  "casos": [
+    {
+      "malha_mm": null,
+      "malha_min_max_mm": [
+        0.03,
+        0.15
+      ],
+      "area_adimensional": null,
+      "nos": 7979,
+      "elementos": 44508,
+      "uniformidade_nucleo_pct": 77.62,
+      "espessura_em_36mm": 1.1849,
+      "espessura_em_37mm": 0.6066,
+      "espessura_min_borda_mm": 0.1256,
+      "espessura_max_mm": 1.8204,
+      "G_bar_por_mm": 2.1761439567206,
+      "dP_para_8_5mm_bar": 18.4972236321251,
+      "tau_medio_kpa": 160.9450029870292,
+      "Q_conferida": 14999.999999999995,
+      "alivio_um": 0.0,
+      "raio_borda_mm": 0.75
+    },
+    {
+      "malha_mm": null,
+      "malha_min_max_mm": [
+        0.031,
+        0.155
+      ],
+      "area_adimensional": null,
+      "nos": 7587,
+      "elementos": 42228,
+      "uniformidade_nucleo_pct": 88.22,
+      "espessura_em_36mm": 1.2716,
+      "espessura_em_37mm": 0.6289,
+      "espessura_min_borda_mm": 0.1318,
+      "espessura_max_mm": 1.5601,
+      "G_bar_por_mm": 2.1629346213962237,
+      "dP_para_8_5mm_bar": 18.384944281867902,
+      "tau_medio_kpa": 160.52828175798302,
+      "Q_conferida": 14999.999999999998,
+      "alivio_um": 25.0,
+      "raio_borda_mm": 0.775
+    },
+    {
+      "malha_mm": null,
+      "malha_min_max_mm": [
+        0.032,
+        0.16
+      ],
+      "area_adimensional": null,
+      "nos": 7314,
+      "elementos": 40662,
+      "uniformidade_nucleo_pct": 86.16,
+      "espessura_em_36mm": 1.4259,
+      "espessura_em_37mm": 0.7166,
+      "espessura_min_borda_mm": 0.1541,
+      "espessura_max_mm": 1.6364,
+      "G_bar_por_mm": 2.1491579271953336,
+      "dP_para_8_5mm_bar": 18.267842381160335,
+      "tau_medio_kpa": 160.0945250598893,
+      "Q_conferida": 15000.0,
+      "alivio_um": 50.0,
+      "raio_borda_mm": 0.8
+    },
+    {
+      "malha_mm": null,
+      "malha_min_max_mm": [
+        0.033,
+        0.165
+      ],
+      "area_adimensional": null,
+      "nos": 7082,
+      "elementos": 39342,
+      "uniformidade_nucleo_pct": 88.34,
+      "espessura_em_36mm": 1.5977,
+      "espessura_em_37mm": 0.7933,
+      "espessura_min_borda_mm": 0.1649,
+      "espessura_max_mm": 1.6089,
+      "G_bar_por_mm": 2.1348387473378123,
+      "dP_para_8_5mm_bar": 18.146129352371403,
+      "tau_medio_kpa": 159.58893888750958,
+      "Q_conferida": 14999.999999999998,
+      "alivio_um": 75.0,
+      "raio_borda_mm": 0.825
+    },
+    {
+      "malha_mm": null,
+      "malha_min_max_mm": [
+        0.034,
+        0.17
+      ],
+      "area_adimensional": null,
+      "nos": 6992,
+      "elementos": 38862,
+      "uniformidade_nucleo_pct": 77.13,
+      "espessura_em_36mm": 2.0119,
+      "espessura_em_37mm": 1.0069,
+      "espessura_min_borda_mm": 0.1991,
+      "espessura_max_mm": 1.8534,
+      "G_bar_por_mm": 2.119955359076331,
+      "dP_para_8_5mm_bar": 18.01962055214881,
+      "tau_medio_kpa": 159.06298565076403,
+      "Q_conferida": 15000.000000000002,
+      "alivio_um": 100.0,
+      "raio_borda_mm": 0.85
+    },
+    {
+      "malha_mm": null,
+      "malha_min_max_mm": [
+        0.036,
+        0.18
+      ],
+      "area_adimensional": null,
+      "nos": 6594,
+      "elementos": 36594,
+      "uniformidade_nucleo_pct": 83.78,
+      "espessura_em_36mm": 2.2364,
+      "espessura_em_37mm": 1.1048,
+      "espessura_min_borda_mm": 0.2222,
+      "espessura_max_mm": 1.6918,
+      "G_bar_por_mm": 2.088640012666102,
+      "dP_para_8_5mm_bar": 17.75344010766187,
+      "tau_medio_kpa": 157.88194605223794,
+      "Q_conferida": 15000.000000000002,
+      "alivio_um": 150.0,
+      "raio_borda_mm": 0.9
+    }
+  ],
+  "observacao": "cada caso foi resolvido em um processo separado do gmsh (o OCC corrompe o estado entre geometrias no mesmo processo); apenas os campos escalares são preservados na agregação"
+}
