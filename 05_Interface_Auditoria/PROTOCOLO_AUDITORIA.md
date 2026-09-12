@@ -185,7 +185,7 @@ ela entra em `nao_auditavel[]` — nunca é tratada como aprovada.
 
 | Modo | Ferramenta | Como funciona | Latência |
 | :--- | :--- | :--- | :--- |
-| **A — CI** | `.github/workflows/auditoria.yml` | push numa proposta dispara a auditoria e o veredito volta como comentário no PR | ~6 min |
+| **A — CI** | `.github/workflows/auditoria.yml` (arquivo pronto em `05_Interface_Auditoria/ci/auditoria.yml`, ver `ci/LEIA-ME.md`) | push numa proposta dispara a auditoria e o veredito volta como comentário no PR | ~6 min |
 | **B — vigilância git** | `scripts/monitor_auditoria.py` | observa o ramo; commit que toca `propostas/` é auditado e o veredito é gravado (e publicado com `--push`) | ~2 min por proposta |
 | **B — painel vivo** | `scripts/painel_auditoria.py` | navegador + API: vigia a pasta, permite colar uma proposta e auditar na hora | segundos a minutos |
 | **C — ponte humana** | o próprio auditor | você cola o JSON no chat; o auditor devolve o `veredito.md` para colar de volta | minutos |

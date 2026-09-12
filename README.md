@@ -122,7 +122,7 @@ Quatro formas de operar, todas implementadas (detalhes no `PROTOCOLO_AUDITORIA.m
 
 | Modo | Ferramenta | Latência |
 | :--- | :--- | :--- |
-| A — CI | `.github/workflows/auditoria.yml` (comenta no PR) | ~6 min |
+| A — CI | `.github/workflows/auditoria.yml` — pronto em `05_Interface_Auditoria/ci/auditoria.yml`, aguardando permissão `workflows` do app (comenta no PR) | ~6 min |
 | B — vigilância git | `python 05_Interface_Auditoria/scripts/monitor_auditoria.py [--remoto --push]` | ~2 min/proposta |
 | B — painel vivo | `python 05_Interface_Auditoria/scripts/painel_auditoria.py --porta 8000` | segundos |
 | C — ponte humana | colar a proposta no chat e receber o veredito | minutos |

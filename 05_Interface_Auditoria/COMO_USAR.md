@@ -78,7 +78,10 @@ triagem, não para fechar o ciclo.
 
 ## Modo A (GitHub)
 
-Está pronto (`.github/workflows/auditoria.yml`, `CODEOWNERS`, template de PR), mas **inerte**:
-o `push` está bloqueado por falta de credencial no Arena. Quando o GitHub for reconectado, o
-mesmo `monitor_auditoria.py` passa a rodar com `--remoto --push` e cada veredito vira um commit
-rastreável no repositório — sem mudar nada mais.
+O `CODEOWNERS` e o template de PR já estão no lugar. O workflow do CI está **pronto mas
+desativado**: mora em `ci/auditoria.yml` porque o app do Arena não tem a permissão `workflows`
+para criar arquivos dentro de `.github/workflows/`. Para ligar, copie o arquivo para
+`.github/workflows/auditoria.yml` (passo a passo em `ci/LEIA-ME.md`) — nada mais muda.
+
+Mesmo sem o CI, o `monitor_auditoria.py` roda com `--remoto --push` e cada veredito vira um
+commit rastreável no repositório.
