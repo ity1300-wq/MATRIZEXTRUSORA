@@ -92,7 +92,13 @@ canto interno Ø90 → Ø80, medido contra as cinco, como proposta (não é muda
 
 ### 🔧 Cabeçote em STEP (peça da máquina, não da matriz)
 
-`06_CAD_Cabecote_EX-030/STEP/` guarda os dois desenhos STEP do cabeçote; o entregável é o
+`06_CAD_Cabecote_EX-030/STEP/` guarda quatro STEP e um PDF: os dois sólidos do cabeçote, o cabeçote
+com a **Matriz 1 Copo** sentada e o cabeçote com a **Matriz 2 Gedeon** sentada (arquivos compostos, 2
+sólidos no mesmo referencial, interferência medida 0,0000 mm³ nos dois), e `DESENHO_2D_CABECOTE_X_MATRIZES.pdf`
+— vista lateral em corte do cabeçote e de cada matriz com as cotas principais, gerado a partir dos próprios
+STEP. O encosto do conjunto na máquina é **face a face** (face do flange na face da extrusora), o que exige
+3,00 mm de rebaixo na máquina para receber o piloto Ø105 × 3,00; a posição axial da matriz não muda com
+isso, porque ela vem do degrau e do fundo do bolso do cabeçote. O entregável é o
 cabeçote **sem a parte que conecta na extrusora** — a interseção pelo
 cilindro Ø130 do corpo, que leva o chanfro 10 × 45° da transição corpo→flange (Ø130 → Ø150, cota que
 estava no desenho e no SSOT mas ainda não no sólido), o flange Ø220 × 40 com os 6 × Ø16,5 e o piloto de
@@ -135,9 +141,21 @@ python 04_Dados_SSOT_e_Scripts/explorar_acomodo_furos.py --json # onde existe a�
 python 04_Dados_SSOT_e_Scripts/gerar_relatorio_v28.py           # atualiza o relatório com os dados
 python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png
 python 04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py --json --md  # matriz × cabeçote EX-030
-python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py                 # STEP do cabeçote sem a junta
+python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py                 # STEP do cabeçote sem a junta, e as 2 montagens
+python 04_Dados_SSOT_e_Scripts/gerar_desenho_2d_cabecote_matriz.py      # o PDF 2D (corte + cotas) das peças
+python 04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py --json --md     # a AUDITORIA (issue/PR #1) e seu tratamento
 python 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --com-estudos       # A PORTA: roda tudo e cobra as 7 checagens
 ```
+
+### 🔎 O processo de auditoria (issue e PR #1) e para onde ele aponta
+
+A auditoria dimensional automatizada dos STEP oficiais vive em `04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py`
+(relatório: `03_Relatorios_e_Documentacao/AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md`, dados:
+`04_Dados_SSOT_e_Scripts/auditoria_geometrica.json`) e é a PR #1 / issue #1 do repositório. A seção **6** do
+relatório é o relato contra cada achado (G-01 … G-06 e as ações 6 e 8 do plano): status, o que foi feito, o
+número medido hoje e onde o número é re-medido. Ela é **gerada** a partir de
+`04_Dados_SSOT_e_Scripts/cad_die_parameters.json:audit.tratamento_auditoria_v28_1` — não é texto solto que
+possa apodrecer do lado de lá do SSOT. O que continua aberto está listado no fim da mesma seção.
 
 ---
 

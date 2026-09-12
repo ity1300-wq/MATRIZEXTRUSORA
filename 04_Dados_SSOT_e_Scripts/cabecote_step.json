@@ -1,8 +1,8 @@
 {
  "peca": "EX-030 CABECOTE - variante sem a junta da extrusora",
- "operacao": "intersecao pelo cilindro Ø130 do corpo (r = 65,000 mm)",
+ "operacao": "intersecao pelo cilindro \u00d8130 do corpo (r = 65,000 mm)",
  "anis_removidos": [
-  "Ø220 (d 52.00..92.00)"
+  "\u00d8220 (d 52.00..92.00)"
  ],
  "m12_aberto": false,
  "angulo_m12_graus": null,
@@ -12,7 +12,7 @@
  "massa_desenhada_kg": 12.3272,
  "massa_sem_flange_kg": 4.7931,
  "massa_removida_kg": 7.534,
- "Ø_por_x_y_mm": [
+ "\u00d8_por_x_y_mm": [
   130.0,
   130.0
  ],
@@ -23,14 +23,49 @@
  "interferencia_matriz_x_desenhado_mm3": 0.0,
  "interferencia_matriz_x_sem_flange_mm3": 0.0,
  "furos_da_junta_fora_do_corpo": true,
- "bolso_Ø_mm": 95.0,
+ "bolso_\u00d8_mm": 95.0,
  "bolso_comprimento_mm": 71.0,
  "comprimento_preservado": true,
  "redondo": true,
  "volume_reimportado_desenhado_mm3": 1570339.487,
  "desvio_round_trip_desenhado_mm3": 0.0,
- "sólidos_no_arquivo_desenhado": 1,
+ "s\u00f3lidos_no_arquivo_desenhado": 1,
  "volume_reimportado_sem_flange_mm3": 610588.167,
  "desvio_round_trip_sem_flange_mm3": 0.0,
- "sólidos_no_arquivo_sem_flange": 1
+ "s\u00f3lidos_no_arquivo_sem_flange": 1,
+ "montagens": {
+  "matriz_1_copo": {
+   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Copo.step",
+   "arquivos_da_matriz": [
+    "02_CAD_Modelos_Historicos/Matriz1_Original_Copo_Solido.step"
+   ],
+   "encosto_usado": "B_ombro_no_degrau",
+   "deslocamento_aplicado_mm": 0.0,
+   "solidos_no_arquivo": 2,
+   "volume_somado_mm3": 1794628.469,
+   "desvio_round_trip_mm3": 0.0,
+   "interferencia_matriz_x_desenhado_mm3": 0.0,
+   "interferencia_matriz_x_sem_flange_mm3": 0.0,
+   "face_de_saida_da_matriz_em_Z": 80.7,
+   "protusao_adem_da_face_do_nariz_mm": -14.3,
+   "massa_somada_kg": 14.0878
+  },
+  "matriz_2_gedeon": {
+   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Gedeon.step",
+   "arquivos_da_matriz": [
+    "02_CAD_Modelos_Historicos/MatrizGedeon_Body_A.step",
+    "02_CAD_Modelos_Historicos/MatrizGedeon_Body_B.step"
+   ],
+   "encosto_usado": "B_ombro_no_degrau",
+   "deslocamento_aplicado_mm": 0.0,
+   "solidos_no_arquivo": 2,
+   "volume_somado_mm3": 2039496.259,
+   "desvio_round_trip_mm3": 0.0,
+   "interferencia_matriz_x_desenhado_mm3": 0.0,
+   "interferencia_matriz_x_sem_flange_mm3": 0.0,
+   "face_de_saida_da_matriz_em_Z": 109.0,
+   "protusao_adem_da_face_do_nariz_mm": 14.0,
+   "massa_somada_kg": 16.01
+  }
+ }
 }

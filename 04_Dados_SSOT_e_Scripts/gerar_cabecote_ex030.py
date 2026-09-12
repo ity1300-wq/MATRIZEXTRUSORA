@@ -41,7 +41,7 @@ sys.path.insert(0, AQUI)
 
 from verificar_interface_cabecote import (cabecote, cil_z, CORPO, BORES, Z_FACE_NARIZ,  # noqa: E402
                                           FUROS_FLANGE, DIR_CAD)
-from verificar_v28 import ENVELOPE  # noqa: E402
+from verificar_v28 import ENVELOPE, maior  # noqa: E402
 from verificar_v28 import n  # noqa: E402
 
 DADO = json.load(open(os.path.join(AQUI, "cabecote_ex030.json"), encoding="utf-8"))
@@ -49,6 +49,11 @@ DADO = json.load(open(os.path.join(AQUI, "cabecote_ex030.json"), encoding="utf-8
 # para STEP/estudos/, que e fora do repo por .gitignore - cenario nao e decisao aprovada
 DIR_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP")
 DIR_ESTUDO = os.path.join(DIR_CAB, "estudos")
+DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")   # lido, nunca escrito (regra 2)
+DIR_OFF = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+PERFIS = os.path.join(AQUI, "perfis_matrizes_x_cabecote.json")
+# as montagens que o usuario pediu: o cabecote com a matriz original e com a Gedeon sentadas
+MONTAGENS = [("matriz_1_copo", "Matriz_Copo"), ("matriz_2_gedeon", "Matriz_Gedeon")]
 DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 def vol(sh):
     """Volume de Shape/Compound: soma os solidos (maior() pegaria so uma das metades)."""
@@ -172,6 +177,71 @@ def main():
           "reimporta - passou"
           if ok else "FALHOU - ver os numeros acima")
 
+    # ------------------------------------------------- montagens: cabecote + matriz sentada, num STEP so
+    # Composto de 2 solidos no MESMO referencial axial (Z = 0 no plano mais traseiro da pecas), SEM booleano:
+    # e assim que o CAD mede folga e interferencia, e assim que o arquivo continua valido como montagem. As
+    # matrizes sao lidas de 02_/01_ sem modificar (regra 2), unidas A U B quando a peca e bipartida - o mesmo
+    # corpo que `medir_perfis_matrizes_x_cabecote.py` mede, para o STEP entregue e a medicao nao divergirem.
+    med["montagens"] = {}
+    falhas_m = ""
+    if os.path.exists(PERFIS):
+        pf = json.load(open(PERFIS, encoding="utf-8"))
+        for chave, curto in MONTAGENS:
+            e = next((x for x in pf["matrizes"] if x["chave"] == chave), None)
+            if e is None:
+                falhas_m = "chave %s ausente em perfis_matrizes_x_cabecote.json" % chave
+                print("FALHOU:", falhas_m)
+                continue
+            paths = []
+            for nome in e["arquivos_lidos"]:
+                pt = next((os.path.join(d, nome) for d in (DIR_HIS, DIR_OFF)
+                           if os.path.exists(os.path.join(d, nome))), None)
+                if pt is None:
+                    falhas_m = "nao acho o STEP da matriz %s" % nome
+                    print("FALHOU:", falhas_m)
+                    break
+                paths.append(pt)
+            else:
+                wp = cq.importers.importStep(paths[0])
+                for pt in paths[1:]:
+                    wp = wp.union(cq.importers.importStep(pt))
+                corpo = maior(wp.val())
+                dz = e["encostos"][e["encosto_usado"]]["deslocamento_aplicado_mm"]
+                if abs(dz) > 1e-9:
+                    corpo = corpo.translate(cq.Vector(0.0, 0.0, dz))
+                comp = cq.Workplane("XY").newObject([cq.Compound.makeCompound([cheio, corpo])])
+                pm = os.path.join(a.saida, f"Cabecote_EX-030_com_{curto}{sufixo}.step")
+                cq.exporters.export(comp, pm, cq.exporters.ExportTypes.STEP)
+                relido = cq.importers.importStep(pm).val()
+                vs = [x.Volume() for x in relido.Solids()] or [vol(relido)]
+                saida = e["comprimento_medido_mm"] + dz
+                med["montagens"][chave] = {
+                    "arquivo": os.path.relpath(pm, RAIZ),
+                    "arquivos_da_matriz": [os.path.relpath(x, RAIZ) for x in paths],
+                    "encosto_usado": e["encosto_usado"], "deslocamento_aplicado_mm": round(dz, 3),
+                    "solidos_no_arquivo": len(relido.Solids()),
+                    "volume_somado_mm3": round(sum(vs), 3),
+                    "desvio_round_trip_mm3": round(sum(vs) - (cheio.Volume() + corpo.Volume()), 6),
+                    "interferencia_matriz_x_desenhado_mm3": round(vol(corpo.intersect(cheio)), 4),
+                    "interferencia_matriz_x_sem_flange_mm3": round(vol(corpo.intersect(novo)), 4),
+                    "face_de_saida_da_matriz_em_Z": round(saida, 3),
+                    "protusao_adem_da_face_do_nariz_mm": round(saida - Z_FACE_NARIZ, 3),
+                    "massa_somada_kg": round((cheio.Volume() + corpo.Volume()) * ACO, 4),
+                }
+                m = med["montagens"][chave]
+                print(f"MONTAGEM {curto:13s} -> {os.path.relpath(pm, RAIZ)} | {m['solidos_no_arquivo']} solidos"
+                      f" | interferencia com o cabecote {n(m['interferencia_matriz_x_desenhado_mm3'], 4)} mm3"
+                      f" | saida da matriz em Z = {n(m['face_de_saida_da_matriz_em_Z'], 2)}"
+                      f" (protrusao {n(m['protusao_adem_da_face_do_nariz_mm'], 2)} mm)")
+                if m["solidos_no_arquivo"] != 2 or abs(m["desvio_round_trip_mm3"]) > 1e-3:
+                    falhas_m = ("montagem %s nao reimporta como 2 solidos de volume fiel (solidos %d, desvio "
+                                "%s mm3)" % (chave, m["solidos_no_arquivo"], m["desvio_round_trip_mm3"]))
+                    print("FALHOU:", falhas_m)
+                json.dump(med, open(cam_json, "w", encoding="utf-8"), indent=1)
+    else:
+        print("aviso: falta perfis_matrizes_x_cabecote.json - montagens nao geradas "
+              "(rode medir_perfis_matrizes_x_cabecote.py --json)")
+
     if not a.sem_relatorio:
         escreve_relatorio(med, p1, p2)
     return 0 if ok else 1
@@ -195,6 +265,28 @@ def escreve_relatorio(med, p1, p2):
         f"Ø{med['bolso_Ø_mm']:.0f} × {n(med['bolso_comprimento_mm'])} mm |",
         f"| `{os.path.relpath(p1, RAIZ)}` | o cabeçote como está no desenho (cubo + flange + resalto), "
         "para referência e para a subtração |",
+        "",
+        "## O cabeçote com cada matriz sentada (montagens entregues)",
+        "",
+        "Dois arquivos compostos - 2 sólidos no mesmo referencial axial (Z = 0 no plano mais traseiro), sem",
+        "booleano, para que a folga e a interferência sejam medidas no CAD de quem recebe. As matrizes são",
+        "lidas de `02_CAD_Modelos_Historicos/` / `01_CAD_MatrizJonatha_Oficial/` **sem modificar** (regra 2),",
+        "unidas A ∪ B quando a peça é bipartida - o mesmo corpo que `medir_perfis_matrizes_x_cabecote.py`",
+        "mede, para o STEP entregue e a medição não divergirem.",
+        "",
+        "| montagem | encosto usado | interferência com o cabeçote | saída da matriz em Z | protrusão |",
+        "| :--- | :--- | ---: | ---: | ---: |",
+        *[f"| `{m['arquivo']}` | `{m['encosto_usado']}` ({n(m['deslocamento_aplicado_mm'], 2)} mm) | "
+          f"**{n(m['interferencia_matriz_x_desenhado_mm3'], 4)} mm³** | {n(m['face_de_saida_da_matriz_em_Z'], 2)} | "
+          f"{n(m['protusao_adem_da_face_do_nariz_mm'], 2)} mm |"
+          for m in med.get("montagens", {}).values()],
+        "",
+        "A diferença de sinal entre as duas linhas é o ponto que o usuário observou na máquina: a Copo "
+        "termina",
+        f"**{n(abs(list(med.get('montagens', {}).values())[0]['protusao_adem_da_face_do_nariz_mm']) if med.get('montagens') else 0, 2)} mm antes** da face do nariz (falta o nariz de 28,30 mm que a Gedeon tem), e a Gedeon "
+        "desemboca",
+        "fora dele. Os dois valores são comprimentos medidos nos STEP das próprias peças: "
+        f"{', '.join(n(x['face_de_saida_da_matriz_em_Z'], 2) for x in med.get('montagens', {}).values())} mm.",
         "",
         "## O que foi removido, e como isso foi definido",
         "",

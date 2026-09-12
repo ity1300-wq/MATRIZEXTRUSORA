@@ -12,6 +12,23 @@ python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py        # gera, mede e pro
 | `06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_sem_flange.step` | **o pedido**: corpo Ø130 × 95,000 mm com o nariz Ø80, o degrau Ø90 e o bolso Ø95 × 71,000 mm |
 | `06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_desenhado.step` | o cabeçote como está no desenho (cubo + flange + resalto), para referência e para a subtração |
 
+## O cabeçote com cada matriz sentada (montagens entregues)
+
+Dois arquivos compostos - 2 sólidos no mesmo referencial axial (Z = 0 no plano mais traseiro), sem
+booleano, para que a folga e a interferência sejam medidas no CAD de quem recebe. As matrizes são
+lidas de `02_CAD_Modelos_Historicos/` / `01_CAD_MatrizJonatha_Oficial/` **sem modificar** (regra 2),
+unidas A ∪ B quando a peça é bipartida - o mesmo corpo que `medir_perfis_matrizes_x_cabecote.py`
+mede, para o STEP entregue e a medição não divergirem.
+
+| montagem | encosto usado | interferência com o cabeçote | saída da matriz em Z | protrusão |
+| :--- | :--- | ---: | ---: | ---: |
+| `06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Copo.step` | `B_ombro_no_degrau` (0,00 mm) | **0,0000 mm³** | 80,70 | -14,30 mm |
+| `06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Gedeon.step` | `B_ombro_no_degrau` (0,00 mm) | **0,0000 mm³** | 109,00 | 14,00 mm |
+
+A diferença de sinal entre as duas linhas é o ponto que o usuário observou na máquina: a Copo termina
+**14,30 mm antes** da face do nariz (falta o nariz de 28,30 mm que a Gedeon tem), e a Gedeon desemboca
+fora dele. Os dois valores são comprimentos medidos nos STEP das próprias peças: 80,70, 109,00 mm.
+
 ## O que foi removido, e como isso foi definido
 
 Remover = intersectar pelo cilindro Ø130 do corpo. A definição não é arbitrária: a junta

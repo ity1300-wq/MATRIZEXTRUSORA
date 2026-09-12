@@ -43,6 +43,8 @@ PARES_DOC_JSON = [("INTERFASE_CABECOTE_EX030.md", "numeros/acesso_furacao_cenari
                   ("INTERFASE_CABECOTE_EX030.md", "numeros/cartuchos_z_min_mm", 2),
                   ("INTERFASE_CABECOTE_EX030.md", "numeros/area_contato_degrau_mm2", 1),
                   ("PROJETO_DFM_V28_MATRIZ_JONATHA.md", "numeros/dp_1d_bar", 1),
+                  ("AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md",
+                   "proposta_v28_dfm/numeros recalculados/tau_parede_land_kPa", 1, "cad_die_parameters.json"),
                   ("INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md", "diferença_copo_x_gedeon_medida/diferença_mm", 2,
                    "perfis_matrizes_x_cabecote.json"),
                   ("INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md",

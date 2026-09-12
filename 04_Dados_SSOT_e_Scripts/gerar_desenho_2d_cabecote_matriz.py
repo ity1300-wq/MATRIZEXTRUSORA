@@ -1,4 +1,4 @@
-"""Gera o DESENHO 2D em PDF das duas peças - o cabeçote EX-030 e a Matriz 1 Copo - em VISTA LATERAL
+"""Gera o DESENHO 2D em PDF do cabeçote EX-030 e de cada matriz (Copo original e Gedeon) em VISTA LATERAL
 EM CORTE pelo plano do eixo, com as cotas principais.
 
 Como cada coisa é obtida, para o desenho não poder descolar da peça:
@@ -12,11 +12,14 @@ Como cada coisa é obtida, para o desenho não poder descolar da peça:
     `verificar_interface_cabecote.py` (cabeçote) e `perfis_matrizes_x_cabecote.json`
     (matriz, medido por `medir_perfis_matrizes_x_cabecote.py`). Se o STEP mudar, o portão da cadeia pega.
 
-Vistas: 1) cabeçote  2) matriz  3) montagem (a matriz sentada onde o booleano manda: face de entrada rasa
-com o plano mais traseiro do cabeçote - o "face a face", medido 0,000 mm pelo verificador de interface).
+Vistas: página 1 = cabeçote + cada matriz solta; página 2 = a montagem de cada matriz no cabeçote, sentada
+onde o booleano manda (o encosto medido pelo verificador de interface), no mesmo referencial axial.
+`--matrizes` escolhe as chaves de `perfis_matrizes_x_cabecote.json` - por padrão a Copo (original) e a
+Gedeon, porque é entre essas duas que a diferença de comprimento explica a saída da fenda.
 
 Uso:
   python 04_Dados_SSOT_e_Scripts/gerar_desenho_2d_cabecote_matriz.py [--png] [--saida x.pdf]
+             [--matrizes matriz_1_copo,matriz_2_gedeon]
 """
 import argparse
 import json
@@ -35,9 +38,17 @@ RAIZ = os.path.abspath(os.path.join(AQUI, ".."))
 sys.path.insert(0, AQUI)
 DIR_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP")
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
+DIR_OFF = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
 PERFIS = os.path.join(AQUI, "perfis_matrizes_x_cabecote.json")
 
 from verificar_interface_cabecote import CORPO, BORES, CHAMFRO, Z_FACE_NARIZ, n  # noqa: E402
+from verificar_v28 import maior  # noqa: E402
+
+
+def vol_intersecao(a, b):
+    """Interseccao em mm3, somando os solidos (em booleano que pode sair partido, maior() corta ao
+    meio). E a mesma rotina do medidor de perfis - o desenho nao inventa criterio proprio."""
+    return sum(x.Volume() for x in a.intersect(b).Solids())
 
 matplotlib.rcParams["font.size"] = 8
 matplotlib.rcParams["font.family"] = "DejaVu Sans"
@@ -45,15 +56,27 @@ SOLIDO_CORTE = 0.10          # passo da varredura que define o perfil de corte (
 
 
 # ------------------------------------------------------------------ seccao do STEP
-def curvas_de_corte(solido, y=0.0, deflexao=0.05):
-    """Todas as curvas da seccao do solido pelo plano Y = y (une todas as faces planas do booleano)."""
+def curvas_de_corte(solido, eixo="y", pos=0.0, deflexao=0.05):
+    """Todas as curvas da seccao do solido pelo plano (eixo) = pos, em coordenadas (radial, Z).
+
+    `eixo="y"` corta pelo plano Y = pos e le o raio em |x| - e o plano natural do cabeçote. `eixo="x"` corta
+    pelo plano X = pos e le o raio em |y| - e o que serve para a Gedeon e para a v28, cujo plano de particao
+    e justamente Y = 0: cortando em Y = 0 nao ha seccao, ha a face de juncao das duas metades (723 mm2 de
+    nada). Une todas as faces planas do booleano."""
     from OCP.BRepAlgoAPI import BRepAlgoAPI_Common
     from OCP.BRepAdaptor import BRepAdaptor_Curve
     from OCP.GCPnts import GCPnts_UniformDeflection
     from OCP.TopAbs import TopAbs_FACE
     from OCP.TopExp import TopExp_Explorer
     from OCP.TopoDS import TopoDS
-    meio = cq.Solid.makeBox(3000, 2000, 3000, cq.Vector(-1500, -2000.0 + y, -1500))
+    if eixo == "y":
+        meio = cq.Solid.makeBox(3000, 2000, 3000, cq.Vector(-1500, -2000.0 + pos, -1500))
+        plano, radial = "ylen", 0
+    elif eixo == "x":
+        meio = cq.Solid.makeBox(2000, 3000, 3000, cq.Vector(-2000.0 + pos, -1500, -1500))
+        plano, radial = "xlen", 1
+    else:
+        raise ValueError("eixo deve ser 'x' ou 'y'")
     b = BRepAlgoAPI_Common(solido.wrapped, meio.wrapped)
     b.Build()
     if not b.IsDone():
@@ -63,20 +86,25 @@ def curvas_de_corte(solido, y=0.0, deflexao=0.05):
     while ex.More():
         fc = cq.Face(TopoDS.Face_s(ex.Current()))
         try:
-            if abs(fc.BoundingBox().ylen) < 1e-9:
+            # 1e-6, nao 1e-9: as faces do corte saem com ruido do booleano (medido: xlen = 2e-07 em
+            # X = 0 na Gedeon), e com 1e-9 a seccao inteira era descartada - e o 'no section' que apareceu
+            # era isso, nao falta de geometria. 1e-6 mm e 4 ordens de grandeza menor que qualquer detalhe.
+            if abs(getattr(fc.BoundingBox(), plano)) < 1e-6:
                 area += fc.Area()
                 for w in fc.Wires():
                     for e in w.Edges():
                         ad = BRepAdaptor_Curve(TopoDS.Edge_s(e.wrapped))
                         d = GCPnts_UniformDeflection(ad, deflexao)
                         if d.IsDone() and d.NbPoints() > 1:
-                            curvas.append([(d.Value(i).X(), d.Value(i).Z())
-                                           for i in range(1, d.NbPoints() + 1)])
+                            v = (getattr(d.Value(i), ("X", "Y")[radial])() for i in
+                                 range(1, d.NbPoints() + 1))
+                            curvas.append([(q, d.Value(i).Z()) for i, q in zip(
+                                range(1, d.NbPoints() + 1), v)])
         except Exception:
             pass
         ex.Next()
     if not curvas:
-        raise RuntimeError("nenhuma curva de seção em Y = %.3f" % y)
+        raise RuntimeError("nenhuma curva de seção em %s = %.3f" % (eixo.upper(), pos))
     return curvas, round(area, 3)
 
 
@@ -207,47 +235,95 @@ def chamada_diametro(ax, r, z, texto, col, cor="tab:red", fs=7.0):
     ax.text(col.x + 2.0, zz, texto, ha="left", va="center", color=cor, fontsize=fs)
 
 
+def corpo_da_matriz(m):
+    """A peça como o medidor a monta: união dos arquivos quando ela é bipartida (A ∪ B). Lidos só para
+    medir - `02_CAD_Modelos_Historicos/` não é modificado (regra 2)."""
+    paths = []
+    for nome in m["arquivos_lidos"]:
+        p = next((os.path.join(d, nome) for d in (DIR_HIS, DIR_OFF) if os.path.exists(os.path.join(d, nome))),
+                 None)
+        if p is None:
+            sys.exit("não acho %s em %s nem em %s" % (nome, os.path.relpath(DIR_HIS, RAIZ),
+                                                     os.path.relpath(DIR_OFF, RAIZ)))
+        paths.append(p)
+    wp = cq.importers.importStep(paths[0])
+    for pt in paths[1:]:
+        wp = wp.union(cq.importers.importStep(pt))
+    return maior(wp.val()), [os.path.relpath(x, RAIZ) for x in paths]
+
+
+def secao(solido, eixo=None):
+    """(curvas, área, perfil medido fatia a fatia, platos, rótulo do plano) de um sólido - é o que o desenho
+    traça. Nada aqui vem de memória: é tudo medido no sólido que chegou.
+
+    Com `eixo=None` o plano é escolhido pela medida, não por gosto: dos dois planos axiais possíveis (Y = 0 e
+    X = 0, ambos contendo o eixo Z) fica o que der MAIS ÁREA DE MATERIAL. Isso existe por causa de uma
+    armadilha real: em peça bipartida cujo plano de partição é Y = 0 (a Gedeon, a Desenvolvimento, a Jonatha),
+    cortar em Y = 0 não corta a peça - mostra a face de junção das metades. Medido: 1.490 mm² em Y = 0 contra
+    5.885 mm² em X = 0, com o raio externo chegando a 43,50 em vez de 46,50, ou seja, a silhueta saindo
+    errada. Peça simétrica os dois planos empatam, e o empate fica com Y = 0."""
+    opc = [("y", "Y = 0 (plano do eixo)"), ("x", "X = 0 (plano do eixo, transversal ao de partição)")]
+    if eixo is not None:
+        se_eixo, se_rot = eixo, {"y": "Y = 0 (plano do eixo)", "x": "X = 0 (plano do eixo)"}[eixo]
+    else:
+        melhor = None
+        for e, rot in opc:
+            try:
+                c, a = curvas_de_corte(solido, eixo=e)
+            except RuntimeError:
+                continue
+            if melhor is None or a > melhor[1]:
+                melhor = (c, a, e, rot)
+        if melhor is None:
+            raise RuntimeError("nenhum plano de corte válido neste sólido")
+        _, _, se_eixo, se_rot = melhor
+    curvas, area = curvas_de_corte(solido, eixo=se_eixo)
+    bb = solido.BoundingBox()
+    pf = perfil_corte(curvas, bb.zmin, bb.zmax)
+    return curvas, area, pf, escada(pf), se_rot
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--saida", default=os.path.join(DIR_CAB, "DESENHO_2D_CABECOTE_X_MATRIZ_COPO.pdf"))
-    ap.add_argument("--png", action="store_true")
+    ap.add_argument("--saida", default=os.path.join(DIR_CAB, "DESENHO_2D_CABECOTE_X_MATRIZES.pdf"))
+    ap.add_argument("--png", action="store_true", help="um PNG por página, ao lado do PDF, para conferência")
     ap.add_argument("--cabecote", default=os.path.join(DIR_CAB, "Cabecote_EX-030_desenhado.step"))
-    ap.add_argument("--matriz", default=os.path.join(DIR_HIS, "Matriz1_Original_Copo_Solido.step"))
-    ap.add_argument("--chave-matriz", default="matriz_1_copo")
+    ap.add_argument("--matrizes", default="matriz_1_copo,matriz_2_gedeon",
+                    help="chaves de perfis_matrizes_x_cabecote.json, separadas por vírgula")
     a = ap.parse_args()
 
     if not os.path.exists(PERFIS):
         sys.exit("falta %s\nrode antes: python 04_Dados_SSOT_e_Scripts/medir_perfis_matrizes_x_cabecote.py --json"
                  % os.path.relpath(PERFIS, RAIZ))
     prof_mat = json.load(open(PERFIS, encoding="utf-8"))
-    m = next(x for x in prof_mat["matrizes"] if x["chave"] == a.chave_matriz)
+    chaves = [c.strip() for c in a.matrizes.split(",") if c.strip()]
+    tem = {x["chave"]: x for x in prof_mat["matrizes"]}
+    fora = [c for c in chaves if c not in tem]
+    if fora:
+        sys.exit("chave(s) de matriz desconhecida(s): %s - as medidas são %s"
+                 % (", ".join(fora), ", ".join(sorted(tem))))
+    mats = [tem[c] for c in chaves]
+
     cab = json.load(open(os.path.join(AQUI, "cabecote_ex030.json"), encoding="utf-8"))["corpo"]
     chan = cab["chanfro_corpo_flange"]
-
     head = max(cq.importers.importStep(a.cabecote).val().Solids(), key=lambda s: s.Volume())
-    die = max(cq.importers.importStep(a.matriz).val().Solids(), key=lambda s: s.Volume())
-    ch_c, ch_a = curvas_de_corte(head)
-    cd_c, cd_a = curvas_de_corte(die)
-    bh, bd = head.BoundingBox(), die.BoundingBox()
-    ph = perfil_corte(ch_c, bh.zmin, bh.zmax)
-    pd_ = perfil_corte(cd_c, bd.zmin, bd.zmax)
-    eh, ed = escada(ph), escada(pd_)
-    print("cabeçote (seção: %d curvas, material %.1f mm2) platos:" % (len(ch_c), ch_a))
-    for p in eh:
-        print("   Z %7.2f..%7.2f  r_ext %7.3f  r_furo %s" % (p[0], p[1], p[2],
-                                                              "-" if p[3] is None else "%6.3f" % p[3]))
-    print("matriz (seção: %d curvas, material %.1f mm2) platos:" % (len(cd_c), cd_a))
-    for p in ed:
-        print("   Z %7.2f..%7.2f  r_ext %7.3f  r_furo %s" % (p[0], p[1], p[2],
-                                                              "-" if p[3] is None else "%6.3f" % p[3]))
+    SC = secao(head, eixo="y")
+    for m in mats:
+        corpo, rels = corpo_da_matriz(m)
+        m["_corpo"], m["_arquivos"] = corpo, rels
+        m["_secao"] = secao(corpo)
+        print("%-22s STEP %-46s seção %s: %d curvas, material %8.1f mm2"
+              % (m["chave"], rels[0], m["_secao"][4], len(m["_secao"][0]), m["_secao"][1]))
+    print("cabeçote              STEP %-46s seção %s: %d curvas, material %8.1f mm2"
+          % (os.path.relpath(a.cabecote, RAIZ), SC[4], len(SC[0]), SC[1]))
 
     L_H = Z_FACE_NARIZ
     bores = sorted([(2 * r, za, zb) for (r, za, zb) in BORES], key=lambda t: -t[1])
-    fl, pil, corpo = CORPO[1], CORPO[2], CORPO[0]
+    fl, pil, corpo_c = CORPO[1], CORPO[2], CORPO[0]
     rc0, zc0, rc1, zc1 = CHAMFRO
-    fig, axs = plt.subplots(3, 1, figsize=(16.54, 11.69))
-    plt.subplots_adjust(left=0.025, right=0.985, top=0.965, bottom=0.03, hspace=0.66)
-    XL = (-272.0, 252.0)
+    # a direita precisa de folga: as correntes de protrusao vao para la e o rotulo de 14,30/14,00 mm
+    # saia cortado com XL = 252 (conferido no PNG de 120 dpi)
+    XL = (-272.0, 300.0)
 
     def monta(ax, titulo, nota):
         ax.set_xlim(*XL)
@@ -256,112 +332,151 @@ def main():
         ax.set_title(titulo, fontsize=10.5, loc="left", pad=7)
         ax.text(0.0, -0.155, nota, transform=ax.transAxes, fontsize=7.0, va="top", color="0.2")
 
-    # ============================================================== 1  CABECOTE
-    ax = axs[0]
-    desenha_corte(ax, ph)
-    desenha_arestas(ax, ch_c)
-    col = Coluna(118.0, passo=6.5)
-    for i, (d, za, zb) in enumerate(bores):
-        chamada_diametro(ax, d / 2.0, 0.5 * (max(za, 0.0) + min(zb, L_H)),
-                         "Ø %s   furo %d do cabeçote" % (n(d, 2), i + 1), col, cor="tab:blue")
-    chamada_diametro(ax, corpo[0], 0.5 * (corpo[1] + corpo[2]),
-                     "Ø %s   corpo" % n(2 * corpo[0], 2), col)
-    chamada_diametro(ax, fl[0], 0.5 * (fl[1] + fl[2]), "Ø %s   flange" % n(2 * fl[0], 2), col)
-    chamada_diametro(ax, pil[0], 0.5 * (pil[1] + pil[2]),
-                     "Ø %s   piloto de centragem" % n(2 * pil[0], 2), col, cor="tab:purple")
-    # correntes de comprimento vao para a ESQUERDA: a direita e dos rotulos de diametro, e as duas
-    # coisas se cortavam quando ficavam no mesmo lado
-    xais = [-126.0, -142.0, -158.0, -174.0]
-    for i, (d, za, zb) in enumerate(bores[:3]):
-        cota_v(ax, max(za, 0.0), min(zb, L_H), xais[i], n(min(zb, L_H) - max(za, 0.0), 2),
-               cor="tab:blue", ha="right")
-    cota_v(ax, fl[1], fl[2], -190.0, "%s   flange" % n(fl[2] - fl[1], 2), ha="right")
-    cota_v(ax, pil[1], pil[2], -126.0, n(pil[2] - pil[1], 2), cor="tab:purple")
-    cota_v(ax, 0.0, L_H, -206.0, "%s   comprimento total" % n(L_H, 2), ha="right")
-    ax.plot([-rc0, -rc1], [zc0, zc1], color="tab:red", lw=0.7, ls=(0, (2, 2)))
-    ax.text(-rc1 + 6.0, 0.5 * (zc0 + zc1) + 6.0,
-            "chanfro %s × %s°\nØ %s → Ø %s (cota do desenho)" % (
-                n(chan["cateto_mm"], 2), n(chan["angulo_graus"], 0),
-                n(chan.get("de_D_mm", 2 * rc1), 2), n(chan.get("para_D_mm", 2 * rc0), 2)),
-            ha="center", va="bottom", color="tab:red", fontsize=7.0)
-    nota1 = ("geometria: seção do STEP `%s` (arestas reais, cinza fino) e perfil de corte medido dele fatia "
-             "a fatia (preto, hachurado). Z = 0 no plano mais\ntraseiro da peça; face do nariz em Z = %s. "
-             "Cotas: `cabecote_ex030.json` e `verificar_interface_cabecote.py` - os mesmos dados com que este "
-             "STEP foi construído.\nNão aparecem neste corte por acaso do plano, não por omissão: as 6 fendas "
-             "do flange e os 6 × Ø16,50 (M12) em C.C. Ø180,00." % (os.path.basename(a.cabecote), n(L_H, 2)))
-    monta(ax, "1   CABEÇOTE EX-030 — vista lateral em corte pelo plano do eixo", nota1)
+    def figura(n_faixas):
+        fig, axs = plt.subplots(n_faixas, 1, figsize=(16.54, 11.69))
+        plt.subplots_adjust(left=0.025, right=0.985, top=0.965, bottom=0.03,
+                            hspace=0.66 if n_faixas >= 3 else 0.95)
+        return fig, ([axs] if n_faixas == 1 else list(axs))
 
-    # ============================================================== 2  MATRIZ
-    ax = axs[1]
-    desenha_corte(ax, pd_)
-    desenha_arestas(ax, cd_c)
-    col = Coluna(80.0, passo=7.0)
-    for i, (z0, z1, d) in enumerate(m["escala_Ø_x_Z_mm"]):
-        chamada_diametro(ax, d / 2.0, 0.5 * (z0 + z1),
-                         "Ø %s   estágio %d  (Z %s → %s)" % (n(d, 2), i + 1, n(z0, 2), n(z1, 2)),
-                         col, cor="tab:blue")
-    for i, (z0, z1, d) in enumerate(m["escala_Ø_x_Z_mm"]):
-        cota_v(ax, z0, z1, -124.0 - 16 * i, n(z1 - z0, 2), cor="tab:blue", ha="right")
-    fb = m["transições_refinadas_mm"].get("fim_da_banda_093_em_Z")
-    if fb is not None:
-        cota_v(ax, 0.0, fb, -156.0 - 16 * len(m["escala_Ø_x_Z_mm"]),
-               "%s   banda até o ombro" % n(fb, 3), cor="0.1", ha="right")
-    cota_v(ax, 0.0, m["comprimento_medido_mm"], -196.0,
-           "%s   comprimento da matriz" % n(m["comprimento_medido_mm"], 2), ha="right")
-    canal = 2 * (pd_[len(pd_) // 2][2] or 0.0)
-    nota2 = ("geometria e cotas: seção e escada medidas no STEP `%s` (aberto só para leitura; "
-             "`02_CAD_Modelos_Historicos/` não é modificado - regra 2), publicadas em `%s`.\nA peça é "
-             "bipartida e o corte passa pelo centro do canal da fenda: o canal de %s mm aparece como faixa "
-             "vazia e as duas metades se sobrepõem nesta\nvista. Ø máx medido %s; comprimento %s; ombro (fim "
-             "da banda) em Z = %s." % (os.path.basename(a.matriz), os.path.basename(PERFIS), n(canal, 2),
-                                       n(m["Ø_máximo_medido_mm"], 2), n(m["comprimento_medido_mm"], 2),
-                                       n(m["z_do_ombro_mm"], 2)))
-    monta(ax, "2   %s — vista lateral em corte pelo plano do eixo" % m["nome"], nota2)
+    # ============================================================== FAIXA 1  CABECOTE
+    def faixa_cabecote(ax):
+        curvas, area, perfil, es, plano = SC
+        desenha_corte(ax, perfil)
+        desenha_arestas(ax, curvas)
+        col = Coluna(118.0, passo=6.5)
+        for i, (d, za, zb) in enumerate(bores):
+            chamada_diametro(ax, d / 2.0, 0.5 * (max(za, 0.0) + min(zb, L_H)),
+                             "Ø %s   furo %d do cabeçote" % (n(d, 2), i + 1), col, cor="tab:blue")
+        chamada_diametro(ax, corpo_c[0], 0.5 * (corpo_c[1] + corpo_c[2]),
+                         "Ø %s   corpo" % n(2 * corpo_c[0], 2), col)
+        chamada_diametro(ax, fl[0], 0.5 * (fl[1] + fl[2]), "Ø %s   flange" % n(2 * fl[0], 2), col)
+        chamada_diametro(ax, pil[0], 0.5 * (pil[1] + pil[2]),
+                         "Ø %s   piloto de centragem" % n(2 * pil[0], 2), col, cor="tab:purple")
+        # as correntes de comprimento vao para a ESQUERDA: a direita e dos rotulos de diametro, e as duas
+        # coisas se cortavam quando ficavam no mesmo lado
+        xais = [-126.0, -142.0, -158.0, -174.0]
+        for i, (d, za, zb) in enumerate(bores[:3]):
+            cota_v(ax, max(za, 0.0), min(zb, L_H), xais[i], n(min(zb, L_H) - max(za, 0.0), 2),
+                   cor="tab:blue", ha="right")
+        cota_v(ax, fl[1], fl[2], -190.0, "%s   flange" % n(fl[2] - fl[1], 2), ha="right")
+        cota_v(ax, pil[1], pil[2], -126.0, n(pil[2] - pil[1], 2), cor="tab:purple")
+        cota_v(ax, 0.0, L_H, -206.0, "%s   comprimento total" % n(L_H, 2), ha="right")
+        ax.plot([-rc0, -rc1], [zc0, zc1], color="tab:red", lw=0.7, ls=(0, (2, 2)))
+        ax.text(-rc1 + 6.0, 0.5 * (zc0 + zc1) + 6.0,
+                "chanfro %s × %s°\nØ %s → Ø %s (cota do desenho)" % (
+                    n(chan["cateto_mm"], 2), n(chan["angulo_graus"], 0),
+                    n(chan.get("de_D_mm", 2 * rc1), 2), n(chan.get("para_D_mm", 2 * rc0), 2)),
+                ha="center", va="bottom", color="tab:red", fontsize=7.0)
+        print("cabeçote: %d platos, área de material %.1f mm²" % (len(es), area))
+        nota = ("geometria: seção do STEP `%s` (arestas reais, cinza fino) e perfil de corte medido dele fatia "
+                "a fatia (preto, hachurado). Z = 0 no plano mais\ntraseiro da peça; face do nariz em Z = %s. "
+                "Cotas: `cabecote_ex030.json` e `verificar_interface_cabecote.py` - os mesmos dados com que este "
+                "STEP foi construído.\nNão aparecem neste corte por acaso do plano, não por omissão: as 6 fendas "
+                "do flange e os 6 × Ø16,50 (M12) em C.C. Ø180,00." % (os.path.basename(a.cabecote), n(L_H, 2)))
+        monta(ax, "1   CABEÇOTE EX-030 — vista lateral em corte pelo plano do eixo", nota)
 
-    # ============================================================== 3  MONTAGEM
-    ax = axs[2]
-    desenha_corte(ax, ph, cor="0.2", preenche=False, hachura=False)
-    desenha_corte(ax, pd_, cor="tab:blue", espessura=1.7, hachura=True)
-    dz = m["encostos"][m["encosto_usado"]]["deslocamento_aplicado_mm"]
-    saida = m["comprimento_medido_mm"] + dz
-    prot = saida - L_H
-    col = Coluna(118.0, passo=8.0)
-    for i, (d, za, zb) in enumerate(bores):
-        chamada_diametro(ax, d / 2.0, 0.5 * (max(za, 0.0) + min(zb, L_H)),
-                         "cabeçote  Ø %s" % n(d, 2), col, cor="0.15")
-    for i, (z0, z1, d) in enumerate(m["escala_Ø_x_Z_mm"]):
-        chamada_diametro(ax, d / 2.0 + 3.0, 0.5 * (z0 + z1) + dz, "matriz  Ø %s" % n(d, 2), col,
-                         cor="tab:blue")
-    cota_v(ax, min(saida, L_H), L_H, 196.0,
-           "%s   saída da matriz %s da face do nariz" % (n(abs(prot), 2),
-                                                          "FORA" if prot > 0 else "DENTRO"))
-    cota_v(ax, 0.0, min(saida, L_H), -206.0, "%s   matriz dentro do bolso" % n(min(saida, L_H), 2),
-           ha="right")
-    cota_h(ax, -pil[0], pil[0], 0.0, -21.0,
-           "encosto face a face: traseira da matriz rasa com o plano mais traseiro do cabeçote (medido "
-           "0,000 mm)\no piloto Ø %s × %s protrai atrás da face do flange - é aí que a máquina precisa do "
-           "rebaixo correspondente" % (n(2 * pil[0], 2), n(pil[2] - pil[1], 2)), cor="0.1")
-    dif = prof_mat["diferença_copo_x_gedeon_medida"]
-    nota3 = ("a posição axial da matriz é definida pelo cabeçote (degrau + fundo do bolso), não pela máquina: "
-             "folga radial banda↔bolso %s mm e folga axial no degrau\n%s mm. A Copo desemboca %s mm %s da "
-             "face do nariz - é o que você observou na saída, e o valor é a diferença de comprimento entre as "
-             "matrizes:\nna Copo falta o nariz de %s mm que a Gedeon, a Desenvolvimento e a Jonatha têm "
-             "(medido em `perfis_matrizes_x_cabecote.json`)."
-             % (n((bores[-1][0] - m["Ø_máximo_medido_mm"]) / 2.0, 3),
-                n(m["transições_refinadas_mm"]["folga_axial_banda_x_degrau_do_cabecote_mm"], 3),
-                n(abs(prot), 2), "para fora" if prot > 0 else "para dentro",
-                n(dif["diferença_mm"], 2)))
-    monta(ax, "3   MONTAGEM — cabeçote (contorno) + matriz (azul, hachurada), no mesmo referencial axial",
-          nota3)
+    # ============================================================== FAIXA n  MATRIZ SOLTA
+    def faixa_matriz(ax, m, i):
+        curvas, area, perfil, es, plano = m["_secao"]
+        desenha_corte(ax, perfil)
+        desenha_arestas(ax, curvas)
+        col = Coluna(80.0, passo=7.0)
+        for j, (z0, z1, d) in enumerate(m["escala_Ø_x_Z_mm"]):
+            # abs(): a escala medida devolve -0,00 para o plano de face da Gedeon (flutuador da bbox), e
+            # "Z -0,00" num desenho e ruuido - o plano e o Z = 0
+            chamada_diametro(ax, d / 2.0, 0.5 * (z0 + z1),
+                             "Ø %s   estágio %d  (Z %s → %s)" % (n(d, 2), j + 1, n(abs(z0), 2), n(z1, 2)),
+                             col, cor="tab:blue")
+        for j, (z0, z1, d) in enumerate(m["escala_Ø_x_Z_mm"]):
+            cota_v(ax, z0, z1, -124.0 - 16 * j, n(z1 - z0, 2), cor="tab:blue", ha="right")
+        fb = m["transições_refinadas_mm"].get("fim_da_banda_093_em_Z")
+        if fb is not None:
+            cota_v(ax, 0.0, fb, -156.0 - 16 * len(m["escala_Ø_x_Z_mm"]),
+                   "%s   banda até o ombro" % n(fb, 3), cor="0.1", ha="right")
+        # a corrente do comprimento vai para alem da cadeia dos estagios (que cresce com o numero de
+        # estagios: a Gedeon tem 3 e esmagava o rotulo de 109,00 contra o de "banda ate o ombro")
+        cota_v(ax, 0.0, m["comprimento_medido_mm"], -206.0 - 16.0 * len(m["escala_Ø_x_Z_mm"]),
+               "%s   comprimento da matriz" % n(m["comprimento_medido_mm"], 2), ha="right")
+        canal = 2 * (perfil[len(perfil) // 2][2] or 0.0)
+        print("%s: %d platos, área de material %.1f mm², Ø máx %.2f"
+              % (m["chave"], len(es), area, m["Ø_máximo_medido_mm"]))
+        nota = ("geometria e cotas: seção e escada medidas no STEP `%s` (aberto só para leitura; "
+                "`02_CAD_Modelos_Historicos/` não é modificado - regra 2), publicadas em `%s`.\nA peça é %s. "
+                "Corte feito no plano %s - em peça bipartida o plano Y = 0 é o de partição, onde não há seção, "
+                "há a face\nde junção das metades. O canal medido nesta seção: Ø %s mm (aparece como faixa "
+                "vazia). Ø máx medido %s; comprimento %s;\nombro (fim da banda) em Z = %s."
+                % (", ".join(os.path.basename(x) for x in m["_arquivos"]), os.path.basename(PERFIS),
+                   "bipartida (A ∪ B)" if m["fonte_do_corpo"] == "A U B" else "de corpo único",
+                   plano, n(canal, 2), n(m["Ø_máximo_medido_mm"], 2), n(m["comprimento_medido_mm"], 2),
+                   n(m["z_do_ombro_mm"], 2)))
+        monta(ax, "%d   %s — vista lateral em corte pelo plano do eixo" % (i, m["nome"]), nota)
 
-    print("chanfro desenhado: Z %.2f..%.2f de r %.2f a r %.2f" % (zc0, zc1, rc0, rc1))
+    # ============================================================== FAIXA n  MONTAGEM
+    def faixa_montagem(ax, m, i):
+        curvas_h, area_h, perfil_h, _, plano_h = SC
+        curvas, area, perfil, es, plano = m["_secao"]
+        desenha_corte(ax, perfil_h, cor="0.2", preenche=False, hachura=False)
+        desenha_corte(ax, perfil, cor="tab:blue", espessura=1.7, hachura=True)
+        dz = m["encostos"][m["encosto_usado"]]["deslocamento_aplicado_mm"]
+        saida = m["comprimento_medido_mm"] + dz
+        prot = saida - L_H
+        interf = vol_intersecao(m["_corpo"], head)
+        col = Coluna(118.0, passo=8.0)
+        for j, (d, za, zb) in enumerate(bores):
+            chamada_diametro(ax, d / 2.0, 0.5 * (max(za, 0.0) + min(zb, L_H)),
+                             "cabeçote  Ø %s" % n(d, 2), col, cor="0.15")
+        for j, (z0, z1, d) in enumerate(m["escala_Ø_x_Z_mm"]):
+            chamada_diametro(ax, d / 2.0 + 3.0, 0.5 * (z0 + z1) + dz, "matriz  Ø %s" % n(d, 2), col,
+                             cor="tab:blue")
+        cota_v(ax, min(saida, L_H), L_H, 196.0,
+               "%s   saída da matriz %s da face do nariz" % (n(abs(prot), 2), "FORA" if prot > 0 else "DENTRO"))
+        cota_v(ax, 0.0, min(saida, L_H), -206.0, "%s   matriz dentro do bolso" % n(min(saida, L_H), 2),
+               ha="right")
+        cota_h(ax, -pil[0], pil[0], 0.0, -31.0,
+               "encosto %s: %s\ninterferência medida matriz ∩ cabeçote: %s mm³ (o STEP da montagem é "
+               "composto, sem booleano)"
+               % (m["encosto_usado"], "traseira da matriz rasa com o plano mais traseiro do cabeçote"
+                  if abs(dz) < 1e-6 else "deslocamento aplicado de %s mm" % n(dz, 2), n(interf, 4)), cor="0.1")
+        folga_b = (bores[-1][0] - m["Ø_máximo_medido_mm"]) / 2.0
+        nota = ("posição axial definida pelo cabeçote (degrau + fundo do bolso), não pela máquina: folga radial "
+                "banda↔bolso %s mm e folga axial no\ndegrau %s mm; encosto usado = `%s` (deslocamento %s mm). "
+                "Saída da matriz em Z = %s, ou %s %s da face do nariz (%s).\nCada número desta faixa é medido "
+                "nos dois STEP - cabeçote cortado em %s, matriz em %s. A matriz por `%s`, o assento por\n`medir_perfis_matrizes_x_cabecote.py`.\n"
+                "Os Ø aqui são os MEDIDOS no STEP da peça - no DXF a banda da matriz coincide com o bolso Ø95 "
+                "e o canal é desenhado com 17,00 mm\n(versus os 11,00 mm do furo): ver "
+                "`cabecote_ex030.json:matriz_copo_desenhada_no_dxf`."
+                % (n(folga_b, 3),
+                   n(m["transições_refinadas_mm"]["folga_axial_banda_x_degrau_do_cabecote_mm"], 3),
+                   m["encosto_usado"], n(dz, 2), n(saida, 2), n(abs(prot), 2),
+                   "para fora" if prot > 0 else "para dentro", n(L_H, 2), plano_h, plano,
+                   ", ".join(m["_arquivos"])))
+        monta(ax, "%d   MONTAGEM — %s: cabeçote (contorno) + matriz (azul, hachurada), mesmo referencial axial"
+              % (i, m["nome"].split("(")[0].strip()), nota)
+
+    from matplotlib.backends.backend_pdf import PdfPages
     os.makedirs(os.path.dirname(a.saida), exist_ok=True)
-    fig.savefig(a.saida, format="pdf")
-    print("PDF ->", a.saida)
+    paginas = []
+    fig, axs = figura(1 + len(mats))
+    faixa_cabecote(axs[0])
+    for k, m in enumerate(mats):
+        faixa_matriz(axs[1 + k], m, 2 + k)
+    paginas.append(fig)
+    fig, axs = figura(len(mats))
+    for k, m in enumerate(mats):
+        faixa_montagem(axs[k], m, 1 + k)
+    paginas.append(fig)
+
+    with PdfPages(a.saida) as pdf:
+        for fig in paginas:
+            pdf.savefig(fig)
+    print("PDF ->", a.saida, "(%d páginas)" % len(paginas))
     if a.png:
-        pth = a.saida[:-4] + ".png"
-        fig.savefig(pth, format="png", dpi=120)
-        print("PNG ->", pth)
+        for k, fig in enumerate(paginas, 1):
+            pth = "%s_p%d.png" % (os.path.splitext(a.saida)[0], k)
+            fig.savefig(pth, format="png", dpi=120)
+            print("PNG ->", pth)
+    for fig in paginas:
+        plt.close(fig)
     return 0
 
 
