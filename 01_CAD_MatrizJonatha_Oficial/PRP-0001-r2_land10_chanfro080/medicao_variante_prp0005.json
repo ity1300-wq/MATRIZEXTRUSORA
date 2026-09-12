@@ -1,0 +1,270 @@
+{
+  "medido_em": "2026-09-12T18:55:21+0000",
+  "objeto": "L10_C0.8",
+  "pasta": "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080",
+  "metricas": {
+    "largura_fenda_mm": 75.0,
+    "espessura_fenda_mm": 1.5,
+    "area_fenda_mm2": 112.0171,
+    "raio_borda_mm": 0.75,
+    "boca_entrada_mm": 75.6,
+    "boca_entrada_y_mm": 75.5993,
+    "largura_saida_mm": 76.6,
+    "espessura_saida_mm": 3.1,
+    "parede_labio_mm": 1.45,
+    "land_util_mm": 9.2,
+    "chanfro_medido_mm": 0.8,
+    "land_total_mm": 10.0,
+    "chanfro_sobrelargura_x_mm": 0.702,
+    "chanfro_sobrelargura_y_mm": 0.702,
+    "chanfro_45graus_ok": true,
+    "volume_canal_mm3": 213820.019,
+    "volume_body_a_mm3": 234317.856,
+    "volume_body_b_mm3": 234808.926,
+    "volume_aco_mm3": 469126.783,
+    "massa_aco_kg": 3.6826,
+    "interferencia_mm3": 0.0,
+    "cavidades_fechadas_body_a": 2,
+    "cavidades_fechadas_body_b": 0,
+    "solidos_na_montagem": 2,
+    "solidos_no_canal_fluxo": 3,
+    "z_total_mm": 109.0,
+    "diametro_externo_mm": 93.0,
+    "plano_particao_y_mm": 0.003217,
+    "externo_z0.50_mm": 93.0,
+    "externo_z75.30_mm": 89.5,
+    "externo_z94.85_mm": 79.5,
+    "volume_envelope_mm3": 683248.395,
+    "volume_furos_pino_mm3": 301.593,
+    "fechamento_envelope_mm3": -0.0003,
+    "prefixo": "L10_C0.8",
+    "pasta": "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080",
+    "arquivos": [
+      {
+        "caminho": "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8.step",
+        "sha256": "00bdefcd1aa55a892a30659056542fadf0f6fe1b9c04023587ca6fa143607e75",
+        "bytes": 207657,
+        "operacao": "novo"
+      },
+      {
+        "caminho": "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8_Explodida.step",
+        "sha256": "5142c245dd2ba42e5403efaec579a3f8ee9ab2d9ee2330abc4222ba93fe0626b",
+        "bytes": 203041,
+        "operacao": "novo"
+      },
+      {
+        "caminho": "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8_Com_Fluxo.step",
+        "sha256": "3d1ed700632659c14bd9c27587991e1d850303a7eecf98ad35f34dac4140324b",
+        "bytes": 301131,
+        "operacao": "novo"
+      },
+      {
+        "caminho": "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8_Body_A.step",
+        "sha256": "6a67f26437072610a821e17e211e7c0bd049a61bbb61921f24d208c91519ec86",
+        "bytes": 114312,
+        "operacao": "novo"
+      },
+      {
+        "caminho": "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8_Body_B.step",
+        "sha256": "d258f14e99eb758f841fc4566765d3a9c49ef1cec2ac4e0d757238bc5e0bde09",
+        "bytes": 88542,
+        "operacao": "novo"
+      },
+      {
+        "caminho": "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8_Canal_Fluxo.step",
+        "sha256": "2d370038da9501cb72ad35272bb51a9a5d8f217fd5c6449c901021b0c25ea685",
+        "bytes": 94668,
+        "operacao": "novo"
+      }
+    ],
+    "dp_total_bar": 27.573,
+    "dp_modelo_parametrico": "dp_total = 6.77 + 2.1824·9.20 + 0.9067·0.80 = 27.573 bar"
+  },
+  "checks": [
+    {
+      "id": "largura_fenda_mm",
+      "o_que": "Largura da fenda = 75,00 mm",
+      "nominal": 75.0,
+      "medido": 75.0,
+      "tolerancia": 0.05,
+      "resultado": "OK"
+    },
+    {
+      "id": "espessura_fenda_mm",
+      "o_que": "Espessura da fenda = 1,50 mm",
+      "nominal": 1.5,
+      "medido": 1.5,
+      "tolerancia": 0.02,
+      "resultado": "OK"
+    },
+    {
+      "id": "raio_borda_mm",
+      "o_que": "Raio de borda = 0,75 mm",
+      "nominal": 0.75,
+      "medido": 0.75,
+      "tolerancia": 0.02,
+      "resultado": "OK"
+    },
+    {
+      "id": "boca_entrada_mm",
+      "o_que": "Boca de entrada ≤ Ø75,60 mm",
+      "nominal": 75.6,
+      "medido": 75.6,
+      "tolerancia": 0.001,
+      "resultado": "OK"
+    },
+    {
+      "id": "interferencia_mm3",
+      "o_que": "Interferência entre as metades = 0",
+      "nominal": 0.0,
+      "medido": 0.0,
+      "tolerancia": 0.01,
+      "resultado": "OK"
+    },
+    {
+      "id": "z_total_mm",
+      "o_que": "Comprimento total Z = 109,00 mm",
+      "nominal": 109.0,
+      "medido": 109.0,
+      "tolerancia": 0.05,
+      "resultado": "OK"
+    },
+    {
+      "id": "diametro_externo_mm",
+      "o_que": "Diâmetro externo = Ø93,00 mm",
+      "nominal": 93.0,
+      "medido": 93.0,
+      "tolerancia": 0.05,
+      "resultado": "OK"
+    },
+    {
+      "id": "area_fenda_mm2",
+      "o_que": "Área da seção do land = 112.0171 mm²",
+      "nominal": 112.0171,
+      "medido": 112.0171,
+      "tolerancia": 0.05,
+      "resultado": "OK"
+    },
+    {
+      "id": "fechamento_envelope_mm3",
+      "o_que": "Envelope − (aço + canal + furos) = 0",
+      "nominal": 0.0,
+      "medido": -0.0003,
+      "tolerancia": 1.0,
+      "resultado": "OK"
+    },
+    {
+      "id": "chanfro_45graus",
+      "o_que": "Chanfro de saída divergente a 45°",
+      "nominal": true,
+      "medido": true,
+      "tolerancia": "±0,10 mm radial",
+      "resultado": "OK"
+    }
+  ],
+  "modelo_dp": "dp_total = 6.77 + 2.1824·9.20 + 0.9067·0.80 = 27.573 bar",
+  "nao_medido": [
+    {
+      "item": "uniformidade_nucleo_pct",
+      "motivo": "CFD 2D: a seção transversal do land é idêntica à do v27 (75,00 x 1,50 com R0,75), então o valor do baseline permanece válido"
+    },
+    {
+      "item": "tau_parede_land_kpa",
+      "motivo": "idem (CFD 2D da mesma seção)"
+    },
+    {
+      "item": "residencia_media_s / residencia_parede_min",
+      "motivo": "mudam só pela razão de volumes; Δ do canal é −0,06%"
+    },
+    {
+      "item": "auditor oficial (Protocolo v1.0)",
+      "motivo": "verify_geometry_ssot.py mede apenas 01_CAD_MatrizJonatha_Oficial/ (DIR_CAD fixo, zona congelada §8): não consegue medir um STEP candidato. Lacuna registrada para o Humano resolver na régua (v1.1)"
+    }
+  ],
+  "comparacao_baseline": [
+    {
+      "metrica": "largura_fenda_mm",
+      "baseline": 75.0,
+      "variante": 75.0,
+      "delta_pct": 0.0,
+      "direcao": "igual"
+    },
+    {
+      "metrica": "espessura_fenda_mm",
+      "baseline": 1.5,
+      "variante": 1.5,
+      "delta_pct": 0.0,
+      "direcao": "igual"
+    },
+    {
+      "metrica": "area_fenda_mm2",
+      "baseline": 112.0171,
+      "variante": 112.0171,
+      "delta_pct": 0.0,
+      "direcao": "igual"
+    },
+    {
+      "metrica": "raio_borda_mm",
+      "baseline": 0.75,
+      "variante": 0.75,
+      "delta_pct": 0.0,
+      "direcao": "igual"
+    },
+    {
+      "metrica": "boca_entrada_mm",
+      "baseline": 75.6,
+      "variante": 75.6,
+      "delta_pct": 0.0,
+      "direcao": "igual"
+    },
+    {
+      "metrica": "parede_labio_mm",
+      "baseline": 0.75,
+      "variante": 1.45,
+      "delta_pct": 93.333,
+      "direcao": "melhor"
+    },
+    {
+      "metrica": "land_util_mm",
+      "baseline": 8.5,
+      "variante": 9.2,
+      "delta_pct": 8.235,
+      "direcao": "melhor"
+    },
+    {
+      "metrica": "volume_canal_mm3",
+      "baseline": 213945.1459,
+      "variante": 213820.019,
+      "delta_pct": -0.058,
+      "direcao": "neutro"
+    },
+    {
+      "metrica": "interferencia_mm3",
+      "baseline": 0.0,
+      "variante": 0.0,
+      "delta_pct": null,
+      "direcao": "neutro"
+    },
+    {
+      "metrica": "z_total_mm",
+      "baseline": 109.0,
+      "variante": 109.0,
+      "delta_pct": 0.0,
+      "direcao": "igual"
+    },
+    {
+      "metrica": "diametro_externo_mm",
+      "baseline": 93.0,
+      "variante": 93.0,
+      "delta_pct": 0.0,
+      "direcao": "igual"
+    },
+    {
+      "metrica": "dp_total_bar",
+      "baseline": 26.68,
+      "variante": 27.573,
+      "delta_pct": 3.347,
+      "direcao": "pior"
+    }
+  ]
+}
