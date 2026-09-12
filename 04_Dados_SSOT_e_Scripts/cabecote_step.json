@@ -36,9 +36,11 @@
  "montagens": {
   "matriz_1_copo": {
    "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Copo.step",
+   "entrega_sem_booleano": true,
    "arquivos_da_matriz": [
     "02_CAD_Modelos_Historicos/Matriz1_Original_Copo_Solido.step"
    ],
+   "solidos_da_matriz_no_arquivo": 1,
    "encosto_usado": "B_ombro_no_degrau",
    "deslocamento_aplicado_mm": 0.0,
    "solidos_no_arquivo": 2,
@@ -52,13 +54,15 @@
   },
   "matriz_2_gedeon": {
    "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Gedeon.step",
+   "entrega_sem_booleano": true,
    "arquivos_da_matriz": [
     "02_CAD_Modelos_Historicos/MatrizGedeon_Body_A.step",
     "02_CAD_Modelos_Historicos/MatrizGedeon_Body_B.step"
    ],
+   "solidos_da_matriz_no_arquivo": 2,
    "encosto_usado": "B_ombro_no_degrau",
    "deslocamento_aplicado_mm": 0.0,
-   "solidos_no_arquivo": 2,
+   "solidos_no_arquivo": 3,
    "volume_somado_mm3": 2039496.259,
    "desvio_round_trip_mm3": 0.0,
    "interferencia_matriz_x_desenhado_mm3": 0.0,

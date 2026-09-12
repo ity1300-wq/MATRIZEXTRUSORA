@@ -66,7 +66,7 @@ Medida nos STEP gerados por `gerar_matriz_v28.py` (booleanos + BRepExtrema; nada
 | Massa de aço (7,85 g/cm³) | — | 3,586 kg | ✅ | v27.0: 3,682 kg | aços: P20 pré / H13 temperado |
 | Área projetada do canal no plano XZ (medida) | — | 8169 mm² | ✅ | é a área sobre a qual a pressão empurra as metades uma contra a outra |
 | Força que abre a bipartição | — | 55,7 kN no limite (pressão plena em toda a área) · 30,6 kN sobre a boca Ø75,60 | ✅ | por isso a fixação não é opcional (ver relatório DFM) |
-| ΔP 1D - lei das potências (método do próprio projeto) | — | v28.1 = 41,9 bar | v27.0 = 41,9 bar | ✅ | land 8,50 vs 8,50 paralelos → -0.0 bar; maior gradiente em Z≈99,2 mm |
+| ΔP 1D - lei das potências (método do próprio projeto) | — | v28.1 = 26,6 bar | v27.0 = 26,6 bar | ✅ | land 8,50 vs 8,50 paralelos → -0.0 bar; maior gradiente em Z≈99,2 mm |
 | τ na parede do land | — | 163,8 kPa (γ̇_ap = 911 s⁻¹) | ✅ | não depende do comprimento do land: mesma fenda, mesma vazão |
 | Faixa de aço entre o canal e o Ø93 | — | 8.70 mm | ✅ | sem espaço para furo de pressão: Ø9,5 + parede 4 + parede 4 = 11,5 mm |
 | Cotas de usinagem do land | — | paralelo Z=99,00→107,50 mm (8,50) · chanfro 1,50×45° Z=107,50→109,00 mm | ✅ | conferir no desenho antes de cortar o aço |

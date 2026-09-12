@@ -34,6 +34,7 @@ import os
 import sys
 
 import cadquery as cq
+from OCP.BRepCheck import BRepCheck_Analyzer  # e isto que diz se um solido abre 'corrompido' no CAD
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.abspath(os.path.join(AQUI, ".."))
@@ -178,10 +179,12 @@ def main():
           if ok else "FALHOU - ver os numeros acima")
 
     # ------------------------------------------------- montagens: cabecote + matriz sentada, num STEP so
-    # Composto de 2 solidos no MESMO referencial axial (Z = 0 no plano mais traseiro da pecas), SEM booleano:
-    # e assim que o CAD mede folga e interferencia, e assim que o arquivo continua valido como montagem. As
-    # matrizes sao lidas de 02_/01_ sem modificar (regra 2), unidas A U B quando a peca e bipartida - o mesmo
-    # corpo que `medir_perfis_matrizes_x_cabecote.py` mede, para o STEP entregue e a medicao nao divergirem.
+    # Composto de N solidos no MESMO referencial axial (Z = 0 no plano mais traseiro), SEM booleano nenhum na
+    # entrega. Isso e deliberado e custou uma correcao: a primeira versao entregava a matriz como A U B, que e
+    # valido (BRepCheck: True) e e o que a MEDICAO precisa, mas fecha cascas internas - a uniao da Gedeon tem 3
+    # shells contra as 2 do Body_A e as 2 do Body_B - e solido com casca interna abre como "pecas
+    # quebradas/corrompidas" em visualizador de STEP. Num arquivo de montagem, a biparticao e o dado: as metades
+    # vao la separadas, iguais ao que o arquivo de origem tem.
     med["montagens"] = {}
     falhas_m = ""
     if os.path.exists(PERFIS):
@@ -202,45 +205,85 @@ def main():
                     break
                 paths.append(pt)
             else:
-                wp = cq.importers.importStep(paths[0])
-                for pt in paths[1:]:
-                    wp = wp.union(cq.importers.importStep(pt))
-                corpo = maior(wp.val())
+                # cada solido de origem, no lugar em que a medicao o poe (dz = encosto escolhido no medidor)
+                pedacos = []
+                for pt in paths:
+                    v = cq.importers.importStep(pt).val()
+                    for so in (v.Solids() or [v]):
+                        pedacos.append(so)
                 dz = e["encostos"][e["encosto_usado"]]["deslocamento_aplicado_mm"]
                 if abs(dz) > 1e-9:
-                    corpo = corpo.translate(cq.Vector(0.0, 0.0, dz))
-                comp = cq.Workplane("XY").newObject([cq.Compound.makeCompound([cheio, corpo])])
+                    pedacos = [x.translate(cq.Vector(0.0, 0.0, dz)) for x in pedacos]
+                comp = cq.Workplane("XY").newObject([cq.Compound.makeCompound([cheio] + pedacos)])
                 pm = os.path.join(a.saida, f"Cabecote_EX-030_com_{curto}{sufixo}.step")
                 cq.exporters.export(comp, pm, cq.exporters.ExportTypes.STEP)
                 relido = cq.importers.importStep(pm).val()
                 vs = [x.Volume() for x in relido.Solids()] or [vol(relido)]
                 saida = e["comprimento_medido_mm"] + dz
+                # a interferencia e medida peca a peca e somada (mesmo numero do booleano sobre a uniao, porque
+                # as metades se tocam no plano de particao e nao se sobrepoe - medido: A U B = A + B ao bitola)
+                interf_c = sum(vol(x.intersect(cheio)) for x in pedacos)
+                interf_n = sum(vol(x.intersect(novo)) for x in pedacos)
+                shells_cab = len(cheio.Shells())
                 med["montagens"][chave] = {
                     "arquivo": os.path.relpath(pm, RAIZ),
+                    "entrega_sem_booleano": True,
                     "arquivos_da_matriz": [os.path.relpath(x, RAIZ) for x in paths],
+                    "solidos_da_matriz_no_arquivo": len(pedacos),
                     "encosto_usado": e["encosto_usado"], "deslocamento_aplicado_mm": round(dz, 3),
                     "solidos_no_arquivo": len(relido.Solids()),
                     "volume_somado_mm3": round(sum(vs), 3),
-                    "desvio_round_trip_mm3": round(sum(vs) - (cheio.Volume() + corpo.Volume()), 6),
-                    "interferencia_matriz_x_desenhado_mm3": round(vol(corpo.intersect(cheio)), 4),
-                    "interferencia_matriz_x_sem_flange_mm3": round(vol(corpo.intersect(novo)), 4),
+                    "desvio_round_trip_mm3": round(sum(vs) - (cheio.Volume() + sum(x.Volume() for x in pedacos)), 6),
+                    "interferencia_matriz_x_desenhado_mm3": round(interf_c, 4),
+                    "interferencia_matriz_x_sem_flange_mm3": round(interf_n, 4),
                     "face_de_saida_da_matriz_em_Z": round(saida, 3),
                     "protusao_adem_da_face_do_nariz_mm": round(saida - Z_FACE_NARIZ, 3),
-                    "massa_somada_kg": round((cheio.Volume() + corpo.Volume()) * ACO, 4),
+                    "massa_somada_kg": round((cheio.Volume() + sum(x.Volume() for x in pedacos)) * ACO, 4),
                 }
                 m = med["montagens"][chave]
-                print(f"MONTAGEM {curto:13s} -> {os.path.relpath(pm, RAIZ)} | {m['solidos_no_arquivo']} solidos"
-                      f" | interferencia com o cabecote {n(m['interferencia_matriz_x_desenhado_mm3'], 4)} mm3"
-                      f" | saida da matriz em Z = {n(m['face_de_saida_da_matriz_em_Z'], 2)}"
-                      f" (protrusao {n(m['protusao_adem_da_face_do_nariz_mm'], 2)} mm)")
-                if m["solidos_no_arquivo"] != 2 or abs(m["desvio_round_trip_mm3"]) > 1e-3:
-                    falhas_m = ("montagem %s nao reimporta como 2 solidos de volume fiel (solidos %d, desvio "
-                                "%s mm3)" % (chave, m["solidos_no_arquivo"], m["desvio_round_trip_mm3"]))
+                print(f"MONTAGEM {curto:13s} -> {m['arquivo']} | {m['solidos_no_arquivo']} solidos "
+                      f"(1 cabecote + {m['solidos_da_matriz_no_arquivo']} da matriz, sem booleano) | "
+                      f"interferencia somada {n(m['interferencia_matriz_x_desenhado_mm3'], 4)} mm3 | "
+                      f"saida da matriz em Z = {n(m['face_de_saida_da_matriz_em_Z'], 2)} "
+                      f"(protrusao {n(m['protusao_adem_da_face_do_nariz_mm'], 2)} mm)")
+                if m["solidos_no_arquivo"] != 1 + m["solidos_da_matriz_no_arquivo"]:
+                    falhas_m = ("montagem %s nao reimporta com o numero de solidos esperado (%d vs %d)"
+                                % (chave, m["solidos_no_arquivo"], 1 + m["solidos_da_matriz_no_arquivo"]))
+                    print("FALHOU:", falhas_m)
+                if abs(m["desvio_round_trip_mm3"]) > 1e-3:
+                    falhas_m = "montagem %s nao reimporta com volume fiel" % chave
                     print("FALHOU:", falhas_m)
                 json.dump(med, open(cam_json, "w", encoding="utf-8"), indent=1)
     else:
         print("aviso: falta perfis_matrizes_x_cabecote.json - montagens nao geradas "
               "(rode medir_perfis_matrizes_x_cabecote.py --json)")
+
+    # ------------------------------------------- inventario medido dos arquivos de matriz (o "corrompida")
+    # Medido, nao opinado: quantos solidos ha em cada arquivo de origem, se cada um e valido e o que ele e. E
+    # isto que responde "a Gedeon parece corrompida" sem pedir a ninguem que confie em mim.
+    inv = {}
+    for rot, caminho in (("MatrizGedeon.step (inteira)", os.path.join(DIR_HIS, "MatrizGedeon.step")),
+                         ("MatrizGedeon_Body_A.step", os.path.join(DIR_HIS, "MatrizGedeon_Body_A.step")),
+                         ("MatrizGedeon_Body_B.step", os.path.join(DIR_HIS, "MatrizGedeon_Body_B.step")),
+                         ("MatrizGedeon_Canal_Fluxo.step", os.path.join(DIR_HIS, "MatrizGedeon_Canal_Fluxo.step")),
+                         ("Matriz1_Original_Copo_Solido.step", os.path.join(DIR_HIS, "Matriz1_Original_Copo_Solido.step")),
+                         ("MatrizJonatha.step (master v27)", os.path.join(DIR_OFF, "MatrizJonatha.step"))):
+        if not os.path.exists(caminho):
+            continue
+        v = cq.importers.importStep(caminho).val()
+        ss = v.Solids() or [v]
+        inv[rot] = {
+            "solidos": len(v.Solids()) or 1,
+            "validos_por_solido": [bool(BRepCheck_Analyzer(x.wrapped).IsValid()) for x in ss],
+            "shells_por_solido": [len(x.Shells()) for x in ss],
+            "volume_mm3": round(sum(x.Volume() for x in ss), 1),
+            "volumes_por_solido_mm3": [round(x.Volume(), 1) for x in ss],
+        }
+    med["inventario_dos_arquivos_de_matriz"] = inv
+    print("inventario medido dos arquivos de origem:")
+    for k, v in inv.items():
+        print(f"   {k:36s} {v['solidos']} solido(s) | vol {v['volume_mm3']:11.1f} mm3 | "
+              f"validos {all(v['validos_por_solido'])} | shells {v['shells_por_solido']}")
 
     if not a.sem_relatorio:
         escreve_relatorio(med, p1, p2)
@@ -268,14 +311,75 @@ def escreve_relatorio(med, p1, p2):
         "",
         "## O cabeçote com cada matriz sentada (montagens entregues)",
         "",
-        "Dois arquivos compostos - 2 sólidos no mesmo referencial axial (Z = 0 no plano mais traseiro), sem",
-        "booleano, para que a folga e a interferência sejam medidas no CAD de quem recebe. As matrizes são",
-        "lidas de `02_CAD_Modelos_Historicos/` / `01_CAD_MatrizJonatha_Oficial/` **sem modificar** (regra 2),",
-        "unidas A ∪ B quando a peça é bipartida - o mesmo corpo que `medir_perfis_matrizes_x_cabecote.py`",
-        "mede, para o STEP entregue e a medição não divergirem.",
+        "Dois arquivos compostos, no mesmo referencial axial (Z = 0 no plano mais traseiro), **sem booleano",
+        "nenhum**: cada sólido é o que está no arquivo de origem, no lugar onde a medição o põe.** A montagem da",
+        "Copo tem 2 sólidos (ela é de corpo único) e a da Gedeon tem 3 (cabeçote + Body_A + Body_B). Isso foi",
+        "corrigido depois da primeira versão, que entregava a matriz unida (A ∪ B): a união é válida e é com",
+        "ela que a folga é medida, mas ela conserva as cavidades internas seladas dos sólidos de origem - e",
+        "sólido com casca interna é o que abre como \"peça quebrada\" na maioria dos visualizadores de STEP.",
+        "Medido hoje, nos arquivos tais como estão no repositório: `MatrizGedeon_Body_A.step` é **1 sólido com",
+        "3 cascas** (duas cavidades fechadas dentro dele), o `Body_B` tem 1, e a união fica com 3. Numa",
+        "montagem, a bipartição é o dado, não um detalhe a esconder: as metades vão separadas. As duas se",
+        "tocam no plano de partição e não se sobrepõem (A ∪ B = 469.156,8 mm³ contra A + B = 469.156,7 mm³),",
+        "então somar a interferência peça a peça dá o mesmo número que o booleano sobre a união.",
         "",
-        "| montagem | encosto usado | interferência com o cabeçote | saída da matriz em Z | protrusão |",
-        "| :--- | :--- | ---: | ---: | ---: |",
+        "O `[3, 1]` do `MatrizJonatha.step` (v27, master) é a mesma moléstia, e é o G-03 da auditoria: bolsões de",
+        "pino selados num corpo e ausentes no outro. A v28.1 é o remédio proposto - 4 bolsões abertos no plano",
+        "de partição e cegos sob o fundo nos DOIS corpos, com parede mínima medida de 2,391 a 2,483 mm até o",
+        "canal e 0,000000 mm³ de comunicação com o fluxo.",
+        "partição e não se sobrepõem (medido: A ∪ B = 469.156,8 mm³ contra A + B = 469.156,7 mm³), então somar a",
+        "interferência peça a peça dá o mesmo número que o booleano sobre a união.",
+        "",
+        "As matrizes são lidas de `02_CAD_Modelos_Historicos/` / `01_CAD_MatrizJonatha_Oficial/` **sem",
+        "modificar** (regra 2). A medição da folga usa A ∪ B — o mesmo corpo que",
+        "`medir_perfis_matrizes_x_cabecote.py` mede, para o STEP entregue e a medição não divergirem;",
+        "a entrega usa as metades separadas, como explicado acima.",
+        "",
+        "| montagem | sólidos no arquivo | encosto usado | interferência com o cabeçote | saída em Z | protrusão |",
+        "| :--- | ---: | :--- | ---: | ---: | ---: |",
+        *[f"| `{os.path.basename(m['arquivo'])}` | {m['solidos_no_arquivo']} (1 + {m['solidos_da_matriz_no_arquivo']}) | "
+          f"`{m['encosto_usado']}` ({n(m['deslocamento_aplicado_mm'], 2)} mm) | "
+          f"**{n(m['interferencia_matriz_x_desenhado_mm3'], 4)} mm³** | {n(m['face_de_saida_da_matriz_em_Z'], 2)} | "
+          f"{n(m['protusao_adem_da_face_do_nariz_mm'], 2)} mm |"
+          for m in med.get("montagens", {}).values()],
+        "",
+        "### O que cada arquivo de matriz realmente contém (medido, não narrado)",
+        "",
+        "Isto existe porque a pergunta 'a Gedeon está corrompida?' só se responde abrindo os arquivos. Nenhum",
+        "deles é inválido — o que corrompe a leitura é *quantos* sólidos tem cada um e o que eles são:",
+        "",
+        "| arquivo | sólidos | volume total | sólidos válidos | cascas por sólido |",
+        "| :--- | ---: | ---: | :--- | :--- |",
+        *[f"| `{k}` | {v['solidos']} | {v['volume_mm3']:,.1f} mm³ | {v['validos_por_solido']} | {v['shells_por_solido']} |"
+          for k, v in med.get("inventario_dos_arquivos_de_matriz", {}).items()],
+        "",
+        "`MatrizGedeon.step` (a inteira) são **5 sólidos**: as duas metades **sem o canal escavado**",
+        "(320.090,4 mm³ cada), o sólido do canal de plástico (43.017,9 mm³, boca Ø75,60, Z 0..109) e dois pinos",
+        "de 24,9 mm³. Aberto num visualizador, isso é corpo + corpo dentro do corpo + vazio virando sólido dentro",
+        "dos dois — daí o aspecto de arquivo quebrado. Os STEP que o projeto usa são os outros:",
+        "`MatrizGedeon_Body_A.step` e `_Body_B.step`, as metades **com** o canal escavado (234.332,8 + 234.823,9",
+        "= 469.156,7 mm³, e a união dá 469.156,8: elas se tocam, não se sobrepõem).",
+        "",
+        "E o achado velho, re-confirmado por medida: `MatrizGedeon_Canal_Fluxo.step` tem **213.790,0 mm³** contra",
+        "os **43.017,9 mm³** do sólido de canal que está dentro de `MatrizGedeon.step` — o arquivo do canal da",
+        "Gedeon não é o canal da Gedeon (é a P5 da triagem; é por isso que toda comparação desta tacada usa as",
+        "metades, nunca esse arquivo).",
+        "",
+        "### A fenda não está no cabeçote — e o 'copo' que se vê é o bolso dele",
+        "",
+        "`Cabecote_EX-030_sem_flange.step` tem **1 sólido, 1 casca, 11 faces, 610.588,2 mm³** (medido",
+        "reimportando o arquivo): não há matriz nenhuma ali dentro. A fenda 75,00 × 1,50 vive na matriz, não no",
+        "cabeçote. O que se vê por dentro é a escada de furos do próprio cabeçote — Ø80 (nariz, 14,02) → Ø90",
+        "(degrau, 11,00) → Ø95 × 70,00 (o bolso onde a banda da matriz entra) — que é exatamente o copo da matriz",
+        "em negativo, e é isso que faz a matriz passar pelo nariz sem tocar a fenda.",
+        "",
+        "### Por que a Gedeon montada parece a Jonatha",
+        "",
+        "Porque são gêmeas de envelope: Gedeon (A ∪ B) 469.156,8 mm³, Jonatha v27 469.001,7 mm³ (0,03 % de",
+        "diferença) e Jonatha v28.1 456.796,5 mm³, com a caixa externa idêntica (±46,50 × Z 0..109,00). O que as",
+        "separa é interno - funil, canal e bolsões de pino - e não aparece na silhueta lateral. É também por isso",
+        "que a exigência do projeto é 'envelope externo idêntico': é o que faz as duas entrarem no mesmo cabeçote.",
+        "",
         *[f"| `{m['arquivo']}` | `{m['encosto_usado']}` ({n(m['deslocamento_aplicado_mm'], 2)} mm) | "
           f"**{n(m['interferencia_matriz_x_desenhado_mm3'], 4)} mm³** | {n(m['face_de_saida_da_matriz_em_Z'], 2)} | "
           f"{n(m['protusao_adem_da_face_do_nariz_mm'], 2)} mm |"

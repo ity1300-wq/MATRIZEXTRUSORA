@@ -411,7 +411,7 @@
     },
     {
       "item": "ΔP 1D - lei das potências (método do próprio projeto)",
-      "medido": "v28.1 = 41,9 bar | v27.0 = 41,9 bar",
+      "medido": "v28.1 = 26,6 bar | v27.0 = 26,6 bar",
       "observacao": "land 8,50 vs 8,50 paralelos → -0.0 bar; maior gradiente em Z≈99,2 mm",
       "status": "CONFORME"
     },

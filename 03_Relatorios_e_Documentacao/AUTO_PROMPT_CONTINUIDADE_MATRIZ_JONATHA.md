@@ -49,7 +49,7 @@ cálculo/medição que o produziria.
   selados no Body_A e ausentes no Body_B). v28.1 = **0 não conformes em
   64 itens medidos** (64 conformes).
 - ΔP 1D sobre a geometria medida (lei das potências, K=18.500 Pa·sⁿ, n=0,32, Q=15 cm³/s):
-  **v28.1 = 41,9 bar | v27.0 = 41,9 bar** — o CFD arquivado declara 68,2 bar e **não é reproduzível**
+  **v28.1 = 26,6 bar | v27.0 = 26,6 bar** — o CFD arquivado declara 68,2 bar e **não é reproduzível**
   a partir do repositório. τ na parede do land: 163,8 kPa (γ̇_ap = 911 s⁻¹) - e é o **mesmo**
   valor na Matriz 2 (mesma fenda, mesma vazão); a alegação de queda de τ está errada.
 - Uniformidade de 99,10 %: **sem definição nem planilha** no repositório. Não usar como critério
@@ -131,7 +131,7 @@ python 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --com-estudos  # A PORTA: rod
 > canal em 1 sólido, 6 cartuchos Ø9,5 + 4 poços de termopar) e passa em 64 de
 > 64 medições. O funil aprovado é um cônico linear de largura constante, não um
 > coat-hanger, e o ΔP de 68,2 bar do relatório é alegação de CFD não reproduzível - a medição 1D dá
-> v28.1 = 41,9 bar | v27.0 = 41,9 bar.*
+> v28.1 = 26,6 bar | v27.0 = 26,6 bar.*
 > *Tenho as decisões D1-D3 (fixação, chanfro, descrição do funil) na sua mesa e acesso ao DWG do
 > cabeçote (6 × M12 em BC Ø150 com ±15° de ajuste). Pronto para orientar usinagem, fechamento das
 > pendências ou rodar a próxima simulação."

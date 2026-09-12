@@ -326,7 +326,7 @@
  "numeros": {
   "pressao_efetiva_MPa": 6.818460031827641,
   "empuxo_axial_kN": 29.843145966035845,
-  "empuxo_axial_dp1d_kN": 18.33885965658045,
+  "empuxo_axial_dp1d_kN": 11.642330951432937,
   "acesso_furacao_cenarios": {
    "desenho DXF medido": {
     "protrusao_mm": 14.0,
@@ -348,7 +348,7 @@
   "protrusao_medida_usuario_mm": 20.0,
   "cenario_que_governa": "desenho DXF medido",
   "cartuchos_z_min_mm": 99.75,
-  "dp_1d_bar": 41.9,
+  "dp_1d_bar": 26.6,
   "area_boca_mm2": 4488.833247155239,
   "area_fenda_mm2": 112.0171,
   "area_projetada_mm2": 8169.0,
@@ -645,7 +645,7 @@
   },
   {
    "item": "Empuxo axial que empurra a matriz para fora do cabeçote",
-   "medido": "29,8 kN no limite · 18,3 kN com o ΔP 1D medido (41,9 bar)",
+   "medido": "29,8 kN no limite · 11,6 kN com o ΔP 1D medido (26,6 bar)",
    "observacao": "p × (4489 mm² da boca − 112 mm² da fenda)",
    "status": "CONFORME"
   },

@@ -71,7 +71,7 @@ python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png  # conferência
 | Arquivo do canal | 3 sólidos | **1 sólido** | contagem de sólidos no STEP |
 | Massa de aço | 3,682 kg | **3,586 kg** | volume × 7,85 g/cm³ |
 | Fechamento volumétrico | resíduo 0,001 mm³ | **resíduo 0,0115 mm³** (env − aço − canal = Σ furos) | booleano |
-| ΔP 1D sobre a geometria | 41,9 bar | **v28.1 = 41,9 bar · v27.0 = 41,9 bar** | `dp_total()` do próprio projeto |
+| ΔP 1D sobre a geometria | 41,9 bar | **v28.1 = 26,6 bar · v27.0 = 26,6 bar** | `dp_total()` do próprio projeto |
 | τ na parede do land | 164,0 kPa | **163,8 kPa (γ̇_ap = 911 s⁻¹)** | `tau_parede()` do próprio projeto |
 | Fixação das metades | inexistente | **pelo collete do cabeçote: 8,6 MPa de compressão radial fecham a partição** | item 6, medido |
 | Interface com o cabeçote | nunca medida | **Ø93/Ø89,5/Ø79,5 encaixam em Ø95/Ø90/Ø80 com 1,00/0,25/0,25 mm de folga e interferência 0,0000 mm³** | booleanos, item 6 |
@@ -88,7 +88,7 @@ Medindo essa área no sólido: **8169 mm²** (não é a área da boca; é a inte
 | :--- | ---: |
 | ΔP de projeto do CFD (68,2 bar, valor declarado no relatório de CFD) sobre **toda** a área projetada (limite superior) | **55,7 kN** |
 | 68,2 bar atuando só sobre a boca Ø75,60 (o número citado no relatório de triagem) | 30,6 kN |
-| ΔP 1D medido na geometria (41,9 bar) sobre a área projetada | ≈ 34,2 kN |
+| ΔP 1D medido na geometria (26,6 bar) sobre a área projetada | ≈ 21,7 kN |
 
 A geometria não oferece onde ancorar isso:
 
@@ -234,7 +234,7 @@ termopar ou o polímero.
 ## 8. Reologia: o que a v28.1 muda e o que continua em aberto
 
 * Com o lábio **inalterado** (D2), a estimativa 1D sobre a geometria medida fica em
-  **v28.1 = 41,9 bar · v27.0 = 41,9 bar** — os 43,9 bar da v28.0 vinham exatamente dos 0,70 mm de land a mais
+  **v28.1 = 26,6 bar · v27.0 = 26,6 bar** — os 43,9 bar da v28.0 vinham exatamente dos 0,70 mm de land a mais
   que a decisão D2 rejeitou. Continua sendo
   **~35 % menor que os 68,2 bar do relatório de CFD** — a direção do erro é a mesma desde a
   triagem: os números de CFD do projeto não são reproduzíveis a partir do repositório.
@@ -244,7 +244,7 @@ termopar ou o polímero.
 * Antes de usar "99,10 % de uniformidade" como critério de aceite, é preciso publicar a definição
   (σ/U do perfil de velocidade medido em que plano) e a planilha. Sem isso, não é especificação.
 * **Não há CFD pendente por esta revisão**: o lábio ficou igual ao do master (decisão D2) e o ΔP 1D
-  medido nos dois sólidos é o mesmo, v28.1 = 41,9 bar · v27.0 = 41,9 bar. CFD novo só entra na conta se a opção
+  medido nos dois sólidos é o mesmo, v28.1 = 26,6 bar · v27.0 = 26,6 bar. CFD novo só entra na conta se a opção
   coat-hanger (7.1b) for adotada — e aí o ΔP medido no estudo é 100,9 bar, acima do limite
   de 68,2 bar usado no relatório de projeto.
 
