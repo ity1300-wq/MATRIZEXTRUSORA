@@ -300,5 +300,22 @@
   "o_que_nao_se_consegue": "identificar qual vista e de qual peca (EX-030 / EX-031 / EX-032). O aspose nao preserva blocos nem camadas e devolve so POLYLINE; os dois metodos tentados falham - componentes conexos viram UM grupo (47017 de 47017 segmentos, porque as linhas de centro encostam em tudo) e o voto de espelhamento casa cada aresta consigo mesma (dando 'diametros' de 2500 mm, que sao a legenda). Em 2026-09-12 gastaram-se duas tentativas nisso: nao reincidir",
   "consequencia": "o 'Ø90,00 reto' e a aresta horizontal mais proxima das geratrizes, NAO uma atribuicao certa ao EX-031 - por isso a pendencia do furo do collete fica ABERTA e o STEP do conjunto montado nao e gerado. Resolve-se em segundos com um paquimetro no furo da bucha: se for conico ate ~Ø93, a pressao radial de 8,6 MPa volta a valer; se for reto, a banda de aperto tem de ser criada na matriz (ou o collete e outra peca)",
   "instrumento": "python 04_Dados_SSOT_e_Scripts/medir_perfil_cabecote.py --json 04_Dados_SSOT_e_Scripts/cabecote_perfil.json (roda pelas 7 checagens de verificar_cadeia.py); a docstring do medidor lista os metodos que NAO funcionam neste arquivo"
+ },
+ "encosto_na_extrusora": {
+  "decisao_do_usuario": "encosta face a face (2026-09-12) - a face do flange do cabeçote encosta na face da extrusora; o piloto Ø105 × 3,00 é centragem",
+  "o_que_Isso_muda_na_matriz": "nada na posição da matriz. A posição axial da matriz é definida pela escada interna do cabeçote (fundo do bolso + degrau), medida com interferência 0,0000 mm³ no assento; o que a decisão fixa é onde o CONJUNTO cabeçote+matriz para em relação à máquina.",
+  "exigencia_na_maquina": "se a junta fecha na face do flange (d = 92,00), a face da extrusora precisa de um rebaixo que receba o piloto de 3,00 mm (Ø > 105,00); sem ele a junta fica aberta 3,00 mm, e é o rebaixo que define se a traseira da matriz (d = 95,00) entra ou não na máquina",
+  "correcao_de_afirmacao_anterior": "eu escrevi que, com encosto face a face, a protrusão da matriz cairia de 14,00 para 11,00 mm e o NC dos cartuchos viraria +0,250 mm. Isso estava errado: só seria assim se a referência axial da matriz fosse a face do flange, e a medição mostra que ela é o degrau/fundo do bolso do próprio cabeçote. A protrusão continua 14,00 mm e o NC (-2,750 mm, sai com Z >= 99,75) continua de pé."
+ },
+ "matriz_copo_desenhada_no_dxf": {
+  "o_que_e": "a seção do cabeçote no DXF já contém a Matriz 1 Copo montada, com cotas de PROJETO - não as medidas do STEP. Foi o que o usuário apontou, e a geometria confirma.",
+  "medido_no_dxf": {
+   "banda_da_matriz": "H r = 47,48/47,52 sobre d = 25,00..95,00 existe em DUAS camadas: `contorno` (o bolso do cabeçote) e `SL35` (geometria de seção) - linha a linha com o bolso, Ø95,00 desenhado, não Ø93,00",
+   "segundo_estagio": "H r = 45,00 em d = 14,00..25,00 (11,00 = o furo do cabeçote) E outra em d = 14,00..31,00 (17,00) - o estágio desenhado para dentro da matriz é 6,00 mm mais comprido que o furo que o recebe",
+   "unica_aresta_vertical_na_faixa": "V d = 25,00 de r = 44,98 a 47,48 (a quina do degrau do cabeçote); não há outra aresta vertical entre r 36 e 54 no trecho",
+   "face_de_entrada": "V d = 95,00 em SL35, de r = 0,02 a 47,48 - a face de entrada da matriz desenhada no plano mais traseiro do cabeçote (o 'face a face')"
+  },
+  "consequencia": "os 11,00 mm que eu lia como comprimento do degrau do cabeçote são também o canal da fenda, que é peça separada do copo - o corte do DXF mostra os dois estágios lado a lado nessa faixa. No STEP medido: banda 69,909 e estágio 10,80 (total 80,70), ou seja, o corpo medido é 0,091 + 0,20 mm mais curto que o desenhado (70 + 11 = 81,00).",
+  "limitacao_deste_arquivo": "o DXF extraído do DWG tem SÓ geometria: 0 entidades DIMENSION e 0 textos, então os NÚMEROS escritos no desenho não são legíveis aqui. O que o arquivo permite é medir as linhas acima. O DWG é AutoCAD 2016 com seções comprimidas e o leitor .NET não roda neste ambiente (pede OpenSSL 1.1)."
  }
 }

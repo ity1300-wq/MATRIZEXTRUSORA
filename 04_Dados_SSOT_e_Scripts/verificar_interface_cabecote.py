@@ -50,9 +50,12 @@ BORES = [(40.0, 81.0, 96.0), (45.0, 70.0, 81.0), (47.5, -1.0, 70.0)]     # (r, z
 # a cota era leitura minha da borda do furo Ø16 no C.C. Ø180 (82 = 90 - 8), não uma superfície da peça.
 _cab_dado = json.load(open(os.path.join(AQUI, "cabecote_ex030.json"), encoding="utf-8"))
 _CH = _cab_dado["corpo"]["chanfro_corpo_flange"]
-CORPO = [(65.0, 53.0, 95.0), (110.0, 2.0, 44.0), (52.5, 0.0, 3.0)]
-# o ultimo anel e o piloto de centragem Ø105 x 3,00 mm atras da face do flange, lido do SSOT abaixo - nao
-# mais o "ressalto Ø203", que era leitura minha do bordo externo das fendas de 23,5 (r = 101,5 = 90 + 11,75)
+# os anéis vão exatamente às faces do desenho (flange = 40,00 mm de espessura, de Z 43 até Z 3).
+# As sobreposições de 1 mm que estavam aqui criavam material fantasma: um colar de Ø220 engolindo
+# o primeiro milímetro do chanfro e 1 mm de flange tapando o vão onde só deveria haver o piloto. Foi
+# o item [G] do verificador, que mede a face real no sólido, que entregou o erro.
+CORPO = [(65.0, 53.0, 95.0), (110.0, 3.0, 43.0), (52.5, 0.0, 3.0)]
+# piloto de centragem: o raio vem do SSOT e a altura e o fim do anel, cobrados pelos asserts abaixo
 assert abs(CORPO[2][0] * 2.0 - _cab_dado["corpo"]["piloto_traseiro"]["Ø_mm"]) < 1e-9, "CORPO[2] diverge do SSOT"
 assert abs(CORPO[2][2] - _cab_dado["corpo"]["piloto_traseiro"]["altura_mm"]) < 1e-9, "piloto: altura diverge"
 # cone do chanfro em (r_em_baixo, Z_em_baixo, r_em_cima, Z_em_cima); a geratriz e prolongada 0,5 mm para
@@ -460,6 +463,36 @@ def main():
 
     print("\n" + "=" * 74)
     ncs = [l for l in linhas if l["status"] == "NAO_CONFORME"]
+    print("\n[G] encosto do conjunto na extrusora (decisão 'encosta face a face')\n" + "-" * 70)
+    # O que e medido no solido: o piloto protrai atras da face do flange exatamente a altura que a decisao
+    # exige que a máquina rebaixe. O que fica pendente: se a face da extrusora TEM esse rebaixo.
+    # O que e medido no solido: onde a casca externa cai de 0220 para 0105 - a face real do flange - e o
+    # quanto o piloto protrai atras dela. (Nao uso CORPO[][1] direto: os aneis tem sobreposicao de 1 mm
+    # para o booleano ser robusto, e a face DESNHADA esta em Z = 3,00, nao em 2,00.)
+    face_flange = None
+    for zt in [round(0.05 * i, 3) for i in range(0, 121)]:
+        fat = head.intersect(cil_z(500.0, zt - 0.0025, zt + 0.0025))
+        if not fat.Solids():
+            continue
+        rr = max(maior(fat).BoundingBox().xlen, maior(fat).BoundingBox().ylen) / 2.0
+        if rr > 100.0:
+            face_flange = zt
+            break
+    protr_piloto = round(face_flange - CORPO[2][1], 3) if face_flange is not None else float("nan")
+    print(f"   face do flange no sólido: Z = {n(face_flange, 2)} | piloto de Z = {n(CORPO[2][1], 2)} a "
+          f"{n(CORPO[2][2], 2)} | protrusão do piloto: {n(protr_piloto, 2)} mm")
+    checar("Piloto protrai atrás da face do flange (o rebaixo que a máquina precisa ter)",
+           protr_piloto, dados["corpo"]["piloto_traseiro"]["altura_mm"], un="mm",
+           obs="face do flange e fim do piloto medidos no sólido por varredura de seções de 0,05 mm")
+    alerta("Rebaixo na face da extrusora para receber o piloto (decisão 'face a face')",
+           round(protr_piloto, 3),
+           "com a junta fechando na face do flange (d = 92,00), a face da máquina precisa de %s mm de "
+           "rebaixo em Ø > %s; sem ele a junta fica aberta %s mm. A posição axial da matriz NÃO muda "
+           % (n(protr_piloto, 2), n(2 * CORPO[2][0], 2), n(protr_piloto, 2)) +
+           "com isso: ela vem do degrau/fundo do bolso do cabeçote (interferência 0,0000 mm³ no assento), "
+           "então a protrusão continua 14,00 mm e o NC dos cartuchos também.")
+    print()
+
     pend = [l for l in linhas if l["status"] == "PENDENTE_CONFIRMACAO"]
     print(f"{len(linhas)} itens | {len(linhas) - len(ncs) - len(pend)} conformes | "
           f"{len(ncs)} não conformes | {len(pend)} pendentes (máquina)")

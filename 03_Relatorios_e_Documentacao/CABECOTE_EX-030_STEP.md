@@ -17,12 +17,12 @@ python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py        # gera, mede e pro
 Remover = intersectar pelo cilindro Ø130 do corpo. A definição não é arbitrária: a junta
 cabeçote↔extrusora é exatamente o que está fora do corpo, medido em anéis:
 
-* Ø220 (d 51.00..93.00);
+* Ø220 (d 52.00..92.00);
 * os 6 furos Ø16,500 em C.C. Ø180,000 ficam a 90,000 mm do eixo, **todos** fora de r = 65,000 mm — o corte leva os seis junto com o flange, sem precisar de furo novo e sem tocar em nenhuma face de centragem.
 
 ## O que a medição do sólido prova
 
-* volume 1617704 → 615202 mm³; massa **12,699 → 4,829 kg**, foram **7,870 kg** de aço a menos (62,0 % do volume) — a conta do material e do tempo de usinagem muda de verdade;
+* volume 1570339 → 610588 mm³; massa **12,327 → 4,793 kg**, foram **7,534 kg** de aço a menos (61,1 % do volume) — a conta do material e do tempo de usinagem muda de verdade;
 * **0,0000 mm³** de metal removido até r = 46,50 mm, que é a banda Ø93 em que a matriz é apertada: o bolso Ø95, o degrau Ø90→Ø95 (a face que reage os 29,8 kN de empuxo) e o nariz Ø80 continuam os do desenho, milímetro por milímetro;
 * comprimento axial **95,000 mm**, igual ao do desenho (95,000 mm), e a bounding box ficou Ø130,000 × Ø130,000: corpo redondo, sem nada sobrando da junta;
 * na parede do bolso (entre a banda Ø93 e o furo Ø95): 0,000 mm³ removidos pelo corte — o Ø12 do M12, se ele for transversal, abre 1,00 mm além da banda da matriz, na parede onde o collete EX-031 encosta, e não na matriz;
