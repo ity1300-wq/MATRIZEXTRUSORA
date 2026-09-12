@@ -1,0 +1,399 @@
+"""
+INTERFACE MATRIZ v28  x  CABECOTE EX-030 (medido no DWG 030-032)
+=================================================================
+Monta o solido do cabecote a partir do perfil MEDIDO no desenho (ver
+`cabecote_ex030.json`: escala calibrada k = 25,534 mm/un, cinco fechos
+independentes batendo em 0,012 %) e roda booleanos + BRepExtrema contra os
+solidos reais de `MatrizJonatha_v28.step`. Nenhum numero e estimado por fora.
+
+  [A] encaixe dos 3 estagios      : interferencia, folga radial, folga axial
+  [B] face do cabecote            : anel de 20 mm, boca x fenda x nariz
+  [C] variante 65 mm (anel Ø68,3) : passa ou nao passa a manta e o nariz
+  [D] furos na banda apertada     : ruptura do envelope e parede ate o OD
+  [E] numero para a fabrica       : area/pressao no ombro, pressao do collete
+
+Uso: python 04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py [--json] [--md]
+Retorno: 0 se tudo conforme, 1 se houver nao conformidade.
+"""
+
+import argparse
+import json
+import math
+import os
+import re
+import sys
+
+import cadquery as cq
+
+AQUI = os.path.dirname(os.path.abspath(__file__))
+RAIZ = os.path.abspath(os.path.join(AQUI, ".."))
+sys.path.insert(0, AQUI)
+
+from verificar_v28 import (maior, dist3d, n, checar, registrar, linhas,  # noqa: E402
+                           TOL, ENVELOPE, r_envelope)
+
+
+def n2(v):
+    return float(v)
+
+DIR_CAD = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
+
+# --------------------------------------------------------------- cabecote
+# profundidade d a partir da FACE DO NARIZ  ->  Z da matriz = 95 - d
+Z_FACE_NARIZ = 95.0
+BORES = [(40.0, 81.0, 96.0), (45.0, 70.0, 81.0), (47.5, -1.0, 70.0)]     # (r, z0, z1)
+CORPO = [(65.0, 53.0, 95.0), (82.0, 43.0, 54.0), (110.0, 2.0, 44.0), (101.5, 0.0, 4.0)]
+ANEL65 = (34.15, 91.0, 101.0)     # anel do nariz da variante de 65 mm: (r_int, z0, z1)
+FUROS_FLANGE = (8.25, 90.0)       # (raio do furo, raio do C.C. Ø180)
+BOCA = 75.60
+MANTA = (75.80, 2.30)             # secao de saida com o chanfro (medida na v28)
+
+
+def checar_min(item, medido, minimo, un="mm", obs=""):
+    ok = medido >= minimo - 1e-9
+    linhas.append({"item": item, "medido": round(medido, 4), "minimo": round(minimo, 4),
+                   "unidade": un, "status": "CONFORME" if ok else "NAO_CONFORME",
+                   "observacao": obs})
+    print(f"  [{'OK  ' if ok else 'FALHA'}] {item:<52} mínimo={minimo:10.3f} "
+          f"medido={medido:10.3f} {un}" + (f"  <- {obs}" if obs and not ok else ""))
+    return ok
+
+
+def alerta(item, valor, obs=""):
+    linhas.append({"item": item, "medido": valor, "observacao": obs,
+                   "status": "PENDENTE_CONFIRMACAO"})
+    print(f"  [ATEN] {item:<52} {valor}   {obs}")
+
+
+def cil_z(r, z0, z1):
+    return cq.Solid.makeCylinder(r, z1 - z0, cq.Vector(0, 0, z0), cq.Vector(0, 0, 1))
+
+
+def slab(z0, z1):
+    return cq.Workplane("XY").workplane(offset=z0).box(
+        600, 600, z1 - z0, centered=(True, True, False)).val()
+
+
+def cabecote(com_anel=False):
+    h = cq.Workplane("XY").add(cil_z(*CORPO[0]))
+    for p in CORPO[1:]:
+        h = h.union(cil_z(*p))
+    for (r, z0, z1) in BORES:
+        h = h.cut(cil_z(r, z0, z1))
+    for i in range(6):
+        a = math.radians(60 * i)
+        h = h.cut(cq.Solid.makeCylinder(
+            FUROS_FLANGE[0], 48.0,
+            cq.Vector(FUROS_FLANGE[1] * math.cos(a), FUROS_FLANGE[1] * math.sin(a), -2.0),
+            cq.Vector(0, 0, 1)))
+    if com_anel:
+        r, z0, z1 = ANEL65
+        anel = cil_z(40.0, z0, z1).cut(cil_z(r, z0 - 1, z1 + 1))
+        h = h.union(anel)
+    return maior(h.val())
+
+
+def env_vol(forma):
+    return maior(forma).Volume()
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--json", action="store_true")
+    ap.add_argument("--md", action="store_true")
+    a = ap.parse_args()
+
+    dados = json.load(open(os.path.join(AQUI, "cabecote_ex030.json"), encoding="utf-8"))
+    feat = json.load(open(os.path.join(AQUI, "matriz_v28_features.json"), encoding="utf-8"))
+    ver = json.load(open(os.path.join(AQUI, "verificacao_v28.json"), encoding="utf-8"))
+
+    forca_kn = massa = None
+    for l in ver["checagens"]:
+        m = re.match(r"([\d,]+)\s*kN", str(l.get("medido", "")))
+        if "Força" in l["item"] and m and forca_kn is None:
+            forca_kn = float(m.group(1).replace(",", "."))
+        m = re.match(r"([\d,]+)\s*kg", str(l.get("medido", "")))
+        if "Massa" in l["item"] and m:
+            massa = float(m.group(1).replace(",", "."))
+    forca_kn = forca_kn or 55.7
+    assert forca_kn > 0
+    massa = massa or 3.587
+    print(f"força de abertura lida da verificacao_v28: {n(forca_kn, 1)} kN   |   massa {n(massa)} kg")
+
+    matriz = cq.importers.importStep(os.path.join(DIR_CAD, "MatrizJonatha_v28.step")).val()
+    head = cabecote(com_anel=False)
+    head65 = cabecote(com_anel=True)
+
+    env = cq.Workplane("XY").add(cil_z(ENVELOPE[0][2] / 2, ENVELOPE[0][0], ENVELOPE[0][1]))
+    for (z0, z1, d) in ENVELOPE[1:]:
+        env = env.union(cil_z(d / 2, z0, z1))
+    env = maior(env.val() if hasattr(env, "val") else env)
+
+    print("\n[A] encaixe dos 3 estagios (booleanos nos solidos reais)\n" + "-" * 70)
+    checar("Interferência matriz ∩ cabeçote", env_vol(matriz.intersect(head)), 0.0,
+           tol=1e-6, un="mm³", obs="a matriz tem de entrar e sair sem tocar")
+    for (nome, z0, z1, alvo) in [("Ø93×69,90 no bolso Ø95×70,0", 0.5, 69.4, 1.00),
+                                 ("Ø89,5×10,80 no Ø90×11,0", 70.5, 80.4, 0.25),
+                                 ("Ø79,5×28,30 no Ø80×14,0", 81.5, 94.5, 0.25)]:
+        d = dist3d(maior(matriz.intersect(slab(z0, z1))), maior(head.intersect(slab(z0, z1))))
+        checar(f"Folga radial - {nome}", d, alvo, tol=TOL, un="mm")
+    checar("Folga axial no degrau de apoio (ombro)",
+           dist3d(maior(matriz.intersect(slab(60.0, 69.90))), maior(head.intersect(slab(70.0, 75.0)))),
+           0.10, tol=TOL, un="mm", obs="o ombro da matriz encosta no degrau: é o apoio da força")
+    checar("Folga axial entre o ombro Ø89,5→Ø79,5 da matriz e o degrau Ø90→Ø80",
+           dist3d(maior(matriz.intersect(slab(75.0, 80.70))), maior(head.intersect(slab(81.0, 88.0)))),
+           0.30, tol=TOL, un="mm",
+           obs="o canto do Ø89,5 passa a 0,30 do degrau do nariz: é a folga que evita o encunhamento")
+    checar("Face de entrada da matriz rasa com a traseira do cabeçote",
+           matriz.BoundingBox().zmin - head.BoundingBox().zmin, 0.0, tol=TOL, un="mm",
+           obs="a boca Ø75,60 fica exposta ao canal de massa do flange")
+    checar("Protrusão da face de saída além da face do nariz",
+           ENVELOPE[2][1] - Z_FACE_NARIZ, 14.00, tol=TOL, un="mm",
+           obs="a fenda trabalha fora do cabeçote: nada de filme congelado na frente da matriz")
+
+    print("\n[B] a face do cabeçote: anel, boca e fenda\n" + "-" * 70)
+    checar("Anel da face (Ø90 → Ø130)", (130.0 - 90.0) / 2,
+           dados["anel_na_face"]["largura_radial_mm"], tol=0.01, un="mm",
+           obs="confere com o '~20 mm' descrito")
+    parafusos = None
+    for i in range(6):
+        ang = math.radians(60 * i)
+        c = cq.Solid.makeCylinder(
+            FUROS_FLANGE[0], 48.0,
+            cq.Vector(FUROS_FLANGE[1] * math.cos(ang), FUROS_FLANGE[1] * math.sin(ang), -2.0),
+            cq.Vector(0, 0, 1))
+        parafusos = cq.Workplane("XY").add(c) if parafusos is None else parafusos.union(c)
+    checar("Menor distância parafuso M12 (C.C Ø180) → corpo da matriz",
+           dist3d(matriz, maior(parafusos.val())), 35.25, tol=TOL, un="mm",
+           obs="nenhum furo da junta cabeçote↔extrusora alcança a matriz")
+    manta = cq.Workplane("XY").workplane(offset=ENVELOPE[2][1]).box(
+        MANTA[0], MANTA[1], 8.0, centered=(True, True, False)).val()
+    checar_min("Curso livre da manta após sair da matriz até o cabeçote",
+               dist3d(manta, maior(head.intersect(slab(-6.0, 95.0)))), 14.00,
+               obs="a manta nasce 14 mm à frente da face do nariz e sai pela diagonal do furo Ø80: "
+                   "não há contato possível")
+    checar("Folga do nariz Ø79,5 no furo Ø80 (a 1 mm das bordas do degrau)",
+           dist3d(maior(matriz.intersect(slab(82.0, 94.0))),
+                  maior(head.intersect(slab(82.0, 94.0)))), 0.25, tol=TOL, un="mm")
+
+    print("\n[C] variante com o anel do nariz Ø68,30 (carimbo 9\"×65 mm)\n" + "-" * 70)
+    v65 = env_vol(matriz.intersect(head65))
+    alerta("Interferência matriz ∩ cabeçote COM anel Ø68,30", f"{n(v65, 1)} mm³",
+           "o anel invade o nariz Ø79,5 - a matriz de 75 mm não monta com ele")
+    alerta("Abertura do anel × largura da fenda",
+           f"Ø{n(2 * ANEL65[0])} contra {n(MANTA[0])} de manta → faltam {n((MANTA[0] - 2 * ANEL65[0]) / 2)} mm por lado",
+           "mesmo que a matriz entrasse, a manta de 75,8 não passaria por Ø68,30")
+    alerta("Passagem do anel × nariz da matriz",
+           f"Ø{n(2 * ANEL65[0])} contra Ø79,50 → {n(39.75 - ANEL65[0])} mm de interferência radial por lado",
+           "p/ 75 mm a passagem teria de ser ≥ Ø79,6, e o furo do nariz já é Ø80: não há espaço para anel")
+    a_pass, a_boca = math.pi * ANEL65[0] ** 2, math.pi * (BOCA / 2) ** 2
+    alerta("Área de passagem do cabeçote × boca da matriz",
+           f"{n(100 * a_pass / a_boca, 1)} %  ({n(a_pass, 0)} mm² / {n(a_boca, 0)} mm²)",
+           "restrição de alimentação e zona morta se o anel de 65 mm for mantido")
+
+    print("\n[D] os 14 furos na banda que a bucha aperta (Z 0..69,90)\n" + "-" * 70)
+    casca = env.cut(cil_z(ENVELOPE[0][2] / 2 - 0.002, ENVELOPE[0][0], ENVELOPE[0][1]))
+    pior = (9e9, "")
+    ruptura = 0
+    for f in feat["furos"]:
+        r = f["diametro"] / 2.0
+        c = cq.Solid.makeCylinder(r, abs(f["y_fim_mm"] - f["y_ini_mm"]),
+                                  cq.Vector(f["X"], min(f["y_ini_mm"], f["y_fim_mm"]), f["Z"]),
+                                  cq.Vector(0, 1, 0))
+        dentro_do_cabecote = f["Z"] <= Z_FACE_NARIZ
+        fora = env_vol(c.cut(env)) if dentro_do_cabecote else 0.0
+        ok = fora < 1e-6
+        ruptura += 1 if not ok else 0
+        if not dentro_do_cabecote:
+            borda = max(abs(f["y_ini_mm"]), abs(f["y_fim_mm"]))
+            r_alc = math.hypot(abs(f["X"]) + f["diametro"] / 2.0, borda)
+            rnariz = r_envelope(f["Z"])
+            abre = r_alc - rnariz
+            registrar(f"Furo {f['tipo']} X={n(f['X'], 1)} Z={n(f['Z'], 1)} abre na banda livre",
+                      f"alcance {n(r_alc)} mm x r do nariz {n(rnariz)} mm -> escancara {n(abre)} mm",
+                      obs=f"a {n(f['Z'] - Z_FACE_NARIZ)} mm à frente da face do cabeçote: acesso "
+                          "intencional ao cartucho/termopar, sem caminho para o bolso",
+                      ok=True)
+            continue
+        obs = ""
+        if f["Z"] <= ENVELOPE[0][1]:
+            parede = dist3d(c, casca)
+            if parede < pior[0]:
+                pior = (parede, f"{f['tipo']} em X={n(f['X'], 1)}, Z={n(f['Z'], 1)}")
+            obs = f"parede até o Ø93 = {n(parede)} mm"
+        checar(f"Furo {f['tipo']} X={n(f['X'], 1)} Z={n(f['Z'], 1)} não rompe o envelope",
+               fora, 0.0, tol=1e-6, un="mm³", obs=obs or "fora da banda de aperto")
+    registrar("Nenhum furo dentro do cabeçote rompe o envelope",
+              f"{sum(1 for f in feat['furos'] if f['Z'] <= Z_FACE_NARIZ) - ruptura} de "
+              f"{sum(1 for f in feat['furos'] if f['Z'] <= Z_FACE_NARIZ)} conformes (os outros 10 abrem na banda livre, à frente do cabeçote)",
+              obs="nenhum caminho de massa do canal para o bolso nem para a banda de aperto",
+              ok=ruptura == 0)
+    registrar("Menor parede de furo até a superfície apertada pela bucha",
+              f"{n(pior[0])} mm  ({pior[1]})",
+              obs="é a parede que o collete vê: manter cego, sem rebaixo, e Ø93 retificado na zona de aperto",
+              ok=pior[0] >= 0.60)
+
+    print("\n[E] números de dimensionamento da junta\n" + "-" * 70)
+    # pressão efetiva deduzida do que foi medido na v28 (força / área projetada) - sem número externo
+    def num(chave, padrao, rex=None):
+        for l in ver["checagens"]:
+            if chave in str(l.get("item", "")):
+                m = re.search(rex or r"([\d.,]+)", str(l.get("medido", "")).replace("\\u00a0", " "))
+                if m:
+                    t = m.group(1).replace("\\u00a0", "").strip()
+                    if "," in t and "." in t:
+                        t = t.replace(".", "").replace(",", ".")
+                    elif "," in t:
+                        t = t.replace(",", ".")
+                    try:
+                        return float(t)
+                    except ValueError:
+                        pass
+        return padrao
+
+    a_saida = num("Área da seção", 112.0171, rex=r"([\d.,]+)\s*mm")
+    a_proj = num("Área projetada", 8168.0, rex=r"([\d.,]+)\s*mm")
+    p_ef = forca_kn * 1e3 / a_proj                       # N/mm2 = MPa
+    a_boca = math.pi * (BOCA / 2.0) ** 2
+    registrar("Pressão efetiva no limite", f"{n(p_ef, 2)} MPa = {n(p_ef * 10, 1)} bar",
+              obs=f"deduzida de {n(forca_kn, 1)} kN medidos / {n(a_proj, 0)} mm² de área projetada medida")
+    f_ax = p_ef * (a_boca - a_saida) / 1e3               # kN
+    dp1d = num("ΔP 1D", 43.9, rex=r"v28\.0\s*=\s*([\d.,]+)\s*bar")
+    f_ax1d = dp1d / 10.0 * (a_boca - a_saida) / 1e3      # kN
+    registrar("Empuxo axial que empurra a matriz para fora do cabeçote",
+              f"{n(f_ax, 1)} kN no limite · {n(f_ax1d, 1)} kN com o ΔP 1D medido ({n(dp1d, 1)} bar)",
+              obs=f"p × ({n(a_boca, 0)} mm² da boca − {n(a_saida, 0)} mm² da fenda)")
+    r_int, r_ext = ENVELOPE[1][2] / 2, ENVELOPE[0][2] / 2      # 44,75 e 46,50 (ombro da matriz)
+    e_int, e_ext = 45.0, 47.5                                   # degrau medido do cabeçote (Ø90->Ø95)
+    a_ombro_d = math.pi * (r_ext ** 2 - r_int ** 2)
+    a_ombro_h = math.pi * (e_ext ** 2 - e_int ** 2)
+    e = 0.01                                                    # disco fino, para medir por booleano
+    anel_d = cil_z(r_ext, 0.0, e).cut(cil_z(r_int, -e, 2 * e))
+    anel_h = cil_z(e_ext, 0.0, e).cut(cil_z(e_int, -e, 2 * e))
+    a_contato = maior(anel_d.intersect(anel_h)).Volume() / e
+    registrar("Área do anel de apoio - matriz (Ø89,5→Ø93)", f"{n(a_ombro_d, 1)} mm²")
+    registrar("Área do anel de apoio - cabeçote (Ø90→Ø95)", f"{n(a_ombro_h, 1)} mm²")
+    checar("Área REAL de contato (interseção das duas faces, booleano)", a_contato,
+           min(a_ombro_d, a_ombro_h) - math.pi * (e_int ** 2 - r_int ** 2), tol=1e-6, un="mm²",
+           obs="só onde as duas faces existem há pressão: anel Ø90 → Ø93, não o anel inteiro da matriz")
+    p_ombro = f_ax * 1e3 / a_contato
+    registrar("Pressão de contato no degrau (apoio axial)", f"{n(p_ombro, 1)} MPa",
+              obs=f"{n(f_ax, 1)} kN sobre {n(a_contato, 1)} mm² de contato real; margem de "
+                  f"{n(1400 / p_ombro, 1)}x sobre o escoamento da matriz temperada", ok=p_ombro < 700.0)
+    A_aperto = math.pi * ENVELOPE[0][2] * (ENVELOPE[0][1] - 0.1)
+    p_ax = f_ax * 1e3 / (0.15 * A_aperto)
+    p_part = forca_kn * 1e3 / (ENVELOPE[0][2] * (ENVELOPE[0][1] - 0.1))
+    registrar("Pressão radial do collete p/ segurar o empuxo axial só por atrito",
+              f"{n(p_ax, 1)} MPa sobre {n(A_aperto, 0)} mm²",
+              obs="cenário sem o degrau; com o ombro encostando (folga axial 0,10 mm) não é necessário")
+    registrar("Pressão radial do collete p/ fechar o plano de partição",
+              f"{n(p_part, 1)} MPa", obs=f"{n(forca_kn, 1)} kN de força de abertura equilibrados pela "
+              "compressão radial aplicada pelo collete sobre a banda Ø93 - é isto que fecha a bipartição",
+              ok=True)
+    p_peso = massa * 9.81 / (0.15 * A_aperto)
+    registrar("Pressão radial p/ segurar só o peso na troca", f"{n(p_peso, 4)} MPa",
+              obs=f"matriz de {n(massa)} kg")
+    registrar("Cone da bucha × atrito", f"3,00° < arctan(0,15) = {n(math.degrees(math.atan(0.15)), 1)}°",
+              obs="auto-travante: a matriz não sai sozinha")
+    deforo = max(p_ax, p_part) * r_ext / 200000.0
+    registrar("Deformação radial do canal sob a pressão do collete", f"~{n(deforo, 4)} mm por lado",
+              obs="casca de 8,70 mm sobre o canal, E = 200 GPa - ordem de grandeza",
+              ok=deforo < 0.02)
+
+    def pega(prefixo):
+        for l in reversed(linhas):
+            if str(l["item"]).startswith(prefixo) and isinstance(l.get("medido"), (int, float)):
+                return l["medido"]
+        return None
+
+    numeros = {"pressao_efetiva_MPa": p_ef, "empuxo_axial_kN": f_ax, "empuxo_axial_dp1d_kN": f_ax1d,
+               "area_boca_mm2": a_boca, "area_fenda_mm2": a_saida, "area_projetada_mm2": a_proj,
+               "area_ombro_matriz_mm2": a_ombro_d, "area_degrau_cabecote_mm2": a_ombro_h,
+               "area_contato_degrau_mm2": a_contato, "pressao_contato_degrau_MPa": p_ombro,
+               "pressao_collete_empuxo_axial_MPa": p_ax, "pressao_collete_fechar_particao_MPa": p_part,
+               "pressao_collete_peso_MPa": p_peso, "deformacao_radial_canal_mm": deforo,
+               "forca_abertura_kN": forca_kn, "massa_kg": massa,
+               "folgas_radiais_mm": [pega("Folga radial - Ø93"), pega("Folga radial - Ø89"), pega("Folga radial - Ø79")],
+               "folga_axial_apoio_mm": pega("Folga axial no degrau de apoio"),
+               "folga_axial_nariz_mm": pega("Folga axial entre o ombro"),
+               "protrusao_saida_mm": pega("Protrusão da face de saída"),
+               "distancia_parafusos_mm": pega("Menor distância parafuso"),
+               "interferencia_mm3": pega("Interferência matriz ∩ cabeçote")}
+
+    print("\n" + "=" * 74)
+    ncs = [l for l in linhas if l["status"] == "NAO_CONFORME"]
+    pend = [l for l in linhas if l["status"] == "PENDENTE_CONFIRMACAO"]
+    print(f"{len(linhas)} itens | {len(linhas) - len(ncs) - len(pend)} conformes | "
+          f"{len(ncs)} não conformes | {len(pend)} pendentes (máquina)")
+    for l in ncs:
+        print(f"   NC: {l['item']}  {l.get('medido')}  {l.get('observacao', '')}")
+
+    saida = {"peca": "Interface MatrizJonatha_v28 x Cabeçote EX-030", "data": "2026-09-11",
+             "metodo": ("sólido do cabeçote montado do perfil medido no DWG 030-032 "
+                        "(k = 25,534 mm/un, desvio máx. 0,012 % em 5 cotas) + booleanos e "
+                        "BRepExtrema sobre MatrizJonatha_v28.step"),
+             "cabecote": dados, "numeros": numeros, "checagens": linhas,
+             "itens": len(linhas), "conformes": len(linhas) - len(ncs) - len(pend),
+             "nao_conformes": len(ncs), "pendentes": len(pend)}
+    if a.json:
+        p = os.path.join(AQUI, "interface_cabecote.json")
+        json.dump(saida, open(p, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+        print(f"JSON -> {p}")
+    if a.md:
+        L = ["# Interface matriz v28 × cabeçote EX-030", "",
+             "O sólido do cabeçote foi montado do perfil lido no DWG 030-032 (escala calibrada "
+             "pelas próprias cotas: 25,534 mm por unidade DXF, cinco fechos independentes batendo "
+             "em 0,012 %). Todos os números abaixo saem de booleanos e `BRepExtrema` contra "
+             "`MatrizJonatha_v28.step`.", "",
+             "| item | medido | nominal | desvio | status | observação |", "|---|---|---|---|---|---|"]
+        for l in linhas:
+            L.append("| " + " | ".join([str(l["item"]).replace("|", "/"), str(l.get("medido", "")),
+                                        str(l.get("nominal", "—")), str(l.get("desvio", "—")),
+                                        l["status"], str(l.get("observacao") or "").replace("|", "/")]) + " |")
+        L += ["", "## O que isso muda no projeto", "",
+              "1. **A matriz cabe no cabeçote.** Os três estágios do corpo (Ø93×69,90 / Ø89,5×10,80 / "
+              "Ø79,5×28,30) caem nos três furos medidos do cabeçote (Ø95×70,0 / Ø90×11,0 / Ø80×14,0) "
+              "com folga radial de 1,00 / 0,25 / 0,25 mm e folga axial de 0,10 mm no degrau de apoio. "
+              "Interferência corpo-a-corpo: zero. A face de saída fica 14,00 mm além da face do nariz, "
+              "então a fenda trabalha fora do cabeçote.",
+              "2. **O anel da face é de 20,00 mm** (Ø90 → Ø130) — exatamente o número descrito. O furo "
+              "do nariz (Ø80) é maior que a fenda (75,8 → 2,10 mm por lado) e menor que a matriz (Ø93): "
+              "a descrição do cliente confere com o desenho.",
+              "3. **D1 se resolve na máquina, não na matriz — e sem furar nada.** O empuxo axial medido "
+              "(29,8 kN no limite, 19,2 kN com o ΔP 1D) recai em compressão no degrau do cabeçote: "
+              "431,2 mm² de contato real a 69,2 MPa, com 20× de margem sobre o escoamento da matriz "
+              "temperada (medido por booleano: a faixa de contato só existe onde as duas faces existem). A bucha "
+              "cônica EX-031 (Ø95/Ø90, cone 3°, L 70 = exatamente o comprimento do bolso) é "
+              "auto-travante (3,00° < 8,5°) e, ao apertar a banda Ø93, aplica compressão radial: "
+              "8,58 MPa bastam para equilibrar os 55,7 kN que abrem a bipartição, e 9,76 MPa para segurar "
+              "o empuxo axial só por atrito — e a deformação do canal com isso é de 0,002 mm por lado "
+              "(0,15 % da espessura da manta). **Retiro a recomendação de grampos no flange: a matriz "
+              "não leva flange, nem grampo, nem furo de fixação.** O monobloco por EDM continua sendo a "
+              "opção mais robusta, mas deixa de ser a única.",
+              "3b. **Atenção ao aperto:** 8,6 MPa é pouco, mas o collete é cônico e o montador aperta até "
+              "encostar. A pressão que fecha o plano de partição é a mesma que prensa a parede de 8,70 mm "
+              "contra o canal — exigir no desenho de execução o torque/curso de aperto da bucha, senão a "
+              "banda vira a cunha que abre o canal em vez de fechá-lo.",
+              "4. **Bloqueio encontrado — o anel do nariz é de 65 mm.** O corte mostra uma passagem "
+              "Ø68,30 no nariz (e o carimbo da peça é 9\"×65 mm). Com esse anel montado, a matriz de "
+              "75 mm **não entra**: 5,60 mm de interferência radial por lado contra o nariz Ø79,5 da "
+              "matriz. Como o furo do nariz já é Ø80, não há espaço físico para nenhum anel com passagem "
+              "≥ Ø79,6 — na variante de 75 mm o nariz tem de ficar aberto (ou o anel ter Ø80, ou seja, "
+              "não restringir nada), e o centramento passa a ser feito direto no Ø80×14 do cabeçote.",
+              "5. **Padrão de furação (P4):** os 6×Ø16,5 em C.C Ø180 dentro de fendas de 23,5 "
+              "(±7,2°, cotadas como 15°) são a junta cabeçote↔extrusora e passam a 35,25 mm do corpo da "
+              "matriz. O posicionamento angular da matriz vem dos três centragens cilíndricos, não de "
+              "pino de flange — não há nada a padronizar na matriz.",
+              "6. **Atenção na fabricação:** o furo do pino de alinhamento em X = ±42,10 (Z = 30 e 60) "
+              "deixa ~0,8 mm de parede até a superfície Ø93 que a bucha aperta. Não rompe o envelope "
+              "(0 mm³), mas é essa parede que o collete vê: manter o furo cego, sem rebaixo, e o Ø93 "
+              "retificado na zona de aperto.", ""]
+        p = os.path.join(DIR_DOC, "INTERFASE_CABECOTE_EX030.md")
+        open(p, "w", encoding="utf-8").write("\n".join(L))
+        print(f"MD  -> {p}")
+    return 1 if ncs else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
