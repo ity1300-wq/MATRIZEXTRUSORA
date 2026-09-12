@@ -188,16 +188,22 @@ def main():
     if ac:
         _ok = ac["você mediu na máquina"]
         _alt = ac["desenho DXF medido"]
-        txt_bico = (f"**FECHADA pela sua linha axial de {dim(_ok['protrusao_mm'])} mm** — medida no sólido, não "
-                    f"estimada: sobram {dim(_ok['folga_axial_min_mm'])} mm entre a borda traseira do furo mais "
-                    f"crítico e o fim do metal do cabeçote, e {dim(_ok['metal_no_caminho_mm3'], 0)} mm³ de metal no "
-                    f"caminho de inserção dos {_ok['n_furos_na_faixa_de_saida']} eixos de furo na faixa de saída "
-                    f"(são 10 furos: cada eixo entra pelas duas metades)")
-        txt_bico_efeto = (f"nenhum furo da matriz se move. No valor do desenho ({dim(_alt['protrusao_mm'])} mm) "
-                          f"faltariam {dim(abs(_alt['folga_axial_min_mm']))} mm e "
-                          f"{dim(_alt['metal_no_caminho_mm3'], 0)} mm³ de metal do cabeçote entrariam no caminho "
-                          f"do {_alt['furo_critico']} — a saída aí é alívio no nariz do cabeçote ou a matriz "
-                          "assentada mais para fora, nunca mexer na furação da matriz")
+        gov = nz["cenario_que_governa"]
+        _ok = ac[gov]
+        _alt = ac["você mediu na máquina" if gov.startswith("desenho") else "desenho DXF medido"]
+        txt_bico = (f"**REABERTA em 2026-09-12.** A cota '20 mm' do croqui, medida no DXF, é a posição do furo "
+                    f"M12 do bolso contada da face do flange (72,02 − 52,02 = 20,00 mm) — não a sobra axial da "
+                    f"matriz. Vale a protrusão do desenho ({dim(_ok['protrusao_mm'])} mm), e aí a borda traseira "
+                    f"do furo mais crítico fica {dim(abs(_ok['folga_axial_min_mm']))} mm dentro da luva do nariz, com "
+                    f"{dim(_ok['metal_no_caminho_mm3'], 0)} mm³ de metal no caminho de inserção dos "
+                    f"{_ok['n_furos_na_faixa_de_saida']} eixos de furo na faixa de saída (são 10 furos: cada eixo "
+                    "entra pelas duas metades)")
+        txt_bico_efeto = (f"duas saídas medidas, e nenhuma delas mexe nos outros 20 furos da matriz: levar os "
+                          f"cartuchos para Z ≥ {dim(nz['cartuchos_z_min_mm'])} mm (calculado do Ø9,50 e da face do "
+                          f"nariz em 95,00 mm) ou abrir alívio no nariz do cabeçote. No cenário alternativo "
+                          f"({dim(_alt['protrusao_mm'])} mm de protrusão) a folga vira "
+                          f"{dim(_alt['folga_axial_min_mm'])} mm com {dim(_alt['metal_no_caminho_mm3'], 0)} mm³ no "
+                          "caminho — por isso a conferência na máquina é o que fecha o item")
     else:
         txt_bico = "**ABERTA — é a única que pode mexer nos furos** (rode `verificar_interface_cabecote.py --json`)"
         txt_bico_efeto = ("se o bico chegar até a face da matriz, os cartuchos (Z=97,00) e os termopares "
@@ -492,7 +498,9 @@ termopar ou o polímero.
 | **medir** | Comprimento do bico do cabeçote (sua linha no croqui × o nariz do desenho) | {txt_bico} | {txt_bico_efeto} |
 
 Enquanto D3 estiver em aberto, **nada é promovido**: `MatrizJonatha.step` continua sendo o v27.0 e a
-v28.1 vive ao lado, com `verificar_v28.py` (64 itens) e `verificar_interface_cabecote.py` (43 itens)
+v28.1 vive ao lado, com `verificar_v28.py` ({vf['itens']} itens) e `verificar_interface_cabecote.py` \
+({ic['itens']} itens, {ic['conformes']} conformes, {ic['nao_conformes']} não conforme — a folga axial dos \
+cartuchos × a luva do nariz, que é a linha 'medir' acima)
 para re-medir a qualquer momento.
 
 ---

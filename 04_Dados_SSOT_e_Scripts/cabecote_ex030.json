@@ -71,7 +71,7 @@
    "Ø_mm": 90.0,
    "de_d_mm": 14.0,
    "ate_d_mm": 25.0,
-   "cota_texto": "Ø90 +0,05/0"
+   "cota_texto": "Ø90 +0,05/+0,10 (print de 2026-09-12 lido girado; antes eu tinha usado +0,05/0 - a confirmar)"
   },
   {
    "ordem": 3,
@@ -144,7 +144,10 @@
    "furo_cabecote": "Ø90 x 11 (d 14..25)",
    "folga_radial_mm": 0.25,
    "folga_axial_mm": 0.3,
-   "nota": "o Ø89,5 termina 0,10 antes do fim do furo Ø90 e 0,30 antes do degrau para o Ø80"
+   "nota": "o Ø89,5 termina 0,10 antes do fim do furo Ø90 e 0,30 antes do degrau para o Ø80",
+   "tolerancia_cotada_no_desenho": "Ø90 +0,05/+0,10 (lida no print girado de 2026-09-12; a confirmar na peça - meu modelo usou +0,05/0)",
+   "folga_radial_com_tolerancia_mm": 0.325,
+   "o_que_muda": "o furo Ø90 pode sair até Ø90,10, então a folga radial do degrau Ø89,5 da matriz vai de 0,250 a 0,325 mm. Nada trava por causa disso (o engate axial de 0,30 mm é folga de face, não de diâmetro) e o centro continua vindo da banda Ø93 apertada pelo collete - o que essa folga extra deixa de garantir é a concentricidade do nariz Ø79,5, se um dia ela for requisito"
   },
   {
    "estagio_matriz": "Ø79,5 x 28,3 (d -14..14,3)",
@@ -167,7 +170,8 @@
  },
  "pendencias": [
   "confirmar se o assento do bolso Ø95x70 e cilindrico ou conico de 3 graus (o desenho mostra o collete com OD Ø95->Ø86)",
-  "RESOLVIDA em 2026-09-12 pela linha axial medida na maquina (20,00 mm, croqui do usuario): folga traseira do furo mais critico = 3.25 mm com a protrusao medida, contra -2.75 mm com o nariz de 14.00 mm do desenho, onde 1372 mm3 de metal do cabecote entrariam no caminho do cartucho em X=-22,0, Z=97,0. Nenhum furo da matriz se move: no pior caso o alivio e no cabecote. Medido em verificar_interface_cabecote.py bloco F (Z da face = 89.00)"
+  "ABERTA de novo em 2026-09-12: o '20 mm' do croqui e a posicao do M12 do bolso (contada da face do flange), nao a sobra axial da matriz. Com a protrusao do desenho (14,00 mm) a borda traseira do furo do cartucho em Z=97,00 fica 2,75 mm dentro da luva do nariz. Duas saidas, as duas medidas: cartuchos em Z >= 99,75 mm na matriz, ou alivio no nariz do cabecote. Medidas de conferencia na maquina: quanto a matriz sobressai do cabecote, e se o montador passa o cartucho com a matriz montada",
+  "CONFIRMAR a tolerância do Ø90 do nariz: o print mostra +0,05/+0,10 (os dois positivos), meu modelo usou +0,05/0. Efeito medido: folga radial do degrau da matriz passa de 0,250 para 0,250..0,325 mm; engate axial e contato do ombro não mudam"
  ],
  "conferencia_com_a_medicao_do_usuario": {
   "data": "2026-09-11",
@@ -193,6 +197,27 @@
     "metal_no_caminho_mm3": 1372.276
    },
    "conclusao": "os furos de aquecimento ficam livres; a diferenca entre os dois numeros (6,00 mm) decide se o cabecote precisa de alivio no nariz, nao se a matriz muda"
+  }
+ },
+ "furos_transversais_no_cabecote": {
+  "medidos_no_dxf": [
+   {
+    "tipo": "furo roscado M12 no bolso",
+    "Ø_broca_mm": 10.5,
+    "Ø_passagem_mm": 12.0,
+    "x_da_face_do_nariz_mm": 72.02,
+    "x_da_face_do_flange_mm": 20.0,
+    "plano_z_na_matriz_mm": 23.0,
+    "como_medido": "dois circulos exatos no eixo (desvio radial 0,002 mm) na vista em corte"
+   }
+  ],
+  "leitura_das_cotas": "o '20' cotado nesta vista e a distancia da face do flange (52.02 mm) ate o centro do furo (72.02 mm): 72,02 - 52,02 = 20,00 mm. Nao e protrusao da matriz - foi assim que eu li antes e estava errado",
+  "faces_axiais_medidas_mm": {
+   "face do nariz": 0.02,
+   "degrau Ø80->Ø90": 14.02,
+   "degrau Ø90->Ø95": 25.02,
+   "face do flange": 52.02,
+   "fundo do bolso": 95.02
   }
  }
 }

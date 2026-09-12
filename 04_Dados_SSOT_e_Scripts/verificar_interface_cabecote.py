@@ -339,8 +339,13 @@ def main():
         return None
 
     print("\n[F] acesso dos cartuchos e termopares × comprimento do bico do cabeçote\n" + "-" * 70)
-    # dado de entrada = a linha axial medida na maquina (croqui de 2026-09-12, no SSOT). O valor do
-    # desenho e medido no mesmo booleano, como cenario alternativo - nao e opiniao.
+    # Dois cenarios, ambos medidos - nenhum e opiniao:
+    #   * "desenho DXF medido": protrusao = 109,00 - 95,00 = 14,00 mm (face do nariz e fundo do bolso
+    #     medidos no DXF). E o cenario que VALE.
+    #   * "voce mediu na maquina": LAX = linha_axial_medida do SSOT (20,00 mm). Em 2026-09-12 mediu-se
+    #     que o "20" do desenho e a posicao do furo M12 do bolso contada da face do flange
+    #     (72,02 - 52,02 = 20,00), NAO a sobra axial da matriz - ver cabecote_ex030.json. Fica aqui como
+    #     cenario alternativo, porque foi a leitura que o usuario descreveu no croqui.
     _ss = json.load(open(os.path.join(AQUI, "cad_die_parameters.json"), encoding="utf-8"))
     LAX = float(_ss["decisoes_usuario"]["medicao_na_maquina"]["linha_axial_medida"]["valor_mm"])
     fur = {}
@@ -348,6 +353,7 @@ def main():
         if f_["tipo"] in ("cartucho", "termopar"):
             fur[(f_["tipo"], f_["X"], f_["Z"], f_["diametro"])] = f_
     PROTR_DESENHO = ENVELOPE[2][1] - Z_FACE_NARIZ
+    FLANGE_FACE, FURO_M12 = 52.02, 72.02      # faces axiais medidas no DXF (verifiesse no bloco [F])
     acessos = {}
     for nome_c, protr in sorted({"você mediu na máquina": LAX, "desenho DXF medido": PROTR_DESENHO}.items()):
         z_face = ENVELOPE[2][1] - protr
@@ -365,23 +371,32 @@ def main():
                            "metal_no_caminho_mm3": round(bloqueio, 3),
                            "n_furos_na_faixa_de_saida": len(fur)}
         if nome_c.startswith("você"):
-            checar_min("Folga axial da furação de saída à frente do metal do cabeçote", pior, 0.0, un="mm",
-                       obs=f"cenário medido na máquina (protrusão {n(protr, 2)} mm); furo mais crítico: "
-                           f"{pior_q}; metal do cabeçote no caminho de inserção: {n(bloqueio)} mm³")
+            alerta(f"Folga axial da furação se a protrusão for {n(protr, 2)} mm (cota '20' do croqui)",
+                   f"folga {n(pior)} mm | {n(bloqueio)} mm³ de metal no caminho",
+                   obs="o '20 mm' do desenho NAO e protrusao: medido no DXF, e a distancia da face do flange "
+                       f"({FLANGE_FACE} mm) ao centro do furo M12 do bolso ({FURO_M12} mm) = 20,00 mm. "
+                       "Fica registrado como cenario alternativo, porque e a leitura que ele descreveu")
         else:
-            alerta(f"Mesmo furo no cenário do desenho (protrusão {n(PROTR_DESENHO, 2)} mm)",
-                   f"folga {n(pior)} mm | {n(bloqueio)} mm³ de metal do cabeçote no caminho de {pior_q}",
-                   obs="ou o nariz do cabeçote ganha alívio para passar o cartucho, ou a matriz assenta "
-                       f"{n(LAX - PROTR_DESENHO, 2)} mm mais para fora - que e justamente o que a sua linha "
-                       f"de {n(LAX)} mm diz. Em nenhum dos dois casos a furação da matriz muda de lugar.")
-    registrar("O que isso decide sobre os furos da matriz",
-              "nada se move na matriz nos dois cenários",
-              obs=f"a folga traseira mínima medida é {n(acessos['você mediu na máquina']['folga_axial_min_mm'])} mm "
-                  f"no seu número e {n(acessos['desenho DXF medido']['folga_axial_min_mm'])} mm no do desenho; "
-                  "com folga positiva o cartucho entra por fora sem depender de furo no cabeçote")
+            checar_min("Folga axial da furação de saída à frente do metal do cabeçote (protrusão do desenho)",
+                       pior, 0.0, un="mm",
+                       obs=f"protrusão {n(protr, 2)} mm medida no DXF; furo mais crítico: {pior_q}; metal no "
+                           f"caminho de inserção: {n(bloqueio)} mm³; o cartucho deixa de esbarrar em "
+                           f"Z >= {n(z_face + max(f_['diametro'] for f_ in fur.values()) / 2.0, 2)} mm")
+    z_min = (ENVELOPE[2][1] - PROTR_DESENHO) + max(f_["diametro"] for f_ in fur.values()) / 2.0
+    alerta("O que isso decide sobre a furação de saída",
+           f"aberta: com a protrusão do desenho ({n(PROTR_DESENHO, 2)} mm) os cartuchos têm de ir para "
+           f"Z >= {n(z_min, 2)} mm, ou o nariz do cabeçote ganha alívio",
+           obs=f"folga traseira medida {n(acessos['desenho DXF medido']['folga_axial_min_mm'])} mm no cenário que "
+               f"vale (desenho) e {n(acessos['você mediu na máquina']['folga_axial_min_mm'])} mm se a matriz "
+               "sobressair 20,00 mm; o cabeçote já é furado transversalmente para o M12 do pushador "
+               f"({n(FURO_M12, 2)} mm da face do nariz, {n(FURO_M12 - FLANGE_FACE, 2)} mm da face do flange), "
+               "então alívio no nariz não é inédito na peça - mas aí é o cabeçote que muda, não a matriz")
 
     numeros = {"pressao_efetiva_MPa": p_ef, "empuxo_axial_kN": f_ax, "empuxo_axial_dp1d_kN": f_ax1d,
                "acesso_furacao_cenarios": acessos, "protrusao_medida_usuario_mm": LAX,
+               "cenario_que_governa": "desenho DXF medido",
+              # Z a partir do qual nenhum cartucho esbarra no nariz, calculado no booleano do bloco [F]
+              "cartuchos_z_min_mm": z_min,
                "dp_1d_bar": dp1d,
                "area_boca_mm2": a_boca, "area_fenda_mm2": a_saida, "area_projetada_mm2": a_proj,
                "area_ombro_matriz_mm2": a_ombro_d, "area_degrau_cabecote_mm2": a_ombro_h,
@@ -426,6 +441,8 @@ def main():
             L.append("| " + " | ".join([str(l["item"]).replace("|", "/"), str(l.get("medido", "")),
                                         str(l.get("nominal", "—")), str(l.get("desvio", "—")),
                                         l["status"], str(l.get("observacao") or "").replace("|", "/")]) + " |")
+        _fx = dados["furos_transversais_no_cabecote"]["medidos_no_dxf"][0]
+        _metal = (dados["corpo"]["Ø_corpo_mm"] - dados["furos_do_cabecote_para_a_matriz"][2]["Ø_mm"]) / 2.0
         L += ["", "## O que isso muda no projeto", "",
               "1. **A matriz cabe no cabeçote.** Os três estágios do corpo (Ø93×69,90 / Ø89,5×10,80 / "
               "Ø79,5×28,30) caem nos três furos medidos do cabeçote (Ø95×70,0 / Ø90×11,0 / Ø80×14,0) "
@@ -468,7 +485,21 @@ def main():
               "6. **Atenção na fabricação:** o furo do pino de alinhamento em X = ±42,10 (Z = 30 e 60) "
               "deixa ~0,8 mm de parede até a superfície Ø93 que a bucha aperta. Não rompe o envelope "
               "(0 mm³), mas é essa parede que o collete vê: manter o furo cego, sem rebaixo, e o Ø93 "
-              "retificado na zona de aperto.", ""]
+              "retificado na zona de aperto.",
+              f"7. **A cota '20 mm' da vista em corte não é a protrusão da matriz — lido no DXF, não "
+              f"deduzido.** O par de círculos exatos Ø{n(_fx['Ø_broca_mm'], 2)}/Ø{n(_fx['Ø_passagem_mm'], 2)} "
+              f"está sobre o eixo a {n(_fx['x_da_face_do_nariz_mm'], 2)} mm da face do nariz, e é isso que fica "
+              f"{n(_fx['x_da_face_do_flange_mm'], 2)} mm da face do flange: um **M12 transversal na parede do "
+              f"bolso**, no plano Z = {n(_fx['plano_z_na_matriz_mm'], 2)} mm do eixo da matriz, atravessando "
+              f"{n(_metal, 2)} mm de aço entre o bolso e o corpo. Duas consequências: (i) a protrusão da matriz "
+              "volta a ser a do desenho (14,00 mm) e a folga traseira dos cartuchos reabre como não conforme, com "
+              "as duas saídas medidas no bloco [F]; (ii) se você preferir não mover os cartuchos, há precedente na "
+              "própria peça para levar o aquecimento pelo cabeçote — e é a prova de que a matriz dispensa furo de "
+              "desmontagem, já que o pushador EX-032 M12 age por esse furo.",
+              f"8. **A conferir no desenho:** o print mostra o Ø90 do nariz cotado +0,05/+0,10 (os dois "
+              "positivos), e meu modelo usou +0,05/0. O efeito medido é pequeno e não trava nada: a folga radial "
+              "do degrau Ø89,5 da matriz passa de 0,250 mm para a faixa 0,250…0,325 mm; o engate axial de 0,30 mm "
+              "é folga de face e o centro continua vindo da banda Ø93 apertada pelo collete.", ""]
         p = os.path.join(DIR_DOC, "INTERFASE_CABECOTE_EX030.md")
         open(p, "w", encoding="utf-8").write("\n".join(L))
         print(f"MD  -> {p}")

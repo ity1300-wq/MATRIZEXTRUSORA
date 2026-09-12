@@ -400,7 +400,16 @@
     "origem": "respostas do usuario as perguntas D1-D4 reformuladas em termos simples, mais o croqui em vista lateral enviado na sequencia (azul = extrusora, vermelho = cabecote, branco = matriz)",
     "D1_fixacao": {
       "decisao": "FECHADA PELA MAQUINA: a matriz nao leva flange, grampo nem furo de fixacao; a retencao vem da bucha conica EX-031 (collete) e do degrau do cabecote",
-      "impacto_no_cad": "nenhum - envelope intacto"
+      "impacto_no_cad": "nenhum - envelope intacto",
+      "furo_m12_no_bolso_do_cabecote": {
+        "Ø_broca_mm": 10.5,
+        "Ø_passagem_mm": 12.0,
+        "centro_da_face_do_nariz_mm": 72.02,
+        "centro_da_face_do_flange_mm": 20.0,
+        "plano_no_eixo_da_matriz_mm_z": 23.0,
+        "o_que_prova": "o cabecote ja tem furo transversal na parede do bolso (17,50 mm de aco ali) - o pushador EX-032 M12 age por ele, e e por isso que a matriz nao precisa de furo de desmontagem (a decisao de suprimir os M6 da v28 fica corroborada por uma medida, nao por preferencia)",
+        "medido_em": "cabecote.dxf (dois circulos exatos de Ø10,50 e Ø12,00 no eixo, 72,02 mm da face)"
+      }
     },
     "D2_labio_saida": {
       "decisao": "MANTER COMO NO MASTER: chanfro de saida 1,50 x 45 graus e land paralelo 8,50 mm (lamina de 0,75 mm). A reducao para 0,80 x 45 que a v28.0 propunha foi REJEITADA",
@@ -463,12 +472,13 @@
         "se o anel Ø68,30 lido no corte existisse: faltariam 3,35 mm por lado - nao 'sobra'"
       ],
       "conclusao": "as duas medidas do usuario confirmam o modelo medido no DWG por caminhos independentes e descartam o anel do nariz de 65 mm para o produto de 75 mm",
-      "fica_para_conferir": "FECHADO pela sua linha axial de 20 mm: os furos de cartucho e termopar ficam a frente do metal do cabecote nos dois cenarios razoaveis (20 mm medidos: sobram 3,25 mm de folga na borda traseira do furo do cartucho; 14,00 mm do desenho: faltam 2,75 mm e o cartucho precisa de alivio no nariz do cabecote). Se a matriz for assentada mais fundo que 12,00 mm de protrusao, ai sim a furacao tem de mudar - nao e o caso nas duas medidas.",
+      "fica_para_conferir": "REABERTA: a folga axial dos cartuchos depende da protrusao real. No desenho (14,00 mm) faltam 2,75 mm e o cartucho nao entra pela folga de 0,25 mm entre o Ø79,5 da matriz e o Ø80 do nariz. Sae de cena se voce confirmar que a matriz sobressai mais de 12,00 mm; senao, mover os 6 cartuchos para Z >= 99,75 mm (e o proprio verificador calcula o numero) ou abrir alivio no nariz do cabecote - que ja e furado transversalmente para o M12 do pushador, entao tem precedente",
       "linha_axial_medida": {
-        "o_que": "uma linha reta do final do corpo do cabecote ate o comeco da fenda - declarada pelo usuario em 2026-09-12 com o croqui em vista lateral (azul extrusora, vermelho cabecote, branco matriz)",
         "valor_mm": 20.0,
-        "o_que_isso_significa_em_cotas": "a face frontal do cabecote fica ~20 mm atras da face de saida da matriz. No desenho (DXF) a mesma distancia e 14,00 mm. A diferenca de 6 mm e o que decide se o metal do bico encosta ou nao na borda traseira dos furos dos cartuchos",
-        "consequencia": "medida nos dois cenarios em verificar_interface_cabecote.py bloco F"
+        "o_que_eh_realmente": "corrigido em 2026-09-12 por medicao no DXF: o '20' desta vista e a posicao axial do par de circulos 010,50/012,00 (furo roscado M12 no bolso do cabecote), contada a partir da FACE DO FLANGE - 72,02 - 52,02 = 20,00 mm. NAO e a sobra axial entre o fim do cabecote e a face da matriz",
+        "consequencia": "a protrusao da matriz volta a ser a do desenho (14,00 mm). A pendencia dos cartuchos esta REABERTA: com 14,00 mm, a borda traseira do furo do cartucho (Z=97,00 - 09,5/2 = 92,25) fica 2,75 mm dentro da luva do nariz do cabecote, onde a folga radial e 0,25 mm",
+        "valor_valido_para_protrusao_mm": 14.0,
+        "fonte": "medido em cabecote.dxf: faces axiais em 0,02 / 14,02 / 25,02 / 52,02 / 95,02 mm e centro do furo em 72,02 mm (circulos exatos, desvio radial 0,002 mm)"
       }
     },
     "consequencia_d2_mediata": {
