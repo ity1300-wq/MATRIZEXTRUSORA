@@ -50,11 +50,6 @@
   "Ø_flange_mm": 220.0,
   "espessura_flange_mm": 40.0,
   "sobre_faces_flange_mm": 216.0,
-  "resalto_traseiro": {
-   "Ø_mm": 203.0,
-   "altura_mm": 3.0,
-   "alerta_de_leitura": "nenhuma aresta aparece depois de d = 92,01 nas duas vistas de secao, e a de r = 101,53 corre exatamente d 52,00..92,01 - que e o bordo externo da fenda de 23,5 (raio 101,75), nao um resalo de 3 mm atras do flange. O resalo 0203 x 3 e o comprimento 95,00 (= 92 + 3) ficam sem confirmacao no DXF. O referencial nao foi mexido (Z_FACE_NARIZ = 95): cota de maquina, e dela depende a protrusao de 14,00 mm da matriz"
-  },
   "chanfro": "10 x 45 graus (na transicao corpo/flange)",
   "chanfro_corpo_flange": {
    "cateto_mm": 10.0,
@@ -81,6 +76,20 @@
    ],
    "como_foi_medido": "varredura das arestas da camada 'contorno' nas duas vistas de secao do cabecote (eixos y = 657,7 mm; faces em x = 42,56 e 299,95 mm do desenho; k = 25,534 mm/un). A seta do proprio desenho aponta para essa aresta - ela estava na cota, nao no solido",
    "correcao_de_leitura": "ate hoje a faixa d 42..52 era modelada como um cilindro 0164 (r = 82). As arestas r = 82,0 e r = 98,0 correm d 52..92 junto das r = 78,5 e r = 101,5: sao as bordas do furo 016 em C.C. 0180 e o bordo externo da fenda de 23,5, lidas como cilindros da peca. 0164 = 2*(90-8), nao uma cota da peça"
+  },
+  "piloto_traseiro": {
+   "Ø_mm": 105.0,
+   "altura_mm": 3.0,
+   "d_inicio_mm": 92.0,
+   "d_fim_mm": 95.0,
+   "o_que_e": "macho de centragem que protrai 3,00 mm atras da face do flange, em Ø105, com o furo Ø95 atravessando ate o fim (por isso a peca mede 95,00 no total e nao 92,00)",
+   "medido_no_dxf": {
+    "parede_do_piloto": "H r = 52,48 / 52,52 correndo d = 92,00..95,00 (comp 3,00 mm, camada contorno)",
+    "face_traseira_do_flange": "V d = 92,00 de r = 52,48 ate r = 110,03",
+    "bolso": "H r = 47,48 / 47,52 correndo d = 25,00..95,00 (comp 70,00 mm)",
+    "carimbo_do_desenho": "Ø105 com desvio negativo cotado na vista; os tres furos cotados no corte sao Ø90 +0,05/+0,1, Ø95 e Ø105"
+   },
+   "substitui": "o `resalto_traseiro: {Ø 203, altura 3}` que estava aqui. A linha r = 101,5 que eu li como ressalto corre d = 52..92 junto do OD do flange - e o bordo externo das fendas de 23,5 (raio 101,75). Ø203 nunca foi cota de ressalto nenhum; e o diametro das fendas."
   }
  },
  "furos_do_cabecote_para_a_matriz": [
@@ -107,6 +116,15 @@
    "de_d_mm": 25.0,
    "ate_d_mm": 95.0,
    "cota_texto": "Ø95 (-0,05/-0,1 no assento da bucha)"
+  },
+  {
+   "ordem": 4,
+   "nome": "alargamento traseiro do bolso (o piloto Ø105)",
+   "Ø_mm": 105.0,
+   "de_d_mm": 92.0,
+   "ate_d_mm": 95.0,
+   "cota_texto": "Ø105,00 medido no corte: parede a r = 52,48/52,52 por 3,00 mm, além da face do flange (d 92,00) - e o que fecha o comprimento total em 95,00",
+   "medido_no_dxf": "H r 52,48 e 52,52 em d 92,00..95,00 + V d 92,00 de r 52,48 a 110,03 (contorno)"
   }
  ],
  "anel_na_face": {
@@ -261,7 +279,7 @@
    "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_sem_flange.step",
    "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_desenhado.step"
   ],
-  "o_que_e": "cabeçote sem a junta da extrusora = interseção pelo cilindro Ø130 do corpo (r > 65,00 mm removido: o chanfro 10 × 45° da transição corpo→flange, o flange Ø220 × 40 com os 6 × Ø16,5 nas fendas de 23,5 e o resalto Ø203 × 3 atrás do flange)",
+  "o_que_e": "cabeçote sem a junta da extrusora = interseção pelo cilindro Ø130 do corpo (r > 65,00 mm removido: o chanfro 10 × 45° da transição corpo→flange, o flange Ø220 × 40 com os 6 × Ø16,5 nas fendas de 23,5 e o piloto de centragem Ø105 × 3 atrás do flange)",
   "massa_kg": {
    "fonte": "04_Dados_SSOT_e_Scripts/cabecote_step.json",
    "chaves": "massa_desenhada_kg | massa_sem_flange_kg | massa_removida_kg",

@@ -160,13 +160,14 @@ já a colocava), não para a matriz. Isso não é escolha de projeto: é consequ
 
 > **Correção registrada.** A versão anterior desta seção dizia "6 × M12 em BC Ø150, curso angular ±15°, escala 21,28 mm/un" e "Ø13,33 mm de folga". O Ø150 vinha de uma leitura de raster em baixa resolução: o desenho diz **C.C Ø180**. Tudo abaixo foi re-medido com a escala calibrada e provado por booleanos contra `MatrizJonatha_v28.step` (`verificar_interface_cabecote.py` → **50 itens, 42 conformes, 1 não conformes, 7 pendências do lado da máquina**).
 
-**Furos do cabeçote para a matriz** — profundidade `d` contada da face do nariz; a matriz senta em `Z_matriz = 95,00 − d` (corpo Ø130,00 × 42,00, flange Ø220,00 × 40,00, ressalto Ø203,00 × 3,00):
+**Furos do cabeçote para a matriz** — profundidade `d` contada da face do nariz; a matriz senta em `Z_matriz = 95,00 − d` (corpo Ø130,00 × 42,00, flange Ø220,00 × 40,00, piloto de centragem Ø105,00 × 3,00 atrás do flange, chanfro 10,00 × 45,00° na transição corpo→flange):
 
 | furo | Ø | de … até (mm de profundidade) | comprimento | cota anotada |
 | :--- | ---: | ---: | ---: | :--- |
 | bore do nariz | Ø80,00 mm | 0,00 … 14,00 mm | 14,00 mm | Ø80 |
 | bore intermediario | Ø90,00 mm | 14,00 … 25,00 mm | 11,00 mm | Ø90 +0,05/+0,10 (print de 2026-09-12 lido girado; antes eu tinha usado +0,05/0 - a confirmar) |
 | bolso de fixacao (assento da bucha conica) | Ø95,00 mm | 25,00 … 95,00 mm | 70,00 mm | Ø95 (-0,05/-0,1 no assento da bucha) |
+| alargamento traseiro do bolso (o piloto Ø105) | Ø105,00 mm | 92,00 … 95,00 mm | 3,00 mm | Ø105,00 medido no corte: parede a r = 52,48/52,52 por 3,00 mm, além da face do flange (d 92,00) - e o que fecha o comprimento total em 95,00 |
 
 **Encaixe medido nos sólidos** (não por diferença de cotas):
 

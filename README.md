@@ -84,10 +84,12 @@ intactos). Sai com código 1 se qualquer uma falhar — e ela foi auto-testada i
 `06_CAD_Cabecote_EX-030/STEP/` guarda os dois desenhos STEP do cabeçote; o entregável é o
 cabeçote **sem a parte que conecta na extrusora** — a interseção pelo
 cilindro Ø130 do corpo, que leva o chanfro 10 × 45° da transição corpo→flange (Ø130 → Ø150, cota que
-estava no desenho e no SSOT mas ainda não no sólido), o flange Ø220 × 40 com os 6 × Ø16,5 e o resalto
-Ø203 × 3. Medido no sólido: massa **13,051 → 4,902 kg** (8,149 kg de aço a menos), **0,0000 mm³** removidos até a
-banda Ø93 em que a matriz é apertada, comprimento axial preservado (95,000 mm) e interferência com
-`MatrizJonatha_v28.step` de **0,0000 mm³** nos dois. Não é peça de produção: sem o flange não há onde
+estava no desenho e no SSOT mas ainda não no sólido), o flange Ø220 × 40 com os 6 × Ø16,5 e o piloto de
+centragem **Ø105 × 3,00 mm** atrás do flange — que é o que fecha o total em 95,00 mm (o "ressalto Ø203 × 3"
+que estava aqui era leitura minha do bordo externo das fendas de 23,5: r = 101,5 = 90 + 11,75). Massas,
+volume, metal removido na banda Ø93, comprimento e interferência com `MatrizJonatha_v28.step` são lidos do
+sólido a cada rodada e publicados em `04_Dados_SSOT_e_Scripts/cabecote_step.json` — não são copiados para cá
+porque cópia manual de número de booleano apodrece. Não é peça de produção: sem o flange não há onde
 aparafusar a junta, e o M12 transversal ficou fora do modelo por indeterminação de desenho — tudo em
 `03_Relatorios_e_Documentacao/CABECOTE_EX-030_STEP.md`.
 

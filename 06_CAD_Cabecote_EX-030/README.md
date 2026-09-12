@@ -5,10 +5,10 @@
 Dois sólidos, gerados por `python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py`
 a partir do que foi medido no DWG (`04_Dados_SSOT_e_Scripts/cabecote_ex030.json`):
 
-- `STEP/Cabecote_EX-030_sem_flange.step` — **o pedido**: o cabeçote sem a parte que conecta na extrusora (corpo Ø130 × 95,000 mm, nariz Ø80, degrau Ø90, bolso Ø95 × 70). 4,902 kg.
-- `STEP/Cabecote_EX-030_desenhado.step` — como está no desenho: corpo Ø130 × 42, **chanfro 10 × 45°** na transição para a face do flange (Ø130 → Ø150), flange Ø220 × 40 com as 6 fendas de 23,5 e o resalto Ø203 × 3. Massa e volume medidos no sólido: `04_Dados_SSOT_e_Scripts/cabecote_step.json`.
+- `STEP/Cabecote_EX-030_sem_flange.step` — **o pedido**: o cabeçote sem a parte que conecta na extrusora (corpo Ø130 × 95,000 mm, nariz Ø80, degrau Ø90, bolso Ø95 × 70,00 e o piloto Ø105 × 3,00 na traseira, que fica dentro do corte pelo Ø130 e por isso aparece aqui).
+- `STEP/Cabecote_EX-030_desenhado.step` — como está no desenho: corpo Ø130 × 42, **chanfro 10 × 45°** na transição para a face do flange (Ø130 → Ø150), flange Ø220 × 40 com as 6 fendas de 23,5 e o piloto de centragem Ø105 × 3,00 mm na traseira. Massa e volume medidos no sólido, a cada rodada: `04_Dados_SSOT_e_Scripts/cabecote_step.json`.
 
-O chanfro é cota do desenho e estava no SSOT (`corpo.chanfro` em `cabecote_ex030.json`) mas não estava no sólido; foi conferido hoje nas **duas** vistas de seção do DXF (aresta a 45,00° de (d 42,00; r 65,02) a (d 52,00; r 75,02), camada `contorno`) e medido no modelo depois de gerado. Onde este repositório tinha um "cubo Ø164" nessa faixa, a linha era a borda do furo Ø16 no C.C. Ø180 (82 = 90 − 8), não uma superfície da peça.
+O chanfro é cota do desenho e estava no SSOT (`corpo.chanfro` em `cabecote_ex030.json`) mas não estava no sólido; foi conferido hoje nas **duas** vistas de seção do DXF (aresta a 45,00° de (d 42,00; r 65,02) a (d 52,00; r 75,02), camada `contorno`) e medido no modelo depois de gerado. Onde o SSOT dizia `resalto_traseiro: Ø203 × 3`, a medição da traseira mostra outra coisa: piloto Ø105,00 × 3,00 mm protraindo além da face do flange (`H r 52,48/52,52` em `d 92,00..95,00`), com o Ø95 do bolso atravessando até `d = 95,00` — é isso que dá os 95,00 mm de comprimento total. Onde este repositório tinha um "cubo Ø164" nessa faixa, a linha era a borda do furo Ø16 no C.C. Ø180 (82 = 90 − 8), não uma superfície da peça.
 
 Referencial: Z é o eixo da matriz (face do nariz em Z = 95, face de entrada do cabeçote em Z = 0), então o arquivo monta direto com `01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28.step`.
 

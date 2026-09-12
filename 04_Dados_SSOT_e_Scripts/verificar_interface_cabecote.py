@@ -50,7 +50,11 @@ BORES = [(40.0, 81.0, 96.0), (45.0, 70.0, 81.0), (47.5, -1.0, 70.0)]     # (r, z
 # a cota era leitura minha da borda do furo Ø16 no C.C. Ø180 (82 = 90 - 8), não uma superfície da peça.
 _cab_dado = json.load(open(os.path.join(AQUI, "cabecote_ex030.json"), encoding="utf-8"))
 _CH = _cab_dado["corpo"]["chanfro_corpo_flange"]
-CORPO = [(65.0, 53.0, 95.0), (110.0, 2.0, 44.0), (101.5, 0.0, 4.0)]
+CORPO = [(65.0, 53.0, 95.0), (110.0, 2.0, 44.0), (52.5, 0.0, 3.0)]
+# o ultimo anel e o piloto de centragem Ø105 x 3,00 mm atras da face do flange, lido do SSOT abaixo - nao
+# mais o "ressalto Ø203", que era leitura minha do bordo externo das fendas de 23,5 (r = 101,5 = 90 + 11,75)
+assert abs(CORPO[2][0] * 2.0 - _cab_dado["corpo"]["piloto_traseiro"]["Ø_mm"]) < 1e-9, "CORPO[2] diverge do SSOT"
+assert abs(CORPO[2][2] - _cab_dado["corpo"]["piloto_traseiro"]["altura_mm"]) < 1e-9, "piloto: altura diverge"
 # cone do chanfro em (r_em_baixo, Z_em_baixo, r_em_cima, Z_em_cima); a geratriz e prolongada 0,5 mm para
 # dentro do corpo (mesma reta, mesmo 45 graus) para o booleano nao abrir costura na uniao
 _R_CORPO = _cab_dado["corpo"]["Ø_corpo_mm"] / 2.0
