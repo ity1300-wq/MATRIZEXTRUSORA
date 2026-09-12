@@ -251,6 +251,12 @@
     "desvio_round_trip_step_mm3": 0.0
    },
    "m12_fora_do_modelo": "o Ø10,5/Ø12 a 72,02 mm da face não tem aresta de seção no DXF: natureza e ângulo não determináveis; --com-m12 gera o cenário transversal"
+  },
+  "leitura_impossivel_neste_arquivo": {
+   "fato_robusto": "as 4 UNICAS geratrizes inclinadas do DXF dao 3,267 deg e aparecem em duas vistas, com silhueta simetrica Ø86,00 (a 0,01 mm), dx = 64,00 mm e dy = +/-3,66 mm por lado. Angulo e razao sao invariantes: independem da escala e de saber a que vista pertencem",
+   "o_que_nao_se_consegue": "identificar qual vista e de qual peca (EX-030 / EX-031 / EX-032). O aspose nao preserva blocos nem camadas e devolve so POLYLINE; os dois metodos tentados falham - componentes conexos viram UM grupo (47017 de 47017 segmentos, porque as linhas de centro encostam em tudo) e o voto de espelhamento casa cada aresta consigo mesma (dando 'diametros' de 2500 mm, que sao a legenda). Em 2026-09-12 gastaram-se duas tentativas nisso: nao reincidir",
+   "consequencia": "o 'Ø90,00 reto' e a aresta horizontal mais proxima das geratrizes, NAO uma atribuicao certa ao EX-031 - por isso a pendencia do furo do collete fica ABERTA e o STEP do conjunto montado nao e gerado. Resolve-se em segundos com um paquimetro no furo da bucha: se for conico ate ~Ø93, a pressao radial de 8,6 MPa volta a valer; se for reto, a banda de aperto tem de ser criada na matriz (ou o collete e outra peca)",
+   "instrumento": "04_Dados_SSOT_e_Scripts/medir_perfil_cabecote.py --json cabecote_perfil.json; a docstring lista os metodos que nao funcionam neste arquivo"
   }
  },
  "numeros": {

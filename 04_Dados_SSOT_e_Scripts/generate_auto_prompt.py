@@ -195,6 +195,7 @@ python 04_Dados_SSOT_e_Scripts/verify_legacy_dies.py --json  # as 4 matrizes + �
 python 04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py --json --md  # matriz × cabeçote (48 itens)
 python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py  # STEP do cabecote sem a junta + provas
 python 04_Dados_SSOT_e_Scripts/estudar_recuo_cartuchos.py   # medida da alternativa (a) da pendencia [F]
+python 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --com-estudos  # A PORTA: roda tudo + 7 invariantes
 ```
 
 ## 8. RESPOSTA INICIAL OBRIGATÓRIA

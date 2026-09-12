@@ -71,6 +71,14 @@ volume estacionado nas pontas, invasão do envelope e aço cortado) — tabela e
 `03_Relatorios_e_Documentacao/ESTUDO_FUNIL_COATHANGER.md`, gerador em `04_Dados_SSOT_e_Scripts/estudar_funis.py`.
 Nada disso substitui `MatrizJonatha.step`.
 
+### ✅ Porta de verificação
+
+`verificar_cadeia.py` roda a cadeia inteira e depois cobra 7 invariantes: contagens dos verificadores,
+o único não conforme esperado da interface, as medidas do STEP do cabeçote, **os números que os
+documentos citam contra os JSON gerados** (foi assim que 1372→2744 e 14,3→14,00 apodreceram), a
+ausência de cópia manual de número de booleano e as regras 1 e 2 (v27.0 e `02_CAD_Modelos_Historicos/`
+intactos). Sai com código 1 se qualquer uma falhar — e ela foi auto-testada injetando o número velho.
+
 ### 🔧 Cabeçote em STEP (peça da máquina, não da matriz)
 
 `06_CAD_Cabecote_EX-030/` tem o cabeçote **sem a parte que conecta na extrusora** — a interseção pelo
@@ -113,6 +121,7 @@ python 04_Dados_SSOT_e_Scripts/gerar_relatorio_v28.py           # atualiza o rel
 python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png
 python 04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py --json --md  # matriz × cabeçote EX-030
 python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py                 # STEP do cabeçote sem a junta
+python 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --com-estudos       # A PORTA: roda tudo e cobra as 7 checagens
 ```
 
 ---
