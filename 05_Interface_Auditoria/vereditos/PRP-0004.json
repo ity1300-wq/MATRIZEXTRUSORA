@@ -1,9 +1,9 @@
 {
   "protocolo": "1.0",
   "proposta_id": "PRP-0004",
-  "commit_auditado": "0eaee50e02cc5adddda6c1241e8b73f74b2597b1",
+  "commit_auditado": "b0175422c5829c7db9d32b01a4988cb16de037ea",
   "proposta_sha256": "ad9137c080c5b4d2c5b1bb310ad002385a56037bf9b06cd77c01dc918ffb0a81",
-  "data": "2026-09-12T17:57:59+0000",
+  "data": "2026-09-12T19:42:54+0000",
   "auditor": {
     "nome": "Auditor IA (Protocolo v1.0)",
     "tipo": "IA",
@@ -146,6 +146,27 @@
       "resultado": "OK",
       "fonte": "sha256 × baseline",
       "observacao": ""
+    },
+    {
+      "id": "I8",
+      "o_que": "git: arquivos CAD alterados desde base_commit",
+      "nominal": "declarados",
+      "medido": [
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8.step",
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8_Body_A.step",
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8_Body_B.step",
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8_Canal_Fluxo.step",
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8_Com_Fluxo.step",
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/MatrizJonatha_L10_C0.8_Explodida.step",
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/gerar_variante.log",
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/gerar_variante_prp0001r2.py",
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/medicao_v27_oficial.json",
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/medicao_variante_prp0006.json",
+        "01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/medir_variante_prp0006.py"
+      ],
+      "severidade": "INFO",
+      "resultado": "ATENCAO",
+      "fonte": "git diff 55860156..HEAD"
     },
     {
       "id": "E:land_util_mm",
@@ -382,7 +403,7 @@
   "medicoes_reutilizadas": false,
   "hashes": {
     "proposta": "ad9137c080c5b4d2c5b1bb310ad002385a56037bf9b06cd77c01dc918ffb0a81",
-    "head": "0eaee50e02cc5adddda6c1241e8b73f74b2597b1",
+    "head": "b0175422c5829c7db9d32b01a4988cb16de037ea",
     "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step": "7f26c5c5ba238a12667f2bdf974bc15f001c9103fd480ffb144eb2718e67e04e",
     "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_A.step": "7342d3ecab6771fe5a5b370ff445be5084f635fbb5ba3c5ba9d7e4818fd563a8",
     "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_B.step": "afcce0aca2b8ab33602e9d866902448d4f261cca3464e044702bb148af66cf05",
@@ -405,6 +426,7 @@
     "02_CAD_Modelos_Historicos/MatrizGedeon_Body_A.step": "f8f05663d52cf7f0aac026eb67e242cdb063394a286090c5b1e2a24c8dbd7dbb",
     "02_CAD_Modelos_Historicos/MatrizGedeon_Body_B.step": "fb8787b3e669591c87f2b4df2e1d158474c99aa820d1575de3fb2482265e32f5",
     "02_CAD_Modelos_Historicos/MatrizGedeon_Canal_Fluxo.step": "3ea2afd1e662d6cea1d294aff7dd5f65a3630b81e61883a27195f9b0009587a4",
+    "02_CAD_Modelos_Historicos/matrizGedeonCerta.step": "4917db736ff68e9b28db9f6794c6375c3bd843576dac5d54a6a0144512cb97a7",
     "04_Dados_SSOT_e_Scripts/cad_die_parameters.json": "892e30df3f794d8ea1fa9aba0fdd4e732e698169dffe386d35a781b7d737031b",
     "04_Dados_SSOT_e_Scripts/cfd_edge_relief.py": "60538fd892ae69ce93eb92f1473b3daad3e51a2dfccce48161b9d11f0ab73531",
     "04_Dados_SSOT_e_Scripts/cfd_land_crosssection.py": "592baed4a5250687666f2f13b45a3a20de6c9d78c38858d001ea46f73f36a8f5",
@@ -412,7 +434,7 @@
     "04_Dados_SSOT_e_Scripts/setup_headless_gl.sh": "8d8812f2b95068466e6f60257349f9162ac9e272d175a5509310e97d5b6e06d2",
     "04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py": "dea957f056f3ca8c7cb112e2106b126f2a42a708f221686cc3e77062a09258a4",
     "04_Dados_SSOT_e_Scripts/verify_legacy_dies.py": "100c9874abb12914d3f94a9460b533d60c1689566773410adcf898778a57fff7",
-    "05_Interface_Auditoria/PROTOCOLO_AUDITORIA.md": "83865936df7b41449dbdb1ebc5de52bdf166fb9b323eee3e4889f754970f8cb2",
+    "05_Interface_Auditoria/PROTOCOLO_AUDITORIA.md": "702d5f2fb7494f3bdc71f78646b76937a0520d6f0076e53084fe59cc38713704",
     "05_Interface_Auditoria/esquema/proposta.schema.json": "88dbcac446e8bfe8955a76ad4050f41dc9cfa0f1bba7312a660e1ba529bac0f6",
     "05_Interface_Auditoria/esquema/veredito.schema.json": "1575a461ecedc928f7eac5673597a2d2e514a43442fba41e112c75cee5198830",
     "05_Interface_Auditoria/scripts/auditar_proposta.py": "189f74c35316506118fb15c0cf0add1d37d42e88f67524ef9a5fc5e910778c4e",
@@ -423,6 +445,6 @@
     "python 04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py --json",
     "python 04_Dados_SSOT_e_Scripts/verify_legacy_dies.py --json",
     "python 04_Dados_SSOT_e_Scripts/avaliacao_matriz3_calculos.py --json",
-    "python 05_Interface_Auditoria/scripts/auditar_proposta.py /home/user/MATRIZEXTRUSORA/05_Interface_Auditoria/.proposta_em_auditoria.json"
+    "python 05_Interface_Auditoria/scripts/auditar_proposta.py 05_Interface_Auditoria/propostas/PRP-0004-land-12.json"
   ]
 }
