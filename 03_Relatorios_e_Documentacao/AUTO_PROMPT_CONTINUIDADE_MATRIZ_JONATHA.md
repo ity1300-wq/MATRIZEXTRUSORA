@@ -83,10 +83,11 @@ cálculo/medição que o produziria.
 - `05_Variantes_Em_Estudo/` — STEP de comparações pedidas antes de mexer em geometria (funil
   coat-hanger da D3 e o recuo dos cartuchos para Z = 99,75 / 100,25 mm da alternativa (a)). **Não**
   substituem o oficial nem entram no `MatrizJonatha.step`
-- `06_CAD_Cabecote_EX-030/` — STEP do **cabeçote** sem a junta da extrusora (corpo Ø130 × 95,000 com
-  nariz Ø80, degrau Ø90 e bolso Ø95 × 70) e do cabeçote como desenhado, gerados por
+- `06_CAD_Cabecote_EX-030/STEP/` — os desenhos STEP do **cabeçote**: o sem a junta da extrusora (corpo
+  Ø130 × 95,000 com nariz Ø80, degrau Ø90 e bolso Ø95 × 70) e o como-desenhado, gerados por
   `gerar_cabecote_ex030.py` a partir deste mesmo JSON; provas em
-  `03_Relatorios_e_Documentacao/CABECOTE_EX-030_STEP.md`. É peça da máquina, não da matriz
+  `03_Relatorios_e_Documentacao/CABECOTE_EX-030_STEP.md`. É peça da máquina, não da matriz.
+  `STEP/estudos/` (fora do repo, `.gitignore`) recebe os cenários não aprovados, como o `--com-m12`
 - `02_CAD_Modelos_Historicos/` — Matriz 1 Copo, Matriz 2 Gedeon, Desenvolvimento (somente leitura)
 - `03_Relatorios_e_Documentacao/` — `PROJETO_DFM_V28_MATRIZ_JONATHA.md` (esta revisão),
   `VERIFICACAO_V28.md` (as 64 medições), `TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md`

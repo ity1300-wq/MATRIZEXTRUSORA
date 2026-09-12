@@ -4,7 +4,9 @@ Geometria: 100% do que foi medido no DWG 030-032 (`cabecote_ex030.json`) e do co
 verificador de interface usa (`verificar_interface_cabecote.cabecote`). Nenhuma cota e digitada aqui.
 
 "A parte que conecta na extrusora" e definida por medida, nao por gosto: e tudo que esta fora do raio
-do corpo (r > 65,00 mm = 0130). Entrassem o cubo 0164 (d 42..52), o flange 0220 x 40 (d 52..92) com os
+do corpo (r > 65,00 mm = 0130). Entrassem o chanfro 10 x 45 graus da transicao corpo->flange
+        (de (d 42,00; r 65,02) a (d 52,00; r 75,02), medido nas duas vistas de secao do DXF), o flange
+        0220 x 40 (d 52..92) com os
 6x016,5 em C.C. 0180 nas fendas de 23,5 e o resalto 0203 x 3 (d 92..95). Os furos da junta estao a
 r = 90 mm, todos fora de 0130 - a intersecao pelo cilindro do corpo leva os seis junto com o flange.
 
@@ -16,8 +18,10 @@ na banda onde o collete aperta, ou furo coaxial no fundo do bolso) muda o que a 
 
   python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py [--com-m12] [--angulo-graus 90]
 
-Saida: 06_CAD_Cabecote_EX-030/Cabecote_EX-030_desenhado.step       (referencia, com a junta)
-        06_CAD_Cabecote_EX-030/Cabecote_EX-030_sem_flange.step     (o pedido)
+Saida (pasta 06_CAD_Cabecote_EX-030/STEP/, criada se nao existir):
+        Cabecote_EX-030_desenhado.step    referencia, com a junta
+        Cabecote_EX-030_sem_flange.step   o pedido
+        com --com-m12 os dois vao para STEP/estudos/ em vez de sobrescrever os entregues
         04_Dados_SSOT_e_Scripts/cabecote_step.json                 (medicoes da operacao)
         03_Relatorios_e_Documentacao/CABECOTE_EX-030_STEP.md       (o que foi removido e o que prova)
 """
@@ -39,7 +43,10 @@ from verificar_v28 import ENVELOPE  # noqa: E402
 from verificar_v28 import n  # noqa: E402
 
 DADO = json.load(open(os.path.join(AQUI, "cabecote_ex030.json"), encoding="utf-8"))
-DIR_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030")
+# pasta dos desenhos STEP do cabecote: s66 entregue aqui; cenario de estudo (ex. --com-m12) vai
+# para STEP/estudos/, que e fora do repo por .gitignore - cenario nao e decisao aprovada
+DIR_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP")
+DIR_ESTUDO = os.path.join(DIR_CAB, "estudos")
 DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 def vol(sh):
     """Volume de Shape/Compound: soma os solidos (maior() pegaria so uma das metades)."""
@@ -70,9 +77,12 @@ def main():
     ap.add_argument("--com-m12", action="store_true",
                     help="abre o 012 transversal no cenario do plano lido (o angulo nao esta cotado)")
     ap.add_argument("--angulo-graus", type=float, default=90.0)
-    ap.add_argument("--saida", default=DIR_CAB)
+    ap.add_argument("--saida", default=None,
+                    help=f"padrao: {os.path.relpath(DIR_CAB, RAIZ)}/ (ou STEP/estudos/ com --com-m12)")
     ap.add_argument("--sem-relatorio", action="store_true")
     a = ap.parse_args()
+    if a.saida is None:  # o cenario M12 nunca sobrescreve os STEP entregues
+        a.saida = DIR_ESTUDO if a.com_m12 else DIR_CAB
     os.makedirs(a.saida, exist_ok=True)
 
     cheio = cabecote(com_anel=False)

@@ -2,18 +2,17 @@
  "peca": "EX-030 CABECOTE - variante sem a junta da extrusora",
  "operacao": "intersecao pelo cilindro Ø130 do corpo (r = 65,000 mm)",
  "anis_removidos": [
-  "Ø164 (d 41.00..52.00)",
   "Ø203 (d 91.00..95.00)",
   "Ø220 (d 51.00..93.00)"
  ],
  "m12_aberto": false,
  "angulo_m12_graus": null,
- "volume_desenhado_mm3": 1723748.046,
+ "volume_desenhado_mm3": 1662551.253,
  "volume_sem_flange_mm3": 624430.81,
- "volume_removido_mm3": 1099317.236,
- "massa_desenhada_kg": 13.5314,
+ "volume_removido_mm3": 1038120.443,
+ "massa_desenhada_kg": 13.051,
  "massa_sem_flange_kg": 4.9018,
- "massa_removida_kg": 8.6296,
+ "massa_removida_kg": 8.1492,
  "Ø_por_x_y_mm": [
   130.0,
   130.0
@@ -29,7 +28,7 @@
  "bolso_comprimento_mm": 71.0,
  "comprimento_preservado": true,
  "redondo": true,
- "volume_reimportado_desenhado_mm3": 1723748.046,
+ "volume_reimportado_desenhado_mm3": 1662551.253,
  "desvio_round_trip_desenhado_mm3": 0.0,
  "sólidos_no_arquivo_desenhado": 1,
  "volume_reimportado_sem_flange_mm3": 624430.81,

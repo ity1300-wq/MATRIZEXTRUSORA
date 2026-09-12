@@ -92,7 +92,8 @@ def fmt(v, casas):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--rapido", action="store_true", help="só as checagens, sem re-rodar nada")
+    ap.add_argument("--rapido", action="store_true",
+                    help="só as checagens, sem re-rodar nada (nao pega crash de verificador)")
     ap.add_argument("--com-estudos", action="store_true", help="inclui os estudos (lento)")
     a = ap.parse_args()
     os.environ.setdefault("LD_LIBRARY_PATH", os.path.join(AQUI, ".headless_gl") + ":" + os.environ.get("LD_LIBRARY_PATH", ""))
@@ -101,6 +102,10 @@ def main():
         print("\n[1] cadeia")
         for cmd in CADEIA + (CADEIA_ESTUDOS if a.com_estudos else []):
             roda(f"python 04_Dados_SSOT_e_Scripts/{cmd}", cmd.split()[0])
+    else:
+        print("[1] cadeia NAO rodada (--rapido). O que segue compara documentos com os JSON que ja estao "
+              "no disco: detecta numero apodrecido, nao detecta crash dentro de um script. Para isso, "
+              "rode sem a flag.")
 
     print("\n[2] matriz v28.1")
     v = json.load(open(os.path.join(AQUI, "verificacao_v28.json"), encoding="utf-8"))

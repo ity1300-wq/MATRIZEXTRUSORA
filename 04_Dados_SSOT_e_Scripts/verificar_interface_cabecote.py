@@ -43,7 +43,20 @@ DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 # profundidade d a partir da FACE DO NARIZ  ->  Z da matriz = 95 - d
 Z_FACE_NARIZ = 95.0
 BORES = [(40.0, 81.0, 96.0), (45.0, 70.0, 81.0), (47.5, -1.0, 70.0)]     # (r, z0, z1)
-CORPO = [(65.0, 53.0, 95.0), (82.0, 43.0, 54.0), (110.0, 2.0, 44.0), (101.5, 0.0, 4.0)]
+# Casca do cabeçote em (raio, Z_inferior, Z_superior), com Z = 95 - d e d medido da face do nariz.
+# A transição corpo -> flange NÃO é um cilindro: é o chanfro 10 × 45° medido no DXF nas duas vistas de
+# seção, de (d 42,00; r 65,02) a (d 52,00; r 75,02). Os números vêm de `corpo.chanfro_corpo_flange` em
+# cabecote_ex030.json - nada é digitado aqui. Onde este arquivo tinha (82,0, 43,0, 54,0), um "cubo Ø164",
+# a cota era leitura minha da borda do furo Ø16 no C.C. Ø180 (82 = 90 - 8), não uma superfície da peça.
+_cab_dado = json.load(open(os.path.join(AQUI, "cabecote_ex030.json"), encoding="utf-8"))
+_CH = _cab_dado["corpo"]["chanfro_corpo_flange"]
+CORPO = [(65.0, 53.0, 95.0), (110.0, 2.0, 44.0), (101.5, 0.0, 4.0)]
+# cone do chanfro em (r_em_baixo, Z_em_baixo, r_em_cima, Z_em_cima); a geratriz e prolongada 0,5 mm para
+# dentro do corpo (mesma reta, mesmo 45 graus) para o booleano nao abrir costura na uniao
+_R_CORPO = _cab_dado["corpo"]["Ø_corpo_mm"] / 2.0
+_Z_FLANGE = Z_FACE_NARIZ - _CH["d_fim_mm"]
+_Z_CORPO = Z_FACE_NARIZ - _CH["d_inicio_mm"]
+CHAMFRO = (_R_CORPO + _CH["cateto_mm"], _Z_FLANGE, _R_CORPO - 0.5, _Z_CORPO + 0.5)
 ANEL65 = (34.15, 91.0, 101.0)     # anel do nariz da variante de 65 mm: (r_int, z0, z1)
 FUROS_FLANGE = (8.25, 90.0)       # (raio do furo, raio do C.C. Ø180)
 BOCA = 75.60
@@ -74,6 +87,12 @@ def cil_z(r, z0, z1):
     return cq.Solid.makeCylinder(r, z1 - z0, cq.Vector(0, 0, z0), cq.Vector(0, 0, 1))
 
 
+def cone_z(r0, z0, r1, z1):
+    """Cone solido entre Z=z0 (raio r0) e Z=z1 (raio r1). E assim que o chanfro do desenho entra no
+    modelo: uma geratriz a 45 graus, nao um degrau."""
+    return cq.Solid.makeCone(r0, r1, z1 - z0, cq.Vector(0, 0, z0), cq.Vector(0, 0, 1))
+
+
 def slab(z0, z1):
     return cq.Workplane("XY").workplane(offset=z0).box(
         600, 600, z1 - z0, centered=(True, True, False)).val()
@@ -83,6 +102,7 @@ def cabecote(com_anel=False):
     h = cq.Workplane("XY").add(cil_z(*CORPO[0]))
     for p in CORPO[1:]:
         h = h.union(cil_z(*p))
+    h = h.union(cone_z(*CHAMFRO))          # o chanfro 10 x 45 medido no desenho, ausente ate aqui
     for (r, z0, z1) in BORES:
         h = h.cut(cil_z(r, z0, z1))
     for i in range(6):
@@ -168,6 +188,16 @@ def main():
     checar("Anel da face (Ø90 → Ø130)", (130.0 - 90.0) / 2,
            dados["anel_na_face"]["largura_radial_mm"], tol=0.01, un="mm",
            obs="confere com o '~20 mm' descrito")
+    # o chanfro 10 x 45 do desenho, cobrado no solido: esteve na cota do SSOT e no papel, e nao no
+    # modelo, ate 2026-09-12 - se ele sumir de novo, este item fecha a cadeia com exit 1
+    _z_meio = _Z_FLANGE + _CH["cateto_mm"] / 2.0
+    _secao = maior(head.intersect(cil_z(500.0, _z_meio - 0.0005, _z_meio + 0.0005))).BoundingBox()
+    _r_esperado = _R_CORPO + _CH["cateto_mm"] / 2.0
+    checar("Chanfro corpo->flange no sólido (raio na meia-altura do cone)",
+           max(_secao.xlen, _secao.ylen) / 2.0, _r_esperado, tol=0.01, un="mm",
+           obs=f"meça em Z = {n(_z_meio)} mm (d = {n(Z_FACE_NARIZ - _z_meio)} mm): Ø130 → Ø150 em "
+               f"{n(_CH['cateto_mm'])} mm a 45,00°, a mesma aresta nas duas vistas de seção do DXF")
+
     parafusos = None
     for i in range(6):
         ang = math.radians(60 * i)

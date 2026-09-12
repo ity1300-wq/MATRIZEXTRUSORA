@@ -9,22 +9,21 @@ python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py        # gera, mede e pro
 
 | arquivo | o que é |
 | :--- | :--- |
-| `06_CAD_Cabecote_EX-030/Cabecote_EX-030_sem_flange.step` | **o pedido**: corpo Ø130 × 95,000 mm com o nariz Ø80, o degrau Ø90 e o bolso Ø95 × 71,000 mm |
-| `06_CAD_Cabecote_EX-030/Cabecote_EX-030_desenhado.step` | o cabeçote como está no desenho (cubo + flange + resalto), para referência e para a subtração |
+| `06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_sem_flange.step` | **o pedido**: corpo Ø130 × 95,000 mm com o nariz Ø80, o degrau Ø90 e o bolso Ø95 × 71,000 mm |
+| `06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_desenhado.step` | o cabeçote como está no desenho (cubo + flange + resalto), para referência e para a subtração |
 
 ## O que foi removido, e como isso foi definido
 
 Remover = intersectar pelo cilindro Ø130 do corpo. A definição não é arbitrária: a junta
 cabeçote↔extrusora é exatamente o que está fora do corpo, medido em anéis:
 
-* Ø164 (d 41.00..52.00);
 * Ø203 (d 91.00..95.00);
 * Ø220 (d 51.00..93.00);
 * os 6 furos Ø16,500 em C.C. Ø180,000 ficam a 90,000 mm do eixo, **todos** fora de r = 65,000 mm — o corte leva os seis junto com o flange, sem precisar de furo novo e sem tocar em nenhuma face de centragem.
 
 ## O que a medição do sólido prova
 
-* volume 1723748 → 624431 mm³; massa **13,531 → 4,902 kg**, foram **8,630 kg** de aço a menos (63,8 % do volume) — a conta do material e do tempo de usinagem muda de verdade;
+* volume 1662551 → 624431 mm³; massa **13,051 → 4,902 kg**, foram **8,149 kg** de aço a menos (62,4 % do volume) — a conta do material e do tempo de usinagem muda de verdade;
 * **0,0000 mm³** de metal removido até r = 46,50 mm, que é a banda Ø93 em que a matriz é apertada: o bolso Ø95, o degrau Ø90→Ø95 (a face que reage os 29,8 kN de empuxo) e o nariz Ø80 continuam os do desenho, milímetro por milímetro;
 * comprimento axial **95,000 mm**, igual ao do desenho (95,000 mm), e a bounding box ficou Ø130,000 × Ø130,000: corpo redondo, sem nada sobrando da junta;
 * na parede do bolso (entre a banda Ø93 e o furo Ø95): 0,000 mm³ removidos pelo corte — o Ø12 do M12, se ele for transversal, abre 1,00 mm além da banda da matriz, na parede onde o collete EX-031 encosta, e não na matriz;

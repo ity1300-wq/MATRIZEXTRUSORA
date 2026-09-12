@@ -13,6 +13,7 @@ O sólido do cabeçote foi montado do perfil lido no DWG 030-032 (escala calibra
 | Face de entrada da matriz rasa com a traseira do cabeçote | -0.0 | 0.0 | -0.0 | CONFORME | a boca Ø75,60 fica exposta ao canal de massa do flange |
 | Protrusão da face de saída além da face do nariz | 14.0 | 14.0 | 0.0 | CONFORME | a fenda trabalha fora do cabeçote: nada de filme congelado na frente da matriz |
 | Anel da face (Ø90 → Ø130) | 20.0 | 20.0 | 0.0 | CONFORME | confere com o '~20 mm' descrito |
+| Chanfro corpo->flange no sólido (raio na meia-altura do cone) | 70.0005 | 70.0 | 0.0005 | CONFORME | meça em Z = 48,000 mm (d = 47,000 mm): Ø130 → Ø150 em 10,000 mm a 45,00°, a mesma aresta nas duas vistas de seção do DXF |
 | Menor distância parafuso M12 (C.C Ø180) → corpo da matriz | 35.25 | 35.25 | 0.0 | CONFORME | nenhum furo da junta cabeçote↔extrusora alcança a matriz |
 | Curso livre da manta após sair da matriz até o cabeçote | 14.2201 | — | — | CONFORME | a manta nasce 14 mm à frente da face do nariz e sai pela diagonal do furo Ø80: não há contato possível |
 | Folga do nariz Ø79,5 no furo Ø80 (a 1 mm das bordas do degrau) | 0.25 | 0.25 | -0.0 | CONFORME |  |
