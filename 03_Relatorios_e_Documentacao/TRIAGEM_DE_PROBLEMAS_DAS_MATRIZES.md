@@ -19,11 +19,13 @@
 | Canal de polímero (real) | 318.480 mm³ | 43.018 mm³ | 155.370 mm³ | 213.945 mm³ |
 | Arquivo "Canal_Fluxo" × corpo | ✅ confere | ❌ **4,96× maior** | ✅ confere | ✅ confere |
 | Pinos de alinhamento | (não tem) | Ø1,78 × 10 mm atravessando as duas metades | — | 2 furos Ø4 × 12, só no `Body_A`, **selados** |
-| ΔP por lei das potências (1D, medido) | 37,1 bar | **305,5 bar** | 49,3 bar | **41,9 bar** |
+| ΔP por lei das potências (1D, medido) | 23,8 bar | **194,2 bar** | 31,3 bar | **26,6 bar** |
 | ΔP declarado no relatório | 185,4 bar | 268,7 bar | — | 68,2 bar |
-| Razão medido/declarado | 0,20× ❌ | 1,14× ✅ | — | 0,61× ✅ |
+| Razão medido/declarado | 0,13× ❌ | 0,72× | — | 0,39× ❌ |
 
 Cálculo próprio: lei das potências com **K = 18.500 Pa·s^n, n = 0,32, Q = 15 cm³/s** (os mesmos parâmetros do SSOT), integrada sobre a geometria medida. É um modelo 1D de escoamento desenvolvido: válido para comparar matrizes e checar ordem de grandeza, **não** substitui CFD.
+
+> **Correção de 11/09/2026** — a fórmula da fenda larga usada na primeira versão desta tabela tinha um fator extra `(1+n)/n`, que inflava o ΔP em `((1+n)/n)^n = 1,573×`. Valores antigos (37,1 / 305,5 / 49,3 / 41,9 bar) foram substituídos pelos corretos (23,8 / 194,2 / 31,3 / 26,6 bar). O fator de correção foi verificado contra o CFD 2D da seção do land da Jonatha: **2,1761 bar/mm** medidos no CFD contra **2,19 bar/mm** na fórmula — 0,6%. A razão medido/declarado da Jonatha passa de 0,61× para 0,39×, ou seja, o ΔP do canal é **ainda menor** do que se supunha, e a folga da extrusora é maior.
 
 ---
 
@@ -87,13 +89,13 @@ Recalculado com os **mesmos parâmetros reológicos do SSOT** sobre a geometria 
 
 | Alegação | Medição independente | Veredito |
 | :--- | :--- | :--- |
-| Matriz 2: ΔP = 268,7 bar | 305,5 bar | ✅ coerente (1,14×) |
-| Jonatha: ΔP = 68,2 bar | 41,9 bar | ✅ mesma ordem (0,61×) |
-| Matriz 1: ΔP = 185,4 bar | 37,1 bar | ❌ 0,20× — o 1D não captura a contração de 90°, que é o defeito real dela; esse número não sai do método declarado |
+| Matriz 2: ΔP = 268,7 bar | 194,2 bar | ⚠️ mesma ordem (0,72×), mas o declarado é 38% maior |
+| Jonatha: ΔP = 68,2 bar | 26,6 bar | ❌ 0,39×: o declarado é 2,6× o medido |
+| Matriz 1: ΔP = 185,4 bar | 23,8 bar | ❌ 0,13× — o 1D não captura a contração de 90°, que é o defeito real dela; esse número não sai do método declarado |
 | τ na parede: Gedeon 157,11 kPa → Jonatha 128,44 kPa | **164,0 kPa nas duas** (γ̇ = 915 s⁻¹) | ❌ impossível: o land é o **mesmo** (75 × 1,5) e a vazão é a **mesma** — a tensão de cisalhamento na parede não pode diferir entre as duas |
 | Uniformidade 99,10% / 68,96% / 54,73% | — | ⚠️ não auditável: não existe definição (variação de quê, medida onde) nem planilha no repositório |
 
-**O que é verdade na física:** a direção do ganho é correta e comprovável. A Matriz 2 comprime o fluxo de 74 mm para 1,5 mm em 21 mm (funil quase cego) e depois o mantém 88 mm num land fino; a Jonatha faz a mesma compressão em 99 mm e mantém apenas 8,5 mm de land. Como a perda de carga no land é proporcional ao comprimento, a diferença medida (305,5 → 41,9 bar) é explicada por geometria, não por narrativa.
+**O que é verdade na física:** a direção do ganho é correta e comprovável. A Matriz 2 comprime o fluxo de 74 mm para 1,5 mm em 21 mm (funil quase cego) e depois o mantém 88 mm num land fino; a Jonatha faz a mesma compressão em 99 mm e mantém apenas 8,5 mm de land. Como a perda de carga no land é proporcional ao comprimento, a diferença medida (194,2 → 26,6 bar) é explicada por geometria, não por narrativa.
 
 **Ação:** refazer os números em script versionado (ou rotular os atuais como "estimativa a confirmar"). O número de 99,10% precisa de definição explícita antes de ser usado como critério de aceitação.
 
@@ -127,8 +129,8 @@ Recalculado com os **mesmos parâmetros reológicos do SSOT** sobre a geometria 
 | **N4** | Bipartição em Y = 0 | Interferência 0,000 mm³; `aço + canal + furos` fecham o envelope com **0,001 mm³** de resíduo. |
 | **N5** | Volumes e massa | Body_A 234.255,29 mm³, Body_B 234.746,37 mm³, canal 213.945,15 mm³ → **3,682 kg** de aço. Bate com o SSOT na casa dos milésimos. |
 | **N6** | Consistência dos arquivos entregues | Matriz 1, Matriz Desenvolvimento e Matriz Jonatha têm o "canal isolado" igual ao vazio do corpo. **Só** o da Matriz 2 está errado (P5). |
-| **N7** | A Matriz 1 não perdia carga por atrito | O trecho reto Ø75,6 mais os ~10 mm de fenda dão ≈37 bar em 1D — praticamente o mesmo da Jonatha (41,9 bar). O defeito dela é o **degrau de 90°** (parede cega que rasga o fundido), e não "185,4 bar de contrapressão". A troca da matriz continua certa; o motivo apontado nos relatórios é que estava errado. |
-| **N8** | O ganho da Jonatha sobre a Matriz 2 é real | Land medido: **88,0 mm → 8,5 mm**. Perda de carga medida: **305,5 → 41,9 bar**. A redução declarada (268,7 → 68,2 bar) é **conservadora** em relação à medição — o ganho não é marketing, é geometria. |
+| **N7** | A Matriz 1 não perdia carga por atrito | O trecho reto Ø75,6 mais os ~10 mm de fenda dão ≈24 bar em 1D — praticamente o mesmo da Jonatha (26,6 bar). O defeito dela é o **degrau de 90°** (parede cega que rasga o fundido), e não "185,4 bar de contrapressão". A troca da matriz continua certa; o motivo apontado nos relatórios é que estava errado. |
+| **N8** | O ganho da Jonatha sobre a Matriz 2 é real | Land medido: **88,0 mm → 8,5 mm**. Perda de carga medida: **194,2 → 26,6 bar**. A redução declarada (268,7 → 68,2 bar) é **conservadora** em relação à medição — o ganho não é marketing, é geometria. |
 
 ---
 
@@ -137,7 +139,7 @@ Recalculado com os **mesmos parâmetros reológicos do SSOT** sobre a geometria 
 | Alegação nos relatórios | O que a medição mostra | Ação |
 | :--- | :--- | :--- |
 | "τ na parede cai de 157,11 para 128,44 kPa" | Seção do land e vazão idênticas ⇒ τ é o mesmo nas duas: **164,0 kPa** | Recalcular; o ganho real está no ΔP, não em τ |
-| "Matriz 1: 185,4 bar / 54,73% de uniformidade" | 1D sobre a geometria medida dá **37,1 bar** | Se o número for necessário, rodar CFD 2D/3D de verdade; senão, marcar como não verificado |
+| "Matriz 1: 185,4 bar / 54,73% de uniformidade" | 1D sobre a geometria medida dá **23,8 bar** (o degrau de 90° não é capturado por 1D) | Se o número for necessário, rodar CFD 2D/3D de verdade; senão, marcar como não verificado |
 | "Uniformidade de 99,10%" | Sem definição nem planilha no repositório | Publicar a definição (variação de quê, medida em qual plano) e o cálculo |
 | "Land: 87,60 → 10,00 mm (−88,6%)" | Medido **88,0 → 10,0 mm** ✅, mas o "10,00" inclui 1,50 mm de chanfro ⇒ paralelos = 8,50 mm | Confirmar o ganho e corrigir o valor do land paralelo (P8) |
 

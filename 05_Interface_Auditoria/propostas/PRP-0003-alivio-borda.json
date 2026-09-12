@@ -1,0 +1,30 @@
+{
+  "protocolo": "1.0",
+  "id": "PRP-0003",
+  "titulo": "Alivio de borda a montante do labio, mantendo a ponta em R0,75",
+  "autor": "IA engenheiro (terceira iteracao do ciclo)",
+  "data": "2026-09-12",
+  "tipo": "calculo",
+  "base_commit": "55860156a66f91fa7ae6e4093b5cf73eda433f96",
+  "objetivo": "Engordar a aresta fina sem mexer no raio de saida especificado, resolvendo a aresta de ~0,13 mm que a avaliacao mediu.",
+  "arquivos": [],
+  "parametros": {},
+  "esperado": {
+    "espessura_equivalente_borda_mm": 0.222,
+    "dp_total_bar": 26.68
+  },
+  "nao_muda": [
+    "largura_fenda_mm",
+    "espessura_fenda_mm",
+    "raio_borda_mm",
+    "area_fenda_mm2",
+    "boca_entrada_mm",
+    "uniformidade_nucleo_pct"
+  ],
+  "justificativa": "O estudo de alivio de borda (cfd_edge_relief.py) mediu que 150 um de alivio na rampa levam a espessura equivalente dos ultimos 2 mm de 0,126 para 0,222 mm (+76%), sem mexer no nucleo da chapa e com queda de 4% no gradiente. Aqui proponho aplicar esse alivio SOMENTE a montante do labio, preservando a ponta em R0,75 - o que difere do estudo, que alargava o raio de saida.",
+  "riscos": [
+    "A variante 'alivio a montante, ponta em R0,75' ainda NAO foi rodada no cfd_edge_relief.py: a previsao de 0,222 mm vem da variante com raio de ponta maior e pode nao se transferir.",
+    "Alivio a montante muda a distribuicao de vazao perto da borda de um jeito que o modelo 1D nao captura."
+  ],
+  "observacoes": "r2 (12/09): revisao apos o bloqueio I5 (o auditor re-selou a zona congelada). O conteudo tecnico nao mudou; a proposta volta para a fila para veredito valido. Serve de teste do protocolo: alegacao que o auditor nao sabe verificar deve gerar ressalva explicita, nao aprovacao silenciosa."
+}

@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Veredito de auditoria (Protocolo de Auditoria v1.0)",
+  "type": "object",
+  "required": ["protocolo", "proposta_id", "commit_auditado", "data", "estado", "resumo",
+               "checks", "comparacao_baseline", "bloqueios", "recomendacoes", "nao_auditavel",
+               "hashes", "reproduzir"],
+  "properties": {
+    "protocolo": {"type": "string", "const": "1.0"},
+    "proposta_id": {"type": "string", "pattern": "^PRP-[0-9]{4}$"},
+    "commit_auditado": {"type": "string"},
+    "proposta_sha256": {"type": "string"},
+    "data": {"type": "string"},
+    "auditor": {
+      "type": "object",
+      "properties": {
+        "nome": {"type": "string"},
+        "tipo": {"type": "string", "enum": ["IA", "CI", "humano"]},
+        "tipo_proposta": {"type": "string", "enum": ["calculo", "geometria", "processo"]}
+      }
+    },
+    "estado": {
+      "type": "string",
+      "enum": ["APROVADO", "APROVADO_COM_RESSALVAS", "REPROVADO", "BLOQUEADO"]
+    },
+    "resumo": {"type": "string"},
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "o_que", "severidade", "resultado"],
+        "properties": {
+          "id": {"type": "string"},
+          "o_que": {"type": "string"},
+          "nominal": {},
+          "medido": {},
+          "tolerancia": {"type": "string"},
+          "unidade": {"type": "string"},
+          "severidade": {"type": "string", "enum": ["BLOCKER", "ALERTA", "INFO"]},
+          "resultado": {"type": "string", "enum": ["OK", "ATENCAO", "FALHA", "NAO_VERIFICADO"]},
+          "fonte": {"type": "string"},
+          "observacao": {"type": "string"}
+        }
+      }
+    },
+    "metricas": {"type": "object"},
+    "comparacao_baseline": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["metrica", "baseline", "proposto"],
+        "properties": {
+          "metrica": {"type": "string"},
+          "baseline": {},
+          "proposto": {},
+          "delta_pct": {"type": ["number", "null"]},
+          "direcao": {"type": "string", "enum": ["melhor", "pior", "igual", "n/a"]},
+          "aceitavel": {"type": "boolean"},
+          "bloqueia_se_mudar": {"type": "boolean"}
+        }
+      }
+    },
+    "bloqueios": {"type": "array", "items": {"type": "string"}},
+    "recomendacoes": {"type": "array", "items": {"type": "string"}},
+    "nao_auditavel": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "item": {"type": "string"},
+          "motivo": {"type": "string"}
+        }
+      }
+    },
+    "modelo_parametrico": {"type": "string"},
+    "hashes": {"type": "object"},
+    "reproduzir": {"type": "array", "items": {"type": "string"}}
+  }
+}

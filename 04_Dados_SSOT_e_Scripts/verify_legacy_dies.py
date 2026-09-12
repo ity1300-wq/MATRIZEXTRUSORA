@@ -60,8 +60,12 @@ def dp_fenda(W_mm, H_mm, L_mm):
         return 0.0
     W, H, L = W_mm * 1e-3, H_mm * 1e-3, L_mm * 1e-3
     Q = Q_MM3_S * 1e-9
-    num = Q * (1 + N_INDICE) * (1 + 2 * N_INDICE)
-    den = 2 * W * N_INDICE ** 2 * (H / 2) ** ((1 + 2 * N_INDICE) / N_INDICE)
+    # Q = W * 2n/(2n+1) * (G/K)^(1/n) * (H/2)^((2n+1)/n)
+    # -> G = K * ( Q*(2n+1) / (2*W*n*(H/2)^((2n+1)/n)) )^n
+    # (a versão anterior tinha um fator extra (1+n)/n, que inflava o Δp em
+    #  ((1+n)/n)^n = 1,573x; verificado contra o CFD 2D da seção do land)
+    num = Q * (1 + 2 * N_INDICE)
+    den = 2 * W * N_INDICE * (H / 2) ** ((1 + 2 * N_INDICE) / N_INDICE)
     return K_PA_SN * L * (num / den) ** N_INDICE / 1e5
 
 
