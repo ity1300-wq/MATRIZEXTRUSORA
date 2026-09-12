@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 *.tmp
 .cache/
+
+# Ambiente CAD headless (stub libGL gerado por setup_headless_gl.sh)
+.headless_gl/
