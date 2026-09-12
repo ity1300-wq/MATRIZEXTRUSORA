@@ -1,0 +1,68 @@
+{
+  "projeto": "Avaliacao_Uniformidade_Matriz_3",
+  "metrica": "q_min/q_max da vazão local por mm de largura",
+  "raio_borda_mm": 0.75,
+  "limite_nucleo_mm": 36.75,
+  "secoes": [
+    {
+      "z_mm": 70.0,
+      "altura_max_mm": 23.205,
+      "q_medio_mm3_s_mm": 200.0,
+      "q_min_mm3_s_mm": 466.447,
+      "q_max_mm3_s_por_mm": 556.229,
+      "uniformidade_qmin_qmax_pct": 83.9,
+      "tau_medio_parede_kpa": 28.96791727542497,
+      "G_bar_mm": 0.03790450613800541,
+      "aviso": "perfil q(x) amostrado não resolve a seção alta do funil; usar apenas as métricas escalares"
+    },
+    {
+      "z_mm": 95.0,
+      "altura_max_mm": 4.4931,
+      "q_medio_mm3_s_mm": 200.0,
+      "q_min_mm3_s_mm": 418.014,
+      "q_max_mm3_s_por_mm": 455.283,
+      "uniformidade_qmin_qmax_pct": 91.8,
+      "tau_medio_parede_kpa": 80.23365480515079,
+      "G_bar_mm": 0.4758065646894736,
+      "aviso": "perfil q(x) amostrado não resolve a seção alta do funil; usar apenas as métricas escalares"
+    },
+    {
+      "z_mm": 99.5,
+      "altura_max_mm": 1.5,
+      "q_medio_mm3_s_mm": 200.0,
+      "q_min_mm3_s_mm": 112.69,
+      "q_max_mm3_s_por_mm": 215.522,
+      "uniformidade_qmin_qmax_pct": 52.3,
+      "tau_medio_parede_kpa": 160.8879760835549,
+      "G_bar_mm": 2.176064416059068,
+      "core_q_medio_mm3_s_mm": 202.8,
+      "core_parcela_vazao_pct": 100.0,
+      "core_dentro_5pct": 92.3,
+      "core_dentro_10pct": 97.0,
+      "ultimo_1mm_parcela_vazao_pct": 0.63,
+      "ultimo_1mm_q_medio_mm3_s_mm": 47.0,
+      "ultimo_1mm_q_relativo_ao_nucleo_pct": 23.2,
+      "borda_parcela_vazao_pct": 0.0,
+      "borda_q_medio_mm3_s_mm": 0.0,
+      "borda_q_relativa_ao_nucleo_pct": 0.0,
+      "perfil_ultimos_2mm": [
+        [
+          35.75,
+          162.1
+        ],
+        [
+          36.25,
+          141.1
+        ],
+        [
+          36.75,
+          112.7
+        ],
+        [
+          37.25,
+          37.6
+        ]
+      ]
+    }
+  ]
+}

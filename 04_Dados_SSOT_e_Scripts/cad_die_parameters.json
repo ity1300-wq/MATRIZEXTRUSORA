@@ -102,12 +102,12 @@
       "dados": "04_Dados_SSOT_e_Scripts/auditoria_matrizes_historicas.json",
       "resumo": "Medição das 4 matrizes (1 Copo, 2 Gedeon, Desenvolvimento e Jonatha v27). Separadas as alegações que se sustentam das que não se sustentam.",
       "problemas_reais": [
-        "P1 (bloqueador): Matriz Jonatha sem nenhum recurso de fixação/aperto - a força de abertura das metades é da ordem de 30 kN (68,2 bar x 4.489 mm2).",
+        "P1 (bloqueador): Matriz Jonatha sem nenhum recurso de fixação/aperto - a força de abertura das metades é da ordem de 20 a 30 kN (68,2 bar x 4.489 mm2 no pior caso; 19,9 kN pelo perfil de pressão calculado: 24,4 bar médios x 8.175 mm2).",
         "P2 (bloqueador): furos de pino selados no Body_A (cavidades internas) e ausentes no Body_B; a Matriz 2 tinha pino Ø1,78 x 10 mm atravessando as duas metades.",
         "P3 (risco): sem controle térmico (cartuchos Ø9,5, termopar, refrigeração Ø8,0).",
         "P4 (dependência): sem padrão de flange/acoplamento em Z=0.",
         "P5 (entrega): MatrizGedeon_Canal_Fluxo.step está errado - 213.790,03 mm3 contra 43.017,90 mm3 do canal real (4,96x maior), com geometria igual à da Jonatha.",
-        "P6 (decisão): números de CFD não reproduzíveis - τ de 128,44 kPa é impossível (mesmo land e mesma vazão dão 164,0 kPa); Matriz 1 com 185,4 bar contra 37,1 bar medidos em 1D.",
+        "P6 (decisão): números de CFD não reproduzíveis - τ de 128,44 kPa é impossível (mesmo land e mesma vazão dão 164,0 kPa, confirmado por CFD 2D em 160,9 kPa); Matriz 1 com 185,4 bar contra 23,8 bar medidos em 1D (fórmula da fenda corrigida em 11/09/2026).",
         "P7 (robustez): lábio de saída com 0,75 mm de aço - sugerido chanfro de 0,8 x 45°.",
         "P8 (documentação): land paralelo real de 8,50 mm e não 10,00 mm."
       ],
@@ -118,8 +118,8 @@
         "N4: bipartição sem interferência (0,000 mm3) e fechamento volumétrico com 0,001 mm3 de resíduo.",
         "N5: volumes e massa conferem com o SSOT (3,682 kg de aço).",
         "N6: canal isolado confere com o corpo na Matriz 1, Desenvolvimento e Jonatha.",
-        "N7: a Matriz 1 não perdia carga por atrito (37,1 bar em 1D); o defeito é o degrau de 90°.",
-        "N8: o ganho da Jonatha é real - land de 88,0 para 8,5 mm e ΔP medido de 305,5 para 41,9 bar."
+        "N7: a Matriz 1 não perdia carga por atrito (23,8 bar em 1D); o defeito é o degrau de 90°.",
+        "N8: o ganho da Jonatha é real - land de 88,0 para 8,5 mm e ΔP medido de 194,2 para 26,6 bar."
       ]
     }
   }

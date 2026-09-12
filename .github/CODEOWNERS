@@ -1,0 +1,14 @@
+# Zona congelada do Protocolo de Auditoria (§8): as IAs não afrouxam a própria régua.
+# Toda alteração nestes caminhos exige revisão do responsável humano pelo projeto.
+
+05_Interface_Auditoria/PROTOCOLO_AUDITORIA.md   @ity1300-wq
+05_Interface_Auditoria/esquema/                 @ity1300-wq
+05_Interface_Auditoria/scripts/                 @ity1300-wq
+05_Interface_Auditoria/baseline/                @ity1300-wq
+04_Dados_SSOT_e_Scripts/cad_die_parameters.json @ity1300-wq
+04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py @ity1300-wq
+04_Dados_SSOT_e_Scripts/verify_legacy_dies.py   @ity1300-wq
+
+# O modelo aprovado também é do humano
+01_CAD_MatrizJonatha_Oficial/                   @ity1300-wq
+02_CAD_Modelos_Historicos/                      @ity1300-wq

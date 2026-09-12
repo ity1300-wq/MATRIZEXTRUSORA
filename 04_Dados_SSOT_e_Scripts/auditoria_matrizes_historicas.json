@@ -22,7 +22,7 @@
       ],
       "z_inicio_land": 70.75,
       "comprimento_land_mm": 9.95,
-      "dp_estimado_1d_bar": 37.1,
+      "dp_estimado_1d_bar": 23.8,
       "dp_declarado_bar": 185.4,
       "uniformidade_declarada_pct": 54.73,
       "tau_parede_land_kpa": 164.0
@@ -45,7 +45,7 @@
       ],
       "z_inicio_land": 21.0,
       "comprimento_land_mm": 88.0,
-      "dp_estimado_1d_bar": 305.5,
+      "dp_estimado_1d_bar": 194.2,
       "dp_declarado_bar": 268.7,
       "uniformidade_declarada_pct": 68.96,
       "tau_parede_land_kpa": 164.0
@@ -68,7 +68,7 @@
       ],
       "z_inicio_land": 99.0,
       "comprimento_land_mm": 10.0,
-      "dp_estimado_1d_bar": 49.3,
+      "dp_estimado_1d_bar": 31.3,
       "tau_parede_land_kpa": 164.0
     },
     {
@@ -89,7 +89,7 @@
       ],
       "z_inicio_land": 99.0,
       "comprimento_land_mm": 10.0,
-      "dp_estimado_1d_bar": 41.9,
+      "dp_estimado_1d_bar": 26.6,
       "dp_declarado_bar": 68.2,
       "uniformidade_declarada_pct": 99.1,
       "tau_parede_land_kpa": 164.0
