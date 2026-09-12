@@ -171,7 +171,7 @@
   },
   "pendencias": [
    "confirmar se o assento do bolso Ø95x70 e cilindrico ou conico de 3 graus (o desenho mostra o collete com OD Ø95->Ø86)",
-   "confirmar o COMPRIMENTO do bico do cabeçote (14,00 mm no desenho): se na máquina o bico chegar até a face da matriz, os cartuchos (Z=97,00) e os termopares (Z=103,00) ficam dentro do cabeçote e o aquecimento tem de mudar de peça"
+   "RESOLVIDA em 2026-09-12 pela linha axial medida na maquina (20,00 mm, croqui do usuario): folga traseira do furo mais critico = 3.25 mm com a protrusao medida, contra -2.75 mm com o nariz de 14.00 mm do desenho, onde 1372 mm3 de metal do cabecote entrariam no caminho do cartucho em X=-22,0, Z=97,0. Nenhum furo da matriz se move: no pior caso o alivio e no cabecote. Medido em verificar_interface_cabecote.py bloco F (Z da face = 89.00)"
   ],
   "conferencia_com_a_medicao_do_usuario": {
    "data": "2026-09-11",
@@ -187,13 +187,42 @@
     "com_anel_D68_30_mm": -3.3500000000000014,
     "casou": true
    },
-   "leitura": "os dois números do croqui reproduzem a medição do DXF; a segunda alternativa é a única compatível com 'sobrar 2,5 mm', o que descarta o anel de 65 mm"
+   "leitura": "os dois números do croqui reproduzem a medição do DXF; a segunda alternativa é a única compatível com 'sobrar 2,5 mm', o que descarta o anel de 65 mm",
+   "linha_axial_ate_o_fim_do_bico": {
+    "declarada_mm": 20.0,
+    "folga_traseira_do_furo_critico_mm": 3.25,
+    "cenario_alternativo_desenho": {
+     "protrusao_mm": 14.0,
+     "folga_mm": -2.75,
+     "metal_no_caminho_mm3": 1372.276
+    },
+    "conclusao": "os furos de aquecimento ficam livres; a diferenca entre os dois numeros (6,00 mm) decide se o cabecote precisa de alivio no nariz, nao se a matriz muda"
+   }
   }
  },
  "numeros": {
   "pressao_efetiva_MPa": 6.818460031827641,
   "empuxo_axial_kN": 29.843145966035845,
   "empuxo_axial_dp1d_kN": 18.33885965658045,
+  "acesso_furacao_cenarios": {
+   "desenho DXF medido": {
+    "protrusao_mm": 14.0,
+    "z_face_cabecote_mm": 95.0,
+    "folga_axial_min_mm": -2.75,
+    "furo_critico": "cartucho em X=-22,0, Z=97,0",
+    "metal_no_caminho_mm3": 1372.276,
+    "n_furos_na_faixa_de_saida": 5
+   },
+   "você mediu na máquina": {
+    "protrusao_mm": 20.0,
+    "z_face_cabecote_mm": 89.0,
+    "folga_axial_min_mm": 3.25,
+    "furo_critico": "cartucho em X=-22,0, Z=97,0",
+    "metal_no_caminho_mm3": 0.0,
+    "n_furos_na_faixa_de_saida": 5
+   }
+  },
+  "protrusao_medida_usuario_mm": 20.0,
   "dp_1d_bar": 41.9,
   "area_boca_mm2": 4488.833247155239,
   "area_fenda_mm2": 112.0171,
@@ -542,10 +571,30 @@
    "medido": "~0,0023 mm por lado",
    "observacao": "casca de 8,70 mm sobre o canal, E = 200 GPa - ordem de grandeza",
    "status": "CONFORME"
+  },
+  {
+   "item": "Mesmo furo no cenário do desenho (protrusão 14,00 mm)",
+   "medido": "folga -2,750 mm | 1372,276 mm³ de metal do cabeçote no caminho de cartucho em X=-22,0, Z=97,0",
+   "observacao": "ou o nariz do cabeçote ganha alívio para passar o cartucho, ou a matriz assenta 6,00 mm mais para fora - que e justamente o que a sua linha de 20,000 mm diz. Em nenhum dos dois casos a furação da matriz muda de lugar.",
+   "status": "PENDENTE_CONFIRMACAO"
+  },
+  {
+   "item": "Folga axial da furação de saída à frente do metal do cabeçote",
+   "medido": 3.25,
+   "minimo": 0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "cenário medido na máquina (protrusão 20,00 mm); furo mais crítico: cartucho em X=-22,0, Z=97,0; metal do cabeçote no caminho de inserção: 0,000 mm³"
+  },
+  {
+   "item": "O que isso decide sobre os furos da matriz",
+   "medido": "nada se move na matriz nos dois cenários",
+   "observacao": "a folga traseira mínima medida é 3,250 mm no seu número e -2,750 mm no do desenho; com folga positiva o cartucho entra por fora sem depender de furo no cabeçote",
+   "status": "CONFORME"
   }
  ],
- "itens": 45,
- "conformes": 41,
+ "itens": 48,
+ "conformes": 43,
  "nao_conformes": 0,
- "pendentes": 4
+ "pendentes": 5
 }

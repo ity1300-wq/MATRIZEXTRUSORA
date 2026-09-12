@@ -184,6 +184,24 @@ def main():
     nz = (ic or {}).get("numeros", {})
     if not nz:
         raise SystemExit("interface_cabecote.json['numeros'] ausente - rode verificar_interface_cabecote.py --json")
+    ac = nz.get("acesso_furacao_cenarios")
+    if ac:
+        _ok = ac["você mediu na máquina"]
+        _alt = ac["desenho DXF medido"]
+        txt_bico = (f"**FECHADA pela sua linha axial de {dim(_ok['protrusao_mm'])} mm** — medida no sólido, não "
+                    f"estimada: sobram {dim(_ok['folga_axial_min_mm'])} mm entre a borda traseira do furo mais "
+                    f"crítico e o fim do metal do cabeçote, e {dim(_ok['metal_no_caminho_mm3'], 0)} mm³ de metal no "
+                    f"caminho de inserção dos {_ok['n_furos_na_faixa_de_saida']} eixos de furo na faixa de saída "
+                    f"(são 10 furos: cada eixo entra pelas duas metades)")
+        txt_bico_efeto = (f"nenhum furo da matriz se move. No valor do desenho ({dim(_alt['protrusao_mm'])} mm) "
+                          f"faltariam {dim(abs(_alt['folga_axial_min_mm']))} mm e "
+                          f"{dim(_alt['metal_no_caminho_mm3'], 0)} mm³ de metal do cabeçote entrariam no caminho "
+                          f"do {_alt['furo_critico']} — a saída aí é alívio no nariz do cabeçote ou a matriz "
+                          "assentada mais para fora, nunca mexer na furação da matriz")
+    else:
+        txt_bico = "**ABERTA — é a única que pode mexer nos furos** (rode `verificar_interface_cabecote.py --json`)"
+        txt_bico_efeto = ("se o bico chegar até a face da matriz, os cartuchos (Z=97,00) e os termopares "
+                          "(Z=103,00) ficam enterrados no cabeçote e o aquecimento muda de peça")
     p_lim_bar = nz["pressao_efetiva_MPa"] * 10
     f_boca = nz["pressao_efetiva_MPa"] * nz["area_boca_mm2"] / 1e3
     f_proj = nz["dp_1d_bar"] / 10 * nz["area_projetada_mm2"] / 1e3
@@ -471,7 +489,7 @@ termopar ou o polímero.
 | **D2** | Chanfro da saída 0,80 ou 1,50 | **DECIDIDO: mantém 1,50 × 45°** (land 8,50, lâmina 0,75) como no master | a v28.1 não altera a região de saída; o lascamento na limpeza vira item de procedimento, não de geometria |
 | **D4** | Promover a v28 para oficial | **DECIDIDO: não** — v27.0 segue master | a v28 fica ao lado, verificada, esperando você conferir a máquina |
 | **D3** | Funil: o cone linear do modelo atual **ou** o coat-hanger de 6,00 mm do texto | {txt_d3_estado} | {txt_d3_conseq} |
-| **medir** | Comprimento do bico do cabeçote (14,00 mm no desenho) | **ABERTA — é a única que pode mexer nos furos** | se o bico chegar até a face da matriz, os 6 cartuchos (Z=97,00) e os 4 termopares (Z=103,00) ficam enterrados no cabeçote e o aquecimento muda de peça |
+| **medir** | Comprimento do bico do cabeçote (sua linha no croqui × o nariz do desenho) | {txt_bico} | {txt_bico_efeto} |
 
 Enquanto D3 estiver em aberto, **nada é promovido**: `MatrizJonatha.step` continua sendo o v27.0 e a
 v28.1 vive ao lado, com `verificar_v28.py` (64 itens) e `verificar_interface_cabecote.py` (43 itens)

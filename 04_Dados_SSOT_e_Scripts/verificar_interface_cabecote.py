@@ -338,7 +338,50 @@ def main():
                 return l["medido"]
         return None
 
+    print("\n[F] acesso dos cartuchos e termopares × comprimento do bico do cabeçote\n" + "-" * 70)
+    # dado de entrada = a linha axial medida na maquina (croqui de 2026-09-12, no SSOT). O valor do
+    # desenho e medido no mesmo booleano, como cenario alternativo - nao e opiniao.
+    _ss = json.load(open(os.path.join(AQUI, "cad_die_parameters.json"), encoding="utf-8"))
+    LAX = float(_ss["decisoes_usuario"]["medicao_na_maquina"]["linha_axial_medida"]["valor_mm"])
+    fur = {}
+    for f_ in feat["furos"]:
+        if f_["tipo"] in ("cartucho", "termopar"):
+            fur[(f_["tipo"], f_["X"], f_["Z"], f_["diametro"])] = f_
+    PROTR_DESENHO = ENVELOPE[2][1] - Z_FACE_NARIZ
+    acessos = {}
+    for nome_c, protr in sorted({"você mediu na máquina": LAX, "desenho DXF medido": PROTR_DESENHO}.items()):
+        z_face = ENVELOPE[2][1] - protr
+        cab = (head if abs(protr - PROTR_DESENHO) < 1e-9
+               else head.translate(cq.Vector(0, 0, z_face - Z_FACE_NARIZ)))
+        pior, pior_q, bloqueio = 9e9, "", 0.0
+        for (tipo, x, z, dd) in sorted(fur):
+            folga = (z - dd / 2.0) - z_face          # borda traseira do furo vs fim do metal do cabecote
+            corredor = cq.Solid.makeCylinder(dd / 2.0, 240.0, cq.Vector(x, -120.0, z), cq.Vector(0, 1, 0))
+            bloqueio += maior(corredor.intersect(cab)).Volume()
+            if folga < pior:
+                pior, pior_q = folga, f"{tipo} em X={n(x, 1)}, Z={n(z, 1)}"
+        acessos[nome_c] = {"protrusao_mm": round(protr, 3), "z_face_cabecote_mm": round(z_face, 3),
+                           "folga_axial_min_mm": round(pior, 3), "furo_critico": pior_q,
+                           "metal_no_caminho_mm3": round(bloqueio, 3),
+                           "n_furos_na_faixa_de_saida": len(fur)}
+        if nome_c.startswith("você"):
+            checar_min("Folga axial da furação de saída à frente do metal do cabeçote", pior, 0.0, un="mm",
+                       obs=f"cenário medido na máquina (protrusão {n(protr, 2)} mm); furo mais crítico: "
+                           f"{pior_q}; metal do cabeçote no caminho de inserção: {n(bloqueio)} mm³")
+        else:
+            alerta(f"Mesmo furo no cenário do desenho (protrusão {n(PROTR_DESENHO, 2)} mm)",
+                   f"folga {n(pior)} mm | {n(bloqueio)} mm³ de metal do cabeçote no caminho de {pior_q}",
+                   obs="ou o nariz do cabeçote ganha alívio para passar o cartucho, ou a matriz assenta "
+                       f"{n(LAX - PROTR_DESENHO, 2)} mm mais para fora - que e justamente o que a sua linha "
+                       f"de {n(LAX)} mm diz. Em nenhum dos dois casos a furação da matriz muda de lugar.")
+    registrar("O que isso decide sobre os furos da matriz",
+              "nada se move na matriz nos dois cenários",
+              obs=f"a folga traseira mínima medida é {n(acessos['você mediu na máquina']['folga_axial_min_mm'])} mm "
+                  f"no seu número e {n(acessos['desenho DXF medido']['folga_axial_min_mm'])} mm no do desenho; "
+                  "com folga positiva o cartucho entra por fora sem depender de furo no cabeçote")
+
     numeros = {"pressao_efetiva_MPa": p_ef, "empuxo_axial_kN": f_ax, "empuxo_axial_dp1d_kN": f_ax1d,
+               "acesso_furacao_cenarios": acessos, "protrusao_medida_usuario_mm": LAX,
                "dp_1d_bar": dp1d,
                "area_boca_mm2": a_boca, "area_fenda_mm2": a_saida, "area_projetada_mm2": a_proj,
                "area_ombro_matriz_mm2": a_ombro_d, "area_degrau_cabecote_mm2": a_ombro_h,

@@ -49,6 +49,9 @@ O sólido do cabeçote foi montado do perfil lido no DWG 030-032 (escala calibra
 | Pressão radial p/ segurar só o peso na troca | 0,0115 MPa | — | — | CONFORME | matriz de 3,586 kg |
 | Cone da bucha × atrito | 3,00° < arctan(0,15) = 8,5° | — | — | CONFORME | auto-travante: a matriz não sai sozinha |
 | Deformação radial do canal sob a pressão do collete | ~0,0023 mm por lado | — | — | CONFORME | casca de 8,70 mm sobre o canal, E = 200 GPa - ordem de grandeza |
+| Mesmo furo no cenário do desenho (protrusão 14,00 mm) | folga -2,750 mm | 1372,276 mm³ de metal do cabeçote no caminho de cartucho em X=-22,0, Z=97,0 | — | — | PENDENTE_CONFIRMACAO | ou o nariz do cabeçote ganha alívio para passar o cartucho, ou a matriz assenta 6,00 mm mais para fora - que e justamente o que a sua linha de 20,000 mm diz. Em nenhum dos dois casos a furação da matriz muda de lugar. |
+| Folga axial da furação de saída à frente do metal do cabeçote | 3.25 | — | — | CONFORME | cenário medido na máquina (protrusão 20,00 mm); furo mais crítico: cartucho em X=-22,0, Z=97,0; metal do cabeçote no caminho de inserção: 0,000 mm³ |
+| O que isso decide sobre os furos da matriz | nada se move na matriz nos dois cenários | — | — | CONFORME | a folga traseira mínima medida é 3,250 mm no seu número e -2,750 mm no do desenho; com folga positiva o cartucho entra por fora sem depender de furo no cabeçote |
 
 ## O que isso muda no projeto
 

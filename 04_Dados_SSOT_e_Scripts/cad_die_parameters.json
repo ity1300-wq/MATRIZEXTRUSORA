@@ -463,7 +463,13 @@
         "se o anel Ø68,30 lido no corte existisse: faltariam 3,35 mm por lado - nao 'sobra'"
       ],
       "conclusao": "as duas medidas do usuario confirmam o modelo medido no DWG por caminhos independentes e descartam o anel do nariz de 65 mm para o produto de 75 mm",
-      "fica_para_conferir": "comprimento do bico do cabecote: o desenho da nariz de 14,00 mm de profundidade, o que deixa 14,30 mm do nariz da matriz para fora - e e nessa faixa que estao os 6 cartuchos (Z = 97,00) e os 4 termopares (Z = 103,00). Se na maquina o bico do cabecote chegar ate a face da matriz, esses furos ficam enterrados no cabecote e o aquecimento tera de mudar de lugar"
+      "fica_para_conferir": "FECHADO pela sua linha axial de 20 mm: os furos de cartucho e termopar ficam a frente do metal do cabecote nos dois cenarios razoaveis (20 mm medidos: sobram 3,25 mm de folga na borda traseira do furo do cartucho; 14,00 mm do desenho: faltam 2,75 mm e o cartucho precisa de alivio no nariz do cabecote). Se a matriz for assentada mais fundo que 12,00 mm de protrusao, ai sim a furacao tem de mudar - nao e o caso nas duas medidas.",
+      "linha_axial_medida": {
+        "o_que": "uma linha reta do final do corpo do cabecote ate o comeco da fenda - declarada pelo usuario em 2026-09-12 com o croqui em vista lateral (azul extrusora, vermelho cabecote, branco matriz)",
+        "valor_mm": 20.0,
+        "o_que_isso_significa_em_cotas": "a face frontal do cabecote fica ~20 mm atras da face de saida da matriz. No desenho (DXF) a mesma distancia e 14,00 mm. A diferenca de 6 mm e o que decide se o metal do bico encosta ou nao na borda traseira dos furos dos cartuchos",
+        "consequencia": "medida nos dois cenarios em verificar_interface_cabecote.py bloco F"
+      }
     },
     "consequencia_d2_mediata": {
       "boca_saida_mm": {

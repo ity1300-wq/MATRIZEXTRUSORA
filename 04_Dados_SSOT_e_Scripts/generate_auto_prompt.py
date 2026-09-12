@@ -82,7 +82,11 @@ def main():
         if chave == "D2_labio_saida" and v.get("risco_assumido"):
             extra += " — risco assumido conscientemente: " + v["risco_assumido"]
         if chave == "medicao_na_maquina" and v.get("fica_para_conferir"):
-            abertas.append("**Medida que falta** — " + v["fica_para_conferir"])
+            fc = str(v["fica_para_conferir"])
+            if fc.upper().startswith(("FECHAD", "RESOLID", "RESOLVID")):
+                decididas.append(f"   * **{titulo} (pendência axial)**: {fc}")
+            else:
+                abertas.append("**Medida que falta** — " + fc)
         decididas.append(f"   * **{titulo}**: {dec}{extra}")
     decisoes = ("\n".join(f"   {i}. {d}" for i, d in enumerate(abertas, start=1))
                 or "   (nenhuma pendencia de decisao registrada no SSOT)")
