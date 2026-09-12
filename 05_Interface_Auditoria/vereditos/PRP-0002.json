@@ -1,9 +1,9 @@
 {
   "protocolo": "1.0",
   "proposta_id": "PRP-0002",
-  "commit_auditado": "e6afc206b7844b88d2865ff5740d533ed400eb71",
-  "proposta_sha256": "39735ba9b1f004124d1e62c937acaf8e02048ddae3794a92853f9d2e0341c6e0",
-  "data": "2026-09-12T17:46:46+0000",
+  "commit_auditado": "5894de1cf7ca9f17e7468ff3819f5d66ec06b1c8",
+  "proposta_sha256": "1ab572d61673f3fbe1c5111b083810bfe487ff73af8fc3382ea5f5a5f0dba9de",
+  "data": "2026-09-12T17:56:06+0000",
   "auditor": {
     "nome": "Auditor IA (Protocolo v1.0)",
     "tipo": "IA",
@@ -381,8 +381,8 @@
   "modelo_parametrico": "dp_total = 6.77 (entrada+funil+aproximação, medido) + 2.182·land_util + 0.907·chanfro; land_util = land_total − chanfro; parede_labio = 2,25 − chanfro",
   "medicoes_reutilizadas": false,
   "hashes": {
-    "proposta": "39735ba9b1f004124d1e62c937acaf8e02048ddae3794a92853f9d2e0341c6e0",
-    "head": "e6afc206b7844b88d2865ff5740d533ed400eb71",
+    "proposta": "1ab572d61673f3fbe1c5111b083810bfe487ff73af8fc3382ea5f5a5f0dba9de",
+    "head": "5894de1cf7ca9f17e7468ff3819f5d66ec06b1c8",
     "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step": "7f26c5c5ba238a12667f2bdf974bc15f001c9103fd480ffb144eb2718e67e04e",
     "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_A.step": "7342d3ecab6771fe5a5b370ff445be5084f635fbb5ba3c5ba9d7e4818fd563a8",
     "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_B.step": "afcce0aca2b8ab33602e9d866902448d4f261cca3464e044702bb148af66cf05",
@@ -416,7 +416,7 @@
     "05_Interface_Auditoria/esquema/proposta.schema.json": "88dbcac446e8bfe8955a76ad4050f41dc9cfa0f1bba7312a660e1ba529bac0f6",
     "05_Interface_Auditoria/esquema/veredito.schema.json": "1575a461ecedc928f7eac5673597a2d2e514a43442fba41e112c75cee5198830",
     "05_Interface_Auditoria/scripts/auditar_proposta.py": "189f74c35316506118fb15c0cf0add1d37d42e88f67524ef9a5fc5e910778c4e",
-    "05_Interface_Auditoria/scripts/monitor_auditoria.py": "9012ad62c637b323032b79bd404fbe9887774eb30d9badd1084a55dbbaa21765",
+    "05_Interface_Auditoria/scripts/monitor_auditoria.py": "1516279da6f3bfce9319a723a1f3e790ad6a34f3e59fd4217c7d28d37cf8db97",
     "05_Interface_Auditoria/scripts/painel_auditoria.py": "84f18b9c9d9aab5ba080986b336a3e9ba575b291ceb2ab90572ec8e70e7452d5"
   },
   "reproduzir": [

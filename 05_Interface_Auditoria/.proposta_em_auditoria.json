@@ -1,21 +1,21 @@
 {
   "protocolo": "1.0",
-  "id": "PRP-0001",
-  "titulo": "Land paralelo de 10,0 mm e chanfro de saida de 0,80 mm x 45 graus",
-  "autor": "IA engenheiro (exemplo de primeira iteracao do protocolo)",
+  "id": "PRP-0002",
+  "titulo": "Chanfro de saida reduzido de 1,50 mm para 0,50 mm x 45 graus",
+  "autor": "IA engenheiro (segunda iteracao do ciclo)",
   "data": "2026-09-12",
   "tipo": "calculo",
-  "base_commit": "199fa1b5b5e3ac5754d1414f69fd3ee161dac45a",
-  "objetivo": "Fechar a nao conformidade do land (8,50 medido contra 10,00 declarado no SSOT) e engrossar a parede de aco do labio de saida, pagando o minimo de contrapressao.",
+  "base_commit": "55860156a66f91fa7ae6e4093b5cf73eda433f96",
+  "objetivo": "Devolver land paralelo e engrossar a parede de aco do labio, aproveitando que o chanfro e' o trecho menos util do canal.",
   "arquivos": [],
   "parametros": {
     "land_total_mm": 10.0,
-    "chanfro_mm": 0.8
+    "chanfro_mm": 0.5
   },
   "esperado": {
-    "land_util_mm": 9.2,
-    "parede_labio_mm": 1.45,
-    "dp_total_bar": 27.6
+    "land_util_mm": 9.5,
+    "parede_labio_mm": 1.75,
+    "dp_total_bar": 27.96
   },
   "nao_muda": [
     "largura_fenda_mm",
@@ -26,10 +26,10 @@
     "volume_canal_mm3",
     "uniformidade_nucleo_pct"
   ],
-  "justificativa": "O chanfro de saida de 1,50 mm consome 1,50 mm dos 10,00 mm de land, deixando 8,50 mm paralelos e apenas 0,75 mm de parede de aco no labio. Reduzir o chanfro para 0,80 mm devolve 0,70 mm de land paralelo (9,20 mm) e engrossa a parede do labio para 1,45 mm. A perda de carga adicional vem do land mais longo: com gradiente de 2,187 bar/mm, o trecho cresce 0,70 x 2,187 = 1,53 bar, e o chanfro menor economiza 0,70 x 0,907 = 0,63 bar, resultando em 27,6 bar contra 26,68 bar do v27.",
+  "justificativa": "O chanfro de saida custa 0,907 bar por mm de comprimento (gradiente medio medido no v27) e devolve pouco em troca: e' um trecho divergente, onde a secao cresce e a taxa de deformacao axial e' maxima (39 1/s). Reduzindo de 1,50 para 0,50 mm: o land paralelo vai de 8,50 para 9,50 mm (gradiente 2,187 bar/mm -> +2,19 bar) e o proprio chanfro economiza 0,91 bar, resultando em 27,96 bar contra 26,68 bar do v27 (+4,8%). Em troca, a parede de aco do labio sai de 0,75 para 1,75 mm.",
   "riscos": [
-    "Chanfro menor reduz a protecao da aresta do labio durante a limpeza e a partida; verificar acabamento e ausencia de rebarba na montagem.",
-    "Alteracao exige retifica do labio e nova medicao dimensional antes do uso."
+    "Chanfro de 0,50 mm exige acabamento fino no labio; qualquer rebarba fica proporcionalmente maior.",
+    "Menos alivio de secao na saida pode dificultar a limpeza e a partida; avaliar na pratica antes de fixar o padrao."
   ],
-  "observacoes": "Proposta sem STEP: e uma previsao para decisao. O STEP entra como PRP-0001-r2, tipo 'geometria', apos a aprovacao desta previsao. base_commit atualizado para o estado auditado apos a correcao da particao de zonas (o SSOT mudou desde a primeira versao)."
+  "observacoes": "Comparar com PRP-0001 (chanfro 0,80 mm): a diferenca de pressao entre as duas e' de apenas 0,4 bar, mas a parede do labio ganha mais 0,30 mm. Decisao de fabricacao, nao de hidraulica."
 }
