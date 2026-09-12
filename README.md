@@ -71,6 +71,16 @@ volume estacionado nas pontas, invasão do envelope e aço cortado) — tabela e
 `03_Relatorios_e_Documentacao/ESTUDO_FUNIL_COATHANGER.md`, gerador em `04_Dados_SSOT_e_Scripts/estudar_funis.py`.
 Nada disso substitui `MatrizJonatha.step`.
 
+### 🔧 Cabeçote em STEP (peça da máquina, não da matriz)
+
+`06_CAD_Cabecote_EX-030/` tem o cabeçote **sem a parte que conecta na extrusora** — a interseção pelo
+cilindro Ø130 do corpo, que leva o cubo Ø164, o flange Ø220 × 40 com os 6 × Ø16,5 e o resalto Ø203 × 3.
+Medido no sólido: massa **13,531 → 4,902 kg** (8,630 kg de aço a menos), **0,0000 mm³** removidos até a
+banda Ø93 em que a matriz é apertada, comprimento axial preservado (95,000 mm) e interferência com
+`MatrizJonatha_v28.step` de **0,0000 mm³** nos dois. Não é peça de produção: sem o flange não há onde
+aparafusar a junta, e o M12 transversal ficou fora do modelo por indeterminação de desenho — tudo em
+`03_Relatorios_e_Documentacao/CABECOTE_EX-030_STEP.md`.
+
 ### 🔩 Interface com o cabeçote EX-030 — medida no DWG e provada nos sólidos
 
 O `030-032- cabeçote.dwg` (HIDEALL, PED:2257) foi convertido e **medido entidade por entidade**. A
@@ -102,6 +112,7 @@ python 04_Dados_SSOT_e_Scripts/explorar_acomodo_furos.py --json # onde existe a�
 python 04_Dados_SSOT_e_Scripts/gerar_relatorio_v28.py           # atualiza o relatório com os dados
 python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png
 python 04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py --json --md  # matriz × cabeçote EX-030
+python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py                 # STEP do cabeçote sem a junta
 ```
 
 ---

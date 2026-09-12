@@ -164,6 +164,10 @@ cálculo/medição que o produziria.
   explodida, com fluxo, kit de pinos)
 - `05_Variantes_Em_Estudo/` — STEP de comparações pedidas antes de mexer em geometria (hoje: funil
   coat-hanger). **Não** substituem o oficial nem entram no `MatrizJonatha.step`
+- `06_CAD_Cabecote_EX-030/` — STEP do **cabeçote** sem a junta da extrusora (corpo Ø130 × 95,000 com
+  nariz Ø80, degrau Ø90 e bolso Ø95 × 70) e do cabeçote como desenhado, gerados por
+  `gerar_cabecote_ex030.py` a partir deste mesmo JSON; provas em
+  `03_Relatorios_e_Documentacao/CABECOTE_EX-030_STEP.md`. É peça da máquina, não da matriz
 - `02_CAD_Modelos_Historicos/` — Matriz 1 Copo, Matriz 2 Gedeon, Desenvolvimento (somente leitura)
 - `03_Relatorios_e_Documentacao/` — `PROJETO_DFM_V28_MATRIZ_JONATHA.md` (esta revisão),
   `VERIFICACAO_V28.md` (as {ver.get('itens', 0)} medições), `TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md`
@@ -172,6 +176,7 @@ cálculo/medição que o produziria.
 - `04_Dados_SSOT_e_Scripts/` — `cad_die_parameters.json` (SSOT), `gerar_matriz_v28.py`,
   `verificar_v28.py`, `explorar_acomodo_furos.py`, `gerar_relatorio_v28.py`, `renderizar_v28.py`,
   `estudar_funis.py` (comparativo de funis da D3), `verificar_interface_cabecote.py`,
+  `gerar_cabecote_ex030.py` (STEP do cabeçote sem flange) e `medir_perfil_cabecote.py`,
   `verify_geometry_ssot.py` (auditoria v27), `verify_legacy_dies.py` (as 4 matrizes + ΔP 1D),
   `acomodo_furos.json`, `matriz_v28_features.json`, `verificacao_v28.json`
 - `030-032- cabeçote.dwg` — cabeçote Hideall EX-030/031/032: **6 × M12 em BC Ø150, passo 60° a
@@ -186,6 +191,8 @@ python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py           # regenera os STEP 
 python 04_Dados_SSOT_e_Scripts/verificar_v28.py --json --md  # mede e prova
 python 04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py       # auditoria do v27.0 (2 NC)
 python 04_Dados_SSOT_e_Scripts/verify_legacy_dies.py --json  # as 4 matrizes + ΔP 1D
+python 04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py --json --md  # matriz × cabeçote (48 itens)
+python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py  # STEP do cabecote sem a junta + provas
 ```
 
 ## 8. RESPOSTA INICIAL OBRIGATÓRIA

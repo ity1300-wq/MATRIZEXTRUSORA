@@ -223,6 +223,26 @@
     "face do flange": 52.02,
     "fundo do bolso": 95.02
    }
+  },
+  "step_gerado": {
+   "gerador": "04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py",
+   "arquivos": [
+    "06_CAD_Cabecote_EX-030/Cabecote_EX-030_sem_flange.step",
+    "06_CAD_Cabecote_EX-030/Cabecote_EX-030_desenhado.step"
+   ],
+   "o_que_e": "cabeçote sem a junta da extrusora = interseção pelo cilindro Ø130 do corpo (r > 65,00 mm removido: cubo Ø164, flange Ø220 × 40 com os 6 × Ø16,5 e resalto Ø203 × 3)",
+   "massa_kg": {
+    "desenhado": 13.5314,
+    "sem_flange": 4.9018,
+    "removido": 8.6296
+   },
+   "provas": {
+    "metal_removido_ate_a_banda_da_matriz_mm3": 0.0,
+    "interferencia_matriz_v28_mm3": 0.0,
+    "comprimento_axial_mm": 95.0,
+    "desvio_round_trip_step_mm3": 0.0
+   },
+   "m12_fora_do_modelo": "o Ø10,5/Ø12 a 72,02 mm da face não tem aresta de seção no DXF: natureza e ângulo não determináveis; --com-m12 gera o cenário transversal"
   }
  },
  "numeros": {
