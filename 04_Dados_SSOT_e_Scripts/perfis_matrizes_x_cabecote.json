@@ -1,0 +1,562 @@
+{
+ "peca": "perfis das 5 matrizes x escada interna do cabecote EX-030",
+ "data": "2026-09-12",
+ "referencial": "Z da matriz; face do nariz do cabecote em Z = 95,00; fundo do bolso (face traseira) em Z = 0",
+ "metodo": "varredura de seccoes de 0,20 mm nos STEP das proprias matrizes (Ø_ext = max(xlen, ylen) do maior solido da seccao, plato guarda o maximo) + posicionamento por encosto + interferencia por booleano somando todos os solidos",
+ "escada_interna_do_cabecote_mm": [
+  {
+   "Ø_mm": 95.0,
+   "de_Z": 0.0,
+   "ate_Z": 70.0,
+   "comprimento_mm": 70.0,
+   "nome": "bolso de fixação (onde a bucha aperta a banda)"
+  },
+  {
+   "Ø_mm": 105.0,
+   "de_Z": 0.0,
+   "ate_Z": 3.0,
+   "comprimento_mm": 3.0,
+   "nome": "rebaixo traseiro do piloto - não restringe a matriz"
+  },
+  {
+   "Ø_mm": 90.0,
+   "de_Z": 70.0,
+   "ate_Z": 81.0,
+   "comprimento_mm": 11.0,
+   "nome": "degrau - assento do ombro da matriz"
+  },
+  {
+   "Ø_mm": 80.0,
+   "de_Z": 81.0,
+   "ate_Z": 95.0,
+   "comprimento_mm": 14.0,
+   "nome": "furo do nariz (por onde a película sai)"
+  }
+ ],
+ "matrizes": [
+  {
+   "chave": "matriz_1_copo",
+   "nome": "Matriz 1 - Copo (original, a que o cabecote foi feito em volta)",
+   "arquivos_lidos": [
+    "Matriz1_Original_Copo_Solido.step"
+   ],
+   "fonte_do_corpo": "solido unico",
+   "comprimento_medido_mm": 80.7,
+   "Ø_máximo_medido_mm": 93.0,
+   "z_do_ombro_mm": 70.0,
+   "escala_Ø_x_Z_mm": [
+    [
+     0.0,
+     69.8,
+     93.0
+    ],
+    [
+     70.0,
+     80.6,
+     89.5
+    ]
+   ],
+   "fins_de_plato_refinados_mm": [
+    69.909,
+    80.7
+   ],
+   "canal_à_frente_da_saída_mm3": {
+    "trecho_mm": 14.0,
+    "volume_do_furo_mm3": 70371.675,
+    "material_da_matriz_no_furo_mm3": 0.0,
+    "vão_livre_mm3": 70371.675,
+    "medido_como": "cilindro Ø80,00 do furo do nariz, no trecho entre a face de saída da matriz e Z = 95,00, menos o material da própria matriz dentro dele (booleano)"
+   },
+   "encostos": {
+    "A_face_frente_rasa": {
+     "deslocamento_aplicado_mm": 14.3,
+     "face_de_saida_em_Z": 95.0,
+     "protusão_além_da_face_do_nariz_mm": 0.0,
+     "traseira_da_matriz_em_Z": 14.3,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": 14.3,
+     "interferência_com_o_cabeçote_mm3": 24053.9969
+    },
+    "B_ombro_no_degrau": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 80.7,
+     "protusão_além_da_face_do_nariz_mm": -14.3,
+     "traseira_da_matriz_em_Z": 0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": 0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "C_fundo_do_bolso": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 80.7,
+     "protusão_além_da_face_do_nariz_mm": -14.3,
+     "traseira_da_matriz_em_Z": 0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": 0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    }
+   },
+   "folgas_radiais_no_encosto_do_assento": [
+    {
+     "estagio": "Ø93,00 em Z 0,00..69,80",
+     "furo": "Ø95,00 (Z 0,00..70,00)",
+     "folga_radial_mm": 1.0,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø89,50 em Z 70,00..80,60",
+     "furo": "Ø90,00 (Z 70,00..81,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    }
+   ],
+   "encosto_usado": "B_ombro_no_degrau",
+   "transições_refinadas_mm": {
+    "fim_da_banda_093_em_Z": 69.909,
+    "folga_axial_banda_x_degrau_do_cabecote_mm": 0.091,
+    "fim_do_estagio_089-50_em_Z": 80.7,
+    "vão_da_saida_ate_o_furo_do_nariz_mm": 0.3,
+    "face_de_saida_em_Z_no_assento": 80.7,
+    "canal_morto_no_furo_do_nariz_mm": 14.3
+   }
+  },
+  {
+   "chave": "matriz_2_gedeon",
+   "nome": "Matriz 2 - Gedeon (a maior, que o usuario diz que entra)",
+   "arquivos_lidos": [
+    "MatrizGedeon_Body_A.step",
+    "MatrizGedeon_Body_B.step"
+   ],
+   "fonte_do_corpo": "A U B",
+   "comprimento_medido_mm": 109.0,
+   "Ø_máximo_medido_mm": 93.0,
+   "z_do_ombro_mm": 70.0,
+   "escala_Ø_x_Z_mm": [
+    [
+     -0.0,
+     69.8,
+     93.0
+    ],
+    [
+     70.0,
+     80.6,
+     89.5
+    ],
+    [
+     80.8,
+     109.0,
+     79.5
+    ]
+   ],
+   "fins_de_plato_refinados_mm": [
+    69.909,
+    80.709,
+    109.0
+   ],
+   "canal_à_frente_da_saída_mm3": {
+    "trecho_mm": 0.0,
+    "volume_do_furo_mm3": 0.0,
+    "material_da_matriz_no_furo_mm3": 0.0,
+    "vão_livre_mm3": 0.0,
+    "por_quê": "a face de saída da matriz já está na face do nariz"
+   },
+   "encostos": {
+    "A_face_frente_rasa": {
+     "deslocamento_aplicado_mm": -14.0,
+     "face_de_saida_em_Z": 95.0,
+     "protusão_além_da_face_do_nariz_mm": 0.0,
+     "traseira_da_matriz_em_Z": -14.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": -14.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "B_ombro_no_degrau": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 109.0,
+     "protusão_além_da_face_do_nariz_mm": 14.0,
+     "traseira_da_matriz_em_Z": -0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": -0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "C_fundo_do_bolso": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 109.0,
+     "protusão_além_da_face_do_nariz_mm": 14.0,
+     "traseira_da_matriz_em_Z": 0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": 0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    }
+   },
+   "folgas_radiais_no_encosto_do_assento": [
+    {
+     "estagio": "Ø93,00 em Z -0,00..69,80",
+     "furo": "Ø95,00 (Z 0,00..70,00)",
+     "folga_radial_mm": 1.0,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø89,50 em Z 70,00..80,60",
+     "furo": "Ø90,00 (Z 70,00..81,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø79,50 em Z 80,80..109,00",
+     "furo": "Ø80,00 (Z 81,00..95,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    }
+   ],
+   "encosto_usado": "B_ombro_no_degrau",
+   "transições_refinadas_mm": {
+    "fim_da_banda_093_em_Z": 69.909,
+    "folga_axial_banda_x_degrau_do_cabecote_mm": 0.091,
+    "fim_do_estagio_089-50_em_Z": 80.709,
+    "vão_da_saida_ate_o_furo_do_nariz_mm": 0.291,
+    "face_de_saida_em_Z_no_assento": 109.0,
+    "canal_morto_no_furo_do_nariz_mm": -14.0
+   }
+  },
+  {
+   "chave": "matriz_desenvolvimento",
+   "nome": "Matriz Desenvolvimento",
+   "arquivos_lidos": [
+    "MatrizDesenvolvimento_Body_A.step",
+    "MatrizDesenvolvimento_Body_B.step"
+   ],
+   "fonte_do_corpo": "A U B",
+   "comprimento_medido_mm": 109.0,
+   "Ø_máximo_medido_mm": 93.0,
+   "z_do_ombro_mm": 70.0,
+   "escala_Ø_x_Z_mm": [
+    [
+     -0.0,
+     69.8,
+     93.0
+    ],
+    [
+     70.0,
+     80.6,
+     89.5
+    ],
+    [
+     80.8,
+     109.0,
+     79.5
+    ]
+   ],
+   "fins_de_plato_refinados_mm": [
+    69.909,
+    80.709,
+    109.0
+   ],
+   "canal_à_frente_da_saída_mm3": {
+    "trecho_mm": 0.0,
+    "volume_do_furo_mm3": 0.0,
+    "material_da_matriz_no_furo_mm3": 0.0,
+    "vão_livre_mm3": 0.0,
+    "por_quê": "a face de saída da matriz já está na face do nariz"
+   },
+   "encostos": {
+    "A_face_frente_rasa": {
+     "deslocamento_aplicado_mm": -14.0,
+     "face_de_saida_em_Z": 95.0,
+     "protusão_além_da_face_do_nariz_mm": 0.0,
+     "traseira_da_matriz_em_Z": -14.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": -14.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "B_ombro_no_degrau": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 109.0,
+     "protusão_além_da_face_do_nariz_mm": 14.0,
+     "traseira_da_matriz_em_Z": -0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": -0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "C_fundo_do_bolso": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 109.0,
+     "protusão_além_da_face_do_nariz_mm": 14.0,
+     "traseira_da_matriz_em_Z": 0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": 0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    }
+   },
+   "folgas_radiais_no_encosto_do_assento": [
+    {
+     "estagio": "Ø93,00 em Z -0,00..69,80",
+     "furo": "Ø95,00 (Z 0,00..70,00)",
+     "folga_radial_mm": 1.0,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø89,50 em Z 70,00..80,60",
+     "furo": "Ø90,00 (Z 70,00..81,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø79,50 em Z 80,80..109,00",
+     "furo": "Ø80,00 (Z 81,00..95,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    }
+   ],
+   "encosto_usado": "B_ombro_no_degrau",
+   "transições_refinadas_mm": {
+    "fim_da_banda_093_em_Z": 69.909,
+    "folga_axial_banda_x_degrau_do_cabecote_mm": 0.091,
+    "fim_do_estagio_089-50_em_Z": 80.709,
+    "vão_da_saida_ate_o_furo_do_nariz_mm": 0.291,
+    "face_de_saida_em_Z_no_assento": 109.0,
+    "canal_morto_no_furo_do_nariz_mm": -14.0
+   }
+  },
+  {
+   "chave": "jonatha_v27",
+   "nome": "Matriz Jonatha v27.0 (oficial aprovada)",
+   "arquivos_lidos": [
+    "MatrizJonatha.step"
+   ],
+   "fonte_do_corpo": "oficial",
+   "comprimento_medido_mm": 109.0,
+   "Ø_máximo_medido_mm": 93.0,
+   "z_do_ombro_mm": 70.0,
+   "escala_Ø_x_Z_mm": [
+    [
+     -0.0,
+     69.8,
+     93.0
+    ],
+    [
+     70.0,
+     80.6,
+     89.5
+    ],
+    [
+     80.8,
+     109.0,
+     79.5
+    ]
+   ],
+   "fins_de_plato_refinados_mm": [
+    69.909,
+    80.709,
+    109.0
+   ],
+   "canal_à_frente_da_saída_mm3": {
+    "trecho_mm": 0.0,
+    "volume_do_furo_mm3": 0.0,
+    "material_da_matriz_no_furo_mm3": 0.0,
+    "vão_livre_mm3": 0.0,
+    "por_quê": "a face de saída da matriz já está na face do nariz"
+   },
+   "encostos": {
+    "A_face_frente_rasa": {
+     "deslocamento_aplicado_mm": -14.0,
+     "face_de_saida_em_Z": 95.0,
+     "protusão_além_da_face_do_nariz_mm": 0.0,
+     "traseira_da_matriz_em_Z": -14.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": -14.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "B_ombro_no_degrau": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 109.0,
+     "protusão_além_da_face_do_nariz_mm": 14.0,
+     "traseira_da_matriz_em_Z": -0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": -0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "C_fundo_do_bolso": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 109.0,
+     "protusão_além_da_face_do_nariz_mm": 14.0,
+     "traseira_da_matriz_em_Z": 0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": 0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    }
+   },
+   "folgas_radiais_no_encosto_do_assento": [
+    {
+     "estagio": "Ø93,00 em Z -0,00..69,80",
+     "furo": "Ø95,00 (Z 0,00..70,00)",
+     "folga_radial_mm": 1.0,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø89,50 em Z 70,00..80,60",
+     "furo": "Ø90,00 (Z 70,00..81,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø79,50 em Z 80,80..109,00",
+     "furo": "Ø80,00 (Z 81,00..95,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    }
+   ],
+   "encosto_usado": "B_ombro_no_degrau",
+   "transições_refinadas_mm": {
+    "fim_da_banda_093_em_Z": 69.909,
+    "folga_axial_banda_x_degrau_do_cabecote_mm": 0.091,
+    "fim_do_estagio_089-50_em_Z": 80.709,
+    "vão_da_saida_ate_o_furo_do_nariz_mm": 0.291,
+    "face_de_saida_em_Z_no_assento": 109.0,
+    "canal_morto_no_furo_do_nariz_mm": -14.0
+   }
+  },
+  {
+   "chave": "jonatha_v28_1",
+   "nome": "Matriz Jonatha v28.1 (proposta DFM)",
+   "arquivos_lidos": [
+    "MatrizJonatha_v28.step"
+   ],
+   "fonte_do_corpo": "proposta",
+   "comprimento_medido_mm": 109.0,
+   "Ø_máximo_medido_mm": 93.0,
+   "z_do_ombro_mm": 70.0,
+   "escala_Ø_x_Z_mm": [
+    [
+     -0.0,
+     69.8,
+     93.0
+    ],
+    [
+     70.0,
+     80.6,
+     89.5
+    ],
+    [
+     80.8,
+     109.0,
+     79.5
+    ]
+   ],
+   "fins_de_plato_refinados_mm": [
+    69.909,
+    80.709,
+    109.0
+   ],
+   "canal_à_frente_da_saída_mm3": {
+    "trecho_mm": 0.0,
+    "volume_do_furo_mm3": 0.0,
+    "material_da_matriz_no_furo_mm3": 0.0,
+    "vão_livre_mm3": 0.0,
+    "por_quê": "a face de saída da matriz já está na face do nariz"
+   },
+   "encostos": {
+    "A_face_frente_rasa": {
+     "deslocamento_aplicado_mm": -14.0,
+     "face_de_saida_em_Z": 95.0,
+     "protusão_além_da_face_do_nariz_mm": 0.0,
+     "traseira_da_matriz_em_Z": -14.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": -14.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "B_ombro_no_degrau": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 109.0,
+     "protusão_além_da_face_do_nariz_mm": 14.0,
+     "traseira_da_matriz_em_Z": -0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": -0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "C_fundo_do_bolso": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 109.0,
+     "protusão_além_da_face_do_nariz_mm": 14.0,
+     "traseira_da_matriz_em_Z": 0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": 0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    }
+   },
+   "folgas_radiais_no_encosto_do_assento": [
+    {
+     "estagio": "Ø93,00 em Z -0,00..69,80",
+     "furo": "Ø95,00 (Z 0,00..70,00)",
+     "folga_radial_mm": 1.0,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø89,50 em Z 70,00..80,60",
+     "furo": "Ø90,00 (Z 70,00..81,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø79,50 em Z 80,80..109,00",
+     "furo": "Ø80,00 (Z 81,00..95,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    }
+   ],
+   "encosto_usado": "B_ombro_no_degrau",
+   "transições_refinadas_mm": {
+    "fim_da_banda_093_em_Z": 69.909,
+    "folga_axial_banda_x_degrau_do_cabecote_mm": 0.091,
+    "fim_do_estagio_089-50_em_Z": 80.709,
+    "vão_da_saida_ate_o_furo_do_nariz_mm": 0.291,
+    "face_de_saida_em_Z_no_assento": 109.0,
+    "canal_morto_no_furo_do_nariz_mm": -14.0
+   }
+  }
+ ],
+ "diferença_copo_x_gedeon_medida": {
+  "comprimento_copo_mm": 80.7,
+  "comprimento_gedeon_mm": 109.0,
+  "diferença_mm": 28.3,
+  "o_que_a_diferenca_faz_no_encosto_A": {
+   "copo_vão_atrás_mm": 14.3,
+   "gedeon_vão_atrás_mm": -14.0,
+   "copo_ombro_Z": 70.0,
+   "gedeon_ombro_Z": 70.0
+  },
+  "o_que_a_diferenca_faz_no_encosto_B": {
+   "copo_protusao_mm": -14.3,
+   "gedeon_protusao_mm": 14.0,
+   "copo_traseira_em_Z": 0.0,
+   "gedeon_traseira_em_Z": -0.0
+  }
+ },
+ "o_que_um_chanfro_interno_muda": {
+  "cateto_testado_mm": 1.0,
+  "metal_removido_do_cabeçote_mm3": 646.636,
+  "canto": "furo do nariz: Ø90 -> Ø80 em Z = 81,00 (o degrau onde a face da matriz encosta)",
+  "por_matriz": [
+   {
+    "matriz": "matriz_1_copo",
+    "interferência_antes_mm3": 0.0,
+    "interferência_depois_mm3": 0.0,
+    "folga_radial_no_canto_antes_mm": null,
+    "folga_radial_no_canto_depois_mm": null
+   },
+   {
+    "matriz": "matriz_2_gedeon",
+    "interferência_antes_mm3": 0.0,
+    "interferência_depois_mm3": 0.0,
+    "folga_radial_no_canto_antes_mm": 0.25,
+    "folga_radial_no_canto_depois_mm": 2.25
+   },
+   {
+    "matriz": "matriz_desenvolvimento",
+    "interferência_antes_mm3": 0.0,
+    "interferência_depois_mm3": 0.0,
+    "folga_radial_no_canto_antes_mm": 0.25,
+    "folga_radial_no_canto_depois_mm": 2.25
+   },
+   {
+    "matriz": "jonatha_v27",
+    "interferência_antes_mm3": 0.0,
+    "interferência_depois_mm3": 0.0,
+    "folga_radial_no_canto_antes_mm": 0.25,
+    "folga_radial_no_canto_depois_mm": 2.25
+   },
+   {
+    "matriz": "jonatha_v28_1",
+    "interferência_antes_mm3": 0.0,
+    "interferência_depois_mm3": 0.0,
+    "folga_radial_no_canto_antes_mm": 0.25,
+    "folga_radial_no_canto_depois_mm": 2.25
+   }
+  ]
+ }
+}

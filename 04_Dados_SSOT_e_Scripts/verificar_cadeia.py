@@ -32,14 +32,21 @@ CADEIA = ["gerar_matriz_v28.py", "verificar_v28.py --json --md", "verificar_inte
           "gerar_cabecote_ex030.py", "gerar_relatorio_v28.py", "generate_auto_prompt.py",
           "verify_geometry_ssot.py", "verify_legacy_dies.py --json"]
 CADEIA_ESTUDOS = ["estudar_funis.py --so-texto", "estudar_recuo_cartuchos.py --so-texto",
-                  "medir_perfil_cabecote.py --json 04_Dados_SSOT_e_Scripts/cabecote_perfil.json"]
+                  "medir_perfil_cabecote.py --json 04_Dados_SSOT_e_Scripts/cabecote_perfil.json",
+                  "medir_perfis_matrizes_x_cabecote.py --json --md"]
 NC_ESPERADA_INTERFACE = "Folga axial da furação de saída à frente do metal do cabeçote"
 # (arquivo .md, chave no JSON de onde o numero vem, quantas casas) - o par que ja apodreceu uma vez
 # casas = quantas o documento imprime (o par (chave, casas) e o que detecta copia desatualizada)
+# o 4o elemento opcional e o nome do JSON de onde o numero vem (padrao: interface_cabecote.json)
 PARES_DOC_JSON = [("INTERFASE_CABECOTE_EX030.md", "numeros/acesso_furacao_cenarios/desenho DXF medido/metal_no_caminho_mm3", 3),
                   ("INTERFASE_CABECOTE_EX030.md", "numeros/cartuchos_z_min_mm", 2),
                   ("INTERFASE_CABECOTE_EX030.md", "numeros/area_contato_degrau_mm2", 1),
-                  ("PROJETO_DFM_V28_MATRIZ_JONATHA.md", "numeros/dp_1d_bar", 1)]
+                  ("PROJETO_DFM_V28_MATRIZ_JONATHA.md", "numeros/dp_1d_bar", 1),
+                  ("INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md", "diferença_copo_x_gedeon_medida/diferença_mm", 2,
+                   "perfis_matrizes_x_cabecote.json"),
+                  ("INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md",
+                   "o_que_um_chanfro_interno_muda/metal_removido_do_cabeçote_mm3", 3,
+                   "perfis_matrizes_x_cabecote.json")]
 
 falhas = []
 
@@ -150,11 +157,16 @@ def main():
     for nome in os.listdir(DIR_DOC):
         if nome.endswith(".md"):
             doc[nome] = open(os.path.join(DIR_DOC, nome), encoding="utf-8").read()
-    for arq, chave, casas in PARES_DOC_JSON:
+    cache_json = {"interface_cabecote.json": i}
+    for par in PARES_DOC_JSON:
+        arq, chave, casas = par[0], par[1], par[2]
+        nome_json = par[3] if len(par) > 3 else "interface_cabecote.json"
         if arq not in doc:
             no(f"{arq} não existe")
             continue
-        valor = fmt(pega(i, chave), casas)
+        if nome_json not in cache_json:
+            cache_json[nome_json] = json.load(open(os.path.join(AQUI, nome_json), encoding="utf-8"))
+        valor = fmt(pega(cache_json[nome_json], chave), casas)
         checa(valor in doc[arq], f"{arq}: '{valor}' ({chave}) presente",
               f"{arq} NÃO contém '{valor}' de {chave} - documento desatualizado em relação ao JSON")
 

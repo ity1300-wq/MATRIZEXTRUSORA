@@ -79,6 +79,17 @@ documentos citam contra os JSON gerados** (foi assim que 1372→2744 e 14,3→14
 ausência de cópia manual de número de booleano e as regras 1 e 2 (v27.0 e `02_CAD_Modelos_Historicos/`
 intactos). Sai com código 1 se qualquer uma falhar — e ela foi auto-testada injetando o número velho.
 
+### 📐 Parte interna do cabeçote × as cinco matrizes (comparado por medida)
+
+`03_Relatorios_e_Documentacao/INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md`, gerado por
+`04_Dados_SSOT_e_Scripts/medir_perfis_matrizes_x_cabecote.py`, mede a escada de cada matriz nos STEP
+dela (Copo original, Gedeon, Desenvolvimento, Jonatha v27.0, v28.1) e o posiciona no cabeçote pelos três
+encostos possíveis, com interferência medida por booleano. Resultado central, medido hoje: as cinco têm o
+fim da banda Ø93 no **mesmo Z** e a mesma folga axial no degrau; a Copo não tem nariz e por isso fica com a
+face de saída **enterrada**, enquanto Gedeon/Desenvolvimento/Jonatha protrudem — a diferença de comprimento
+é exatamente o nariz, somada aos dois deslocamentos de face. O relatório traz também o que-if do chanfro no
+canto interno Ø90 → Ø80, medido contra as cinco, como proposta (não é mudança aprovada no desenho).
+
 ### 🔧 Cabeçote em STEP (peça da máquina, não da matriz)
 
 `06_CAD_Cabecote_EX-030/STEP/` guarda os dois desenhos STEP do cabeçote; o entregável é o
