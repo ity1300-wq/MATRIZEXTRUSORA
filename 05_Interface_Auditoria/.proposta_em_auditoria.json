@@ -1,21 +1,21 @@
 {
   "protocolo": "1.0",
-  "id": "PRP-0002",
-  "titulo": "Chanfro de saida reduzido de 1,50 mm para 0,50 mm x 45 graus",
-  "autor": "IA engenheiro (segunda iteracao do ciclo)",
+  "id": "PRP-0004",
+  "titulo": "Land paralelo de 12,0 mm para ganho de robustez na distribuicao",
+  "autor": "IA engenheiro (quarta iteracao do ciclo)",
   "data": "2026-09-12",
   "tipo": "calculo",
   "base_commit": "55860156a66f91fa7ae6e4093b5cf73eda433f96",
-  "objetivo": "Devolver land paralelo e engrossar a parede de aco do labio, aproveitando que o chanfro e' o trecho menos util do canal.",
+  "objetivo": "Aumentar o land de 8,50 para 10,50 mm paralelos, ganhando resiliencia da distribuicao contra perturbacoes a montante.",
   "arquivos": [],
   "parametros": {
-    "land_total_mm": 10.0,
-    "chanfro_mm": 0.5
+    "land_total_mm": 12.0,
+    "chanfro_mm": 1.5
   },
   "esperado": {
-    "land_util_mm": 9.5,
-    "parede_labio_mm": 1.75,
-    "dp_total_bar": 27.96
+    "land_util_mm": 10.5,
+    "parede_labio_mm": 0.75,
+    "dp_total_bar": 31.05
   },
   "nao_muda": [
     "largura_fenda_mm",
@@ -26,10 +26,10 @@
     "volume_canal_mm3",
     "uniformidade_nucleo_pct"
   ],
-  "justificativa": "O chanfro de saida custa 0,907 bar por mm de comprimento (gradiente medio medido no v27) e devolve pouco em troca: e' um trecho divergente, onde a secao cresce e a taxa de deformacao axial e' maxima (39 1/s). Reduzindo de 1,50 para 0,50 mm: o land paralelo vai de 8,50 para 9,50 mm (gradiente 2,187 bar/mm -> +2,19 bar) e o proprio chanfro economiza 0,91 bar, resultando em 27,96 bar contra 26,68 bar do v27 (+4,8%). Em troca, a parede de aco do labio sai de 0,75 para 1,75 mm.",
+  "justificativa": "Com o land em 69,5% da perda de carga, aumentar o trecho paralelo deixa a distribuicao mais imune a variacao de vazao e temperatura. Custo previsto: 2,182 x 2,0 = 4,36 bar no land, menos 0,0 no chanfro (mantido em 1,50) -> 31,05 bar contra 26,68 bar do v27.",
   "riscos": [
-    "Chanfro de 0,50 mm exige acabamento fino no labio; qualquer rebarba fica proporcionalmente maior.",
-    "Menos alivio de secao na saida pode dificultar a limpeza e a partida; avaliar na pratica antes de fixar o padrao."
+    "Mais 4,4 bar de contrapressao sobre a extrusora para um ganho de distribuicao que o modelo nao sabe medir (o nucleo ja esta em +-5%).",
+    "Retifica do labio e nova revalidacao dimensional."
   ],
-  "observacoes": "Comparar com PRP-0001 (chanfro 0,80 mm): a diferenca de pressao entre as duas e' de apenas 0,4 bar, mas a parede do labio ganha mais 0,30 mm. Decisao de fabricacao, nao de hidraulica."
+  "observacoes": "Proposta de teste do protocolo: e' honesta nos numeros, mas o auditor deve apontar a degradacao de pressao frente ao baseline."
 }
