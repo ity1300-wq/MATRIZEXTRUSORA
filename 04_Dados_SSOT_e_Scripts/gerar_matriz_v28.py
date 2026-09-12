@@ -33,8 +33,10 @@ DIR_DADOS = os.path.join(RAIZ, "04_Dados_SSOT_e_Scripts")
 # (proposta_v28_dfm.geometria_labios), que registra a decisao D2 do usuario de 2026-09-11 -
 # manter o chanfro de 1,50 x 45 graus e o land paralelo de 8,50 mm do master aprovado.
 # --land / --chanfro so servem para re-rodar variantes ja rejeitadas (ex.: a v28.0 com 0,80).
-_SSOT_LABIO = json.load(open(os.path.join(DIR_DADOS, "cad_die_parameters.json"),
-                             encoding="utf-8"))["proposta_v28_dfm"].get("geometria_labios", {})
+_SSOT_PROP = json.load(open(os.path.join(DIR_DADOS, "cad_die_parameters.json"),
+                           encoding="utf-8"))["proposta_v28_dfm"]
+_SSOT_LABIO = _SSOT_PROP.get("geometria_labios", {})
+ROTULO_DOC = _SSOT_PROP.get("rotulo", "v28")   # rotulo citado em documentos; ROTULO e so o prefixo do arquivo
 Z_LAND = float(_SSOT_LABIO.get("z_inicio_land_mm", 99.00))   # inicio do land (herdado do v27.0)
 Z_FIM = float(_SSOT_LABIO.get("z_fim_mm", 109.00))           # face de saida
 LAND_PARALELO = float(_SSOT_LABIO.get("land_paralelo_mm", 8.50))
@@ -204,7 +206,8 @@ def _flags():
 def main():
     _flags()
     print("=" * 78)
-    print(f"MATRIZ JONATHA - REVISAO {ROTULO} (DFM)  |  land {LAND_PARALELO:.2f} + chanfro {CHANFRO:.2f} x 45 (lidos do SSOT)")
+    print(f"MATRIZ JONATHA - REVISAO {ROTULO_DOC} (DFM)  |  prefixo dos arquivos: {ROTULO}  |  "
+          f"land {LAND_PARALELO:.2f} + chanfro {CHANFRO:.2f} x 45 (lidos do SSOT)")
     print("=" * 78)
 
     c1 = cq.Workplane("XY").circle(93.00 / 2).extrude(69.90)
@@ -263,7 +266,7 @@ def main():
     for (t, d, x, z, c, q, y0, y1) in furos:
         print(f"    {t:<18} Ø{d:5.2f}  X={x:7.2f}  Z={z:6.2f}  L={c:6.2f} mm  "
               f"Y=[{y0:7.2f},{y1:6.2f}]  [{q}]")
-    print("\n-> STEP v28.0 gravados em 01_CAD_MatrizJonatha_Oficial/")
+    print(f"\n-> STEP {ROTULO_DOC} gravados em 01_CAD_MatrizJonatha_Oficial/ (prefixo MatrizJonatha_{ROTULO})")
     return 0
 
 
