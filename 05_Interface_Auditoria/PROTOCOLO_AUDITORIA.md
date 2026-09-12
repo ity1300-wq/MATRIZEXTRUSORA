@@ -254,3 +254,4 @@ correspondente para forçar a reauditoria com a régua nova.
 | Versão | Data | Mudança |
 | :--- | :--- | :--- |
 | 1.0 | 12/09/2026 | Primeira versão: contrato, esquemas, tolerâncias, modelo paramétrico, CI |
+| 1.0.1 | 12/09/2026 | Modos B implementados (`monitor_auditoria.py`, `painel_auditoria.py` com API); checagem de imutabilidade passou a ser por **hash contra o baseline** (não depende do histórico do git); regra do **selo da régua** (`--atualizar-hashes`); proposta que declara métrica não auditável sai como `APROVADO_COM_RESSALVAS`; veredito emitido por modo `rapido` fica marcado como `medicoes_reutilizadas` |

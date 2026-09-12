@@ -2,3 +2,10 @@ __pycache__/
 *.pyc
 *.tmp
 .cache/
+
+# Ambiente CAD headless (stub libGL gerado por setup_headless_gl.sh)
+.headless_gl/
+
+# Estado de execução do painel/monitor de auditoria (não versionar)
+05_Interface_Auditoria/.estado_*.json
+05_Interface_Auditoria/.proposta_em_auditoria.json
