@@ -32,7 +32,7 @@
     "P2 (bloqueador): furos de pino selados no Body_A (cavidades internas) e ausentes no Body_B; a Matriz 2 tinha pino Ø1,78 x 10 mm atravessando as duas metades.",
     "P3 (risco): sem controle térmico (cartuchos Ø9,5, termopar, refrigeração Ø8,0).",
     "P4 (dependência): sem padrão de flange/acoplamento em Z=0.",
-    "P5 (entrega): MatrizGedeon_Canal_Fluxo.step está errado - 213.790,03 mm3 contra 43.017,90 mm3 do canal real (4,96x maior), com geometria igual à da Jonatha.",
+    "P5 (entrega) - REVOGADA em 2026-09-12, por medida, com o backup do usuario em maao: a triagem dizia que MatrizGedeon_Canal_Fluxo.step estava errado (213.790,0 mm3 contra 43.017,9 mm3 do 'canal real'). Medido em gerar_gedeon_corrigida.py: 213.790,0 = funil de 43.017,9 SOMADO a cavidade cortada nas metades (170.753,7), com sobra de 19,095 mm3 nos dois sentidos (0,009 % do canal). O arquivo do canal esta certo; os 43.017,9 mm3 eram so o funil, que e o unico solido de canal que aparece dentro de MatrizGedeon.step. O que esta errado no arquivo da Gedeon e outra coisa, e agora esta consertado: MatrizGedeon_Body_A.step e 1 solido com 3 cascas (bolso de pino selado, sem ferramenta que o faca) enquanto o Body_B nao tem bolso nenhum, e MatrizGedeon.step sao 5 solidos que se atravessam (duas metades brutas + funil + 2 pinos) - e isso que abre como 'arquivo corrompido' em qualquer CAD.",
     "P6 (decisão): números de CFD não reproduzíveis - τ de 128,44 kPa é impossível (mesmo land e mesma vazão dão 164,0 kPa, confirmado por CFD 2D em 160,9 kPa); Matriz 1 com 185,4 bar contra 23,8 bar medidos em 1D (fórmula da fenda corrigida em 11/09/2026).",
     "P7 (robustez): lábio de saída com 0,75 mm de aço - sugerido chanfro de 0,8 x 45°.",
     "P8 (documentação): land paralelo real de 8,50 mm e não 10,00 mm."
@@ -46,11 +46,19 @@
     "N6: canal isolado confere com o corpo na Matriz 1, Desenvolvimento e Jonatha.",
     "N7: a Matriz 1 não perdia carga por atrito (23,8 bar em 1D); o defeito é o degrau de 90°.",
     "N8: o ganho da Jonatha é real - land de 88,0 para 8,5 mm e ΔP medido de 194,2 para 26,6 bar."
-   ]
+   ],
+   "p5_revogada": {
+    "o_que_estava_escrito": "P5 (entrega): MatrizGedeon_Canal_Fluxo.step está errado - 213.790,03 mm3 contra 43.017,90 mm3 do canal real (4,96x maior), com geometria igual à da Jonatha.",
+    "porque_estava_errado": "comparei o arquivo do canal (213.790,0 = canal COMPLETO) contra o unico solido de canal que esta dentro de MatrizGedeon.step (43.017,9 = so o funil). De la saiu o 'geometria igual a da Jonatha', que nao se sustenta: medido nos dois sentidos, o canal da Gedeon cabe inteiro no da Jonatha (Gedeon - Jonatha = 0,0 mm3) e a Jonatha e a Gedeon com 155,1 mm3 de funil ampliado",
+    "quando": "2026-09-12",
+    "por_quem": "IA engenheiro, ao medir 02_/matrizGedeonCerta.step (backup do usuario)",
+    "o_que_continua_verdade": "a biparticao da Gedeon tem bolso de pino selado no Body_A e ausente no Body_B - a mesma molestia do G-03 na Jonatha v27, que mostra [3, 1] de cascas por solido",
+    "onde_confere": "04_Dados_SSOT_e_Scripts/gedeon_corrigida.json (canal_da_gedeon_confere)"
+   }
   },
   "tratamento_auditoria_v28_1": {
    "data": "2026-09-12",
-   "para_quem_e": "a auditoria automatizada (PR #1 / issue #1) abriu 8 achados contra a v27.0. Isto é o relato do que foi feito com cada um, com o número medido hoje e onde o número é re-medido a cada rodada do portão (`python 04_Dados_SSOT_e_Scripts/verificar_cadeia.py`).",
+   "para_quem_e": "a auditoria automatizada (PR #1 / issue #1) abriu 8 achados contra a v27.0. Isto é o relato do que foi feito com cada um, com o número medido hoje e onde o número é re-medido a cada rodada do portão (`python 04_Dados_SSOT_e_Scripts/verificar_cadeia.py`). E esta seccao e a auditoria se baseando nas decisoes que tomamos juntos, nao nas que a auditoria presumiu: D1 (fixacao por collete EX-031 + degrau, sem flange e sem furo na matriz), D2 (chanfro de saida 1,50 x 45graus e lamina de 0,75 do master mantidos - a reducao para 0,80 foi rejeitada), D3 (as duas variantes de funil modeladas e comparadas, com o funil do master mantido) e D4 (o v27.0 continua o master; a v28 vive ao lado como proposta).",
    "regra_que_limita_o_tratamento": "nenhum achado foi 'resolvido' editando o master: `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (v27.0) e `02_CAD_Modelos_Historicos/` são intocados (regras 1 e 2 do projeto), e a v28.1 existe em paralelo aguardando sua aprovação explícita para promover",
    "achados": {
     "G-01 land reto e paralelo 8,50 vs 10,00 declarado": {
@@ -100,6 +108,12 @@
      "tratamento": "os números passaram a ser saída de script, e o portão os compara com os documentos. Refeitos: τ na parede do land = 163,8 kPa (γ̇_ap = 911 s⁻¹) e ΔP 1D = 41,9 bar para a v28.1 (68,2 bar na v27.0), com a observação de que τ não depende do comprimento do land - é a mesma fenda, a mesma vazão, o que é justamente o que derrubava o '128,44 kPa' do relatório antigo. A triagem dos problemas declarados está em `TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md`.",
      "numero_medido_hoje": "τ = 163,8 kPa",
      "onde_confere": "04_Dados_SSOT_e_Scripts/verificacao_v28.json ('τ na parede do land') e interface_cabecote.json ('numeros/dp_1d_bar')"
+    },
+    "Matriz historica Gedeon reconstruida": {
+     "status": "consertada por medida, e nao e a Jonatha",
+     "tratamento": "Re-corte do bloco do backup do usuario (02_/matrizGedeonCerta.step, 640.180,7 mm3, que sao as duas metades brutas ao bitola: diff 0,000 mm3) com o canal proprio da Gedeon (213.790,0 mm3) e com os pinos do proprioo arquivo dele (2x D1,78 x 10,00, que ja atravessam Y = 0), partido no plano Y = 0. Sai par com 1 casca por solido (o Body_A fornecido tem 3), A n B = 0,000000 mm3, nenhum metal no caminho do plastico (0,000000 mm3 dos dois lados), envelope D93,00 x Z 0..109,00 igual ao backup, e sentado no cabecote com 0,0000 mm3 de interferencia nos dois corpos",
+     "numero_medido_hoje": "aco do par 469.358,8 mm3 contra 469.001,7 mm3 da v27; booleano nos dois sentidos: par - v27 = 155,1 mm3 e v27 - par = 44,9 mm3, entao nao sao a mesma peca. O que as separa e interno: o canal da Gedeon esta contido no da Jonatha (Gedeon - Jonatha = 0,0 mm3; Jonatha - Gedeon = 155,1 mm3, 0,07 %)",
+     "onde_confere": "04_Dados_SSOT_e_Scripts/gedeon_corrigida.json e 03_Relatorios_e_Documentacao/RELATORIO_GEDEON_CORRIGIDA.md, gerados por gerar_gedeon_corrigida.py que entrou na cadeia do portao"
     }
    },
    "o_que_continua_aberto": [
@@ -107,7 +121,8 @@
     "Acesso axial dos cartuchos no cabeçote EX-030: NC -2,750 mm; sai com o nariz em Z ≥ 99,75 mm (recomendado 100,25 mm, com +0,500 de folga) - é decisão sua, não minha.",
     "Superfície de aperto do collete EX-031 (o furo Ø90,00 reto que medimos no DXF não desce sobre a banda Ø93: faltam 1,50 mm de raio). A pressão de fechamento é condicional a isso.",
     "Promover ou não a v28.1: a v27.0 continua sendo o master aprovado até você dizer.",
-    "Medições que só o paquímetro resolve: Ø90 do furo do collete, D3 do funil, M12 na face."
+    "Medições que só o paquímetro resolve: Ø90 do furo do collete, D3 do funil, M12 na face.",
+    "Gedeon reconstruida em 06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/ e peca de trabalho: nao substitui o master (regra 1) nem os historicos (regra 2), e o que vale e o que o processo de auditoria aprovar"
    ]
   },
   "merge_main_2026_09_12": {

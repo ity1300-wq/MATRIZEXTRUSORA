@@ -30,7 +30,9 @@ sys.path.insert(0, AQUI)
 
 CADEIA = ["gerar_matriz_v28.py", "verificar_v28.py --json --md", "verificar_interface_cabecote.py --json --md",
           "gerar_cabecote_ex030.py", "gerar_relatorio_v28.py", "generate_auto_prompt.py",
-          "verify_geometry_ssot.py", "verify_legacy_dies.py --json"]
+          "gerar_gedeon_corrigida.py", "verify_geometry_ssot.py --json --md", "verify_legacy_dies.py --json"]
+# o --md do verify_geometry_ssot NAO e opcional na cadeia: a seccao 6 do relatorio e lida do SSOT, e sem
+# regerar o documento o par (AUDITORIA...md x tau) abaixo compararia texto velho com numero novo.
 CADEIA_ESTUDOS = ["estudar_funis.py --so-texto", "estudar_recuo_cartuchos.py --so-texto",
                   "medir_perfil_cabecote.py --json 04_Dados_SSOT_e_Scripts/cabecote_perfil.json",
                   "medir_perfis_matrizes_x_cabecote.py --json --md",
@@ -49,7 +51,11 @@ PARES_DOC_JSON = [("INTERFASE_CABECOTE_EX030.md", "numeros/acesso_furacao_cenari
                    "perfis_matrizes_x_cabecote.json"),
                   ("INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md",
                    "o_que_um_chanfro_interno_muda/metal_removido_do_cabeçote_mm3", 3,
-                   "perfis_matrizes_x_cabecote.json")]
+                   "perfis_matrizes_x_cabecote.json"),
+                  ("RELATORIO_GEDEON_CORRIGIDA.md", "canal_da_gedeon_confere/arquivo_canal_mm3", 1,
+                   "gedeon_corrigida.json"),
+                  ("RELATORIO_GEDEON_CORRIGIDA.md", "contra_a_jonatha/canal_jonatha_minus_gedeon_mm3",
+                   1, "gedeon_corrigida.json")]
 
 falhas = []
 

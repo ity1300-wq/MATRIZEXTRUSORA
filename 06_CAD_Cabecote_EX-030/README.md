@@ -34,7 +34,27 @@ a partir do que foi medido no DWG (`04_Dados_SSOT_e_Scripts/cabecote_ex030.json`
   (v27) e 456.796,5 (v28.1), com a mesma caixa externa ±46,50 × Z 0..109,00. O que as separa é interno (funil,
   canal, bolsões de pino) e não aparece na silhueta lateral. O `[3, 1]` de cascas do `MatrizJonatha.step` é a
   mesma moléstia do `Body_A` da Gedeon — é o G-03 da auditoria, e o remédio está na v28.1.
-- Achado re-confirmado ao medir: `02_/MatrizGedeon_Canal_Fluxo.step` tem **213.790,0 mm³**, enquanto o sólido de
+### `STEP/Gedeon_Corrigida/` — a Gedeon reconstruída a partir do SEU backup (2026-09-12)
+
+Você subiu `02_/matrizGedeonCerta.step` e medimos nele: é o **bloco inteiro sem escavar** (640.180,7 mm³ = as
+duas metades brutas de `MatrizGedeon.step` somadas, diferença de 0,000 mm³). O conserto então não inventa
+geometria: é o seu bloco **− o canal próprio da Gedeon (213.790,0 mm³) − os pinos do próprio arquivo dele**
+(2 × Ø1,78 × 10,00, que já atravessam Y = 0), partido no plano Y = 0. Sai em `STEP/Gedeon_Corrigida/`:
+`MatrizGedeon_Corrigida_Body_A.step` e `_Body_B.step` (aço 234.617,6 + 234.741,2 mm³), `_Canal_Fluxo.step`,
+`_Explodida.step` e `Cabecote_EX-030_com_Matriz_Gedeon_Corrigida.step` (3 sólidos). Medido: **1 casca por
+sólido** (o `Body_A` do repositório tem 3), A ∩ B = 0,000000 mm³, nenhum metal no canal (0,000000 mm³),
+envelope Ø93,00 × Z 0..109,00 igual ao do backup, ∩ com o cabeçote = 0,0000 mm³.
+
+E sobre "está igual à Jonatha": medido em booleano nos dois sentidos, **não está** — par−v27 = 155,1 mm³ e
+v27−par = 44,9 mm³ de aço, e o canal da Gedeon cabe inteiro no da Jonatha (Gedeon−Jonatha = 0,0 mm³;
+Jonatha−Gedeon = 155,1 mm³, 0,07 %). As duas são gêmeas de propósito (a exigência do projeto é envelope
+idêntico); o que as separa é o funil, e a ampliação é da Jonatha. Ao medir isso apareceu que **a P5 da triagem
+estava errada** — ela chamava `_Canal_Fluxo.step` de canal errado comparando-o com o funil só; a P5 está
+marcada como REVOGADA no SSOT, com a medição ao lado. Números: `04_Dados_SSOT_e_Scripts/gedeon_corrigida.json`
+e `03_Relatorios_e_Documentacao/RELATORIO_GEDEON_CORRIGIDA.md`, gerados por `gerar_gedeon_corrigida.py`, que
+entrou na cadeia do portão.
+
+- Achado re-confirmado ao medir (e depois revogado, ver acima): `02_/MatrizGedeon_Canal_Fluxo.step` tem **213.790,0 mm³**, enquanto o sólido de
   canal que está dentro de `MatrizGedeon.step` tem **43.017,9 mm³**. O arquivo do canal da Gedeon não é o canal
   da Gedeon (P5 da triagem) — é por isso que toda comparação desta pasta usa as metades, nunca esse arquivo.
 - `STEP/DESENHO_2D_CABECOTE_X_MATRIZES.pdf` — **o desenho 2D** pedido: vista lateral em corte pelo plano
