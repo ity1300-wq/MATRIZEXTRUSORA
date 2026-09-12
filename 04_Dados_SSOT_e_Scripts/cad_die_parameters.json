@@ -1,1 +1,524 @@
-{"project_metadata": {"title": "MatrizJonatha STEP Deliverables (Approved Master v27.0)", "project_name": "MatrizJonatha", "standard": "ABNT NBR 10067 / ISO 128 / STEP AP214 / AP242", "units": "mm", "revision": "v27.0_MatrizJonatha_Approved_Master", "version": "v27.0_MatrizJonatha_Approved_Master", "date": "2026-09-11", "status": "V27.0_CONTINUA_APROVADO__V28.0_PROPOSTA_PENDENTE_DE_APROVACAO_USUARIO", "selected_die": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step", "geometry_verified": true, "user_decision": "v27.0 segue sendo o master aprovado (nada foi sobrescrito). A revisão v28.1 (DFM) existe em paralelo como proposta verificada: aguarda decisão do usuário sobre (i) chanfro 0,80 x 45° e (ii) furação de pinos/aquecimento antes de virar o oficial.", "revision_ssot": "v28.1_DFM_Proposta", "data_revisao_v28": "2026-09-11"}, "matriz_jonatha_master_files": {"master_assembly_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step", "exploded_view_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Explodida.step", "with_polymer_flow_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Com_Fluxo.step", "isolated_body_a": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_A.step", "isolated_body_b": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_B.step", "isolated_flow_channel": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Canal_Fluxo.step"}, "envelope_externo_mm": {"comprimento_total_z_mm": 109.0, "estagio_1": {"diametro_mm": 93.0, "z_de_mm": 0.0, "z_ate_mm": 69.9}, "estagio_2": {"diametro_mm": 89.5, "z_de_mm": 69.9, "z_ate_mm": 80.7}, "estagio_3": {"diametro_mm": 79.5, "z_de_mm": 80.7, "z_ate_mm": 109.0}, "observacao": "Envelope 100% idêntico à Matriz 2 (Gedeon) para montagem direta na extrusora. Medido e confirmado por auditoria automática nos STEP oficiais."}, "matriz_jonatha_parameters": {"manifold_type": "Funil Hidrodinâmico em V Restrito na Entrada Cilíndrica (Encaixe Extrudora Respeitado)", "entry_bore_diameter_mm": 75.6, "manifold_central_depth_mm": 6.0, "pre_land_transition_depth_mm": 3.5, "land_length_mm": 10.0, "land_paralelo_real_mm": 8.5, "land_paralelo_observacao": "Medido na auditoria v27.0: dos 10,00 mm totais, o chanfro de saída de 1,50 mm × 45° ocupa os últimos 1,50 mm (Z=107,50 a 109,00). DECIDIDO em 2026-09-11 (D2): manter 1,50 × 45° e declarar land_paralelo_real_mm = 8,50 como valor de projeto; a redução para 0,80 mm proposta na v28.0 foi rejeitada", "land_width_mm": 75.0, "land_thickness_mm": 1.5, "edge_radius_mm": 0.75, "exit_chamfer": "1.50 mm x 45°", "pressure_drop_bar": 68.2, "velocity_uniformity_percent": 99.1, "matriz_2_baseline_pressure_drop_bar": 268.7, "material": "Aço Ferramenta P20 / AISI H13 Nitretado", "land_paralelo_mm": 8.5}, "rheological_model_parameters": {"polymer": "EPR/XLPE/PVC Modificado (Média Tensão)", "flow_rate_cm3_s": 15.0, "processing_temperature_C": 190.0, "power_law": {"K_Pa_s_n": 18500.0, "n": 0.32}, "carreau_yasuda": {"eta_0_Pa_s": 42000.0, "lambda_s": 0.85, "a": 1.25, "n": 0.32, "Ea_over_R_K": 4250.0, "T_ref_K": 463.15}}, "audit": {"audited_on": "2026-09-11", "audit_status": "TODOS OS ITENS F-01 A F-05 RESOLVIDOS (SSOT v27.0 COMPLETO)", "F01_resolution": "RESOLVIDO: RELATORIO_DE_SIMULACAO.md atualizado para v27.0 (68,2 bar / 99,10%).", "F02_resolution": "RESOLVIDO: AUTO_PROMPT_CONTINUIDADE_MATRIZ_JONATHA.md atualizado para v27.0 (68,2 bar / 99,10%).", "F03_resolution": "RESOLVIDO: Datasets JSON reológico e térmico atualizados para v27.0 (68,2 bar).", "F04_F05_resolution": "RESOLVIDO: Scripts de geração Python limpos, testados, idempotentes e com caminho relativo.", "auditoria_geometrica_2026_09_11": {"script": "04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py", "relatorio": "03_Relatorios_e_Documentacao/AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md", "dados": "04_Dados_SSOT_e_Scripts/auditoria_geometrica.json", "itens_verificados": 36, "conformes": 19, "nao_conformes": 2, "resultado": "Geometria dos STEP oficiais confirmada: envelope 93/89,5/79,5 x 109 mm, boca de entrada Ø75,60 mm, land 75,00 x 1,50 mm com bordas R0,75, bipartição sem interferência e fechamento volumétrico exato (aço + canal + furos de pino = envelope).", "achados_pendentes_de_decisao": ["G-01: land reto e paralelo real de 8,50 mm (SSOT declara 10,00 mm) - chanfro de saída consome 1,50 mm.", "G-02: lábio de saída com apenas 0,75 mm de parede de aço (fragilidade na face Ø79,5).", "G-03: os furos de pino Ø4 x 12 do Body_A estão SELADOS (cavidades internas fechadas: 3 shells) e o Body_B não possui furos conjugados - os pinos não alinham as metades.", "G-04: nenhum recurso de fixação/aperto, controle térmico (cartuchos Ø9,5, termopar, refrigeração Ø8,0) ou flange de entrada presente no CAD.", "G-05: MatrizJonatha_Canal_Fluxo.step contém 3 sólidos (núcleo de polímero + 2 furos de pino) em vez de 1."]}, "triagem_de_problemas_2026_09_11": {"documento": "03_Relatorios_e_Documentacao/TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md", "script": "04_Dados_SSOT_e_Scripts/verify_legacy_dies.py", "dados": "04_Dados_SSOT_e_Scripts/auditoria_matrizes_historicas.json", "resumo": "Medição das 4 matrizes (1 Copo, 2 Gedeon, Desenvolvimento e Jonatha v27). Separadas as alegações que se sustentam das que não se sustentam.", "problemas_reais": ["P1 (bloqueador): Matriz Jonatha sem nenhum recurso de fixação/aperto - a força de abertura das metades é da ordem de 30 kN (68,2 bar x 4.489 mm2).", "P2 (bloqueador): furos de pino selados no Body_A (cavidades internas) e ausentes no Body_B; a Matriz 2 tinha pino Ø1,78 x 10 mm atravessando as duas metades.", "P3 (risco): sem controle térmico (cartuchos Ø9,5, termopar, refrigeração Ø8,0).", "P4 (dependência): sem padrão de flange/acoplamento em Z=0.", "P5 (entrega): MatrizGedeon_Canal_Fluxo.step está errado - 213.790,03 mm3 contra 43.017,90 mm3 do canal real (4,96x maior), com geometria igual à da Jonatha.", "P6 (decisão): números de CFD não reproduzíveis - τ de 128,44 kPa é impossível (mesmo land e mesma vazão dão 164,0 kPa); Matriz 1 com 185,4 bar contra 37,1 bar medidos em 1D.", "P7 (robustez): lábio de saída com 0,75 mm de aço - sugerido chanfro de 0,8 x 45°.", "P8 (documentação): land paralelo real de 8,50 mm e não 10,00 mm."], "nao_sao_problemas": ["N1: envelope Ø93/89,5/79,5 x 109 mm idêntico à Matriz 2 (compatibilidade comprovada por medição).", "N2: fenda 75,00 x 1,50 com R0,75 - área 112,017 mm2 igual ao cálculo analítico.", "N3: canal da Jonatha sem arestas frágeis; a boca Ø75,60 é o envelope máximo do canal.", "N4: bipartição sem interferência (0,000 mm3) e fechamento volumétrico com 0,001 mm3 de resíduo.", "N5: volumes e massa conferem com o SSOT (3,682 kg de aço).", "N6: canal isolado confere com o corpo na Matriz 1, Desenvolvimento e Jonatha.", "N7: a Matriz 1 não perdia carga por atrito (37,1 bar em 1D); o defeito é o degrau de 90°.", "N8: o ganho da Jonatha é real - land de 88,0 para 8,5 mm e ΔP medido de 305,5 para 41,9 bar."]}}, "proposta_v28_dfm": {"status": "PENDENTE_APROVACAO (v27.0 continua oficial)", "arquivos": {"master_assembly_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28.step", "isolated_body_a": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Body_A.step", "isolated_body_b": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Body_B.step", "isolated_flow_channel": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Canal_Fluxo.step", "exploded_view_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Explodida.step", "with_polymer_flow_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Com_Fluxo.step", "pino_kit_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Pinos_Alinhamento.step", "kit_pinos": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Pinos_Alinhamento.step (4 sólidos nomeados)"}, "geradores": {"cad": "04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py", "verificacao": "04_Dados_SSOT_e_Scripts/verificar_v28.py", "conferencia_visual": "04_Dados_SSOT_e_Scripts/renderizar_v28.py", "mapeamento_de_aco": "04_Dados_SSOT_e_Scripts/explorar_acomodo_furos.py"}, "relatorio": "03_Relatorios_e_Documentacao/PROJETO_DFM_V28_MATRIZ_JONATHA.md", "verificacao_md": "03_Relatorios_e_Documentacao/VERIFICACAO_V28.md", "verificacao_dados": "04_Dados_SSOT_e_Scripts/verificacao_v28.json", "resultado_verificacao": {"itens": 64, "conformes": 64, "nao_conformes": 0, "nota": "todos os números abaixo são medidos nos STEP por booleanos + BRepExtrema, não declarados", "inclui": "contagem de sólidos por arquivo entregue (7/7), parede real de cada um dos 14 furos, ∩ canal = 0 mm³ em todos, web mínima 5,380 mm, fechamento volumétrico (resíduo 0,0115 mm³), e prova de que o funil Z<99 é o mesmo sólido do v27.0 (Δmáx 0,000000 mm)"}, "o_que_mudou": {"P7_P8_chanfro_e_land": "chanfro de saída 1,50 -> 0,80 x 45°; land reto e paralelo 8,50 -> 9,20 mm (Z=99,00->108,20); lâmina do lábio 0,75 -> 1,450 mm (medida)", "P2_pinos": "4 bolsões de Ø4 H7 x 12 mm ABERTOS no plano de partição e conjugados nas duas metades (v27: 2 bolsões selados só no Body_A, nenhum no Body_B) + kit de pinos Ø4 x 24 modelado", "P3_aquecimento": "6 cartuchos Ø9,5 mm (Z=97,00; X=0 e ±22; cegos, fundo a 8,20-9,36 mm do canal) + 4 poços de termopar Ø4,8 mm (Z=103,00; X=±11) na zona do land", "P5_entrega": "arquivo do canal entregue com 1 único sólido (v27 entregava 3: núcleo + 2 bolsões)", "especificacao_produto": "INTACTA E VERIFICADA: fenda 75,00 x 1,50 mm, R0,75 nas bordas, área 112,0171 mm², boca Ø75,60, envelope Ø93x69,90 / Ø89,5x10,80 / Ø79,5x28,30, Z total 109,00", "funil_herdado": "Z<99 é o mesmo sólido do master: distância máxima entre superfícies v28 vs v27 = 0,000000 mm; Δvolume = 0,028 mm³"}, "numeros recalculados": {"delta_p_1d_bar_v28": 43.9, "delta_p_1d_bar_v27": 41.9, "delta_p_1d_metodo": "lei das potências K=18500 Pa·s^n, n=0,32, Q=15 cm³/s, integrada sobre a geometria medida (dp_total de verify_legacy_dies.py)", "tau_parede_land_kPa": 163.8, "gamma_ponto_aparente_s-1": 911, "massa_aco_kg": 3.587, "area_projetada_canal_xz_mm2": 8168, "forca_abertura_biparticao_kN": {"limite_pressao_plena": 55.7, "somente_boca_d75_60": 30.6}, "web_minima_entre_furos_mm": 5.38, "delta_p_declarado_no_relatorio_cfd_bar": 68.2, "aviso": "o ΔP de projeto (68,2 bar) é resultado de CFD arquivado, não reproduzível no repositório; a estimativa 1D sobre a geometria medida dá 43,9 bar. Registrar como 'estimativa a confirmar' até rodar CFD novo sobre o v28"}, "pendencias_v28": [{"id": "F-28-1", "item": "Fixação das metades contra a força de abertura (30,6-55,7 kN)", "situacao": "RESOLVIDA PELO CABECOTE, medido no DWG 030-032 e provado por booleanos: o bolso Ø95,00 × 70,00 do cabeçote recebe a banda Ø93 × 69,90 da matriz e a bucha cônica EX-031 (Ø95 → Ø86, cone 3,00°, L 70,00) aperta essa banda. Compressão radial de 8,58 MPa equilibra os 55,70 kN que abrem a partição; o cone é auto-travante (3,00° < arctan 0,15 = 8,53°). Empuxo axial de 29,85 kN recai em compressão no degrau do cabeçote, no anel de contato real Ø90 → Ø93 (431,2 mm² medidos por booleano) a 69,22 MPa - margem de 20,2x sobre o escoamento da matriz temperada", "acao": "Nenhum furo, grampo ou flange na matriz. Exigir na fabricação: banda Ø93 retificada na zona de aperto (Ra <= 0,4 um, circularidade 0,01) e face do degrau (Z=69,90) com planicidade e perpendicularidade ao eixo <= 0,01 mm. Manter os 4 bolsões de pino CEGOS, sem escarear: a parede até o Ø93 é de 0,794 mm e é ela que o collete prensa", "alternativa": "Monobloco aberto por EDM continua válido como redundância e elimina o plano de partição; não é mais o único caminho"}, {"id": "F-28-2", "item": "Refrigeração no corpo da matriz", "situacao": "NÃO CABE: nenhum Ø8 axial ou radial fica a ≥3,5 mm do canal sem romper a peça (mapeamento em acomodo_furos.json)", "acao": "refrigeração no adaptador/cabeçote, não na matriz"}, {"id": "F-28-3", "item": "Padrão de acoplamento na face Z=0 e furação do flange", "situacao": "FECHADO POR MEDIÇÃO no DWG 030-032 (escala k = 25,534 mm/un calibrada por 5 cotas, desvio máx. 0,012%): a matriz não tem nem precisa de flange. A furação de 6 × Ø16,50 em fendas de 23,50 sobre C.C. Ø180,00 (M12, folga angular total 14,40° cotada como 15°, furo central Ø25,00) é a junta CABEÇOTE-EXTRUSORA e passa a 35,25 mm do corpo da matriz. O centragens da matriz é feito pelos 3 estágios cilíndricos (Ø95/Ø90/Ø80 do cabeçote) com folga radial de 1,00/0,25/0,25 mm", "correcao": "A versão anterior destes campos usava escala calibrada em 'C/G Ø150' lida em raster de baixa resolução (k = 21,28 mm/un) e falava em 'ressalto de chave a 0°' e em 'grampos no BC Ø150'. O desenho diz C.C Ø180; a leitura anterior estava errada e foi substituída por medição entidade por entidade", "acao": "Nada a usinar na matriz para este item. Conferir na máquina as tolerâncias dos furos (Ø90 +0,05/0; Ø95 -0,05/-0,1) antes de fechar o desenho de execução"}, {"id": "F-28-4", "item": "Assimetria do canal em Y", "situacao": "herdada do loft do v27: as duas metades diferem 199,22 mm³ (0,093 % do volume do canal)", "acao": "se aparecer riscas/diferença de espessura entre as faces da manta, culpar primeiro este item; corrigir refazendo o loft com seções de mesmo número de arestas (throughAll)"}, {"id": "F-28-5", "item": "Uniformidade de 99,10 %", "situacao": "ainda sem definição nem planilha no repositório; não usar como critério de aceite", "acao": "definir (σ/U do perfil de vazão medido no plano Z=109) antes de contratar garantia"}, {"id": "F-28-6", "item": "Anel do nariz do cabeçote (variante 9\" × 65 mm)", "situacao": "FECHADA PELO USUARIO por medição na máquina: sobram ~2,5 mm em cada extremidade da fenda, o que só acontece com a passagem em Ø80,00 (75,00 + 2 × 2,50). Com o anel Ø68,30 lido no corte faltariam 3,35 mm por lado. O Ø68,30 é da variante de 65 mm do carimbo 9\"X65MM e não participa da montagem de 75 mm", "evidencia_cruzada": "o anel da face medido no DXF (Ø90 → Ø130 = 20,00 mm) bate com os ~20 mm que o usuário mediu na máquina - duas fontes independentes no mesmo valor", "acao": "nenhuma na matriz. Manter registrado que o Ø68,30 existe no desenho, para ninguém reaproveitar esse cabeçote de 65 mm sem verificar"}, {"id": "F-28-7", "item": "Especificação de aperto da bucha cônica EX-031", "situacao": "Pendente no lado da máquina: o aperto da banda Ø93 é o que fecha o plano de partição, mas o desenho do cabeçote não dá curso nem torque de aperto. A pressão necessária é 8,58 MPa para equilibrar a partição e 9,76 MPa para segurar o empuxo axial só por atrito; sem controle, o collete cônico pode apertar muito acima disso", "acao": "Definir curso/torque de aperto na ordem de serviço da extrusora. A deformação radial do canal com 9,76 MPa é 0,0023 mm por lado (0,15% da espessura de 1,50 mm), o que é aceitável; acima de ~40 MPa a banda começa a fechar os furos de pino de 0,794 mm de parede"}], "rotulo": "v28.1", "geometria_labios": {"land_paralelo_mm": 8.5, "chanfro_saida_mm": 1.5, "z_inicio_land_mm": 99.0, "z_fim_mm": 109.0, "origem": "decisao D2 do usuario em 2026-09-11: manter o labio do master. gerador e verificador leem estes valores - nao ha numero datilografado no script"}, "mudancas_reais": ["bipartição com 4 bolsões de pino abertos no plano e conjugados nas duas metades (o v27 tinha 2 bolsões selados só no Body_A e nenhum no Body_B)", "6 cartuchos Ø9,50 e 4 poços de termopar Ø4,80 na zona do nariz", "arquivo do canal em 1 único sólido (o v27 entregava 3) - pronto para EDM e para malha de CFD", "kit de pinos de alinhamento modelado (4 sólidos nomeados em MatrizJonatha_v28_Pinos_Alinhamento.step)", "furos M6 de desmontagem suprimidos na face de entrada: o anel traseiro tem 8,70 mm e o pushador EX-032 é ferramenta do cabeçote, não rosca na matriz"], "o_que_NAO_mudou": "especificação do produto e labio de saida: fenda 75,00 x 1,50 com R0,75, boca Ø75,60, chanfro 1,50 x 45, land paralelo 8,50, lamina 0,75, envelope Ø93/Ø89,50/Ø79,50 x 109,00 (decisao D2)"}, "fabricao_v28": {"tolerancias": {"furos_pino": "Ø4 H7, profundidade 12,0 mm, perpendicularidade 0,01 x A", "plano_particao": "paralelismo 0,02 mm; rugosidade Ra ≤ 0,8 µm na face Y=0", "land": "Ø/simétrica ±0,02 mm; Ra ≤ 0,4 µm nas faces do land", "chanfro_saida": "1,50 x 45 graus (±0,05), sem rebarba - MANTIDO como no master pela decisao D2; a lamina do labio fica em 0,75 mm, entao o esmerilhamento/limpeza da face de saida tem de ser procedimento controlado (nao usar metal duro nem choque termico na lamina)", "banda_aperto_cabecote": "Ø93,00 0/-0,02 na zona Z=0,10-69,90 (a banda que a bucha EX-031 prensa), Ra <= 0,4 um, circularidade 0,01 mm", "degrau_apoio": "face do ombro em Z=69,90: planicidade <= 0,01 mm e perpendicularidade ao eixo <= 0,01 mm (69,22 MPa no anel de contato real de 431,2 mm²; se encostar em aresta, cava o cabeçote cementado)", "lamina_labio": "0,75 mm no ponto mais fino (medido 0,750); boca de saida resultante 78,00 x 4,50 mm, medida no arquivo do canal"}, "pinos": "4 × Ø4 h6 x 24 mm, aço temperado 58-62 HRC, fixados com pino-guia colado no Body_A e deslizante no Body_B", "aquecimento": {"cartuchos": "6 × Ø9,5 x 25 mm, 750 W total (3 zonas de 2 cartuchos), termopar J/K tipo K em poço separado", "potencia_por_zona": "X=0 (centro) 100 %; X=±22 (bordas) 120 % para compensar perda de borda"}, "tratamento": "Nitretação a gás 0,10-0,15 mm, 62 HRC DEPOIS da furação completa (a furação dos cartuchos não pode vir depois do tratamento térmico)", "ordem_de_usinagem_recomendada": ["tornear envelope Ø93/Ø89,5/Ø79,5 e facear Z=0 e Z=109", "fresar/surtir o Ø75,60 da boca", "abrir o plano de partição e fresar o canal (ou EDM com o sólido MatrizJonatha_v28_Canal_Fluxo.step)", "fechar, furar e escarear os 4 bolsões de pino conjugados", "fechar e furar os 4 bolsões de pino conjugados - CEGOS, sem escarear (parede de 0,794 mm até o Ø93 que o collete prensa)", "montar, conferir a fenda 75,00 x 1,50 com calibrador e só então nitretar", "retificar a banda Ø93 da zona de aperto e conferir o paralelismo do degrau Z=69,90 antes do tratamento"], "interface_cabecote": "monta no cabecote EX-030 com folga radial 1,00/0,25/0,25 mm nos tres estagios, folga axial 0,10 mm no degrau e 14,00 mm de protrusao do nariz; folga do produto (75,00) no furo Ø80 do cabecote = 2,50 mm por lado - confere com a medicao do usuario. Com o chanfro 1,50 mantido, a BOCA da matriz abre para 78,00 mm (1,00 mm por lado ate o Ø80): se o bico do cabecote chegar ate a face da matriz, essa e a folga real", "decisao_d2": "o chanfro de 0,80 mm que a v28.0 propunha foi rejeitado pelo usuario em 2026-09-11; o gerador le o valor do SSOT, entao voltar atras e mexer em geometria_labios e re-rodar, nao no script"}, "interface_cabecote": {"fonte_arquivo": "03_Relatorios_e_Documentacao/CAD_Export/030-032- cabeçote.dwg (convertido; medição em /home/user/cabecote.dxf)", "metodo": "aspose-cad -> DXF; ezdxf leu as entidades; escala calibrada pelas cotas do próprio desenho; interface provada com booleanos e BRepExtrema sobre MatrizJonatha_v28.step", "scripts": ["04_Dados_SSOT_e_Scripts/cabecote_ex030.json (perfil medido do cabeçote)", "04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py --json --md", "04_Dados_SSOT_e_Scripts/interface_cabecote.json (42 itens)", "03_Relatorios_e_Documentacao/INTERFASE_CABECOTE_EX030.md"], "resultado_verificacao": {"itens": 43, "conformes": 39, "nao_conformes": 0, "pendentes_maquina": 4}, "escala": {"k_mm_por_unidade": 25.534, "incerteza": "+/- 0.003 (0.012%)", "correcao_registrada": "leituras anteriores usaram k=21,28 obtido de 'C/G Ø150' lido em raster de baixa resolucao; o desenho diz 'C.C Ø180'. Todas as cotas do cabecote foram re-medidas com k=25,534."}, "cabecote_comprimento_mm": 95.0, "furos_para_a_matriz": [{"ordem": 1, "nome": "bore do nariz", "Ø_mm": 80.0, "de_d_mm": 0.0, "ate_d_mm": 14.0, "cota_texto": "Ø80"}, {"ordem": 2, "nome": "bore intermediario", "Ø_mm": 90.0, "de_d_mm": 14.0, "ate_d_mm": 25.0, "cota_texto": "Ø90 +0,05/0"}, {"ordem": 3, "nome": "bolso de fixacao (assento da bucha conica)", "Ø_mm": 95.0, "de_d_mm": 25.0, "ate_d_mm": 95.0, "cota_texto": "Ø95 (-0,05/-0,1 no assento da bucha)"}], "encaixe": [{"estagio_matriz": "Ø93 x 69,9 (d 25,1..95)", "furo_cabecote": "Ø95 x 70 (d 25..95)", "folga_radial_mm": 1.0, "folga_axial_mm": 0.1}, {"estagio_matriz": "Ø89,5 x 10,8 (d 14,3..25,1)", "furo_cabecote": "Ø90 x 11 (d 14..25)", "folga_radial_mm": 0.25, "folga_axial_mm": 0.3, "nota": "o Ø89,5 termina 0,10 antes do fim do furo Ø90 e 0,30 antes do degrau para o Ø80"}, {"estagio_matriz": "Ø79,5 x 28,3 (d -14..14,3)", "furo_cabecote": "Ø80 x 14 (d 0..14)", "folga_radial_mm": 0.25, "protrusao_da_face_de_saida_mm": 14.0, "engate_do_nariz_mm": 14.0}], "anel_da_face_mm": 20.0, "ombro_de_apoio": {"anel_de_contato_de_Ø_mm": 90.0, "para_Ø_mm": 93.0, "area_contato_mm2": 431.2, "nota": "interseccao entre o degrau do cabecote (Ø90->Ø95) e o ombro da matriz (Ø89,5->Ø93); o ombro da matriz e a face que reage a forca de abertura"}, "bucha_conica_EX031": {"designacao": "EX-031 BUCHA CONICA", "comprimento_mm": 70.0, "Ø_externo_maior_mm": 95.0, "Ø_externo_menor_mm": 86.0, "Ø_interno_ref_mm": 90.0, "cone_graus": 3.0, "Ø_passagem_outro_lado_mm": 86.0, "tolerancias": {"Ø_externo": "-0,05/-0,1", "Ø_interno": "-0,15"}, "funcao_interpretada": "collete conico que, assentado no bolso Ø95x70, contrai sobre o corpo Ø93 da matriz; auto-travante (3 deg < arctan 0,15 = 8,6 deg)"}, "junta_cabecote_extrusora": {"furos": 6, "Ø_mm": 16.5, "em_fenda_comprimento_mm": 23.5, "circunferencia_primitiva_mm": 180.0, "folga_angular_total_graus": 14.4, "cota_angular_no_desenho_graus": 15.0, "rosca": "M12", "Ø_central_mm": 25.0, "nota": "furos do FLANGE do cabecote para a extrusora - NAO sao para a matriz; ficam fora do envelope Ø93 da matriz"}, "pressoes_MPa": {"contato_no_degrau": 69.22062946378651, "collete_para_fechar_particao": 8.580583541300797, "collete_para_empuxo_axial_por_atrito": 9.757044082842652, "collete_para_segurar_peso": 0.011503258547906188}, "forcas_kN": {"abertura_da_biparticao_limite": 55.7, "empuxo_axial_limite": 29.846799632290264, "empuxo_axial_dp1d": 19.2142228860115}, "conclusao_projeto": "a matriz não leva flange, grampo nem furo de fixação; envelope Ø93/Ø89,5/Ø79,5 × 109,00 mantido integralmente - ele é o centragens do cabeçote", "bloqueio": "anel do nariz Ø68,30 da variante de 65 mm impede a montagem da matriz de 75 mm (F-28-6)", "areas_mm2": {"ombro_matriz": 501.6730768701201, "degrau_cabecote": 726.4933011426397, "contato_real_booleano": 431.18359170520006, "boca_entrada": 4488.833247155239, "fenda": 112.0171, "projetada_XZ": 8168.0}, "deformacao_radial_canal_mm": 0.0022685127492609166, "fonte_numeros": "interface_cabecote.json[\"numeros\"] - gerado por verificar_interface_cabecote.py"}, "decisoes_usuario": {"data": "2026-09-11", "origem": "respostas do usuario as perguntas D1-D4 reformuladas em termos simples, mais o croqui em vista lateral enviado na sequencia (azul = extrusora, vermelho = cabecote, branco = matriz)", "D1_fixacao": {"decisao": "FECHADA PELA MAQUINA: a matriz nao leva flange, grampo nem furo de fixacao; a retencao vem da bucha conica EX-031 (collete) e do degrau do cabecote", "impacto_no_cad": "nenhum - envelope intacto", "furo_m12_no_bolso_do_cabecote": {"Ø_broca_mm": 10.5, "Ø_passagem_mm": 12.0, "centro_da_face_do_nariz_mm": 72.02, "centro_da_face_do_flange_mm": 20.0, "plano_no_eixo_da_matriz_mm_z": 23.0, "o_que_prova": "o cabecote ja tem furo transversal na parede do bolso (17,50 mm de aco ali) - o pushador EX-032 M12 age por ele, e e por isso que a matriz nao precisa de furo de desmontagem (a decisao de suprimir os M6 da v28 fica corroborada por uma medida, nao por preferencia)", "medido_em": "cabecote.dxf (dois circulos exatos de Ø10,50 e Ø12,00 no eixo, 72,02 mm da face)"}, "risco_restante_collete": "corrigido em 2026-09-12 por medicao no DXF: o furo do collete EX-031 e reto Ø90,00 e as unicas geratrizes conicas do desenho (3,267 deg, silhueta Ø86,00) dao OD conico - com Ø90 reto o collete nao aperta a banda Ø93 da matriz (faltam 1,50 mm de raio). O apoio AXIAL no degrau do cabecote (431,2 mm2 de contato real, medido por booleano) nao depende disso e continua de pe; a compressao RADIAL que fecharia o plano de particao fica condicionada a confirmar a superficie de aperto. Alternativa ja recomendada no relatorio e imune a isso: monobloco por EDM (sem plano de particao)"}, "D2_labio_saida": {"decisao": "MANTER COMO NO MASTER: chanfro de saida 1,50 x 45 graus e land paralelo 8,50 mm (lamina de 0,75 mm). A reducao para 0,80 x 45 que a v28.0 propunha foi REJEITADA", "geometria": {"land_paralelo_mm": 8.5, "chanfro_saida_mm": 1.5, "lamina_mm": 0.75}, "impacto_no_cad": "a regiao Z >= 99,00 da v28 passa a ser identica a do v27; o que a revisao muda fica so em biparticao/pinos, aquecimento e arquivo do canal", "risco_assumido": "a lamina de 0,75 mm continua fragil na limpeza da matriz: registrar como procedimento de manutencao (nao esmerilhar, nao usar metal duro na face)"}, "D3_funil": {"decisao": "MODELAR AS DUAS VARIANTES E COMPARAR: o funil conico linear que o modelo atual tem x o coat-hanger de 6,00 mm que o texto descreve", "status": "ABERTA - proximo trabalho de CAD + 1D", "entregavel": "comparativo medido nos solidos: dP, tempo de residencia e espessura da manta lado a lado, para entao escolher entre manter ou virar v29", "resultado_medido": {"data": "2026-09-12", "metodo": "cortes do solido com secao() de verify_legacy_dies.py (a mesma que o dp_total usa, para tabela e Delta-P saírem do mesmo corte); Delta-P 1D com dp_total() de verify_legacy_dies.py (K = 18.500,00 Pa·s^n, n = 0,32, Q = 15.000 mm³/s); mesmo land 8,50 mm e chanfro 1,50 × 45 nos dois lados da comparação; lei de projeto do funil novo nas estações Z=0, Z=25, Z=70, Z=99 mm", "funil_atual": {"dp_1d_bar": 41.9, "volume_mm3": 213945.0, "residencia_s": 14.3, "altura_secao_z25_mm": 56.89, "frac_volume_pontas": 0.086, "invasao_envelope_mm": 0.0}, "variante_coathanger": {"dp_1d_bar": 100.9, "volume_mm3": 76010.0, "residencia_s": 5.1, "altura_secao_z25_mm": 12.0, "frac_volume_pontas": 0.031, "invasao_envelope_mm": 0.0}, "conclusao": "o coat-hanger das secoes declaradas custa 2,41x de pressao, nao muda a espessura da manta (fenda e land identicos) e so reduz residencia porque o canal e menor. Nenhum dos dois e o reservatorio de 6,00 mm do texto. Recomendado: opcao (a) - manter o funil do master e corrigir o texto. Se for (b), CFD novo e obrigatorio (100,9 bar passa o limite de 68,2 bar do proprio projeto).", "arquivos": ["04_Dados_SSOT_e_Scripts/estudar_funis.py", "04_Dados_SSOT_e_Scripts/funil_coathanger.json", "03_Relatorios_e_Documentacao/ESTUDO_FUNIL_COATHANGER.md", "05_Variantes_Em_Estudo/ESTUDO_funil_coathanger_Matriz.step", "05_Variantes_Em_Estudo/ESTUDO_funil_coathanger_Canal_Fluxo.step"], "estado": "comparacao entregue; a escolha (a) ou (b) e do usuario - nenhuma geometria foi alterada"}}, "D4_promover": {"decisao": "NAO promover: o v27.0 continua sendo o master aprovado e a v28 fica ao lado como proposta verificada"}, "medicao_na_maquina": {"quem": "usuario, com paquimetro na maquina", "o_que": "linha do final do cabecote ate o comeco da matriz e a sobra em cada extremidade da fenda", "valores_declarados": {"anel_da_face_radial_mm": 20.0, "sobra_por_lado_na_fenda_mm": 2.5}, "conferencia_contra_o_desenho": ["(Ø130 - Ø90)/2 = 20,00 mm  ==  os 20 mm declarados (o DXF mede anel da face = 20,00)", "(Ø80 - 75,00)/2 = 2,50 mm  ==  os 2,5 mm por lado declarados", "com o chanfro 1,50 x 45 a boca da fenda passa a 75,80 -> sobra 2,10 mm por lado (ainda 'aproximadamente 2,5')", "se o anel Ø68,30 lido no corte existisse: faltariam 3,35 mm por lado - nao 'sobra'"], "conclusao": "as duas medidas do usuario confirmam o modelo medido no DWG por caminhos independentes e descartam o anel do nariz de 65 mm para o produto de 75 mm", "fica_para_conferir": "REABERTA: a folga axial dos cartuchos depende da protrusao real. No desenho (14,00 mm) faltam 2,75 mm e o cartucho nao entra pela folga de 0,25 mm entre o Ø79,5 da matriz e o Ø80 do nariz. Sae de cena se voce confirmar que a matriz sobressai mais de 12,00 mm; senao, mover os 6 cartuchos para Z >= 99,75 mm (e o proprio verificador calcula o numero) ou abrir alivio no nariz do cabecote - que ja e furado transversalmente para o M12 do pushador, entao tem precedente", "linha_axial_medida": {"valor_mm": 20.0, "o_que_eh_realmente": "corrigido em 2026-09-12 por medicao no DXF: o '20' desta vista e a posicao axial do par de circulos 010,50/012,00 (furo roscado M12 no bolso do cabecote), contada a partir da FACE DO FLANGE - 72,02 - 52,02 = 20,00 mm. NAO e a sobra axial entre o fim do cabecote e a face da matriz", "consequencia": "a protrusao da matriz volta a ser a do desenho (14,00 mm). A pendencia dos cartuchos esta REABERTA: com 14,00 mm, a borda traseira do furo do cartucho (Z=97,00 - 09,5/2 = 92,25) fica 2,75 mm dentro da luva do nariz do cabecote, onde a folga radial e 0,25 mm", "valor_valido_para_protrusao_mm": 14.0, "fonte": "medido em cabecote.dxf: faces axiais em 0,02 / 14,02 / 25,02 / 52,02 / 95,02 mm e centro do furo em 72,02 mm (circulos exatos, desvio radial 0,002 mm)"}}, "consequencia_d2_mediata": {"boca_saida_mm": {"largura": 78.0, "altura": 4.5, "origem": "medida no arquivo MatrizJonatha_v28_Canal_Fluxo.secao a 0,001 mm da face de saida"}, "folga_ate_furo_do_nariz_mm_por_lado": 1.0, "empuxo_axial_com_dp1d_kN": 18.3, "nota": "manter o chanfro 1,50 x 45 abre a boca de 75,00 para 78,00 mm. Enquanto o bico do cabecote terminar antes da face da matriz (14,00 mm no desenho) isso nao encosta em nada; se o bico for mais comprido, a folga vira 1,00 mm por lado e nao 2,50 mm. Por isso a medida do comprimento do bico e a unica que ainda pode mexer nos furos."}, "fonte_de_todos_os_numeros_interface": "04_Dados_SSOT_e_Scripts/interface_cabecote.json (verificar_interface_cabecote.py) - o verificador nao tem mais fallback chutado: item ausente faz o script parar"}}
+{
+  "project_metadata": {
+    "title": "MatrizJonatha STEP Deliverables (Approved Master v27.0)",
+    "project_name": "MatrizJonatha",
+    "standard": "ABNT NBR 10067 / ISO 128 / STEP AP214 / AP242",
+    "units": "mm",
+    "revision": "v27.0_MatrizJonatha_Approved_Master",
+    "version": "v27.0_MatrizJonatha_Approved_Master",
+    "date": "2026-09-11",
+    "status": "V27.0_CONTINUA_APROVADO__V28.0_PROPOSTA_PENDENTE_DE_APROVACAO_USUARIO",
+    "selected_die": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
+    "geometry_verified": true,
+    "user_decision": "v27.0 segue sendo o master aprovado (nada foi sobrescrito). A revisão v28.1 (DFM) existe em paralelo como proposta verificada: aguarda decisão do usuário sobre (i) chanfro 0,80 x 45° e (ii) furação de pinos/aquecimento antes de virar o oficial.",
+    "revision_ssot": "v28.1_DFM_Proposta",
+    "data_revisao_v28": "2026-09-11"
+  },
+  "matriz_jonatha_master_files": {
+    "master_assembly_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
+    "exploded_view_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Explodida.step",
+    "with_polymer_flow_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Com_Fluxo.step",
+    "isolated_body_a": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_A.step",
+    "isolated_body_b": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_B.step",
+    "isolated_flow_channel": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Canal_Fluxo.step"
+  },
+  "envelope_externo_mm": {
+    "comprimento_total_z_mm": 109.0,
+    "estagio_1": {
+      "diametro_mm": 93.0,
+      "z_de_mm": 0.0,
+      "z_ate_mm": 69.9
+    },
+    "estagio_2": {
+      "diametro_mm": 89.5,
+      "z_de_mm": 69.9,
+      "z_ate_mm": 80.7
+    },
+    "estagio_3": {
+      "diametro_mm": 79.5,
+      "z_de_mm": 80.7,
+      "z_ate_mm": 109.0
+    },
+    "observacao": "Envelope 100% idêntico à Matriz 2 (Gedeon) para montagem direta na extrusora. Medido e confirmado por auditoria automática nos STEP oficiais."
+  },
+  "matriz_jonatha_parameters": {
+    "manifold_type": "Funil Hidrodinâmico em V Restrito na Entrada Cilíndrica (Encaixe Extrudora Respeitado)",
+    "entry_bore_diameter_mm": 75.6,
+    "manifold_central_depth_mm": 6.0,
+    "pre_land_transition_depth_mm": 3.5,
+    "land_length_mm": 10.0,
+    "land_paralelo_real_mm": 8.5,
+    "land_paralelo_observacao": "Medido na auditoria v27.0: dos 10,00 mm totais, o chanfro de saída de 1,50 mm × 45° ocupa os últimos 1,50 mm (Z=107,50 a 109,00). DECIDIDO em 2026-09-11 (D2): manter 1,50 × 45° e declarar land_paralelo_real_mm = 8,50 como valor de projeto; a redução para 0,80 mm proposta na v28.0 foi rejeitada",
+    "land_width_mm": 75.0,
+    "land_thickness_mm": 1.5,
+    "edge_radius_mm": 0.75,
+    "exit_chamfer": "1.50 mm x 45°",
+    "pressure_drop_bar": 68.2,
+    "velocity_uniformity_percent": 99.1,
+    "matriz_2_baseline_pressure_drop_bar": 268.7,
+    "material": "Aço Ferramenta P20 / AISI H13 Nitretado",
+    "land_paralelo_mm": 8.5
+  },
+  "rheological_model_parameters": {
+    "polymer": "EPR/XLPE/PVC Modificado (Média Tensão)",
+    "flow_rate_cm3_s": 15.0,
+    "processing_temperature_C": 190.0,
+    "power_law": {
+      "K_Pa_s_n": 18500.0,
+      "n": 0.32
+    },
+    "carreau_yasuda": {
+      "eta_0_Pa_s": 42000.0,
+      "lambda_s": 0.85,
+      "a": 1.25,
+      "n": 0.32,
+      "Ea_over_R_K": 4250.0,
+      "T_ref_K": 463.15
+    }
+  },
+  "audit": {
+    "audited_on": "2026-09-11",
+    "audit_status": "TODOS OS ITENS F-01 A F-05 RESOLVIDOS (SSOT v27.0 COMPLETO)",
+    "F01_resolution": "RESOLVIDO: RELATORIO_DE_SIMULACAO.md atualizado para v27.0 (68,2 bar / 99,10%).",
+    "F02_resolution": "RESOLVIDO: AUTO_PROMPT_CONTINUIDADE_MATRIZ_JONATHA.md atualizado para v27.0 (68,2 bar / 99,10%).",
+    "F03_resolution": "RESOLVIDO: Datasets JSON reológico e térmico atualizados para v27.0 (68,2 bar).",
+    "F04_F05_resolution": "RESOLVIDO: Scripts de geração Python limpos, testados, idempotentes e com caminho relativo.",
+    "auditoria_geometrica_2026_09_11": {
+      "script": "04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py",
+      "relatorio": "03_Relatorios_e_Documentacao/AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md",
+      "dados": "04_Dados_SSOT_e_Scripts/auditoria_geometrica.json",
+      "itens_verificados": 36,
+      "conformes": 19,
+      "nao_conformes": 2,
+      "resultado": "Geometria dos STEP oficiais confirmada: envelope 93/89,5/79,5 x 109 mm, boca de entrada Ø75,60 mm, land 75,00 x 1,50 mm com bordas R0,75, bipartição sem interferência e fechamento volumétrico exato (aço + canal + furos de pino = envelope).",
+      "achados_pendentes_de_decisao": [
+        "G-01: land reto e paralelo real de 8,50 mm (SSOT declara 10,00 mm) - chanfro de saída consome 1,50 mm.",
+        "G-02: lábio de saída com apenas 0,75 mm de parede de aço (fragilidade na face Ø79,5).",
+        "G-03: os furos de pino Ø4 x 12 do Body_A estão SELADOS (cavidades internas fechadas: 3 shells) e o Body_B não possui furos conjugados - os pinos não alinham as metades.",
+        "G-04: nenhum recurso de fixação/aperto, controle térmico (cartuchos Ø9,5, termopar, refrigeração Ø8,0) ou flange de entrada presente no CAD.",
+        "G-05: MatrizJonatha_Canal_Fluxo.step contém 3 sólidos (núcleo de polímero + 2 furos de pino) em vez de 1."
+      ]
+    },
+    "triagem_de_problemas_2026_09_11": {
+      "documento": "03_Relatorios_e_Documentacao/TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md",
+      "script": "04_Dados_SSOT_e_Scripts/verify_legacy_dies.py",
+      "dados": "04_Dados_SSOT_e_Scripts/auditoria_matrizes_historicas.json",
+      "resumo": "Medição das 4 matrizes (1 Copo, 2 Gedeon, Desenvolvimento e Jonatha v27). Separadas as alegações que se sustentam das que não se sustentam.",
+      "problemas_reais": [
+        "P1 (bloqueador): Matriz Jonatha sem nenhum recurso de fixação/aperto - a força de abertura das metades é da ordem de 30 kN (68,2 bar x 4.489 mm2).",
+        "P2 (bloqueador): furos de pino selados no Body_A (cavidades internas) e ausentes no Body_B; a Matriz 2 tinha pino Ø1,78 x 10 mm atravessando as duas metades.",
+        "P3 (risco): sem controle térmico (cartuchos Ø9,5, termopar, refrigeração Ø8,0).",
+        "P4 (dependência): sem padrão de flange/acoplamento em Z=0.",
+        "P5 (entrega): MatrizGedeon_Canal_Fluxo.step está errado - 213.790,03 mm3 contra 43.017,90 mm3 do canal real (4,96x maior), com geometria igual à da Jonatha.",
+        "P6 (decisão): números de CFD não reproduzíveis - τ de 128,44 kPa é impossível (mesmo land e mesma vazão dão 164,0 kPa); Matriz 1 com 185,4 bar contra 37,1 bar medidos em 1D.",
+        "P7 (robustez): lábio de saída com 0,75 mm de aço - sugerido chanfro de 0,8 x 45°.",
+        "P8 (documentação): land paralelo real de 8,50 mm e não 10,00 mm."
+      ],
+      "nao_sao_problemas": [
+        "N1: envelope Ø93/89,5/79,5 x 109 mm idêntico à Matriz 2 (compatibilidade comprovada por medição).",
+        "N2: fenda 75,00 x 1,50 com R0,75 - área 112,017 mm2 igual ao cálculo analítico.",
+        "N3: canal da Jonatha sem arestas frágeis; a boca Ø75,60 é o envelope máximo do canal.",
+        "N4: bipartição sem interferência (0,000 mm3) e fechamento volumétrico com 0,001 mm3 de resíduo.",
+        "N5: volumes e massa conferem com o SSOT (3,682 kg de aço).",
+        "N6: canal isolado confere com o corpo na Matriz 1, Desenvolvimento e Jonatha.",
+        "N7: a Matriz 1 não perdia carga por atrito (37,1 bar em 1D); o defeito é o degrau de 90°.",
+        "N8: o ganho da Jonatha é real - land de 88,0 para 8,5 mm e ΔP medido de 305,5 para 41,9 bar."
+      ]
+    }
+  },
+  "proposta_v28_dfm": {
+    "status": "PENDENTE_APROVACAO (v27.0 continua oficial)",
+    "arquivos": {
+      "master_assembly_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28.step",
+      "isolated_body_a": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Body_A.step",
+      "isolated_body_b": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Body_B.step",
+      "isolated_flow_channel": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Canal_Fluxo.step",
+      "exploded_view_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Explodida.step",
+      "with_polymer_flow_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Com_Fluxo.step",
+      "pino_kit_step": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Pinos_Alinhamento.step",
+      "kit_pinos": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Pinos_Alinhamento.step (4 sólidos nomeados)"
+    },
+    "geradores": {
+      "cad": "04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py",
+      "verificacao": "04_Dados_SSOT_e_Scripts/verificar_v28.py",
+      "conferencia_visual": "04_Dados_SSOT_e_Scripts/renderizar_v28.py",
+      "mapeamento_de_aco": "04_Dados_SSOT_e_Scripts/explorar_acomodo_furos.py"
+    },
+    "relatorio": "03_Relatorios_e_Documentacao/PROJETO_DFM_V28_MATRIZ_JONATHA.md",
+    "verificacao_md": "03_Relatorios_e_Documentacao/VERIFICACAO_V28.md",
+    "verificacao_dados": "04_Dados_SSOT_e_Scripts/verificacao_v28.json",
+    "resultado_verificacao": {
+      "itens": 64,
+      "conformes": 64,
+      "nao_conformes": 0,
+      "nota": "todos os números abaixo são medidos nos STEP por booleanos + BRepExtrema, não declarados",
+      "inclui": "contagem de sólidos por arquivo entregue (7/7), parede real de cada um dos 14 furos, ∩ canal = 0 mm³ em todos, web mínima 5,380 mm, fechamento volumétrico (resíduo 0,0115 mm³), e prova de que o funil Z<99 é o mesmo sólido do v27.0 (Δmáx 0,000000 mm)"
+    },
+    "o_que_mudou": {
+      "P7_P8_chanfro_e_land": "chanfro de saída 1,50 -> 0,80 x 45°; land reto e paralelo 8,50 -> 9,20 mm (Z=99,00->108,20); lâmina do lábio 0,75 -> 1,450 mm (medida)",
+      "P2_pinos": "4 bolsões de Ø4 H7 x 12 mm ABERTOS no plano de partição e conjugados nas duas metades (v27: 2 bolsões selados só no Body_A, nenhum no Body_B) + kit de pinos Ø4 x 24 modelado",
+      "P3_aquecimento": "6 cartuchos Ø9,5 mm (Z=97,00; X=0 e ±22; cegos, fundo a 8,20-9,36 mm do canal) + 4 poços de termopar Ø4,8 mm (Z=103,00; X=±11) na zona do land",
+      "P5_entrega": "arquivo do canal entregue com 1 único sólido (v27 entregava 3: núcleo + 2 bolsões)",
+      "especificacao_produto": "INTACTA E VERIFICADA: fenda 75,00 x 1,50 mm, R0,75 nas bordas, área 112,0171 mm², boca Ø75,60, envelope Ø93x69,90 / Ø89,5x10,80 / Ø79,5x28,30, Z total 109,00",
+      "funil_herdado": "Z<99 é o mesmo sólido do master: distância máxima entre superfícies v28 vs v27 = 0,000000 mm; Δvolume = 0,028 mm³"
+    },
+    "numeros recalculados": {
+      "delta_p_1d_bar_v28": 43.9,
+      "delta_p_1d_bar_v27": 41.9,
+      "delta_p_1d_metodo": "lei das potências K=18500 Pa·s^n, n=0,32, Q=15 cm³/s, integrada sobre a geometria medida (dp_total de verify_legacy_dies.py)",
+      "tau_parede_land_kPa": 163.8,
+      "gamma_ponto_aparente_s-1": 911,
+      "massa_aco_kg": 3.587,
+      "area_projetada_canal_xz_mm2": 8168,
+      "forca_abertura_biparticao_kN": {
+        "limite_pressao_plena": 55.7,
+        "somente_boca_d75_60": 30.6
+      },
+      "web_minima_entre_furos_mm": 5.38,
+      "delta_p_declarado_no_relatorio_cfd_bar": 68.2,
+      "aviso": "o ΔP de projeto (68,2 bar) é resultado de CFD arquivado, não reproduzível no repositório; a estimativa 1D sobre a geometria medida dá 43,9 bar. Registrar como 'estimativa a confirmar' até rodar CFD novo sobre o v28"
+    },
+    "pendencias_v28": [
+      {
+        "id": "F-28-1",
+        "item": "Fixação das metades contra a força de abertura (30,6-55,7 kN)",
+        "situacao": "RESOLVIDA PELO CABECOTE, medido no DWG 030-032 e provado por booleanos: o bolso Ø95,00 × 70,00 do cabeçote recebe a banda Ø93 × 69,90 da matriz e a bucha cônica EX-031 (Ø95 → Ø86, cone 3,00°, L 70,00) aperta essa banda. Compressão radial de 8,58 MPa equilibra os 55,70 kN que abrem a partição; o cone é auto-travante (3,00° < arctan 0,15 = 8,53°). Empuxo axial de 29,85 kN recai em compressão no degrau do cabeçote, no anel de contato real Ø90 → Ø93 (431,2 mm² medidos por booleano) a 69,22 MPa - margem de 20,2x sobre o escoamento da matriz temperada",
+        "acao": "Nenhum furo, grampo ou flange na matriz. Exigir na fabricação: banda Ø93 retificada na zona de aperto (Ra <= 0,4 um, circularidade 0,01) e face do degrau (Z=69,90) com planicidade e perpendicularidade ao eixo <= 0,01 mm. Manter os 4 bolsões de pino CEGOS, sem escarear: a parede até o Ø93 é de 0,794 mm e é ela que o collete prensa",
+        "alternativa": "Monobloco aberto por EDM continua válido como redundância e elimina o plano de partição; não é mais o único caminho"
+      },
+      {
+        "id": "F-28-2",
+        "item": "Refrigeração no corpo da matriz",
+        "situacao": "NÃO CABE: nenhum Ø8 axial ou radial fica a ≥3,5 mm do canal sem romper a peça (mapeamento em acomodo_furos.json)",
+        "acao": "refrigeração no adaptador/cabeçote, não na matriz"
+      },
+      {
+        "id": "F-28-3",
+        "item": "Padrão de acoplamento na face Z=0 e furação do flange",
+        "situacao": "FECHADO POR MEDIÇÃO no DWG 030-032 (escala k = 25,534 mm/un calibrada por 5 cotas, desvio máx. 0,012%): a matriz não tem nem precisa de flange. A furação de 6 × Ø16,50 em fendas de 23,50 sobre C.C. Ø180,00 (M12, folga angular total 14,40° cotada como 15°, furo central Ø25,00) é a junta CABEÇOTE-EXTRUSORA e passa a 35,25 mm do corpo da matriz. O centragens da matriz é feito pelos 3 estágios cilíndricos (Ø95/Ø90/Ø80 do cabeçote) com folga radial de 1,00/0,25/0,25 mm",
+        "correcao": "A versão anterior destes campos usava escala calibrada em 'C/G Ø150' lida em raster de baixa resolução (k = 21,28 mm/un) e falava em 'ressalto de chave a 0°' e em 'grampos no BC Ø150'. O desenho diz C.C Ø180; a leitura anterior estava errada e foi substituída por medição entidade por entidade",
+        "acao": "Nada a usinar na matriz para este item. Conferir na máquina as tolerâncias dos furos (Ø90 +0,05/0; Ø95 -0,05/-0,1) antes de fechar o desenho de execução"
+      },
+      {
+        "id": "F-28-4",
+        "item": "Assimetria do canal em Y",
+        "situacao": "herdada do loft do v27: as duas metades diferem 199,22 mm³ (0,093 % do volume do canal)",
+        "acao": "se aparecer riscas/diferença de espessura entre as faces da manta, culpar primeiro este item; corrigir refazendo o loft com seções de mesmo número de arestas (throughAll)"
+      },
+      {
+        "id": "F-28-5",
+        "item": "Uniformidade de 99,10 %",
+        "situacao": "ainda sem definição nem planilha no repositório; não usar como critério de aceite",
+        "acao": "definir (σ/U do perfil de vazão medido no plano Z=109) antes de contratar garantia"
+      },
+      {
+        "id": "F-28-6",
+        "item": "Anel do nariz do cabeçote (variante 9\" × 65 mm)",
+        "situacao": "FECHADA PELO USUARIO por medição na máquina: sobram ~2,5 mm em cada extremidade da fenda, o que só acontece com a passagem em Ø80,00 (75,00 + 2 × 2,50). Com o anel Ø68,30 lido no corte faltariam 3,35 mm por lado. O Ø68,30 é da variante de 65 mm do carimbo 9\"X65MM e não participa da montagem de 75 mm",
+        "evidencia_cruzada": "o anel da face medido no DXF (Ø90 → Ø130 = 20,00 mm) bate com os ~20 mm que o usuário mediu na máquina - duas fontes independentes no mesmo valor",
+        "acao": "nenhuma na matriz. Manter registrado que o Ø68,30 existe no desenho, para ninguém reaproveitar esse cabeçote de 65 mm sem verificar"
+      },
+      {
+        "id": "F-28-7",
+        "item": "Especificação de aperto da bucha cônica EX-031",
+        "situacao": "Pendente no lado da máquina: o aperto da banda Ø93 é o que fecha o plano de partição, mas o desenho do cabeçote não dá curso nem torque de aperto. A pressão necessária é 8,58 MPa para equilibrar a partição e 9,76 MPa para segurar o empuxo axial só por atrito; sem controle, o collete cônico pode apertar muito acima disso",
+        "acao": "Definir curso/torque de aperto na ordem de serviço da extrusora. A deformação radial do canal com 9,76 MPa é 0,0023 mm por lado (0,15% da espessura de 1,50 mm), o que é aceitável; acima de ~40 MPa a banda começa a fechar os furos de pino de 0,794 mm de parede"
+      }
+    ],
+    "rotulo": "v28.1",
+    "geometria_labios": {
+      "land_paralelo_mm": 8.5,
+      "chanfro_saida_mm": 1.5,
+      "z_inicio_land_mm": 99.0,
+      "z_fim_mm": 109.0,
+      "origem": "decisao D2 do usuario em 2026-09-11: manter o labio do master. gerador e verificador leem estes valores - nao ha numero datilografado no script"
+    },
+    "mudancas_reais": [
+      "bipartição com 4 bolsões de pino abertos no plano e conjugados nas duas metades (o v27 tinha 2 bolsões selados só no Body_A e nenhum no Body_B)",
+      "6 cartuchos Ø9,50 e 4 poços de termopar Ø4,80 na zona do nariz",
+      "arquivo do canal em 1 único sólido (o v27 entregava 3) - pronto para EDM e para malha de CFD",
+      "kit de pinos de alinhamento modelado (4 sólidos nomeados em MatrizJonatha_v28_Pinos_Alinhamento.step)",
+      "furos M6 de desmontagem suprimidos na face de entrada: o anel traseiro tem 8,70 mm e o pushador EX-032 é ferramenta do cabeçote, não rosca na matriz"
+    ],
+    "o_que_NAO_mudou": "especificação do produto e labio de saida: fenda 75,00 x 1,50 com R0,75, boca Ø75,60, chanfro 1,50 x 45, land paralelo 8,50, lamina 0,75, envelope Ø93/Ø89,50/Ø79,50 x 109,00 (decisao D2)"
+  },
+  "fabricao_v28": {
+    "tolerancias": {
+      "furos_pino": "Ø4 H7, profundidade 12,0 mm, perpendicularidade 0,01 x A",
+      "plano_particao": "paralelismo 0,02 mm; rugosidade Ra ≤ 0,8 µm na face Y=0",
+      "land": "Ø/simétrica ±0,02 mm; Ra ≤ 0,4 µm nas faces do land",
+      "chanfro_saida": "1,50 x 45 graus (±0,05), sem rebarba - MANTIDO como no master pela decisao D2; a lamina do labio fica em 0,75 mm, entao o esmerilhamento/limpeza da face de saida tem de ser procedimento controlado (nao usar metal duro nem choque termico na lamina)",
+      "banda_aperto_cabecote": "Ø93,00 0/-0,02 na zona Z=0,10-69,90 (a banda que a bucha EX-031 prensa), Ra <= 0,4 um, circularidade 0,01 mm",
+      "degrau_apoio": "face do ombro em Z=69,90: planicidade <= 0,01 mm e perpendicularidade ao eixo <= 0,01 mm (69,22 MPa no anel de contato real de 431,2 mm²; se encostar em aresta, cava o cabeçote cementado)",
+      "lamina_labio": "0,75 mm no ponto mais fino (medido 0,750); boca de saida resultante 78,00 x 4,50 mm, medida no arquivo do canal"
+    },
+    "pinos": "4 × Ø4 h6 x 24 mm, aço temperado 58-62 HRC, fixados com pino-guia colado no Body_A e deslizante no Body_B",
+    "aquecimento": {
+      "cartuchos": "6 × Ø9,5 x 25 mm, 750 W total (3 zonas de 2 cartuchos), termopar J/K tipo K em poço separado",
+      "potencia_por_zona": "X=0 (centro) 100 %; X=±22 (bordas) 120 % para compensar perda de borda"
+    },
+    "tratamento": "Nitretação a gás 0,10-0,15 mm, 62 HRC DEPOIS da furação completa (a furação dos cartuchos não pode vir depois do tratamento térmico)",
+    "ordem_de_usinagem_recomendada": [
+      "tornear envelope Ø93/Ø89,5/Ø79,5 e facear Z=0 e Z=109",
+      "fresar/surtir o Ø75,60 da boca",
+      "abrir o plano de partição e fresar o canal (ou EDM com o sólido MatrizJonatha_v28_Canal_Fluxo.step)",
+      "fechar, furar e escarear os 4 bolsões de pino conjugados",
+      "fechar e furar os 4 bolsões de pino conjugados - CEGOS, sem escarear (parede de 0,794 mm até o Ø93 que o collete prensa)",
+      "montar, conferir a fenda 75,00 x 1,50 com calibrador e só então nitretar",
+      "retificar a banda Ø93 da zona de aperto e conferir o paralelismo do degrau Z=69,90 antes do tratamento"
+    ],
+    "interface_cabecote": "monta no cabecote EX-030 com folga radial 1,00/0,25/0,25 mm nos tres estagios, folga axial 0,10 mm no degrau e 14,00 mm de protrusao do nariz; folga do produto (75,00) no furo Ø80 do cabecote = 2,50 mm por lado - confere com a medicao do usuario. Com o chanfro 1,50 mantido, a BOCA da matriz abre para 78,00 mm (1,00 mm por lado ate o Ø80): se o bico do cabecote chegar ate a face da matriz, essa e a folga real",
+    "decisao_d2": "o chanfro de 0,80 mm que a v28.0 propunha foi rejeitado pelo usuario em 2026-09-11; o gerador le o valor do SSOT, entao voltar atras e mexer em geometria_labios e re-rodar, nao no script"
+  },
+  "interface_cabecote": {
+    "fonte_arquivo": "03_Relatorios_e_Documentacao/CAD_Export/030-032- cabeçote.dwg (convertido; medição em /home/user/cabecote.dxf)",
+    "metodo": "aspose-cad -> DXF; ezdxf leu as entidades; escala calibrada pelas cotas do próprio desenho; interface provada com booleanos e BRepExtrema sobre MatrizJonatha_v28.step",
+    "scripts": [
+      "04_Dados_SSOT_e_Scripts/cabecote_ex030.json (perfil medido do cabeçote)",
+      "04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py --json --md",
+      "04_Dados_SSOT_e_Scripts/interface_cabecote.json (42 itens)",
+      "03_Relatorios_e_Documentacao/INTERFASE_CABECOTE_EX030.md"
+    ],
+    "resultado_verificacao": {
+      "itens": 43,
+      "conformes": 39,
+      "nao_conformes": 0,
+      "pendentes_maquina": 4
+    },
+    "escala": {
+      "k_mm_por_unidade": 25.534,
+      "incerteza": "+/- 0.003 (0.012%)",
+      "correcao_registrada": "leituras anteriores usaram k=21,28 obtido de 'C/G Ø150' lido em raster de baixa resolucao; o desenho diz 'C.C Ø180'. Todas as cotas do cabecote foram re-medidas com k=25,534."
+    },
+    "cabecote_comprimento_mm": 95.0,
+    "furos_para_a_matriz": [
+      {
+        "ordem": 1,
+        "nome": "bore do nariz",
+        "Ø_mm": 80.0,
+        "de_d_mm": 0.0,
+        "ate_d_mm": 14.0,
+        "cota_texto": "Ø80"
+      },
+      {
+        "ordem": 2,
+        "nome": "bore intermediario",
+        "Ø_mm": 90.0,
+        "de_d_mm": 14.0,
+        "ate_d_mm": 25.0,
+        "cota_texto": "Ø90 +0,05/0"
+      },
+      {
+        "ordem": 3,
+        "nome": "bolso de fixacao (assento da bucha conica)",
+        "Ø_mm": 95.0,
+        "de_d_mm": 25.0,
+        "ate_d_mm": 95.0,
+        "cota_texto": "Ø95 (-0,05/-0,1 no assento da bucha)"
+      }
+    ],
+    "encaixe": [
+      {
+        "estagio_matriz": "Ø93 x 69,9 (d 25,1..95)",
+        "furo_cabecote": "Ø95 x 70 (d 25..95)",
+        "folga_radial_mm": 1.0,
+        "folga_axial_mm": 0.1
+      },
+      {
+        "estagio_matriz": "Ø89,5 x 10,8 (d 14,3..25,1)",
+        "furo_cabecote": "Ø90 x 11 (d 14..25)",
+        "folga_radial_mm": 0.25,
+        "folga_axial_mm": 0.3,
+        "nota": "o Ø89,5 termina 0,10 antes do fim do furo Ø90 e 0,30 antes do degrau para o Ø80"
+      },
+      {
+        "estagio_matriz": "Ø79,5 x 28,3 (d -14..14,3)",
+        "furo_cabecote": "Ø80 x 14 (d 0..14)",
+        "folga_radial_mm": 0.25,
+        "protrusao_da_face_de_saida_mm": 14.0,
+        "engate_do_nariz_mm": 14.0
+      }
+    ],
+    "anel_da_face_mm": 20.0,
+    "ombro_de_apoio": {
+      "anel_de_contato_de_Ø_mm": 90.0,
+      "para_Ø_mm": 93.0,
+      "area_contato_mm2": 431.2,
+      "nota": "interseccao entre o degrau do cabecote (Ø90->Ø95) e o ombro da matriz (Ø89,5->Ø93); o ombro da matriz e a face que reage a forca de abertura"
+    },
+    "bucha_conica_EX031": {
+      "designacao": "EX-031 BUCHA CONICA",
+      "comprimento_mm": 70.0,
+      "Ø_externo_maior_mm": 95.0,
+      "Ø_externo_menor_mm": 86.0,
+      "Ø_interno_ref_mm": 90.0,
+      "cone_graus": 3.0,
+      "Ø_passagem_outro_lado_mm": 86.0,
+      "tolerancias": {
+        "Ø_externo": "-0,05/-0,1",
+        "Ø_interno": "-0,15"
+      },
+      "funcao_interpretada": "collete conico que, assentado no bolso Ø95x70, contrai sobre o corpo Ø93 da matriz; auto-travante (3 deg < arctan 0,15 = 8,6 deg)"
+    },
+    "junta_cabecote_extrusora": {
+      "furos": 6,
+      "Ø_mm": 16.5,
+      "em_fenda_comprimento_mm": 23.5,
+      "circunferencia_primitiva_mm": 180.0,
+      "folga_angular_total_graus": 14.4,
+      "cota_angular_no_desenho_graus": 15.0,
+      "rosca": "M12",
+      "Ø_central_mm": 25.0,
+      "nota": "furos do FLANGE do cabecote para a extrusora - NAO sao para a matriz; ficam fora do envelope Ø93 da matriz"
+    },
+    "pressoes_MPa": {
+      "contato_no_degrau": 69.22062946378651,
+      "collete_para_fechar_particao": 8.580583541300797,
+      "collete_para_empuxo_axial_por_atrito": 9.757044082842652,
+      "collete_para_segurar_peso": 0.011503258547906188
+    },
+    "forcas_kN": {
+      "abertura_da_biparticao_limite": 55.7,
+      "empuxo_axial_limite": 29.846799632290264,
+      "empuxo_axial_dp1d": 19.2142228860115
+    },
+    "conclusao_projeto": "a matriz não leva flange, grampo nem furo de fixação; envelope Ø93/Ø89,5/Ø79,5 × 109,00 mantido integralmente - ele é o centragens do cabeçote",
+    "bloqueio": "anel do nariz Ø68,30 da variante de 65 mm impede a montagem da matriz de 75 mm (F-28-6)",
+    "areas_mm2": {
+      "ombro_matriz": 501.6730768701201,
+      "degrau_cabecote": 726.4933011426397,
+      "contato_real_booleano": 431.18359170520006,
+      "boca_entrada": 4488.833247155239,
+      "fenda": 112.0171,
+      "projetada_XZ": 8168.0
+    },
+    "deformacao_radial_canal_mm": 0.0022685127492609166,
+    "fonte_numeros": "interface_cabecote.json[\"numeros\"] - gerado por verificar_interface_cabecote.py"
+  },
+  "decisoes_usuario": {
+    "data": "2026-09-11",
+    "origem": "respostas do usuario as perguntas D1-D4 reformuladas em termos simples, mais o croqui em vista lateral enviado na sequencia (azul = extrusora, vermelho = cabecote, branco = matriz)",
+    "D1_fixacao": {
+      "decisao": "FECHADA PELA MAQUINA: a matriz nao leva flange, grampo nem furo de fixacao; a retencao vem da bucha conica EX-031 (collete) e do degrau do cabecote",
+      "impacto_no_cad": "nenhum - envelope intacto",
+      "furo_m12_no_bolso_do_cabecote": {
+        "Ø_broca_mm": 10.5,
+        "Ø_passagem_mm": 12.0,
+        "centro_da_face_do_nariz_mm": 72.02,
+        "centro_da_face_do_flange_mm": 20.0,
+        "plano_no_eixo_da_matriz_mm_z": 23.0,
+        "o_que_prova": "o cabecote ja tem furo transversal na parede do bolso (17,50 mm de aco ali) - o pushador EX-032 M12 age por ele, e e por isso que a matriz nao precisa de furo de desmontagem (a decisao de suprimir os M6 da v28 fica corroborada por uma medida, nao por preferencia)",
+        "medido_em": "cabecote.dxf (dois circulos exatos de Ø10,50 e Ø12,00 no eixo, 72,02 mm da face)"
+      },
+      "risco_restante_collete": "corrigido em 2026-09-12 por medicao no DXF: o furo do collete EX-031 e reto Ø90,00 e as unicas geratrizes conicas do desenho (3,267 deg, silhueta Ø86,00) dao OD conico - com Ø90 reto o collete nao aperta a banda Ø93 da matriz (faltam 1,50 mm de raio). O apoio AXIAL no degrau do cabecote (431,2 mm2 de contato real, medido por booleano) nao depende disso e continua de pe; a compressao RADIAL que fecharia o plano de particao fica condicionada a confirmar a superficie de aperto. Alternativa ja recomendada no relatorio e imune a isso: monobloco por EDM (sem plano de particao)"
+    },
+    "D2_labio_saida": {
+      "decisao": "MANTER COMO NO MASTER: chanfro de saida 1,50 x 45 graus e land paralelo 8,50 mm (lamina de 0,75 mm). A reducao para 0,80 x 45 que a v28.0 propunha foi REJEITADA",
+      "geometria": {
+        "land_paralelo_mm": 8.5,
+        "chanfro_saida_mm": 1.5,
+        "lamina_mm": 0.75
+      },
+      "impacto_no_cad": "a regiao Z >= 99,00 da v28 passa a ser identica a do v27; o que a revisao muda fica so em biparticao/pinos, aquecimento e arquivo do canal",
+      "risco_assumido": "a lamina de 0,75 mm continua fragil na limpeza da matriz: registrar como procedimento de manutencao (nao esmerilhar, nao usar metal duro na face)"
+    },
+    "D3_funil": {
+      "decisao": "MODELAR AS DUAS VARIANTES E COMPARAR: o funil conico linear que o modelo atual tem x o coat-hanger de 6,00 mm que o texto descreve",
+      "status": "ABERTA - proximo trabalho de CAD + 1D",
+      "entregavel": "comparativo medido nos solidos: dP, tempo de residencia e espessura da manta lado a lado, para entao escolher entre manter ou virar v29",
+      "resultado_medido": {
+        "data": "2026-09-12",
+        "metodo": "cortes do solido com secao() de verify_legacy_dies.py (a mesma que o dp_total usa, para tabela e Delta-P saírem do mesmo corte); Delta-P 1D com dp_total() de verify_legacy_dies.py (K = 18.500,00 Pa·s^n, n = 0,32, Q = 15.000 mm³/s); mesmo land 8,50 mm e chanfro 1,50 × 45 nos dois lados da comparação; lei de projeto do funil novo nas estações Z=0, Z=25, Z=70, Z=99 mm",
+        "funil_atual": {
+          "dp_1d_bar": 41.9,
+          "volume_mm3": 213945.0,
+          "residencia_s": 14.3,
+          "altura_secao_z25_mm": 56.89,
+          "frac_volume_pontas": 0.086,
+          "invasao_envelope_mm": 0.0
+        },
+        "variante_coathanger": {
+          "dp_1d_bar": 100.9,
+          "volume_mm3": 76010.0,
+          "residencia_s": 5.1,
+          "altura_secao_z25_mm": 12.0,
+          "frac_volume_pontas": 0.031,
+          "invasao_envelope_mm": 0.0
+        },
+        "conclusao": "o coat-hanger das secoes declaradas custa 2,41x de pressao, nao muda a espessura da manta (fenda e land identicos) e so reduz residencia porque o canal e menor. Nenhum dos dois e o reservatorio de 6,00 mm do texto. Recomendado: opcao (a) - manter o funil do master e corrigir o texto. Se for (b), CFD novo e obrigatorio (100,9 bar passa o limite de 68,2 bar do proprio projeto).",
+        "arquivos": [
+          "04_Dados_SSOT_e_Scripts/estudar_funis.py",
+          "04_Dados_SSOT_e_Scripts/funil_coathanger.json",
+          "03_Relatorios_e_Documentacao/ESTUDO_FUNIL_COATHANGER.md",
+          "05_Variantes_Em_Estudo/ESTUDO_funil_coathanger_Matriz.step",
+          "05_Variantes_Em_Estudo/ESTUDO_funil_coathanger_Canal_Fluxo.step"
+        ],
+        "estado": "comparacao entregue; a escolha (a) ou (b) e do usuario - nenhuma geometria foi alterada"
+      }
+    },
+    "D4_promover": {
+      "decisao": "NAO promover: o v27.0 continua sendo o master aprovado e a v28 fica ao lado como proposta verificada"
+    },
+    "medicao_na_maquina": {
+      "quem": "usuario, com paquimetro na maquina",
+      "o_que": "linha do final do cabecote ate o comeco da matriz e a sobra em cada extremidade da fenda",
+      "valores_declarados": {
+        "anel_da_face_radial_mm": 20.0,
+        "sobra_por_lado_na_fenda_mm": 2.5
+      },
+      "conferencia_contra_o_desenho": [
+        "(Ø130 - Ø90)/2 = 20,00 mm  ==  os 20 mm declarados (o DXF mede anel da face = 20,00)",
+        "(Ø80 - 75,00)/2 = 2,50 mm  ==  os 2,5 mm por lado declarados",
+        "com o chanfro 1,50 x 45 a boca da fenda passa a 75,80 -> sobra 2,10 mm por lado (ainda 'aproximadamente 2,5')",
+        "se o anel Ø68,30 lido no corte existisse: faltariam 3,35 mm por lado - nao 'sobra'"
+      ],
+      "conclusao": "as duas medidas do usuario confirmam o modelo medido no DWG por caminhos independentes e descartam o anel do nariz de 65 mm para o produto de 75 mm",
+      "fica_para_conferir": "REABERTA: a folga axial dos cartuchos depende da protrusao real. No desenho (14,00 mm) faltam 2,75 mm e o cartucho nao entra pela folga de 0,25 mm entre o Ø79,5 da matriz e o Ø80 do nariz. Sae de cena se voce confirmar que a matriz sobressai mais de 12,00 mm; senao, mover os 6 cartuchos para Z >= 99,75 mm (e o proprio verificador calcula o numero) ou abrir alivio no nariz do cabecote - que ja e furado transversalmente para o M12 do pushador, entao tem precedente",
+      "linha_axial_medida": {
+        "valor_mm": 20.0,
+        "o_que_eh_realmente": "corrigido em 2026-09-12 por medicao no DXF: o '20' desta vista e a posicao axial do par de circulos 010,50/012,00 (furo roscado M12 no bolso do cabecote), contada a partir da FACE DO FLANGE - 72,02 - 52,02 = 20,00 mm. NAO e a sobra axial entre o fim do cabecote e a face da matriz",
+        "consequencia": "a protrusao da matriz volta a ser a do desenho (14,00 mm). A pendencia dos cartuchos esta REABERTA: com 14,00 mm, a borda traseira do furo do cartucho (Z=97,00 - 09,5/2 = 92,25) fica 2,75 mm dentro da luva do nariz do cabecote, onde a folga radial e 0,25 mm",
+        "valor_valido_para_protrusao_mm": 14.0,
+        "fonte": "medido em cabecote.dxf: faces axiais em 0,02 / 14,02 / 25,02 / 52,02 / 95,02 mm e centro do furo em 72,02 mm (circulos exatos, desvio radial 0,002 mm)"
+      },
+      "alternativa_a_medida": {
+        "o_que_e": "a alternativa (a) da pendencia [F] foi modelada e medida pelo caminho real do projeto (gerar_matriz_v28.construir + BRepExtrema + booleano contra o solido do cabecote), sem tocar no oficial; STEP em 05_Variantes_Em_Estudo/ e tabela em 03_Relatorios_e_Documentacao/ESTUDO_RECUO_CARTUCHOS.md",
+        "cenarios_mm": {
+          "como esta (Z=97,00)": {
+            "bloqueio_cabecote_mm3": 2744.55,
+            "folga_traseira_mm": -2.75,
+            "web_entre_furos_mm": 5.38,
+            "massa_kg": 3.5858
+          },
+          "minimo que passa (Z=99,75)": {
+            "bloqueio_cabecote_mm3": 0.0,
+            "folga_traseira_mm": 0.0,
+            "web_entre_furos_mm": 4.32,
+            "massa_kg": 3.5824
+          },
+          "com folga de bancada (Z=100,25)": {
+            "bloqueio_cabecote_mm3": 0.0,
+            "folga_traseira_mm": 0.5,
+            "web_entre_furos_mm": 4.189,
+            "massa_kg": 3.5818
+          }
+        },
+        "o_que_nao_muda": "paredes do cartucho (8,196 mm ate o canal, medidas nos tres cenarios), volume do canal, land 8,500 e chanfro 1,50 x 45 - entao 6P 1D de 41,9 bar e 6 = 163,8 kPa continuam validos; nenhum furo rompe o canal nem sai do envelope nos tres",
+        "o_que_muda_de_fato": "web cartucho-termopar de 5.380 para 4.189 mm (ainda acima dos 3,0 mm pedidos) e a borda do furo se aproxima da face de saida de 7.250 para 4.000 mm",
+        "recomendacao": "Z = 100,25 mm, nao o minimo 99,75: 0,000 mm de folga e contato exato entre dois solidos com tolerancia, e o montador nao monta folga exata",
+        "correcao_que_o_estudo_forcou": "o bloco [F] somava metal no caminho com maior(), que devolve um so solido - e o corredor de cada cartucho corta as DUAS paredes opostas do nariz. O numero estava em 1372,276 mm3 e passou a 2744,550 mm3. O estudo, feito por outro caminho, deu o mesmo 2744,55 mm3 - e e isso que vale"
+      }
+    },
+    "consequencia_d2_mediata": {
+      "boca_saida_mm": {
+        "largura": 78.0,
+        "altura": 4.5,
+        "origem": "medida no arquivo MatrizJonatha_v28_Canal_Fluxo.secao a 0,001 mm da face de saida"
+      },
+      "folga_ate_furo_do_nariz_mm_por_lado": 1.0,
+      "empuxo_axial_com_dp1d_kN": 18.3,
+      "nota": "manter o chanfro 1,50 x 45 abre a boca de 75,00 para 78,00 mm. Enquanto o bico do cabecote terminar antes da face da matriz (14,00 mm no desenho) isso nao encosta em nada; se o bico for mais comprido, a folga vira 1,00 mm por lado e nao 2,50 mm. Por isso a medida do comprimento do bico e a unica que ainda pode mexer nos furos."
+    },
+    "fonte_de_todos_os_numeros_interface": "04_Dados_SSOT_e_Scripts/interface_cabecote.json (verificar_interface_cabecote.py) - o verificador nao tem mais fallback chutado: item ausente faz o script parar"
+  }
+}

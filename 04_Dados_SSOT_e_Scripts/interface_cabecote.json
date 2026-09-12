@@ -204,14 +204,12 @@
    "leitura": "os dois números do croqui reproduzem a medição do DXF; a segunda alternativa é a única compatível com 'sobrar 2,5 mm', o que descarta o anel de 65 mm",
    "linha_axial_ate_o_fim_do_bico": {
     "declarada_mm": 20.0,
-    "folga_traseira_do_furo_critico_mm": 3.25,
-    "cenario_alternativo_desenho": {
-     "protrusao_mm": 14.0,
-     "folga_mm": -2.75,
-     "metal_no_caminho_mm3": 1372.276
-    },
-    "conclusao": "os furos de aquecimento ficam livres; a diferenca entre os dois numeros (6,00 mm) decide se o cabecote precisa de alivio no nariz, nao se a matriz muda"
-   }
+    "o_que_e_na_verdade": "reclassificada em 2026-09-12 por medicao no DXF: e a posicao do furo M12 do bolso, contada da face do flange (72,02 - 52,02 = 20,00 mm) - nao a sobra axial da matriz. Ver decisoes_usuario.medicao_na_maquina.linha_axial_medida no SSOT",
+    "protrusao_que_governa_mm": 14.0,
+    "numeros_do_booleano": "NAO copiados aqui de proposito. Ler interface_cabecote.json['numeros']['acesso_furacao_cenarios'], gerada por verificar_interface_cabecote.py. Esta chave era uma copia manual e apodreceu: trazia 1372,276 mm3, da epoca em que o bloco [F] somava um so solido da intersecao (o corredor corta as duas paredes opostas do nariz); o valor correto e 2744,550 mm3",
+    "conclusao": "ABERTA: com a protrusao do desenho (14,00 mm) o cartucho esbarra na luva do nariz. As duas saidas estao medidas - recuar os furos para Z >= 99,75 mm (recomendado 100,25 mm; ver 03_Relatorios_e_Documentacao/ESTUDO_RECUO_CARTUCHOS.md) ou alivio no nariz do cabecote"
+   },
+   "regra": "esta chave so guarda o que o USUARIO declarou e se casou com o desenho; numero de booleano mora em interface_cabecote.json e e lido de la por quem gera relatorio - nunca reescrito a mao"
   },
   "furos_transversais_no_cabecote": {
    "medidos_no_dxf": [
@@ -265,7 +263,7 @@
     "z_face_cabecote_mm": 95.0,
     "folga_axial_min_mm": -2.75,
     "furo_critico": "cartucho em X=-22,0, Z=97,0",
-    "metal_no_caminho_mm3": 1372.276,
+    "metal_no_caminho_mm3": 2744.55,
     "n_furos_na_faixa_de_saida": 5
    },
    "você mediu na máquina": {
@@ -641,7 +639,7 @@
    "minimo": 0.0,
    "unidade": "mm",
    "status": "NAO_CONFORME",
-   "observacao": "protrusão 14,00 mm medida no DXF; furo mais crítico: cartucho em X=-22,0, Z=97,0; metal no caminho de inserção: 1372,276 mm³; o cartucho deixa de esbarrar em Z >= 99,75 mm"
+   "observacao": "protrusão 14,00 mm medida no DXF; furo mais crítico: cartucho em X=-22,0, Z=97,0; metal no caminho de inserção: 2744,550 mm³; o cartucho deixa de esbarrar em Z >= 99,75 mm"
   },
   {
    "item": "Folga axial da furação se a protrusão for 20,00 mm (cota '20' do croqui)",

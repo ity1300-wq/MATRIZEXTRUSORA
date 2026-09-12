@@ -162,8 +162,9 @@ cálculo/medição que o produziria.
 - `01_CAD_MatrizJonatha_Oficial/MatrizJonatha*.step` — v27.0 aprovado (intocado)
 - `01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28*.step` — proposta DFM (corpo A/B, canal 1 sólido,
   explodida, com fluxo, kit de pinos)
-- `05_Variantes_Em_Estudo/` — STEP de comparações pedidas antes de mexer em geometria (hoje: funil
-  coat-hanger). **Não** substituem o oficial nem entram no `MatrizJonatha.step`
+- `05_Variantes_Em_Estudo/` — STEP de comparações pedidas antes de mexer em geometria (funil
+  coat-hanger da D3 e o recuo dos cartuchos para Z = 99,75 / 100,25 mm da alternativa (a)). **Não**
+  substituem o oficial nem entram no `MatrizJonatha.step`
 - `06_CAD_Cabecote_EX-030/` — STEP do **cabeçote** sem a junta da extrusora (corpo Ø130 × 95,000 com
   nariz Ø80, degrau Ø90 e bolso Ø95 × 70) e do cabeçote como desenhado, gerados por
   `gerar_cabecote_ex030.py` a partir deste mesmo JSON; provas em
@@ -193,6 +194,7 @@ python 04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py       # auditoria do v27.
 python 04_Dados_SSOT_e_Scripts/verify_legacy_dies.py --json  # as 4 matrizes + ΔP 1D
 python 04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py --json --md  # matriz × cabeçote (48 itens)
 python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py  # STEP do cabecote sem a junta + provas
+python 04_Dados_SSOT_e_Scripts/estudar_recuo_cartuchos.py   # medida da alternativa (a) da pendencia [F]
 ```
 
 ## 8. RESPOSTA INICIAL OBRIGATÓRIA

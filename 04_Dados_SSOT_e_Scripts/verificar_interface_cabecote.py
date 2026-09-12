@@ -373,7 +373,10 @@ def main():
         for (tipo, x, z, dd) in sorted(fur):
             folga = (z - dd / 2.0) - z_face          # borda traseira do furo vs fim do metal do cabecote
             corredor = cq.Solid.makeCylinder(dd / 2.0, 240.0, cq.Vector(x, -120.0, z), cq.Vector(0, 1, 0))
-            bloqueio += maior(corredor.intersect(cab)).Volume()
+            # TODOS os solidos: o corredor do cartucho central corta as duas paredes opostas do
+            # nariz, e maior() devolvia so uma metade (1372,276 em vez de 2744,552 mm3)
+            _int = corredor.intersect(cab)
+            bloqueio += sum(so.Volume() for so in _int.Solids()) or _int.Volume()
             if folga < pior:
                 pior, pior_q = folga, f"{tipo} em X={n(x, 1)}, Z={n(z, 1)}"
         acessos[nome_c] = {"protrusao_mm": round(protr, 3), "z_face_cabecote_mm": round(z_face, 3),
