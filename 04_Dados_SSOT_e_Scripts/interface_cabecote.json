@@ -40,7 +40,7 @@
   },
   "referencia_axial": {
    "convencao": "d = profundidade a partir da FACE DO NARIZ do cabecote (a face por onde sai a manta), no sentido da massa fundida",
-   "posicao_da_matriz": "Z_matriz = 95 - d  (Z=0 e a face de entrada da matriz; Z=109 a face de saida). A matriz protrui 14,3 mm para fora da face do nariz.",
+   "posicao_da_matriz": "Z_matriz = 95 - d  (Z=0 e a face de entrada da matriz; Z=109 a face de saida). A matriz protrui 14,00 mm para fora da face do nariz (109,00 - 95,00); o degrau da matriz esta em d = 14,30 mm, e a diferenca de 0,30 mm e a folga axial do degrau do cabecote (14,02 mm medidos no DXF) - os dois numeros sao de faces diferentes, nao sao a mesma cota lida duas vezes",
    "comprimento_total_mm": 95.0,
    "medido": "Ø130 ocupa d=0..42; cubo d=42..52; flange Ø220 d=52..92; resalto d=92..95 (cota 3)"
   },
