@@ -45,14 +45,34 @@ geometria: é o seu bloco **− o canal próprio da Gedeon (213.790,0 mm³) − 
 sólido** (o `Body_A` do repositório tem 3), A ∩ B = 0,000000 mm³, nenhum metal no canal (0,000000 mm³),
 envelope Ø93,00 × Z 0..109,00 igual ao do backup, ∩ com o cabeçote = 0,0000 mm³.
 
-**A prancha que mostra isso com o olho**: `STEP/Gedeon_Corrigida/DESENHO_2D_GEDEON_CONSERTADA_X_JONATHA.pdf`
-(`desenhar_gedeon_consertada.py`), cinco faixas **no mesmo escalonamento** — cabeçote sem matriz, Gedeon como
-entregue, Gedeon reconstruída, Jonatha v27, e a diferença das duas hachurada. Nela aparece que as faixas 2 e 3
-têm a **mesma caixa externa medida** (Ø 93,00 × Z 0,1..109,00, área de seção 5.885,5 mm² nas duas), que a
-Jonatha tem seção 5.883,5 mm² (2,0 mm² a menos no corte) e que os 155,1 mm³ de diferença de aço estão no **anel
-de saída, Z 107,50 → 109,00** — o chanfro de 1,50 × 45° que a Jonatha tem e a Gedeon não tem — e não no funil,
-como eu havia escrito antes de medir a posição. Os 44,9 mm³ restantes estão na zona dos pinos (Z 44,50 → 64,50),
-onde a Gedeon tem bolso e a v27 é maciça. Números do desenho: `STEP/Gedeon_Corrigida/desenho_gedeon.json`.
+**A matriz Gedeon CERTA é o arquivo do usuário, e a prancha mostra isso com o olho.**
+`02_CAD_Modelos_Historicos/matrizGedeonCerta.step` foi medido face por face por `gerar_gedeon_certa.py` e não é
+bloco bruto: é a matriz pronta — 1 sólido, 18 faces, **640.180,7 mm³** de aço, com a fenda
+**75,00 × 1,50 com R 0,75** atravessando de Z = 0,17 a Z = 109,00 (sai pela face de saída), o cone de entrada que
+abre em **Ø 75,60** na face traseira e fecha em Z = 20,98, e os **2 furos de pino Ø 1,78 × 10,00** a
+|x| = 40,61..42,39, Z 44,50..54,50. Os três estágios do envelope batem com o SSOT: Ø 93,00 até Z 69,90,
+Ø 89,50 até Z 80,70, Ø 79,50 até Z 109,00. Caminho de fluxo medido (cone + fenda): **43.017,9 mm³**.
+
+A prancha está em `STEP/Gedeon_Certa/DESENHO_2D_GEDEON_CERTA_X_JONATHA.pdf` (`desenhar_gedeon_consertada.py`),
+cinco faixas **no mesmo escalonamento**: cabeçote sem matriz · Gedeon como entregue · **Gedeon certa (o arquivo
+dele, inteiro)** · Jonatha v27 · a diferença das duas hachurada. Área de seção medida: 5.885,5 mm² na Gedeon
+entregue, 5.883,5 mm² na v27 e **8.776,5 mm² na certa** — é o funil que a v27 tem escavado no próprio aço e a
+Gedeon não tem. Números do desenho: `STEP/Gedeon_Certa/desenho_gedeon.json`.
+
+**O único defeito do arquivo dele** é de fabricabilidade, não de forma: os 2 furos de pino são **cavidades
+seladas** dentro do aço (o sólido tem 3 cascas; sobram 4,11 mm até o Ø 93,00 externo, sem por onde entrar
+ferramenta). O conserto entregue é só partir em Y = 0: `STEP/Gedeon_Certa/MatrizGedeon_Certa_Body_A/B.step`,
+A 320.090,4 + B 320.090,4 = o bloco com diferença de **0,0004 mm³**, 1 casca cada, BRepCheck válido nos dois,
+A ∩ B = 0,0000 mm³, e o furo sai aberto no plano de partição como meia-cana. Nenhum aço foi escavado do
+arquivo dele. Interface conferida na mesma colocação medida: ∩ matriz × cabeçote = **0,0000 mm³**, aço do
+cabeçote dentro do cone+fenda = **0,0000 mm³**, e a face de saída da matriz fica **14,00 mm** além da face do
+cabeçote (Z = 95,00) — a fenda não encosta no nariz.
+
+**A entrega anterior (`STEP/Gedeon_Corrigida_REFUTADA/`) está refutada e não é entregável**: ela escavou no
+arquivo dele o canal histórico `MatrizGedeon_Canal_Fluxo.step` (213.790,0 mm³) inteiro, o que tirava
+**170.821,9 mm³** de aço que não é da Gedeon — o que existe de vazio na matriz é o cone de entrada + a fenda.
+A pasta foi renomeada para registro do que foi medido; a rotine `gerar_gedeon_corrigida.py` agora abre com essa
+declaração.
 
 E sobre "está igual à Jonatha": medido em booleano nos dois sentidos, **não está** — par−v27 = 155,1 mm³ e
 v27−par = 44,9 mm³ de aço, e o canal da Gedeon cabe inteiro no da Jonatha (Gedeon−Jonatha = 0,0 mm³;

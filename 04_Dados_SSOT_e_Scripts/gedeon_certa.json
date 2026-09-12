@@ -1,0 +1,297 @@
+{
+ "arquivo": "02_CAD_Modelos_Historicos/matrizGedeonCerta.step",
+ "leitura_apenas": true,
+ "solidos": 1,
+ "caixa": {
+  "x": [
+   -46.5,
+   46.5
+  ],
+  "y": [
+   -46.5,
+   46.5
+  ],
+  "z": [
+   -0.0,
+   109.0
+  ],
+  "d_x": 93.0,
+  "d_y": 93.0,
+  "d_z": 109.0
+ },
+ "inventario": {
+  "cilindros_z": {
+   "46.5": {
+    "n": 1,
+    "z": [
+     0.0,
+     69.9
+    ],
+    "x": [
+     -46.5,
+     46.5
+    ],
+    "y": [
+     -46.5,
+     46.5
+    ],
+    "area": 20422.6
+   },
+   "44.75": {
+    "n": 1,
+    "z": [
+     69.9,
+     80.7
+    ],
+    "x": [
+     -44.75,
+     44.75
+    ],
+    "y": [
+     -44.75,
+     44.75
+    ],
+    "area": 3036.7
+   },
+   "39.75": {
+    "n": 1,
+    "z": [
+     80.7,
+     109.0
+    ],
+    "x": [
+     -39.75,
+     39.75
+    ],
+    "y": [
+     -39.75,
+     39.75
+    ],
+    "area": 7068.1
+   },
+   "0.89": {
+    "n": 2,
+    "z": [
+     44.5,
+     54.5
+    ],
+    "x": [
+     -42.39,
+     42.39
+    ],
+    "y": [
+     -0.89,
+     0.89
+    ],
+    "area": 111.8
+   }
+  },
+  "fenda_planos": [
+   [
+    -1.0,
+    -36.75,
+    36.75,
+    0.75,
+    0.75,
+    0.59,
+    109.0
+   ],
+   [
+    1.0,
+    -36.75,
+    36.75,
+    -0.75,
+    -0.75,
+    0.59,
+    109.0
+   ]
+  ],
+  "cil_eixos_outros": [
+   [
+    0.75,
+    36.75,
+    37.5,
+    -0.75,
+    0.75,
+    0.17,
+    109.0
+   ],
+   [
+    0.75,
+    -37.5,
+    -36.75,
+    -0.75,
+    0.75,
+    0.17,
+    109.0
+   ]
+  ],
+  "cone": {
+   "raio_max": 37.8,
+   "z": [
+    -0.0,
+    20.98
+   ],
+   "area": 5029.6
+  },
+  "bores": [
+   [
+    0.89,
+    -42.39,
+    -40.61,
+    -0.89,
+    0.89,
+    44.5,
+    54.5
+   ],
+   [
+    0.89,
+    40.61,
+    42.39,
+    -0.89,
+    0.89,
+    44.5,
+    54.5
+   ]
+  ],
+  "cascas": 3,
+  "faces": 18,
+  "volume": 640180.7
+ },
+ "fenda": {
+  "largura_mm": 75.0,
+  "espessura_mm": 1.5,
+  "raio_ponta_mm": 0.75,
+  "z_de_mm": 0.17,
+  "z_ate_mm": 109.0,
+  "n_planos": 2,
+  "y_planos": [
+   -0.75,
+   0.75
+  ],
+  "atravessa": true
+ },
+ "cone_entrada": {
+  "raio_max": 37.8,
+  "z": [
+   -0.0,
+   20.98
+  ],
+  "area": 5029.6
+ },
+ "furos_pino": {
+  "qtd": 2,
+  "diametro_mm": 1.78,
+  "z": [
+   44.5,
+   54.5
+  ],
+  "x": [
+   [
+    -42.39,
+    -40.61
+   ],
+   [
+    40.61,
+    42.39
+   ]
+  ],
+  "y_meia_largura_mm": 0.89,
+  "comprimento_mm": 10.0,
+  "x_extremo_abs_mm": 42.39
+ },
+ "furos_transversais": [],
+ "cavidade": {
+  "volume_envelope_mm3": 683248.4,
+  "volume_cavidade_mm3": 43017.9,
+  "cavidades_seladas": 2,
+  "volume_seladas_mm3": 49.8,
+  "massa_kg": 5.0254
+ },
+ "reincidencia_evitada": {
+  "volume_do_canal_historico_mm3": 213790.0,
+  "aco_que_ser_removido_da_certa_mm3": 170772.2
+ },
+ "defeito_cavidade_selada": {
+  "cascas_no_solido": 3,
+  "furos_sem_acesso": 2,
+  "parede_ate_o_externo_mm": 4.11,
+  "diametro_externo_na_zona": 93.0
+ },
+ "entrega": {
+  "volume_A_mm3": 320090.4,
+  "volume_B_mm3": 320090.4,
+  "soma_menos_o_bloco_mm3": 0.000383,
+  "interseccao_A_B_mm3": 0.0,
+  "cascas_A": 1,
+  "cascas_B": 1,
+  "valido_A": true,
+  "valido_B": true,
+  "caixa_A": {
+   "x": [
+    -46.5,
+    46.5
+   ],
+   "y": [
+    -46.5,
+    0.0
+   ],
+   "z": [
+    -0.0,
+    109.0
+   ],
+   "d_x": 93.0,
+   "d_y": 46.5,
+   "d_z": 109.0
+  },
+  "caixa_B": {
+   "x": [
+    -46.5,
+    46.5
+   ],
+   "y": [
+    -0.0,
+    46.5
+   ],
+   "z": [
+    -0.0,
+    109.0
+   ],
+   "d_x": 93.0,
+   "d_y": 46.5,
+   "d_z": 109.0
+  }
+ },
+ "interface_cabecote": {
+  "deslocamento_axial_mm": 0.0,
+  "interseccao_mm3": 0.0,
+  "protrusao_alem_da_face_mm": 14.0,
+  "face_saida_cabecote_z": 95.0,
+  "metal_do_cabecote_no_fluxo_mm3": 0.0
+ },
+ "contra_a_jonatha": {
+  "alinhamento": "face de saida em Z = 109.0",
+  "volume_jonatha_aco_mm3": 469001.7,
+  "volume_certa_aco_mm3": 640180.7,
+  "aco_so_na_certa_mm3": 171224.1,
+  "aco_so_na_jonatha_mm3": 44.9,
+  "fluxo_certa_mm3": 43017.9,
+  "canal_da_v27_mm3": 213945.1,
+  "diferenca_de_conceito": "a certa e um tampao com a fenda atravessada e um cone de entrada; a v27 tem funil proprio dentro dela. A diferenca nao e 'funil ampliado': a Gedeon nao tem funil no seu aco - a convergencia a montante e do furo estagiado do cabecote."
+ },
+ "entrega_anterior_refutada": {
+  "volume_aco_entrega_anterior_mm3": 469358.8,
+  "volume_aco_certa_mm3": 640180.7,
+  "aco_removido_por_engano_mm3": 170821.9,
+  "motivo": "a entrega anterior escavou no arquivo do usuario o canal historico `MatrizGedeon_Canal_Fluxo.step` inteiro, quando a unica cavidade da matriz e o cone de entrada + a fenda atravessada"
+ },
+ "round_trip": {
+  "volume_reimportada_mm3": 320090.3617,
+  "diff_mm3": 0.0
+ },
+ "checks": {
+  "total": 21,
+  "falhas": 0,
+  "falhas_lista": []
+ }
+}

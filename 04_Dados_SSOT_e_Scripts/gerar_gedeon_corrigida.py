@@ -67,7 +67,7 @@ DIR_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP")
 
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
 DIR_OFF = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
-DIR_GED = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Gedeon_Corrigida")
+DIR_GED = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Gedeon_Corrigida_REFUTADA")
 ARQ_JSON = os.path.join(AQUI, "gedeon_corrigida.json")
 ARQ_MD = os.path.join(RAIZ, "03_Relatorios_e_Documentacao", "RELATORIO_GEDEON_CORRIGIDA.md")
 ARQ_PERFIS = os.path.join(AQUI, "perfis_matrizes_x_cabecote.json")
@@ -145,7 +145,16 @@ def separa(shape, faixa):
 
 # -------------------------------------------------------------------------------------------- medicao
 def main():
-    ap = argparse.ArgumentParser(description="Reconstrói a Matriz 2 (Gedeon) a partir do backup do usuário.")
+    print("\n" + "=" * 96)
+    print(" ESTA ROTINA FOI REFUTADA em 2026-09-12: ela escava em `matrizGedeonCerta.step` o canal\n"
+          " historico inteiro (213.790,0 mm3), tirando do arquivo do usuario o aco que nao e dele\n"
+          " (170.821,9 mm3). O arquivo dele JA E a matriz certa: fenda 75,00 x 1,50 com R 0,75\n"
+          " atravessada, cone de entrada em 0 75,60, furos de pino. A entrega valida e\n"
+          " 06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/, gerada por gerar_gedeon_certa.py.\n"
+          " Esta pasta sai como Gedeon_Corrigida_REFUTADA: e o registro do que foi medido, nao e\n"
+          " entregavel de fabricacao.")
+    print("=" * 96)
+    ap = argparse.ArgumentParser(description="REFUTADA — mede o re-corte historico para registro; entrega valida em gerar_gedeon_certa.py")
     ap.add_argument("--sem-relatorio", action="store_true", help="só mede e escreve o JSON")
     a = ap.parse_args()
 
@@ -411,6 +420,7 @@ def escreve_relatorio(med):
     linhas = [
         "# Matriz 2 (Gedeon) reconstruída a partir do backup do usuário",
         "",
+        "> **REFUTADA em 2026-09-12, na mesma noite desta entrega.** Este relatório mede o que os\n> arquivos históricos são, e continua sendo a fonte dessas medições — mas a reconstrução que ele\n> descreve não é a matriz: escavar `MatrizGedeon_Canal_Fluxo.step` (213.790,0 mm³) em\n> `matrizGedeonCerta.step` tirava **170.821,9 mm³** de aço que não é da Gedeon. O arquivo do usuário\n> já é a matriz pronta (fenda 75,00 × 1,50 com R 0,75 atravessada, cone de entrada Ø 75,60, 2 furos\n> de pino Ø 1,78 × 10,00). Entrega válida: `06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/`, gerada por\n> `gerar_gedeon_certa.py`; os STEP desta tentativa foram movidos para\n> `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/`.",
         "Gerado por `04_Dados_SSOT_e_Scripts/gerar_gedeon_corrigida.py`. Todo número aqui é medição dos STEP",
         "reimportados; `02_CAD_Modelos_Historicos/` foi aberto só para leitura (regra 2) e",
         "`01_/MatrizJonatha.step` não foi tocado (regra 1). A reconstrução é `bloco do backup − canal da",

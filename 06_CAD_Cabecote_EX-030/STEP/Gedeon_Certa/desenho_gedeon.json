@@ -40,16 +40,39 @@
       64.5
      ]
     }
-   ]
+   ],
+   "aco_mm3": 469358.8
   },
-  "3 Gedeon consertada": {
-   "área_material_mm2": 5885.5,
+  "3 Gedeon certa": {
+   "área_material_mm2": 8776.5,
    "D_máximo_mm": 93.0,
    "z_min": 0.1,
    "z_max": 109.0,
    "raio_interno_mín_mm": 0.75,
    "plano": "X = 0 (plano do eixo, transversal ao de partição)",
-   "platos": 1
+   "platos": 3,
+   "furos_marcados": [
+    {
+     "x": [
+      -42.39,
+      -40.61
+     ],
+     "z": [
+      44.5,
+      54.5
+     ]
+    },
+    {
+     "x": [
+      40.61,
+      42.39
+     ],
+     "z": [
+      44.5,
+      54.5
+     ]
+    }
+   ]
   },
   "4 Jonatha v27": {
    "área_material_mm2": 5883.5,
@@ -62,30 +85,30 @@
   },
   "5 diferenca": {
    "só a Gedeon tem": {
-    "volume_mm3": 155.1,
+    "volume_mm3": 170753.1,
     "z": [
-     107.5,
-     109.0
+     -0.0,
+     99.0
     ],
     "raio": [
-     39.0,
-     39.0
+     37.8,
+     37.8
     ],
-    "área_seção_mm2": 75.5
+    "área_seção_mm2": 6496.7
    },
    "só a Jonatha tem": {
-    "volume_mm3": 44.9,
+    "volume_mm3": 22.5,
     "z": [
      44.5,
-     64.5
+     54.5
     ],
     "raio": [
      42.39,
      40.61
     ],
-    "área_seção_mm2": 28.7
+    "área_seção_mm2": 14.4
    }
   }
  },
- "prancha": "06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/DESENHO_2D_GEDEON_CONSERTADA_X_JONATHA.pdf"
+ "prancha": "06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/DESENHO_2D_GEDEON_CERTA_X_JONATHA.pdf"
 }

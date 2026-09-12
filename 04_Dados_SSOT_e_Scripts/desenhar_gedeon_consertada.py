@@ -26,6 +26,7 @@ import argparse
 import json
 import os
 import sys
+import textwrap
 
 import cadquery as cq
 import matplotlib
@@ -42,7 +43,7 @@ from verificar_v28 import maior, n                       # n(): número pt-BR
 
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
 DIR_OFF = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
-DIR_GED = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Gedeon_Corrigida")
+DIR_GED = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Gedeon_Certa")
 ARQ_JSON = os.path.join(DIR_GED, "desenho_gedeon.json")
 
 LIM_X = (-212.0, 212.0)
@@ -51,6 +52,14 @@ LIM_Y = (-10.0, 136.0)
 
 def le(p):
     return cq.importers.importStep(p).val()
+
+
+def quebra(nota, largo=186):
+    """Embrulha cada linha da nota na largura da folha: nota que passa do fim nao e nota, e mancha."""
+    out = []
+    for ln in str(nota).split("\n"):
+        out.extend(textwrap.wrap(ln, largo) or [""])
+    return "\n".join(out)
 
 
 def faixa(ax, solido, titulo, nota):
@@ -80,7 +89,7 @@ def faixa(ax, solido, titulo, nota):
     ax.set_aspect("equal", adjustable="datalim")
     ax.axis("off")
     ax.set_title(titulo, fontsize=10.0, loc="left", pad=6)
-    ax.text(0.0, -0.17, nota, transform=ax.transAxes, fontsize=6.8, va="top", color="0.2")
+    ax.text(0.0, -0.27, quebra(nota), transform=ax.transAxes, fontsize=6.4, va="top", color="0.2")
     return dict(área_material_mm2=round(area, 1), D_máximo_mm=round(2 * rmax, 3), z_min=round(zmin, 3),
                 z_max=round(zmax, 3), raio_interno_mín_mm=round(rmin, 3), plano=plano, platos=len(platos))
 
@@ -106,111 +115,131 @@ def faixa_diferenca(ax, par, jona, titulo, nota, zmin_p, zmax_p):
                         área_seção_mm2=round(aa, 1))
     # legenda no espaco livre ACIMA da peca: na coluna de rotulos ela ja tem Ø maximo e os Z, e as duas
     # coisas se cortavam (e cortavam o desenho) quando ficavam no meio da figura
-    ax.text(-70.0, 133.0, "vermelho  %s mm³  — aço que só a Gedeon tem, no anel de saída, em Z %s → %s" % (
+    ax.text(-70.0, 133.0, "vermelho  %s mm³  — aço que só a Gedeon tem (Z %s → %s): aqui a v27 tem o funil "
+            "escavado no proprio aco, a Gedeon e macica" % (
         n(med["só a Gedeon tem"]["volume_mm3"], 1), n(med["só a Gedeon tem"]["z"][0], 2),
         n(med["só a Gedeon tem"]["z"][1], 2)), fontsize=7.4, color="tab:red", ha="left", va="top")
-    ax.text(-70.0, 122.0, "azul  %s mm³  — aço que só a Jonatha tem, na zona dos pinos, em Z %s → %s" % (
+    ax.text(-70.0, 122.0, "azul  %s mm³  — aço que só a Jonatha tem (Z %s → %s): ali a Gedeon tem o furo de "
+            "pino, a v27 e macica" % (
         n(med["só a Jonatha tem"]["volume_mm3"], 1), n(med["só a Jonatha tem"]["z"][0], 2),
         n(med["só a Jonatha tem"]["z"][1], 2)), fontsize=7.4, color="tab:blue", ha="left", va="top")
-    ax.text(-70.0, zmin_p - 6.0, "envelope comum: Ø 93,00 × Z 0..109,00 — as curvas de fora são as mesmas das "
-            "faixas 2, 3 e 4; o que difere é interno e nas bordas, e é isto que responde \"parece idêntica\"",
+    ax.text(-70.0, zmin_p - 6.0, "envelope comum as cinco faixas: Ø 93,00 × Z 0..109,00 — o que difere e "
+            "interno, e e isto que responde \"parece identica\"",
             fontsize=7.0, color="0.15", ha="left", va="top")
     ax.set_xlim(*LIM_X)
     ax.set_ylim(*LIM_Y)
     ax.set_aspect("equal", adjustable="datalim")
     ax.axis("off")
     ax.set_title(titulo, fontsize=10.0, loc="left", pad=6)
-    ax.text(0.0, -0.17, nota, transform=ax.transAxes, fontsize=6.8, va="top", color="0.2")
+    ax.text(0.0, -0.08, quebra(nota), transform=ax.transAxes, fontsize=6.4, va="top", color="0.2")
     return med
 
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--saida", default=os.path.join(DIR_GED, "DESENHO_2D_GEDEON_CONSERTADA_X_JONATHA.pdf"))
+    ap.add_argument("--saida", default=os.path.join(DIR_GED, "DESENHO_2D_GEDEON_CERTA_X_JONATHA.pdf"))
     ap.add_argument("--png", action="store_true", help="PNG de conferência ao lado (ignorado pelo git)")
     a = ap.parse_args()
     os.makedirs(DIR_GED, exist_ok=True)
 
     cab = le(os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Cabecote_EX-030_sem_flange.step"))
     A0, B0 = (le(os.path.join(DIR_HIS, "MatrizGedeon_Body_A.step")), le(os.path.join(DIR_HIS, "MatrizGedeon_Body_B.step")))
-    A1, B1 = (le(os.path.join(DIR_GED, "MatrizGedeon_Corrigida_Body_A.step")),
-              le(os.path.join(DIR_GED, "MatrizGedeon_Corrigida_Body_B.step")))
+    A1, B1 = (le(os.path.join(DIR_GED, "MatrizGedeon_Certa_Body_A.step")),
+              le(os.path.join(DIR_GED, "MatrizGedeon_Certa_Body_B.step")))
     J = le(os.path.join(DIR_OFF, "MatrizJonatha.step"))
     J2 = maior(J.Solids()[0].fuse(J.Solids()[1]))
     entregue, consertada = maior(A0.fuse(B0)), maior(A1.fuse(B1))
     pin = json.load(open(os.path.join(AQUI, "gedeon_corrigida.json"), encoding="utf-8"))["pinos"]
+    gc = json.load(open(os.path.join(AQUI, "gedeon_certa.json"), encoding="utf-8"))
+    fzp = gc["furos_pino"]
+    cx3 = [dict(x=[round(v[0], 2), round(v[1], 2)], z=[round(fzp["z"][0], 2), round(fzp["z"][1], 2)])
+           for v in fzp["x"]]
 
     fig, axs = plt.subplots(5, 1, figsize=(16.54, 11.69))
-    plt.subplots_adjust(left=0.022, right=0.985, top=0.965, bottom=0.035, hspace=0.62)
+    plt.subplots_adjust(left=0.022, right=0.985, top=0.965, bottom=0.035, hspace=1.02)
     med = {}
 
     med["1 cabecote sem matriz"] = faixa(
         axs[0], cab,
         "1   CABEÇOTE EX-030 SEM MATRIZ — a fenda não está aqui; o «copo» que se vê é o bolso dele",
-        "geometria: seção medida no STEP `Cabecote_EX-030_sem_flange.step` (1 sólido, 1 casca, 11 faces, "
-        "610.588,2 mm³ — reimportado e conferido). Não há matriz alguma neste arquivo.\nA fenda 75,00 × 1,50 "
-        "com R0,75 vive na MATRIZ, não no cabeçote: o cabeçote só fura em escada Ø80 (nariz) → Ø90 (degrau) → "
-        "Ø95 × 70,00 (o bolso). É essa escada que, em corte,\nparece o copo da matriz — porque é o copo da "
-        "matriz em negativo, e é o que faz a matriz passar pelo nariz sem tocar a fenda.")
+        "seção medida no STEP `Cabecote_EX-030_sem_flange.step` (1 sólido, 1 casca, 11 faces, 610.588,2 mm³, "
+        "reimportado e conferido): não há matriz alguma neste arquivo.\nO cabeçote só fura em escada Ø80 "
+        "(nariz) → Ø90 (degrau) → Ø95 × 70,00 (o bolso). É essa escada que, em corte, parece o copo da matriz "
+        "— é o copo em negativo, e é o que faz a matriz passar pelo nariz sem tocar a fenda.")
 
     med["2 Gedeon entregue"] = faixa(
         axs[1], entregue,
         "2   GEDEON COMO ENTREGUE (02_/Body_A ∪ Body_B) — 1 sólido com 3 CASCA: bolso de pino selado",
-        "geometria: seção medida das duas metades de `02_CAD_Modelos_Historicos/` abertas SÓ PARA LEITURA "
-        "(regra 2), unidas para o corte (A ∪ B = 469.156,8 mm³ contra A + B = 469.156,7 — se tocam no plano de\n"
-        "partição, não se sobrepõem). O retângulo pontilhado é a zona do pino Ø1,78 × 10,00: no `Body_A` ela é "
-        "uma CASCA INTERNA — cavidade selada dentro do aço, que é o que abre\ncomo «peça corrompida» no CAD e o "
-        "que não tem ferramenta que faça — e no `Body_B` não há bolso nenhum. Envelope Ø93,00 × Z 0..109,00.",
-        )
+        "seção medida das duas metades de `02_CAD_Modelos_Historicos/`, abertas SÓ PARA LEITURA (regra 2) e "
+        "unidas para o corte: A ∪ B = %s mm³ de aço, caixa Ø93,00 × Z 0..109,00.\nO retângulo pontilhado é a "
+        "zona do pino Ø1,78: no `Body_A` é CASCA INTERNA — cavidade selada dentro do aço, o que abre como "
+        "«peça corrompida» no CAD e não tem ferramenta — e no `Body_B` não há bolso nenhum."
+        % n(gc["entrega_anterior_refutada"]["volume_aco_entrega_anterior_mm3"], 1))
     cx = pin["caixas_mm"]
-    # um retangulo por pino, nas coordenadas MEDIDAS (vêm de `gedeon_corrigida.json`, não decoradas), com a
-    # legenda no espaco livre acima da peca - antes ela ficava em cima do desenho e da coluna de rotulos
-    for axi, cor, txt in ((axs[1], "tab:red", "Z %s → %s, a |x| %s mm: no `Body_A` é CASCA INTERNA (bolso "
-                           "selado dentro do aço); no `Body_B` não há bolso nenhum"
-                           % (n(cx[0]["z"][0], 2), n(cx[0]["z"][1], 2), n(abs(cx[0]["x"][1]), 2))),
-                          (axs[2], "tab:green", "mesma zona, mesmo pino: aqui o bolso sai ABERTO no plano de "
-                           "partição nos dois corpos, porque os cilindros do próprio arquivo já atravessam "
-                           "Y = 0")):
-        for c in cx:
-            axi.add_patch(plt.Rectangle((c["x"][0] - 1.6, c["z"][0] - 1.6), c["x"][1] - c["x"][0] + 3.2,
-                                        c["z"][1] - c["z"][0] + 3.2, fill=False, ec=cor, lw=1.2,
-                                        ls=(0, (3, 2))))
-            axi.plot([c["x"][1] + 1.6, 62.0], [0.5 * (c["z"][0] + c["z"][1])] * 2, color=cor, lw=0.5,
-                     ls=(0, (2, 2)))
-        axi.text(-70.0, 126.0, txt, fontsize=7.0, color=cor, ha="left", va="top")
+    for c in cx:
+        axs[1].add_patch(plt.Rectangle((c["x"][0] - 1.6, c["z"][0] - 1.6), c["x"][1] - c["x"][0] + 3.2,
+                                       c["z"][1] - c["z"][0] + 3.2, fill=False, ec="tab:red", lw=1.2,
+                                       ls=(0, (3, 2))))
+        axs[1].plot([c["x"][1] + 1.6, 62.0], [0.5 * (c["z"][0] + c["z"][1])] * 2, color="tab:red", lw=0.5,
+                    ls=(0, (2, 2)))
+    axs[1].text(-70.0, 132.5, "Z %s → %s, a |x| %s mm: no `Body_A` o bolso é CASCA INTERNA (selada no aço); "
+                "no `Body_B` não existe. E esta peça tem %s mm³ de aço contra os %s mm³ do arquivo certo"
+                % (n(cx[0]["z"][0], 2), n(cx[0]["z"][1], 2), n(abs(cx[0]["x"][1]), 2),
+                   n(gc["entrega_anterior_refutada"]["volume_aco_entrega_anterior_mm3"], 1),
+                   n(gc["entrega_anterior_refutada"]["volume_aco_certa_mm3"], 1)),
+                fontsize=7.0, color="tab:red", ha="left", va="top")
     med["2 Gedeon entregue"]["pinos_marcados"] = cx
+    med["2 Gedeon entregue"]["aco_mm3"] = gc["entrega_anterior_refutada"]["volume_aco_entrega_anterior_mm3"]
 
-    med["3 Gedeon consertada"] = faixa(
+    f = gc["fenda"]; ce = gc["cone_entrada"]; dv = gc["defeito_cavidade_selada"]; en = gc["entrega"]
+    med["3 Gedeon certa"] = faixa(
         axs[2], consertada,
-        "3   GEDEON RECONSTRUÍDA DO SEU BACKUP — mesmo envelope, bolso conjugado, 1 CASCA por sólido",
-        "geometria: `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/MatrizGedeon_Corrigida_Body_A/B.step`, "
-        "re-corte de `02_/matrizGedeonCerta.step` (o seu backup: 640.180,7 mm³ = as duas metades brutas de\n"
-        "`MatrizGedeon.step`, diferença 0,000 mm³) com o canal próprio da Gedeon (213.790,0 mm³) e com os pinos "
-        "do próprio arquivo dele. A ∩ B = 0,000000 mm³; metal no canal = 0,000000 mm³;\nvalidade BRepCheck True "
-        "nos dois. Caixa externa idêntica à faixa 2 — o que mudou é o bolso, não a peça.")
+        "3   GEDEON CERTA — O SEU ARQUIVO, INTEIRO — fenda atravessada, cone de entrada, sem funil",
+        "seção medida de `02_/matrizGedeonCerta.step` (SÓ LEITURA, %d faces, %s mm³ de aço, %d cascas): a fenda "
+        "de largura %s × espessura %s com R %s nos topos atravessa de Z = %s a Z = %s e sai pela face de saída; "
+        "o cone de entrada abre em Ø %s na face traseira.\nO único defeito do arquivo dele: os %d furos de pino "
+        "são cavidades SELADAS — %s mm de aço até o Ø %s, sem entrada de ferramenta (por isso as %d cascas). O "
+        "conserto é só partir em Y = 0: A %s + B %s = o bloco com diferença de %s mm³, 1 casca cada, BRepCheck "
+        "válido, A ∩ B = %s mm³. NENHUM aço foi escavado."
+        % (gc["inventario"]["faces"], n(gc["inventario"]["volume"], 1), gc["inventario"]["cascas"],
+           n(f["largura_mm"], 2), n(f["espessura_mm"], 2), n(f["raio_ponta_mm"], 2), n(f["z_de_mm"], 2),
+           n(f["z_ate_mm"], 2), n(2 * ce["raio_max"], 2), dv["furos_sem_acesso"],
+           n(dv["parede_ate_o_externo_mm"], 2), n(dv["diametro_externo_na_zona"], 2), dv["cascas_no_solido"],
+           n(en["volume_A_mm3"], 1), n(en["volume_B_mm3"], 1), n(en["soma_menos_o_bloco_mm3"], 4),
+           n(en["interseccao_A_B_mm3"], 4)))
+    for cxi in cx3:
+        axs[2].add_patch(plt.Rectangle((cxi["x"][0] - 1.6, cxi["z"][0] - 1.6), cxi["x"][1] - cxi["x"][0] + 3.2,
+                                       cxi["z"][1] - cxi["z"][0] + 3.2, fill=False, ec="tab:green", lw=1.2,
+                                       ls=(0, (3, 2))))
+        axs[2].plot([cxi["x"][1] + 1.6, 62.0], [0.5 * (cxi["z"][0] + cxi["z"][1])] * 2, color="tab:green",
+                    lw=0.5, ls=(0, (2, 2)))
+    axs[2].text(-70.0, 132.5, "Z %s → %s, a |x| %s mm: no arquivo inteiro o furo é cavidade SELADA; nas duas "
+                "metades entregues ele sai aberto no plano de partição (meia-cana usinável)"
+                % (n(fzp["z"][0], 2), n(fzp["z"][1], 2), n(abs(fzp["x"][1][1]), 2)),
+                fontsize=7.0, color="tab:green", ha="left", va="top")
+    med["3 Gedeon certa"]["furos_marcados"] = cx3
 
     med["4 Jonatha v27"] = faixa(
         axs[3], J2,
         "4   JONATHA v27 (o master aprovado) — compare com a faixa 3, no mesmo escalonamento",
-        "geometria: seção medida de `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (2 sólidos, "
-        "469.001,7 mm³, cascas [3, 1]). As cascas são a mesma moléstia da Gedeon: bolso selado num corpo e "
-        "ausente\nno outro — é o G-03 da auditoria, que a proposta v28.1 remedia abrindo os quatro bolsões no "
-        "plano de partição dos DOIS corpos. Vista aqui para que a comparação seja no mesmo escalonamento,\nnão "
-        "de memória: o que as separa é medido na faixa 5 — 155,1 mm³ de aço que a Gedeon tem na SAÍDA "
-        "(Z 107,50 → 109,00) e que na Jonatha é o chanfro de 1,50 × 45°, mais 44,9 mm³ na zona dos pinos "
-        "(Z 44,50 → 64,50). O funil não é a diferença: o canal da Gedeon cabe inteiro no da Jonatha "
-        "(Gedeon − Jonatha = 0,0 mm³). Envelope idêntico é exigência de projeto, não coincidência.")
+        "seção medida de `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (2 sólidos, %s mm³ de aço, cascas "
+        "[3, 1]). Vista no MESMO escalonamento da faixa 3 para a comparação não ser de memória: a silhueta "
+        "externa é idêntica porque o envelope é exigência de projeto (Ø93,00 × Z 0..109,00 nas duas).\n"
+        "O que as separa é medido na faixa 5: a v27 tem funil escavado no próprio aço (%s mm³ de canal contra "
+        "%s mm³ de cone + fenda da Gedeon) e %s mm³ de aço a menos no total."
+        % (n(gc["contra_a_jonatha"]["volume_jonatha_aco_mm3"], 1), n(gc["contra_a_jonatha"]["canal_da_v27_mm3"], 1),
+           n(gc["contra_a_jonatha"]["fluxo_certa_mm3"], 1), n(gc["contra_a_jonatha"]["aco_so_na_certa_mm3"], 1)))
 
-    _f3 = med["3 Gedeon consertada"]
+    _f3 = med["3 Gedeon certa"]
     med["5 diferenca"] = faixa_diferenca(
         axs[4], consertada, J2,
-        "5   ONDE A GEDEON E A JONATHA DIFEREM — não são a mesma peça, e dá para ver onde",
-        ("os dois blocos hachurados são os booleanos nos dois sentidos, medidos por `gerar_gedeon_corrigida.py` "
-         "e aqui re-cortados em Y = 0 (é o plano onde os bolsos de pino aparecem).\n"
-         "É isso que responde «parece idêntica à Jonatha»: a silhueta externa é a mesma porque o ENVELOPE é "
-         "exigência de projeto (Ø93,00 × Z 0..109,00 idêntico); a diferença é interna, no caminho do plástico, "
-         "e está\naqui hachurada. O canal da Gedeon cabe inteiro no da Jonatha: Gedeon − Jonatha = 0,0 mm³, "
-         "Jonatha − Gedeon = 155,1 mm³."),
+        "5   ONDE A GEDEON CERTA E A JONATHA v27 DIFEREM — diferença de conceito, medida nas duas peças",
+        ("booleanos nos dois sentidos entre `matrizGedeonCerta.step` e `MatrizJonatha.step`, alinhados pela face "
+         "de saída (Z = 109,00), re-cortados em Y = 0 — o plano onde os furos de pino aparecem. Números da PEÇA "
+         "INTEIRA medida por `gerar_gedeon_certa.py`; a hachura é a meia-seção, por isso cada furo aparece uma "
+         "vez.\nA diferença não é «funil ampliado»: a Gedeon não tem funil no próprio aço; a convergência a "
+         "montante é do furo estagiado do cabeçote. Fluxo da Gedeon %s mm³ contra funil da v27 %s mm³."
+         % (n(gc["contra_a_jonatha"]["fluxo_certa_mm3"], 1), n(gc["contra_a_jonatha"]["canal_da_v27_mm3"], 1))),
         _f3["z_min"], _f3["z_max"])
 
     fig.savefig(a.saida, format="pdf")
@@ -218,7 +247,7 @@ def main():
     if a.png:
         # um PNG da prancha inteira, em dpi baixo de proposito: e para conferir de vista, e o `fig.canvas
         # .draw()` por faixa estourava a memoria do conteiner (5 eixos com hatch densos).
-        fig.savefig(os.path.join(DIR_GED, "DESENHO_2D_GEDEON_CONSERTADA_p1.png"), dpi=85)
+        fig.savefig(os.path.join(DIR_GED, "DESENHO_2D_GEDEON_CERTA_p1.png"), dpi=85)
         print("PNG de conferencia gravado (o .gitignore da pasta ignora DESENHO_2D_*_p*.png por design)")
     json.dump({"gerado_por": "04_Dados_SSOT_e_Scripts/desenhar_gedeon_consertada.py",
                "escalonamento_identico_as_faixas": "sim — todas com xlim %s e ylim %s" % (LIM_X, LIM_Y),

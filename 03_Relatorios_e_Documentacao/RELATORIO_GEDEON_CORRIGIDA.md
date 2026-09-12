@@ -1,5 +1,13 @@
 # Matriz 2 (Gedeon) reconstruída a partir do backup do usuário
 
+> **REFUTADA em 2026-09-12, na mesma noite desta entrega.** Este relatório mede o que os
+> arquivos históricos são, e continua sendo a fonte dessas medições — mas a reconstrução que ele
+> descreve não é a matriz: escavar `MatrizGedeon_Canal_Fluxo.step` (213.790,0 mm³) em
+> `matrizGedeonCerta.step` tirava **170.821,9 mm³** de aço que não é da Gedeon. O arquivo do usuário
+> já é a matriz pronta (fenda 75,00 × 1,50 com R 0,75 atravessada, cone de entrada Ø 75,60, 2 furos
+> de pino Ø 1,78 × 10,00). Entrega válida: `06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/`, gerada por
+> `gerar_gedeon_certa.py`; os STEP desta tentativa foram movidos para
+> `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/`.
 Gerado por `04_Dados_SSOT_e_Scripts/gerar_gedeon_corrigida.py`. Todo número aqui é medição dos STEP
 reimportados; `02_CAD_Modelos_Historicos/` foi aberto só para leitura (regra 2) e
 `01_/MatrizJonatha.step` não foi tocado (regra 1). A reconstrução é `bloco do backup − canal da
@@ -45,11 +53,11 @@ própria Gedeon − pinos do próprio arquivo dele`, partida no plano Y = 0.
 
 | peça | arquivo | bytes | sólidos | cascas por sólido | válidos |
 | :--- | :--- | ---: | ---: | :--- | :--- |
-| Body_A | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/MatrizGedeon_Corrigida_Body_A.step` | 97,921 | 1 | [1] | True |
-| Body_B | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/MatrizGedeon_Corrigida_Body_B.step` | 119,785 | 1 | [1] | True |
-| Canal_Fluxo | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/MatrizGedeon_Corrigida_Canal_Fluxo.step` | 43,193 | 1 | [1] | True |
-| Explodida | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/MatrizGedeon_Corrigida_Explodida.step` | 268,553 | 5 | [1, 1, 1, 1, 1] | True |
-| com o cabeçote | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/Cabecote_EX-030_com_Matriz_Gedeon_Corrigida.step` | 274,036 | 3 | [1, 1, 1] | True |
+| Body_A | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Body_A.step` | 97,921 | 1 | [1] | True |
+| Body_B | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Body_B.step` | 119,785 | 1 | [1] | True |
+| Canal_Fluxo | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Canal_Fluxo.step` | 43,193 | 1 | [1] | True |
+| Explodida | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Explodida.step` | 268,553 | 5 | [1, 1, 1, 1, 1] | True |
+| com o cabeçote | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/Cabecote_EX-030_com_Matriz_Gedeon_Corrigida.step` | 274,036 | 3 | [1, 1, 1] | True |
 
 ## Números que o portão do projeto cobra deste JSON
 
