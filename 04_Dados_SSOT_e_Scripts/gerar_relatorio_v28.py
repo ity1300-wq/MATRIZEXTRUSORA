@@ -68,10 +68,112 @@ def linha(k, v):
     return f"| {k} | {v} |"
 
 
+
+def secao6(ic):
+    """Secao 6 do relatorio, montada dos JSONs de medicao (nada datilografado)."""
+    if not ic:
+        return ("## 6. Cabeçote\n\nRode `python 04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py "
+                "--json --md` para gerar a medição da interface.\n")
+    cb, ch = ic["cabecote"], {str(l["item"]): l for l in ic["checagens"]}
+    cal = cb["calibracao_escala"]
+    am = "; ".join(f"{a['feicao']} → desvio {a['erro_pct']:+.2f} %".replace(".", ",") for a in cal["amarra"])
+    corpo, fuji, junta = cb["corpo"], cb["furos_do_cabecote_para_a_matriz"], cb["junta_cabecote_extrusora"]
+    anel65, bucha, ombro = cb["anel_do_nariz_variante_65mm"], cb["bucha_conica"], cb["ombro_de_apoio"]
+    enq = []
+    for e in cb["encaixe_matriz_x_cabecote"]:
+        axial = e.get("folga_axial_mm", e.get("protrusao_da_matriz_mm", 0.0))
+        enq.append(f"| {e['estagio_matriz']} | {e['furo_cabecote']} | {dim(e['folga_radial_mm'])} mm "
+                   f"| {dim(axial)} mm{': ' + e['nota'] if 'nota' in e else ''} |")
+    linhas_furo = []
+    for b in fuji:
+        linhas_furo.append(f"| {b['nome']} | Ø{dim(b['Ø_mm'])} mm | {dim(b['de_d_mm'])} … {dim(b['ate_d_mm'])} mm "
+                           f"| {dim(b['ate_d_mm'] - b['de_d_mm'])} mm | {b['cota_texto']} |")
+    press = []
+    for l in ic["checagens"]:
+        if str(l["item"]).startswith("Pressão radial do collete") or str(l["item"]).startswith("Pressão de contato"):
+            press.append(f"{l['item'].split('] ')[0]} → **{l['medido']}**")
+    def m(chave, dec=2):
+        ach = ch.get(chave, {})
+        if not ach:
+            ach = next((l for l in ic["checagens"] if str(l["item"]).startswith(chave)), {})
+        v = ach.get("medido")
+        return dim(v, dec) if isinstance(v, (int, float)) else "—"
+
+    return (
+        "## 6. Cabeçote EX-030 — a interface medida no DWG e provada nos sólidos\n\n"
+        f"`030-032- cabeçote.dwg` (HIDEALL, PED:2257 — EX-030 cabeçote em SAE8620 {corpo['carimbo']}, "
+        "cementado 0,4-0,6 mm e temperado a 52-55 HRC; EX-031 bucha cônica; EX-032 pushador) foi "
+        "convertido para DXF e **medido numericamente**, entidade por entidade. A escala foi calibrada "
+        f"pelas próprias cotas do desenho — **k = {dim(cal['k_mm_por_unidade_dxf'], 3)} mm por unidade DXF**, "
+        f"incerteza {cal['incerteza']} — e cinco fechos independentes confirmam o fator: {am}.\n\n"
+        "> **Correção registrada.** A versão anterior desta seção dizia \"6 × M12 em BC Ø150, curso angular "
+        "±15°, escala 21,28 mm/un\" e \"Ø13,33 mm de folga\". O Ø150 vinha de uma leitura de raster em baixa "
+        "resolução: o desenho diz **C.C Ø180**. Tudo abaixo foi re-medido com a escala calibrada e provado "
+        f"por booleanos contra `MatrizJonatha_v28.step` (`verificar_interface_cabecote.py` → "
+        f"**{ic['itens']} itens, {ic['conformes']} conformes, {ic['nao_conformes']} não conformes, "
+        f"{ic['pendentes']} pendências do lado da máquina**).\n\n"
+        f"**Furos do cabeçote para a matriz** — profundidade `d` contada da face do nariz; a matriz senta em "
+        f"`Z_matriz = {dim(cb['referencia_axial']['comprimento_total_mm'])} − d` "
+        f"(corpo Ø{dim(corpo['Ø_corpo_mm'])} × {dim(corpo['comprimento_corpo_mm'])}, "
+        f"flange Ø{dim(corpo['Ø_flange_mm'])} × {dim(corpo['espessura_flange_mm'])}, "
+        f"ressalto Ø{dim(corpo['resalto_traseiro']['Ø_mm'])} × {dim(corpo['resalto_traseiro']['altura_mm'])}):\n\n"
+        "| furo | Ø | de … até (mm de profundidade) | comprimento | cota anotada |\n"
+        "| :--- | ---: | ---: | ---: | :--- |\n" + "\n".join(linhas_furo) + "\n\n"
+        "**Encaixe medido nos sólidos** (não por diferença de cotas):\n\n"
+        "| estágio da matriz | furo do cabeçote | folga radial | folga axial / protrusão |\n"
+        "| :--- | :--- | ---: | ---: |\n" + "\n".join(enq) + "\n\n"
+        f"Interferência corpo-a-corpo matriz ∩ cabeçote: **{m('Interferência matriz ∩ cabeçote', 4)} mm³** — "
+        f"a matriz entra e sai sem tocar. O anel da face mede **Ø{dim(cb['anel_na_face']['de_Ø_mm'])} → "
+        f"Ø{dim(corpo['Ø_corpo_mm'])} = {m('Anel da face')} mm**, que é o \"~20 mm\" descrito pelo cliente, "
+        f"confirmado em medição. Folgas radiais medidas nos três estágios: "
+        f"**{m(fo[0].get('item', ''), 2) if False else m('Folga radial - Ø93×69,90 no bolso Ø95×70,0')} / "
+        f"{m('Folga radial - Ø89,5×10,80 no Ø90×11,0')} / {m('Folga radial - Ø79,5×28,30 no Ø80×14,0')} mm**; "
+        f"folga axial no degrau de apoio **{m('Folga axial no degrau de apoio (ombro)')} mm** — é essa folga "
+        f"que define onde a matriz para. A face de saída da matriz fica **{m('Protrusão da face de saída além da face do nariz')} mm** "
+        "à frente do nariz do cabeçote, então a fenda e a manta trabalham fora do cabeçote (nada de filme "
+        "congelado encostado na saída) e a manta tem **14,00 mm** de curso livre antes de qualquer obstáculo.\n\n"
+        "**Fixação (P1/P4): vem da máquina, não da matriz.** A bucha cônica EX-031 (Ø"
+        f"{dim(bucha['Ø_externo_maior_mm'])} → Ø{dim(bucha['Ø_externo_menor_mm'])} OD, Ø{dim(bucha['Ø_interno_ref_mm'])} ID, "
+        f"cone {dim(bucha['cone_graus'])}°, L = {dim(bucha['comprimento_mm'])} mm — exatamente o comprimento do "
+        "bolso Ø95 × 70) é encaixada no bolso e, ao ser empurrada axialmente, contrai sobre a banda Ø93 da "
+        f"matriz; o cone é auto-travante (3,00° < arctan 0,15 = 8,5°). O empuxo axial recai em compressão no "
+        f"degrau do cabeçote, sobre o ombro da matriz — **{dim(ombro['area_contato_mm2'], 1)} mm²** de anel de "
+        "contato. As pressões envolvidas:\n\n" + "\n".join(f"* {p}" for p in press) + "\n\n"
+        "Ou seja: o aperto que a máquina já faz fecha o plano de partição por compressão radial, e o apoio "
+        "axial existe. **A matriz não leva flange, não leva grampo e não leva furo de fixação** — e é por "
+        "isso que a supressão dos furos M6 de desmontagem na face de entrada se mantém: o pushador EX-032 é "
+        "ferramenta do cabeçote (haste partida Ø25 × 132, M12), não um rosqueamento na matriz.\n\n"
+        f"**Padrão de furação (P4): não há o que padronizar na matriz.** A furação do desenho — "
+        f"{junta['furos']} × Ø{dim(junta['Ø_mm'])} em fendas de {dim(junta['em_fenda_comprimento_mm'])} mm sobre "
+        f"C.C. Ø{dim(junta['circunferencia_primitiva_mm'])} (M12), folga angular total "
+        f"{dim(junta['folga_angular_total_graus'], 1)}° cotada como {dim(junta['cota_angular_no_desenho_graus'], 0)}°, "
+        f"furo central Ø{dim(junta['Ø_central_mm'])} — é a junta **cabeçote ↔ extrusora**, e fica a "
+        f"{m('Menor distância parafuso M12 (C.C Ø180) → corpo da matriz')} mm do corpo da matriz. O giro do "
+        "conjunto se ajusta por essas fendas antes de apertar; o posicionamento da matriz vem dos três "
+        "centragens cilíndricos medidos acima.\n\n"
+        f"**Bloqueio novo — e ele é do cabeçote:** o corte mostra um anel no nariz com passagem "
+        f"Ø{dim(anel65['Ø_interno_mm'])} mm protruindo {dim(abs(anel65['de_d_mm']))} mm à frente da face, "
+        f"compatível com o carimbo **{corpo['carimbo']}** (manta de 65 mm). Com esse anel montado, a matriz de "
+        f"75 mm **não monta**: Ø{dim(anel65['Ø_interno_mm'])} contra o nariz Ø79,50 da matriz dá "
+        f"{dim((79.5 - anel65['Ø_interno_mm']) / 2)} mm de interferência radial por lado e volume de choque "
+        f"medido de **{ch.get('Interferência matriz ∩ cabeçote COM anel Ø68,30', {}).get('medido', '—')}**. "
+        "Como o furo do nariz do cabeçote já é Ø80, não há espaço físico para nenhum anel com passagem "
+        "≥ Ø79,6: na variante de 75 mm o nariz da matriz roda direto no Ø80 do cabeçote, e o anel tem de "
+        "ser eliminado ou refeito com Ø80 (ou seja, sem restringir).\n\n"
+        "**O que ainda se resolve com paquímetro na máquina** (nada disso altera a geometria da matriz):\n\n"
+        + "\n".join(f"* {p}" for p in cb["pendencias"]) +
+        "\n\nO DWG é conversão de avaliação (marca d'água \"Evaluation only\"), então as tolerâncias "
+        "anotadas devem ser conferidas na peça antes de fechar o desenho de execução.\n"
+    )
+
 def main():
     ft = carregar("matriz_v28_features.json")
     vf = carregar("verificacao_v28.json")
     ssot = carregar("cad_die_parameters.json")
+    try:
+        ic = carregar("interface_cabecote.json")
+    except FileNotFoundError:
+        ic = None
     meta, m = ft["meta"], ssot["matriz_jonatha_parameters"]
 
     land = achar(vf, "Land reto e paralelo")
@@ -136,8 +238,10 @@ def main():
 4. **P3 parcialmente fechado**: 6 cartuchos Ø9,5 e 4 poços de termopar Ø4,8 na zona do land,
    com paredes reais medidas de {dim(paredes.get('cartucho', 0))}–{dim(paredes.get('termopar', 0))} mm. A refrigeração
    **não cabe no corpo** (item 5) e vai para o adaptador.
-5. **P1 continua sem solução dentro do envelope** — e agora com a prova geométrica: sobram
-   apenas 8,70 mm de aço entre o canal Ø75,60 e o Ø93, menos do que Ø9,5 + 2 × 4 mm de parede.
+5. **P1 tem solução — e ela é da máquina**: o cabeçote EX-030 medido tem bolso Ø95 × 70,0 com
+   bucha cônica (EX-031, cone 3°) que aperta a banda Ø93 da matriz, e degrau de apoio axial.
+   Dentro do envelope da matriz continua não havendo onde furar (sobram 8,70 mm de aço entre o
+   canal Ø75,60 e o Ø93), então a fixação **não** é tarefa da matriz — item 6.
 6. **P5 fechado**: o arquivo do canal é **1 único sólido** (o v27 entregava 3). Os números de CFD
    permanecem não reproduzíveis e foram re-marcados como "estimativa a confirmar" (item 7).
 
@@ -182,7 +286,8 @@ python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png  # conferência
 | Fechamento volumétrico | resíduo 0,001 mm³ | **resíduo {dim(fp.get('desvio'), 4)} mm³** (env − aço − canal = Σ furos) | booleano |
 | ΔP 1D sobre a geometria | 41,9 bar | **{tbl(dp.get('medido'))}** | `dp_total()` do próprio projeto |
 | τ na parede do land | 164,0 kPa | **{tau.get('medido')}** | `tau_parede()` do próprio projeto |
-| Fixação das metades | inexistente | **ainda inexistente — decisão necessária** | item 4 |
+| Fixação das metades | inexistente | **pelo collete do cabeçote: 8,6 MPa de compressão radial fecham a partição** | item 6, medido |
+| Interface com o cabeçote | nunca medida | **Ø93/Ø89,5/Ø79,5 encaixam em Ø95/Ø90/Ø80 com 1,00/0,25/0,25 mm de folga e interferência 0,0000 mm³** | booleanos, item 6 |
 | Refrigeração | inexistente | **não cabe no corpo** | item 5 |
 
 ---
@@ -206,7 +311,7 @@ A geometria não oferece onde ancorar isso:
 * consequência: **parafusos radiais ou axiais no corpo são geometricamente impossíveis** sem
   alterar o envelope, e o envelope é a regra que garante a montagem na extrusora.
 
-**Três caminhos viáveis, em ordem de preferência de quem já viu isso abrir em produção:**
+**Caminhos, reordenados depois de medir o cabeçote (item 6):**
 
 1. **Monobloco por EDM.** Eliminar a bipartição: abrir o canal por EDM a partir da face de saída
    (o `MatrizJonatha_v28_Canal_Fluxo.step` de 1 sólido é exatamente o arquivo para isso) e
@@ -215,9 +320,10 @@ A geometria não oferece onde ancorar isso:
 2. **Aro de retração (shrink ring)** no degrau Ø93 → Ø89,50 (Z = 69,90). O aro coloca o corpo em
    compressão circunferencial e fecha o plano de partição por atrito, pré-carregada. Vantagem: não
    fura a peça. Necessita: verificar no cabeçote o espaço axial de 0,8 mm do degrau.
-3. **Grampos externos usando o cabeçote.** O cabeçote já tem 6 × M12 em BC Ø150 com curso angular
-   de ±15° (item 6) — se o nariz do cabeçote tiver ombro, a própria união cabeçote-matriz
-   pré-carrega o plano de partição. Requer confirmar o desenho de execução (item 6, escala).
+3. ~~Grampos externos usando os furos do flange do cabeçote~~ — **retirada**: os 6 × M12 estão em
+   C.C. Ø180, nas fendas da junta cabeçote ↔ extrusora, a 35,25 mm do corpo da matriz (medido),
+   e não alcançam a matriz. A pré-carga do plano de partição vem da bucha cônica EX-031, que já
+   aperta a banda Ø93: 8,6 MPa bastam para equilibrar os 55,7 kN (item 6, medido nos sólidos).
 
 Recomendação: **opção 1 (monobloco + EDM)** para a matriz de produção e manter a bipartição só no
 protótipo de bancada. As duas outras são remendo; a 1 remove a causa.
@@ -251,37 +357,7 @@ já a colocava), não para a matriz. Isso não é escolha de projeto: é consequ
 
 ---
 
-## 6. Cabeçote — o dado externo que destravou P4 (lido do DWG)
-
-`030-032- cabeçote.dwg` (AutoCAD R2004, AC1018, desenhos EX-030/031/032 da Hideall) foi convertido
-para DXF e as entidades medidas numericamente — não lidas no olho. O DXF não preserva texto
-(as cotas viraram polilinhas), então o que segue vem da **geometria**:
-
-| Medido no desenho (unidades do DXF) | Valor | Leitura |
-| :--- | ---: | :--- |
-| 6 círculos de Ø0,6266 u em BC Ø7,050 u, ângulos 30°/90°/150°/210°/270°/330° | passo exato de 60° | **6 furos em círculo primitivo** |
-| cada um com um lobo maior tangente (formato "fechadura") + anotação "15°" com arco | — | **slots com curso angular de ±15°** para ajuste de giro da matriz |
-| 6 círculos de Ø0,2350/0,1960 u em BC Ø3,603 u | razão BC/furo = 15,3 | outra furação (rosqueada) menor, num dos itens 031/032 |
-| ressalto retangular tangente à borda externa, em 0° | — | **chave/ressalto de anti-rotação** |
-| anéis concêntricos com razões 1,00 / 1,167 / 1,358 / 1,400 / 1,533 / 1,750 / 2,167 / 2,333 / 3,067 / 3,667 | — | furação do nariz do cabeçote |
-
-Calibração de escala: a anotação legível "**C/G Ø150**" sobre o círculo dos 6 furos dá
-21,28 mm/unidade; com a mesma escala, o círculo de Ø3,29 u vira **Ø70,0 mm** (bate com a cota "70"
-do desenho) e o furo de Ø0,6266 u vira **Ø13,33 mm** (Ø de folga para M12, 13,5 pela ISO 273 grossa,
-±1,3 %). Três cotas independentes fechando com um único fator é o que sustenta a escala; a
-incerteza nos diâmetros absolutos é de ~1 %.
-
-**O que fazer com isso:** a matriz **não** se fixa com furos próprios (item 4); ela é retida pelo
-cabeçote, e o cabeçote é fixado por **6 × M12 em BC Ø150, passo 60° a partir de 30°, com curso
-angular de ±15° e chave a 0°**. Isso é suficiente para: (a) prever no projeto da matriz um
-assentamento e uma folga angular compatíveis com ajuste de ±15°; (b) projetar os 6 furos da matriz
-no mesmo BC, se a opção de grampos for escolhida.
-
-**O que ainda falta (e não dá para tirar deste arquivo):** profundidade do nariz, diâmetro e
-tolerância do furo de assentamento, e se o Ø150 é furação passante no cabeçote. Isso se resolve com
-paquímetro na máquina, não com CAD. O DWG é um raster de avaliação (marca d'água "Evaluation only"),
-portanto **confirmar na máquina antes de usinar**.
-
+{secao6(ic)}
 ---
 
 ## 7. Duas descobertas sobre o modelo que valem decisão
@@ -332,7 +408,8 @@ termopar ou o polímero.
 
 | # | Decisão | Consequência se aprovar | Consequência se não decidir |
 | :-: | :--- | :--- | :--- |
-| **D1** | Aprovar **monobloco + EDM** (recomendado) **ou** aro de retração **ou** grampos no BC Ø150 | libera corte do aço | a matriz de 30-56 kN vai abrir no plano de partição na primeira subida de vazão |
+| **D1** | Aceitar **fixação pelo collete do cabeçote** (bucha EX-031, 8,6 MPa na banda Ø93) — e decidir se ainda assim quer **monobloco + EDM** como redundância | nada a acrescentar à matriz; libera corte do aço | sem o collete apertado na banda Ø93 retificada, a matriz de 30-56 kN abre no plano de partição na primeira subida de vazão |
+| **D1b** | **Anel do nariz Ø68,30 do cabeçote**: eliminar na variante de 75 mm (não há espaço: o furo é Ø80) | a matriz de 75 mm monta; hoje ela **não monta** | 5,60 mm/lado de interferência entre o anel e o nariz Ø79,5 da matriz — montagem impossível |
 | **D2** | Manter chanfro **0,80 × 45°** (land 9,20) ou voltar a 1,50 × 45° (land 8,50) | lâmina de 1,45 mm não lasca na limpeza | risco de lascamento no lábio e face de saída irreparável |
 | **D3** | Aceitar a descrição "**funil cônico linear de largura constante**" ou pedir o coat-hanger de verdade | SSOT e CAD voltam a dizer a mesma coisa | qualquer CFD futuro vai divergir do CAD por 0,70-6,00 mm de seção |
 

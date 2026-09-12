@@ -63,12 +63,37 @@ sólidos (booleanos + `BRepExtrema`), não declarando:
   "coat-hanger com reservatório de 6,00 mm" descrito — as seções intermediárias do loft nunca entraram
   no sólido. Item de decisão **D3**.
 
+### 🔩 Interface com o cabeçote EX-030 — medida no DWG e provada nos sólidos
+
+O `030-032- cabeçote.dwg` (HIDEALL, PED:2257) foi convertido e **medido entidade por entidade**. A
+escala do desenho foi calibrada pelas próprias cotas (**25,534 mm por unidade DXF**, 5 fechos
+independentes fechando em 0,012 %), e o sólido do cabeçote montado a partir dessa medição foi
+enfrentado à v28.0 com booleanos: **43 itens, 39 conformes, 0 não conformes, 4 pendências do lado
+da máquina** → `03_Relatorios_e_Documentacao/INTERFASE_CABECOTE_EX030.md`
+
+| o que foi medido | resultado |
+| :--- | :--- |
+| furos do cabeçote para a matriz | Ø80,00 × 14,00 · Ø90,00 × 11,00 · Ø95,00 × 70,00 (profundidade da face do nariz) |
+| encaixe nos 3 estágios da matriz | folga radial **1,00 / 0,25 / 0,25 mm**, folga axial no degrau de apoio **0,10 mm**, interferência **0,0000 mm³** |
+| face do cabeçote | anel de **20,00 mm** (Ø90 → Ø130); nariz Ø80 maior que a fenda (75,80) e menor que a matriz (Ø93) |
+| protrusão da matriz | face de saída **14,00 mm** à frente do nariz do cabeçote — a fenda trabalha fora da peça aquecida |
+| fixação | bucha cônica **EX-031** (Ø95 → Ø86, cone 3,00°, L 70,00) apertando a banda Ø93: **8,58 MPa** fecham os 55,7 kN da partição; empuxo axial de 29,85 kN recai no degrau, no anel de contato real de 431,2 mm² (**69,22 MPa**, margem 20,2×) |
+| padrão de flange (P4) | **não existe na matriz**: 6 × Ø16,50 em fendas de 23,50 sobre C.C. Ø180,00 (M12, ±7,20° de ajuste) é a junta cabeçote ↔ extrusora, a 35,25 mm do corpo da matriz |
+| **bloqueio** | anel do nariz **Ø68,30** (carimbo 9"×65 mm) → 5,60 mm de interferência radial por lado com o nariz Ø79,50 da matriz: **a matriz de 75 mm não monta com esse anel**, e como o furo do nariz já é Ø80 não há espaço para nenhum anel não restritivo |
+
+Correção registrada: a triagem anterior calibrou a escala em "C/G Ø150" (k = 21,28 mm/un) lido em
+raster de baixa resolução e sugeriu grampos nesses furos. O desenho diz **C.C Ø180**; os furos são
+da junta com a extrusora e **a recomendação de grampos no flange foi retirada** — a fixação vem do
+collete da própria máquina. Nenhuma cota da matriz mudou por causa disso: o envelope
+Ø93/Ø89,50/Ø79,50 × 109,00 é exatamente o centragens do cabeçote.
+
 ```bash
 python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py               # regenera os STEP v28.0
 python 04_Dados_SSOT_e_Scripts/verificar_v28.py --json --md      # volta a medir e provar
 python 04_Dados_SSOT_e_Scripts/explorar_acomodo_furos.py --json # onde existe aço para furos
 python 04_Dados_SSOT_e_Scripts/gerar_relatorio_v28.py           # atualiza o relatório com os dados
 python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png
+python 04_Dados_SSOT_e_Scripts/verificar_interface_cabecote.py --json --md  # matriz × cabeçote EX-030
 ```
 
 ---
