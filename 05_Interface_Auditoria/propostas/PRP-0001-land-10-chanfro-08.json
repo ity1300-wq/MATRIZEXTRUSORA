@@ -1,0 +1,35 @@
+{
+  "protocolo": "1.0",
+  "id": "PRP-0001",
+  "titulo": "Land paralelo de 10,0 mm e chanfro de saida de 0,80 mm x 45 graus",
+  "autor": "IA engenheiro (exemplo de primeira iteracao do protocolo)",
+  "data": "2026-09-12",
+  "tipo": "calculo",
+  "base_commit": "199fa1b5b5e3ac5754d1414f69fd3ee161dac45a",
+  "objetivo": "Fechar a nao conformidade do land (8,50 medido contra 10,00 declarado no SSOT) e engrossar a parede de aco do labio de saida, pagando o minimo de contrapressao.",
+  "arquivos": [],
+  "parametros": {
+    "land_total_mm": 10.0,
+    "chanfro_mm": 0.8
+  },
+  "esperado": {
+    "land_util_mm": 9.2,
+    "parede_labio_mm": 1.45,
+    "dp_total_bar": 27.6
+  },
+  "nao_muda": [
+    "largura_fenda_mm",
+    "espessura_fenda_mm",
+    "raio_borda_mm",
+    "area_fenda_mm2",
+    "boca_entrada_mm",
+    "volume_canal_mm3",
+    "uniformidade_nucleo_pct"
+  ],
+  "justificativa": "O chanfro de saida de 1,50 mm consome 1,50 mm dos 10,00 mm de land, deixando 8,50 mm paralelos e apenas 0,75 mm de parede de aco no labio. Reduzir o chanfro para 0,80 mm devolve 0,70 mm de land paralelo (9,20 mm) e engrossa a parede do labio para 1,45 mm. A perda de carga adicional vem do land mais longo: com gradiente de 2,187 bar/mm, o trecho cresce 0,70 x 2,187 = 1,53 bar, e o chanfro menor economiza 0,70 x 0,907 = 0,63 bar, resultando em 27,6 bar contra 26,68 bar do v27.",
+  "riscos": [
+    "Chanfro menor reduz a protecao da aresta do labio durante a limpeza e a partida; verificar acabamento e ausencia de rebarba na montagem.",
+    "Alteracao exige retifica do labio e nova medicao dimensional antes do uso."
+  ],
+  "observacoes": "Proposta sem STEP: e uma previsao para decisao. O STEP entra como PRP-0001-r2, tipo 'geometria', apos a aprovacao desta previsao. base_commit atualizado para o estado auditado apos a correcao da particao de zonas (o SSOT mudou desde a primeira versao)."
+}

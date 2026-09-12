@@ -1,0 +1,410 @@
+{
+  "protocolo": "1.0",
+  "proposta_id": "PRP-0003",
+  "commit_auditado": "55860156a66f91fa7ae6e4093b5cf73eda433f96",
+  "proposta_sha256": "233dd97df79d0fac57a5d1caedf6f2bf27867b4d81a6fdef22f654dd253dfdb3",
+  "data": "2026-09-12T17:41:22+0000",
+  "auditor": {
+    "nome": "Auditor IA (Protocolo v1.0)",
+    "tipo": "IA",
+    "tipo_proposta": "calculo"
+  },
+  "estado": "APROVADO_COM_RESSALVAS",
+  "resumo": "Requisitos duros OK, com itens não auditados listados.",
+  "checks": [
+    {
+      "id": "D1",
+      "o_que": "Largura da fenda = 75,00 mm",
+      "nominal": 75.0,
+      "medido": 75.0,
+      "tolerancia": "±0.05 mm",
+      "unidade": "mm",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "verify_geometry_ssot.py"
+    },
+    {
+      "id": "D2",
+      "o_que": "Espessura da fenda = 1,50 mm",
+      "nominal": 1.5,
+      "medido": 1.5,
+      "tolerancia": "±0.02 mm",
+      "unidade": "mm",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "verify_geometry_ssot.py"
+    },
+    {
+      "id": "D3",
+      "o_que": "Raio de borda = 0,75 mm",
+      "nominal": 0.75,
+      "medido": 0.75,
+      "tolerancia": "±0.02 mm",
+      "unidade": "mm",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "verify_geometry_ssot.py"
+    },
+    {
+      "id": "D4",
+      "o_que": "Boca de entrada ≤ Ø75,60 mm",
+      "nominal": 75.6,
+      "medido": 75.6,
+      "tolerancia": "±0.001 mm",
+      "unidade": "mm",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "verify_geometry_ssot.py"
+    },
+    {
+      "id": "D5",
+      "o_que": "Interferência entre as metades = 0",
+      "nominal": 0.0,
+      "medido": 0.0,
+      "tolerancia": "±0.01 mm³",
+      "unidade": "mm³",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "verify_geometry_ssot.py"
+    },
+    {
+      "id": "D6",
+      "o_que": "Envelope externo (Ø93 × 109 mm)",
+      "nominal": "93 × 109",
+      "medido": "93.0 × 109.0",
+      "tolerancia": "±0,05 mm",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "verify_geometry_ssot.py"
+    },
+    {
+      "id": "D7",
+      "o_que": "Canal isolado × corpo (consistência)",
+      "nominal": true,
+      "medido": true,
+      "tolerancia": "≤ 0,5%",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "verify_legacy_dies.py"
+    },
+    {
+      "id": "I1",
+      "o_que": "02_CAD_Modelos_Historicos/ intacto",
+      "nominal": "idêntico ao baseline congelado",
+      "medido": "nenhuma alteração",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "sha256 × baseline",
+      "observacao": ""
+    },
+    {
+      "id": "I2",
+      "o_que": "Entregáveis CAD em .step",
+      "nominal": "idêntico ao baseline congelado",
+      "medido": "todos .step",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "sha256 × baseline",
+      "observacao": ""
+    },
+    {
+      "id": "I3",
+      "o_que": "STEP alterados estão declarados na proposta",
+      "nominal": "idêntico ao baseline congelado",
+      "medido": "nenhuma alteração",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "sha256 × baseline",
+      "observacao": ""
+    },
+    {
+      "id": "I4",
+      "o_que": "SSOT e scripts de medição não alterados",
+      "nominal": "idêntico ao baseline congelado",
+      "medido": "nenhuma alteração",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "sha256 × baseline",
+      "observacao": ""
+    },
+    {
+      "id": "I5",
+      "o_que": "Protocolo, esquemas e scripts do auditor não alterados",
+      "nominal": "idêntico ao baseline congelado",
+      "medido": "nenhuma alteração",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "sha256 × baseline",
+      "observacao": ""
+    },
+    {
+      "id": "I6",
+      "o_que": "Sem arquivos protegidos ausentes",
+      "nominal": "idêntico ao baseline congelado",
+      "medido": "nenhum",
+      "severidade": "BLOCKER",
+      "resultado": "OK",
+      "fonte": "sha256 × baseline",
+      "observacao": ""
+    },
+    {
+      "id": "E:dp_total_bar",
+      "o_que": "Declarado × recalculado: dp_total_bar",
+      "nominal": 26.68,
+      "medido": 26.68,
+      "tolerancia": "±15.0%",
+      "severidade": "ALERTA",
+      "resultado": "OK",
+      "fonte": "auditor (modelo/medição)",
+      "observacao": "desvio 0.0%"
+    }
+  ],
+  "metricas": {
+    "largura_fenda_mm": 75.0,
+    "espessura_fenda_mm": 1.5,
+    "area_fenda_mm2": 112.0171,
+    "land_util_mm": 8.5,
+    "boca_entrada_mm": 75.6,
+    "parede_labio_mm": 0.75,
+    "interferencia_mm3": 0.0,
+    "volume_canal_mm3": 213945.1459,
+    "z_total_mm": 109.0,
+    "diametro_externo_mm": 93.0,
+    "envelope_residuo_mm3": 0.0009,
+    "raio_borda_mm": 0.75,
+    "canal_consistente": true,
+    "dp_total_bar": 26.68,
+    "forca_abertura_kN": 19.97,
+    "residencia_media_s": 14.26,
+    "residencia_parede_min": 23.6,
+    "dp_land_bar_mm": 2.1761,
+    "uniformidade_nucleo_pct": 52.29,
+    "tau_parede_land_kpa": 160.8879760835549,
+    "uniformidade_dentro_5pct": 92.3
+  },
+  "comparacao_baseline": [
+    {
+      "metrica": "largura_fenda_mm",
+      "baseline": 75.0,
+      "proposto": 75.0,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": true
+    },
+    {
+      "metrica": "espessura_fenda_mm",
+      "baseline": 1.5,
+      "proposto": 1.5,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": true
+    },
+    {
+      "metrica": "area_fenda_mm2",
+      "baseline": 112.0171,
+      "proposto": 112.0171,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": true
+    },
+    {
+      "metrica": "land_util_mm",
+      "baseline": 8.5,
+      "proposto": 8.5,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "boca_entrada_mm",
+      "baseline": 75.6,
+      "proposto": 75.6,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": true
+    },
+    {
+      "metrica": "parede_labio_mm",
+      "baseline": 0.75,
+      "proposto": 0.75,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "interferencia_mm3",
+      "baseline": 0.0,
+      "proposto": 0.0,
+      "delta_pct": null,
+      "direcao": "neutro",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "volume_canal_mm3",
+      "baseline": 213945.1459,
+      "proposto": 213945.1459,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "z_total_mm",
+      "baseline": 109.0,
+      "proposto": 109.0,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "diametro_externo_mm",
+      "baseline": 93.0,
+      "proposto": 93.0,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "envelope_residuo_mm3",
+      "baseline": 0.0009,
+      "proposto": 0.0009,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "raio_borda_mm",
+      "baseline": 0.75,
+      "proposto": 0.75,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": true
+    },
+    {
+      "metrica": "canal_consistente",
+      "baseline": true,
+      "proposto": true,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "dp_total_bar",
+      "baseline": 26.68,
+      "proposto": 26.68,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "forca_abertura_kN",
+      "baseline": 19.97,
+      "proposto": 19.97,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "residencia_media_s",
+      "baseline": 14.26,
+      "proposto": 14.26,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "residencia_parede_min",
+      "baseline": 23.6,
+      "proposto": 23.6,
+      "delta_pct": 0.0,
+      "direcao": "igual",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    },
+    {
+      "metrica": "dp_land_bar_mm",
+      "baseline": 2.1866,
+      "proposto": 2.1761,
+      "delta_pct": -0.48,
+      "direcao": "neutro",
+      "aceitavel": true,
+      "bloqueia_se_mudar": false
+    }
+  ],
+  "bloqueios": [],
+  "recomendacoes": [
+    "A proposta declara métricas que o auditor não sabe recalcular (ver 'Não auditado'): enviar evidência própria (rodada de CFD, medição) ou reformular a proposta sem elas."
+  ],
+  "nao_auditavel": [
+    {
+      "item": "esperado.espessura_equivalente_borda_mm",
+      "motivo": "o auditor não sabe recalcular esta métrica"
+    },
+    {
+      "item": "geometria proposta (STEP ainda não entregue)",
+      "motivo": "proposta do tipo 'calculo': os valores de geometria são previsão do modelo, não medição de arquivo; quando o STEP for entregue, reenviar como tipo 'geometria' para auditoria dimensional"
+    }
+  ],
+  "modelo_parametrico": "dp_total = 6.77 (entrada+funil+aproximação, medido) + 2.182·land_util + 0.907·chanfro; land_util = land_total − chanfro; parede_labio = 2,25 − chanfro",
+  "medicoes_reutilizadas": false,
+  "hashes": {
+    "proposta": "233dd97df79d0fac57a5d1caedf6f2bf27867b4d81a6fdef22f654dd253dfdb3",
+    "head": "55860156a66f91fa7ae6e4093b5cf73eda433f96",
+    "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step": "7f26c5c5ba238a12667f2bdf974bc15f001c9103fd480ffb144eb2718e67e04e",
+    "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_A.step": "7342d3ecab6771fe5a5b370ff445be5084f635fbb5ba3c5ba9d7e4818fd563a8",
+    "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_B.step": "afcce0aca2b8ab33602e9d866902448d4f261cca3464e044702bb148af66cf05",
+    "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Canal_Fluxo.step": "922073408b1b3a50a9f27240a2451a3c88e7fc9289bc26718f5d26af83c73e90",
+    "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Com_Fluxo.step": "d4e353146e79aef25916a22301c2536c90fca9008c8f8ed73e18e34e4fdc7482",
+    "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Explodida.step": "ba7cfb6fbd1b8144ccc3e4445475c822cbeea285702dae521bb667fb61a3ea8d",
+    "02_CAD_Modelos_Historicos/Matriz1_Original_Copo.step": "cb633ea093ac767823a1a3c77bf8f5ee81101444ed56fc42b404aa8c88714a7e",
+    "02_CAD_Modelos_Historicos/Matriz1_Original_Copo_Body_A.step": "c9f2155573a6cb0a93357a305cef1a7ffb9f1ea7d88901d58d0bb4b8ff219964",
+    "02_CAD_Modelos_Historicos/Matriz1_Original_Copo_Body_B.step": "5bd4004c21541c6fae600dcbda801827b56cb696f6781a89bf069a55e32c103c",
+    "02_CAD_Modelos_Historicos/Matriz1_Original_Copo_Canal_Fluxo.step": "23a625bb91d60d260504fca13782a6e0b7503b426101cef2805c1743ce497e90",
+    "02_CAD_Modelos_Historicos/Matriz1_Original_Copo_Explodida.step": "4984a866d807ae0991006d9b383432a3166fb1f0836c1caaf9cc173852e3ecc1",
+    "02_CAD_Modelos_Historicos/Matriz1_Original_Copo_Solido.step": "18a9afdfbaba4e6af656fab98ece663c86bebf97af06b222c620f48a9a009791",
+    "02_CAD_Modelos_Historicos/MatrizDesenvolvimento.step": "5917a442450d18994d8220bd949d796fa7669b72d8a51ce41fe46c5441e36a17",
+    "02_CAD_Modelos_Historicos/MatrizDesenvolvimento_Body_A.step": "52cd443f15d33fa261a34dd077e0804178e0742ea07b1f1d18252dc46aa183e7",
+    "02_CAD_Modelos_Historicos/MatrizDesenvolvimento_Body_B.step": "b75294c98537d4d762a09a1f241e043611ba40852656bb07bf307fef65a90089",
+    "02_CAD_Modelos_Historicos/MatrizDesenvolvimento_Canal_Fluxo.step": "59b7733d12dc2f6bdf71c463fc2191c2088737f2b39b68a101e8e9ecd5b4f2f0",
+    "02_CAD_Modelos_Historicos/MatrizDesenvolvimento_Com_Fluxo.step": "b6d24a0a2b2196559694a24aaf6e6bbd5201972b58257efaa5d60ce0c918e9c3",
+    "02_CAD_Modelos_Historicos/MatrizDesenvolvimento_Explodida.step": "8ed6f18e469e4b1e656409b59d01e1692311d4c852814bf06907bf182c11ccca",
+    "02_CAD_Modelos_Historicos/MatrizGedeon.step": "807b394441c9052bb398c57af6b8c5e1671e2b98d145605aa20d6736ce50c8bd",
+    "02_CAD_Modelos_Historicos/MatrizGedeon_Body_A.step": "f8f05663d52cf7f0aac026eb67e242cdb063394a286090c5b1e2a24c8dbd7dbb",
+    "02_CAD_Modelos_Historicos/MatrizGedeon_Body_B.step": "fb8787b3e669591c87f2b4df2e1d158474c99aa820d1575de3fb2482265e32f5",
+    "02_CAD_Modelos_Historicos/MatrizGedeon_Canal_Fluxo.step": "3ea2afd1e662d6cea1d294aff7dd5f65a3630b81e61883a27195f9b0009587a4",
+    "04_Dados_SSOT_e_Scripts/cad_die_parameters.json": "892e30df3f794d8ea1fa9aba0fdd4e732e698169dffe386d35a781b7d737031b",
+    "04_Dados_SSOT_e_Scripts/cfd_edge_relief.py": "60538fd892ae69ce93eb92f1473b3daad3e51a2dfccce48161b9d11f0ab73531",
+    "04_Dados_SSOT_e_Scripts/cfd_land_crosssection.py": "592baed4a5250687666f2f13b45a3a20de6c9d78c38858d001ea46f73f36a8f5",
+    "04_Dados_SSOT_e_Scripts/setup_cfd_env.sh": "78c68b2f0b4eb764c484b8e35d599489189ace0e22358b237a9319ec20c7aef9",
+    "04_Dados_SSOT_e_Scripts/setup_headless_gl.sh": "8d8812f2b95068466e6f60257349f9162ac9e272d175a5509310e97d5b6e06d2",
+    "04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py": "dea957f056f3ca8c7cb112e2106b126f2a42a708f221686cc3e77062a09258a4",
+    "04_Dados_SSOT_e_Scripts/verify_legacy_dies.py": "100c9874abb12914d3f94a9460b533d60c1689566773410adcf898778a57fff7",
+    "05_Interface_Auditoria/PROTOCOLO_AUDITORIA.md": "569ea31e0415b7acae4854375bb4dea0d9b42b451f7f3fd0b3230e45788000cc",
+    "05_Interface_Auditoria/esquema/proposta.schema.json": "88dbcac446e8bfe8955a76ad4050f41dc9cfa0f1bba7312a660e1ba529bac0f6",
+    "05_Interface_Auditoria/esquema/veredito.schema.json": "1575a461ecedc928f7eac5673597a2d2e514a43442fba41e112c75cee5198830",
+    "05_Interface_Auditoria/scripts/auditar_proposta.py": "189f74c35316506118fb15c0cf0add1d37d42e88f67524ef9a5fc5e910778c4e",
+    "05_Interface_Auditoria/scripts/monitor_auditoria.py": "ad27b89e825a53088562f8f7999d5105462c2095ef85b3edcb74b17539e1df5d",
+    "05_Interface_Auditoria/scripts/painel_auditoria.py": "84f18b9c9d9aab5ba080986b336a3e9ba575b291ceb2ab90572ec8e70e7452d5"
+  },
+  "reproduzir": [
+    "python 04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py --json",
+    "python 04_Dados_SSOT_e_Scripts/verify_legacy_dies.py --json",
+    "python 04_Dados_SSOT_e_Scripts/avaliacao_matriz3_calculos.py --json",
+    "python 05_Interface_Auditoria/scripts/auditar_proposta.py /home/user/MATRIZEXTRUSORA/05_Interface_Auditoria/.proposta_em_auditoria.json"
+  ]
+}
