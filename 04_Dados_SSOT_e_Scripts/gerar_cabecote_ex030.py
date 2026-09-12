@@ -21,7 +21,9 @@ na banda onde o collete aperta, ou furo coaxial no fundo do bolso) muda o que a 
 Saida (pasta 06_CAD_Cabecote_EX-030/STEP/, criada se nao existir):
         Cabecote_EX-030_desenhado.step    referencia, com a junta
         Cabecote_EX-030_sem_flange.step   o pedido
-        com --com-m12 os dois vao para STEP/estudos/ em vez de sobrescrever os entregues
+        com --com-m12 (ou --saida para outra pasta) os STEP ganham sufixo _M12 e vao para
+        STEP/estudos/, assim como o relatorio (CABECOTE_EX-030_STEP_M12.md) e as medicoes
+        (cabecote_step_M12.json): rodada de cenario nao escreve em documento oficial do repo
         04_Dados_SSOT_e_Scripts/cabecote_step.json                 (medicoes da operacao)
         03_Relatorios_e_Documentacao/CABECOTE_EX-030_STEP.md       (o que foi removido e o que prova)
 """
@@ -84,6 +86,13 @@ def main():
     if a.saida is None:  # o cenario M12 nunca sobrescreve os STEP entregues
         a.saida = DIR_ESTUDO if a.com_m12 else DIR_CAB
     os.makedirs(a.saida, exist_ok=True)
+    # regra da pasta: fora do STEP/ oficial NADA escreve em documento do repo - nem STEP, nem relatorio,
+    # nem JSON de medicoes. Cenario (--com-m12, ou --saida apontando para outro lugar) fica em
+    # STEP/estudos/, com sufixo no nome, e so ali
+    oficial = os.path.abspath(a.saida) == os.path.abspath(DIR_CAB)
+    sufixo = "" if oficial else "_M12"
+    cam_json = (os.path.join(AQUI, "cabecote_step.json") if oficial
+                else os.path.join(a.saida, "cabecote_step_M12.json"))
 
     cheio = cabecote(com_anel=False)
     novo = cheio.intersect(cil_z(RAIO_CORPO, Z0 - 1.0, Z1 + 1.0))
@@ -128,11 +137,10 @@ def main():
     }
     med["comprimento_preservado"] = abs(bn.zlen - bf.zlen) < 1e-6
     med["redondo"] = abs(bn.xlen - 2 * RAIO_CORPO) < 1e-6 and abs(bn.ylen - 2 * RAIO_CORPO) < 1e-6
-    json.dump(med, open(os.path.join(AQUI, "cabecote_step.json"), "w", encoding="utf-8"),
-              ensure_ascii=False, indent=1)
+    json.dump(med, open(cam_json, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
-    p1 = os.path.join(a.saida, "Cabecote_EX-030_desenhado.step")
-    p2 = os.path.join(a.saida, "Cabecote_EX-030_sem_flange.step")
+    p1 = os.path.join(a.saida, f"Cabecote_EX-030_desenhado{sufixo}.step")
+    p2 = os.path.join(a.saida, f"Cabecote_EX-030_sem_flange{sufixo}.step")
     cq.exporters.export(cheio, p1)
     cq.exporters.export(novo, p2)
 
@@ -144,8 +152,7 @@ def main():
         rt[f"desvio_round_trip_{nome}_mm3"] = round(vol(relido) - origem.Volume(), 6)
         rt[f"sólidos_no_arquivo_{nome}"] = len(relido.Solids()) or 1
     med.update(rt)
-    json.dump(med, open(os.path.join(AQUI, "cabecote_step.json"), "w", encoding="utf-8"),
-              ensure_ascii=False, indent=1)
+    json.dump(med, open(cam_json, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     desvio_max = max(abs(rt[k]) for k in rt if k.startswith("desvio_round_trip"))
     print(f"desenhado  -> {p1}\n           {n(cheio.Volume(), 0)} mm3 | {n(cheio.Volume() * ACO, 3)} kg "
           f"| Ø{bf.xlen:.0f} x {n(bf.zlen)} mm de comprimento")
@@ -244,7 +251,11 @@ def escreve_relatorio(med, p1, p2):
         "",
         "*Gerado por `gerar_cabecote_ex030.py`; medições em `04_Dados_SSOT_e_Scripts/cabecote_step.json`.*",
     ]
-    p = os.path.join(DIR_DOC, "CABECOTE_EX-030_STEP.md")
+    # escreve_relatorio e chamada tambem pelas rodadas de cenario, que nao tem `a` em escopo:
+    # o destino se deduz da pasta para onde os proprios STEP foram escritos
+    oficial = os.path.abspath(os.path.dirname(p2)) == os.path.abspath(DIR_CAB)
+    p = (os.path.join(DIR_DOC, "CABECOTE_EX-030_STEP.md") if oficial
+         else os.path.join(os.path.dirname(p2), "CABECOTE_EX-030_STEP_M12.md"))
     open(p, "w", encoding="utf-8").write("\n".join(linhas) + "\n")
     print("relatório ->", p)
 

@@ -17,7 +17,7 @@ Referencial: Z é o eixo da matriz (face do nariz em Z = 95, face de entrada do 
 O que está aqui foi gerado para *ver*, não para *usar*: por exemplo
 `python 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py --com-m12 --angulo-graus 90` abre o furo
 transversal Ø12 no ângulo que o desenho não determina, e o gerador manda o resultado para cá em vez de
-tocar nos dois STEP acima. A pasta está no `.gitignore` — cenário sem decisão aprovada não vira
+tocar nos dois STEP acima: na rodada de cenário os arquivos ganham sufixo `_M12` e o relatório e as mediações vão para a mesma pasta (`CABECOTE_EX-030_STEP_M12.md`, `cabecote_step_M12.json`), nunca para `03_Relatorios_e_Documentacao/`. A pasta está no `.gitignore` — cenário sem decisão aprovada não vira
 entregável, e é recriável com um comando.
 
 Medições, o que foi removido e o que ainda não está resolvido (fixação da junta, ângulo do M12):
