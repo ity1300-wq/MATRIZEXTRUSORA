@@ -358,6 +358,28 @@
    true
   ],
   "origem": "os pinos são os sólidos do próprio `MatrizGedeon.step` — não foram inventados aqui",
+  "caixas_mm": [
+   {
+    "x": [
+     -42.39,
+     -40.61
+    ],
+    "z": [
+     54.5,
+     64.5
+    ]
+   },
+   {
+    "x": [
+     40.61,
+     42.39
+    ],
+    "z": [
+     54.5,
+     64.5
+    ]
+   }
+  ],
   "parede_minima_ate_o_canal_mm": {
    "A": [
     0.404,

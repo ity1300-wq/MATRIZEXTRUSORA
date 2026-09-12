@@ -45,6 +45,15 @@ geometria: é o seu bloco **− o canal próprio da Gedeon (213.790,0 mm³) − 
 sólido** (o `Body_A` do repositório tem 3), A ∩ B = 0,000000 mm³, nenhum metal no canal (0,000000 mm³),
 envelope Ø93,00 × Z 0..109,00 igual ao do backup, ∩ com o cabeçote = 0,0000 mm³.
 
+**A prancha que mostra isso com o olho**: `STEP/Gedeon_Corrigida/DESENHO_2D_GEDEON_CONSERTADA_X_JONATHA.pdf`
+(`desenhar_gedeon_consertada.py`), cinco faixas **no mesmo escalonamento** — cabeçote sem matriz, Gedeon como
+entregue, Gedeon reconstruída, Jonatha v27, e a diferença das duas hachurada. Nela aparece que as faixas 2 e 3
+têm a **mesma caixa externa medida** (Ø 93,00 × Z 0,1..109,00, área de seção 5.885,5 mm² nas duas), que a
+Jonatha tem seção 5.883,5 mm² (2,0 mm² a menos no corte) e que os 155,1 mm³ de diferença de aço estão no **anel
+de saída, Z 107,50 → 109,00** — o chanfro de 1,50 × 45° que a Jonatha tem e a Gedeon não tem — e não no funil,
+como eu havia escrito antes de medir a posição. Os 44,9 mm³ restantes estão na zona dos pinos (Z 44,50 → 64,50),
+onde a Gedeon tem bolso e a v27 é maciça. Números do desenho: `STEP/Gedeon_Corrigida/desenho_gedeon.json`.
+
 E sobre "está igual à Jonatha": medido em booleano nos dois sentidos, **não está** — par−v27 = 155,1 mm³ e
 v27−par = 44,9 mm³ de aço, e o canal da Gedeon cabe inteiro no da Jonatha (Gedeon−Jonatha = 0,0 mm³;
 Jonatha−Gedeon = 155,1 mm³, 0,07 %). As duas são gêmeas de propósito (a exigência do projeto é envelope

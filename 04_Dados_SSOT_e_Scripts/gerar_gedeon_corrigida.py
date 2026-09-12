@@ -16,8 +16,10 @@ narrar:
     batem — o arquivo do canal É o canal completo da Gedeon, e os 43.017,9 mm³ são só o funil dele.
   * "está igual à Jonatha": medido, o canal da Gedeon está contido no canal da Jonatha v27 com
     155,1 mm³ de diferença (0,07 %). As duas são gêmeas de propósito — é a exigência do projeto
-    ("envelope externo idêntico"). A identidade da Gedeon é o funil próprio dela, que a Jonatha
-    ampliou.
+    ("envelope externo idêntico"). Onde o aço delas difere foi medido, e não é o funil: os
+    155,1 mm³ estão no anel de saída (Z 107,50..109,00) — o chanfro de 1,50 × 45° que a Jonatha
+    tem e a Gedeon não tem — e os 44,9 mm³ na zona dos pinos (Z 44,50..64,50), onde a Gedeon tem
+    bolso e a v27 é maciça. Escrever "funil ampliado" antes de medir a posição foi erro meu.
 
 O conserto, então, não é inventar geometria nova: é **re-cortar o bloco do backup do usuário
 (`02_/matrizGedeonCerta.step`) com o canal da própria Gedeon e com os pinos do próprio arquivo dele**,
@@ -291,6 +293,9 @@ def main():
                     "atravessa_o_plano_de_particao": [bool(p.BoundingBox().ymin < -1e-6 and p.BoundingBox().ymax > 1e-6)
                                                       for p in pinos],
                     "origem": "os pinos são os sólidos do próprio `MatrizGedeon.step` — não foram inventados aqui",
+                    "caixas_mm": [{"x": [round(p.BoundingBox().xmin, 2), round(p.BoundingBox().xmax, 2)],
+                                   "z": [round(p.BoundingBox().zmin, 2), round(p.BoundingBox().zmax, 2)]}
+                                  for p in pinos],
                     "parede_minima_ate_o_canal_mm": {"A": [parede_por_caixa(A1, p) for p in pinos],
                                                     "B": [parede_por_caixa(B1, p) for p in pinos]}}
 
@@ -323,7 +328,7 @@ def main():
           f"{m['canal_gedeon_minus_jonatha_mm3']:,.1f} mm³")
     cobra("canal contido no da jonatha", m["canal_gedeon_minus_jonatha_mm3"] < 1.0,
           f"Gedeon−Jonatha = {m['canal_gedeon_minus_jonatha_mm3']:,.1f} mm³ (o canal da Gedeon cabe inteiro "
-          f"no da Jonatha; a diferença é o funil que a Jonatha ampliou em "
+          f"no da Jonatha; o volume a mais dela é o anel de saída chanfrado, medido em Z 107,50 → 109,00: "
           f"{m['canal_jonatha_minus_gedeon_mm3']:,.1f} mm³ = "
           f"{100 * m['canal_jonatha_minus_gedeon_mm3'] / m['canal_gedeon_mm3']:.2f} %)")
 
@@ -449,7 +454,9 @@ def escreve_relatorio(med):
         "(o G-05 da auditoria — é por isso que a comparação soma os três, em vez de pegar o maior) "
         f"da v27; **Gedeon−Jonatha = {j['canal_gedeon_minus_jonatha_mm3']:,.1f} mm³** e Jonatha−Gedeon = "
         f"{j['canal_jonatha_minus_gedeon_mm3']:,.1f} mm³. Ou seja: o canal da Gedeon cabe inteiro no da Jonatha, e a "
-        f"Jonatha é a Gedeon com o funil **ampliado em {j['canal_jonatha_minus_gedeon_mm3']:,.1f} mm³** "
+        f"Jonatha é a Gedeon com {j['canal_jonatha_minus_gedeon_mm3']:,.1f} mm³ a mais de vazio na saída "
+        f"(o chanfro de 1,50 × 45°, anel medido em Z 107,50 → 109,00) e sem os bolsos de pino (44,9 mm³ "
+        f"na zona Z 44,50 → 64,50) "
         f"({100 * j['canal_jonatha_minus_gedeon_mm3'] / j['canal_gedeon_mm3']:.2f} %). As duas são gêmeas de propósito: "
         "a exigência do projeto é envelope externo idêntico, e a caixa medida é a mesma "
         f"(±{c['caixa_A']['x'][1]:.2f} × Z {c['caixa_A']['z'][0]:.2f}..{c['caixa_B']['z'][1]:.2f}).",
