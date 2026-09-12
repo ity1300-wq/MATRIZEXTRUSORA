@@ -29,10 +29,16 @@ DIR_CAD = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
 DIR_DADOS = os.path.join(RAIZ, "04_Dados_SSOT_e_Scripts")
 
 # ---------------------------------------------------------------- parametros
-Z_LAND = 99.00            # inicio do land (herdado do v27.0)
-Z_FIM = 109.00            # face de saida
-LAND_PARALELO = 9.20      # P7/P8: antes eram 8,50 paralelos + 1,50 de chanfro
-CHANFRO = 0.80            # P7: 0,80 x 45 graus -> lamina de ~1,85 mm
+# O labio de saida NAO e mais numero datilografado aqui: vem do SSOT
+# (proposta_v28_dfm.geometria_labios), que registra a decisao D2 do usuario de 2026-09-11 -
+# manter o chanfro de 1,50 x 45 graus e o land paralelo de 8,50 mm do master aprovado.
+# --land / --chanfro so servem para re-rodar variantes ja rejeitadas (ex.: a v28.0 com 0,80).
+_SSOT_LABIO = json.load(open(os.path.join(DIR_DADOS, "cad_die_parameters.json"),
+                             encoding="utf-8"))["proposta_v28_dfm"].get("geometria_labios", {})
+Z_LAND = float(_SSOT_LABIO.get("z_inicio_land_mm", 99.00))   # inicio do land (herdado do v27.0)
+Z_FIM = float(_SSOT_LABIO.get("z_fim_mm", 109.00))           # face de saida
+LAND_PARALELO = float(_SSOT_LABIO.get("land_paralelo_mm", 8.50))
+CHANFRO = float(_SSOT_LABIO.get("chanfro_saida_mm", 1.50))
 LARGURA, ESPESSURA = 75.00, 1.50
 ENVELOPE = [(0.00, 69.90, 93.00), (69.90, 80.70, 89.50), (80.70, 109.00, 79.50)]
 
@@ -175,9 +181,30 @@ def construir(corpo_externo, canal):
     return aco, corpo_a, corpo_b, furos
 
 
+ROTULO = "v28"
+
+
+def _flags():
+    """--land/--chanfro reabrem variantes rejeitadas; --rotulo evita sobrescrever arquivos."""
+    global LAND_PARALELO, CHANFRO, ROTULO
+    import argparse
+    ap = argparse.ArgumentParser(description="gera a proposta DFM da Matriz Jonatha")
+    ap.add_argument("--land", type=float, default=None, help="comprimento do land paralelo (mm)")
+    ap.add_argument("--chanfro", type=float, default=None, help="chanfro de saida 45 graus (mm)")
+    ap.add_argument("--rotulo", default="v28", help="prefixo dos STEP gerados")
+    a = ap.parse_args()
+    if a.land is not None:
+        LAND_PARALELO = a.land
+    if a.chanfro is not None:
+        CHANFRO = a.chanfro
+    ROTULO = a.rotulo
+    return a
+
+
 def main():
+    _flags()
     print("=" * 78)
-    print("MATRIZ JONATHA - REVISAO v28.0 (DFM)")
+    print(f"MATRIZ JONATHA - REVISAO {ROTULO} (DFM)  |  land {LAND_PARALELO:.2f} + chanfro {CHANFRO:.2f} x 45 (lidos do SSOT)")
     print("=" * 78)
 
     c1 = cq.Workplane("XY").circle(93.00 / 2).extrude(69.90)
@@ -195,7 +222,7 @@ def main():
     print(f"  Body_A = {vol_a:.3f} mm3 | Body_B = {vol_b:.3f} mm3 | "
           f"massa = {(vol_a + vol_b) * 7.85e-6:.3f} kg")
 
-    nome = lambda ext: os.path.join(DIR_CAD, f"MatrizJonatha_v28{ext}")
+    nome = lambda ext: os.path.join(DIR_CAD, f"MatrizJonatha_{ROTULO}{ext}")
     for (suf, cores) in [("", (corpo_a, corpo_b, None)),
                          ("_Explodida", (corpo_a, corpo_b.translate((0, 40, 0)), None)),
                          ("_Com_Fluxo", (corpo_a, corpo_b, canal))]:

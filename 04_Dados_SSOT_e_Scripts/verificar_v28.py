@@ -1,5 +1,5 @@
 """
-VERIFICACAO EXATA DA REVISAO v28.0 - MATRIZ JONATHA
+VERIFICACAO EXATA DA REVISAO PROPOSTA - MATRIZ JONATHA (rotulo lido do SSOT)
 ===================================================
 Mede os STEP gerados por `gerar_matriz_v28.py` e prova, uma a uma, as
 afirmacoes da revisao. Nada aqui e estimado: cada parede, volume e distancia
@@ -7,7 +7,7 @@ sai de booleanos e de BRepExtrema sobre os solidos reais.
 
   [A] o que NAO podia mudar  : fenda 75,00 x 1,50 com R0,75, boca Ø75,60,
                                envelope Ø93/Ø89,5/Ø79,5 x 109, funil herdado
-  [B] o que a revisao prometeu: land 9,20 paralelos + chanfro 0,80, lamina,
+  [B] o que a revisao prometeu: labio conforme o SSOT (D2: 8,50 + 1,50 x 45), lamina,
                                pinos abertos e conjugados nas duas metades,
                                zero cavidade selada, canal com 1 solido
   [C] seguranca dos furos      : nenhum invade o canal, parede real >= alvo,
@@ -34,6 +34,8 @@ sys.path.insert(0, AQUI)
 from verify_legacy_dies import dp_total, tau_parede   # metodos do proprio projeto
 
 DIR_CAD = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+with open(os.path.join(AQUI, "cad_die_parameters.json"), encoding="utf-8") as _f:
+    ROTULO = json.load(_f)["proposta_v28_dfm"].get("rotulo", "v28.1")   # rotulo = SSOT, nao string no codigo
 DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 
 PAREDE_MIN = {"pino_alinhamento": 2.00, "cartucho": 4.00, "termopar": 3.00,
@@ -160,7 +162,7 @@ def main():
     vol_env = sum(math.pi * (d / 2) ** 2 * (z1 - z0) for (z0, z1, d) in ENVELOPE)
 
     print("=" * 96)
-    print("VERIFICAÇÃO EXATA - MATRIZ JONATHA v28.0  (medida nos STEP gerados)")
+    print(f"VERIFICAÇÃO EXATA - MATRIZ JONATHA {ROTULO}  (medida nos STEP gerados)")
     print("=" * 96)
 
     # ---------------------------------------------------------------- A
@@ -235,14 +237,17 @@ def main():
     checar("Land reto e paralelo (v27.0: 8,50)", land_medido, meta["land_paralelo"],
            tol=0.10, obs="P8 resolvido no modelo")
     checar("Chanfro de saída (v27.0: 1,50)", Z_FIM - (Z_LAND + land_medido), meta["chanfro"],
-           tol=0.10, obs="P7: lâmina mais robusta")
+           tol=0.10, obs="D2: lábio mantido como no master, sem ganho de land")
     s_ch, _ = secao(canal, Z_FIM - 0.1)
     checar("Sobrelargura do chanfro a 0,10 mm da face", (s_ch.xmax - s_ch.xmin - 75.0) / 2,
            meta["chanfro"] - 0.10, tol=0.05, un="mm", obs="chanfro de 45°")
     s_fim, _ = secao(canal, Z_FIM - 0.001)
     lamina = r_envelope(Z_FIM) - max(abs(s_fim.xmin), abs(s_fim.xmax))
-    registrar("Lâmina de aço no lábio de saída (v27.0: 0,75)", f"{n(lamina)} mm",
-              "P7 resolvido: ≥ 1,40 mm era o critério", ok=lamina >= 1.40)
+    ss = json.load(open(os.path.join(AQUI, "cad_die_parameters.json"), encoding="utf-8"))
+    lam_dec = float(ss["decisoes_usuario"]["D2_labio_saida"]["geometria"]["lamina_mm"])
+    checar("Lâmina de aço no lábio de saída (= valor decidido em D2)", lamina, lam_dec, tol=0.05,
+           un="mm", obs="a decisão D2 aceitou a lâmina fina de 0,75 mm do master; o lascamento na "
+           "limpeza passa a ser item de procedimento de manutenção, não de geometria")
     sh_a, sh_b = contar(A, "shell"), contar(B, "shell")
     registrar("Shells no Body_A (v27.0 tinha 3 = 2 bolhas seladas)", str(sh_a),
               "1 = sólido limpo, sem cavidade interna", ok=sh_a == 1)
@@ -360,7 +365,7 @@ def main():
     dp28, zp28, pk28 = dp_total(canal, Z_FIM)
     dp27, zp27, pk27 = dp_total(canal27, 109.0)
     registrar("ΔP 1D - lei das potências (método do próprio projeto)",
-              f"v28.0 = {n(dp28, 1)} bar | v27.0 = {n(dp27, 1)} bar",
+              f"{ROTULO} = {n(dp28, 1)} bar | v27.0 = {n(dp27, 1)} bar",
               f"land {n(meta['land_paralelo'], 2)} vs 8,50 paralelos → {dp28 - dp27:+.1f} bar; "
               f"maior gradiente em Z≈{n(zp28, 1)} mm", ok=True)
     tau, gdot = tau_parede(75.0, 1.5)
@@ -371,7 +376,7 @@ def main():
               "sem espaço para furo de pressão: Ø9,5 + parede 4 + parede 4 = 11,5 mm", ok=True)
     z_ok = [Z_LAND + meta["land_paralelo"], Z_FIM]
     registrar("Cotas de usinagem do land",
-              f"paralelo Z={n(Z_LAND, 2)}→{n(z_ok[0], 2)} mm (9,20) · chanfro 0,80×45° "
+              f"paralelo Z={n(Z_LAND, 2)}→{n(z_ok[0], 2)} mm ({n(meta['land_paralelo'], 2)}) · chanfro {n(meta['chanfro'], 2)}×45° "
               f"Z={n(z_ok[0], 2)}→{n(Z_FIM, 2)} mm", "conferir no desenho antes de cortar o aço",
               ok=True)
 
@@ -385,11 +390,11 @@ def main():
 
     if a.json:
         with open(os.path.join(AQUI, "verificacao_v28.json"), "w", encoding="utf-8") as f:
-            json.dump({"revisao": "v28.0_PROPOSTA", "itens": len(linhas), "conformes": conf,
+            json.dump({"revisao": f"{ROTULO}_PROPOSTA", "itens": len(linhas), "conformes": conf,
                        "nao_conformes": len(nc), "checagens": linhas}, f, indent=2, ensure_ascii=False)
         print(f"-> {os.path.join('04_Dados_SSOT_e_Scripts', 'verificacao_v28.json')}")
     if a.md:
-        md = ["# Verificação exata da revisão v28.0 — Matriz Jonatha", "",
+        md = [f"# Verificação exata da revisão {ROTULO} — Matriz Jonatha", "",
               "Medida nos STEP gerados por `gerar_matriz_v28.py` (booleanos + BRepExtrema; "
               "nada é estimado).", "",
               f"**{len(linhas)} itens verificados · {conf} conformes · {len(nc)} não conformes**",

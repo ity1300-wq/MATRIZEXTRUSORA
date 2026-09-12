@@ -98,7 +98,7 @@
    "ate_d_mm": 4.0,
    "protrusao_a_frente_da_face_mm": 6.0,
    "interpretacao": "peca/anel separado no nariz, com passagem Ø68,3 - compativel com o carimbo 9\"X65MM (manta de 65 mm: folga de 1,65 mm por lado), INCOMPATIVEL com a manta de 75 mm (75,8) e com o nariz da matriz (Ø79,5)",
-   "status": "a confirmar com o cliente se existe variante sem anel / com anel Ø78 para o produto de 75 mm"
+   "status": "DESCARTADO para o produto de 75 mm por medição do usuário na máquina (2026-09-11): sobram ~2,5 mm em cada extremidade da fenda, o que exige passagem Ø80,00; com o anel Ø68,30 faltariam 3,35 mm por lado. O Ø68,30 do corte é a variante de 65 mm do carimbo 9\"X65MM"
   },
   "junta_cabecote_extrusora": {
    "furos": 6,
@@ -170,27 +170,44 @@
    "observacao": "nivel Ø68,3 medido nos trechos d=-6..4 e d=35..64; interpretado como o anel do nariz (variante 65 mm). A area de passagem (3664 mm2) e 18,4% menor que a boca da matriz (4488 mm2)."
   },
   "pendencias": [
-   "confirmar com o cliente a variante do anel do nariz para manta de 75 mm",
-   "confirmar se o assento do bolso Ø95x70 e cilindrico ou conico de 3 graus (o desenho mostra o collete com OD Ø95->Ø86)"
-  ]
+   "confirmar se o assento do bolso Ø95x70 e cilindrico ou conico de 3 graus (o desenho mostra o collete com OD Ø95->Ø86)",
+   "confirmar o COMPRIMENTO do bico do cabeçote (14,00 mm no desenho): se na máquina o bico chegar até a face da matriz, os cartuchos (Z=97,00) e os termopares (Z=103,00) ficam dentro do cabeçote e o aquecimento tem de mudar de peça"
+  ],
+  "conferencia_com_a_medicao_do_usuario": {
+   "data": "2026-09-11",
+   "anel_da_face": {
+    "declarado_mm": 20.0,
+    "medido_no_desenho_mm": 20.0,
+    "casou": true
+   },
+   "sobra_na_fenda_por_lado": {
+    "declarado_mm": 2.5,
+    "com_passagem_D80_mm": 2.5,
+    "com_passagem_D80_e_boca_do_chanfro_mm": 2.1000000000000014,
+    "com_anel_D68_30_mm": -3.3500000000000014,
+    "casou": true
+   },
+   "leitura": "os dois números do croqui reproduzem a medição do DXF; a segunda alternativa é a única compatível com 'sobrar 2,5 mm', o que descarta o anel de 65 mm"
+  }
  },
  "numeros": {
-  "pressao_efetiva_MPa": 6.819294809010774,
-  "empuxo_axial_kN": 29.846799632290264,
-  "empuxo_axial_dp1d_kN": 19.2142228860115,
+  "pressao_efetiva_MPa": 6.818460031827641,
+  "empuxo_axial_kN": 29.843145966035845,
+  "empuxo_axial_dp1d_kN": 18.33885965658045,
+  "dp_1d_bar": 41.9,
   "area_boca_mm2": 4488.833247155239,
   "area_fenda_mm2": 112.0171,
-  "area_projetada_mm2": 8168.0,
+  "area_projetada_mm2": 8169.0,
   "area_ombro_matriz_mm2": 501.6730768701201,
   "area_degrau_cabecote_mm2": 726.4933011426397,
   "area_contato_degrau_mm2": 431.18359170520006,
-  "pressao_contato_degrau_MPa": 69.22062946378651,
-  "pressao_collete_empuxo_axial_MPa": 9.757044082842652,
+  "pressao_contato_degrau_MPa": 69.21215588936322,
+  "pressao_collete_empuxo_axial_MPa": 9.755849684007684,
   "pressao_collete_fechar_particao_MPa": 8.580583541300797,
-  "pressao_collete_peso_MPa": 0.011503258547906188,
-  "deformacao_radial_canal_mm": 0.0022685127492609166,
+  "pressao_collete_peso_MPa": 0.011500051617728348,
+  "deformacao_radial_canal_mm": 0.0022682350515317866,
   "forca_abertura_kN": 55.7,
-  "massa_kg": 3.587,
+  "massa_kg": 3.586,
   "folgas_radiais_mm": [
    1.0,
    0.25,
@@ -295,7 +312,7 @@
   },
   {
    "item": "Curso livre da manta após sair da matriz até o cabeçote",
-   "medido": 14.154,
+   "medido": 14.2201,
    "minimo": 14.0,
    "unidade": "mm",
    "status": "CONFORME",
@@ -311,15 +328,30 @@
    "observacao": ""
   },
   {
+   "item": "Folga do PRODUTO (75,00) no furo Ø80 - o que voce mediu na maquina",
+   "nominal": 2.5,
+   "medido": 2.5,
+   "desvio": 0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "'sobra 2,5 mm em cada extremidade da fenda' - reproduzido pelo modelo medido"
+  },
+  {
+   "item": "Folga da BOCA da matriz (com o chanfro de D2) no furo Ø80",
+   "medido": "1,000 mm por lado  (boca medida: 78,000 × 4,500 mm)",
+   "observacao": "consequência de manter o chanfro 1,50 × 45: a boca abre para 78,000 mm e a folga cai de 2,50 para 1,000 mm se o bico do cabeçote chegar até a face da matriz - é por isso que o comprimento do bico (14,00 mm no desenho) é a única medida que falta",
+   "status": "CONFORME"
+  },
+  {
    "item": "Interferência matriz ∩ cabeçote COM anel Ø68,30",
    "medido": "5098,0 mm³",
-   "observacao": "o anel invade o nariz Ø79,5 - a matriz de 75 mm não monta com ele",
+   "observacao": "FECHADO por medição na máquina: sobram 2,5 mm/lado na fenda, entao a passagem e o proprio Ø80 do cabecote - o volume acima so vale se alguem reaproveitar o anel de 65 mm",
    "status": "PENDENTE_CONFIRMACAO"
   },
   {
-   "item": "Abertura do anel × largura da fenda",
-   "medido": "Ø68,300 contra 75,800 de manta → faltam 3,750 mm por lado",
-   "observacao": "mesmo que a matriz entrasse, a manta de 75,8 não passaria por Ø68,30",
+   "item": "Sobra na extremidade da fenda × passagem do cabeçote",
+   "medido": "Ø80,00 → sobra 2,500 mm por lado (usuário mediu ~2,5) · Ø68,30 do anel de 65 mm → faltariam 4,850 mm",
+   "observacao": "o número medido na máquina só casa com o Ø80: prova de que o anel de 65 mm não está lá",
    "status": "PENDENTE_CONFIRMACAO"
   },
   {
@@ -445,12 +477,12 @@
   {
    "item": "Pressão efetiva no limite",
    "medido": "6,82 MPa = 68,2 bar",
-   "observacao": "deduzida de 55,7 kN medidos / 8168 mm² de área projetada medida",
+   "observacao": "deduzida de 55,7 kN medidos / 8169 mm² de área projetada medida",
    "status": "CONFORME"
   },
   {
    "item": "Empuxo axial que empurra a matriz para fora do cabeçote",
-   "medido": "29,8 kN no limite · 19,2 kN com o ΔP 1D medido (43,9 bar)",
+   "medido": "29,8 kN no limite · 18,3 kN com o ΔP 1D medido (41,9 bar)",
    "observacao": "p × (4489 mm² da boca − 112 mm² da fenda)",
    "status": "CONFORME"
   },
@@ -496,7 +528,7 @@
   {
    "item": "Pressão radial p/ segurar só o peso na troca",
    "medido": "0,0115 MPa",
-   "observacao": "matriz de 3,587 kg",
+   "observacao": "matriz de 3,586 kg",
    "status": "CONFORME"
   },
   {
@@ -512,8 +544,8 @@
    "status": "CONFORME"
   }
  ],
- "itens": 43,
- "conformes": 39,
+ "itens": 45,
+ "conformes": 41,
  "nao_conformes": 0,
  "pendentes": 4
 }

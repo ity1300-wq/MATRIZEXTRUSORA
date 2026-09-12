@@ -25,7 +25,7 @@ cálculo/medição que o produziria.
 
 ## 3. REGRAS INVIOLÁVEIS
 1. **Modelo oficial aprovado:** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` — SSOT **v27.0_MatrizJonatha_Approved_Master**. A revisão
-   **v28.0_DFM_Proposta** (`MatrizJonatha_v28*.step`) existe em paralelo como **proposta verificada**,
+   **v28.1_DFM_Proposta** (`MatrizJonatha_v28*.step`) existe em paralelo como **proposta verificada**,
    pendente de aprovação: não a promova sem o "aprova" do usuário, e não sobrescreva o v27.0.
 2. **Histórico intocável:** nunca edite `02_CAD_Modelos_Historicos/` (Matriz 1 Copo, Matriz 2
    Gedeon, Matriz Desenvolvimento).
@@ -39,17 +39,17 @@ cálculo/medição que o produziria.
 - O funil do modelo aprovado é um **reduzor cônico linear de largura constante** (X: 75,6 → 75,0 mm
   de Z=0 a Z=99; Y: ±37,61 → ±0,75 mm). O "coat-hanger com reservatório de 6,00 mm e asas em
   Z=25/Z=70" **não está no sólido**: o loft do gerador usou só a primeira e a última seções.
-- Land: **9.2** reto e paralelo + chanfro de **0,80 × 45°** na v28.0
-  (o v27.0 tem 8,50 + 1,50). Lâmina do lábio: 1,450 mm.
+- Land: **8.5** reto e paralelo + chanfro de **1,50 × 45°** na v28.1
+  (o v27.0 tem 8,50 + 1,50). Lâmina do lábio: 0.75.
 - Força que abre a bipartição: **55,7 kN no limite (pressão plena em toda a área) · 30,6 kN sobre a boca Ø75,60** (área projetada do canal
-  medida no sólido: 8168 mm²).
+  medida no sólido: 8169 mm²).
 - Faixa de aço entre o canal e o Ø93: **8,70 mm** ⇒ **não cabe** parafuso de pressão no corpo.
   Refrigeração Ø8 também não cabe no corpo (mapeado em `acomodo_furos.json`).
 - Nº de não conformidades: v27.0 = **2** (land declarado 10,00 vs 8,50 reais; bolsões de pino
-  selados no Body_A e ausentes no Body_B). v28.0 = **0 não conformes em
+  selados no Body_A e ausentes no Body_B). v28.1 = **0 não conformes em
   64 itens medidos** (64 conformes).
 - ΔP 1D sobre a geometria medida (lei das potências, K=18.500 Pa·sⁿ, n=0,32, Q=15 cm³/s):
-  **v28.0 = 43,9 bar | v27.0 = 41,9 bar** — o CFD arquivado declara 68,2 bar e **não é reproduzível**
+  **v28.1 = 41,9 bar | v27.0 = 41,9 bar** — o CFD arquivado declara 68,2 bar e **não é reproduzível**
   a partir do repositório. τ na parede do land: 163,8 kPa (γ̇_ap = 911 s⁻¹) - e é o **mesmo**
   valor na Matriz 2 (mesma fenda, mesma vazão); a alegação de queda de τ está errada.
 - Uniformidade de 99,10 %: **sem definição nem planilha** no repositório. Não usar como critério
@@ -61,7 +61,7 @@ cálculo/medição que o produziria.
    - **F-28-3** — Padrão de acoplamento na face Z=0 e furação do flange: FECHADO POR MEDIÇÃO no DWG 030-032 (escala k = 25,534 mm/un calibrada por 5 cotas, desvio máx. 0,012%): a matriz não tem nem precisa de flange. A furação de 6 × Ø16,50 em fendas de 23,50 sobre C.C. Ø180,00 (M12, folga angular total 14,40° cotada como 15°, furo central Ø25,00) é a junta CABEÇOTE-EXTRUSORA e passa a 35,25 mm do corpo da matriz. O centragens da matriz é feito pelos 3 estágios cilíndricos (Ø95/Ø90/Ø80 do cabeçote) com folga radial de 1,00/0,25/0,25 mm
    - **F-28-4** — Assimetria do canal em Y: herdada do loft do v27: as duas metades diferem 199,22 mm³ (0,093 % do volume do canal)
    - **F-28-5** — Uniformidade de 99,10 %: ainda sem definição nem planilha no repositório; não usar como critério de aceite
-   - **F-28-6** — Anel do nariz do cabeçote (variante 9" × 65 mm): BLOQUEIO DE MONTAGEM, do lado da máquina: o corte de EX-030 mostra passagem Ø68,30 protruindo 6,00 mm à frente da face do nariz. Contra o nariz Ø79,50 da matriz isso dá 5,60 mm de interferência radial por lado (5.098,0 mm³ de choque medidos no booleano). Como o furo do nariz do cabeçote já é Ø80,00, não existe anel possível para a manta de 75 mm
+   - **F-28-6** — Anel do nariz do cabeçote (variante 9" × 65 mm): FECHADA PELO USUARIO por medição na máquina: sobram ~2,5 mm em cada extremidade da fenda, o que só acontece com a passagem em Ø80,00 (75,00 + 2 × 2,50). Com o anel Ø68,30 lido no corte faltariam 3,35 mm por lado. O Ø68,30 é da variante de 65 mm do carimbo 9"X65MM e não participa da montagem de 75 mm
    - **F-28-7** — Especificação de aperto da bucha cônica EX-031: Pendente no lado da máquina: o aperto da banda Ø93 é o que fecha o plano de partição, mas o desenho do cabeçote não dá curso nem torque de aperto. A pressão necessária é 8,58 MPa para equilibrar a partição e 9,76 MPa para segurar o empuxo axial só por atrito; sem controle, o collete cônico pode apertar muito acima disso
 
 **Decisões que precisam do usuário:**
@@ -90,7 +90,7 @@ cálculo/medição que o produziria.
 ```bash
 bash 04_Dados_SSOT_e_Scripts/setup_headless_gl.sh            # só em container sem libGL
 export LD_LIBRARY_PATH="$PWD/04_Dados_SSOT_e_Scripts/.headless_gl:$LD_LIBRARY_PATH"
-python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py           # regenera os STEP v28.0
+python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py           # regenera os STEP v28.1
 python 04_Dados_SSOT_e_Scripts/verificar_v28.py --json --md  # mede e prova
 python 04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py       # auditoria do v27.0 (2 NC)
 python 04_Dados_SSOT_e_Scripts/verify_legacy_dies.py --json  # as 4 matrizes + ΔP 1D
@@ -100,12 +100,12 @@ python 04_Dados_SSOT_e_Scripts/verify_legacy_dies.py --json  # as 4 matrizes + �
 > *"Entendido e confirmado! Assumi a persona de Engenheiro Sênior de Matrizes de Extrusão
 > Polimérica e Reologia Computacional.*
 > *Estado que reconheço: **v27.0_MatrizJonatha_Approved_Master** é o master aprovado (`MatrizJonatha.step`), com fenda
-> 75,00 × 1,50 mm (R0,75) e boca Ø75,60; a proposta **v28.0_DFM_Proposta** fecha P2/P5/P7/P8
-> (land 9.2, chanfro 0,80 × 45°, pinos conjugados abertos nas duas metades,
+> 75,00 × 1,50 mm (R0,75) e boca Ø75,60; a proposta **v28.1_DFM_Proposta** fecha P2/P5/P7/P8
+> (land 8.5, chanfro 1,50 × 45°, pinos conjugados abertos nas duas metades,
 > canal em 1 sólido, 6 cartuchos Ø9,5 + 4 poços de termopar) e passa em 64 de
 > 64 medições. O funil aprovado é um cônico linear de largura constante, não um
 > coat-hanger, e o ΔP de 68,2 bar do relatório é alegação de CFD não reproduzível - a medição 1D dá
-> v28.0 = 43,9 bar | v27.0 = 41,9 bar.*
+> v28.1 = 41,9 bar | v27.0 = 41,9 bar.*
 > *Tenho as decisões D1-D3 (fixação, chanfro, descrição do funil) na sua mesa e acesso ao DWG do
 > cabeçote (6 × M12 em BC Ø150 com ±15° de ajuste). Pronto para orientar usinagem, fechamento das
 > pendências ou rodar a próxima simulação."

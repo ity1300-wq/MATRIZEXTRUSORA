@@ -51,7 +51,7 @@ def main():
 
     land = med("Land reto e paralelo", n(ft["meta"]["land_paralelo"]) + " mm")
     rev_aprov = pm["revision"]
-    rev_prop = pm.get("revision_ssot", "v28.0")
+    rev_prop = pm.get("revision_ssot", "v28.1")
     pend = "\n".join(f"   - **{x['id']}** — {x['item']}: {x['situacao']}"
                      for x in v28.get("pendencias_v28", []))
     decisoes = [
@@ -103,17 +103,17 @@ cálculo/medição que o produziria.
 - O funil do modelo aprovado é um **reduzor cônico linear de largura constante** (X: 75,6 → 75,0 mm
   de Z=0 a Z=99; Y: ±37,61 → ±0,75 mm). O "coat-hanger com reservatório de 6,00 mm e asas em
   Z=25/Z=70" **não está no sólido**: o loft do gerador usou só a primeira e a última seções.
-- Land: **{land}** reto e paralelo + chanfro de **{n(ft['meta']['chanfro'])} × 45°** na v28.0
+- Land: **{land}** reto e paralelo + chanfro de **{n(ft['meta']['chanfro'])} × 45°** na v28.1
   (o v27.0 tem 8,50 + 1,50). Lâmina do lábio: {med('Lâmina de aço', '1,45 mm')}.
 - Força que abre a bipartição: **{med('Força que abre', '55,7 kN')}** (área projetada do canal
   medida no sólido: {med('Área projetada', '8168 mm²')}).
 - Faixa de aço entre o canal e o Ø93: **8,70 mm** ⇒ **não cabe** parafuso de pressão no corpo.
   Refrigeração Ø8 também não cabe no corpo (mapeado em `acomodo_furos.json`).
 - Nº de não conformidades: v27.0 = **2** (land declarado 10,00 vs 8,50 reais; bolsões de pino
-  selados no Body_A e ausentes no Body_B). v28.0 = **{ver.get('nao_conformes', 0)} não conformes em
+  selados no Body_A e ausentes no Body_B). v28.1 = **{ver.get('nao_conformes', 0)} não conformes em
   {ver.get('itens', 0)} itens medidos** ({ver.get('conformes', 0)} conformes).
 - ΔP 1D sobre a geometria medida (lei das potências, K=18.500 Pa·sⁿ, n=0,32, Q=15 cm³/s):
-  **{med('ΔP 1D', 'v28.0 = 43,9 bar')}** — o CFD arquivado declara 68,2 bar e **não é reproduzível**
+  **{med('ΔP 1D', 'v28.1 = 43,9 bar')}** — o CFD arquivado declara 68,2 bar e **não é reproduzível**
   a partir do repositório. τ na parede do land: {med('τ na parede', '163,8 kPa')} - e é o **mesmo**
   valor na Matriz 2 (mesma fenda, mesma vazão); a alegação de queda de τ está errada.
 - Uniformidade de 99,10 %: **sem definição nem planilha** no repositório. Não usar como critério
@@ -146,7 +146,7 @@ cálculo/medição que o produziria.
 ```bash
 bash 04_Dados_SSOT_e_Scripts/setup_headless_gl.sh            # só em container sem libGL
 export LD_LIBRARY_PATH="$PWD/04_Dados_SSOT_e_Scripts/.headless_gl:$LD_LIBRARY_PATH"
-python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py           # regenera os STEP v28.0
+python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py           # regenera os STEP v28.1
 python 04_Dados_SSOT_e_Scripts/verificar_v28.py --json --md  # mede e prova
 python 04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py       # auditoria do v27.0 (2 NC)
 python 04_Dados_SSOT_e_Scripts/verify_legacy_dies.py --json  # as 4 matrizes + ΔP 1D

@@ -94,7 +94,7 @@
     "ate_d_mm": 4.0,
     "protrusao_a_frente_da_face_mm": 6.0,
     "interpretacao": "peca/anel separado no nariz, com passagem Ø68,3 - compativel com o carimbo 9\"X65MM (manta de 65 mm: folga de 1,65 mm por lado), INCOMPATIVEL com a manta de 75 mm (75,8) e com o nariz da matriz (Ø79,5)",
-    "status": "a confirmar com o cliente se existe variante sem anel / com anel Ø78 para o produto de 75 mm"
+    "status": "DESCARTADO para o produto de 75 mm por medição do usuário na máquina (2026-09-11): sobram ~2,5 mm em cada extremidade da fenda, o que exige passagem Ø80,00; com o anel Ø68,30 faltariam 3,35 mm por lado. O Ø68,30 do corte é a variante de 65 mm do carimbo 9\"X65MM"
   },
   "junta_cabecote_extrusora": {
     "furos": 6,
@@ -166,7 +166,23 @@
     "observacao": "nivel Ø68,3 medido nos trechos d=-6..4 e d=35..64; interpretado como o anel do nariz (variante 65 mm). A area de passagem (3664 mm2) e 18,4% menor que a boca da matriz (4488 mm2)."
   },
   "pendencias": [
-    "confirmar com o cliente a variante do anel do nariz para manta de 75 mm",
-    "confirmar se o assento do bolso Ø95x70 e cilindrico ou conico de 3 graus (o desenho mostra o collete com OD Ø95->Ø86)"
-  ]
+    "confirmar se o assento do bolso Ø95x70 e cilindrico ou conico de 3 graus (o desenho mostra o collete com OD Ø95->Ø86)",
+    "confirmar o COMPRIMENTO do bico do cabeçote (14,00 mm no desenho): se na máquina o bico chegar até a face da matriz, os cartuchos (Z=97,00) e os termopares (Z=103,00) ficam dentro do cabeçote e o aquecimento tem de mudar de peça"
+  ],
+  "conferencia_com_a_medicao_do_usuario": {
+    "data": "2026-09-11",
+    "anel_da_face": {
+      "declarado_mm": 20.0,
+      "medido_no_desenho_mm": 20.0,
+      "casou": true
+    },
+    "sobra_na_fenda_por_lado": {
+      "declarado_mm": 2.5,
+      "com_passagem_D80_mm": 2.5,
+      "com_passagem_D80_e_boca_do_chanfro_mm": 2.1000000000000014,
+      "com_anel_D68_30_mm": -3.3500000000000014,
+      "casou": true
+    },
+    "leitura": "os dois números do croqui reproduzem a medição do DXF; a segunda alternativa é a única compatível com 'sobrar 2,5 mm', o que descarta o anel de 65 mm"
+  }
 }

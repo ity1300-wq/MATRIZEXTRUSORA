@@ -1,8 +1,10 @@
-# PROJETO DFM v28.0 — Matriz Jonatha (revisão para fabricação)
+# PROJETO DFM v28.1 — Matriz Jonatha (revisão para fabricação)
 
 **Projeto:** matriz de extrusão plana para manta isolante de acessórios de cabos MT
-**Modelo base (aprovado):** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` — SSOT v27.0
-**Esta revisão:** v28.0 — **PROPOSTA, pendente de aprovação do usuário**. O v27.0 não foi alterado.
+**Modelo base (aprovado, continua oficial):** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` — SSOT v27.0
+**Esta revisão:** v28.1 — **PROPOSTA**. O v27.0 continua sendo o master aprovado (decisão **D4**
+do usuário: "não promover"). O que muda aqui é o que a decisão **D2** deixou de pé: nada no lábio
+de saída, tudo no restante.
 **Data:** 2026-09-11
 **Verificação:** `04_Dados_SSOT_e_Scripts/verificar_v28.py` → **64 itens, 64 conformes, 0 não conformes**
 **Conferência visual:** `V28_CONFERENCIA_VISUAL.png` (6 vistas, lidas dos STEP)
@@ -12,15 +14,16 @@
 ## 1. Resumo em seis linhas
 
 1. O funil de fluxo aprovado **não foi tocado**: a distância máxima entre a superfície do funil
-   v28.0 e a do v27.0 medida nos sólidos é **0,000000 mm**.
-2. **P7 e P8 fechados**: chanfro de saída passou de 1,50 → **0,80 × 45°**, o que devolve 0,70 mm
-   de land reto (**land paralelo = 9,20 mm**, era 8,50) e engrossa a lâmina do
-   lábio de 0,75 → **1,450 mm**.
+   v28.1 e a do v27.0 medida nos sólidos é **0,000000 mm**.
+2. **P7 e P8 rejeitados (decisão D2, 2026-09-11)**: o chanfro de saída fica **1,50 × 45°** e o
+   land paralelo fica **8,50 mm**, como no master — medidos nesta revisão: land
+   8,50 mm, chanfro 1,50 × 45°, lâmina do lábio
+   **0,75**. Ou seja: **a v28.1 não toca na região de saída do fundido**.
 3. **P2 fechado**: os 4 bolsões de pino Ø4 × 12 agora são **abertos no plano de partição e
    conjugados nas duas metades** (o v27.0 tinha 2 bolsões selados só no Body_A e nada no Body_B),
    com kit de pinos modelado em `MatrizJonatha_v28_Pinos_Alinhamento.step`.
 4. **P3 parcialmente fechado**: 6 cartuchos Ø9,5 e 4 poços de termopar Ø4,8 na zona do land,
-   com paredes reais medidas de 8,20–17,03 mm. A refrigeração
+   com paredes reais medidas de 8,20–16,35 mm. A refrigeração
    **não cabe no corpo** (item 5) e vai para o adaptador.
 5. **P1 tem solução — e ela é da máquina**: o cabeçote EX-030 medido tem bolso Ø95 × 70,0 com
    bucha cônica (EX-031, cone 3°) que aperta a banda Ø93 da matriz, e degrau de apoio axial.
@@ -46,7 +49,7 @@
 bash 04_Dados_SSOT_e_Scripts/setup_headless_gl.sh
 export LD_LIBRARY_PATH="$PWD/04_Dados_SSOT_e_Scripts/.headless_gl:$LD_LIBRARY_PATH"
 python 04_Dados_SSOT_e_Scripts/explorar_acomodo_furos.py --json   # onde existe aço para furos
-python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py                # gera os STEP v28.0
+python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py                # gera os STEP da proposta
 python 04_Dados_SSOT_e_Scripts/verificar_v28.py --json --md        # mede e prova (63 itens)
 python 04_Dados_SSOT_e_Scripts/gerar_relatorio_v28.py            # este relatório
 python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png  # conferência visual
@@ -56,19 +59,19 @@ python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png  # conferência
 
 ## 3. Tabela antes × depois (tudo medido nos STEP)
 
-| Item | v27.0 (aprovado) | v28.0 (proposta) | Como foi medido |
+| Item | v27.0 (aprovado) | v28.1 (proposta) | Como foi medido |
 | :--- | ---: | ---: | :--- |
-| Land reto e paralelo | 8,50 mm | **9,20 mm** | varredura de seção em Z (passo 0,05 mm) até abs(Y) ≠ 1,50 |
-| Chanfro de saída | 1,50 × 45° | **0,80 × 45°** | folga radial a 0,10 mm da face |
-| Lâmina do lábio (ponto mais fino) | 0,75 mm | **1,450 mm** | Ø79,5/2 − abs(X) da seção na face Z=109 |
+| Land reto e paralelo | 8,50 mm (o SSOT declarava 10,00) | **8,50 mm — mantido (D2)**; SSOT atualizado para 8,50 paralelo + 1,50 de chanfro | varredura de seção em Z (passo 0,05 mm) até abs(Y) ≠ 1,50 |
+| Chanfro de saída | 1,50 × 45° | **1,50 × 45° — mantido (D2 rejeitou o 0,80)** | folga radial a 0,10 mm da face |
+| Lâmina do lábio (ponto mais fino) | 0,75 mm | **0,75 — mantida (D2)**; o risco de lascamento na limpeza passa a ser item de procedimento | Ø79,5/2 − abs(X) da seção na face Z=109 |
 | Furos de pino Ø4 × 12 | 2, selados no Body_A; 0 no Body_B | **4 abertos e conjugados (2 por lado)** | volume do furo ∩ corpo = 0 e aço sob o fundo presente |
 | Cavidades internas fechadas | Body_A: 2 | **0** (1 shell em cada metade) | contagem de `TopAbs_SHELL` |
 | Cartuchos de aquecimento | 0 | **6 × Ø9,5**, fundo a 8,20 mm do canal | booleano + `BRepExtrema` |
-| Poços de termopar | 0 | **4 × Ø4,8**, fundo a 17,03 mm | idem |
+| Poços de termopar | 0 | **4 × Ø4,8**, fundo a 16,35 mm | idem |
 | Arquivo do canal | 3 sólidos | **1 sólido** | contagem de sólidos no STEP |
-| Massa de aço | 3,682 kg | **3,587 kg** | volume × 7,85 g/cm³ |
+| Massa de aço | 3,682 kg | **3,586 kg** | volume × 7,85 g/cm³ |
 | Fechamento volumétrico | resíduo 0,001 mm³ | **resíduo 0,0115 mm³** (env − aço − canal = Σ furos) | booleano |
-| ΔP 1D sobre a geometria | 41,9 bar | **v28.0 = 43,9 bar · v27.0 = 41,9 bar** | `dp_total()` do próprio projeto |
+| ΔP 1D sobre a geometria | 41,9 bar | **v28.1 = 41,9 bar · v27.0 = 41,9 bar** | `dp_total()` do próprio projeto |
 | τ na parede do land | 164,0 kPa | **163,8 kPa (γ̇_ap = 911 s⁻¹)** | `tau_parede()` do próprio projeto |
 | Fixação das metades | inexistente | **pelo collete do cabeçote: 8,6 MPa de compressão radial fecham a partição** | item 6, medido |
 | Interface com o cabeçote | nunca medida | **Ø93/Ø89,5/Ø79,5 encaixam em Ø95/Ø90/Ø80 com 1,00/0,25/0,25 mm de folga e interferência 0,0000 mm³** | booleanos, item 6 |
@@ -79,13 +82,13 @@ python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png  # conferência
 ## 4. P1 — fixação das metades: por que não há furo que resolva isso
 
 A força que empurra uma metade contra a outra é a pressão sobre a área projetada do canal no plano XZ.
-Medindo essa área no sólido: **8168 mm²** (não é a área da boca; é a integral da largura do canal ao longo de Z).
+Medindo essa área no sólido: **8169 mm²** (não é a área da boca; é a integral da largura do canal ao longo de Z).
 
 | Cenário de pressão | Força de abertura |
 | :--- | ---: |
-| ΔP de projeto do CFD (68,2 bar) atuando sobre **toda** a área projetada (limite superior) | **55,7 kN** |
+| ΔP de projeto do CFD (68,2 bar, valor declarado no relatório de CFD) sobre **toda** a área projetada (limite superior) | **55,7 kN** |
 | 68,2 bar atuando só sobre a boca Ø75,60 (o número citado no relatório de triagem) | 30,6 kN |
-| ΔP 1D medido na geometria (43,9 bar) sobre a área projetada | ≈ 35,9 kN |
+| ΔP 1D medido na geometria (41,9 bar) sobre a área projetada | ≈ 34,2 kN |
 
 A geometria não oferece onde ancorar isso:
 
@@ -114,7 +117,7 @@ protótipo de bancada. As duas outras são remendo; a 1 remove a causa.
 
 ---
 
-## 5. Furação da v28.0 — cotas de usinagem e paredes reais
+## 5. Furação da v28.1 — cotas de usinagem e paredes reais
 
 Estas são as coordenadas do modelo; o `matriz_v28_features.json` é a fonte.
 
@@ -127,13 +130,13 @@ Estas são as coordenadas do modelo; o `matriz_v28_features.json` é a fonte.
 | pino_alinhamento | 4,00 | +42,10 | 60,00 | -12,00 … 12,00 (nas duas metades) | 24,00 | 2,39 mm |
 | pino_alinhamento | 4,00 | -42,10 | 30,00 | -12,00 … 12,00 (nas duas metades) | 24,00 | 2,39 mm |
 | pino_alinhamento | 4,00 | +42,10 | 30,00 | -12,00 … 12,00 (nas duas metades) | 24,00 | 2,39 mm |
-| termopar | 4,80 | -11,00 | 103,00 | ±18,20 … 40,20 (1 por metade) | 22,00 | 17,03 mm |
-| termopar | 4,80 | +11,00 | 103,00 | ±18,20 … 40,20 (1 por metade) | 22,00 | 17,03 mm |
+| termopar | 4,80 | -11,00 | 103,00 | ±18,20 … 40,20 (1 por metade) | 22,00 | 16,35 mm |
+| termopar | 4,80 | +11,00 | 103,00 | ±18,20 … 40,20 (1 por metade) | 22,00 | 16,35 mm |
 
 Regras de fabricação aplicadas no desenho:
 
 * **parede mínima até o canal**: pino 2,39 mm (alvo ≥ 2,0), cartucho 8,20 mm (alvo ≥ 4,0),
-  termopar 17,03 mm (alvo ≥ 3,0) — todas medidas com `BRepExtrema`, não estimadas;
+  termopar 16,35 mm (alvo ≥ 3,0) — todas medidas com `BRepExtrema`, não estimadas;
 * **web mínima entre furos**: 5,380 mm — nenhum furo encosta em outro;
 * todo furo de aquecimento é **cego** e **abre na face externa**; nenhum rompe a face de entrada
   (Z=0) nem a de saída (Z=109) — verificado por interseção com lâminas nas duas faces;
@@ -155,7 +158,7 @@ já a colocava), não para a matriz. Isso não é escolha de projeto: é consequ
 
 `030-032- cabeçote.dwg` (HIDEALL, PED:2257 — EX-030 cabeçote em SAE8620 9"X65MM, cementado 0,4-0,6 mm e temperado a 52-55 HRC; EX-031 bucha cônica; EX-032 pushador) foi convertido para DXF e **medido numericamente**, entidade por entidade. A escala foi calibrada pelas próprias cotas do desenho — **k = 25,534 mm por unidade DXF**, incerteza +/- 0.003 (0.012%) — e cinco fechos independentes confirmam o fator: circulo dos furos do flange (raio medido 3,525 un) → desvio +0,01 %; Ø externo do flange (4,308 un) → desvio -0,01 %; Ø corpo do cabecote (2,546 un) → desvio +0,00 %; Ø furo da matriz (1,860 un) → desvio -0,01 %; Ø furo do nariz (1,762 un) → desvio -0,01 %.
 
-> **Correção registrada.** A versão anterior desta seção dizia "6 × M12 em BC Ø150, curso angular ±15°, escala 21,28 mm/un" e "Ø13,33 mm de folga". O Ø150 vinha de uma leitura de raster em baixa resolução: o desenho diz **C.C Ø180**. Tudo abaixo foi re-medido com a escala calibrada e provado por booleanos contra `MatrizJonatha_v28.step` (`verificar_interface_cabecote.py` → **43 itens, 39 conformes, 0 não conformes, 4 pendências do lado da máquina**).
+> **Correção registrada.** A versão anterior desta seção dizia "6 × M12 em BC Ø150, curso angular ±15°, escala 21,28 mm/un" e "Ø13,33 mm de folga". O Ø150 vinha de uma leitura de raster em baixa resolução: o desenho diz **C.C Ø180**. Tudo abaixo foi re-medido com a escala calibrada e provado por booleanos contra `MatrizJonatha_v28.step` (`verificar_interface_cabecote.py` → **45 itens, 41 conformes, 0 não conformes, 4 pendências do lado da máquina**).
 
 **Furos do cabeçote para a matriz** — profundidade `d` contada da face do nariz; a matriz senta em `Z_matriz = 95,00 − d` (corpo Ø130,00 × 42,00, flange Ø220,00 × 40,00, ressalto Ø203,00 × 3,00):
 
@@ -189,8 +192,8 @@ Ou seja: o aperto que a máquina já faz fecha o plano de partição por compres
 
 **O que ainda se resolve com paquímetro na máquina** (nada disso altera a geometria da matriz):
 
-* confirmar com o cliente a variante do anel do nariz para manta de 75 mm
 * confirmar se o assento do bolso Ø95x70 e cilindrico ou conico de 3 graus (o desenho mostra o collete com OD Ø95->Ø86)
+* confirmar o COMPRIMENTO do bico do cabeçote (14,00 mm no desenho): se na máquina o bico chegar até a face da matriz, os cartuchos (Z=97,00) e os termopares (Z=103,00) ficam dentro do cabeçote e o aquecimento tem de mudar de peça
 
 O DWG é conversão de avaliação (marca d'água "Evaluation only"), então as tolerâncias anotadas devem ser conferidas na peça antes de fechar o desenho de execução.
 
@@ -224,10 +227,11 @@ termopar ou o polímero.
 
 ---
 
-## 8. Reologia: o que a v28.0 muda e o que continua em aberto
+## 8. Reologia: o que a v28.1 muda e o que continua em aberto
 
-* Com o land paralelo indo de 8,50 para 9,20 mm, a estimativa 1D sobre a geometria medida sobe de
-  41,9 para **43,9 bar** (o ΔP do land é proporcional ao seu comprimento). Continua sendo
+* Com o lábio **inalterado** (D2), a estimativa 1D sobre a geometria medida fica em
+  **v28.1 = 41,9 bar · v27.0 = 41,9 bar** — os 43,9 bar da v28.0 vinham exatamente dos 0,70 mm de land a mais
+  que a decisão D2 rejeitou. Continua sendo
   **~35 % menor que os 68,2 bar do relatório de CFD** — a direção do erro é a mesma desde a
   triagem: os números de CFD do projeto não são reproduzíveis a partir do repositório.
 * A tensão de cisalhamento na parede **não mudou e não mudaria**: **163,8 kPa (γ̇_ap = 911 s⁻¹)**,
@@ -235,24 +239,25 @@ termopar ou o polímero.
   novo chanfro deve ser corrigido.
 * Antes de usar "99,10 % de uniformidade" como critério de aceite, é preciso publicar a definição
   (σ/U do perfil de velocidade medido em que plano) e a planilha. Sem isso, não é especificação.
-* A matriz nova **exige CFD novo** só se a opção coat-hanger (7.1b) for adotada; para a v28.0 como
+* A matriz nova **exige CFD novo** só se a opção coat-hanger (7.1b) for adotada; para a v28.1 como
   está, a variação de land (0,70 mm) cabe na incerteza do método 1D.
 
 ---
 
-## 9. O que eu preciso da sua decisão (3 itens, na ordem)
+## 9. Situação das decisões
 
-| # | Decisão | Consequência se aprovar | Consequência se não decidir |
+| # | Decisão | Estado | Consequência prática |
 | :-: | :--- | :--- | :--- |
-| **D1** | Aceitar **fixação pelo collete do cabeçote** (bucha EX-031, 8,6 MPa na banda Ø93) — e decidir se ainda assim quer **monobloco + EDM** como redundância | nada a acrescentar à matriz; libera corte do aço | sem o collete apertado na banda Ø93 retificada, a matriz de 30-56 kN abre no plano de partição na primeira subida de vazão |
-| **D1b** | **Anel do nariz Ø68,30 do cabeçote**: eliminar na variante de 75 mm (não há espaço: o furo é Ø80) | a matriz de 75 mm monta; hoje ela **não monta** | 5,60 mm/lado de interferência entre o anel e o nariz Ø79,5 da matriz — montagem impossível |
-| **D2** | Manter chanfro **0,80 × 45°** (land 9,20) ou voltar a 1,50 × 45° (land 8,50) | lâmina de 1,45 mm não lasca na limpeza | risco de lascamento no lábio e face de saída irreparável |
-| **D3** | Aceitar a descrição "**funil cônico linear de largura constante**" ou pedir o coat-hanger de verdade | SSOT e CAD voltam a dizer a mesma coisa | qualquer CFD futuro vai divergir do CAD por 0,70-6,00 mm de seção |
+| **D1** | Fixação das metades | **FECHADA pela máquina** — collete EX-031 + degrau do cabeçote; a matriz não leva grampo, flange nem furo | o corte do aço pode ser liberado com a banda Ø93 retificada e os bolsões de pino cegos (sem escarear) |
+| **D1b** | Anel do nariz do cabeçote (Ø68,30 do desenho, variante 9"×65 mm) | **FECHADA por medição sua na máquina**: sobram 2,5 mm por lado na fenda, o que só casa com a passagem Ø80,00 do próprio cabeçote | a matriz de 75 mm monta como está; o Ø68,30 fica registrado como coisa do cabeçote de 65 mm |
+| **D2** | Chanfro da saída 0,80 ou 1,50 | **DECIDIDO: mantém 1,50 × 45°** (land 8,50, lâmina 0,75) como no master | a v28.1 não altera a região de saída; o lascamento na limpeza vira item de procedimento, não de geometria |
+| **D4** | Promover a v28 para oficial | **DECIDIDO: não** — v27.0 segue master | a v28 fica ao lado, verificada, esperando você conferir a máquina |
+| **D3** | Funil: o cone linear do modelo atual **ou** o coat-hanger de 6,00 mm do texto | **EM ANDAMENTO a seu pedido**: vou modelar os dois e trazer ΔP, tempo de residência e espessura da manta medidos lado a lado | a v28.1 mantém o funil do master; a comparação decide se ele vira v29 |
+| **medir** | Comprimento do bico do cabeçote (14,00 mm no desenho) | **ABERTA — é a única que pode mexer nos furos** | se o bico chegar até a face da matriz, os 6 cartuchos (Z=97,00) e os 4 termopares (Z=103,00) ficam enterrados no cabeçote e o aquecimento muda de peça |
 
-Aprovados D1-D3, eu: atualizo o SSOT promovendo a v28.0 para oficial, renumero o `AUTO_PROMPT`
-com os valores novos e entrego o `MatrizJonatha_v28.step` como `MatrizJonatha.step` com o v27.0
-arquivado em `02_CAD_Modelos_Historicos/MatrizJonatha_v27.0_Aprovado/` (cópia, sem tocar em nada
-histórico existente).
+Enquanto D3 estiver em aberto, **nada é promovido**: `MatrizJonatha.step` continua sendo o v27.0 e a
+v28.1 vive ao lado, com `verificar_v28.py` (64 itens) e `verificar_interface_cabecote.py` (43 itens)
+para re-medir a qualquer momento.
 
 ---
 

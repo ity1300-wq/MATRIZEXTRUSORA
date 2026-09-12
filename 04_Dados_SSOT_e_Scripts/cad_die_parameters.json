@@ -10,8 +10,8 @@
     "status": "V27.0_CONTINUA_APROVADO__V28.0_PROPOSTA_PENDENTE_DE_APROVACAO_USUARIO",
     "selected_die": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
     "geometry_verified": true,
-    "user_decision": "v27.0 segue sendo o master aprovado (nada foi sobrescrito). A revisão v28.0 (DFM) existe em paralelo como proposta verificada: aguarda decisão do usuário sobre (i) chanfro 0,80 x 45° e (ii) furação de pinos/aquecimento antes de virar o oficial.",
-    "revision_ssot": "v28.0_DFM_Proposta",
+    "user_decision": "v27.0 segue sendo o master aprovado (nada foi sobrescrito). A revisão v28.1 (DFM) existe em paralelo como proposta verificada: aguarda decisão do usuário sobre (i) chanfro 0,80 x 45° e (ii) furação de pinos/aquecimento antes de virar o oficial.",
+    "revision_ssot": "v28.1_DFM_Proposta",
     "data_revisao_v28": "2026-09-11"
   },
   "matriz_jonatha_master_files": {
@@ -48,7 +48,7 @@
     "pre_land_transition_depth_mm": 3.5,
     "land_length_mm": 10.0,
     "land_paralelo_real_mm": 8.5,
-    "land_paralelo_observacao": "Medido na auditoria v27.0: dos 10,00 mm totais, o chanfro de saída de 1,50 mm x 45° ocupa os últimos 1,50 mm (Z=107,50 a 109,00). Decisão de engenharia pendente (corrigir o SSOT para 8,50 mm ou reduzir o chanfro).",
+    "land_paralelo_observacao": "Medido na auditoria v27.0: dos 10,00 mm totais, o chanfro de saída de 1,50 mm × 45° ocupa os últimos 1,50 mm (Z=107,50 a 109,00). DECIDIDO em 2026-09-11 (D2): manter 1,50 × 45° e declarar land_paralelo_real_mm = 8,50 como valor de projeto; a redução para 0,80 mm proposta na v28.0 foi rejeitada",
     "land_width_mm": 75.0,
     "land_thickness_mm": 1.5,
     "edge_radius_mm": 0.75,
@@ -56,7 +56,8 @@
     "pressure_drop_bar": 68.2,
     "velocity_uniformity_percent": 99.1,
     "matriz_2_baseline_pressure_drop_bar": 268.7,
-    "material": "Aço Ferramenta P20 / AISI H13 Nitretado"
+    "material": "Aço Ferramenta P20 / AISI H13 Nitretado",
+    "land_paralelo_mm": 8.5
   },
   "rheological_model_parameters": {
     "polymer": "EPR/XLPE/PVC Modificado (Média Tensão)",
@@ -213,8 +214,9 @@
       {
         "id": "F-28-6",
         "item": "Anel do nariz do cabeçote (variante 9\" × 65 mm)",
-        "situacao": "BLOQUEIO DE MONTAGEM, do lado da máquina: o corte de EX-030 mostra passagem Ø68,30 protruindo 6,00 mm à frente da face do nariz. Contra o nariz Ø79,50 da matriz isso dá 5,60 mm de interferência radial por lado (5.098,0 mm³ de choque medidos no booleano). Como o furo do nariz do cabeçote já é Ø80,00, não existe anel possível para a manta de 75 mm",
-        "acao": "Confirmar com o cliente: eliminar o anel na variante de 75 mm (o nariz da matriz roda direto no Ø80) ou fornecer anel com passagem Ø80 (não restritivo). Decidir antes de liberar a matriz para corte"
+        "situacao": "FECHADA PELO USUARIO por medição na máquina: sobram ~2,5 mm em cada extremidade da fenda, o que só acontece com a passagem em Ø80,00 (75,00 + 2 × 2,50). Com o anel Ø68,30 lido no corte faltariam 3,35 mm por lado. O Ø68,30 é da variante de 65 mm do carimbo 9\"X65MM e não participa da montagem de 75 mm",
+        "evidencia_cruzada": "o anel da face medido no DXF (Ø90 → Ø130 = 20,00 mm) bate com os ~20 mm que o usuário mediu na máquina - duas fontes independentes no mesmo valor",
+        "acao": "nenhuma na matriz. Manter registrado que o Ø68,30 existe no desenho, para ninguém reaproveitar esse cabeçote de 65 mm sem verificar"
       },
       {
         "id": "F-28-7",
@@ -222,16 +224,33 @@
         "situacao": "Pendente no lado da máquina: o aperto da banda Ø93 é o que fecha o plano de partição, mas o desenho do cabeçote não dá curso nem torque de aperto. A pressão necessária é 8,58 MPa para equilibrar a partição e 9,76 MPa para segurar o empuxo axial só por atrito; sem controle, o collete cônico pode apertar muito acima disso",
         "acao": "Definir curso/torque de aperto na ordem de serviço da extrusora. A deformação radial do canal com 9,76 MPa é 0,0023 mm por lado (0,15% da espessura de 1,50 mm), o que é aceitável; acima de ~40 MPa a banda começa a fechar os furos de pino de 0,794 mm de parede"
       }
-    ]
+    ],
+    "rotulo": "v28.1",
+    "geometria_labios": {
+      "land_paralelo_mm": 8.5,
+      "chanfro_saida_mm": 1.5,
+      "z_inicio_land_mm": 99.0,
+      "z_fim_mm": 109.0,
+      "origem": "decisao D2 do usuario em 2026-09-11: manter o labio do master. gerador e verificador leem estes valores - nao ha numero datilografado no script"
+    },
+    "mudancas_reais": [
+      "bipartição com 4 bolsões de pino abertos no plano e conjugados nas duas metades (o v27 tinha 2 bolsões selados só no Body_A e nenhum no Body_B)",
+      "6 cartuchos Ø9,50 e 4 poços de termopar Ø4,80 na zona do nariz",
+      "arquivo do canal em 1 único sólido (o v27 entregava 3) - pronto para EDM e para malha de CFD",
+      "kit de pinos de alinhamento modelado (4 sólidos nomeados em MatrizJonatha_v28_Pinos_Alinhamento.step)",
+      "furos M6 de desmontagem suprimidos na face de entrada: o anel traseiro tem 8,70 mm e o pushador EX-032 é ferramenta do cabeçote, não rosca na matriz"
+    ],
+    "o_que_NAO_mudou": "especificação do produto e labio de saida: fenda 75,00 x 1,50 com R0,75, boca Ø75,60, chanfro 1,50 x 45, land paralelo 8,50, lamina 0,75, envelope Ø93/Ø89,50/Ø79,50 x 109,00 (decisao D2)"
   },
   "fabricao_v28": {
     "tolerancias": {
       "furos_pino": "Ø4 H7, profundidade 12,0 mm, perpendicularidade 0,01 x A",
       "plano_particao": "paralelismo 0,02 mm; rugosidade Ra ≤ 0,8 µm na face Y=0",
       "land": "Ø/simétrica ±0,02 mm; Ra ≤ 0,4 µm nas faces do land",
-      "chanfro_saida": "0,80 x 45° (±0,05) sem rebarba (lábio de 1,45 mm é frágil: não esmerilhar)",
+      "chanfro_saida": "1,50 x 45 graus (±0,05), sem rebarba - MANTIDO como no master pela decisao D2; a lamina do labio fica em 0,75 mm, entao o esmerilhamento/limpeza da face de saida tem de ser procedimento controlado (nao usar metal duro nem choque termico na lamina)",
       "banda_aperto_cabecote": "Ø93,00 0/-0,02 na zona Z=0,10-69,90 (a banda que a bucha EX-031 prensa), Ra <= 0,4 um, circularidade 0,01 mm",
-      "degrau_apoio": "face do ombro em Z=69,90: planicidade <= 0,01 mm e perpendicularidade ao eixo <= 0,01 mm (69,22 MPa no anel de contato real de 431,2 mm²; se encostar em aresta, cava o cabeçote cementado)"
+      "degrau_apoio": "face do ombro em Z=69,90: planicidade <= 0,01 mm e perpendicularidade ao eixo <= 0,01 mm (69,22 MPa no anel de contato real de 431,2 mm²; se encostar em aresta, cava o cabeçote cementado)",
+      "lamina_labio": "0,75 mm no ponto mais fino (medido 0,750); boca de saida resultante 78,00 x 4,50 mm, medida no arquivo do canal"
     },
     "pinos": "4 × Ø4 h6 x 24 mm, aço temperado 58-62 HRC, fixados com pino-guia colado no Body_A e deslizante no Body_B",
     "aquecimento": {
@@ -248,7 +267,8 @@
       "montar, conferir a fenda 75,00 x 1,50 com calibrador e só então nitretar",
       "retificar a banda Ø93 da zona de aperto e conferir o paralelismo do degrau Z=69,90 antes do tratamento"
     ],
-    "interface_cabecote": "monta no cabeçote EX-030 com folga radial 1,00/0,25/0,25 mm nos três estágios, folga axial 0,10 mm no degrau e 14,00 mm de protrusão do nariz; nenhum furo da matriz rompe o envelope na zona apertada"
+    "interface_cabecote": "monta no cabecote EX-030 com folga radial 1,00/0,25/0,25 mm nos tres estagios, folga axial 0,10 mm no degrau e 14,00 mm de protrusao do nariz; folga do produto (75,00) no furo Ø80 do cabecote = 2,50 mm por lado - confere com a medicao do usuario. Com o chanfro 1,50 mantido, a BOCA da matriz abre para 78,00 mm (1,00 mm por lado ate o Ø80): se o bico do cabecote chegar ate a face da matriz, essa e a folga real",
+    "decisao_d2": "o chanfro de 0,80 mm que a v28.0 propunha foi rejeitado pelo usuario em 2026-09-11; o gerador le o valor do SSOT, entao voltar atras e mexer em geometria_labios e re-rodar, nao no script"
   },
   "interface_cabecote": {
     "fonte_arquivo": "03_Relatorios_e_Documentacao/CAD_Export/030-032- cabeçote.dwg (convertido; medição em /home/user/cabecote.dxf)",
@@ -374,5 +394,58 @@
     },
     "deformacao_radial_canal_mm": 0.0022685127492609166,
     "fonte_numeros": "interface_cabecote.json[\"numeros\"] - gerado por verificar_interface_cabecote.py"
+  },
+  "decisoes_usuario": {
+    "data": "2026-09-11",
+    "origem": "respostas do usuario as perguntas D1-D4 reformuladas em termos simples, mais o croqui em vista lateral enviado na sequencia (azul = extrusora, vermelho = cabecote, branco = matriz)",
+    "D1_fixacao": {
+      "decisao": "FECHADA PELA MAQUINA: a matriz nao leva flange, grampo nem furo de fixacao; a retencao vem da bucha conica EX-031 (collete) e do degrau do cabecote",
+      "impacto_no_cad": "nenhum - envelope intacto"
+    },
+    "D2_labio_saida": {
+      "decisao": "MANTER COMO NO MASTER: chanfro de saida 1,50 x 45 graus e land paralelo 8,50 mm (lamina de 0,75 mm). A reducao para 0,80 x 45 que a v28.0 propunha foi REJEITADA",
+      "geometria": {
+        "land_paralelo_mm": 8.5,
+        "chanfro_saida_mm": 1.5,
+        "lamina_mm": 0.75
+      },
+      "impacto_no_cad": "a regiao Z >= 99,00 da v28 passa a ser identica a do v27; o que a revisao muda fica so em biparticao/pinos, aquecimento e arquivo do canal",
+      "risco_assumido": "a lamina de 0,75 mm continua fragil na limpeza da matriz: registrar como procedimento de manutencao (nao esmerilhar, nao usar metal duro na face)"
+    },
+    "D3_funil": {
+      "decisao": "MODELAR AS DUAS VARIANTES E COMPARAR: o funil conico linear que o modelo atual tem x o coat-hanger de 6,00 mm que o texto descreve",
+      "status": "ABERTA - proximo trabalho de CAD + 1D",
+      "entregavel": "comparativo medido nos solidos: dP, tempo de residencia e espessura da manta lado a lado, para entao escolher entre manter ou virar v29"
+    },
+    "D4_promover": {
+      "decisao": "NAO promover: o v27.0 continua sendo o master aprovado e a v28 fica ao lado como proposta verificada"
+    },
+    "medicao_na_maquina": {
+      "quem": "usuario, com paquimetro na maquina",
+      "o_que": "linha do final do cabecote ate o comeco da matriz e a sobra em cada extremidade da fenda",
+      "valores_declarados": {
+        "anel_da_face_radial_mm": 20.0,
+        "sobra_por_lado_na_fenda_mm": 2.5
+      },
+      "conferencia_contra_o_desenho": [
+        "(Ø130 - Ø90)/2 = 20,00 mm  ==  os 20 mm declarados (o DXF mede anel da face = 20,00)",
+        "(Ø80 - 75,00)/2 = 2,50 mm  ==  os 2,5 mm por lado declarados",
+        "com o chanfro 1,50 x 45 a boca da fenda passa a 75,80 -> sobra 2,10 mm por lado (ainda 'aproximadamente 2,5')",
+        "se o anel Ø68,30 lido no corte existisse: faltariam 3,35 mm por lado - nao 'sobra'"
+      ],
+      "conclusao": "as duas medidas do usuario confirmam o modelo medido no DWG por caminhos independentes e descartam o anel do nariz de 65 mm para o produto de 75 mm",
+      "fica_para_conferir": "comprimento do bico do cabecote: o desenho da nariz de 14,00 mm de profundidade, o que deixa 14,30 mm do nariz da matriz para fora - e e nessa faixa que estao os 6 cartuchos (Z = 97,00) e os 4 termopares (Z = 103,00). Se na maquina o bico do cabecote chegar ate a face da matriz, esses furos ficam enterrados no cabecote e o aquecimento tera de mudar de lugar"
+    },
+    "consequencia_d2_mediata": {
+      "boca_saida_mm": {
+        "largura": 78.0,
+        "altura": 4.5,
+        "origem": "medida no arquivo MatrizJonatha_v28_Canal_Fluxo.secao a 0,001 mm da face de saida"
+      },
+      "folga_ate_furo_do_nariz_mm_por_lado": 1.0,
+      "empuxo_axial_com_dp1d_kN": 18.3,
+      "nota": "manter o chanfro 1,50 x 45 abre a boca de 75,00 para 78,00 mm. Enquanto o bico do cabecote terminar antes da face da matriz (14,00 mm no desenho) isso nao encosta em nada; se o bico for mais comprido, a folga vira 1,00 mm por lado e nao 2,50 mm. Por isso a medida do comprimento do bico e a unica que ainda pode mexer nos furos."
+    },
+    "fonte_de_todos_os_numeros_interface": "04_Dados_SSOT_e_Scripts/interface_cabecote.json (verificar_interface_cabecote.py) - o verificador nao tem mais fallback chutado: item ausente faz o script parar"
   }
 }

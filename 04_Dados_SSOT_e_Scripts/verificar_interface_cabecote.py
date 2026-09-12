@@ -30,7 +30,7 @@ RAIZ = os.path.abspath(os.path.join(AQUI, ".."))
 sys.path.insert(0, AQUI)
 
 from verificar_v28 import (maior, dist3d, n, checar, registrar, linhas,  # noqa: E402
-                           TOL, ENVELOPE, r_envelope)
+                           TOL, ENVELOPE, r_envelope, secao)
 
 
 def n2(v):
@@ -47,7 +47,11 @@ CORPO = [(65.0, 53.0, 95.0), (82.0, 43.0, 54.0), (110.0, 2.0, 44.0), (101.5, 0.0
 ANEL65 = (34.15, 91.0, 101.0)     # anel do nariz da variante de 65 mm: (r_int, z0, z1)
 FUROS_FLANGE = (8.25, 90.0)       # (raio do furo, raio do C.C. Ø180)
 BOCA = 75.60
-MANTA = (75.80, 2.30)             # secao de saida com o chanfro (medida na v28)
+# A "manta" nao e mais um numero digitado aqui: a boca real (com o chanfro decidido em D2) e
+# medida no arquivo do canal, e o produto vem do SSOT.
+_ssot = json.load(open(os.path.join(AQUI, "cad_die_parameters.json"), encoding="utf-8"))
+PRODUTO = (float(_ssot["matriz_jonatha_parameters"]["land_width_mm"]),
+           float(_ssot["matriz_jonatha_parameters"]["land_thickness_mm"]))
 
 
 def checar_min(item, medido, minimo, un="mm", obs=""):
@@ -116,12 +120,20 @@ def main():
         m = re.match(r"([\d,]+)\s*kg", str(l.get("medido", "")))
         if "Massa" in l["item"] and m:
             massa = float(m.group(1).replace(",", "."))
-    forca_kn = forca_kn or 55.7
+    if forca_kn is None:
+        raise SystemExit("forca de abertura nao encontrada em verificacao_v28.json")
     assert forca_kn > 0
-    massa = massa or 3.587
+    if massa is None:
+        raise SystemExit("massa nao encontrada em verificacao_v28.json")
     print(f"força de abertura lida da verificacao_v28: {n(forca_kn, 1)} kN   |   massa {n(massa)} kg")
 
     matriz = cq.importers.importStep(os.path.join(DIR_CAD, "MatrizJonatha_v28.step")).val()
+    canal = maior(cq.importers.importStep(
+        os.path.join(DIR_CAD, "MatrizJonatha_v28_Canal_Fluxo.step")).val())
+    _bb, _ = secao(canal, ENVELOPE[2][1] - 0.001)
+    MANTA = (_bb.xmax - _bb.xmin, _bb.ymax - _bb.ymin)          # boca com o chanfro, medida
+    print(f"boca de saida medida no canal: {n(MANTA[0])} x {n(MANTA[1])} mm  "
+          f"(produto {n(PRODUTO[0])} x {n(PRODUTO[1])} + chanfro {n(_ssot['proposta_v28_dfm']['geometria_labios']['chanfro_saida_mm'])}x45)")
     head = cabecote(com_anel=False)
     head65 = cabecote(com_anel=True)
 
@@ -168,7 +180,7 @@ def main():
            dist3d(matriz, maior(parafusos.val())), 35.25, tol=TOL, un="mm",
            obs="nenhum furo da junta cabeçote↔extrusora alcança a matriz")
     manta = cq.Workplane("XY").workplane(offset=ENVELOPE[2][1]).box(
-        MANTA[0], MANTA[1], 8.0, centered=(True, True, False)).val()
+        PRODUTO[0], PRODUTO[1], 8.0, centered=(True, True, False)).val()
     checar_min("Curso livre da manta após sair da matriz até o cabeçote",
                dist3d(manta, maior(head.intersect(slab(-6.0, 95.0)))), 14.00,
                obs="a manta nasce 14 mm à frente da face do nariz e sai pela diagonal do furo Ø80: "
@@ -176,14 +188,25 @@ def main():
     checar("Folga do nariz Ø79,5 no furo Ø80 (a 1 mm das bordas do degrau)",
            dist3d(maior(matriz.intersect(slab(82.0, 94.0))),
                   maior(head.intersect(slab(82.0, 94.0)))), 0.25, tol=TOL, un="mm")
+    checar("Folga do PRODUTO (75,00) no furo Ø80 - o que voce mediu na maquina",
+           (80.0 - PRODUTO[0]) / 2, 2.50, tol=0.05, un="mm",
+           obs="'sobra 2,5 mm em cada extremidade da fenda' - reproduzido pelo modelo medido")
+    registrar("Folga da BOCA da matriz (com o chanfro de D2) no furo Ø80",
+              f"{n((80.0 - MANTA[0]) / 2)} mm por lado  (boca medida: {n(MANTA[0])} × {n(MANTA[1])} mm)",
+              obs="consequência de manter o chanfro 1,50 × 45: a boca abre para "
+                  f"{n(MANTA[0])} mm e a folga cai de 2,50 para {n((80.0 - MANTA[0]) / 2)} mm se o bico "
+                  "do cabeçote chegar até a face da matriz - é por isso que o comprimento do bico "
+                  "(14,00 mm no desenho) é a única medida que falta", ok=True)
 
     print("\n[C] variante com o anel do nariz Ø68,30 (carimbo 9\"×65 mm)\n" + "-" * 70)
     v65 = env_vol(matriz.intersect(head65))
     alerta("Interferência matriz ∩ cabeçote COM anel Ø68,30", f"{n(v65, 1)} mm³",
-           "o anel invade o nariz Ø79,5 - a matriz de 75 mm não monta com ele")
-    alerta("Abertura do anel × largura da fenda",
-           f"Ø{n(2 * ANEL65[0])} contra {n(MANTA[0])} de manta → faltam {n((MANTA[0] - 2 * ANEL65[0]) / 2)} mm por lado",
-           "mesmo que a matriz entrasse, a manta de 75,8 não passaria por Ø68,30")
+           "FECHADO por medição na máquina: sobram 2,5 mm/lado na fenda, entao a passagem e o proprio "
+           "Ø80 do cabecote - o volume acima so vale se alguem reaproveitar o anel de 65 mm")
+    alerta("Sobra na extremidade da fenda × passagem do cabeçote",
+           f"Ø80,00 → sobra {n((80.0 - 75.0) / 2)} mm por lado (usuário mediu ~2,5) · "
+           f"Ø68,30 do anel de 65 mm → faltariam {n((MANTA[0] - 2 * ANEL65[0]) / 2)} mm",
+           "o número medido na máquina só casa com o Ø80: prova de que o anel de 65 mm não está lá")
     alerta("Passagem do anel × nariz da matriz",
            f"Ø{n(2 * ANEL65[0])} contra Ø79,50 → {n(39.75 - ANEL65[0])} mm de interferência radial por lado",
            "p/ 75 mm a passagem teria de ser ≥ Ø79,6, e o furo do nariz já é Ø80: não há espaço para anel")
@@ -237,8 +260,12 @@ def main():
     print("\n[E] números de dimensionamento da junta\n" + "-" * 70)
     # pressão efetiva deduzida do que foi medido na v28 (força / área projetada) - sem número externo
     def num(chave, padrao, rex=None):
+        """Lê um número do JSON da verificação. `padrao=None` => o item é obrigatório:
+        se ele sumiu ou mudou de formato, o script para em vez de devolver chutado."""
         for l in ver["checagens"]:
             if chave in str(l.get("item", "")):
+                if isinstance(l.get("medido"), (int, float)):        # ja veio medido, como numero
+                    return float(l["medido"])
                 m = re.search(rex or r"([\d.,]+)", str(l.get("medido", "")).replace("\\u00a0", " "))
                 if m:
                     t = m.group(1).replace("\\u00a0", "").strip()
@@ -250,16 +277,20 @@ def main():
                         return float(t)
                     except ValueError:
                         pass
+        if padrao is None:
+            raise SystemExit(f"item '{chave}' nao encontrado/legivel em verificacao_v28.json - rode "
+                             "verificar_v28.py --json antes; nao existe numero de memoria aqui")
         return padrao
 
-    a_saida = num("Área da seção", 112.0171, rex=r"([\d.,]+)\s*mm")
-    a_proj = num("Área projetada", 8168.0, rex=r"([\d.,]+)\s*mm")
+    a_saida = num("Área da seção", None, rex=r"([\d.,]+)\s*mm")
+    a_proj = num("Área projetada", None, rex=r"([\d.,]+)\s*mm")
     p_ef = forca_kn * 1e3 / a_proj                       # N/mm2 = MPa
     a_boca = math.pi * (BOCA / 2.0) ** 2
     registrar("Pressão efetiva no limite", f"{n(p_ef, 2)} MPa = {n(p_ef * 10, 1)} bar",
               obs=f"deduzida de {n(forca_kn, 1)} kN medidos / {n(a_proj, 0)} mm² de área projetada medida")
     f_ax = p_ef * (a_boca - a_saida) / 1e3               # kN
-    dp1d = num("ΔP 1D", 43.9, rex=r"v28\.0\s*=\s*([\d.,]+)\s*bar")
+    # regex sem rotulo: casa com v28.1, v29... e com o que vier; sem fallback chutado
+    dp1d = num("ΔP 1D", None, rex=r"=\s*([\d.,]+)\s*bar")
     f_ax1d = dp1d / 10.0 * (a_boca - a_saida) / 1e3      # kN
     registrar("Empuxo axial que empurra a matriz para fora do cabeçote",
               f"{n(f_ax, 1)} kN no limite · {n(f_ax1d, 1)} kN com o ΔP 1D medido ({n(dp1d, 1)} bar)",
@@ -308,6 +339,7 @@ def main():
         return None
 
     numeros = {"pressao_efetiva_MPa": p_ef, "empuxo_axial_kN": f_ax, "empuxo_axial_dp1d_kN": f_ax1d,
+               "dp_1d_bar": dp1d,
                "area_boca_mm2": a_boca, "area_fenda_mm2": a_saida, "area_projetada_mm2": a_proj,
                "area_ombro_matriz_mm2": a_ombro_d, "area_degrau_cabecote_mm2": a_ombro_h,
                "area_contato_degrau_mm2": a_contato, "pressao_contato_degrau_MPa": p_ombro,
@@ -357,16 +389,21 @@ def main():
               "com folga radial de 1,00 / 0,25 / 0,25 mm e folga axial de 0,10 mm no degrau de apoio. "
               "Interferência corpo-a-corpo: zero. A face de saída fica 14,00 mm além da face do nariz, "
               "então a fenda trabalha fora do cabeçote.",
-              "2. **O anel da face é de 20,00 mm** (Ø90 → Ø130) — exatamente o número descrito. O furo "
-              "do nariz (Ø80) é maior que a fenda (75,8 → 2,10 mm por lado) e menor que a matriz (Ø93): "
-              "a descrição do cliente confere com o desenho.",
-              "3. **D1 se resolve na máquina, não na matriz — e sem furar nada.** O empuxo axial medido "
-              "(29,8 kN no limite, 19,2 kN com o ΔP 1D) recai em compressão no degrau do cabeçote: "
-              "431,2 mm² de contato real a 69,2 MPa, com 20× de margem sobre o escoamento da matriz "
+              f"2. **O anel da face é de 20,00 mm** (Ø90 → Ø130) — exatamente o número descrito. "
+              f"O furo do nariz (Ø80) é maior que a boca da matriz (boca medida {n(MANTA[0])} × "
+              f"{n(MANTA[1])} mm -> {n((80.0 - MANTA[0]) / 2, 2)} mm por lado) e menor que a matriz "
+              f"(Ø{ENVELOPE[0][2]:.0f}): a descrição do cliente confere com o desenho — os 2,50 mm "
+              f"por lado medidos na máquina são do produto (Ø{PRODUTO[0]:.2f}), não da boca chanfrada.",
+              # (substituído pela linha medida acima)
+              f"3. **D1 se resolve na máquina, não na matriz — e sem furar nada.** O empuxo axial "
+              f"medido ({n(f_ax, 1)} kN no limite, {n(f_ax1d, 1)} kN com o ΔP 1D de {n(dp1d, 1)} bar) "
+              f"recai em compressão no degrau: {n(a_contato, 1)} mm² de contato real a "
+              f"{n(p_ombro, 1)} MPa, com {n(1400 / p_ombro, 0)}× de margem sobre o escoamento da matriz "
               "temperada (medido por booleano: a faixa de contato só existe onde as duas faces existem). A bucha "
               "cônica EX-031 (Ø95/Ø90, cone 3°, L 70 = exatamente o comprimento do bolso) é "
               "auto-travante (3,00° < 8,5°) e, ao apertar a banda Ø93, aplica compressão radial: "
-              "8,58 MPa bastam para equilibrar os 55,7 kN que abrem a bipartição, e 9,76 MPa para segurar "
+              f"{n(p_part, 2)} MPa bastam para equilibrar os {n(forca_kn, 1)} kN que abrem a bipartição, "
+              f"e {n(p_ax, 2)} MPa para segurar "
               "o empuxo axial só por atrito — e a deformação do canal com isso é de 0,002 mm por lado "
               "(0,15 % da espessura da manta). **Retiro a recomendação de grampos no flange: a matriz "
               "não leva flange, nem grampo, nem furo de fixação.** O monobloco por EDM continua sendo a "

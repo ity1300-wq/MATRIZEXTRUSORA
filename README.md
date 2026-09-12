@@ -1,7 +1,7 @@
 # MATRIZEXTRUSORA — Matriz Jonatha (Extrusão Plana Master Aprovado)
 
 ![Status](https://img.shields.io/badge/Status-Modelo%20Master%20Aprovado-success)
-![Revisão proposta](https://img.shields.io/badge/DFM-v28.0_Proposta_Verificada-orange)
+![Revisão proposta](https://img.shields.io/badge/DFM-v28.1_Proposta_Verificada-orange)
 ![Versão SSOT](https://img.shields.io/badge/SSOT-v27.0_Master-blue)
 ![Formato CAD](https://img.shields.io/badge/Formato-STEP%20AP214-orange)
 ![Linguagem](https://img.shields.io/badge/Python-CadQuery%202.0-green)
@@ -40,16 +40,16 @@ Projeto de engenharia mecânica, reologia computacional (CFD) e modelagem 3D CAD
 
 ---
 
-## 📐 Revisão v28.0 — proposta DFM verificada (não substitui o v27.0)
+## 📐 Revisão v28.1 — proposta DFM verificada (não substitui o v27.0)
 
 A v27.0 continua sendo o **master aprovado**; a v28.0 vive ao lado, em arquivos novos, até a
 aprovação. Ela resolve o que a auditoria apontou como defeito real e prova cada número medindo os
 sólidos (booleanos + `BRepExtrema`), não declarando:
 
-| | v27.0 aprovado | v28.0 proposta |
+| | v27.0 aprovado | v28.1 proposta |
 | :--- | :--- | :--- |
-| Land reto e paralelo | 8,50 mm (o SSOT dizia 10,00) | **9,20 mm** |
-| Chanfro de saída | 1,50 × 45° (lâmina de 0,75 mm) | **0,80 × 45°** (lâmina de 1,45 mm) |
+| Land reto e paralelo | 8,50 mm (o SSOT declarava 10,00) | **8,50 mm — mantido** (D2); SSOT corrigido para 8,50 + 1,50 de chanfro |
+| Chanfro de saída | 1,50 × 45° (lâmina de 0,75 mm) | **1,50 × 45° — mantido** (a redução para 0,80 foi rejeitada em D2); boca de saída medida 78,00 × 4,50 mm |
 | Furos de pino | 2 bolsões **selados** no Body_A; nenhum no Body_B | **4 bolsões Ø4 H7 × 12 abertos no plano de partição, conjugados nas duas metades** + kit de pinos |
 | Aquecimento | nenhum | **6 cartuchos Ø9,5** (Z=97,00; X=0 e ±22) e **4 poços de termopar Ø4,8** (Z=103,00; X=±11), paredes reais de 2,39-17,03 mm |
 | Arquivo do canal | 3 sólidos (núcleo + 2 bolhas) | **1 sólido** (pronto para EDM e para malha de CFD) |

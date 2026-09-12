@@ -1,8 +1,8 @@
 {
   "meta": {
     "z_land": 99.0,
-    "land_paralelo": 9.2,
-    "chanfro": 0.8,
+    "land_paralelo": 8.5,
+    "chanfro": 1.5,
     "z_saida": 109.0,
     "z_corte": 98.999
   },
@@ -12,9 +12,9 @@
   "diametro_termopar_mm": 4.8,
   "diametro_desmontagem_mm": 0.0,
   "parede_alvo_cartucho_mm": 4.0,
-  "volume_canal_mm3": 213820.019,
-  "volume_body_a_mm3": 228360.464,
-  "volume_body_b_mm3": 228561.234,
+  "volume_canal_mm3": 213945.146,
+  "volume_body_a_mm3": 228297.901,
+  "volume_body_b_mm3": 228498.67,
   "envelope": [
     [
       0.0,

@@ -1,5 +1,5 @@
 """
-GERADOR DO RELATORIO DFM v28.0 - MATRIZ JONATHA
+GERADOR DO RELATORIO DFM DA REVISAO PROPOSTA - MATRIZ JONATHA
 ===============================================
 Monta `PROJETO_DFM_V28_MATRIZ_JONATHA.md` a partir dos dados MEDIDOS:
   * `matriz_v28_features.json`  (desenho de intencao: cotas de cada furo)
@@ -174,7 +174,14 @@ def main():
         ic = carregar("interface_cabecote.json")
     except FileNotFoundError:
         ic = None
+    nz = (ic or {}).get("numeros", {})
+    if not nz:
+        raise SystemExit("interface_cabecote.json['numeros'] ausente - rode verificar_interface_cabecote.py --json")
+    p_lim_bar = nz["pressao_efetiva_MPa"] * 10
+    f_boca = nz["pressao_efetiva_MPa"] * nz["area_boca_mm2"] / 1e3
+    f_proj = nz["dp_1d_bar"] / 10 * nz["area_projetada_mm2"] / 1e3
     meta, m = ft["meta"], ssot["matriz_jonatha_parameters"]
+    rot = ssot["proposta_v28_dfm"].get("rotulo", "v28.1")
 
     land = achar(vf, "Land reto e paralelo")
     cha = achar(vf, "Chanfro de saída (v27")
@@ -214,11 +221,13 @@ def main():
         tabela_furos.append(f"| {tipo} | {br(d)} | {("0,00" if abs(x) < 1e-9 else br(x, True))} | {br(z)} | {faixa} | "
                             f"{br(f['comprimento_mm'])} | {br(paredes.get(tipo, 0))} mm |")
 
-    txt = f"""# PROJETO DFM v28.0 — Matriz Jonatha (revisão para fabricação)
+    txt = f"""# PROJETO DFM v28.1 — Matriz Jonatha (revisão para fabricação)
 
 **Projeto:** matriz de extrusão plana para manta isolante de acessórios de cabos MT
-**Modelo base (aprovado):** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` — SSOT v27.0
-**Esta revisão:** v28.0 — **PROPOSTA, pendente de aprovação do usuário**. O v27.0 não foi alterado.
+**Modelo base (aprovado, continua oficial):** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` — SSOT v27.0
+**Esta revisão:** v28.1 — **PROPOSTA**. O v27.0 continua sendo o master aprovado (decisão **D4**
+do usuário: "não promover"). O que muda aqui é o que a decisão **D2** deixou de pé: nada no lábio
+de saída, tudo no restante.
 **Data:** 2026-09-11
 **Verificação:** `{os.path.basename(DIR_DADOS)}/verificar_v28.py` → **{vf['itens']} itens, {vf['conformes']} conformes, {vf['nao_conformes']} não conformes**
 **Conferência visual:** `V28_CONFERENCIA_VISUAL.png` (6 vistas, lidas dos STEP)
@@ -228,10 +237,11 @@ def main():
 ## 1. Resumo em seis linhas
 
 1. O funil de fluxo aprovado **não foi tocado**: a distância máxima entre a superfície do funil
-   v28.0 e a do v27.0 medida nos sólidos é **{un(funil.get('medido', '0 mm').replace('Δmáx entre superfícies = ', ''), 'mm')}**.
-2. **P7 e P8 fechados**: chanfro de saída passou de 1,50 → **0,80 × 45°**, o que devolve 0,70 mm
-   de land reto (**land paralelo = {dim(land.get('medido'))} mm**, era 8,50) e engrossa a lâmina do
-   lábio de 0,75 → **{un(lam.get('medido'))}**.
+   {rot} e a do v27.0 medida nos sólidos é **{un(funil.get('medido', '0 mm').replace('Δmáx entre superfícies = ', ''), 'mm')}**.
+2. **P7 e P8 rejeitados (decisão D2, 2026-09-11)**: o chanfro de saída fica **1,50 × 45°** e o
+   land paralelo fica **{dim(land.get('medido'))} mm**, como no master — medidos nesta revisão: land
+   {dim(land.get('medido'))} mm, chanfro {dim(cha.get('medido'))} × 45°, lâmina do lábio
+   **{un(lam.get('medido'))}**. Ou seja: **a v28.1 não toca na região de saída do fundido**.
 3. **P2 fechado**: os 4 bolsões de pino Ø4 × 12 agora são **abertos no plano de partição e
    conjugados nas duas metades** (o v27.0 tinha 2 bolsões selados só no Body_A e nada no Body_B),
    com kit de pinos modelado em `MatrizJonatha_v28_Pinos_Alinhamento.step`.
@@ -262,7 +272,7 @@ def main():
 bash 04_Dados_SSOT_e_Scripts/setup_headless_gl.sh
 export LD_LIBRARY_PATH="$PWD/04_Dados_SSOT_e_Scripts/.headless_gl:$LD_LIBRARY_PATH"
 python 04_Dados_SSOT_e_Scripts/explorar_acomodo_furos.py --json   # onde existe aço para furos
-python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py                # gera os STEP v28.0
+python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py                # gera os STEP da proposta
 python 04_Dados_SSOT_e_Scripts/verificar_v28.py --json --md        # mede e prova (63 itens)
 python 04_Dados_SSOT_e_Scripts/gerar_relatorio_v28.py            # este relatório
 python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png  # conferência visual
@@ -272,11 +282,11 @@ python 04_Dados_SSOT_e_Scripts/renderizar_v28.py --saida v28.png  # conferência
 
 ## 3. Tabela antes × depois (tudo medido nos STEP)
 
-| Item | v27.0 (aprovado) | v28.0 (proposta) | Como foi medido |
+| Item | v27.0 (aprovado) | {rot} (proposta) | Como foi medido |
 | :--- | ---: | ---: | :--- |
-| Land reto e paralelo | 8,50 mm | **{dim(land.get('medido'))} mm** | varredura de seção em Z (passo 0,05 mm) até abs(Y) ≠ 1,50 |
-| Chanfro de saída | 1,50 × 45° | **{dim(cha.get('medido'))} × 45°** | folga radial a 0,10 mm da face |
-| Lâmina do lábio (ponto mais fino) | 0,75 mm | **{un(lam.get('medido'))}** | Ø79,5/2 − abs(X) da seção na face Z=109 |
+| Land reto e paralelo | 8,50 mm (o SSOT declarava 10,00) | **{dim(land.get('medido'))} mm — mantido (D2)**; SSOT atualizado para 8,50 paralelo + 1,50 de chanfro | varredura de seção em Z (passo 0,05 mm) até abs(Y) ≠ 1,50 |
+| Chanfro de saída | 1,50 × 45° | **{dim(cha.get('medido'))} × 45° — mantido (D2 rejeitou o 0,80)** | folga radial a 0,10 mm da face |
+| Lâmina do lábio (ponto mais fino) | 0,75 mm | **{un(lam.get('medido'))} — mantida (D2)**; o risco de lascamento na limpeza passa a ser item de procedimento | Ø79,5/2 − abs(X) da seção na face Z=109 |
 | Furos de pino Ø4 × 12 | 2, selados no Body_A; 0 no Body_B | **4 abertos e conjugados (2 por lado)** | volume do furo ∩ corpo = 0 e aço sob o fundo presente |
 | Cavidades internas fechadas | Body_A: 2 | **0** (1 shell em cada metade) | contagem de `TopAbs_SHELL` |
 | Cartuchos de aquecimento | 0 | **6 × Ø9,5**, fundo a {dim(paredes.get('cartucho', 0))} mm do canal | booleano + `BRepExtrema` |
@@ -299,9 +309,9 @@ Medindo essa área no sólido: **{un(aprev.get('medido'))}** (não é a área da
 
 | Cenário de pressão | Força de abertura |
 | :--- | ---: |
-| ΔP de projeto do CFD (68,2 bar) atuando sobre **toda** a área projetada (limite superior) | **{un(forc.get('medido')).split(' no limite')[0]}** |
-| 68,2 bar atuando só sobre a boca Ø75,60 (o número citado no relatório de triagem) | 30,6 kN |
-| ΔP 1D medido na geometria (43,9 bar) sobre a área projetada | ≈ 35,9 kN |
+| ΔP de projeto do CFD ({dim(p_lim_bar, 1)} bar, valor declarado no relatório de CFD) sobre **toda** a área projetada (limite superior) | **{un(forc.get('medido')).split(' no limite')[0]}** |
+| {dim(p_lim_bar, 1)} bar atuando só sobre a boca Ø{dim(m['entry_bore_diameter_mm'])} (o número citado no relatório de triagem) | {dim(f_boca, 1)} kN |
+| ΔP 1D medido na geometria ({dim(nz['dp_1d_bar'], 1)} bar) sobre a área projetada | ≈ {dim(f_proj, 1)} kN |
 
 A geometria não oferece onde ancorar isso:
 
@@ -330,7 +340,7 @@ protótipo de bancada. As duas outras são remendo; a 1 remove a causa.
 
 ---
 
-## 5. Furação da v28.0 — cotas de usinagem e paredes reais
+## 5. Furação da {rot} — cotas de usinagem e paredes reais
 
 Estas são as coordenadas do modelo; o `matriz_v28_features.json` é a fonte.
 
@@ -388,10 +398,11 @@ termopar ou o polímero.
 
 ---
 
-## 8. Reologia: o que a v28.0 muda e o que continua em aberto
+## 8. Reologia: o que a {rot} muda e o que continua em aberto
 
-* Com o land paralelo indo de 8,50 para 9,20 mm, a estimativa 1D sobre a geometria medida sobe de
-  41,9 para **43,9 bar** (o ΔP do land é proporcional ao seu comprimento). Continua sendo
+* Com o lábio **inalterado** (D2), a estimativa 1D sobre a geometria medida fica em
+  **{tbl(dp.get('medido'))}** — os 43,9 bar da v28.0 vinham exatamente dos 0,70 mm de land a mais
+  que a decisão D2 rejeitou. Continua sendo
   **~35 % menor que os 68,2 bar do relatório de CFD** — a direção do erro é a mesma desde a
   triagem: os números de CFD do projeto não são reproduzíveis a partir do repositório.
 * A tensão de cisalhamento na parede **não mudou e não mudaria**: **{un(tau.get('medido'))}**,
@@ -399,24 +410,25 @@ termopar ou o polímero.
   novo chanfro deve ser corrigido.
 * Antes de usar "99,10 % de uniformidade" como critério de aceite, é preciso publicar a definição
   (σ/U do perfil de velocidade medido em que plano) e a planilha. Sem isso, não é especificação.
-* A matriz nova **exige CFD novo** só se a opção coat-hanger (7.1b) for adotada; para a v28.0 como
+* A matriz nova **exige CFD novo** só se a opção coat-hanger (7.1b) for adotada; para a {rot} como
   está, a variação de land (0,70 mm) cabe na incerteza do método 1D.
 
 ---
 
-## 9. O que eu preciso da sua decisão (3 itens, na ordem)
+## 9. Situação das decisões
 
-| # | Decisão | Consequência se aprovar | Consequência se não decidir |
+| # | Decisão | Estado | Consequência prática |
 | :-: | :--- | :--- | :--- |
-| **D1** | Aceitar **fixação pelo collete do cabeçote** (bucha EX-031, 8,6 MPa na banda Ø93) — e decidir se ainda assim quer **monobloco + EDM** como redundância | nada a acrescentar à matriz; libera corte do aço | sem o collete apertado na banda Ø93 retificada, a matriz de 30-56 kN abre no plano de partição na primeira subida de vazão |
-| **D1b** | **Anel do nariz Ø68,30 do cabeçote**: eliminar na variante de 75 mm (não há espaço: o furo é Ø80) | a matriz de 75 mm monta; hoje ela **não monta** | 5,60 mm/lado de interferência entre o anel e o nariz Ø79,5 da matriz — montagem impossível |
-| **D2** | Manter chanfro **0,80 × 45°** (land 9,20) ou voltar a 1,50 × 45° (land 8,50) | lâmina de 1,45 mm não lasca na limpeza | risco de lascamento no lábio e face de saída irreparável |
-| **D3** | Aceitar a descrição "**funil cônico linear de largura constante**" ou pedir o coat-hanger de verdade | SSOT e CAD voltam a dizer a mesma coisa | qualquer CFD futuro vai divergir do CAD por 0,70-6,00 mm de seção |
+| **D1** | Fixação das metades | **FECHADA pela máquina** — collete EX-031 + degrau do cabeçote; a matriz não leva grampo, flange nem furo | o corte do aço pode ser liberado com a banda Ø93 retificada e os bolsões de pino cegos (sem escarear) |
+| **D1b** | Anel do nariz do cabeçote (Ø68,30 do desenho, variante 9"×65 mm) | **FECHADA por medição sua na máquina**: sobram 2,5 mm por lado na fenda, o que só casa com a passagem Ø80,00 do próprio cabeçote | a matriz de 75 mm monta como está; o Ø68,30 fica registrado como coisa do cabeçote de 65 mm |
+| **D2** | Chanfro da saída 0,80 ou 1,50 | **DECIDIDO: mantém 1,50 × 45°** (land 8,50, lâmina 0,75) como no master | a v28.1 não altera a região de saída; o lascamento na limpeza vira item de procedimento, não de geometria |
+| **D4** | Promover a v28 para oficial | **DECIDIDO: não** — v27.0 segue master | a v28 fica ao lado, verificada, esperando você conferir a máquina |
+| **D3** | Funil: o cone linear do modelo atual **ou** o coat-hanger de 6,00 mm do texto | **EM ANDAMENTO a seu pedido**: vou modelar os dois e trazer ΔP, tempo de residência e espessura da manta medidos lado a lado | a v28.1 mantém o funil do master; a comparação decide se ele vira v29 |
+| **medir** | Comprimento do bico do cabeçote (14,00 mm no desenho) | **ABERTA — é a única que pode mexer nos furos** | se o bico chegar até a face da matriz, os 6 cartuchos (Z=97,00) e os 4 termopares (Z=103,00) ficam enterrados no cabeçote e o aquecimento muda de peça |
 
-Aprovados D1-D3, eu: atualizo o SSOT promovendo a v28.0 para oficial, renumero o `AUTO_PROMPT`
-com os valores novos e entrego o `MatrizJonatha_v28.step` como `MatrizJonatha.step` com o v27.0
-arquivado em `02_CAD_Modelos_Historicos/MatrizJonatha_v27.0_Aprovado/` (cópia, sem tocar em nada
-histórico existente).
+Enquanto D3 estiver em aberto, **nada é promovido**: `MatrizJonatha.step` continua sendo o v27.0 e a
+v28.1 vive ao lado, com `verificar_v28.py` (64 itens) e `verificar_interface_cabecote.py` (43 itens)
+para re-medir a qualquer momento.
 
 ---
 

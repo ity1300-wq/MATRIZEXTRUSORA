@@ -1,5 +1,5 @@
 {
-  "revisao": "v28.0_PROPOSTA",
+  "revisao": "v28.1_PROPOSTA",
   "itens": 64,
   "conformes": 64,
   "nao_conformes": 0,
@@ -117,8 +117,8 @@
     },
     {
       "item": "Land reto e paralelo (v27.0: 8,50)",
-      "nominal": 9.2,
-      "medido": 9.2,
+      "nominal": 8.5,
+      "medido": 8.5,
       "desvio": -0.0,
       "unidade": "mm",
       "status": "CONFORME",
@@ -126,27 +126,30 @@
     },
     {
       "item": "Chanfro de saída (v27.0: 1,50)",
-      "nominal": 0.8,
-      "medido": 0.8,
+      "nominal": 1.5,
+      "medido": 1.5,
       "desvio": 0.0,
       "unidade": "mm",
       "status": "CONFORME",
-      "observacao": "P7: lâmina mais robusta"
+      "observacao": "D2: lábio mantido como no master, sem ganho de land"
     },
     {
       "item": "Sobrelargura do chanfro a 0,10 mm da face",
-      "nominal": 0.7,
-      "medido": 0.702,
+      "nominal": 1.4,
+      "medido": 1.402,
       "desvio": 0.002,
       "unidade": "mm",
       "status": "CONFORME",
       "observacao": "chanfro de 45°"
     },
     {
-      "item": "Lâmina de aço no lábio de saída (v27.0: 0,75)",
-      "medido": "1,450 mm",
-      "observacao": "P7 resolvido: ≥ 1,40 mm era o critério",
-      "status": "CONFORME"
+      "item": "Lâmina de aço no lábio de saída (= valor decidido em D2)",
+      "nominal": 0.75,
+      "medido": 0.75,
+      "desvio": -0.0,
+      "unidade": "mm",
+      "status": "CONFORME",
+      "observacao": "a decisão D2 aceitou a lâmina fina de 0,75 mm do master; o lascamento na limpeza passa a ser item de procedimento de manutenção, não de geometria"
     },
     {
       "item": "Shells no Body_A (v27.0 tinha 3 = 2 bolhas seladas)",
@@ -330,7 +333,7 @@
     },
     {
       "item": "parede mínima até o canal - termopar X=-11.00 Z=103.00",
-      "medido": "17,033 mm",
+      "medido": "16,349 mm",
       "observacao": "alvo ≥ 3,00 mm | invadiu o canal em 0,000000 mm³",
       "status": "CONFORME"
     },
@@ -342,7 +345,7 @@
     },
     {
       "item": "parede mínima até o canal - termopar X=-11.00 Z=103.00",
-      "medido": "17,033 mm",
+      "medido": "16,349 mm",
       "observacao": "alvo ≥ 3,00 mm | invadiu o canal em 0,000000 mm³",
       "status": "CONFORME"
     },
@@ -354,7 +357,7 @@
     },
     {
       "item": "parede mínima até o canal - termopar X=+11.00 Z=103.00",
-      "medido": "17,033 mm",
+      "medido": "16,349 mm",
       "observacao": "alvo ≥ 3,00 mm | invadiu o canal em 0,000000 mm³",
       "status": "CONFORME"
     },
@@ -366,7 +369,7 @@
     },
     {
       "item": "parede mínima até o canal - termopar X=+11.00 Z=103.00",
-      "medido": "17,033 mm",
+      "medido": "16,349 mm",
       "observacao": "alvo ≥ 3,00 mm | invadiu o canal em 0,000000 mm³",
       "status": "CONFORME"
     },
@@ -390,13 +393,13 @@
     },
     {
       "item": "Massa de aço (7,85 g/cm³)",
-      "medido": "3,587 kg",
+      "medido": "3,586 kg",
       "observacao": "v27.0: 3,682 kg | aços: P20 pré / H13 temperado",
       "status": "CONFORME"
     },
     {
       "item": "Área projetada do canal no plano XZ (medida)",
-      "medido": "8168 mm²",
+      "medido": "8169 mm²",
       "observacao": "é a área sobre a qual a pressão empurra as metades uma contra a outra",
       "status": "CONFORME"
     },
@@ -408,8 +411,8 @@
     },
     {
       "item": "ΔP 1D - lei das potências (método do próprio projeto)",
-      "medido": "v28.0 = 43,9 bar | v27.0 = 41,9 bar",
-      "observacao": "land 9,20 vs 8,50 paralelos → +2.0 bar; maior gradiente em Z≈99,2 mm",
+      "medido": "v28.1 = 41,9 bar | v27.0 = 41,9 bar",
+      "observacao": "land 8,50 vs 8,50 paralelos → -0.0 bar; maior gradiente em Z≈99,2 mm",
       "status": "CONFORME"
     },
     {
@@ -426,7 +429,7 @@
     },
     {
       "item": "Cotas de usinagem do land",
-      "medido": "paralelo Z=99,00→108,20 mm (9,20) · chanfro 0,80×45° Z=108,20→109,00 mm",
+      "medido": "paralelo Z=99,00→107,50 mm (8,50) · chanfro 1,50×45° Z=107,50→109,00 mm",
       "observacao": "conferir no desenho antes de cortar o aço",
       "status": "CONFORME"
     }
