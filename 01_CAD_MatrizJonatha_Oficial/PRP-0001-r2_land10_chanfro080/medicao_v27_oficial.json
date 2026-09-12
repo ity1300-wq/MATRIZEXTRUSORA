@@ -1,5 +1,5 @@
 {
-  "medido_em": "2026-09-12T18:53:25+0000",
+  "medido_em": "2026-09-12T19:11:14+0000",
   "objeto": "v27_oficial",
   "pasta": "01_CAD_MatrizJonatha_Oficial",
   "metricas": {
@@ -179,92 +179,6 @@
     {
       "item": "auditor oficial (Protocolo v1.0)",
       "motivo": "verify_geometry_ssot.py mede apenas 01_CAD_MatrizJonatha_Oficial/ (DIR_CAD fixo, zona congelada §8): não consegue medir um STEP candidato. Lacuna registrada para o Humano resolver na régua (v1.1)"
-    }
-  ],
-  "comparacao_baseline": [
-    {
-      "metrica": "largura_fenda_mm",
-      "baseline": 75.0,
-      "variante": 75.0,
-      "delta_pct": 0.0,
-      "direcao": "igual"
-    },
-    {
-      "metrica": "espessura_fenda_mm",
-      "baseline": 1.5,
-      "variante": 1.5,
-      "delta_pct": 0.0,
-      "direcao": "igual"
-    },
-    {
-      "metrica": "area_fenda_mm2",
-      "baseline": 112.0171,
-      "variante": 112.0171,
-      "delta_pct": 0.0,
-      "direcao": "igual"
-    },
-    {
-      "metrica": "raio_borda_mm",
-      "baseline": 0.75,
-      "variante": 0.75,
-      "delta_pct": 0.0,
-      "direcao": "igual"
-    },
-    {
-      "metrica": "boca_entrada_mm",
-      "baseline": 75.6,
-      "variante": 75.6,
-      "delta_pct": 0.0,
-      "direcao": "igual"
-    },
-    {
-      "metrica": "parede_labio_mm",
-      "baseline": 0.75,
-      "variante": 0.75,
-      "delta_pct": 0.0,
-      "direcao": "igual"
-    },
-    {
-      "metrica": "land_util_mm",
-      "baseline": 8.5,
-      "variante": 8.5,
-      "delta_pct": 0.0,
-      "direcao": "igual"
-    },
-    {
-      "metrica": "volume_canal_mm3",
-      "baseline": 213945.1459,
-      "variante": 213945.146,
-      "delta_pct": 0.0,
-      "direcao": "igual"
-    },
-    {
-      "metrica": "interferencia_mm3",
-      "baseline": 0.0,
-      "variante": 0.0,
-      "delta_pct": null,
-      "direcao": "neutro"
-    },
-    {
-      "metrica": "z_total_mm",
-      "baseline": 109.0,
-      "variante": 109.0,
-      "delta_pct": 0.0,
-      "direcao": "igual"
-    },
-    {
-      "metrica": "diametro_externo_mm",
-      "baseline": 93.0,
-      "variante": 93.0,
-      "delta_pct": 0.0,
-      "direcao": "igual"
-    },
-    {
-      "metrica": "dp_total_bar",
-      "baseline": 26.68,
-      "variante": 26.68,
-      "delta_pct": 0.0,
-      "direcao": "igual"
     }
   ]
 }

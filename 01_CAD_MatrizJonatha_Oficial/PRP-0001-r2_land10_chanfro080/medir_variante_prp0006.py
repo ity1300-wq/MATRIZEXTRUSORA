@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-medir_variante_prp0005.py — medição independente do STEP entregue (proposta PRP-0005, tipo geometria)
+medir_variante_prp0006.py — medição independente do STEP entregue (proposta PRP-0006, tipo geometria)
 =====================================================================================================
 
 Mede os **arquivos STEP gravados em disco** (não a geometria em memória de quem os gerou) e compara
@@ -34,11 +34,11 @@ permanecem válidos para esta variante.
 Uso:
     export LD_LIBRARY_PATH="$REPO/04_Dados_SSOT_e_Scripts/.headless_gl:$LD_LIBRARY_PATH"
     PY=$HOME/.venv/bin/python
-    $PY medir_variante_prp0005.py                       # mede a variante da proposta
-    $PY medir_variante_prp0005.py --sanidade            # mede os STEP oficiais (deve dar o baseline)
-    $PY medir_variante_prp0005.py --comparar-baseline   # acrescenta a tabela de deltas
+    $PY medir_variante_prp0006.py                       # mede a variante da proposta
+    $PY medir_variante_prp0006.py --sanidade            # mede os STEP oficiais (deve dar o baseline)
+    $PY medir_variante_prp0006.py --comparar-baseline   # acrescenta a tabela de deltas
 
-Saída: `medicao_variante_prp0005.json` nesta pasta (+ impressão legível no console).
+Saída: `medicao_variante_prp0006.json` nesta pasta (+ impressão legível no console).
 Código de saída: 0 = todos os requisitos duros conformes; 1 = alguma não conformidade.
 """
 
@@ -298,7 +298,7 @@ def main():
                   f"{l['direcao']}")
 
     destino = args.saida or os.path.join(
-        AQUI, "medicao_v27_oficial.json" if args.sanidade else "medicao_variante_prp0005.json")
+        AQUI, "medicao_v27_oficial.json" if args.sanidade else "medicao_variante_prp0006.json")
     with open(destino, "w", encoding="utf-8") as fh:
         json.dump(saida, fh, ensure_ascii=False, indent=2)
     print(f"\nJSON: {os.path.relpath(destino, RAIZ)}")

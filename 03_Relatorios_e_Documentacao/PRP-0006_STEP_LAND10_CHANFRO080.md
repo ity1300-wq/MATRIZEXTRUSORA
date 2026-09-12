@@ -1,9 +1,9 @@
-# PRP-0005 — STEP do land 10,00 mm com chanfro de saída 0,80 mm × 45°
+# PRP-0006 — STEP do land 10,00 mm com chanfro de saída 0,80 mm × 45°
 
 **Data:** 12/09/2026 · **Autor:** IA engenheira (sessão `arena/01a096e3-matrizextrusora`)
 **Linhagem:** implementa a previsão aprovada da **PRP-0001** (`vereditos/PRP-0001.json`, `APROVADO`)
 **Objeto:** `01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/`
-**Veredito da auditoria:** `PRP-0005` → **BLOQUEADO** — *por defeito da régua, não da peça* (ver §6)
+**Veredito da auditoria:** `PRP-0006` → **BLOQUEADO** — *por defeito da régua, não da peça* (ver §6)
 
 > Regra do projeto respeitada: **nenhum número deste relatório existe sem um script que o
 > reproduza.** Cada valor abaixo tem o comando que o gera.
@@ -21,8 +21,8 @@
 | `MatrizJonatha_L10_C0.8_Body_B.step` | metade superior |
 | `MatrizJonatha_L10_C0.8_Canal_Fluxo.step` | núcleo de polímero + os 2 sólidos dos furos de pino (3 sólidos, como no master) |
 | `gerar_variante_prp0001r2.py` | gerador paramétrico (`--chanfro`, `--land`, `--sanidade`, `--furos-passantes`) |
-| `medir_variante_prp0005.py` | medição independente dos STEP gravados (`--sanidade`, `--comparar-baseline`) |
-| `medicao_variante_prp0005.json` | evidência numérica da variante |
+| `medir_variante_prp0006.py` | medição independente dos STEP gravados (`--sanidade`, `--comparar-baseline`) |
+| `medicao_variante_prp0006.json` | evidência numérica da variante |
 | `medicao_v27_oficial.json` | evidência de que o medidor reproduz o master |
 | `gerar_variante.log` | parâmetros e volumes da geração |
 
@@ -109,7 +109,7 @@ mesmos dois scripts como evidência da variante.
 
 ```bash
 export LD_LIBRARY_PATH="$PWD/04_Dados_SSOT_e_Scripts/.headless_gl:$LD_LIBRARY_PATH"
-$HOME/.venv/bin/python 01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/medir_variante_prp0005.py --comparar-baseline
+$HOME/.venv/bin/python 01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/medir_variante_prp0006.py --comparar-baseline
 ```
 
 | grandeza | v27 (master) | variante | Δ | julgamento |
@@ -173,8 +173,8 @@ cd 01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080
 $PY gerar_variante_prp0001r2.py --chanfro 1.5 --prefixo SANIDADE_v27 --sanidade --sem-exportar \
     --log /tmp/sanidade.log                                        # espera "REPRODUZ"
 $PY gerar_variante_prp0001r2.py                                    # grava os seis STEP
-$PY medir_variante_prp0005.py --sanidade --comparar-baseline       # espera 10/10 e 0,000 % de desvio
-$PY medir_variante_prp0005.py --comparar-baseline                  # espera 10/10 conformes
+$PY medir_variante_prp0006.py --sanidade --comparar-baseline       # espera 10/10 e 0,000 % de desvio
+$PY medir_variante_prp0006.py --comparar-baseline                  # espera 10/10 conformes
 ```
 
 ---
@@ -183,7 +183,7 @@ $PY medir_variante_prp0005.py --comparar-baseline                  # espera 10/1
 
 ```bash
 $PY 05_Interface_Auditoria/scripts/auditar_proposta.py \
-    05_Interface_Auditoria/propostas/PRP-0005-step-land-10-chanfro-080.json --json --md
+    05_Interface_Auditoria/propostas/PRP-0006-step-land-10-chanfro-080.json --json --md
 ```
 
 Saída (código 3):
@@ -205,7 +205,7 @@ Nenhum dos três itens diz respeito à peça. Ver §6.
 Três defeitos independentes da régua, todos com evidência e correção escrita em
 **`REGUA_V1.1_MUDANCA_PROPOSTA.md`** (documento irmão deste). Resumo:
 
-| # | Defeito | Por que atinge a PRP-0005 | Correção |
+| # | Defeito | Por que atinge a PRP-0006 | Correção |
 | :-- | :--- | :--- | :--- |
 | 1 | **Selo do baseline vencido.** O hash de `PROTOCOLO_AUDITORIA.md` no baseline é `1fc0aa5e…`, o arquivo commitado na `main` é `702d5f2f…`. A diferença é o diff legítimo do commit `b065d68` (ponteiro do CI no §7 + linha 1.0.1 no §9), feito depois do último re-selo (`17:58:21`, commit `c4371d7`). Os outros **34** hashes conferem. | `I5` FALHA → `BLOQUEADO`. E isso vale para **qualquer** proposta nova, inclusive a de controle. | `auditar_proposta.py --atualizar-hashes` (ato humano, §8) |
 | 2 | **A régua não mede o objeto entregue.** `verify_geometry_ssot.py` tem `DIR_CAD` fixo; `auditar_proposta.py` roda a bateria sempre sobre os STEP oficiais. Para `tipo=geometria`, `previsto = medido` — e `medido` é o **master**. | `E:land_util_mm` e `E:parede_labio_mm` comparam 9,20/1,45 declarados contra 8,50/0,75 do v27 → FALHA. O §3 promete "mede o arquivo"; hoje não mede. | `--cad-dir` no medidor + campo `objeto` no schema + repasse no auditor (diffs prontos) |
@@ -213,7 +213,7 @@ Três defeitos independentes da régua, todos com evidência e correção escrit
 
 **Nenhuma tolerância precisa mudar.** Os itens 2 e 3 aumentam o que a régua verifica; o item 1 é
 higiene de selo. Enquanto 1 e 2 não forem feitos, a interface **não consegue aprovar nenhuma
-proposta nova** — o que torna a PRP-0005 o teste que faltava: ela é a primeira proposta
+proposta nova** — o que torna a PRP-0006 o teste que faltava: ela é a primeira proposta
 `tipo=geometria` com STEP real submetida ao auditor.
 
 ---
@@ -241,11 +241,45 @@ Registradas para não sumirem — e deliberadamente fora do escopo, para não mi
 
 ---
 
+## 7.1 Esta proposta não está sozinha: PR #3 (v28.1) e a colisão de ID
+
+Enquanto esta proposta era preparada, outra sessão abriu o **PR #3**
+(`proposta/PRP-0005`, *"v28.1: fabricação corrigida, hidráulica idêntica ao v27 (+ cabeçote EX-030 e
+desenhos 2D)"*, 61 arquivos). Três consequências registradas aqui para ninguém se perder:
+
+1. **Colisão de ID, resolvida.** O PR #3 trouxe
+   `05_Interface_Auditoria/propostas/PRP-0005-v28-1-fabricacao.json` e
+   `03_Relatorios_e_Documentacao/AUDITORIA_PREVIA_PRP-0005.md`. Como o `id` nomeia o arquivo de
+   veredito, duas propostas `PRP-0005` sobrescreveriam o veredito uma da outra. **Esta proposta foi
+   renumerada para `PRP-0006`** (arquivos, scripts de medição, relatórios e hashes — nada mais
+   mudou). Causa raiz: `COMO_USAR.md` usa `PRP-0005-<apelido>` como exemplo fixo nas linhas 41 e 49;
+   vale trocar por `PRP-XXXX-<apelido>`.
+2. **Confirmação independente do bloqueio.** O PR #3 chegou sozinho ao mesmo diagnóstico do item 1 do
+   §6, citando os mesmos hashes (`1fc0aa5e…` no baseline × `702d5f2f…` na `main`). Duas sessões, duas
+   propostas sem relação, mesmo `I5`.
+3. **Escopos diferentes que precisam de ordem.** O PR #3 declara `land_total_mm = 10,00` e
+   `chanfro_mm = 1,50` — **os do próprio master** — e ataca fabricação: pinos de alinhamento
+   (`MatrizJonatha_v28_Pinos_Alinhamento.step`), fixação, recuo de cartuchos, interface com o cabeçote
+   EX-030 e desenhos 2D. Esta proposta muda **um** parâmetro (chanfro 1,50 → 0,80), o que a PRP-0001
+   já aprovou, e não toca em fabricação. Não são incompatíveis: o chanfro de 0,80 pode entrar na v28.
+   Mas são duas revisões da mesma peça em paralelo, e o master oficial só pode ser um — a ordem é
+   decisão sua.
+
+O PR #3 também edita a zona congelada (`cad_die_parameters.json` e a seção 6 de
+`verify_geometry_ssot.py`), declarado no corpo dele e **sem** re-selo próprio, o que dispara `I4`.
+Esta proposta não edita nada da zona congelada. Detalhes e a tabela comparativa estão em
+`REGUA_V1.1_MUDANCA_PROPOSTA.md`.
+
+**Nota sobre a `main`:** ela andou durante esta sessão — `82666ac` ("Add files via upload") acrescentou
+`02_CAD_Modelos_Historicos/matrizGedeonCerta.step`, que **não está** nos 35 hashes do baseline. Ou
+seja, a régua está vencida em duas pontas: o selo do protocolo (item 1 do §6) e a lista de arquivos
+protegidos.
+
 ## 8. Decisão pedida ao Humano
 
 1. Re-selar o baseline (item 1) — sem isso a interface está parada.
 2. Aplicar ou recusar a v1.1 da régua (itens 2 e 3), com a linha no §9 do protocolo.
-3. Reauditar a PRP-0005 e ler o veredito novo.
+3. Reauditar a PRP-0006 e ler o veredito novo.
 4. Se aprovado: decidir a **promoção** da variante a master oficial (sobrescrever os seis STEP de
    `01_CAD_MatrizJonatha_Oficial/` e re-congelar o baseline) **junto** com a atualização do SSOT.
    Até lá, a variante vive na subpasta e o master continua sendo o v27.

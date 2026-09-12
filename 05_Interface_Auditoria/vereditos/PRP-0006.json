@@ -1,9 +1,9 @@
 {
   "protocolo": "1.0",
-  "proposta_id": "PRP-0005",
-  "commit_auditado": "00dca9b2e8de492ccea40aa4b3661317d1bcd2f1",
-  "proposta_sha256": "e54a1889ea9b25f11c0ad9bf5f6b5baa619907d26babd8955c3ed8b091a56abe",
-  "data": "2026-09-12T19:02:12+0000",
+  "proposta_id": "PRP-0006",
+  "commit_auditado": "01894308f86986de67cd3b8eebc0580295f08d91",
+  "proposta_sha256": "17b85d09d5ff01bf5a35ff7adf4d90556163d5df4d02fc6d165a0beafb69c55d",
+  "data": "2026-09-12T19:16:18+0000",
   "auditor": {
     "nome": "Auditor IA (Protocolo v1.0)",
     "tipo": "IA",
@@ -380,8 +380,8 @@
   "modelo_parametrico": "não aplicável",
   "medicoes_reutilizadas": false,
   "hashes": {
-    "proposta": "e54a1889ea9b25f11c0ad9bf5f6b5baa619907d26babd8955c3ed8b091a56abe",
-    "head": "00dca9b2e8de492ccea40aa4b3661317d1bcd2f1",
+    "proposta": "17b85d09d5ff01bf5a35ff7adf4d90556163d5df4d02fc6d165a0beafb69c55d",
+    "head": "01894308f86986de67cd3b8eebc0580295f08d91",
     "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step": "7f26c5c5ba238a12667f2bdf974bc15f001c9103fd480ffb144eb2718e67e04e",
     "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_A.step": "7342d3ecab6771fe5a5b370ff445be5084f635fbb5ba3c5ba9d7e4818fd563a8",
     "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_B.step": "afcce0aca2b8ab33602e9d866902448d4f261cca3464e044702bb148af66cf05",
@@ -422,6 +422,6 @@
     "python 04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py --json",
     "python 04_Dados_SSOT_e_Scripts/verify_legacy_dies.py --json",
     "python 04_Dados_SSOT_e_Scripts/avaliacao_matriz3_calculos.py --json",
-    "python 05_Interface_Auditoria/scripts/auditar_proposta.py 05_Interface_Auditoria/propostas/PRP-0005-step-land-10-chanfro-080.json"
+    "python 05_Interface_Auditoria/scripts/auditar_proposta.py 05_Interface_Auditoria/propostas/PRP-0006-step-land-10-chanfro-080.json"
   ]
 }

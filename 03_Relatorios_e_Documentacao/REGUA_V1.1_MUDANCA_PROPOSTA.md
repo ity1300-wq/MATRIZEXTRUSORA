@@ -2,7 +2,7 @@
 
 **Data:** 12/09/2026 · **Autor:** IA engenheira (sessão `arena/01a096e3-matrizextrusora`)
 **Destinatário:** responsável humano pelo projeto (`@ity1300-wq`, dono da zona congelada no CODEOWNERS)
-**Gatilho:** veredito `PRP-0005` (`05_Interface_Auditoria/vereditos/PRP-0005.md`) — **BLOQUEADO**
+**Gatilho:** veredito `PRP-0006` (`05_Interface_Auditoria/vereditos/PRP-0006.md`) — **BLOQUEADO**
 
 > **Nenhum arquivo da zona congelada foi alterado por esta IA.** O que segue é a correção
 > *proposta*, com o código exato, para você aplicar (ou recusar). O §8 do protocolo é explícito:
@@ -60,7 +60,50 @@ re-selo consciente"* — e o re-selo ficou pendente quando o PR #2 foi mesclado.
 
 Os cinco vereditos que estão na `main` (PRP-0000 a PRP-0004) foram emitidos **antes** dessa edição
 do protocolo, por isso não acusaram `I5`. Se qualquer um deles for re-auditado hoje — ou se uma
-proposta nova for submetida — o resultado é `BLOQUEADO`. Foi o que aconteceu com a PRP-0005.
+proposta nova for submetida — o resultado é `BLOQUEADO`. Foi o que aconteceu com a PRP-0006.
+
+### Confirmação independente (importante)
+
+O **PR #3** (`proposta/PRP-0005`, "v28.1: fabricação corrigida", 61 arquivos, aberto 26 min antes
+desta proposta por outra sessão) chegou **sozinho ao mesmo diagnóstico, com os mesmos hashes**:
+
+> *"`I5` — é do processo, não meu: o hash de `05_Interface_Auditoria/PROTOCOLO_AUDITORIA.md` gravado
+> no baseline é `1fc0aa5e…`, e o arquivo no topo da `main` é `702d5f2f…`. Ou seja, o selo ficou para
+> trás na própria `main` (os `selos` registrados param em 17:42; `b065d68` mexeu no protocolo depois
+> disso). Qualquer proposta, inclusive uma sem nenhuma relação com isso, sai bloqueada por isso hoje."*
+
+Duas sessões independentes, duas propostas sem relação entre si, mesmo bloqueio. Isso encerra a
+discussão sobre ser ou não um caso isolado: **a interface está parada na `main`**.
+
+### A régua também já ficou para trás em outro ponto
+
+Em `82666ac` ("Add files via upload", já na `main`) entrou
+`02_CAD_Modelos_Historicos/matrizGedeonCerta.step`. A pasta `02_` é protegida e o baseline tem 35
+hashes — esse arquivo **não está entre eles**. `checar_imutabilidade()` só compara o que está no
+baseline, então ele passa silenciosamente em `I1`; quem acusa é `arquivos_protegidos()`, que o
+reportaria em `I7` (INFO) como "arquivo protegido novo (não estava no baseline)". Um modelo
+histórico novo sem re-congelamento é exatamente o que o §8 quer evitar: **a régua precisa ser
+recongelada também por isso**, não só pelo selo do protocolo.
+
+### E o PR #3 editou a zona congelada (declarado, sem re-selo)
+
+O próprio corpo do PR #3 registra: alterou `04_Dados_SSOT_e_Scripts/cad_die_parameters.json` (blocos
+novos) e `04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py` (seção 6, "Tratamento dos achados"), e
+**não** rodou `--atualizar-hashes` — corretamente, pois "quem propõe não re-sela a régua pela qual
+vai ser medido". Isso dispara `I4`. Ou seja, há **duas** propostas abertas exigindo decisão sua sobre
+a zona congelada, por motivos diferentes:
+
+| PR | O que pede da zona congelada | Gate |
+| :-- | :--- | :-- |
+| **#3** (`proposta/PRP-0005`, v28.1) | aceitar 2 edições já feitas no SSOT e no `verify_geometry_ssot.py`, ou mandá-las para fora da zona protegida | `I4` + `I5` |
+| **#4** (este, `PRP-0006`) | nada — não editou a régua; pede que **você** aplique os itens 2 e 3 (medição de candidato) e re-sele | `I5` só |
+
+Se os dois forem mesclados como estão, eles se sobrescrevem em
+`05_Interface_Auditoria/propostas/PRP-0005-*` vs `PRP-0006-*` (resolvido: esta proposta foi
+renumerada) **e** em `vereditos/`, além de apontarem para direções diferentes da mesma peça: o PR #3
+mantém `chanfro_mm = 1,50` (o do master) e ataca fabricação/fixação/cabeçote; esta proposta muda o
+chanfro para `0,80` (a previsão aprovada da PRP-0001). **Não são incompatíveis, mas precisam de uma
+decisão de ordem sua** — ver §8 do relatório `PRP-0006_STEP_LAND10_CHANFRO080.md`.
 
 ### Correção (ato humano)
 
@@ -77,15 +120,15 @@ e por quê. Como `baseline/` está no CODEOWNERS, o commit precisa da sua aprova
 > *"Vereditos emitidos antes de um re-selo ficam superados: apague o arquivo de veredito do ID
 > correspondente para forçar a reauditoria com a régua nova."*
 
-Depois do re-selo, para a PRP-0005 valer:
+Depois do re-selo, para a PRP-0006 valer:
 
 ```bash
-rm 05_Interface_Auditoria/vereditos/PRP-0005.json 05_Interface_Auditoria/vereditos/PRP-0005.md
+rm 05_Interface_Auditoria/vereditos/PRP-0006.json 05_Interface_Auditoria/vereditos/PRP-0006.md
 python 05_Interface_Auditoria/scripts/auditar_proposta.py \
-    05_Interface_Auditoria/propostas/PRP-0005-step-land-10-chanfro-080.json --json --md
+    05_Interface_Auditoria/propostas/PRP-0006-step-land-10-chanfro-080.json --json --md
 ```
 
-**Aviso:** só o re-selo **não** aprova a PRP-0005 — ela passaria a sair `REPROVADO` por causa do
+**Aviso:** só o re-selo **não** aprova a PRP-0006 — ela passaria a sair `REPROVADO` por causa do
 item 2 (a régua compara o declarado com o master). Os dois itens precisam entrar juntos.
 
 ---
@@ -119,9 +162,9 @@ else:
     previsto = medido          # <- "medição direta" é a do MASTER, não a do STEP da proposta
 ```
 
-**Resultado medido na PRP-0005:** o STEP entregue tem `land_util = 9,20 mm` e
+**Resultado medido na PRP-0006:** o STEP entregue tem `land_util = 9,20 mm` e
 `parede_labio = 1,45 mm` (medidos nos arquivos gravados, 10/10 conformes — ver
-`01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/medicao_variante_prp0005.json`), mas o
+`01_CAD_MatrizJonatha_Oficial/PRP-0001-r2_land10_chanfro080/medicao_variante_prp0006.json`), mas o
 veredito registrou `medido 8.5` e `medido 0.75` — os valores do v27 — e marcou `FALHA` nos dois.
 
 O §3 do protocolo promete outra coisa:
@@ -276,7 +319,7 @@ Regras que valem junto (para não abrir brecha):
    medição de master;
 5. **nenhuma tolerância do §4 muda.** O que muda é *o que se mede*, não *quanto se aceita*.
 
-Com isso, a PRP-0005 fica auditável de verdade:
+Com isso, a PRP-0006 fica auditável de verdade:
 
 ```json
 "objeto": {
@@ -303,7 +346,7 @@ if bloqueia:
 ```
 
 Para `interferencia_mm3` (baseline `0.0`), `delta` é `None` e `None == 0` é `False` → a linha sai
-como **"aceitável: não"** mesmo sem qualquer mudança. Apareceu no primeiro veredito da PRP-0005:
+como **"aceitável: não"** mesmo sem qualquer mudança. Apareceu no primeiro veredito da PRP-0006:
 
 ```
 | `interferencia_mm3` | 0.0 | 0.0 | — | neutro | **não** |
@@ -332,7 +375,7 @@ Critério continua **zero mudança** — só deixa de depender de uma divisão q
 proposta, mas `esquema/proposta.schema.json` restringe `id` a `^PRP-[0-9]{4}$` e o `id` nomeia o
 arquivo de veredito. Ou o padrão passa a `^PRP-[0-9]{4}(-r[0-9]+)?$` (e o auditor sanitiza o nome
 do arquivo), ou o §2 passa a prescrever **novo número** com a linhagem no título/observações. A
-PRP-0005 seguiu a segunda leitura.
+PRP-0006 seguiu a segunda leitura.
 
 **B. `modo cfd` empobrece artefatos versionados.** `medir(com_cfd=True)` chama
 `cfd_land_crosssection.py --secoes 99.5 103 107`, enquanto
@@ -361,7 +404,7 @@ tenha o escopo `workflow`.
 - [ ] 2. Aplicar os diffs dos itens 2 e 3 (ou recusá-los, registrando o motivo)
 - [ ] 3. Acrescentar a linha `1.1` no histórico de versões do §9 do protocolo, dizendo o que mudou
 - [ ] 4. Re-selar de novo (`--atualizar-hashes`), já com os scripts editados
-- [ ] 5. `rm 05_Interface_Auditoria/vereditos/PRP-0005.*` e reauditar a PRP-0005
+- [ ] 5. `rm 05_Interface_Auditoria/vereditos/PRP-0006.*` e reauditar a PRP-0006
 - [ ] 6. Se o veredito vier `APROVADO`: decidir a promoção da variante a master (sobrescrever os
       seis STEP oficiais é ato seu) **e** atualizar o SSOT
       (`cad_die_parameters.json`: `land_paralelo_real_mm` 8,50 → 9,20, `exit_chamfer`
