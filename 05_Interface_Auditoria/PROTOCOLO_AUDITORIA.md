@@ -181,32 +181,43 @@ ela entra em `nao_auditavel[]` — nunca é tratada como aprovada.
 
 ---
 
-## 7. Três modos de operação (do mais automático ao mais simples)
+## 7. Modos de operação (todos implementados neste repositório)
 
-| Modo | Como funciona | Latência | Depende de |
+| Modo | Ferramenta | Como funciona | Latência |
 | :--- | :--- | :--- | :--- |
-| **A — CI (recomendado)** | qualquer push em `05_.../propostas/` dispara `.github/workflows/auditoria.yml`, que audita e comenta no PR | ~6 min, sem ninguém envolvido | Actions habilitado no repositório |
-| **B — sessão ao vivo** | o Auditor (esta IA) mantém um processo observando os commits novos e audita em sequência | 1–3 min | acesso de escrita do Auditor ao repo |
-| **C — ponte humana** | o Engenheiro cola o `PRP-XXXX.json` no chat; o Auditor roda o script e devolve o `veredito.md` (≤ 40 linhas) para colar de volta | minutos | só o humano copiando/colando |
+| **A — CI** | `.github/workflows/auditoria.yml` | push numa proposta dispara a auditoria e o veredito volta como comentário no PR | ~6 min |
+| **B — vigilância git** | `scripts/monitor_auditoria.py` | observa o ramo; commit que toca `propostas/` é auditado e o veredito é gravado (e publicado com `--push`) | ~2 min por proposta |
+| **B — painel vivo** | `scripts/painel_auditoria.py` | navegador + API: vigia a pasta, permite colar uma proposta e auditar na hora | segundos a minutos |
+| **C — ponte humana** | o próprio auditor | você cola o JSON no chat; o auditor devolve o `veredito.md` para colar de volta | minutos |
 
-O conteúdo é **idêntico** nos três modos: o `.json` é o contrato, o `.md` é a cortesia. Se um dia
-o GitHub ou a rede caírem, o Modo C mantém o ciclo andando.
+O conteúdo é o mesmo nos quatro: o `.json` é o contrato, o `.md` é a cortesia.
 
-### Comandos
+### Modo B — vigilância git
 
 ```bash
-# Auditor: rodar uma proposta (leve, ~40 s)
-python 05_Interface_Auditoria/scripts/auditar_proposta.py \
-       05_Interface_Auditoria/propostas/PRP-0001-*.json --json --md
+python 05_Interface_Auditoria/scripts/monitor_auditoria.py                 # vigia o ramo atual
+python 05_Interface_Auditoria/scripts/monitor_auditoria.py --remoto --push # busca no origin e publica
+python 05_Interface_Auditoria/scripts/monitor_auditoria.py --modo rapido --uma-vez
+```
+Pega propostas commitadas **e** as que estão apenas na árvore de trabalho (basta gravar o arquivo);
+pula o que já tem veredito para o mesmo conteúdo; registra o batimento de cada ciclo.
 
-# Auditor: com CFD 2D (mais lento, ~6 min)
-python 05_Interface_Auditoria/scripts/auditar_proposta.py <proposta.json> --com-cfd --json --md
+### Modo B — painel vivo (sem git, sem GitHub)
 
-# Auditor: registrar o estado atual como baseline (só o humano ou o auditor fazem isso)
-python 05_Interface_Auditoria/scripts/auditar_proposta.py --congelar-baseline
+```bash
+python 05_Interface_Auditoria/scripts/painel_auditoria.py --porta 8000 --modo completo
+```
+Abre em `http://localhost:8000` e mostra: baseline congelado, vereditos em disco, histórico da
+sessão, log e um formulário para colar propostas. A IA engenheira pode falar direto com a API:
+
+```bash
+curl -X POST 'http://localhost:8000/api/auditar?modo=completo&sincrono=1' \
+     -H 'Content-Type: application/json' --data-binary @proposta.json
+# -> 200 OK com o veredito completo em JSON  (modo=rapido reaproveita medições, ~2 s)
 ```
 
----
+Rotas: `/`, `/veredito/<ID>`, `/api/estado`, `/api/vereditos`, `/api/vereditos/<ID>`,
+`/api/auditar`, `/auditar`, `/log`.
 
 ## 8. Zona congelada (ninguém, nem IA, mexe sem você)
 
@@ -216,6 +227,25 @@ python 05_Interface_Auditoria/scripts/auditar_proposta.py --congelar-baseline
 
 Se o Auditor errou a régua, **você** corrige e sobe a versão (1.0 → 1.1) com uma nota do que mudou.
 Uma IA nunca afrouxa o próprio critério para passar na própria proposta.
+
+### O selo da régua (aprendido na prática)
+
+Quem altera qualquer arquivo protegido invalida o **selo** do baseline — e a partir daí **toda**
+proposta é bloqueada no check `I5`, inclusive as que nada têm a ver com a mudança. Isso aconteceu
+três vezes enquanto esta interface era construída (o próprio auditor editando os próprios scripts) e
+é o comportamento **desejado**: régua alterada exige re-selo consciente.
+
+```bash
+python 05_Interface_Auditoria/scripts/auditar_proposta.py --atualizar-hashes
+# re-sela a zona congelada (NÃO refaz medições) e registra quem/o quê/quando em "selos"
+```
+
+O re-selo é ato **humano** (ou do Auditor agindo em nome do humano) e fica auditável no histórico do
+baseline: `selos[]` guarda data, commit e a lista de arquivos alterados. Uma IA que altera a régua
+para se autoaprovar aparece nesse registro.
+
+Vereditos emitidos antes de um re-selo ficam **superados**: apague o arquivo de veredito do ID
+correspondente para forçar a reauditoria com a régua nova.
 
 ---
 

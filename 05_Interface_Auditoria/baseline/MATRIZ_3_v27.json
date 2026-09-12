@@ -32,11 +32,11 @@
     "04_Dados_SSOT_e_Scripts/setup_headless_gl.sh": "8d8812f2b95068466e6f60257349f9162ac9e272d175a5509310e97d5b6e06d2",
     "04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py": "dea957f056f3ca8c7cb112e2106b126f2a42a708f221686cc3e77062a09258a4",
     "04_Dados_SSOT_e_Scripts/verify_legacy_dies.py": "100c9874abb12914d3f94a9460b533d60c1689566773410adcf898778a57fff7",
-    "05_Interface_Auditoria/PROTOCOLO_AUDITORIA.md": "569ea31e0415b7acae4854375bb4dea0d9b42b451f7f3fd0b3230e45788000cc",
+    "05_Interface_Auditoria/PROTOCOLO_AUDITORIA.md": "83865936df7b41449dbdb1ebc5de52bdf166fb9b323eee3e4889f754970f8cb2",
     "05_Interface_Auditoria/esquema/proposta.schema.json": "88dbcac446e8bfe8955a76ad4050f41dc9cfa0f1bba7312a660e1ba529bac0f6",
     "05_Interface_Auditoria/esquema/veredito.schema.json": "1575a461ecedc928f7eac5673597a2d2e514a43442fba41e112c75cee5198830",
     "05_Interface_Auditoria/scripts/auditar_proposta.py": "189f74c35316506118fb15c0cf0add1d37d42e88f67524ef9a5fc5e910778c4e",
-    "05_Interface_Auditoria/scripts/monitor_auditoria.py": "ad27b89e825a53088562f8f7999d5105462c2095ef85b3edcb74b17539e1df5d",
+    "05_Interface_Auditoria/scripts/monitor_auditoria.py": "9012ad62c637b323032b79bd404fbe9887774eb30d9badd1084a55dbbaa21765",
     "05_Interface_Auditoria/scripts/painel_auditoria.py": "84f18b9c9d9aab5ba080986b336a3e9ba575b291ceb2ab90572ec8e70e7452d5"
   },
   "metricas": {
@@ -970,7 +970,18 @@
       ],
       "arquivos_novos": [],
       "arquivos_removidos": []
+    },
+    {
+      "quando": "2026-09-12T17:42:43+0000",
+      "commit": "2759786f27938630b57f4c98a498a78361d7e926",
+      "motivo": "re-selo da zona congelada (--atualizar-hashes)",
+      "arquivos_alterados": [
+        "05_Interface_Auditoria/PROTOCOLO_AUDITORIA.md",
+        "05_Interface_Auditoria/scripts/monitor_auditoria.py"
+      ],
+      "arquivos_novos": [],
+      "arquivos_removidos": []
     }
   ],
-  "hashes_atualizados_em": "2026-09-12T17:37:26+0000"
+  "hashes_atualizados_em": "2026-09-12T17:42:43+0000"
 }
