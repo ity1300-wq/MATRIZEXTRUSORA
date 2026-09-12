@@ -48,6 +48,13 @@ def git(*args, obrigatorio=False):
     return r.stdout.strip()
 
 
+def git_conteudo(ref):
+    """Conteúdo bruto de um arquivo num commit — SEM strip (o strip comia o newline final
+    e fazia o hash divergir do arquivo em disco)."""
+    r = subprocess.run(["git", "-C", RAIZ, "show", ref], capture_output=True, timeout=120)
+    return None if r.returncode != 0 else r.stdout.decode("utf-8", "replace")
+
+
 def sha256_txt(txt):
     return hashlib.sha256(txt.encode("utf-8")).hexdigest()
 
@@ -169,18 +176,18 @@ def main():
             alvos = propostas_entre(anteriores, sha)
             log(f"   propostas tocadas: {alvos or 'nenhuma'}")
             for caminho in alvos:
-                conteudo = git("show", f"{sha}:{caminho}") if anteriores else None
+                conteudo = git_conteudo(f"{sha}:{caminho}") if anteriores else None
                 if conteudo is None:
                     with open(os.path.join(RAIZ, caminho), encoding="utf-8") as fh:
                         conteudo = fh.read()
                 assinatura = sha256_txt(conteudo)
-                if estado["auditadas"].get(caminho) == assinatura:
-                    log(f"   {caminho}: já auditado nesta vigília com este conteúdo, pulando")
-                    continue
+                # a verdade é o arquivo de veredito em disco; o cache é só atalho
                 if veredito_para(caminho, assinatura):
                     log(f"   {caminho}: já existe veredito para este conteúdo, pulando")
                     estado["auditadas"][caminho] = assinatura
                     continue
+                if estado["auditadas"].get(caminho) == assinatura:
+                    log(f"   {caminho}: constava como auditado, mas o veredito não está em disco — refazendo")
                 log(f"   auditando {caminho} (modo {args.modo})...")
                 t0 = time.time()
                 situacao, identificador, codigo, saida = auditar(conteudo, caminho, args.modo, DIR_VER)
