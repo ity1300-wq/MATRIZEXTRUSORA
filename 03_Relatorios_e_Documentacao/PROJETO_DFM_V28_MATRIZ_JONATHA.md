@@ -158,7 +158,7 @@ já a colocava), não para a matriz. Isso não é escolha de projeto: é consequ
 
 `030-032- cabeçote.dwg` (HIDEALL, PED:2257 — EX-030 cabeçote em SAE8620 9"X65MM, cementado 0,4-0,6 mm e temperado a 52-55 HRC; EX-031 bucha cônica; EX-032 pushador) foi convertido para DXF e **medido numericamente**, entidade por entidade. A escala foi calibrada pelas próprias cotas do desenho — **k = 25,534 mm por unidade DXF**, incerteza +/- 0.003 (0.012%) — e cinco fechos independentes confirmam o fator: circulo dos furos do flange (raio medido 3,525 un) → desvio +0,01 %; Ø externo do flange (4,308 un) → desvio -0,01 %; Ø corpo do cabecote (2,546 un) → desvio +0,00 %; Ø furo da matriz (1,860 un) → desvio -0,01 %; Ø furo do nariz (1,762 un) → desvio -0,01 %.
 
-> **Correção registrada.** A versão anterior desta seção dizia "6 × M12 em BC Ø150, curso angular ±15°, escala 21,28 mm/un" e "Ø13,33 mm de folga". O Ø150 vinha de uma leitura de raster em baixa resolução: o desenho diz **C.C Ø180**. Tudo abaixo foi re-medido com a escala calibrada e provado por booleanos contra `MatrizJonatha_v28.step` (`verificar_interface_cabecote.py` → **48 itens, 41 conformes, 1 não conformes, 6 pendências do lado da máquina**).
+> **Correção registrada.** A versão anterior desta seção dizia "6 × M12 em BC Ø150, curso angular ±15°, escala 21,28 mm/un" e "Ø13,33 mm de folga". O Ø150 vinha de uma leitura de raster em baixa resolução: o desenho diz **C.C Ø180**. Tudo abaixo foi re-medido com a escala calibrada e provado por booleanos contra `MatrizJonatha_v28.step` (`verificar_interface_cabecote.py` → **49 itens, 41 conformes, 1 não conformes, 7 pendências do lado da máquina**).
 
 **Furos do cabeçote para a matriz** — profundidade `d` contada da face do nariz; a matriz senta em `Z_matriz = 95,00 − d` (corpo Ø130,00 × 42,00, flange Ø220,00 × 40,00, ressalto Ø203,00 × 3,00):
 
@@ -195,6 +195,7 @@ Ou seja: o aperto que a máquina já faz fecha o plano de partição por compres
 * confirmar se o assento do bolso Ø95x70 e cilindrico ou conico de 3 graus (o desenho mostra o collete com OD Ø95->Ø86)
 * ABERTA de novo em 2026-09-12: o '20 mm' do croqui e a posicao do M12 do bolso (contada da face do flange), nao a sobra axial da matriz. Com a protrusao do desenho (14,00 mm) a borda traseira do furo do cartucho em Z=97,00 fica 2,75 mm dentro da luva do nariz. Duas saidas, as duas medidas: cartuchos em Z >= 99,75 mm na matriz, ou alivio no nariz do cabecote. Medidas de conferencia na maquina: quanto a matriz sobressai do cabecote, e se o montador passa o cartucho com a matriz montada
 * CONFIRMAR a tolerância do Ø90 do nariz: o print mostra +0,05/+0,10 (os dois positivos), meu modelo usou +0,05/0. Efeito medido: folga radial do degrau da matriz passa de 0,250 para 0,250..0,325 mm; engate axial e contato do ombro não mudam
+* CONFERIR o Ø90 do furo do collete EX-031: medido no DXF como furo reto, ele nao passa sobre a banda Ø93 da matriz (falta 1,50 mm de raio). Precisa da peça ou do desenho isolado de EX-031 para dizer se o furo e conico, se a banda de aperto e outra, ou se a vista de 3,267 deg e de outra peca
 
 O DWG é conversão de avaliação (marca d'água "Evaluation only"), então as tolerâncias anotadas devem ser conferidas na peça antes de fechar o desenho de execução.
 
@@ -260,7 +261,7 @@ termopar ou o polímero.
 | **medir** | Comprimento do bico do cabeçote (sua linha no croqui × o nariz do desenho) | **REABERTA em 2026-09-12.** A cota '20 mm' do croqui, medida no DXF, é a posição do furo M12 do bolso contada da face do flange (72,02 − 52,02 = 20,00 mm) — não a sobra axial da matriz. Vale a protrusão do desenho (14,00 mm), e aí a borda traseira do furo mais crítico fica 2,75 mm dentro da luva do nariz, com 1372 mm³ de metal no caminho de inserção dos 5 eixos de furo na faixa de saída (são 10 furos: cada eixo entra pelas duas metades) | duas saídas medidas, e nenhuma delas mexe nos outros 20 furos da matriz: levar os cartuchos para Z ≥ 99,75 mm (calculado do Ø9,50 e da face do nariz em 95,00 mm) ou abrir alívio no nariz do cabeçote. No cenário alternativo (20,00 mm de protrusão) a folga vira 3,25 mm com 0 mm³ no caminho — por isso a conferência na máquina é o que fecha o item |
 
 Enquanto D3 estiver em aberto, **nada é promovido**: `MatrizJonatha.step` continua sendo o v27.0 e a
-v28.1 vive ao lado, com `verificar_v28.py` (64 itens) e `verificar_interface_cabecote.py` (48 itens, 41 conformes, 1 não conforme — a folga axial dos cartuchos × a luva do nariz, que é a linha 'medir' acima)
+v28.1 vive ao lado, com `verificar_v28.py` (64 itens) e `verificar_interface_cabecote.py` (49 itens, 41 conformes, 1 não conforme — a folga axial dos cartuchos × a luva do nariz, que é a linha 'medir' acima)
 para re-medir a qualquer momento.
 
 ---

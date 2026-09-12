@@ -320,8 +320,18 @@ def main():
               obs="cenário sem o degrau; com o ombro encostando (folga axial 0,10 mm) não é necessário")
     registrar("Pressão radial do collete p/ fechar o plano de partição",
               f"{n(p_part, 1)} MPa", obs=f"{n(forca_kn, 1)} kN de força de abertura equilibrados pela "
-              "compressão radial aplicada pelo collete sobre a banda Ø93 - é isto que fecha a bipartição",
-              ok=True)
+              "compressão radial aplicada pelo collete sobre a banda Ø93 - CONDICIONAL, ver o alerta do "
+              "furo Ø90 logo abaixo", ok=True)
+    _bc = dados["bucha_conica"]
+    alerta("Superfície de aperto do collete EX-031", _bc["conflito_encontrado"],
+           obs=(f"medido: furo reto Ø{n(_bc['medido_no_dxf']['Ø_interno_mm'], 2)} por "
+                f"{_bc['medido_no_dxf']['Ø_interno_comprimento_arestas_mm']} mm e cone de "
+                f"{n(_bc['medido_no_dxf']['cone_medido_graus'], 3)}° com silhueta "
+                f"Ø{n(_bc['medido_no_dxf']['Ø_externo_menor_mm'], 2)}; banda da matriz Ø"
+                f"{n(ENVELOPE[0][2], 2)} -> falta "
+                f"{n((ENVELOPE[0][2] - _bc['medido_no_dxf']['Ø_interno_mm']) / 2, 2)} mm de raio. "
+                "O apoio axial no degrau não depende disso (431,2 mm² medidos); o que fica condicionado é a "
+                "compressão radial e, com ela, o número de pressão acima"))
     p_peso = massa * 9.81 / (0.15 * A_aperto)
     registrar("Pressão radial p/ segurar só o peso na troca", f"{n(p_peso, 4)} MPa",
               obs=f"matriz de {n(massa)} kg")
@@ -499,7 +509,20 @@ def main():
               f"8. **A conferir no desenho:** o print mostra o Ø90 do nariz cotado +0,05/+0,10 (os dois "
               "positivos), e meu modelo usou +0,05/0. O efeito medido é pequeno e não trava nada: a folga radial "
               "do degrau Ø89,5 da matriz passa de 0,250 mm para a faixa 0,250…0,325 mm; o engate axial de 0,30 mm "
-              "é folga de face e o centro continua vindo da banda Ø93 apertada pelo collete.", ""]
+              "é folga de face e o centro continua vindo da banda Ø93 (que o collete aperta, se a superfície de "
+              "aperto for confirmada - item 9).",
+              "9. **Achei outro número meu que a medição derruba: o furo do collete não passa sobre a banda "
+              "Ø93.** Medindo as vistas com o eixo de cada uma (o corte do cabeçote tem eixo em y = 0; as "
+              "outras vistas têm eixo próprio, e era por isso que as varreduras anteriores não viam nada), "
+              "as **únicas 4 geratrizes inclinadas do desenho inteiro** estão a 3,267°, com silhueta "
+              "simétrica Ø86,00, e o furo que as acompanha é **reto Ø90,00** por 63 a 70 mm. Com Ø90 reto, "
+              "o collete EX-031 não desce sobre a banda Ø93 da matriz: faltam 1,50 mm de raio. O que muda: "
+              "a pressão de 8,6 MPa que eu citei como \"é isto que fecha a bipartição\" passa a ser "
+              "**condicional** à confirmação da superfície de aperto (furo do collete também cônico, outra "
+              "banda na matriz, ou a vista sendo de outra peça). O **apoio axial** no degrau - que é o que "
+              "reage os 29,8 kN - é medido por booleano entre as duas peças e independe do collete, "
+              "então continua de pé. E a recomendação que já estava no relatório é imune a isso: "
+              "monobloco por EDM, sem plano de partição para fechar.", ""]
         p = os.path.join(DIR_DOC, "INTERFASE_CABECOTE_EX030.md")
         open(p, "w", encoding="utf-8").write("\n".join(L))
         print(f"MD  -> {p}")

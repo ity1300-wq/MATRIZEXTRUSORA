@@ -123,7 +123,16 @@
     "Ø_externo": "-0,05/-0,1",
     "Ø_interno": "-0,15"
    },
-   "funcao_interpretada": "collete conico que, assentado no bolso Ø95x70, contrai sobre o corpo Ø93 da matriz; auto-travante (3 deg < arctan 0,15 = 8,6 deg)"
+   "funcao_interpretada": "collete conico que, assentado no bolso Ø95x70, contrai sobre o corpo Ø93 da matriz; auto-travante (3 deg < arctan 0,15 = 8,6 deg)",
+   "medido_no_dxf": {
+    "Ø_interno_mm": 90.0,
+    "Ø_interno_comprimento_arestas_mm": "63 a 70 (arestas horizontais retas a r = 45,00)",
+    "cone_medido_graus": 3.267,
+    "Ø_externo_menor_mm": 86.0,
+    "como": "as UNICAS 4 geratrizes inclinadas do DXF inteiro, todas a 3,267 deg, silhueta simetrica Ø86,00 (a 0,01 mm) numa ponta; medidas com o eixo LOCAL de cada vista - o corte do cabecote tem eixo em y = 0 e as outras vistas tem eixo proprio, por isso as varreduras antigas nao viam nada",
+    "Ø_externo_maior_extrapolado_mm": 94.0
+   },
+   "conflito_encontrado": "com furo RETO Ø90,00 o collete nao passa sobre a banda Ø93 da matriz: faltam 1,50 mm de raio (3,00 mm de diametro). As saidas possiveis, todas a confirmar na peca ou no desenho de EX-031: (a) o furo do collete tambem e conico e a Ø93 no lado grande; (b) a superficie de aperto nao e a banda Ø93 é sim outro diâmetro a criar na matriz; (c) a vista de 3,267 deg nao e o collete. Enquanto isso, o numero 'pressao do collete fecha a biparticao' e condicional, e o apoio AXIAL no degrau (area de contato medida 431,2 mm2) continua valido por si so - ele nao depende do collete"
   },
   "pushador": {
    "designacao": "EX-032 PUSHADOR DO CABECOTE",
@@ -175,7 +184,8 @@
   "pendencias": [
    "confirmar se o assento do bolso Ø95x70 e cilindrico ou conico de 3 graus (o desenho mostra o collete com OD Ø95->Ø86)",
    "ABERTA de novo em 2026-09-12: o '20 mm' do croqui e a posicao do M12 do bolso (contada da face do flange), nao a sobra axial da matriz. Com a protrusao do desenho (14,00 mm) a borda traseira do furo do cartucho em Z=97,00 fica 2,75 mm dentro da luva do nariz. Duas saidas, as duas medidas: cartuchos em Z >= 99,75 mm na matriz, ou alivio no nariz do cabecote. Medidas de conferencia na maquina: quanto a matriz sobressai do cabecote, e se o montador passa o cartucho com a matriz montada",
-   "CONFIRMAR a tolerância do Ø90 do nariz: o print mostra +0,05/+0,10 (os dois positivos), meu modelo usou +0,05/0. Efeito medido: folga radial do degrau da matriz passa de 0,250 para 0,250..0,325 mm; engate axial e contato do ombro não mudam"
+   "CONFIRMAR a tolerância do Ø90 do nariz: o print mostra +0,05/+0,10 (os dois positivos), meu modelo usou +0,05/0. Efeito medido: folga radial do degrau da matriz passa de 0,250 para 0,250..0,325 mm; engate axial e contato do ombro não mudam",
+   "CONFERIR o Ø90 do furo do collete EX-031: medido no DXF como furo reto, ele nao passa sobre a banda Ø93 da matriz (falta 1,50 mm de raio). Precisa da peça ou do desenho isolado de EX-031 para dizer se o furo e conico, se a banda de aperto e outra, ou se a vista de 3,267 deg e de outra peca"
   ],
   "conferencia_com_a_medicao_do_usuario": {
    "data": "2026-09-11",
@@ -598,8 +608,14 @@
   {
    "item": "Pressão radial do collete p/ fechar o plano de partição",
    "medido": "8,6 MPa",
-   "observacao": "55,7 kN de força de abertura equilibrados pela compressão radial aplicada pelo collete sobre a banda Ø93 - é isto que fecha a bipartição",
+   "observacao": "55,7 kN de força de abertura equilibrados pela compressão radial aplicada pelo collete sobre a banda Ø93 - CONDICIONAL, ver o alerta do furo Ø90 logo abaixo",
    "status": "CONFORME"
+  },
+  {
+   "item": "Superfície de aperto do collete EX-031",
+   "medido": "com furo RETO Ø90,00 o collete nao passa sobre a banda Ø93 da matriz: faltam 1,50 mm de raio (3,00 mm de diametro). As saidas possiveis, todas a confirmar na peca ou no desenho de EX-031: (a) o furo do collete tambem e conico e a Ø93 no lado grande; (b) a superficie de aperto nao e a banda Ø93 é sim outro diâmetro a criar na matriz; (c) a vista de 3,267 deg nao e o collete. Enquanto isso, o numero 'pressao do collete fecha a biparticao' e condicional, e o apoio AXIAL no degrau (area de contato medida 431,2 mm2) continua valido por si so - ele nao depende do collete",
+   "observacao": "medido: furo reto Ø90,00 por 63 a 70 (arestas horizontais retas a r = 45,00) mm e cone de 3,267° com silhueta Ø86,00; banda da matriz Ø93,00 -> falta 1,50 mm de raio. O apoio axial no degrau não depende disso (431,2 mm² medidos); o que fica condicionado é a compressão radial e, com ela, o número de pressão acima",
+   "status": "PENDENTE_CONFIRMACAO"
   },
   {
    "item": "Pressão radial p/ segurar só o peso na troca",
@@ -640,8 +656,8 @@
    "status": "PENDENTE_CONFIRMACAO"
   }
  ],
- "itens": 48,
+ "itens": 49,
  "conformes": 41,
  "nao_conformes": 1,
- "pendentes": 6
+ "pendentes": 7
 }
