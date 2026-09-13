@@ -54,7 +54,13 @@ DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")   # lido, nunca escrit
 DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
 PERFIS = os.path.join(AQUI, "perfis_matrizes_x_cabecote.json")
 # as montagens que o usuario pediu: o cabecote com a matriz original e com a Gedeon sentadas
-MONTAGENS = [("matriz_1_copo", "Matriz_Copo"), ("matriz_2_gedeon", "Matriz_Gedeon")]
+# uma montagem por matriz, todas dentro do CABECOTE COMPLETO (o `Cabecote_EX-030_desenhado.step`: corpo
+# + chanfro 10x45 + flange 0220x40 com os 6 furos M12 + junta) - pedido dele em 2026-09-13: "uma versao de
+# cada matriz dentro do cabecote completo com flange".
+MONTAGENS = [("matriz_1_copo", "Matriz_Copo"), ("matriz_2_gedeon", "Matriz_Gedeon"),
+             ("matriz_gedeon_certa", "Matriz_Gedeon_Certa"),
+             ("matriz_desenvolvimento", "Matriz_Desenvolvimento"),
+             ("jonatha_v27", "Matriz_Jonatha_v27"), ("jonatha_v28_1", "Matriz_Jonatha_v28_1")]
 DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 def vol(sh):
     """Volume de Shape/Compound: soma os solidos (maior() pegaria so uma das metades)."""
@@ -228,6 +234,8 @@ def main():
                 med["montagens"][chave] = {
                     "arquivo": os.path.relpath(pm, RAIZ),
                     "entrega_sem_booleano": True,
+                    "cabecote_na_montagem": "Cabecote_EX-030_desenhado.step (COMPLETO: corpo + chanfro "
+                                            "10x45 + flange 0220x40 com 6 furos M12 + junta)",
                     "arquivos_da_matriz": [os.path.relpath(x, RAIZ) for x in paths],
                     "solidos_da_matriz_no_arquivo": len(pedacos),
                     "encosto_usado": e["encosto_usado"], "deslocamento_aplicado_mm": round(dz, 3),
