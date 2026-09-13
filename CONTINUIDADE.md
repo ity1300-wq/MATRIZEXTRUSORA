@@ -96,6 +96,17 @@ modelados, 4 arquivos), os dois STEP derivados da v28 (`_Explodida`, `_Com_Fluxo
 por escolha e não por omissão: `.headless_gl/` (binário regenerável), `__pycache__`, os 4 padrões de
 `*Gedeon_Corrigida*` (a refutada, por ordem dele), os arquivos de estado do protocolo em `05_/`, e as fontes
 do `uploads/` — ver `03_/FONTES_DO_USUARIO_2026-09-13.md` para o comando que põe as 8 capturas lá.
+* **Se você quiser verificação automática no GitHub, falta um passo só — e ele é seu.** Escrevi o workflow do
+  portão (`04_Dados_SSOT_e_Scripts/ci/portao.yml`: job informativo, `continue-on-error` em tudo, `permissions`
+  de só-leitura, sem Modo A — veredito automático em PR continua encerrado por sua ordem) e o push para
+  `.github/workflows/` foi **recusado** com `refusing to allow a Personal Access Token to create or update
+  workflow ... without 'workflow' scope`. É a mesma parede que o `05_/ci/LEIA-ME.md` do auditor registrou (a
+  credencial da plataforma é um App sem a permissão `workflows`; por isso as Actions desta repo têm 0 rodadas).
+  Não vou contornar pelo endpoint de conteúdo, porque isso é furar o modelo de permissões do seu token, não
+  remover trava do projeto. Ligar: `mkdir -p .github/workflows && cp 04_Dados_SSOT_e_Scripts/ci/portao.yml
+  .github/workflows/portao.yml && git add .github/workflows && git commit -m "liga o portao de CI" && git push`
+  — ou colar o conteúdo em *Actions → New workflow* na web, que não exige o escopo. Se você recriar o token com
+  a marca `workflow`, eu ligo sozinho.
 O `--rapido` **não** substitui a porta completa antes de um push — foi uma mudança de caminho feita sem o
 portão completo que quebrou dois verificadores em 2026-09-13 (juntavam caminho com variável e foram procurar
 o arquivo na pasta errada).
