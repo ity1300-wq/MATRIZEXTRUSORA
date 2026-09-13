@@ -189,9 +189,10 @@ git show --stat HEAD                     # a reorganizacao #2, com a justificati
 git log origem/main..HEAD --oneline      # o que ainda nao desceu para a main
 ```
 
-Branches no GitHub (estado de 2026-09-13, depois do push completo): `main` == `continue` == a tag
-`estado-2026-09-13` — o estado atual está no branch padrão, então quem clonar sem saber de nada já cai em
-cima do trabalho inteiro; `proposta/PRP-0005` continua na estrutura anterior (a v28.1 como foi submetida, para
+Branches no GitHub (estado de 2026-09-13, depois do push completo): `main` **contém** `continue` e a tag
+`estado-2026-09-13` — a `main` só tem à frente os merge commits da própria sessão, então quem clonar sem saber
+de nada já cai em cima do trabalho inteiro (foi assim que testamos: `git clone` da `main` +
+`python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --rapido` em máquina limpa = **PORTA ABERTA**); `proposta/PRP-0005` continua na estrutura anterior (a v28.1 como foi submetida, para
 não reescrever PR em revisão); `master` é o snapshot legado que ele manteve de reserva, intocado; e as duas
 `arena/01a091ce-*` / `arena/01a096e3-*` são as pontas da cerimônia de auditoria velha, deixadas como estão.
 
@@ -210,6 +211,12 @@ proposta → veredito do protocolo v1.0. Isso não é aprovação de nada: `matr
 continua apontando para `MatrizJonatha.step` (v27.0) e a v28.1 continua na pasta com `PROPOSTA` no nome. A
 PR #3 passou a "merged" como efeito mecânico de a main conter os commits dela; o veredito nunca foi dado e não
 será dado nesse formato (ver item 1 acima).
+
+As duas PRs abertas da cerimônia velha receberam comentário de estado na data: a **#3** (nossa, PRP-0005) foi
+fechada pelo GitHub como "merged" por motivo mecânico — os commits dela entraram na `main` com o push do estado
+— e o comentário diz que **isso não é veredito nem aprovação da v28.1**; a **#4** (PRP-0006 de outrem, land
+10,00 com chanfro 0,80) fica aberta sem re-veredito, com a decisão D2 (chanfro 1,50 do master) citada e os três
+defeitos da régua apontados como insumo do método novo.
 
 **O repo é público.** Por isso as capturas dele (`uploads/`, prints de celular) e os rascunhos soltos do
 workspace **não** foram para o GitHub de propósito: o que importa deles já está medido e transcrito em
