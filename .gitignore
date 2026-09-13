@@ -11,8 +11,8 @@ __pycache__/
 05_Interface_Auditoria/.proposta_em_auditoria.json
 
 # Derivados recriados pelo portao (04_Dados_SSOT_e_Scripts/verificar_cadeia.py) - ficam fora do git de proposito
-07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28_Explodida.step
-07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28_Com_Fluxo.step
+07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28_Explodida.step
+07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28_Com_Fluxo.step
 03_Relatorios_e_Documentacao/V28_CONFERENCIA_VISUAL.png
 05_Variantes_Em_Estudo/ESTUDO_*.step
 07_CAD_Matrizes/**/DESENHO_2D_*_p*.png
@@ -20,5 +20,9 @@ __pycache__/
 # saida do renderizar_v28.py (2,1 MB de conferencia visual, recriavel a cada rodada)
 v28_conferencia.png
 
-# a tentativa refutada da Gedeon: o portao a recria para as medicoes comparativas, mas ela nao e entrega
-# a tentativa de re-corte da Gedeon foi APAGADA de proposito (2026-09-13); se alguem a recriar, que fique fora
+# a "Gedeon corrigida" (tentativa de re-corte) foi APAGADA de proposito em 2026-09-13: nao e entrega.
+**/*Gedeon_Corrigida*.step
+**/Cabecote_EX-030_com_Matriz_Gedeon_Corrigida.step
+**/gedeon_corrigida.json
+**/RELATORIO_GEDEON_CORRIGIDA.md
+# se alguem a recriar em disco para medir alguma coisa, que nao volte para o git
