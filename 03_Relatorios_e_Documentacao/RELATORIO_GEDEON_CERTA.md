@@ -4,7 +4,7 @@ Fonte: `02_CAD_Modelos_Historicos/matrizGedeonCerta.step` (aberto só para leitu
 
 ## Por que este relatório existe
 
-A entrega anterior (`06_/STEP/Gedeon_Corrigida/`) re-cortou no arquivo do usuário o canal histórico
+A entrega anterior (`06_/STEP/Gedeon_Corrigida/`, apagada em 2026-09-13) re-cortou no arquivo do usuario o canal historico
 da Gedeon — tirou 170772,2 mm³ de aço dele com o argumento de que o
 arquivo era um bloco bruto. **Estava errado.** Medido face por face, o arquivo já é a matriz pronta:
 fenda 75,00 × 1,50 mm com R 0,75 atravessando de Z = 0,17 a Z = 109,00, cone de entrada abrindo em Ø 75,60 em Z = -0,00, e os dois furos de pino Ø 1,78 × 10,00 mm.
@@ -37,11 +37,11 @@ Booleano medido: 171224,1 mm³ de aço só na Gedeon certa e 44,9 mm³ só na v2
 ## Arquivos
 
 ```
-07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Body_A.step
-07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Body_B.step
-07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Canal_Fluxo.step
-07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Explodida.step
-07_CAD_Matrizes/M03_Gedeon_CERTA/Cabecote_EX-030_com_Matriz_Gedeon_Certa.step
+07_CAD_Matrizes/Matriz_Gedeon_Certa/MatrizGedeon_Certa_Body_A.step
+07_CAD_Matrizes/Matriz_Gedeon_Certa/MatrizGedeon_Certa_Body_B.step
+07_CAD_Matrizes/Matriz_Gedeon_Certa/MatrizGedeon_Certa_Canal_Fluxo.step
+07_CAD_Matrizes/Matriz_Gedeon_Certa/MatrizGedeon_Certa_Explodida.step
+07_CAD_Matrizes/Matriz_Gedeon_Certa/Cabecote_EX-030_com_Matriz_Gedeon_Certa.step
 ```
 
 Checks: 21 executados, 0 falha(s). Nada promovido: o master continua v27.0.

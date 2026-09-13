@@ -167,15 +167,15 @@ MATRIZEXTRUSORA/
 ├── .gitignore                             -> Exclusões para repositório Git
 │
 ├── 📂 07_CAD_Matrizes/                     -> **UMA PASTA POR MATRIZ** (reorganização de 2026-09-13)
-│   ├── M01_Jonatha_v27_OFICIAL/           -> o modelo oficial: MatrizJonatha.step, A, B, canal, explodida,
+│   ├── Matriz_Jonatha_v27_OFICIAL/           -> o modelo oficial: MatrizJonatha.step, A, B, canal, explodida,
 │   │                                        com fluxo — e o README com o sha256 conferido contra o baseline
-│   ├── M02_Jonatha_v28_PROPOSTA/          -> proposta DFM v28.1 (NÃO promovida): A/B, canal, kit de 4 pinos
-│   ├── M03_Gedeon_CERTA/                  -> a Gedeon do backup do usuário, partida em Y = 0, + prancha de
+│   ├── Matriz_Jonatha_v28_1_PROPOSTA/          -> proposta DFM v28.1 (NÃO promovida): A/B, canal, kit de 4 pinos
+│   ├── Matriz_Gedeon_Certa/                  -> a Gedeon do backup do usuário, partida em Y = 0, + prancha de
 │   │                                        5 faixas `DESENHO_2D_GEDEON_CERTA_X_JONATHA.pdf`
-│   ├── M04_Gedeon_ENTREGUE_HISTORICA/     -> índice + medição da Gedeon do CAD antigo e a refutação da
+│   ├── Matriz_Gedeon_Entregue_HISTORICA/     -> índice + medição da Gedeon do CAD antigo e a refutação da
 │   │                                        tentativa de re-corte (os STEP históricos ficam em 02_/)
-│   ├── M05_Copo_HISTORICA/                -> índice + medição da Matriz 1 "Copo" (origem em 02_/)
-│   └── M06_MatrizDesenvolvimento_HISTORICA/ -> índice + medição da terceira histórica (origem em 02_/)
+│   ├── Matriz_Copo_HISTORICA/                -> índice + medição da Matriz 1 "Copo" (origem em 02_/)
+│   └── Matriz_Desenvolvimento_HISTORICA/ -> índice + medição da terceira histórica (origem em 02_/)
 │
 ├── 📂 01_CAD_MatrizJonatha_Oficial/       -> ATALHOS com o MESMO conteúdo do master (SSOT v27.0): os seis
 │   └── MatrizJonatha*.step                 `MatrizJonatha*.step` são symlinks para 07_/M01, para que o

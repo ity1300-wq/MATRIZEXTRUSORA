@@ -1,6 +1,6 @@
 # M02 — Matriz Jonatha v28.1 (proposta DFM, NÃO promovida)
 
-É uma proposta em auditoria, não o modelo de trabalho. O master continua o v27.0 em `../M01_Jonatha_v27_OFICIAL/`.
+É uma proposta em auditoria, não o modelo de trabalho. O master continua o v27.0 em `../Matriz_Jonatha_v27_OFICIAL/`.
 
 Conteúdo: corpo inteiro, A, B, canal, pinos de alinhamento (os `_Explodida.step` e `_Com_Fluxo.step` que
 existiam aqui saíram do repositório como derivados; `python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py`
@@ -14,4 +14,4 @@ da bipartição 55,7 kN.
 **Consequência da mudança de pasta, avisada:** `05_Interface_Auditoria/propostas/PRP-0005-v28-1-fabricacao.json`
 lista `arquivos[]` com `caminho` apontando para `01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28*.step`. esses
 caminhos não têm atalho (só o v27 tem). Quando a auditoria for reaberta, isso se resolve nascendo `PRP-0006`
-com os caminhos de `07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/` — proposta auditada não se edita.
+com os caminhos de `07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/` — proposta auditada não se edita.

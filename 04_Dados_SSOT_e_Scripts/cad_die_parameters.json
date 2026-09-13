@@ -32,7 +32,7 @@
     "P2 (bloqueador): furos de pino selados no Body_A (cavidades internas) e ausentes no Body_B; a Matriz 2 tinha pino Ø1,78 x 10 mm atravessando as duas metades.",
     "P3 (risco): sem controle térmico (cartuchos Ø9,5, termopar, refrigeração Ø8,0).",
     "P4 (dependência): sem padrão de flange/acoplamento em Z=0.",
-    "P5 (entrega) - REVOGADA em 2026-09-12, por medida, com o backup do usuario em maao: a triagem dizia que MatrizGedeon_Canal_Fluxo.step estava errado (213.790,0 mm3 contra 43.017,9 mm3 do 'canal real'). Medido em gerar_gedeon_corrigida.py: 213.790,0 = funil de 43.017,9 SOMADO a cavidade cortada nas metades (170.753,7), com sobra de 19,095 mm3 nos dois sentidos (0,009 % do canal). O arquivo do canal esta certo; os 43.017,9 mm3 eram so o funil, que e o unico solido de canal que aparece dentro de MatrizGedeon.step. O que esta errado no arquivo da Gedeon e outra coisa, e agora esta consertado: MatrizGedeon_Body_A.step e 1 solido com 3 cascas (bolso de pino selado, sem ferramenta que o faca) enquanto o Body_B nao tem bolso nenhum, e MatrizGedeon.step sao 5 solidos que se atravessam (duas metades brutas + funil + 2 pinos) - e isso que abre como 'arquivo corrompido' em qualquer CAD.",
+    "P5 (entrega) - REVOGADA em 2026-09-12, por medida, com o backup do usuario em maao: a triagem dizia que MatrizGedeon_Canal_Fluxo.step estava errado (213.790,0 mm3 contra 43.017,9 mm3 do 'canal real'). Medido em gerar_gedeon_certa.py (a tentativa `gerar_gedeon_corrigida.py` foi apagada em 2026-09-13): 213.790,0 = funil de 43.017,9 SOMADO a cavidade cortada nas metades (170.753,7), com sobra de 19,095 mm3 nos dois sentidos (0,009 % do canal). O arquivo do canal esta certo; os 43.017,9 mm3 eram so o funil, que e o unico solido de canal que aparece dentro de MatrizGedeon.step. O que esta errado no arquivo da Gedeon e outra coisa, e agora esta consertado: MatrizGedeon_Body_A.step e 1 solido com 3 cascas (bolso de pino selado, sem ferramenta que o faca) enquanto o Body_B nao tem bolso nenhum, e MatrizGedeon.step sao 5 solidos que se atravessam (duas metades brutas + funil + 2 pinos) - e isso que abre como 'arquivo corrompido' em qualquer CAD.",
     "P6 (decisão): números de CFD não reproduzíveis - τ de 128,44 kPa é impossível (mesmo land e mesma vazão dão 164,0 kPa, confirmado por CFD 2D em 160,9 kPa); Matriz 1 com 185,4 bar contra 23,8 bar medidos em 1D (fórmula da fenda corrigida em 11/09/2026).",
     "P7 (robustez): lábio de saída com 0,75 mm de aço - sugerido chanfro de 0,8 x 45°.",
     "P8 (documentação): land paralelo real de 8,50 mm e não 10,00 mm."
@@ -53,7 +53,7 @@
     "quando": "2026-09-12",
     "por_quem": "IA engenheiro, ao medir 02_/matrizGedeonCerta.step (backup do usuario)",
     "o_que_continua_verdade": "a biparticao da Gedeon tem bolso de pino selado no Body_A e ausente no Body_B - a mesma molestia do G-03 na Jonatha v27, que mostra [3, 1] de cascas por solido",
-    "onde_confere": "04_Dados_SSOT_e_Scripts/gedeon_corrigida.json (canal_da_gedeon_confere)"
+    "onde_confere": "04_Dados_SSOT_e_Scripts/gedeon_certa.json (cavidade, cone_entrada, fenda)"
    }
   },
   "tratamento_auditoria_v28_1": {
@@ -111,9 +111,9 @@
     },
     "Matriz historica Gedeon reconstruida": {
      "status": "consertada por medida, e nao e a Jonatha",
-     "tratamento": "Re-corte do bloco do backup do usuario (02_/matrizGedeonCerta.step, 640.180,7 mm3, que sao as duas metades brutas ao bitola: diff 0,000 mm3) com o canal proprio da Gedeon (213.790,0 mm3) e com os pinos do proprioo arquivo dele (2x D1,78 x 10,00, que ja atravessam Y = 0), partido no plano Y = 0. Sai par com 1 casca por solido (o Body_A fornecido tem 3), A n B = 0,000000 mm3, nenhum metal no caminho do plastico (0,000000 mm3 dos dois lados), envelope D93,00 x Z 0..109,00 igual ao backup, e sentado no cabecote com 0,0000 mm3 de interferencia nos dois corpos. Prancha comparativa com as cinco faixas no mesmo escalonamento: 07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/DESENHO_2D_GEDEON_CONSERTADA_X_JONATHA.pdf",
+     "tratamento": "Re-corte do bloco do backup do usuario (02_/matrizGedeonCerta.step, 640.180,7 mm3, que sao as duas metades brutas ao bitola: diff 0,000 mm3) com o canal proprio da Gedeon (213.790,0 mm3) e com os pinos do proprioo arquivo dele (2x D1,78 x 10,00, que ja atravessam Y = 0), partido no plano Y = 0. Sai par com 1 casca por solido (o Body_A fornecido tem 3), A n B = 0,000000 mm3, nenhum metal no caminho do plastico (0,000000 mm3 dos dois lados), envelope D93,00 x Z 0..109,00 igual ao backup, e sentado no cabecote com 0,0000 mm3 de interferencia nos dois corpos. Prancha comparativa com as cinco faixas no mesmo escalonamento: 07_CAD_Matrizes/Matriz_Gedeon_Entregue_HISTORICA/DESENHO_2D_GEDEON_CONSERTADA_X_JONATHA.pdf",
      "numero_medido_hoje": "aco do par 469.358,8 mm3 contra 469.001,7 mm3 da v27; booleano nos dois sentidos: par - v27 = 155,1 mm3 e v27 - par = 44,9 mm3, entao nao sao a mesma peca. O que as separa e interno e nas bordas: o canal da Gedeon esta contido no da Jonatha (Gedeon - Jonatha = 0,0 mm3; Jonatha - Gedeon = 155,1 mm3 = 0,07 %), e o desenho mede ONDE os 155,1 mm3 estao: no anel de saida, Z 107,50 a 109,00 - o chanfro de 1,50 x 45 graus que a Jonatha tem e a Gedeon nao tem - mais 44,9 mm3 na zona dos pinos (Z 44,50 a 64,50), onde a Gedeon tem bolso e a v27 e macica. Nao e o funil: a afirmacao anterior foi escrita antes de medir a posicao e esta corrigida aqui e no relatorio",
-     "onde_confere": "04_Dados_SSOT_e_Scripts/gedeon_corrigida.json e 03_Relatorios_e_Documentacao/RELATORIO_GEDEON_CORRIGIDA.md, gerados por gerar_gedeon_corrigida.py que entrou na cadeia do portao"
+     "onde_confere": "04_Dados_SSOT_e_Scripts/gedeon_certa.json e 03_Relatorios_e_Documentacao/RELATORIO_GEDEON_CERTA.md, gerados por gerar_gedeon_certa.py, que entrou na cadeia do portao (a tentativa `*_corrigida` foi apagada em 2026-09-13)"
     }
    },
    "o_que_continua_aberto": [
@@ -122,7 +122,7 @@
     "Superfície de aperto do collete EX-031 (o furo Ø90,00 reto que medimos no DXF não desce sobre a banda Ø93: faltam 1,50 mm de raio). A pressão de fechamento é condicional a isso.",
     "Promover ou não a v28.1: a v27.0 continua sendo o master aprovado até você dizer.",
     "Medições que só o paquímetro resolve: Ø90 do furo do collete, D3 do funil, M12 na face.",
-    "Gedeon reconstruida em 07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/ e peca de trabalho: nao substitui o master (regra 1) nem os historicos (regra 2), e o que vale e o que o processo de auditoria aprovar"
+    "Gedeon reconstruida em 07_CAD_Matrizes/Matriz_Gedeon_Entregue_HISTORICA/ e peca de trabalho: nao substitui o master (regra 1) nem os historicos (regra 2), e o que vale e o que o processo de auditoria aprovar"
    ]
   },
   "merge_main_2026_09_12": {
@@ -477,14 +477,14 @@
  "proposta_v28_dfm": {
   "status": "PENDENTE_APROVACAO (v27.0 continua oficial)",
   "arquivos": {
-   "master_assembly_step": "07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28.step",
-   "isolated_body_a": "07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28_Body_A.step",
-   "isolated_body_b": "07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28_Body_B.step",
-   "isolated_flow_channel": "07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28_Canal_Fluxo.step",
-   "exploded_view_step": "07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28_Explodida.step",
-   "with_polymer_flow_step": "07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28_Com_Fluxo.step",
-   "pino_kit_step": "07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28_Pinos_Alinhamento.step",
-   "kit_pinos": "07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28_Pinos_Alinhamento.step (4 sólidos nomeados)"
+   "master_assembly_step": "07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28.step",
+   "isolated_body_a": "07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28_Body_A.step",
+   "isolated_body_b": "07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28_Body_B.step",
+   "isolated_flow_channel": "07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28_Canal_Fluxo.step",
+   "exploded_view_step": "07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28_Explodida.step",
+   "with_polymer_flow_step": "07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28_Com_Fluxo.step",
+   "pino_kit_step": "07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28_Pinos_Alinhamento.step",
+   "kit_pinos": "07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28_Pinos_Alinhamento.step (4 sólidos nomeados)"
   },
   "geradores": {
    "cad": "04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py",

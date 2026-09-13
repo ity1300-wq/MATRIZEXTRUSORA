@@ -14,7 +14,7 @@ do v27.0 e so a regiao Z >= 99,00 (land + chanfro) e reconstuida. Nada do que
 foi aprovado e re-gerado por estimativa.
 
 Uso:  python 04_Dados_SSOT_e_Scripts/gerar_matriz_v28.py
-Saida: 07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28*.step
+Saida: 07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28*.step
        04_Dados_SSOT_e_Scripts/matriz_v28_features.json
 """
 
@@ -25,8 +25,8 @@ import os
 import cadquery as cq
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
-DIR_OUT = os.path.join(RAIZ, "07_CAD_Matrizes", "M02_Jonatha_v28_PROPOSTA")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
+DIR_OUT = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v28_1_PROPOSTA")
 DIR_DADOS = os.path.join(RAIZ, "04_Dados_SSOT_e_Scripts")
 
 # ---------------------------------------------------------------- parametros
@@ -267,7 +267,7 @@ def main():
     for (t, d, x, z, c, q, y0, y1) in furos:
         print(f"    {t:<18} Ø{d:5.2f}  X={x:7.2f}  Z={z:6.2f}  L={c:6.2f} mm  "
               f"Y=[{y0:7.2f},{y1:6.2f}]  [{q}]")
-    print(f"\n-> STEP {ROTULO_DOC} gravados em 07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/ (prefixo MatrizJonatha_{ROTULO})")
+    print(f"\n-> STEP {ROTULO_DOC} gravados em 07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/ (prefixo MatrizJonatha_{ROTULO})")
     return 0
 
 

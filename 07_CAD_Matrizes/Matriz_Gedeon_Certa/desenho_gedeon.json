@@ -22,26 +22,26 @@
    "pinos_marcados": [
     {
      "x": [
-      -42.39,
-      -40.61
+      39.5,
+      43.5
      ],
      "z": [
-      54.5,
-      64.5
+      52.5,
+      56.5
      ]
     },
     {
      "x": [
-      40.61,
-      42.39
+      -43.5,
+      -39.5
      ],
      "z": [
-      54.5,
-      64.5
+      52.5,
+      56.5
      ]
     }
    ],
-   "aco_mm3": 469358.8
+   "aco_mm3": 469156.8
   },
   "3 Gedeon certa": {
    "área_material_mm2": 8776.5,
@@ -110,5 +110,5 @@
    }
   }
  },
- "prancha": "06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/DESENHO_2D_GEDEON_CERTA_X_JONATHA.pdf"
+ "prancha": "07_CAD_Matrizes/Matriz_Gedeon_Certa/DESENHO_2D_GEDEON_CERTA_X_JONATHA.pdf"
 }

@@ -38,7 +38,7 @@ RAIZ = os.path.abspath(os.path.join(AQUI, ".."))
 sys.path.insert(0, AQUI)
 DIR_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP")
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
-DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
+DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
 PERFIS = os.path.join(AQUI, "perfis_matrizes_x_cabecote.json")
 
 from verificar_interface_cabecote import CORPO, BORES, CHAMFRO, Z_FACE_NARIZ, n  # noqa: E402

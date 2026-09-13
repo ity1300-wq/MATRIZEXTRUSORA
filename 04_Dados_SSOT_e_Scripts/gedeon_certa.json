@@ -279,11 +279,17 @@
   "canal_da_v27_mm3": 213945.1,
   "diferenca_de_conceito": "a certa e um tampao com a fenda atravessada e um cone de entrada; a v27 tem funil proprio dentro dela. A diferenca nao e 'funil ampliado': a Gedeon nao tem funil no seu aco - a convergencia a montante e do furo estagiado do cabecote."
  },
- "entrega_anterior_refutada": {
-  "volume_aco_entrega_anterior_mm3": 469358.8,
+ "gedeon_entregue_contra_certa": {
+  "arquivo": "02_CAD_Modelos_Historicos/MatrizGedeon_Body_A.step + _Body_B.step (lidos; atalhos para 07_CAD_Matrizes/Matriz_Gedeon_Entregue_HISTORICA/)",
+  "volume_aco_entregue_mm3": 469156.8,
   "volume_aco_certa_mm3": 640180.7,
-  "aco_removido_por_engano_mm3": 170821.9,
-  "motivo": "a entrega anterior escavou no arquivo do usuario o canal historico `MatrizGedeon_Canal_Fluxo.step` inteiro, quando a unica cavidade da matriz e o cone de entrada + a fenda atravessada"
+  "aco_que_falta_na_entregue_mm3": 171024.0,
+  "motivo": "a Gedeon que veio do CAD antigo tem o funil da Jonatha escavado no proprio aco; a certa do usuario nao tem funil nenhum - o vazio dela e o cone de entrada + a fenda atravessada"
+ },
+ "recorte_historico_nao_e_a_matriz": {
+  "volume_do_canal_historico_mm3": 213790.0,
+  "aco_que_ser_removido_da_certa_mm3": 170772.2,
+  "observacao": "escavar `MatrizGedeon_Canal_Fluxo.step` no arquivo do usuario tiraria este aco dele; a entrega NAO faz isso, e foi exatamente o que a tentativa anterior (apagada em 2026-09-13) fazia"
  },
  "round_trip": {
   "volume_reimportada_mm3": 320090.3617,

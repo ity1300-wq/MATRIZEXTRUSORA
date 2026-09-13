@@ -25,8 +25,8 @@ import cadquery as cq
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
-DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
-DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "M02_Jonatha_v28_PROPOSTA")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
+DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v28_1_PROPOSTA")
 DIR_ESTUDO = os.path.join(RAIZ, "05_Variantes_Em_Estudo")
 DIR_REL = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 sys.path.insert(0, AQUI)

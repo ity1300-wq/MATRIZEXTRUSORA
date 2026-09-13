@@ -36,8 +36,8 @@ from verificar_v28 import (maior, dist3d, n, checar, registrar, linhas,  # noqa:
 def n2(v):
     return float(v)
 
-DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
-DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "M02_Jonatha_v28_PROPOSTA")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
+DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v28_1_PROPOSTA")
 DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 
 # --------------------------------------------------------------- cabecote

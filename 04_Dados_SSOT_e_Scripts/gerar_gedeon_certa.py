@@ -9,7 +9,9 @@ o mesmo bloco sem escavação. O corte tirou 171.069,7 mm³ de aço do arquivo d
 face agora, o arquivo dele NÃO é bloco bruto: ele já tem a fenda 75,00 × 1,50 com R 0,75 atravessando de
 Z = 0,17 a Z = 109,00, já tem o cone de entrada que abre em Ø 75,60 em Z = 0 e já tem os dois furos de
 pino Ø 1,78 × 10,00. Ou seja: **é a matriz pronta**. Escavar o funil da Jonatha nela estava errado, e o
-STEP entregue em `06_/STEP/Gedeon_Corrigida/` está errado por isso. Este script refaz a entrega sem
+STEP entregue em `06_/STEP/Gedeon_Corrigida/` esta errado por isso (a pasta, o gerador e os
+arquivos foram apagados em 2026-09-13, a pedido - a Gedeon certa e o arquivo do usuario, nao havia canal a
+reconstruir). Este script refaz a entrega sem
 mexer em um décimo de aço do arquivo dele.
 
 O que sobra de defeito no arquivo dele, e é o único: os dois furos de pino são **cavidades seladas
@@ -42,15 +44,15 @@ from verificar_v28 import maior                  # maior(): descarta migalha de 
 from verificar_v28 import n                        # n(): número pt-BR, o formato que o portão compara
 
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
-DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
-DIR_SAI = os.path.join(RAIZ, "07_CAD_Matrizes", "M03_Gedeon_CERTA")
+DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
+DIR_SAI = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Gedeon_Certa")
 F_CERTA = os.path.join(DIR_HIS, "matrizGedeonCerta.step")
 F_CANAL_G = os.path.join(DIR_HIS, "MatrizGedeon_Canal_Fluxo.step")
 F_J27 = os.path.join(DIR_OFF, "MatrizJonatha.step")
 F_J27_CANAL = os.path.join(DIR_OFF, "MatrizJonatha_Canal_Fluxo.step")
 F_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Cabecote_EX-030_sem_flange.step")
-F_MON = os.path.join(RAIZ, "07_CAD_Matrizes", "M04_Gedeon_ENTREGUE_HISTORICA",
-                     "Cabecote_EX-030_com_Matriz_Gedeon_Corrigida.step")
+# a montagem entregue (cabecote + Gedeon certa): e dela que [6] le a colocacao real da matriz no cabecote
+F_MON = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Cabecote_EX-030_com_Matriz_Gedeon_Certa.step")
 ARQ_JSON = os.path.join(AQUI, "gedeon_certa.json")
 ARQ_MD = os.path.join(RAIZ, "03_Relatorios_e_Documentacao", "RELATORIO_GEDEON_CERTA.md")
 ARQ_SSOT = os.path.join(AQUI, "cad_die_parameters.json")
@@ -354,23 +356,29 @@ def main():
     print(f"    caminho de fluxo da certa {vol(fluxo):,.1f} mm3 contra o funil da v27 {vol(canal_j):,.1f} mm3; "
           f"aco das pecas inteiras: certa {vol(certa):,.1f} x v27 {vol(j27):,.1f} mm3")
 
-    # --------------------------------------------------- [8] o que a entrega anterior errou, em numero
-    d_ant = os.path.join(RAIZ, "07_CAD_Matrizes", "M04_Gedeon_ENTREGUE_HISTORICA")
-    try:
-        a_ant = maior(le(os.path.join(d_ant, "MatrizGedeon_Corrigida_Body_A.step")))
-        b_ant = maior(le(os.path.join(d_ant, "MatrizGedeon_Corrigida_Body_B.step")))
-        v_ant = vol(uniao([a_ant, b_ant]))
-        med["entrega_anterior_refutada"] = dict(
-            volume_aco_entrega_anterior_mm3=round(v_ant, 1), volume_aco_certa_mm3=round(vol(certa), 1),
-            aco_removido_por_engano_mm3=round(vol(certa) - v_ant, 1),
-            motivo="a entrega anterior escavou no arquivo do usuario o canal historico "
-                   "`MatrizGedeon_Canal_Fluxo.step` inteiro, quando a unica cavidade da matriz e o cone de "
-                   "entrada + a fenda atravessada")
-        print(f"    [refutada] a entrega anterior tem {v_ant:,.1f} mm3 de aco contra os {vol(certa):,.1f} mm3 "
-              f"do arquivo dele: {vol(certa) - v_ant:,.1f} mm3 removidos a mais")
-    except FileNotFoundError:
-        med["entrega_anterior_refutada"] = None
-        print("    [refutada] pasta da entrega anterior nao encontrada - nada a comparar")
+    # --------------------------------- [8] a GEDEON ENTREGUE (02_/) contra a CERTA, medida nos dois arquivos
+    d_ant = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Gedeon_Entregue_HISTORICA")
+    a_ant = maior(le(os.path.join(d_ant, "MatrizGedeon_Body_A.step")))
+    b_ant = maior(le(os.path.join(d_ant, "MatrizGedeon_Body_B.step")))
+    v_ant = vol(uniao([a_ant, b_ant]))
+    med["gedeon_entregue_contra_certa"] = dict(
+        arquivo="02_CAD_Modelos_Historicos/MatrizGedeon_Body_A.step + _Body_B.step (lidos; atalhos para "
+                "07_CAD_Matrizes/Matriz_Gedeon_Entregue_HISTORICA/)",
+        volume_aco_entregue_mm3=round(v_ant, 1), volume_aco_certa_mm3=round(vol(certa), 1),
+        aco_que_falta_na_entregue_mm3=round(vol(certa) - v_ant, 1),
+        motivo="a Gedeon que veio do CAD antigo tem o funil da Jonatha escavado no proprio aco; a certa do "
+               "usuario nao tem funil nenhum - o vazio dela e o cone de entrada + a fenda atravessada")
+    print(f"    [Gedeon entregue x certa] aco {v_ant:,.1f} mm3 contra {vol(certa):,.1f} mm3: faltam na "
+          f"entregue {vol(certa) - v_ant:,.1f} mm3 que a escavacao do funil levou")
+
+    # -------------------------------------------------- [9] a tentativa de re-corte, que nao e a matriz
+    med["recorte_historico_nao_e_a_matriz"] = dict(
+        volume_do_canal_historico_mm3=round(vol(canal_velho), 1),
+        aco_que_ser_removido_da_certa_mm3=round(vol(certa) - sobra, 1),
+        observacao="escavar `MatrizGedeon_Canal_Fluxo.step` no arquivo do usuario tiraria este aco dele; a "
+                   "entrega NAO faz isso, e foi exatamente o que a tentativa anterior (apagada em "
+                   "2026-09-13) fazia")
+
     # ------------------------------------------------------------------- [8] escreve os entregaveis
     print("\n[8] entregáveis")
     os.makedirs(DIR_SAI, exist_ok=True)
@@ -400,7 +408,7 @@ def main():
             "",
             "## Por que este relatório existe",
             "",
-            "A entrega anterior (`06_/STEP/Gedeon_Corrigida/`) re-cortou no arquivo do usuário o canal histórico",
+            "A entrega anterior (`06_/STEP/Gedeon_Corrigida/`, apagada em 2026-09-13) re-cortou no arquivo do usuario o canal historico",
             f"da Gedeon — tirou {n(med['reincidencia_evitada']['aco_que_ser_removido_da_certa_mm3'], 1)} mm³ de aço dele com o argumento de que o",
             "arquivo era um bloco bruto. **Estava errado.** Medido face por face, o arquivo já é a matriz pronta:",
             f"fenda {n(med['fenda']['largura_mm'], 2)} × {n(med['fenda']['espessura_mm'], 2)} mm com R {n(med['fenda']['raio_ponta_mm'], 2)} atravessando de Z = "
@@ -458,11 +466,11 @@ def main():
             "## Arquivos",
             "",
             "```",
-            "07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Body_A.step",
-            "07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Body_B.step",
-            "07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Canal_Fluxo.step",
-            "07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Explodida.step",
-            "07_CAD_Matrizes/M03_Gedeon_CERTA/Cabecote_EX-030_com_Matriz_Gedeon_Certa.step",
+            "07_CAD_Matrizes/Matriz_Gedeon_Certa/MatrizGedeon_Certa_Body_A.step",
+            "07_CAD_Matrizes/Matriz_Gedeon_Certa/MatrizGedeon_Certa_Body_B.step",
+            "07_CAD_Matrizes/Matriz_Gedeon_Certa/MatrizGedeon_Certa_Canal_Fluxo.step",
+            "07_CAD_Matrizes/Matriz_Gedeon_Certa/MatrizGedeon_Certa_Explodida.step",
+            "07_CAD_Matrizes/Matriz_Gedeon_Certa/Cabecote_EX-030_com_Matriz_Gedeon_Certa.step",
             "```",
             "",
             f"Checks: {nchk[0]} executados, {len(falhas)} falha(s). "

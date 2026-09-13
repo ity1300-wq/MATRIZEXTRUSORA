@@ -31,7 +31,8 @@ sys.path.insert(0, AQUI)
 
 CADEIA = ["gerar_matriz_v28.py", "verificar_v28.py --json --md", "verificar_interface_cabecote.py --json --md",
           "gerar_cabecote_ex030.py", "gerar_relatorio_v28.py", "generate_auto_prompt.py",
-          "gerar_gedeon_corrigida.py", "verify_geometry_ssot.py --json --md", "verify_legacy_dies.py --json"]
+          "gerar_gedeon_certa.py",
+          "verify_geometry_ssot.py --json --md", "verify_legacy_dies.py --json"]
 # o --md do verify_geometry_ssot NAO e opcional na cadeia: a seccao 6 do relatorio e lida do SSOT, e sem
 # regerar o documento o par (AUDITORIA...md x tau) abaixo compararia texto velho com numero novo.
 CADEIA_ESTUDOS = ["estudar_funis.py --so-texto", "estudar_recuo_cartuchos.py --so-texto",
@@ -53,10 +54,10 @@ PARES_DOC_JSON = [("INTERFASE_CABECOTE_EX030.md", "numeros/acesso_furacao_cenari
                   ("INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md",
                    "o_que_um_chanfro_interno_muda/metal_removido_do_cabeçote_mm3", 3,
                    "perfis_matrizes_x_cabecote.json"),
-                  ("RELATORIO_GEDEON_CORRIGIDA.md", "canal_da_gedeon_confere/arquivo_canal_mm3", 1,
-                   "gedeon_corrigida.json"),
-                  ("RELATORIO_GEDEON_CORRIGIDA.md", "contra_a_jonatha/canal_jonatha_minus_gedeon_mm3",
-                   1, "gedeon_corrigida.json")]
+                  ("RELATORIO_GEDEON_CERTA.md", "inventario/volume", 1, "gedeon_certa.json"),
+                  ("RELATORIO_GEDEON_CERTA.md", "cavidade/volume_cavidade_mm3", 1, "gedeon_certa.json"),
+                  ("RELATORIO_GEDEON_CERTA.md", "contra_a_jonatha/aco_so_na_certa_mm3", 1,
+                   "gedeon_certa.json")]
 
 falhas = []
 
@@ -189,22 +190,39 @@ def main():
           "falta o aviso de ponteiro no bloco espelho")
 
     print("\n[7] regras 1 e 2 do projeto")
-    st = subprocess.run(["git", "status", "--porcelain"], cwd=RAIZ, capture_output=True, text=True).stdout.splitlines()
-    hist = [l for l in st if "02_CAD_Modelos_Historicos/" in l]
-    checa(not hist, "02_CAD_Modelos_Historicos/ intocada (regra 2)",
-          f"02_CAD_Modelos_Historicos/ FOI TOCADA: {hist}")
-    # desde 2026-09-13 o modelo oficial mora em `07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/` e `01_/` mantem
+    # desde 2026-09-13 cada matriz tem pasta propria: os STEP historicos moram em
+    # 07_CAD_Matrizes/Matriz_*_HISTORICA/ e `02_/` mantem atalhos (symlinks) com os MESMOS bytes. Regra 2
+    # fala dos MODELOS, nao do caminho - por isso a checagem e o sha256 de cada um dos caminhos selados no
+    # baseline do auditor, mais a prova de que cada atalho aponta para 07_CAD_Matrizes.
+    bas = json.load(open(os.path.join(RAIZ, "05_Interface_Auditoria", "baseline", "MATRIZ_3_v27.json"),
+                         encoding="utf-8"))["hashes"]
+    bad = []
+    for caminho, h_exp in sorted(bas.items()):
+        if not caminho.startswith("02_CAD_Modelos_Historicos/"):
+            continue
+        p_real = os.path.realpath(os.path.join(RAIZ, caminho))
+        try:
+            h = hashlib.sha256(open(p_real, "rb").read()).hexdigest()
+        except OSError as e:
+            bad.append("%s: %s" % (caminho, e.strerror))
+            continue
+        if h != h_exp:
+            bad.append("%s: %s... != %s... do baseline" % (caminho, h[:12], h_exp[:12]))
+        link = os.path.join(RAIZ, caminho)
+        if os.path.islink(link) and "07_CAD_Matrizes" not in os.readlink(link):
+            bad.append("%s: o atalho nao aponta para 07_CAD_Matrizes" % caminho)
+    checa(not bad, "os modelos historicos selados no baseline segao byte a byte iguais (regra 2, por conteudo)",
+          "divergencia nos historicos: " + "; ".join(bad[:4]))
+    # desde 2026-09-13 o modelo oficial mora em `07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/` e `01_/` mantem
     # um atalho com o mesmo conteudo. Regra 1 fala do MODELO, nao do caminho: por isso a checagem e por sha256
     # contra o baseline do auditor, e nao por "git status limpo num caminho".
-    bas = json.load(open(os.path.join(RAIZ, "05_Interface_Auditoria", "baseline", "MATRIZ_3_v27.json"),
-                         encoding="utf-8"))
-    h_exp = bas["hashes"]["01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step"]
+    h_exp = bas["01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step"]
     corpo = os.path.realpath(os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial", "MatrizJonatha.step"))
     h_atu = hashlib.sha256(open(corpo, "rb").read()).hexdigest()
     checa(h_atu == h_exp, "MatrizJonatha.step (v27.0) e o mesmo modelo de sempre (regra 1, por conteudo)",
           f"o sha256 do master divergiu do baseline: {h_atu[:16]}... contra {h_exp[:16]}... "
           f"(arquivo real: {os.path.relpath(corpo, RAIZ)})")
-    checa(corpo.startswith(os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")) or
+    checa(corpo.startswith(os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")) or
           corpo == os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial", "MatrizJonatha.step"),
           "o master esta na pasta organizada (07_) ou no caminho oficial",
           f"o master esta em {os.path.relpath(corpo, RAIZ)}, nem em 07_/M01 nem em 01_/")

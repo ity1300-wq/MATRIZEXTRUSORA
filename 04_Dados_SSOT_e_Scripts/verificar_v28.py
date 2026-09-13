@@ -33,8 +33,8 @@ sys.path.insert(0, AQUI)
 
 from verify_legacy_dies import dp_total, tau_parede   # metodos do proprio projeto
 
-DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
-DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "M02_Jonatha_v28_PROPOSTA")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
+DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v28_1_PROPOSTA")
 
 def _pasta_matriz(nome):
     """Arquivo com _v28 no nome mora na pasta da proposta; o resto e o master."""

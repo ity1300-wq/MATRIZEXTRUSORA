@@ -43,7 +43,7 @@ from OCP.TopLoc import TopLoc_Location
 from OCP.TopoDS import TopoDS
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
 DIR_DADOS = os.path.join(RAIZ, "04_Dados_SSOT_e_Scripts")
 
 MESH = 0.05     # deflexao da tesselação do canal [mm]
@@ -228,7 +228,7 @@ def main():
     if args.json:
         out = os.path.join(DIR_DADOS, "acomodo_furos.json")
         with open(out, "w", encoding="utf-8") as f:
-            json.dump({"fonte": "07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/MatrizJonatha_Canal_Fluxo.step",
+            json.dump({"fonte": "07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha_Canal_Fluxo.step",
                        "pontos_malha": int(len(P)), "deflexao_mm": MESH,
                        "envelope": ENVELOPE, "recursos": saida},
                       f, indent=2, ensure_ascii=False)

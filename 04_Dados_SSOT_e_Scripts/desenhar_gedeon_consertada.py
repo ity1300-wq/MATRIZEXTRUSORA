@@ -5,7 +5,7 @@ desenhar_gedeon_consertada.py — uma prancha A3 que responde as três observaç
 ------------------------------------------------------------------------------------------
 Feito depois de o usuário dizer, duas vezes, que (i) a Gedeon "parece corrompida", (ii) no STEP com o cabeçote
 ela "parece idêntica à Jonatha" e (iii) no STEP sem matriz "não aparece a fenda, mas dá para ver o copo da
-matriz dentro do cabeçote". As três têm resposta medida em `gedeon_corrigida.json`; esta prancha é a resposta
+matriz dentro do cabeçote". As três têm resposta medida em `gedeon_certa.json`; esta prancha é a resposta
 *visual*, com as cinco faixas no MESMO ESCALO (limites idênticos em todas), porque comparação em escala
 diferente não é comparação.
 
@@ -17,9 +17,12 @@ Faixas, todas traçadas a partir da seção medida no sólido (nada de cotas dec
   5  onde as duas diferem            → aço que a Gedeon tem e a v27 não, e o contrário
 
 Cada número do rodapé vem da medição desta própria execução e vai para
-`07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/desenho_gedeon.json`.
+`07_CAD_Matrizes/Matriz_Gedeon_Entregue_HISTORICA/desenho_gedeon.json`.
 
 Uso:  python 04_Dados_SSOT_e_Scripts/desenhar_gedeon_consertada.py [--png]
+
+O nome do arquivo sobrou do episodio da tentativa refutada (apagada em 2026-09-13): o que ele
+desenha e a GEDEON CERTA, o arquivo do usuario, contra a v27 e contra a Gedeon entregue.
 """
 
 import argparse
@@ -42,8 +45,8 @@ import gerar_desenho_2d_cabecote_matriz as dd          # só as primitivas de tr
 from verificar_v28 import maior, n                       # n(): número pt-BR
 
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
-DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
-DIR_GED = os.path.join(RAIZ, "07_CAD_Matrizes", "M03_Gedeon_CERTA")
+DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
+DIR_GED = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Gedeon_Certa")
 ARQ_JSON = os.path.join(DIR_GED, "desenho_gedeon.json")
 
 LIM_X = (-212.0, 212.0)
@@ -149,7 +152,20 @@ def main():
     J = le(os.path.join(DIR_OFF, "MatrizJonatha.step"))
     J2 = maior(J.Solids()[0].fuse(J.Solids()[1]))
     entregue, consertada = maior(A0.fuse(B0)), maior(A1.fuse(B1))
-    pin = json.load(open(os.path.join(AQUI, "gedeon_corrigida.json"), encoding="utf-8"))["pinos"]
+    # a caixa do BOLSO DO PINO da Gedeon ENTREGUE, medida nos proprios arquivos de 02_/ (antes vinha do JSON
+    # da tentativa refutada, que foi apagada em 2026-09-13). No arquivo historico o bolso e um cilindro de
+    # eixo em X, raio 2,00 (Ø 4,00 x 4,00), que so aparece no Body_A; os raios 0,75 sao os filetes da fenda e
+    # os 39,75..46,50 sao os estagios externos - daí a janela 0,95 < r < 12.
+    vistas = set()
+    for meio in (A0, B0):
+        for f in meio.Faces():
+            if f.geomType() != "CYLINDER":
+                continue
+            r = f._geomAdaptor().Cylinder().Radius()
+            if 0.95 < r < 12.0:
+                b = f.BoundingBox()
+                vistas.add((round(b.xmin, 2), round(b.xmax, 2), round(b.zmin, 2), round(b.zmax, 2)))
+    pin = {"caixas_mm": [dict(x=[v[0], v[1]], z=[v[2], v[3]]) for v in sorted(vistas, key=lambda v: abs(v[0]))]}
     gc = json.load(open(os.path.join(AQUI, "gedeon_certa.json"), encoding="utf-8"))
     fzp = gc["furos_pino"]
     cx3 = [dict(x=[round(v[0], 2), round(v[1], 2)], z=[round(fzp["z"][0], 2), round(fzp["z"][1], 2)])
@@ -172,9 +188,9 @@ def main():
         "2   GEDEON COMO ENTREGUE (02_/Body_A ∪ Body_B) — 1 sólido com 3 CASCA: bolso de pino selado",
         "seção medida das duas metades de `02_CAD_Modelos_Historicos/`, abertas SÓ PARA LEITURA (regra 2) e "
         "unidas para o corte: A ∪ B = %s mm³ de aço, caixa Ø93,00 × Z 0..109,00.\nO retângulo pontilhado é a "
-        "zona do pino Ø1,78: no `Body_A` é CASCA INTERNA — cavidade selada dentro do aço, o que abre como "
+        "zona do pino (Ø 4,00 × 4,00, eixo em X): no `Body_A` é CASCA INTERNA — cavidade selada dentro do aço, o que abre como "
         "«peça corrompida» no CAD e não tem ferramenta — e no `Body_B` não há bolso nenhum."
-        % n(gc["entrega_anterior_refutada"]["volume_aco_entrega_anterior_mm3"], 1))
+        % n(gc["gedeon_entregue_contra_certa"]["volume_aco_entregue_mm3"], 1))
     cx = pin["caixas_mm"]
     for c in cx:
         axs[1].add_patch(plt.Rectangle((c["x"][0] - 1.6, c["z"][0] - 1.6), c["x"][1] - c["x"][0] + 3.2,
@@ -182,14 +198,14 @@ def main():
                                        ls=(0, (3, 2))))
         axs[1].plot([c["x"][1] + 1.6, 62.0], [0.5 * (c["z"][0] + c["z"][1])] * 2, color="tab:red", lw=0.5,
                     ls=(0, (2, 2)))
-    axs[1].text(-70.0, 132.5, "Z %s → %s, a |x| %s mm: no `Body_A` o bolso é CASCA INTERNA (selada no aço); "
+    axs[1].text(-70.0, 132.5, "Z %s → %s, ponta em |x| = %s mm: no `Body_A` o bolso é CASCA INTERNA (selada no aço); "
                 "no `Body_B` não existe. E esta peça tem %s mm³ de aço contra os %s mm³ do arquivo certo"
                 % (n(cx[0]["z"][0], 2), n(cx[0]["z"][1], 2), n(abs(cx[0]["x"][1]), 2),
-                   n(gc["entrega_anterior_refutada"]["volume_aco_entrega_anterior_mm3"], 1),
-                   n(gc["entrega_anterior_refutada"]["volume_aco_certa_mm3"], 1)),
+                   n(gc["gedeon_entregue_contra_certa"]["volume_aco_entregue_mm3"], 1),
+                   n(gc["gedeon_entregue_contra_certa"]["volume_aco_certa_mm3"], 1)),
                 fontsize=7.0, color="tab:red", ha="left", va="top")
     med["2 Gedeon entregue"]["pinos_marcados"] = cx
-    med["2 Gedeon entregue"]["aco_mm3"] = gc["entrega_anterior_refutada"]["volume_aco_entrega_anterior_mm3"]
+    med["2 Gedeon entregue"]["aco_mm3"] = gc["gedeon_entregue_contra_certa"]["volume_aco_entregue_mm3"]
 
     f = gc["fenda"]; ce = gc["cone_entrada"]; dv = gc["defeito_cavidade_selada"]; en = gc["entrega"]
     med["3 Gedeon certa"] = faixa(
@@ -222,7 +238,7 @@ def main():
     med["4 Jonatha v27"] = faixa(
         axs[3], J2,
         "4   JONATHA v27 (o master aprovado) — compare com a faixa 3, no mesmo escalonamento",
-        "seção medida de `07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/MatrizJonatha.step` (2 sólidos, %s mm³ de aço, cascas "
+        "seção medida de `07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step` (2 sólidos, %s mm³ de aço, cascas "
         "[3, 1]). Vista no MESMO escalonamento da faixa 3 para a comparação não ser de memória: a silhueta "
         "externa é idêntica porque o envelope é exigência de projeto (Ø93,00 × Z 0..109,00 nas duas).\n"
         "O que as separa é medido na faixa 5: a v27 tem funil escavado no próprio aço (%s mm³ de canal contra "
