@@ -35,3 +35,21 @@ Se você quiser as imagens no git mesmo assim, o caminho é um só: tornar o rep
 
 Nada disso depende de ter a imagem no git para ser conferido — o hash acima serve para provar que um arquivo
 restaurado depois é exatamente o mesmo que a sessão usou.
+
+## Quer as 8 capturas dentro do repo? É um comando seu, e a decisão é sua
+
+Elas ficaram fora **por escolha, não por esquecimento**, e o motivo é concreto: a `..._121529.Fotos.png` traz
+anotada por cima a prancha que eu gerei, e a `..._223424.Chrome.png` é um print do navegador — nela dá para ler
+a **URL da sessão do agente** (`arena.ai/agent/01aO9261-…`) e a barra do celular (hora, operadora, ícones de
+notificação). Numa repo pública, isso entra no índice de buscador junto com o resto.
+
+- **Repo pública (o estado de hoje):** nada muda. A procedência fica conferível pelos sha256 desta tabela, e
+  `git clone` + portão não dependem de nenhum dos oito arquivos.
+- **Se você tornar a repo privada:** `gh repo edit ity1300-wq/MATRIZEXTRUSORA --visibility private` (ou o
+  botão na aba *Settings → Danger Zone*), e eu copio os oito para
+  `03_Relatorios_e_Documentacao/fontes_do_usuario/`, confiro cada sha256 contra esta tabela antes de commitar e
+  reporto os oito valores. Custo: um minuto.
+- **O que não entra em nenhuma hipótese:** o arquivo de credencial (`tmp/.gh`, com o token). Esse não é material
+  de projeto — é a chave com `repo` (leitura, escrita **e** administração desta repo). Ele continua só existindo
+  no sandbox, nunca foi commitado, e deveria ser revogado por você independentemente de qualquer coisa que
+  aconteça aqui.

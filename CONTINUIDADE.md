@@ -79,14 +79,23 @@ comete a remoção. Antes de commitar, `git status` e, se faltar caminho, `git c
 01_CAD_MatrizJonatha_Oficial 02_CAD_Modelos_Historicos`. O portão agora confere isso sozinho (checagem
 "nenhum arquivo rastreado sumiu da árvore" + "os 35 caminhos selados existem no disco") e o `--rapido` já pega. E se ele reclamar
 de `libGL.so.1` / o render cair, é porque o clone é novo: rode o `setup_headless_gl.sh` acima (são 36 KB de stub
-compilado; o `.headless_gl/` é ignorado de propósito, então não vem do GitHub).
+compilado; o `.headless_gl/` é ignorado de propósito, então não vem do GitHub). **O atalho para tudo isso
+é um comando só**: `bash 04_Dados_SSOT_e_Scripts/restaurar_workspace.sh --portao` — ele refaz a identidade do
+git, o remoto, restaura por caminho os arquivos rastreados que sumiram (nunca com `checkout -- .`), instala as
+quatro bibliotecas, gera os stubs GL/GLU e roda o portão. Idempotente: pode rodar duas vezes.
 
 **Espaço.** O que o painel chama de workspace é o que o snapshot persiste (o `.cache` de 305 MB fica fora).
 Depois da limpeza de 2026-09-13: 41 MB no total, sendo 31 MB do repo — dos quais **22 MB são `.git`**
 (histórico de STEP; só encolheria reescrevendo histórico, o que não faremos sem ordem) e 8 MB de árvore.
 O que é seguro apagar a qualquer momento, porque o portão recria: `04_Dados_SSOT_e_Scripts/__pycache__`,
-os PNG soltos da raiz do workspace, `06_/STEP/estudos/`, os STEP derivados ignorados (`_Explodida`/
-`_Com_Fluxo` da v28) e os `DESENHO_2D_*_p*.png`. Nada disso precisa ir ao git.
+os PNG soltos da raiz do workspace e `.headless_gl/`. Em 2026-09-13, no pedido de "retire as travas do
+GitHub", **o resto do que estava de fora entrou no git**: `06_/STEP/estudos/` (o cabeçote com os furos M12
+modelados, 4 arquivos), os dois STEP derivados da v28 (`_Explodida`, `_Com_Fluxo`, 1,2 MB) e as pranchas
+`DESENHO_2D_*_p*.png` — eram 2,4 MB de material de trabalho que existia só no sandbox. As regras mortas do
+`.gitignore` que os barravam foram apagadas junto (regra que não barra nada também é trava). continuem fora,
+por escolha e não por omissão: `.headless_gl/` (binário regenerável), `__pycache__`, os 4 padrões de
+`*Gedeon_Corrigida*` (a refutada, por ordem dele), os arquivos de estado do protocolo em `05_/`, e as fontes
+do `uploads/` — ver `03_/FONTES_DO_USUARIO_2026-09-13.md` para o comando que põe as 8 capturas lá.
 O `--rapido` **não** substitui a porta completa antes de um push — foi uma mudança de caminho feita sem o
 portão completo que quebrou dois verificadores em 2026-09-13 (juntavam caminho com variável e foram procurar
 o arquivo na pasta errada).
