@@ -196,6 +196,18 @@ def main():
     # baseline do auditor, mais a prova de que cada atalho aponta para 07_CAD_Matrizes.
     bas = json.load(open(os.path.join(RAIZ, "05_Interface_Auditoria", "baseline", "MATRIZ_3_v27.json"),
                          encoding="utf-8"))["hashes"]
+    # armadilha real de 2026-09-13: o snapshot do workspace nao traz os ATALHOS (01_/ e 02_/ eram so links),
+    # entao depois de o sandbox ser recriado o `git add -A` ve 23 arquivos "sumidos" e comete a remocao - e foi
+    # o que quase aconteceu. O portao barra antes: nenhum caminho rastreado pode faltar na arvore, e todo
+    # caminho selado no baseline tem de existir e resolver (mesmo que por symlink).
+    sumidos = subprocess.run(["git", "ls-files", "-d"], cwd=RAIZ, capture_output=True,
+                             text=True).stdout.split()
+    checa(not sumidos, "nenhum arquivo rastreado sumiu da arvore de trabalho",
+          "faltam %d arquivos rastreados; restaure com `git checkout HEAD -- 01_... 02_...` ANTES de commitar: %s"
+          % (len(sumidos), " ".join(sumidos[:5])))
+    faltando = [c for c in bas if not os.path.exists(os.path.join(RAIZ, c))]
+    checa(not faltando, "os %d caminhos selados no baseline existem no disco (atalhos inclusos)" % len(bas),
+          "sumiram do disco: " + "; ".join(faltando[:5]))
     bad = []
     for caminho, h_exp in sorted(bas.items()):
         if not caminho.startswith("02_CAD_Modelos_Historicos/"):

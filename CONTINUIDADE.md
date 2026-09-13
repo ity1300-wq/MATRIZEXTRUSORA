@@ -67,7 +67,17 @@ python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py          # O PORTAO (roda os
 python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --rapido # nao re-gera CAD (para consulta rapida)
 ```
 
-Se o portão disser `cadquery não está instalado`, é sandbox recriada: `pip install cadquery`. E se ele reclamar
+Se o portão disser `cadquery não está instalado`, é sandbox recriada: `pip install cadquery` (e
+`pip install ezdxf gmsh scikit-fem` se for mexer na simulação 3D; aí rode também
+`bash 04_Dados_SSOT_e_Scripts/setup_headless_glu.sh`, que fabrica os stubs `libGL`/`libGLU` que o `gmsh` exige
+sem root).
+
+**Cuidado com o `git add -A` depois de o sandbox ser recriado** (mordeu em 2026-09-13): o snapshot do workspace
+não traz *atalhos*, e `01_CAD_MatrizJonatha_Oficial/` e `02_CAD_Modelos_Historicos/` são exatamente isso — 23
+links para dentro de `07_CAD_Matrizes/`. Sem restaurar, o `git add -A` entende que os arquivos foram apagados e
+comete a remoção. Antes de commitar, `git status` e, se faltar caminho, `git checkout <último commit bom> --
+01_CAD_MatrizJonatha_Oficial 02_CAD_Modelos_Historicos`. O portão agora confere isso sozinho (checagem
+"nenhum arquivo rastreado sumiu da árvore" + "os 35 caminhos selados existem no disco") e o `--rapido` já pega. E se ele reclamar
 de `libGL.so.1` / o render cair, é porque o clone é novo: rode o `setup_headless_gl.sh` acima (são 36 KB de stub
 compilado; o `.headless_gl/` é ignorado de propósito, então não vem do GitHub).
 
