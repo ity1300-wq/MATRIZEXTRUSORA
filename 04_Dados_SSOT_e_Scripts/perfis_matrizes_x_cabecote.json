@@ -214,6 +214,101 @@
    }
   },
   {
+   "chave": "matriz_gedeon_certa",
+   "nome": "Matriz Gedeon CERTA (o arquivo do usuario, entregue como esta)",
+   "arquivos_lidos": [
+    "matrizGedeonCerta.step"
+   ],
+   "fonte_do_corpo": "solido unico (o arquivo dele, sem re-corte)",
+   "comprimento_medido_mm": 109.0,
+   "Ø_máximo_medido_mm": 93.0,
+   "z_do_ombro_mm": 70.0,
+   "escala_Ø_x_Z_mm": [
+    [
+     -0.0,
+     69.8,
+     93.0
+    ],
+    [
+     70.0,
+     80.6,
+     89.5
+    ],
+    [
+     80.8,
+     109.0,
+     79.5
+    ]
+   ],
+   "fins_de_plato_refinados_mm": [
+    69.909,
+    80.709,
+    109.0
+   ],
+   "canal_à_frente_da_saída_mm3": {
+    "trecho_mm": 0.0,
+    "volume_do_furo_mm3": 0.0,
+    "material_da_matriz_no_furo_mm3": 0.0,
+    "vão_livre_mm3": 0.0,
+    "por_quê": "a face de saída da matriz já está na face do nariz"
+   },
+   "encostos": {
+    "A_face_frente_rasa": {
+     "deslocamento_aplicado_mm": -14.0,
+     "face_de_saida_em_Z": 95.0,
+     "protusão_além_da_face_do_nariz_mm": 0.0,
+     "traseira_da_matriz_em_Z": -14.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": -14.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "B_ombro_no_degrau": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 109.0,
+     "protusão_além_da_face_do_nariz_mm": 14.0,
+     "traseira_da_matriz_em_Z": -0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": -0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    },
+    "C_fundo_do_bolso": {
+     "deslocamento_aplicado_mm": 0.0,
+     "face_de_saida_em_Z": 109.0,
+     "protusão_além_da_face_do_nariz_mm": 14.0,
+     "traseira_da_matriz_em_Z": 0.0,
+     "vão_livre_atrás_da_matriz_no_bolso_mm": 0.0,
+     "interferência_com_o_cabeçote_mm3": 0.0
+    }
+   },
+   "folgas_radiais_no_encosto_do_assento": [
+    {
+     "estagio": "Ø93,00 em Z -0,00..69,80",
+     "furo": "Ø95,00 (Z 0,00..70,00)",
+     "folga_radial_mm": 1.0,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø89,50 em Z 70,00..80,60",
+     "furo": "Ø90,00 (Z 70,00..81,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    },
+    {
+     "estagio": "Ø79,50 em Z 80,80..109,00",
+     "furo": "Ø80,00 (Z 81,00..95,00)",
+     "folga_radial_mm": 0.25,
+     "pode_entrar": true
+    }
+   ],
+   "encosto_usado": "B_ombro_no_degrau",
+   "transições_refinadas_mm": {
+    "fim_da_banda_093_em_Z": 69.909,
+    "folga_axial_banda_x_degrau_do_cabecote_mm": 0.091,
+    "fim_do_estagio_089-50_em_Z": 80.709,
+    "vão_da_saida_ate_o_furo_do_nariz_mm": 0.291,
+    "face_de_saida_em_Z_no_assento": 109.0,
+    "canal_morto_no_furo_do_nariz_mm": -14.0
+   }
+  },
+  {
    "chave": "matriz_desenvolvimento",
    "nome": "Matriz Desenvolvimento",
    "arquivos_lidos": [
@@ -531,6 +626,13 @@
    },
    {
     "matriz": "matriz_2_gedeon",
+    "interferência_antes_mm3": 0.0,
+    "interferência_depois_mm3": 0.0,
+    "folga_radial_no_canto_antes_mm": 0.25,
+    "folga_radial_no_canto_depois_mm": 2.25
+   },
+   {
+    "matriz": "matriz_gedeon_certa",
     "interferência_antes_mm3": 0.0,
     "interferência_depois_mm3": 0.0,
     "folga_radial_no_canto_antes_mm": 0.25,

@@ -15,6 +15,7 @@ Gerado por `medir_perfis_matrizes_x_cabecote.py`. Escada interna do cabeçote me
 |---|---|---|---|---|---|---|
 | Matriz 1 - Copo (original, a que o cabecote foi feito em volta) | 80,70 | 93,00 | 69,909 | 0,091 | 80,700 | 14,00 mm = 70372 mm³ de furo, **70372 mm³** sem metal da matriz dentro |
 | Matriz 2 - Gedeon (a maior, que o usuario diz que entra) | 109,00 | 93,00 | 69,909 | 0,091 | 109,000 | 0,00 mm = 0 mm³ de furo, **0 mm³** sem metal da matriz dentro |
+| Matriz Gedeon CERTA (o arquivo do usuario, entregue como esta) | 109,00 | 93,00 | 69,909 | 0,091 | 109,000 | 0,00 mm = 0 mm³ de furo, **0 mm³** sem metal da matriz dentro |
 | Matriz Desenvolvimento | 109,00 | 93,00 | 69,909 | 0,091 | 109,000 | 0,00 mm = 0 mm³ de furo, **0 mm³** sem metal da matriz dentro |
 | Matriz Jonatha v27.0 (oficial aprovada) | 109,00 | 93,00 | 69,909 | 0,091 | 109,000 | 0,00 mm = 0 mm³ de furo, **0 mm³** sem metal da matriz dentro |
 | Matriz Jonatha v28.1 (proposta DFM) | 109,00 | 93,00 | 69,909 | 0,091 | 109,000 | 0,00 mm = 0 mm³ de furo, **0 mm³** sem metal da matriz dentro |
@@ -30,6 +31,9 @@ Medido no assento natural (o encosto em que a matriz não interfere):
 | Matriz 2 - Gedeon (a maior, que o usuario diz que entra) | Ø93,00 em Z -0,00..69,80 | Ø95,00 (Z 0,00..70,00) | 1,000 mm | sim |
 | Matriz 2 - Gedeon (a maior, que o usuario diz que entra) | Ø89,50 em Z 70,00..80,60 | Ø90,00 (Z 70,00..81,00) | 0,250 mm | sim |
 | Matriz 2 - Gedeon (a maior, que o usuario diz que entra) | Ø79,50 em Z 80,80..109,00 | Ø80,00 (Z 81,00..95,00) | 0,250 mm | sim |
+| Matriz Gedeon CERTA (o arquivo do usuario, entregue como esta) | Ø93,00 em Z -0,00..69,80 | Ø95,00 (Z 0,00..70,00) | 1,000 mm | sim |
+| Matriz Gedeon CERTA (o arquivo do usuario, entregue como esta) | Ø89,50 em Z 70,00..80,60 | Ø90,00 (Z 70,00..81,00) | 0,250 mm | sim |
+| Matriz Gedeon CERTA (o arquivo do usuario, entregue como esta) | Ø79,50 em Z 80,80..109,00 | Ø80,00 (Z 81,00..95,00) | 0,250 mm | sim |
 | Matriz Desenvolvimento | Ø93,00 em Z -0,00..69,80 | Ø95,00 (Z 0,00..70,00) | 1,000 mm | sim |
 | Matriz Desenvolvimento | Ø89,50 em Z 70,00..80,60 | Ø90,00 (Z 70,00..81,00) | 0,250 mm | sim |
 | Matriz Desenvolvimento | Ø79,50 em Z 80,80..109,00 | Ø80,00 (Z 81,00..95,00) | 0,250 mm | sim |
@@ -45,7 +49,7 @@ Medido no assento natural (o encosto em que a matriz não interfere):
 * Comprimento medido: Copo **80,70 mm**, Gedeon **109,00 mm** — diferença **28,30 mm**.
 * No assento natural, a face de saída fica **14,30 mm para dentro** da face do nariz no Copo e **14,00 mm para fora** na Gedeon: 14,30 + 14,00 = 28,30 mm. A diferença de comprimento É o nariz, e nada mais.
 * As cinco têm a mesma escada até o degrau (banda Ø93 e estágio Ø89,50 terminando no mesmo Z, na casa de milésimo). Gedeon, Desenvolvimento e Jonatha só acrescentam o nariz Ø79,50 que atravessa o furo do nariz; a Copo não tem nariz, e por isso a face dela fica enterrada.
-* Interferência no assento natural: matriz_1_copo 0,0000 mm³, matriz_2_gedeon 0,0000 mm³, matriz_desenvolvimento 0,0000 mm³, jonatha_v27 0,0000 mm³, jonatha_v28_1 0,0000 mm³.
+* Interferência no assento natural: matriz_1_copo 0,0000 mm³, matriz_2_gedeon 0,0000 mm³, matriz_gedeon_certa 0,0000 mm³, matriz_desenvolvimento 0,0000 mm³, jonatha_v27 0,0000 mm³, jonatha_v28_1 0,0000 mm³.
 
 ## O que aconteceria com um chanfro de 1,00 × 45° no canto interno Ø90 → Ø80
 
@@ -55,6 +59,7 @@ O canto vivo onde o furo do nariz começa (Z = 81,00) é por onde a película pa
 |---|---|---|---|---|
 | matriz_1_copo | 0,0000 mm³ | 0,0000 mm³ | a matriz não chega no canto | a matriz não chega no canto |
 | matriz_2_gedeon | 0,0000 mm³ | 0,0000 mm³ | 0,25 mm | 2,25 mm |
+| matriz_gedeon_certa | 0,0000 mm³ | 0,0000 mm³ | 0,25 mm | 2,25 mm |
 | matriz_desenvolvimento | 0,0000 mm³ | 0,0000 mm³ | 0,25 mm | 2,25 mm |
 | jonatha_v27 | 0,0000 mm³ | 0,0000 mm³ | 0,25 mm | 2,25 mm |
 | jonatha_v28_1 | 0,0000 mm³ | 0,0000 mm³ | 0,25 mm | 2,25 mm |
