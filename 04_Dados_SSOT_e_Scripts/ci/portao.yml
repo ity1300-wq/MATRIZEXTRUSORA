@@ -1,0 +1,83 @@
+name: Portao (informativo, nunca bloqueia)
+
+# Roda o portao do projeto e a auditoria de correlacoes em todo push e em toda PR, NUMA MAQUINA LIMPA:
+# e a prova de que o repo se basta - clone, install, verificar - sem depender do sandbox da conversa nem
+# de mim. Deliberadamente NAO bloqueia nada: `continue-on-error` em tudo, e nenhum check aqui e "required"
+# (medido em 2026-09-13: 0 rulesets e nenhuma branch protegida). O `05_/ci/LEIA-ME.md` do auditor dizia que
+# o workflow nao podia ser empurrado porque a credencial da plataforma nao tinha a permissao `workflows`;
+# este arquivo NAO pode estar em `.github/workflows/` com a credencial que temos: o push e recusado com
+# "refusing to allow a Personal Access Token to create or update workflow `.github/workflows/portao.yml`
+# without `workflow` scope" (medido em 2026-09-13). Entao ele mora aqui, pronto, e liga em um passo:
+#   mkdir -p .github/workflows && cp 04_Dados_SSOT_e_Scripts/ci/portao.yml .github/workflows/portao.yml
+#   git add .github/workflows && git commit -m "liga o portao de CI" && git push
+# - ou colar o conteudo em Settings -> Actions -> New workflow (a web UI nao exige o escopo `workflow`).
+# O Modo A do protocolo (veredito automatico em PR) continua desligado por decisao do dono do projeto.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 4 * * *"     # uma vez por dia, para o estado do repo ser sempre conferido sozinho
+
+permissions:
+  contents: read
+  checks: write
+  actions: read
+
+jobs:
+  portao:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: libs de grafico (o CadQuery e o gmsh pedem GL; na runner ha driver de video ausente)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libgl1 libglu1-mesa libxkbcommon0 2>&1 | tail -2 || true
+
+      - name: dependencias
+        run: python3 -m pip install --quiet --upgrade pip cadquery ezdxf gmsh scikit-fem
+
+      - name: portao completo (cadeia de scripts + regras 1 e 2 + regras de interface)
+        run: python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py 2>&1 | tee /tmp/portao.txt
+        continue-on-error: true
+
+      - name: auditoria de correlacoes dos STEP
+        run: python3 04_Dados_SSOT_e_Scripts/auditar_step_correlacoes.py --json --md 2>&1 | tee /tmp/auditoria.txt
+        continue-on-error: true
+
+      - name: reologia do mastique (so confere que o gerador roda)
+        run: python3 04_Dados_SSOT_e_Scripts/masti_epdm_reologia.py --json /tmp/masti.json --md /tmp/masti.md
+        continue-on-error: true
+
+      - name: publica as saidas como artefatos (nada e obrigatorio de ler)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: portao-e-auditoria
+          path: |
+            /tmp/portao.txt
+            /tmp/auditoria.txt
+            03_Relatorios_e_Documentacao/AUDITORIA_CORRELACOES_STEP.md
+            04_Dados_SSOT_e_Scripts/auditoria_step_correlacoes.json
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: resumo no log da execucao
+        if: always()
+        run: |
+          echo "### Portão" >> "$GITHUB_STEP_SUMMARY"
+          tail -n 6 /tmp/portao.txt >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+          echo >> "$GITHUB_STEP_SUMMARY"
+          echo "### Auditoria de correlações" >> "$GITHUB_STEP_SUMMARY"
+          tail -n 8 /tmp/auditoria.txt >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+          echo >> "$GITHUB_STEP_SUMMARY"
+          echo "_Este job é informativo por construção: \`continue-on-error\` em tudo e nenhum check é obrigatório._" >> "$GITHUB_STEP_SUMMARY"

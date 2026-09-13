@@ -1,0 +1,37 @@
+{
+ "peca": "EX-030 CABECOTE - variante sem a junta da extrusora",
+ "operacao": "intersecao pelo cilindro Ø130 do corpo (r = 65,000 mm)",
+ "anis_removidos": [
+  "Ø203 (d 91.00..95.00)",
+  "Ø220 (d 51.00..93.00)"
+ ],
+ "m12_aberto": true,
+ "angulo_m12_graus": 90.0,
+ "volume_desenhado_mm3": 1662551.253,
+ "volume_sem_flange_mm3": 620465.165,
+ "volume_removido_mm3": 1042087.414,
+ "massa_desenhada_kg": 13.051,
+ "massa_sem_flange_kg": 4.8707,
+ "massa_removida_kg": 8.1804,
+ "Ø_por_x_y_mm": [
+  130.0,
+  130.0
+ ],
+ "comprimento_axial_mm": 95.0,
+ "comprimento_antes_mm": 95.0,
+ "metal_removido_ate_a_banda_da_matriz_mm3": 0.0,
+ "metal_removido_na_parede_do_bolso_mm3": 0.225,
+ "interferencia_matriz_x_desenhado_mm3": 0.0,
+ "interferencia_matriz_x_sem_flange_mm3": 0.0,
+ "furos_da_junta_fora_do_corpo": true,
+ "bolso_Ø_mm": 95.0,
+ "bolso_comprimento_mm": 71.0,
+ "comprimento_preservado": true,
+ "redondo": true,
+ "volume_reimportado_desenhado_mm3": 1662551.253,
+ "desvio_round_trip_desenhado_mm3": 0.0,
+ "sólidos_no_arquivo_desenhado": 1,
+ "volume_reimportado_sem_flange_mm3": 620465.165,
+ "desvio_round_trip_sem_flange_mm3": 0.0,
+ "sólidos_no_arquivo_sem_flange": 1
+}

@@ -213,7 +213,9 @@ MATRIZEXTRUSORA/
 │   │     Matriz 3 pode melhorar? (figuras/aresta_R075_intuicao.png: por que a aresta R0,75 recebe pouco material)
 │   ├── RELATORIO_GEDEON_CERTA.md          -> A Gedeon do usuário medida face por face, e o que se achou nela
 │   ├── INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md -> O que tem dentro do furo do cabeçote, medido nos STEP
-│   └── V28_CONFERENCIA_VISUAL.png (fora do git) -> 6 vistas da v28; recria renderizar_v28.py, pesa 2,1 MB
+│   ├── AUDITORIA_CORRELACOES_STEP.md       -> os 64 STEP cruzados em sete correlacoes, medidos no arquivo
+│   ├── REOLOGIA_MASTIC_EPDM.md            -> a banda de reologia do mastique resistivo de EPDM (literatura)
+│   └── FONTES_DO_USUARIO_2026-09-13.md    -> as 8 capturas dele, com sha256, e por que ficaram fora
 │   ├── RELATORIO_DE_SIMULACAO.md          -> Relatório executivo completo de CFD reológico e térmico
 │   ├── CAD_SPECIFICATION_BACKUP_SSOT.md  -> Especificação técnica unificada SSOT v27.0
 │   └── SIMULACAO_REOLOGICA_MATRIZ_JONATHA.md -> Detalhamento dos modelos reológicos

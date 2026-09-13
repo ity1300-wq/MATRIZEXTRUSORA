@@ -22,7 +22,7 @@ As regras 1 e 2 do projeto falam dos **modelos**, nao do caminho. Entao `01_CAD_
 | a **Gedeon corrigida** (gerador, JSON, relatorio, 5 STEP) | 800 KB | tentativa refutada em 2026-09-12 — `matrizGedeonCerta.step` e a Gedeon certa, nao havia canal a reconstruir; apagada por inteiro em 2026-09-13, a pedido |
 | `05_/ESTUDO_JONATHA.step`, `ESTUDO_GEDEON.step` | 3,8 MB | estudo do coathanger respondido e gravado no JSON; recria com `python3 04_Dados_SSOT_e_Scripts/estudar_funis.py` |
 | `05_/ESTUDO_GEDEON_REC_{COLADA,ENCAIXE_5,ENCAIXE_10}.step` | 1,0 MB | recria com `estudar_recuo_cartuchos.py` |
-| os 2 STEP derivados `_Explodida`/`_Com_Fluxo` da v28 | 1,2 MB | derivados; os quatro STEP que vao para a fabrica estao na pasta |
+| os 2 STEP derivados `_Explodida`/`_Com_Fluxo` da v28 | 1,2 MB | derivados, e estao rastreados no git desde 2026-09-13 (pedido de nao deixar nada so no sandbox); os quatro STEP que vao para a fabrica estao na pasta |
 | o cenario da furacao M12 em `06_/STEP/estudos/` | 144 KB | recria `python3 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py --com-m12` |
 
 O **cabecote** e as montagens cabecote + matriz ficam em `06_CAD_Cabecote_EX-030/STEP/` (`Cabecote_EX-030_desenhado.step`, `_sem_flange.step`, `Cabecote_EX-030_com_Matriz_Copo.step`, `_com_Matriz_Gedeon.step`, `_com_Matriz_Gedeon_Certa.step`): a matriz e uma pasta, o conjunto e outra.
