@@ -58,6 +58,7 @@ cobradas pelo portão:
 ```bash
 cd MATRIZEXTRUSORA
 pip install cadquery numpy matplotlib ezdxf        # cadquery 2.8.x
+bash 04_Dados_SSOT_e_Scripts/setup_headless_gl.sh  # compila o stub libGL (a pasta .headless_gl/ NAO vai ao git)
 git checkout continue
 # o render offscreen precisa de uma biblioteca GL local que fica fora do git:
 export LD_LIBRARY_PATH=$PWD/04_Dados_SSOT_e_Scripts/.headless_gl
@@ -66,7 +67,9 @@ python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py          # O PORTAO (roda os
 python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --rapido # nao re-gera CAD (para consulta rapida)
 ```
 
-Se o portão disser `cadquery não está instalado`, é sandbox recriada: `pip install cadquery`.
+Se o portão disser `cadquery não está instalado`, é sandbox recriada: `pip install cadquery`. E se ele reclamar
+de `libGL.so.1` / o render cair, é porque o clone é novo: rode o `setup_headless_gl.sh` acima (são 36 KB de stub
+compilado; o `.headless_gl/` é ignorado de propósito, então não vem do GitHub).
 
 **Espaço.** O que o painel chama de workspace é o que o snapshot persiste (o `.cache` de 305 MB fica fora).
 Depois da limpeza de 2026-09-13: 41 MB no total, sendo 31 MB do repo — dos quais **22 MB são `.git`**
@@ -150,8 +153,16 @@ land 8,500 + chanfro 1,500 × 45°, lâmina 0,750, 3,586 kg, abertura da biparti
 
 ## 8. Pendências abertas (com o que fecha cada uma)
 
-1. **Auditoria pausada.** Quando ele mandar voltar: re-selar baseline (`--atualizar-hashes`) e reabrir o
-   veredito da PR #3. Nada foi feito nisso a pedido dele.
+1. **Auditoria: o método atual está encerrado, não suspenso.** Decisão dele em 2026-09-13: *"não agora, mais
+   depois iremos desenvolver novo método de auditoria"*. Então o rito velho (proposta → PR → veredito → re-selo
+   de baseline, protocolo v1.0) **não será retomado**: fica como está, congelado, sem `--atualizar-hashes`, sem
+   veredito na PR #3 e na PR #4, e sem editar `05_Interface_Auditoria/`. Enquanto o método novo não existir, a
+   garantia de consistência é o portão (`verificar_cadeia.py`), que confere regras 1 e 2 por conteúdo e os pares
+   documento × JSON. O que vale aproveitar do método velho, quando desenharmos o novo: o baseline com os 35
+   sha256, a tabela de tolerâncias do protocolo (§4), os seis achados G-01..G-06 de
+   `03_/AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md` (a moléstia real continua sendo G-03, cavidade selada nos dois
+   `Body_A`), e `verify_geometry_ssot.py` / `verify_legacy_dies.py` como medidores — o que está morto é o
+   ritual de aprovação, não a medição.
 2. `03_/AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md` §6 ainda descreve a reconstrução refutada em parte do texto —
    os ponteiros foram atualizados, mas a seção não foi reescrita (zona de auditoria, congelada agora).
 3. Os `arquivos[]` de `05_/propostas/PRP-0005-v28-1-fabricacao.json` apontam para
@@ -178,9 +189,22 @@ git show --stat HEAD                     # a reorganizacao #2, com a justificati
 git log origem/main..HEAD --oneline      # o que ainda nao desceu para a main
 ```
 
-Branches no GitHub: `main` (oficial, só entra por PR aprovada), `master` (legado), `continue` (nosso
-trabalho — é a que tem o estado atual), `proposta/PRP-0005` (a v28.1 em avaliação), e as duas
-`arena/01a096e3-*` / `arena/01a091ce-*` da cerimônia de auditoria.
+Branches no GitHub (estado de 2026-09-13, depois do push completo): `main` == `continue` == a tag
+`estado-2026-09-13` — o estado atual está no branch padrão, então quem clonar sem saber de nada já cai em
+cima do trabalho inteiro; `proposta/PRP-0005` continua na estrutura anterior (a v28.1 como foi submetida, para
+não reescrever PR em revisão); `master` é o snapshot legado que ele manteve de reserva, intocado; e as duas
+`arena/01a091ce-*` / `arena/01a096e3-*` são as pontas da cerimônia de auditoria velha, deixadas como estão.
+
+```bash
+git log --oneline --graph -25 origem/main        # a linha do tempo que desceu para a main
+git tag -l "estado-*"                            # os marcos empurrados
+```
+
+**O repo é público.** Por isso as capturas dele (`uploads/`, prints de celular) e os rascunhos soltos do
+workspace **não** foram para o GitHub de propósito: o que importa deles já está medido e transcrito em
+`03_/` e nos JSON de `04_/`. Se um dia quiser versionar as imagens de entrada, que seja em repo privado ou
+depois de revisar o que aparece nelas. E o token que passou no texto da conversa precisa ser revogado — ele dá
+escrita neste repo.
 
 ## 10. Recado para quem assumir
 

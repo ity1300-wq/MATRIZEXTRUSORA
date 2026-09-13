@@ -60,7 +60,11 @@ def main():
     ROT = [("D1_fixacao", "Fixação das metades"), ("D2_labio_saida", "Lábio de saída (land e chanfro)"),
            ("D3_funil", "Funil: cone atual × coat-hanger"), ("D4_promover", "Promover a revisão a oficial"),
            ("medicao_na_maquina", "Medidas conferidas na máquina"),
-           ("consequencia_d2_mediata", "Consequência medida da decisão do lábio")]
+           ("consequencia_d2_mediata", "Consequência medida da decisão do lábio"),
+           ("D5_gedeon_arquivo_do_usuario", "Gedeon: o arquivo dele É a matriz certa"),
+           ("D6_organizacao_pastas", "Organização do CAD: uma pasta por matriz"),
+           ("D7_metodo_de_auditoria", "Método de auditoria (v1.0 encerrado; novo a desenvolver)"),
+           ("D8_workspace_e_github", "Sessão no GitHub e tamanho do workspace")]
     decididas, abertas = [], []
     for chave, titulo in ROT:
         v = du.get(chave)

@@ -136,6 +136,30 @@
  "decisoes_usuario": {
   "data": "2026-09-11",
   "origem": "respostas do usuario as perguntas D1-D4 reformuladas em termos simples, mais o croqui em vista lateral enviado na sequencia (azul = extrusora, vermelho = cabecote, branco = matriz)",
+  "D5_gedeon_arquivo_do_usuario": {
+   "data": "2026-09-12, reafirmada em 2026-09-13",
+   "origem": "correção dele sobre a nossa entrega: \"matriz corrigida está errada, matriz Gedeon certa.step é de fato a matriz Gedeon certa\"",
+   "decisao": "A GEDEON CERTA E O ARQUIVO DELE, entregue como esta - nao re-escavar canal nem funil nele. A tentativa nossa de \"Gedeon corrigida\" (re-corte do canal historico no bloco) foi refutada por medida e APAGADA por inteiro em 2026-09-13, a pedido: gerador, JSON, relatorio, STEP e montagem. O que sobrou de valor saiu da prosa e virou medicao: gerar_gedeon_certa.py compara a Gedeon entregue com a certa nos proprios arquivos dela, e o unico defeito legítimo do arquivo dele (furos de pino como cavidade selada) e consertado so partidao no plano de particao, sem tirar aco.",
+   "impacto_no_cad": "a entrega da Gedeon mora em 07_CAD_Matrizes/Matriz_Gedeon_Certa/; o arquivo original dele continua tambem acessivel pelo caminho selado 02_CAD_Modelos_Historicos/matrizGedeonCerta.step"
+  },
+  "D6_organizacao_pastas": {
+   "data": "2026-09-13",
+   "origem": "\"nao gostei da organizacao, cada matriz deve estar numa pasta separada\" (a primeira versao, com aninhamento M01..M06 e pastas so de ponteiro, foi recusada)",
+   "decisao": "UMA PASTA POR MATRIZ, sem camada intermediaria e sem pasta so com ponteiro: 07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL, Matriz_Jonatha_v28_1_PROPOSTA, Matriz_Gedeon_Certa, Matriz_Gedeon_Entregue_HISTORICA, Matriz_Copo_HISTORICA, Matriz_Desenvolvimento_HISTORICA. Cada uma contem os STEP dela e um README. O que o cabeçote nao e matriz fica em 06_CAD_Cabecote_EX-030/STEP/.",
+   "impacto_no_cad": "os caminhos oficiais antigos (01_/ e 02_/) continuam existindo como atalhos com os mesmos bytes, porque as regras 1 e 2 falam dos modelos e o baseline do auditor selou caminhos; o portao confere isso por sha256, nao por git status"
+  },
+  "D7_metodo_de_auditoria": {
+   "data": "2026-09-13",
+   "origem": "\"ignore auditoria agora\" (2026-09-12) e, no fechamento do repo: \"nao agora, mais depois iremos desenvolver novo metodo de auditoria\"",
+   "decisao": "O METODO DE AUDITORIA v1.0 (proposta -> PR -> veredito -> re-selo do baseline) esta ENCERRADO, nao suspenso: nao reabrir veredito das PRs abertas, nao rodar --atualizar-hashes, nao editar 05_Interface_Auditoria/. Um metodo novo vai ser desenvolvido depois, com ele. Ate la, a garantia de consistencia e o portao verificar_cadeia.py (cadeia completa + pares documento x JSON + regras 1 e 2 por conteudo).",
+   "o_que_sobrevive_para_o_metodo_novo": "o baseline com os sha256 dos arquivos, a tabela de tolerancias do protocolo, os achados G-01..G-06 da auditoria de 2026-09-11 (a moléstia real continua sendo a cavidade selada nos Body_A) e os medidores verify_geometry_ssot.py / verify_legacy_dies.py - o que morre e o rito de aprovacao, nao a medicao"
+  },
+  "D8_workspace_e_github": {
+   "data": "2026-09-13",
+   "origem": "\"atualize o github de forma completa, atualize o workspace no github, voce tem permissao total\" + \"sugira como diminuir o espaco do workspace que esta em 50mb\"",
+   "decisao": "O ESTADO DA SESSAO MORA NO REPO, nao na conversa: CONTINUIDADE.md na raiz, com README apontando para ele, e o branch padrao main igual ao trabalho de continue. O workspace foi enxugado pelo que e recriavel: PNG de rascunho fora, o DXF do croquis compactado dentro do repo, objetos soltos do git empacotados por gc. As capturas dele (uploads/) ficam FORA do github porque o repo e publico.",
+   "impacto_no_cad": "nenhum arquivo de modelo mudou de bytes com a limpeza; o que e derivado tem o comando que o recria escrito em 07_CAD_Matrizes/README.md"
+  },
   "D1_fixacao": {
    "decisao": "FECHADA PELA MAQUINA: a matriz nao leva flange, grampo nem furo de fixacao; a retencao vem da bucha conica EX-031 (collete) e do degrau do cabecote",
    "impacto_no_cad": "nenhum - envelope intacto",
