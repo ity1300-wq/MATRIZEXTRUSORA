@@ -43,7 +43,8 @@ from verificar_interface_cabecote import (cabecote, cil_z, BORES, CORPO, Z_FACE_
                                           maior, n, dist3d)
 
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
-DIR_OFF = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
+DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "M02_Jonatha_v28_PROPOSTA")
 DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 
 # "corpo" = uniao dos dois bodies quando nao ha solido unico (a auditoria historica chama isso de
@@ -63,7 +64,7 @@ MATRIZES = [
     {"chave": "jonatha_v27", "nome": "Matriz Jonatha v27.0 (oficial aprovada)",
      "arquivos": [os.path.join(DIR_OFF, "MatrizJonatha.step")], "fonte": "oficial"},
     {"chave": "jonatha_v28_1", "nome": "Matriz Jonatha v28.1 (proposta DFM)",
-     "arquivos": [os.path.join(DIR_OFF, "MatrizJonatha_v28.step")], "fonte": "proposta"},
+     "arquivos": [os.path.join(DIR_V28, "MatrizJonatha_v28.step")], "fonte": "proposta"},
 ]
 
 

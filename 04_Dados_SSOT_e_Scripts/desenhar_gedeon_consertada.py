@@ -17,7 +17,7 @@ Faixas, todas traçadas a partir da seção medida no sólido (nada de cotas dec
   5  onde as duas diferem            → aço que a Gedeon tem e a v27 não, e o contrário
 
 Cada número do rodapé vem da medição desta própria execução e vai para
-`06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/desenho_gedeon.json`.
+`07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/desenho_gedeon.json`.
 
 Uso:  python 04_Dados_SSOT_e_Scripts/desenhar_gedeon_consertada.py [--png]
 """
@@ -42,8 +42,8 @@ import gerar_desenho_2d_cabecote_matriz as dd          # só as primitivas de tr
 from verificar_v28 import maior, n                       # n(): número pt-BR
 
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
-DIR_OFF = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
-DIR_GED = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Gedeon_Certa")
+DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
+DIR_GED = os.path.join(RAIZ, "07_CAD_Matrizes", "M03_Gedeon_CERTA")
 ARQ_JSON = os.path.join(DIR_GED, "desenho_gedeon.json")
 
 LIM_X = (-212.0, 212.0)
@@ -222,7 +222,7 @@ def main():
     med["4 Jonatha v27"] = faixa(
         axs[3], J2,
         "4   JONATHA v27 (o master aprovado) — compare com a faixa 3, no mesmo escalonamento",
-        "seção medida de `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (2 sólidos, %s mm³ de aço, cascas "
+        "seção medida de `07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/MatrizJonatha.step` (2 sólidos, %s mm³ de aço, cascas "
         "[3, 1]). Vista no MESMO escalonamento da faixa 3 para a comparação não ser de memória: a silhueta "
         "externa é idêntica porque o envelope é exigência de projeto (Ø93,00 × Z 0..109,00 nas duas).\n"
         "O que as separa é medido na faixa 5: a v27 tem funil escavado no próprio aço (%s mm³ de canal contra "

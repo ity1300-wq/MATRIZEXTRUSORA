@@ -42,14 +42,14 @@ from verificar_v28 import maior                  # maior(): descarta migalha de 
 from verificar_v28 import n                        # n(): número pt-BR, o formato que o portão compara
 
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
-DIR_OFF = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
-DIR_SAI = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Gedeon_Certa")
+DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
+DIR_SAI = os.path.join(RAIZ, "07_CAD_Matrizes", "M03_Gedeon_CERTA")
 F_CERTA = os.path.join(DIR_HIS, "matrizGedeonCerta.step")
 F_CANAL_G = os.path.join(DIR_HIS, "MatrizGedeon_Canal_Fluxo.step")
 F_J27 = os.path.join(DIR_OFF, "MatrizJonatha.step")
 F_J27_CANAL = os.path.join(DIR_OFF, "MatrizJonatha_Canal_Fluxo.step")
 F_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Cabecote_EX-030_sem_flange.step")
-F_MON = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Gedeon_Corrigida",
+F_MON = os.path.join(RAIZ, "07_CAD_Matrizes", "M04_Gedeon_ENTREGUE_HISTORICA",
                      "Cabecote_EX-030_com_Matriz_Gedeon_Corrigida.step")
 ARQ_JSON = os.path.join(AQUI, "gedeon_certa.json")
 ARQ_MD = os.path.join(RAIZ, "03_Relatorios_e_Documentacao", "RELATORIO_GEDEON_CERTA.md")
@@ -355,7 +355,7 @@ def main():
           f"aco das pecas inteiras: certa {vol(certa):,.1f} x v27 {vol(j27):,.1f} mm3")
 
     # --------------------------------------------------- [8] o que a entrega anterior errou, em numero
-    d_ant = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Gedeon_Corrigida")
+    d_ant = os.path.join(RAIZ, "07_CAD_Matrizes", "M04_Gedeon_ENTREGUE_HISTORICA")
     try:
         a_ant = maior(le(os.path.join(d_ant, "MatrizGedeon_Corrigida_Body_A.step")))
         b_ant = maior(le(os.path.join(d_ant, "MatrizGedeon_Corrigida_Body_B.step")))
@@ -458,11 +458,11 @@ def main():
             "## Arquivos",
             "",
             "```",
-            "06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/MatrizGedeon_Certa_Body_A.step",
-            "06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/MatrizGedeon_Certa_Body_B.step",
-            "06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/MatrizGedeon_Certa_Canal_Fluxo.step",
-            "06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/MatrizGedeon_Certa_Explodida.step",
-            "06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/Cabecote_EX-030_com_Matriz_Gedeon_Certa.step",
+            "07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Body_A.step",
+            "07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Body_B.step",
+            "07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Canal_Fluxo.step",
+            "07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Explodida.step",
+            "07_CAD_Matrizes/M03_Gedeon_CERTA/Cabecote_EX-030_com_Matriz_Gedeon_Certa.step",
             "```",
             "",
             f"Checks: {nchk[0]} executados, {len(falhas)} falha(s). "

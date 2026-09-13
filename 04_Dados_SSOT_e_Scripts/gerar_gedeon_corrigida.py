@@ -25,7 +25,7 @@ O conserto, então, não é inventar geometria nova: é **re-cortar o bloco do b
 (`02_/matrizGedeonCerta.step`) com o canal da própria Gedeon e com os pinos do próprio arquivo dele**,
 partindo no plano Y = 0, e entregar:
 
-    06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/MatrizGedeon_Corrigida_Body_A.step
+    07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/MatrizGedeon_Corrigida_Body_A.step
     ...                                      /MatrizGedeon_Corrigida_Body_B.step
     ...                                      /MatrizGedeon_Corrigida_Canal_Fluxo.step
     ...                                      /MatrizGedeon_Corrigida_Explodida.step
@@ -66,8 +66,8 @@ from verificar_interface_cabecote import n          # o mesmo formatador de núm
 DIR_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP")
 
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
-DIR_OFF = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
-DIR_GED = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP", "Gedeon_Corrigida_REFUTADA")
+DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
+DIR_GED = os.path.join(RAIZ, "07_CAD_Matrizes", "M04_Gedeon_ENTREGUE_HISTORICA")
 ARQ_JSON = os.path.join(AQUI, "gedeon_corrigida.json")
 ARQ_MD = os.path.join(RAIZ, "03_Relatorios_e_Documentacao", "RELATORIO_GEDEON_CORRIGIDA.md")
 ARQ_PERFIS = os.path.join(AQUI, "perfis_matrizes_x_cabecote.json")
@@ -150,7 +150,7 @@ def main():
           " historico inteiro (213.790,0 mm3), tirando do arquivo do usuario o aco que nao e dele\n"
           " (170.821,9 mm3). O arquivo dele JA E a matriz certa: fenda 75,00 x 1,50 com R 0,75\n"
           " atravessada, cone de entrada em 0 75,60, furos de pino. A entrega valida e\n"
-          " 06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/, gerada por gerar_gedeon_certa.py.\n"
+          " 07_CAD_Matrizes/M03_Gedeon_CERTA/, gerada por gerar_gedeon_certa.py.\n"
           " Esta pasta sai como Gedeon_Corrigida_REFUTADA: e o registro do que foi medido, nao e\n"
           " entregavel de fabricacao.")
     print("=" * 96)
@@ -420,7 +420,7 @@ def escreve_relatorio(med):
     linhas = [
         "# Matriz 2 (Gedeon) reconstruída a partir do backup do usuário",
         "",
-        "> **REFUTADA em 2026-09-12, na mesma noite desta entrega.** Este relatório mede o que os\n> arquivos históricos são, e continua sendo a fonte dessas medições — mas a reconstrução que ele\n> descreve não é a matriz: escavar `MatrizGedeon_Canal_Fluxo.step` (213.790,0 mm³) em\n> `matrizGedeonCerta.step` tirava **170.821,9 mm³** de aço que não é da Gedeon. O arquivo do usuário\n> já é a matriz pronta (fenda 75,00 × 1,50 com R 0,75 atravessada, cone de entrada Ø 75,60, 2 furos\n> de pino Ø 1,78 × 10,00). Entrega válida: `06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/`, gerada por\n> `gerar_gedeon_certa.py`; os STEP desta tentativa foram movidos para\n> `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/`.",
+        "> **REFUTADA em 2026-09-12, na mesma noite desta entrega.** Este relatório mede o que os\n> arquivos históricos são, e continua sendo a fonte dessas medições — mas a reconstrução que ele\n> descreve não é a matriz: escavar `MatrizGedeon_Canal_Fluxo.step` (213.790,0 mm³) em\n> `matrizGedeonCerta.step` tirava **170.821,9 mm³** de aço que não é da Gedeon. O arquivo do usuário\n> já é a matriz pronta (fenda 75,00 × 1,50 com R 0,75 atravessada, cone de entrada Ø 75,60, 2 furos\n> de pino Ø 1,78 × 10,00). Entrega válida: `07_CAD_Matrizes/M03_Gedeon_CERTA/`, gerada por\n> `gerar_gedeon_certa.py`; os STEP desta tentativa foram movidos para\n> `07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/`.",
         "Gerado por `04_Dados_SSOT_e_Scripts/gerar_gedeon_corrigida.py`. Todo número aqui é medição dos STEP",
         "reimportados; `02_CAD_Modelos_Historicos/` foi aberto só para leitura (regra 2) e",
         "`01_/MatrizJonatha.step` não foi tocado (regra 1). A reconstrução é `bloco do backup − canal da",
@@ -521,7 +521,7 @@ def escreve_relatorio(med):
                "- Acesso axial dos cartuchos/termopares: folga −2,750 mm medida; sai com o nariz em Z ≥ 99,75 mm. "
                "É do cabeçote, não da matriz, e continua o único NC vivo do projeto.",
                "- A Gedeon corrigida **não** substitui o master (regra 1) nem os históricos (regra 2): vive em "
-               "`06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/` como peça de trabalho, e o que vale é o que o "
+               "`07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/` como peça de trabalho, e o que vale é o que o "
                "processo de auditoria aprovar.", ""]
 
     open(ARQ_MD, "w", encoding="utf-8").write("\n".join(linhas))

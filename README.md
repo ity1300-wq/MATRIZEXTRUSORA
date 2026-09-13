@@ -166,15 +166,21 @@ MATRIZEXTRUSORA/
 ├── README.md                              -> Este arquivo guia do repositório
 ├── .gitignore                             -> Exclusões para repositório Git
 │
-├── 📂 01_CAD_MatrizJonatha_Oficial/       -> ARQUIVOS CAD MASTER OFICIAIS (SSOT v27.0)
-│   ├── MatrizJonatha.step                 -> Montagem fechada bipartida oca em camadas AP214
-│   ├── MatrizJonatha_Explodida.step       -> Vista explodida (+40mm Y) exibindo o canal interno
-│   ├── MatrizJonatha_Com_Fluxo.step       -> Montagem completa (Aço + Macho de polímero)
-│   ├── MatrizJonatha_Body_A.step          -> Sólido individual da metade inferior (Y <= 0)
-│   ├── MatrizJonatha_Body_B.step          -> Sólido individual da metade superior (Y >= 0)
-│   ├── MatrizJonatha_Canal_Fluxo.step     -> Sólido individual do núcleo de fluxo do polímero
-│   └── MatrizJonatha_v28*.step            -> PROPOSTA DFM v28.0 (montagem, A/B, canal 1 sólido,
-│                                              explodida, com fluxo e kit de 4 pinos)
+├── 📂 07_CAD_Matrizes/                     -> **UMA PASTA POR MATRIZ** (reorganização de 2026-09-13)
+│   ├── M01_Jonatha_v27_OFICIAL/           -> o modelo oficial: MatrizJonatha.step, A, B, canal, explodida,
+│   │                                        com fluxo — e o README com o sha256 conferido contra o baseline
+│   ├── M02_Jonatha_v28_PROPOSTA/          -> proposta DFM v28.1 (NÃO promovida): A/B, canal, kit de 4 pinos
+│   ├── M03_Gedeon_CERTA/                  -> a Gedeon do backup do usuário, partida em Y = 0, + prancha de
+│   │                                        5 faixas `DESENHO_2D_GEDEON_CERTA_X_JONATHA.pdf`
+│   ├── M04_Gedeon_ENTREGUE_HISTORICA/     -> índice + medição da Gedeon do CAD antigo e a refutação da
+│   │                                        tentativa de re-corte (os STEP históricos ficam em 02_/)
+│   ├── M05_Copo_HISTORICA/                -> índice + medição da Matriz 1 "Copo" (origem em 02_/)
+│   └── M06_MatrizDesenvolvimento_HISTORICA/ -> índice + medição da terceira histórica (origem em 02_/)
+│
+├── 📂 01_CAD_MatrizJonatha_Oficial/       -> ATALHOS com o MESMO conteúdo do master (SSOT v27.0): os seis
+│   └── MatrizJonatha*.step                 `MatrizJonatha*.step` são symlinks para 07_/M01, para que o
+│                                            caminho oficial citado por auditoria, CI e CODEOWNERS continue
+│                                            achando os mesmos bytes. Os físicos moram em 07_CAD_Matrizes/.
 │
 ├── 📂 02_CAD_Modelos_Historicos/          -> MODELOS CAD LEGADOS PRESERVADOS
 │   ├── MatrizGedeon.step e variantes     -> Matriz 2 (Gedeon) original mantida intacta

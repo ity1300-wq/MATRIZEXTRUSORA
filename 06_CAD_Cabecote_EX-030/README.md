@@ -107,7 +107,7 @@ deveria haver o piloto. As faces do desenho agora são exatas (flange de Z = 43,
 
 O chanfro é cota do desenho e estava no SSOT (`corpo.chanfro` em `cabecote_ex030.json`) mas não estava no sólido; foi conferido hoje nas **duas** vistas de seção do DXF (aresta a 45,00° de (d 42,00; r 65,02) a (d 52,00; r 75,02), camada `contorno`) e medido no modelo depois de gerado. Onde o SSOT dizia `resalto_traseiro: Ø203 × 3`, a medição da traseira mostra outra coisa: piloto Ø105,00 × 3,00 mm protraindo além da face do flange (`H r 52,48/52,52` em `d 92,00..95,00`), com o Ø95 do bolso atravessando até `d = 95,00` — é isso que dá os 95,00 mm de comprimento total. Onde este repositório tinha um "cubo Ø164" nessa faixa, a linha era a borda do furo Ø16 no C.C. Ø180 (82 = 90 − 8), não uma superfície da peça.
 
-Referencial: Z é o eixo da matriz (face do nariz em Z = 95, face de entrada do cabeçote em Z = 0), então o arquivo monta direto com `01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28.step`.
+Referencial: Z é o eixo da matriz (face do nariz em Z = 95, face de entrada do cabeçote em Z = 0), então o arquivo monta direto com `07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28.step`.
 
 ## `STEP/estudos/` — cenários, não entregas
 

@@ -36,7 +36,8 @@ from verificar_v28 import (maior, dist3d, n, checar, registrar, linhas,  # noqa:
 def n2(v):
     return float(v)
 
-DIR_CAD = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
+DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "M02_Jonatha_v28_PROPOSTA")
 DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 
 # --------------------------------------------------------------- cabecote
@@ -154,9 +155,9 @@ def main():
         raise SystemExit("massa nao encontrada em verificacao_v28.json")
     print(f"força de abertura lida da verificacao_v28: {n(forca_kn, 1)} kN   |   massa {n(massa)} kg")
 
-    matriz = cq.importers.importStep(os.path.join(DIR_CAD, "MatrizJonatha_v28.step")).val()
+    matriz = cq.importers.importStep(os.path.join(DIR_V28, "MatrizJonatha_v28.step")).val()
     canal = maior(cq.importers.importStep(
-        os.path.join(DIR_CAD, "MatrizJonatha_v28_Canal_Fluxo.step")).val())
+        os.path.join(DIR_V28, "MatrizJonatha_v28_Canal_Fluxo.step")).val())
     _bb, _ = secao(canal, ENVELOPE[2][1] - 0.001)
     MANTA = (_bb.xmax - _bb.xmin, _bb.ymax - _bb.ymin)          # boca com o chanfro, medida
     print(f"boca de saida medida no canal: {n(MANTA[0])} x {n(MANTA[1])} mm  "

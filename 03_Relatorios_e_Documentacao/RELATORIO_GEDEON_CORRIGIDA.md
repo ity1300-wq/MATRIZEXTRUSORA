@@ -5,9 +5,9 @@
 > descreve não é a matriz: escavar `MatrizGedeon_Canal_Fluxo.step` (213.790,0 mm³) em
 > `matrizGedeonCerta.step` tirava **170.821,9 mm³** de aço que não é da Gedeon. O arquivo do usuário
 > já é a matriz pronta (fenda 75,00 × 1,50 com R 0,75 atravessada, cone de entrada Ø 75,60, 2 furos
-> de pino Ø 1,78 × 10,00). Entrega válida: `06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/`, gerada por
+> de pino Ø 1,78 × 10,00). Entrega válida: `07_CAD_Matrizes/M03_Gedeon_CERTA/`, gerada por
 > `gerar_gedeon_certa.py`; os STEP desta tentativa foram movidos para
-> `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/`.
+> `07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/`.
 Gerado por `04_Dados_SSOT_e_Scripts/gerar_gedeon_corrigida.py`. Todo número aqui é medição dos STEP
 reimportados; `02_CAD_Modelos_Historicos/` foi aberto só para leitura (regra 2) e
 `01_/MatrizJonatha.step` não foi tocado (regra 1). A reconstrução é `bloco do backup − canal da
@@ -53,11 +53,11 @@ própria Gedeon − pinos do próprio arquivo dele`, partida no plano Y = 0.
 
 | peça | arquivo | bytes | sólidos | cascas por sólido | válidos |
 | :--- | :--- | ---: | ---: | :--- | :--- |
-| Body_A | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Body_A.step` | 97,921 | 1 | [1] | True |
-| Body_B | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Body_B.step` | 119,785 | 1 | [1] | True |
-| Canal_Fluxo | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Canal_Fluxo.step` | 43,193 | 1 | [1] | True |
-| Explodida | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Explodida.step` | 268,553 | 5 | [1, 1, 1, 1, 1] | True |
-| com o cabeçote | `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/Cabecote_EX-030_com_Matriz_Gedeon_Corrigida.step` | 274,036 | 3 | [1, 1, 1] | True |
+| Body_A | `07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/MatrizGedeon_Corrigida_Body_A.step` | 97,921 | 1 | [1] | True |
+| Body_B | `07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/MatrizGedeon_Corrigida_Body_B.step` | 119,785 | 1 | [1] | True |
+| Canal_Fluxo | `07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/MatrizGedeon_Corrigida_Canal_Fluxo.step` | 43,193 | 1 | [1] | True |
+| Explodida | `07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/MatrizGedeon_Corrigida_Explodida.step` | 268,553 | 5 | [1, 1, 1, 1, 1] | True |
+| com o cabeçote | `07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/Cabecote_EX-030_com_Matriz_Gedeon_Corrigida.step` | 274,036 | 3 | [1, 1, 1] | True |
 
 ## Números que o portão do projeto cobra deste JSON
 
@@ -67,4 +67,4 @@ Canal da Gedeon medido no arquivo: **213790,0 mm³** (o `_Canal_Fluxo.step` é o
 
 - O Ø90,00 reto do furo do cabeçote não desce sobre a banda Ø93 da matriz (faltam 1,50 mm de raio): a superfície de aperto do collete EX-031 continua por confirmar, e a pressão que fecha a bipartição é condicional a isso.
 - Acesso axial dos cartuchos/termopares: folga −2,750 mm medida; sai com o nariz em Z ≥ 99,75 mm. É do cabeçote, não da matriz, e continua o único NC vivo do projeto.
-- A Gedeon corrigida **não** substitui o master (regra 1) nem os históricos (regra 2): vive em `06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/` como peça de trabalho, e o que vale é o que o processo de auditoria aprovar.
+- A Gedeon corrigida **não** substitui o master (regra 1) nem os históricos (regra 2): vive em `07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/` como peça de trabalho, e o que vale é o que o processo de auditoria aprovar.

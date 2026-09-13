@@ -33,7 +33,7 @@ sys.path.insert(0, AQUI)
 
 from verify_legacy_dies import dp_total, tau_parede   # metodos do proprio projeto
 
-DIR_CAD = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
 with open(os.path.join(AQUI, "cad_die_parameters.json"), encoding="utf-8") as _f:
     ROTULO = json.load(_f)["proposta_v28_dfm"].get("rotulo", "v28.1")   # rotulo = SSOT, nao string no codigo
 DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")

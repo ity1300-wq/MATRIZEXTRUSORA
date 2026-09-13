@@ -17,6 +17,7 @@ Checagens:
   7. `MatrizJonatha.step` (v27.0) e `02_CAD_Modelos_Historicos/` intactos (regras 1 e 2).
 """
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -192,9 +193,21 @@ def main():
     hist = [l for l in st if "02_CAD_Modelos_Historicos/" in l]
     checa(not hist, "02_CAD_Modelos_Historicos/ intocada (regra 2)",
           f"02_CAD_Modelos_Historicos/ FOI TOCADA: {hist}")
-    mestre = [l for l in st if l.rstrip().endswith("01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step")]
-    checa(not mestre, "MatrizJonatha.step (v27.0) intocado (regra 1)",
-          f"o master v27.0 foi modificado: {mestre}")
+    # desde 2026-09-13 o modelo oficial mora em `07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/` e `01_/` mantem
+    # um atalho com o mesmo conteudo. Regra 1 fala do MODELO, nao do caminho: por isso a checagem e por sha256
+    # contra o baseline do auditor, e nao por "git status limpo num caminho".
+    bas = json.load(open(os.path.join(RAIZ, "05_Interface_Auditoria", "baseline", "MATRIZ_3_v27.json"),
+                         encoding="utf-8"))
+    h_exp = bas["hashes"]["01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step"]
+    corpo = os.path.realpath(os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial", "MatrizJonatha.step"))
+    h_atu = hashlib.sha256(open(corpo, "rb").read()).hexdigest()
+    checa(h_atu == h_exp, "MatrizJonatha.step (v27.0) e o mesmo modelo de sempre (regra 1, por conteudo)",
+          f"o sha256 do master divergiu do baseline: {h_atu[:16]}... contra {h_exp[:16]}... "
+          f"(arquivo real: {os.path.relpath(corpo, RAIZ)})")
+    checa(corpo.startswith(os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")) or
+          corpo == os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial", "MatrizJonatha.step"),
+          "o master esta na pasta organizada (07_) ou no caminho oficial",
+          f"o master esta em {os.path.relpath(corpo, RAIZ)}, nem em 07_/M01 nem em 01_/")
     ok(f"{len(st)} arquivos alterados no total (STEP regenerados contam ruído de export, não de geometria)")
 
     print("\n" + "=" * 78)

@@ -5,8 +5,8 @@
   "02_CAD_Modelos_Historicos/MatrizGedeon_Body_A.step",
   "02_CAD_Modelos_Historicos/MatrizGedeon_Body_B.step",
   "02_CAD_Modelos_Historicos/MatrizGedeon_Canal_Fluxo.step",
-  "01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step",
-  "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Canal_Fluxo.step"
+  "07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/MatrizJonatha.step",
+  "07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/MatrizJonatha_Canal_Fluxo.step"
  ],
  "regra_2": "02_CAD_Modelos_Historicos/ aberto somente para leitura; nenhum arquivo dele foi escrito",
  "ficha_dos_arquivos": {
@@ -414,7 +414,7 @@
  },
  "entregas": {
   "Body_A": {
-   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Body_A.step",
+   "arquivo": "07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/MatrizGedeon_Corrigida_Body_A.step",
    "bytes": 97921,
    "solidos": 1,
    "cascas_por_solido": [
@@ -426,7 +426,7 @@
    "volume_mm3": 234579.8
   },
   "Body_B": {
-   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Body_B.step",
+   "arquivo": "07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/MatrizGedeon_Corrigida_Body_B.step",
    "bytes": 119785,
    "solidos": 1,
    "cascas_por_solido": [
@@ -438,7 +438,7 @@
    "volume_mm3": 234779.0
   },
   "Canal_Fluxo": {
-   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Canal_Fluxo.step",
+   "arquivo": "07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/MatrizGedeon_Corrigida_Canal_Fluxo.step",
    "bytes": 43193,
    "solidos": 1,
    "cascas_por_solido": [
@@ -450,7 +450,7 @@
    "volume_mm3": 213790.0
   },
   "Explodida": {
-   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/MatrizGedeon_Corrigida_Explodida.step",
+   "arquivo": "07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/MatrizGedeon_Corrigida_Explodida.step",
    "bytes": 268553,
    "solidos": 5,
    "cascas_por_solido": [
@@ -470,7 +470,7 @@
    "volume_mm3": 683198.6
   },
   "com o cabeçote": {
-   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida_REFUTADA/Cabecote_EX-030_com_Matriz_Gedeon_Corrigida.step",
+   "arquivo": "07_CAD_Matrizes/M04_Gedeon_ENTREGUE_HISTORICA/Cabecote_EX-030_com_Matriz_Gedeon_Corrigida.step",
    "bytes": 274036,
    "solidos": 3,
    "cascas_por_solido": [

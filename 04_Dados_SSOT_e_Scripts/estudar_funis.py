@@ -25,7 +25,8 @@ import cadquery as cq
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
-DIR_CAD = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
+DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "M02_Jonatha_v28_PROPOSTA")
 DIR_ESTUDO = os.path.join(RAIZ, "05_Variantes_Em_Estudo")
 DIR_REL = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 sys.path.insert(0, AQUI)
@@ -326,9 +327,9 @@ def main():
     cq.exporters.export(cq.Workplane("XY").add(corpo_new).val(),
                         os.path.join(DIR_ESTUDO, "ESTUDO_funil_coathanger_Matriz.step"))
     atual = maior(cq.importers.importStep(
-        os.path.join(DIR_CAD, "MatrizJonatha_v28_Canal_Fluxo.step")).val())
+        os.path.join(DIR_V28, "MatrizJonatha_v28_Canal_Fluxo.step")).val())
     # o .step da matriz e uma composicao com as duas metades: maior() pegaria so uma delas
-    corpo_atu = cq.importers.importStep(os.path.join(DIR_CAD, "MatrizJonatha_v28.step")).val()
+    corpo_atu = cq.importers.importStep(os.path.join(DIR_V28, "MatrizJonatha_v28.step")).val()
     m_atu = medir("funil atual - reduzor conico linear do master", atual, corpo_atu)
     m_new = medir("variante coat-hanger - secoes declaradas, loft por todas as estacoes",
                   canal_new, corpo_new)

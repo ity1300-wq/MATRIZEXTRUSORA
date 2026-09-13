@@ -37,11 +37,11 @@ Booleano medido: 171224,1 mm³ de aço só na Gedeon certa e 44,9 mm³ só na v2
 ## Arquivos
 
 ```
-06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/MatrizGedeon_Certa_Body_A.step
-06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/MatrizGedeon_Certa_Body_B.step
-06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/MatrizGedeon_Certa_Canal_Fluxo.step
-06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/MatrizGedeon_Certa_Explodida.step
-06_CAD_Cabecote_EX-030/STEP/Gedeon_Certa/Cabecote_EX-030_com_Matriz_Gedeon_Certa.step
+07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Body_A.step
+07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Body_B.step
+07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Canal_Fluxo.step
+07_CAD_Matrizes/M03_Gedeon_CERTA/MatrizGedeon_Certa_Explodida.step
+07_CAD_Matrizes/M03_Gedeon_CERTA/Cabecote_EX-030_com_Matriz_Gedeon_Certa.step
 ```
 
 Checks: 21 executados, 0 falha(s). Nada promovido: o master continua v27.0.

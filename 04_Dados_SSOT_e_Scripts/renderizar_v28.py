@@ -29,7 +29,7 @@ from OCP.TopLoc import TopLoc_Location
 from OCP.TopoDS import TopoDS
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DIR_CAD = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
 EIXOS = {"saida_Z": (0, 1), "long_Y": (0, 2), "lado_X": (1, 2)}  # (h, v)
 
 

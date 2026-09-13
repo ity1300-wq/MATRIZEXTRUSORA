@@ -159,8 +159,8 @@ cálculo/medição que o produziria.
 {decisoes}
 
 ## 6. MAPA DE ARQUIVOS
-- `01_CAD_MatrizJonatha_Oficial/MatrizJonatha*.step` — v27.0 aprovado (intocado)
-- `01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28*.step` — proposta DFM (corpo A/B, canal 1 sólido,
+- `07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/MatrizJonatha*  (o caminho antigo segue valido: ha um atalho em `01_CAD_MatrizJonatha_Oficial/` para o mesmo arquivo).step` — v27.0 aprovado (intocado)
+- `07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28*.step` — proposta DFM (corpo A/B, canal 1 sólido,
   explodida, com fluxo, kit de pinos)
 - `05_Variantes_Em_Estudo/` — STEP de comparações pedidas antes de mexer em geometria (funil
   coat-hanger da D3 e o recuo dos cartuchos para Z = 99,75 / 100,25 mm da alternativa (a)). **Não**

@@ -51,7 +51,7 @@ DADO = json.load(open(os.path.join(AQUI, "cabecote_ex030.json"), encoding="utf-8
 DIR_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP")
 DIR_ESTUDO = os.path.join(DIR_CAB, "estudos")
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")   # lido, nunca escrito (regra 2)
-DIR_OFF = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
 PERFIS = os.path.join(AQUI, "perfis_matrizes_x_cabecote.json")
 # as montagens que o usuario pediu: o cabecote com a matriz original e com a Gedeon sentadas
 MONTAGENS = [("matriz_1_copo", "Matriz_Copo"), ("matriz_2_gedeon", "Matriz_Gedeon")]
@@ -112,8 +112,8 @@ def main():
     na_parede_do_bolso = (vol(removido.intersect(cil_z(RAIO_BOLSO + 0.001, Z0 - 1, Z1 + 1)))
                           - ate_a_matriz)
     bf, bn = cheio.BoundingBox(), novo.BoundingBox()
-    matriz = cq.importers.importStep(os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial",
-                                                  "MatrizJonatha_v28.step")).val()
+    matriz = cq.importers.importStep(os.path.join(RAIZ,
+                 "07_CAD_Matrizes", "M02_Jonatha_v28_PROPOSTA", "MatrizJonatha_v28.step")).val()
     interf_cheio = vol(matriz.intersect(cheio))
     interf_novo = vol(matriz.intersect(novo))
     aneis = sorted({f"Ø{2 * r:.0f} (d {Z_FACE_NARIZ - z1:.2f}..{Z_FACE_NARIZ - z0:.2f})"
