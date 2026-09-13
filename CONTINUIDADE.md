@@ -230,12 +230,16 @@ land 8,500 + chanfro 1,500 × 45°, lâmina 0,750, 3,586 kg, abertura da biparti
    A branch `proposta/PRP-0005` ficou na estrutura anterior (com o aninhamento `M01..M06`) **de propósito**:
    PR em revisão não se reescreve. Quem for olhar o diff da PR #3 veja os arquivos em
    `07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/` na branch `continue`.
-4. PR #3 (nossa) sem comentário de estado no GitHub; PR #4 (`arena/01a096e3-...`, proposta PRP-0006 de outrem:
-   land 10,00 mm com chanfro 0,80) está aberta e **não** foi avaliada por nós. O chanfro do master é 1,50 e
-   assim fica até ele dizer o contrário.
+4. **Todas as PR estão fechadas** (ordem dele, 2026-09-13, repetida três vezes): a #4 (`arena/01a096e3-...`,
+   PRP-0006 de outrem — land 10,00 mm com chanfro 0,80) foi fechada **sem mesclar** (`merged_at = null`) e com
+   comentário de estado explicando que não houve veredito nem aprovação; #1, #2 e #3 já estavam fechadas
+   (mescladas). Nada foi apagado: a branch da #4 continua no repo e `delete_branch_on_merge=false`, então
+   `gh pr reopen 4` / `gh pr merge 4` resolve se ele mudar de ideia. O chanfro do master é 1,50 e assim fica
+   até ele dizer o contrário — a decisão D2 não foi tocada por este fechamento.
 5. Geometria do cabeçote que ainda depende de decisão dele: o chanfro que falta no desenho dele foi conferido
    no DXF (10 × 45° na face do flange) e a cabeça do parafuso M12 no furo de 16,5 — o cenário da furação M12
-   foi removido do repo; fica no disco em `06_/STEP/estudos/` e recria com
+   foi removido do repo em setembro e **voltou rastreado** em 2026-09-13, com a rodada de "tire as travas":
+   os 4 arquivos estão em `06_/STEP/estudos/` no git, e recria com
    `python3 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py --com-m12`.
 
 ## 9. Como ler o histórico
@@ -270,11 +274,15 @@ continua apontando para `MatrizJonatha.step` (v27.0) e a v28.1 continua na pasta
 PR #3 passou a "merged" como efeito mecânico de a main conter os commits dela; o veredito nunca foi dado e não
 será dado nesse formato (ver item 1 acima).
 
-As duas PRs abertas da cerimônia velha receberam comentário de estado na data: a **#3** (nossa, PRP-0005) foi
-fechada pelo GitHub como "merged" por motivo mecânico — os commits dela entraram na `main` com o push do estado
-— e o comentário diz que **isso não é veredito nem aprovação da v28.1**; a **#4** (PRP-0006 de outrem, land
-10,00 com chanfro 0,80) fica aberta sem re-veredito, com a decisão D2 (chanfro 1,50 do master) citada e os três
-defeitos da régua apontados como insumo do método novo.
+As duas PRs da cerimônia velha receberam comentário de estado na data: a **#3** (nossa, PRP-0005) foi fechada
+pelo GitHub como "merged" por motivo mecânico — os commits dela entraram na `main` com o push do estado — e o
+comentário diz que **isso não é veredito nem aprovação da v28.1**. A **#4** (PRP-0006 de outrem, land 10,00 com
+chanfro 0,80) recebeu comentário apontando os três defeitos da régua como insumo do método novo e ficou aberta
+até 2026-09-13, quando ele mandou fechar todas: fechada **sem mesclar** e **sem re-veredictar**, com um segundo
+comentário ([pull/4#issuecomment-5654833275](https://github.com/ity1300-wq/MATRIZEXTRUSORA/pull/4#issuecomment-5654833275))
+registrando o estado do projeto no momento do fechamento — master v27.0, v28.1 não promovida e com a cara
+degenerada no `Body_B` a consertar antes de qualquer promoção, método v1.0 encerrado. Verificado pela API
+depois do fechamento: `ABERTAS: nenhuma` (4 PR no total, todas `closed`).
 
 **O repo é público.** Por isso as capturas dele (`uploads/`, prints de celular com o endereço da sessão e a
 barra do aparelho) **não** foram para o GitHub: `03_Relatorios_e_Documentacao/FONTES_DO_USUARIO_2026-09-13.md`
