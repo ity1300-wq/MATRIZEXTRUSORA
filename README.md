@@ -8,6 +8,10 @@
 
 Projeto de engenharia mecânica, reologia computacional (CFD) e modelagem 3D CAD para fabricação da **Matriz Jonatha**: matriz de extrusão plana otimizada para manta de isolação de acessórios de cabos elétricos de Média Tensão (MT).
 
+> **Voltando de uma sessão perdida (ou assumindo com outro agente)?** Leia [`CONTINUIDADE.md`](CONTINUIDADE.md)
+> na raiz: é o estado do trabalho, as regras que valem, como montar o ambiente, o que o dono do projeto já
+> decidiu e o que está pendurado. Ele + `git log` substituem a conversa — nada importante vive só no chat.
+
 ---
 
 ## 📌 Especificação Resumida do Produto Final
@@ -15,7 +19,7 @@ Projeto de engenharia mecânica, reologia computacional (CFD) e modelagem 3D CAD
 - **Espessura da Manta ($Y$):** $1,50\text{ mm}$
 - **Perfil das Bordas Laterais:** Raio Total $R = 0,75\text{ mm}$ (elimina concentração de campo elétrico em cabos MT)
 - **Chanfro de Saída:** $1,50\text{ mm} \times 45^\circ$ no v27.0 aprovado → **reduzido para $0,80\text{ mm} \times 45^\circ$ na proposta v28.0**, o que devolve 0,70 mm de land reto (8,50 → 9,20 mm) e engrossa a lâmina do lábio de 0,75 → 1,45 mm (medido)
-- **Encaixe de Entrada ($Z=0$):** Restrito ao diâmetro de acoplamento da extrudora ($arnothing 75,60\text{ mm}$), garantindo vedação e montagem perfeita.
+- **Encaixe de Entrada ($Z=0$):** Restrito ao diâmetro de acoplamento da extrudora ($\varnothing 75,60\text{ mm}$), garantindo vedação e montagem perfeita.
 - **Envelope Cilíndrico Externo:** Estágio 1 ($\varnothing 93,00 \times 69,90\text{ mm}$), Estágio 2 ($\varnothing 89,50 \times 10,80\text{ mm}$), Estágio 3 ($\varnothing 79,50 \times 28,30\text{ mm}$) — 100% idêntico à Matriz 2 para montagem direta na máquina.
 
 ---
@@ -172,20 +176,32 @@ MATRIZEXTRUSORA/
 │   ├── Matriz_Jonatha_v28_1_PROPOSTA/          -> proposta DFM v28.1 (NÃO promovida): A/B, canal, kit de 4 pinos
 │   ├── Matriz_Gedeon_Certa/                  -> a Gedeon do backup do usuário, partida em Y = 0, + prancha de
 │   │                                        5 faixas `DESENHO_2D_GEDEON_CERTA_X_JONATHA.pdf`
-│   ├── Matriz_Gedeon_Entregue_HISTORICA/     -> índice + medição da Gedeon do CAD antigo e a refutação da
-│   │                                        tentativa de re-corte (os STEP históricos ficam em 02_/)
-│   ├── Matriz_Copo_HISTORICA/                -> índice + medição da Matriz 1 "Copo" (origem em 02_/)
-│   └── Matriz_Desenvolvimento_HISTORICA/ -> índice + medição da terceira histórica (origem em 02_/)
+│   ├── Matriz_Gedeon_Entregue_HISTORICA/     -> os 4 STEP da Gedeon do CAD antigo + README com a medição que
+│   │                                        serve de contraste (a "Gedeon corrigida" foi APAGADA em
+│   │                                        2026-09-13: a certa é o arquivo do usuário, não havia canal a
+│   │                                        reconstruir)
+│   ├── Matriz_Copo_HISTORICA/                -> os 6 STEP da Matriz 1 "Copo" + README
+│   ├── Matriz_Desenvolvimento_HISTORICA/     -> os 5 STEP da matriz de desenvolvimento + README
+│   └── README.md                             -> índice das pastas, por que os caminhos antigos valem e o que
+│                                                foi removido (com o comando que recria cada derivado)
 │
-├── 📂 01_CAD_MatrizJonatha_Oficial/       -> ATALHOS com o MESMO conteúdo do master (SSOT v27.0): os seis
-│   └── MatrizJonatha*.step                 `MatrizJonatha*.step` são symlinks para 07_/M01, para que o
-│                                            caminho oficial citado por auditoria, CI e CODEOWNERS continue
-│                                            achando os mesmos bytes. Os físicos moram em 07_CAD_Matrizes/.
+├── CONTINUIDADE.md                           -> COMO RETOMAR O TRABALHO: estado, ambiente, portão, pendências
 │
-├── 📂 02_CAD_Modelos_Historicos/          -> MODELOS CAD LEGADOS PRESERVADOS
-│   ├── MatrizGedeon.step e variantes     -> Matriz 2 (Gedeon) original mantida intacta
-│   ├── MatrizDesenvolvimento.step        -> Versão intermediária mantida intacta
-│   └── Matriz1_Original_Copo.step        -> Matriz 1 (Copo Oco) mantida intacta
+├── 📂 01_CAD_MatrizJonatha_Oficial/       -> caminho oficial (SSOT v27.0). Desde 2026-09-13 os seis
+│   └── MatrizJonatha*.step                 `MatrizJonatha*.step` são SYMLINKS para
+│                                            `07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/`, para que o caminho
+│                                            citado por auditoria, CI e CODEOWNERS ache os mesmos bytes. Os
+│                                            arquivos físicos moram na pasta da matriz: a regra 1 é sobre o
+│                                            MODELO, e o portão confere o sha256 contra o baseline.
+│
+├── 📂 02_CAD_Modelos_Historicos/          -> MODELOS CAD LEGADOS PRESERVADOS (regra 2: ler sim, editar não)
+│   ├── MatrizGedeon.step e variantes     -> Matriz 2 (Gedeon) original: SYMLINK para a pasta dela em 07_;
+│   │                                        os bytes são os selados no baseline do auditor (regra 2 é sobre
+│   │                                        os modelos, não sobre o caminho)
+│   ├── MatrizDesenvolvimento.step        -> Versão intermediária (symlink)
+│   ├── Matriz1_Original_Copo.step        -> Matriz 1 (Copo Oco) (symlink)
+│   └── matrizGedeonCerta.step            -> **o arquivo do usuário**: a Gedeon CERTA, entregue como veio
+│                                            (1 sólido, 640.180,7 mm³); cópia byte a byte em 07_/Matriz_Gedeon_Certa/
 │
 ├── 📂 03_Relatorios_e_Documentacao/       -> DOCUMENTAÇÃO TÉCNICA E SIMULAÇÕES
 │   ├── AUTO_PROMPT_CONTINUIDADE_MATRIZ_JONATHA.md -> Prompt de handover para continuidade em IA
@@ -195,7 +211,9 @@ MATRIZEXTRUSORA/
 │   ├── VERIFICACAO_V28.md                 -> As 64 medições que provam a v28.0
 │   ├── AVALIACAO_MELHORIA_MATRIZ_3_JONATHA.md -> Avaliação independente, com CFD 2D próprio: a
 │   │     Matriz 3 pode melhorar? (figuras/aresta_R075_intuicao.png: por que a aresta R0,75 recebe pouco material)
-│   └── V28_CONFERENCIA_VISUAL.png         -> 6 vistas renderizadas dos STEP v28
+│   ├── RELATORIO_GEDEON_CERTA.md          -> A Gedeon do usuário medida face por face, e o que se achou nela
+│   ├── INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md -> O que tem dentro do furo do cabeçote, medido nos STEP
+│   └── V28_CONFERENCIA_VISUAL.png (fora do git) -> 6 vistas da v28; recria renderizar_v28.py, pesa 2,1 MB
 │   ├── RELATORIO_DE_SIMULACAO.md          -> Relatório executivo completo de CFD reológico e térmico
 │   ├── CAD_SPECIFICATION_BACKUP_SSOT.md  -> Especificação técnica unificada SSOT v27.0
 │   └── SIMULACAO_REOLOGICA_MATRIZ_JONATHA.md -> Detalhamento dos modelos reológicos
@@ -226,7 +244,18 @@ MATRIZEXTRUSORA/
     ├── avaliacao_matriz_3_uniformidade.json -> Métricas de uniformidade transversal (Matriz 3)
     ├── avaliacao_matriz_3_alivio_borda.json -> Estudo paramétrico de alívio de borda
     ├── dados_simulacao_reologica.json     -> Dados numéricos de simulação em JSON
-    └── dados_simulacao_carreau_yasuda.json -> Dados numéricos térmicos em JSON
+    ├── dados_simulacao_carreau_yasuda.json -> Dados numéricos térmicos em JSON
+    ├── verificar_cadeia.py                -> **O PORTÃO**: re-rodá os geradores, confere documento × JSON,
+    │                                        sha256 dos selos e as regras 1 e 2 (`--rapido` só consulta)
+    ├── gerar_gedeon_certa.py              -> Mede o arquivo do usuário e escreve JSON + relatório (21 checks)
+    └── desenhar_gedeon_consertada.py      -> A prancha de 5 faixas (o nome sobrou do episódio da refutada)
+
+├── 📂 05_Interface_Auditoria/              -> O CONTRATO: protocolo, baseline selado, propostas e vereditos
+│                                            (zona congelada — quem propõe não edita aqui)
+└── 📂 06_CAD_Cabecote_EX-030/STEP/          -> O cabeçote e as montagens cabeçote + matriz: `Cabecote_EX-030_
+                                             sem_flange.step`, `_desenhado.step`, `_com_Matriz_Copo.step`,
+                                             `_com_Matriz_Gedeon.step`, `_com_Matriz_Gedeon_Certa.step` e o PDF
+                                             2D do conjunto. A matriz tem pasta; o conjunto é outra.
 ```
 
 ---

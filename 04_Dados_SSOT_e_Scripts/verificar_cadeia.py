@@ -226,7 +226,10 @@ def main():
           corpo == os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial", "MatrizJonatha.step"),
           "o master esta na pasta organizada (07_) ou no caminho oficial",
           f"o master esta em {os.path.relpath(corpo, RAIZ)}, nem em 07_/M01 nem em 01_/")
-    ok(f"{len(st)} arquivos alterados no total (STEP regenerados contam ruído de export, não de geometria)")
+    st = subprocess.run(["git", "status", "--porcelain"], cwd=RAIZ, capture_output=True,
+                        text=True).stdout.splitlines()
+    ok(f"{len(st)} arquivos alterados na arvore de trabalho (STEP regenerados contam ruido de export, nao de "
+       "geometria)")
 
     print("\n" + "=" * 78)
     if falhas:
