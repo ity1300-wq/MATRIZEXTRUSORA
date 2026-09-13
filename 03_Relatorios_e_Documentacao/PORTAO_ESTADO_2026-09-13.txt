@@ -1,0 +1,53 @@
+# rodada do portao completo em 2026-09-13, commit 2544981 (branch continue)
+# comando: python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py
+
+
+[1] cadeia
+  [OK  ] gerar_matriz_v28.py
+  [OK  ] verificar_v28.py
+  [OK  ] verificar_interface_cabecote.py -> 1 não conforme(s) como esperado (veredito, não erro)
+  [OK  ] gerar_cabecote_ex030.py
+  [OK  ] gerar_relatorio_v28.py
+  [OK  ] generate_auto_prompt.py
+  [OK  ] gerar_gedeon_certa.py
+  [OK  ] verify_geometry_ssot.py -> 2 não conforme(s) como esperado (veredito, não erro)
+  [OK  ] verify_legacy_dies.py
+
+[2] matriz v28.1
+  [OK  ] verificação 64 itens | 64 conformes | 0 não conformes
+
+[3] interface com o cabeçote
+  [OK  ] 1 NC, e ela é a conhecida: Folga axial da furação de saída à frente do metal do cabeçot…
+  [OK  ] cenario que governa = 'desenho DXF medido' (folga -2.750 mm, bloqueio 2744.550 mm³)
+  [OK  ] Z mínimo dos cartuchos = 99.750 mm (face do nariz 95,00 + raio do cartucho 4,75)
+
+[4] STEP do cabeçote sem flange
+  [OK  ] metal removido até a banda da matriz: 0.0 mm³
+  [OK  ] round-trip dos STEP reimportados: desvio 0.000000 mm³
+  [OK  ] interferência com a matriz: 0.0 mm³
+
+[5] documentos citam o número do JSON (anti-copia apodrecida)
+  [OK  ] INTERFASE_CABECOTE_EX030.md: '2744,550' (numeros/acesso_furacao_cenarios/desenho DXF medido/metal_no_caminho_mm3) presente
+  [OK  ] INTERFASE_CABECOTE_EX030.md: '99,75' (numeros/cartuchos_z_min_mm) presente
+  [OK  ] INTERFASE_CABECOTE_EX030.md: '431,2' (numeros/area_contato_degrau_mm2) presente
+  [OK  ] PROJETO_DFM_V28_MATRIZ_JONATHA.md: '26,6' (numeros/dp_1d_bar) presente
+  [OK  ] AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md: '163,8' (proposta_v28_dfm/numeros recalculados/tau_parede_land_kPa) presente
+  [OK  ] INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md: '28,30' (diferença_copo_x_gedeon_medida/diferença_mm) presente
+  [OK  ] INTERFASE_INTERNA_CABECOTE_X_MATRIZES.md: '646,636' (o_que_um_chanfro_interno_muda/metal_removido_do_cabeçote_mm3) presente
+  [OK  ] RELATORIO_GEDEON_CERTA.md: '640180,7' (inventario/volume) presente
+  [OK  ] RELATORIO_GEDEON_CERTA.md: '43017,9' (cavidade/volume_cavidade_mm3) presente
+  [OK  ] RELATORIO_GEDEON_CERTA.md: '171224,1' (contra_a_jonatha/aco_so_na_certa_mm3) presente
+
+[6] nenhuma chave guarda número de booleano copiado à mão
+  [OK  ] bloco espelho sem número de booleano copiado
+  [OK  ] bloco espelho aponta para o JSON gerado
+
+[7] regras 1 e 2 do projeto
+  [OK  ] os modelos historicos selados no baseline segao byte a byte iguais (regra 2, por conteudo)
+  [OK  ] MatrizJonatha.step (v27.0) e o mesmo modelo de sempre (regra 1, por conteudo)
+  [OK  ] o master esta na pasta organizada (07_) ou no caminho oficial
+  [OK  ] 17 arquivos alterados na arvore de trabalho (STEP regenerados contam ruido de export, nao de geometria)
+
+==============================================================================
+PORTA ABERTA: cadeia verde e documentos batendo com os JSON gerados
+EXIT=0

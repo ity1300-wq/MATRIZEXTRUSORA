@@ -218,11 +218,21 @@ fechada pelo GitHub como "merged" por motivo mecânico — os commits dela entra
 10,00 com chanfro 0,80) fica aberta sem re-veredito, com a decisão D2 (chanfro 1,50 do master) citada e os três
 defeitos da régua apontados como insumo do método novo.
 
-**O repo é público.** Por isso as capturas dele (`uploads/`, prints de celular) e os rascunhos soltos do
-workspace **não** foram para o GitHub de propósito: o que importa deles já está medido e transcrito em
-`03_/` e nos JSON de `04_/`. Se um dia quiser versionar as imagens de entrada, que seja em repo privado ou
-depois de revisar o que aparece nelas. E o token que passou no texto da conversa precisa ser revogado — ele dá
-escrita neste repo.
+**O repo é público.** Por isso as capturas dele (`uploads/`, prints de celular com o endereço da sessão e a
+barra do aparelho) **não** foram para o GitHub: `03_Relatorios_e_Documentacao/FONTES_DO_USUARIO_2026-09-13.md`
+guarda de cada uma o tamanho, o sha256 e o que rendeu — inclusive a que mostra a galeria dele aberta no meu
+render, com o `k = 21,28 mm/un` da legenda (a escala que vale é a da folha inteira, 25,534, calibrada no
+centro dos furos da junta). Se ele preferir as imagens no git, o passo é tornar o repo privado e subir as oito
+conferindo os hashes. O token que passou no texto da conversa precisa ser revogado — dá escrita neste repo.
+
+**Rascunhos da sessão versionados** (para a próxima IA não adivinhar como o croquis foi lido):
+`04_Dados_SSOT_e_Scripts/rascunhos_da_sessao_2026-09-13/` (39 arquivos: leitura do DWG/DXF, vistas, faixas da
+prancha, remendos de documento, com README por grupo e os erros que custaram tempo) e
+`04_Dados_SSOT_e_Scripts/ferramentas_de_reorganizacao_2026-09-13/` (os 7 scripts do achatamento das pastas). A
+rodada do portão que autorizou o push está transcrita em `03_Relatorios_e_Documentacao/PORTAO_ESTADO_2026-09-13.txt`.
+
+No GitHub, além dos branches: **release** criada da tag `estado-2026-09-13` (para baixar o estado em .zip) e
+descrição/tópicos do repositório apontando para este arquivo.
 
 ## 10. Recado para quem assumir
 
