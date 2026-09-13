@@ -91,7 +91,7 @@ Os itens marcados como **NÃO CONFORME** exigem decisão de engenharia antes da 
 
 a auditoria automatizada (PR #1 / issue #1) abriu 8 achados contra a v27.0. Isto é o relato do que foi feito com cada um, com o número medido hoje e onde o número é re-medido a cada rodada do portão (`python 04_Dados_SSOT_e_Scripts/verificar_cadeia.py`). E esta seccao e a auditoria se baseando nas decisoes que tomamos juntos, nao nas que a auditoria presumiu: D1 (fixacao por collete EX-031 + degrau, sem flange e sem furo na matriz), D2 (chanfro de saida 1,50 x 45graus e lamina de 0,75 do master mantidos - a reducao para 0,80 foi rejeitada), D3 (as duas variantes de funil modeladas e comparadas, com o funil do master mantido) e D4 (o v27.0 continua o master; a v28 vive ao lado como proposta).
 
-> nenhum achado foi 'resolvido' editando o master: `07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/MatrizJonatha.step` (v27.0) e `02_CAD_Modelos_Historicos/` são intocados (regras 1 e 2 do projeto), e a v28.1 existe em paralelo aguardando sua aprovação explícita para promover
+> nenhum achado foi 'resolvido' editando o master: `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (v27.0) e `02_CAD_Modelos_Historicos/` são intocados (regras 1 e 2 do projeto), e a v28.1 existe em paralelo aguardando sua aprovação explícita para promover
 
 | Achado | Status | Tratamento, com o número medido | Onde conferir |
 | :--- | :--- | :--- | :--- |

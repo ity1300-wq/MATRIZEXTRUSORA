@@ -1,7 +1,7 @@
 # PROJETO DFM v28.1 — Matriz Jonatha (revisão para fabricação)
 
 **Projeto:** matriz de extrusão plana para manta isolante de acessórios de cabos MT
-**Modelo base (aprovado, continua oficial):** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` — SSOT v27.0
+**Modelo base (aprovado, continua oficial):** `07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/MatrizJonatha.step` — SSOT v27.0
 **Esta revisão:** v28.1 — **PROPOSTA**. O v27.0 continua sendo o master aprovado (decisão **D4**
 do usuário: "não promover"). O que muda aqui é o que a decisão **D2** deixou de pé: nada no lábio
 de saída, tudo no restante.

@@ -16,3 +16,6 @@ __pycache__/
 03_Relatorios_e_Documentacao/V28_CONFERENCIA_VISUAL.png
 05_Variantes_Em_Estudo/ESTUDO_*.step
 07_CAD_Matrizes/**/DESENHO_2D_*_p*.png
+
+# saida do renderizar_v28.py (2,1 MB de conferencia visual, recriavel a cada rodada)
+v28_conferencia.png

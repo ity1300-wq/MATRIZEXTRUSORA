@@ -34,6 +34,11 @@ sys.path.insert(0, AQUI)
 from verify_legacy_dies import dp_total, tau_parede   # metodos do proprio projeto
 
 DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
+DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "M02_Jonatha_v28_PROPOSTA")
+
+def _pasta_matriz(nome):
+    """Arquivo com _v28 no nome mora na pasta da proposta; o resto e o master."""
+    return DIR_V28 if "_v28" in nome else DIR_CAD
 with open(os.path.join(AQUI, "cad_die_parameters.json"), encoding="utf-8") as _f:
     ROTULO = json.load(_f)["proposta_v28_dfm"].get("rotulo", "v28.1")   # rotulo = SSOT, nao string no codigo
 DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
@@ -149,7 +154,7 @@ def main():
     Z_LAND, Z_FIM = meta["z_land"], meta["z_saida"]
 
     def load(nm):
-        return cq.importers.importStep(os.path.join(DIR_CAD, nm))
+        return cq.importers.importStep(os.path.join(_pasta_matriz(nm), nm))
 
     cmp_fluxo = load("MatrizJonatha_v28_Canal_Fluxo.step")
     n_sol = len(cmp_fluxo.solids().vals())
@@ -210,7 +215,7 @@ def main():
                 "MatrizJonatha_v28_Body_A.step": 1, "MatrizJonatha_v28_Body_B.step": 1}
     faltando, errados, presentes = [], [], []
     for nome_arq, ns in esperado.items():
-        caminho = os.path.join(DIR_CAD, nome_arq)
+        caminho = os.path.join(_pasta_matriz(nome_arq), nome_arq)
         if not os.path.exists(caminho):
             faltando.append(nome_arq)
             continue

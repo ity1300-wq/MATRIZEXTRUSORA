@@ -30,6 +30,11 @@ from OCP.TopoDS import TopoDS
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "M01_Jonatha_v27_OFICIAL")
+DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "M02_Jonatha_v28_PROPOSTA")
+
+def _pasta_matriz(nome):
+    """Arquivo com _v28 no nome mora na pasta da proposta; o resto e o master."""
+    return DIR_V28 if "_v28" in nome else DIR_CAD
 EIXOS = {"saida_Z": (0, 1), "long_Y": (0, 2), "lado_X": (1, 2)}  # (h, v)
 
 
@@ -55,7 +60,7 @@ def triangulos(solido, deflexao=0.15):
 
 
 def carregar(nome):
-    return cq.importers.importStep(os.path.join(DIR_CAD, nome))
+    return cq.importers.importStep(os.path.join(_pasta_matriz(nome), nome))
 
 
 def principal(solidos):

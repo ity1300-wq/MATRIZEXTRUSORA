@@ -77,8 +77,8 @@ cálculo/medição que o produziria.
    2. **Medida que falta** — REABERTA: a folga axial dos cartuchos depende da protrusao real. No desenho (14,00 mm) faltam 2,75 mm e o cartucho nao entra pela folga de 0,25 mm entre o Ø79,5 da matriz e o Ø80 do nariz. Sae de cena se voce confirmar que a matriz sobressai mais de 12,00 mm; senao, mover os 6 cartuchos para Z >= 99,75 mm (e o proprio verificador calcula o numero) ou abrir alivio no nariz do cabecote - que ja e furado transversalmente para o M12 do pushador, entao tem precedente
 
 ## 6. MAPA DE ARQUIVOS
-- `01_CAD_MatrizJonatha_Oficial/MatrizJonatha*.step` — v27.0 aprovado (intocado)
-- `01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28*.step` — proposta DFM (corpo A/B, canal 1 sólido,
+- `07_CAD_Matrizes/M01_Jonatha_v27_OFICIAL/MatrizJonatha*  (o caminho antigo segue valido: ha um atalho em `01_CAD_MatrizJonatha_Oficial/` para o mesmo arquivo).step` — v27.0 aprovado (intocado)
+- `07_CAD_Matrizes/M02_Jonatha_v28_PROPOSTA/MatrizJonatha_v28*.step` — proposta DFM (corpo A/B, canal 1 sólido,
   explodida, com fluxo, kit de pinos)
 - `05_Variantes_Em_Estudo/` — STEP de comparações pedidas antes de mexer em geometria (funil
   coat-hanger da D3 e o recuo dos cartuchos para Z = 99,75 / 100,25 mm da alternativa (a)). **Não**
