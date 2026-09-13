@@ -37,6 +37,7 @@
   "matriz_1_copo": {
    "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Copo.step",
    "entrega_sem_booleano": true,
+   "cabecote_na_montagem": "Cabecote_EX-030_desenhado.step (COMPLETO: corpo + chanfro 10x45 + flange 0220x40 com 6 furos M12 + junta)",
    "arquivos_da_matriz": [
     "02_CAD_Modelos_Historicos/Matriz1_Original_Copo_Solido.step"
    ],
@@ -55,6 +56,7 @@
   "matriz_2_gedeon": {
    "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Gedeon.step",
    "entrega_sem_booleano": true,
+   "cabecote_na_montagem": "Cabecote_EX-030_desenhado.step (COMPLETO: corpo + chanfro 10x45 + flange 0220x40 com 6 furos M12 + junta)",
    "arquivos_da_matriz": [
     "02_CAD_Modelos_Historicos/MatrizGedeon_Body_A.step",
     "02_CAD_Modelos_Historicos/MatrizGedeon_Body_B.step"
@@ -70,6 +72,83 @@
    "face_de_saida_da_matriz_em_Z": 109.0,
    "protusao_adem_da_face_do_nariz_mm": 14.0,
    "massa_somada_kg": 16.01
+  },
+  "matriz_gedeon_certa": {
+   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Gedeon_Certa.step",
+   "entrega_sem_booleano": true,
+   "cabecote_na_montagem": "Cabecote_EX-030_desenhado.step (COMPLETO: corpo + chanfro 10x45 + flange 0220x40 com 6 furos M12 + junta)",
+   "arquivos_da_matriz": [
+    "02_CAD_Modelos_Historicos/matrizGedeonCerta.step"
+   ],
+   "solidos_da_matriz_no_arquivo": 1,
+   "encosto_usado": "B_ombro_no_degrau",
+   "deslocamento_aplicado_mm": 0.0,
+   "solidos_no_arquivo": 2,
+   "volume_somado_mm3": 2210520.211,
+   "desvio_round_trip_mm3": 0.0,
+   "interferencia_matriz_x_desenhado_mm3": 0.0,
+   "interferencia_matriz_x_sem_flange_mm3": 0.0,
+   "face_de_saida_da_matriz_em_Z": 109.0,
+   "protusao_adem_da_face_do_nariz_mm": 14.0,
+   "massa_somada_kg": 17.3526
+  },
+  "matriz_desenvolvimento": {
+   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Desenvolvimento.step",
+   "entrega_sem_booleano": true,
+   "cabecote_na_montagem": "Cabecote_EX-030_desenhado.step (COMPLETO: corpo + chanfro 10x45 + flange 0220x40 com 6 furos M12 + junta)",
+   "arquivos_da_matriz": [
+    "02_CAD_Modelos_Historicos/MatrizDesenvolvimento_Body_A.step",
+    "02_CAD_Modelos_Historicos/MatrizDesenvolvimento_Body_B.step"
+   ],
+   "solidos_da_matriz_no_arquivo": 2,
+   "encosto_usado": "B_ombro_no_degrau",
+   "deslocamento_aplicado_mm": 0.0,
+   "solidos_no_arquivo": 3,
+   "volume_somado_mm3": 2097915.914,
+   "desvio_round_trip_mm3": 0.0,
+   "interferencia_matriz_x_desenhado_mm3": 0.0,
+   "interferencia_matriz_x_sem_flange_mm3": 0.0,
+   "face_de_saida_da_matriz_em_Z": 109.0,
+   "protusao_adem_da_face_do_nariz_mm": 14.0,
+   "massa_somada_kg": 16.4686
+  },
+  "jonatha_v27": {
+   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v27.step",
+   "entrega_sem_booleano": true,
+   "cabecote_na_montagem": "Cabecote_EX-030_desenhado.step (COMPLETO: corpo + chanfro 10x45 + flange 0220x40 com 6 furos M12 + junta)",
+   "arquivos_da_matriz": [
+    "07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step"
+   ],
+   "solidos_da_matriz_no_arquivo": 2,
+   "encosto_usado": "B_ombro_no_degrau",
+   "deslocamento_aplicado_mm": 0.0,
+   "solidos_no_arquivo": 3,
+   "volume_somado_mm3": 2039341.143,
+   "desvio_round_trip_mm3": 0.0,
+   "interferencia_matriz_x_desenhado_mm3": 0.0,
+   "interferencia_matriz_x_sem_flange_mm3": 0.0,
+   "face_de_saida_da_matriz_em_Z": 109.0,
+   "protusao_adem_da_face_do_nariz_mm": 14.0,
+   "massa_somada_kg": 16.0088
+  },
+  "jonatha_v28_1": {
+   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v28_1.step",
+   "entrega_sem_booleano": true,
+   "cabecote_na_montagem": "Cabecote_EX-030_desenhado.step (COMPLETO: corpo + chanfro 10x45 + flange 0220x40 com 6 furos M12 + junta)",
+   "arquivos_da_matriz": [
+    "07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28.step"
+   ],
+   "solidos_da_matriz_no_arquivo": 2,
+   "encosto_usado": "B_ombro_no_degrau",
+   "deslocamento_aplicado_mm": 0.0,
+   "solidos_no_arquivo": 3,
+   "volume_somado_mm3": 2027136.033,
+   "desvio_round_trip_mm3": 0.0,
+   "interferencia_matriz_x_desenhado_mm3": 0.0,
+   "interferencia_matriz_x_sem_flange_mm3": 0.0,
+   "face_de_saida_da_matriz_em_Z": 109.0,
+   "protusao_adem_da_face_do_nariz_mm": 14.0,
+   "massa_somada_kg": 15.913
   }
  }
 }

@@ -163,6 +163,34 @@ land 8,500 + chanfro 1,500 × 45°, lâmina 0,750, 3,586 kg, abertura da biparti
 
 ## 8. Pendências abertas (com o que fecha cada uma)
 
+0. **Rodada de 2026-09-13 (auditoria de correlações + montagens com flange + reologia do mastique).** O que
+   entrou e o que ela achou:
+   * `04_/auditar_step_correlacoes.py` → `03_/AUDITORIA_CORRELACOES_STEP.md` + JSON: **64 STEP** abertos e
+     cruzados em sete correlações (C1 cota × SSOT, C2 metade × metade × peça, C3 arquivo do canal × vazio real,
+     C4 matriz × cabeçote com folga radial e anel de fuga, C5 montagem × peças, C6 atalhos × baseline selado,
+     C7 saúde topológica cara por cara). Está na rodada de estudos do portão (`--com-estudos`); sai com código
+     0 como alerta e com `--rigoroso` vira bloqueio. Rodar: `python3 04_Dados_SSOT_e_Scripts/auditar_step_correlacoes.py --json --md`.
+   * Seis montagens **cabeçote completo com flange + matriz sentada**, uma por matriz (`06_/STEP/Cabecote_EX-030_com_Matriz_*.step`:
+     Copo, Gedeon entregue, Gedeon CERTA, Desenvolvimento, Jonatha v27, Jonatha v28.1), todas com ∩ = 0,0000 mm³.
+   * `04_/masti_epdm_reologia.py` → `03_/REOLOGIA_MASTIC_EPDM.md`: reologia de literatura para o mastique
+     resistivo de EPDM em **banda** (K 3×/8×/20× sobre o nosso K deslocado para 90 °C, n = 0,30), com os dois
+     critérios numéricos que a simulação tem de responder (ΔP de matriz 2,1–9,4 MPa da linha análoga; τ_parede
+     ≥ 0,14 MPa = raspado na saída) e as quatro fontes com URL.
+   * **Achado 1 — defeito real na proposta v28.1:** `MatrizJonatha_v28_Body_B.step` tem uma cara PLANA
+     degenerada (área ≈ 0) na transição do land com o chanfro, no plano de partição — centro medido
+     [37,02; 0,56; 99,00]. Isso contamina `MatrizJonatha_v28.step` e a montagem `_com_Matriz_Jonatha_v28_1.step`
+     (BRepCheck inválido = "arquivo corrompido" em muito CAD). Não é o `Body_A`, não é a v27, não é a Gedeon.
+     Conserto: re-cortar o chanfro *antes* de partir em Y no `gerar_matriz_v28.py`, ou costurar a casca sem a
+     cara nula; enquanto não for consertado, a v28.1 **não** vai para a fábrica com `--rigoroso` ligado.
+   * **Achado 2 — o anel de fuga não é exclusivo da Gedeon:** medido na C4, o anel entre a OD da matriz e o
+     furo do cabeçote tem folga 1,00/0,25/0,25 mm e está **contínuo do bico até a entrada em todas as seis
+     matrizes**, área 428,4 mm² (Copo: 2.238,7 mm² porque ela é mais curta e sobra Ø75,60 no bolso). Ou seja:
+     "voltar pelo funil" não é uma característica da Gedeon, é uma rota que existe para qualquer matriz — o que
+     decide é a resistência hidráulica relativa das duas rotas, e é isso que a simulação 3D tem de medir.
+   * **Achado 3 — a borda da saída, medida em seção:** Copo e Gedeon CERTA dão estádio 112,017 mm²
+     (75,00 × 1,50 com R 0,75); v27 e v28.1 dão 346,654 mm² (o estádio já aberto pelo chanfro 1,5 × 45,
+     boca 78,00 × 4,50); a `MatrizDesenvolvimento` histórica dá **351,0 mm² = retângulo puro, canto vivo** —
+     sem arredondamento no canto, que é onde a serra nasce. As peças que ele usa hoje não têm canto vivo.
 1. **Auditoria: o método atual está encerrado, não suspenso.** Decisão dele em 2026-09-13: *"não agora, mais
    depois iremos desenvolver novo método de auditoria"*. Então o rito velho (proposta → PR → veredito → re-selo
    de baseline, protocolo v1.0) **não será retomado**: fica como está, congelado, sem `--atualizar-hashes`, sem

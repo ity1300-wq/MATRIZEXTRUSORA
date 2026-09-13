@@ -38,6 +38,7 @@ CADEIA = ["gerar_matriz_v28.py", "verificar_v28.py --json --md", "verificar_inte
 CADEIA_ESTUDOS = ["estudar_funis.py --so-texto", "estudar_recuo_cartuchos.py --so-texto",
                   "medir_perfil_cabecote.py --json 04_Dados_SSOT_e_Scripts/cabecote_perfil.json",
                   "medir_perfis_matrizes_x_cabecote.py --json --md",
+                  "auditar_step_correlacoes.py --json --md",
                   "gerar_desenho_2d_cabecote_matriz.py"]  # o PDF 2D: 3,7 s, so le os STEP
 NC_ESPERADA_INTERFACE = "Folga axial da furação de saída à frente do metal do cabeçote"
 # (arquivo .md, chave no JSON de onde o numero vem, quantas casas) - o par que ja apodreceu uma vez
