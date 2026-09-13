@@ -18,7 +18,11 @@ que independem de saber a escala nem a que vista o recurso pertence.
 
 Origem axial = x da face do nariz. Escala k = 25,534 mm/unidade (calibrada no C.C. dos furos da junta).
 
-Uso:  python medir_perfil_cabecote.py [--dxf /home/user/cabecote.dxf] [--json sair]
+Uso:  python medir_perfil_cabecote.py [--dxf ARQUIVO] [--json sair]
+
+O DXF de entrada (6,8 MB, convertido do DWG que o dono subiu) nao vai solto no repo: a copia compactada
+mora em `04_Dados_SSOT_e_Scripts/cabecote.dxf.xz` (0,58 MB, round-trip conferido por sha256) e e
+descompactada sozinha quando o arquivo solto do workspace nao existe.
 """
 import argparse
 import collections
@@ -26,6 +30,27 @@ import json
 import math
 import os
 import sys
+
+def dxf_padrao():
+    """Prefere o DXF solto do workspace (foi o que o projeto leu); senao descompacta a copia do repo."""
+    solto = "/home/user/cabecote.dxf"
+    if os.path.exists(solto):
+        return solto
+    empacotado = os.path.join(AQUI, "cabecote.dxf.xz")
+    if not os.path.exists(empacotado):
+        raise SystemExit("sem DXF: nem %s nem %s - o croquis de entrada esta no repo como DWG "
+                         "(`030-032- cabe\u00e7ote.dwg`, na raiz)" % (solto, empacotado))
+    import lzma
+    import tempfile
+    destino = os.path.join(tempfile.gettempdir(), "cabecote.dxf")
+    if not os.path.exists(destino):
+        with open(empacotado, "rb") as f:
+            aberto = lzma.decompress(f.read())
+        with open(destino, "wb") as f:
+            f.write(aberto)
+    print("    DXF descompactado de cabecote.dxf.xz -> %s" % destino)
+    return destino
+
 
 K = 25.534            # mm por unidade do DXF
 X_FACE = 11.7464      # unidade do DXF: plano da face do nariz
@@ -75,12 +100,14 @@ def agrupa(ints, tol=0.30):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--dxf", default="/home/user/cabecote.dxf")
+    ap.add_argument("--dxf", default=None,
+                    help="padrao: /home/user/cabecote.dxf se existir, senao `cabecote.dxf.xz` do repo")
     ap.add_argument("--json", default=os.path.join(AQUI, "cabecote_perfil.json"))
     ap.add_argument("--tol-raio", type=float, default=0.15)
     a = ap.parse_args()
-    segs = segmentos(a.dxf)
-    print(f"{len(segs)} segmentos lidos de {os.path.basename(a.dxf)}")
+    caminho = a.dxf or dxf_padrao()
+    segs = segmentos(caminho)
+    print(f"{len(segs)} segmentos lidos de {os.path.basename(caminho)}")
 
     horiz = collections.defaultdict(list)   # |y|mm -> [(xmin, xmax)]
     vert = collections.defaultdict(list)    # x mm   -> [(ymin,ymax)] em |y| por lado

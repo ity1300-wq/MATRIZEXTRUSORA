@@ -247,6 +247,8 @@ MATRIZEXTRUSORA/
     ├── dados_simulacao_carreau_yasuda.json -> Dados numéricos térmicos em JSON
     ├── verificar_cadeia.py                -> **O PORTÃO**: re-rodá os geradores, confere documento × JSON,
     │                                        sha256 dos selos e as regras 1 e 2 (`--rapido` só consulta)
+    ├── cabecote.dxf.xz                    -> O DXF do croquis do cabeçote (6,8 MB) compactado (0,58 MB):
+    │                                        entrada de `medir_perfil_cabecote.py`, que descompacta sozinho
     ├── gerar_gedeon_certa.py              -> Mede o arquivo do usuário e escreve JSON + relatório (21 checks)
     └── desenhar_gedeon_consertada.py      -> A prancha de 5 faixas (o nome sobrou do episódio da refutada)
 

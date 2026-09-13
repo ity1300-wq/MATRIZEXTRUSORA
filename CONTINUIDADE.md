@@ -67,6 +67,13 @@ python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --rapido # nao re-gera CAD (
 ```
 
 Se o portão disser `cadquery não está instalado`, é sandbox recriada: `pip install cadquery`.
+
+**Espaço.** O que o painel chama de workspace é o que o snapshot persiste (o `.cache` de 305 MB fica fora).
+Depois da limpeza de 2026-09-13: 41 MB no total, sendo 31 MB do repo — dos quais **22 MB são `.git`**
+(histórico de STEP; só encolheria reescrevendo histórico, o que não faremos sem ordem) e 8 MB de árvore.
+O que é seguro apagar a qualquer momento, porque o portão recria: `04_Dados_SSOT_e_Scripts/__pycache__`,
+os PNG soltos da raiz do workspace, `06_/STEP/estudos/`, os STEP derivados ignorados (`_Explodida`/
+`_Com_Fluxo` da v28) e os `DESENHO_2D_*_p*.png`. Nada disso precisa ir ao git.
 O `--rapido` **não** substitui a porta completa antes de um push — foi uma mudança de caminho feita sem o
 portão completo que quebrou dois verificadores em 2026-09-13 (juntavam caminho com variável e foram procurar
 o arquivo na pasta errada).
@@ -92,7 +99,9 @@ da matriz **14,00 mm** além da face do cabeçote.
 **Cabeçote EX-030** (`04_/cabecote_step.json`, `03_/INTERFASE_*`): furo em escada Ø80 | 0..14,02 → Ø90
 +0,05/+0,1 | 14,02..25,00 → Ø95 | 25,00..95,00; corpo Ø130 | 0..42; chanfro 10 × 45° | 42..52; flange
 Ø220 × 40 com 6 × Ø16,5 (M12) em fendas de 23,5 no C.C. Ø180; piloto Ø105,00 × 3,00. Escala do desenho
-DXF: k = 25,534 mm/unidade. Anel de face = (130 − 90)/2 = 20,00 mm radial. Encosto face a face ⇒ rebaixo
+DXF: k = 25,534 mm/unidade. O DXF de entrada (6,8 MB, convertido do DWG que ele subiu) vive no repo como
+`04_Dados_SSOT_e_Scripts/cabecote.dxf.xz` (0,58 MB, round-trip conferido por sha256) — `medir_perfil_cabecote.py`
+compacta/descompacta sozinho, então não precisa de arquivo solto no workspace. Anel de face = (130 − 90)/2 = 20,00 mm radial. Encosto face a face ⇒ rebaixo
 3,00 mm onde Ø > 105,00; cartuchos viáveis a partir de Z 99,75 (recomendado 100,25); curso livre da manta
 14,220 mm; boca 78,000 × 4,500; junta 6,82 MPa / empuxo 29,843 kN; collete 8,58 MPa fecha a partição; parede
 radial da matriz (93,00 − 75,60)/2 = 8,70 mm.
