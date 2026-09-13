@@ -1,0 +1,109 @@
+{
+ "material": "mastique (manta) resistivo não-linear à base de EPDM, não vulcanizado, carregado — definição dada pelo dono do projeto em 2026-09-13",
+ "como_este_arquivo_deve_ser_lido": "a banda, não o ponto. Os três jogos são a mesma família de material em três teores de negro de fumo/estado térmico; a conclusão da simulação só vale se for a mesma nas três.",
+ "temperatura_de_referencia_C": 90.0,
+ "temperatura_atual_do_SSOT_C": 190.0,
+ "reologia_atual_do_SSOT": {
+  "K_Pa_s_n": 18500.0,
+  "n": 0.32,
+  "deslocada_para_a_linha": 231511.8
+ },
+ "K_na_temperatura_da_linha_Pa_s_n": 231511.8,
+ "curvas": {
+  "otimista": {
+   "K_Pa_s_n": 694535.5,
+   "n": 0.3,
+   "viscosidade_aparente_Pa_s": {
+    "0.1": 3480923.0,
+    "1.0": 694535.5,
+    "10.0": 138578.0,
+    "100.0": 27650.0,
+    "1000.0": 5516.9
+   },
+   "eta0_Pa_s": 10739237.0,
+   "lambda_s": 2.267,
+   "uso": "banda baixa: o minimo que um mastique resistivo plausivel precisa"
+  },
+  "tipico": {
+   "K_Pa_s_n": 1852094.5,
+   "n": 0.3,
+   "viscosidade_aparente_Pa_s": {
+    "0.1": 9282461.4,
+    "1.0": 1852094.5,
+    "10.0": 369541.4,
+    "100.0": 73733.2,
+    "1000.0": 14711.7
+   },
+   "eta0_Pa_s": 28637965.0,
+   "lambda_s": 0.85,
+   "uso": "centro da faixa: o que a literatura de composto EPDM/carvao pede em 10^2 1/s"
+  },
+  "pessimista": {
+   "K_Pa_s_n": 4630236.4,
+   "n": 0.3,
+   "viscosidade_aparente_Pa_s": {
+    "0.1": 23206153.5,
+    "1.0": 4630236.4,
+    "10.0": 923853.6,
+    "100.0": 184333.0,
+    "1000.0": 36779.3
+   },
+   "eta0_Pa_s": 71594913.0,
+   "lambda_s": 0.34,
+   "uso": "banda alta: mastique frio e muito carregado - o cenario em que nada passa pela fenda"
+  }
+ },
+ "limite_de_raspado_na_saida_MPa": 0.14,
+ "limite_de_escorregamento_na_parede_MPa": 0.1,
+ "limite_com_auxiliar_de_processamento_MPa": 0.5,
+ "janela_de_energia_da_linha_MPa": {
+  "dP_na_matriz": [
+   2.1,
+   9.4
+  ],
+  "vazao_g_min": [
+   41.0,
+   128.0
+  ],
+  "leitura": "fora dessa janela a linha não é mais a linha do artigo; dP acima do topo significa que o material procura outra saída — e no nosso conjunto só existe uma: o anel entre a matriz e o furo do cabeçote, para trás"
+ },
+ "densidade_g_cm3": 1.25,
+ "modelos_alternativos": {
+  "Herschel-Bulkley (composto cru, squeeze flow)": {
+   "porque": "os ensaios de compressão em três compostos crus ajustam melhor com limiar de escoamento que com lei-potência pura; em fenda de 1,5 mm isso significa núcleo parado no meio do canal e raspado nas bordas",
+   "tau_y_Pa": [
+    0.0,
+    2000.0,
+    6000.0
+   ]
+  },
+  "Cox-Merz": "NÃO usar: documentadamente inaplicável a composto carregado (o G* do reômetro de disco não cai em cima da curva de capilar)"
+ },
+ "fontes": [
+  {
+   "o": "dP de matriz 2,1-9,4 MPa; 41-128 g/min; matriz a 70 C, cabeça 79-87 C (EPDM, perfil)",
+   "onde": "Polymers 18(9):1122 (2026) — Numerical Investigation of Die Swell Behavior in EPDM Rubber Extrusion",
+   "url": "https://www.mdpi.com/2073-4360/18/9/1122"
+  },
+  {
+   "o": "sharkskin em tau_parede >= 0,14 MPa; escorregamento em ~0,1 MPa; limiar sobe a ~0,5 MPa com auxiliar de processamento/BN",
+   "onde": "J. Vlachopoulos, The Role of Rheology in Polymer Extrusion",
+   "url": "http://www.polydynamics.com/Rheology.pdf"
+  },
+  {
+   "o": "composto cru: lei-potência boa em faixa larga de gama, Herschel-Bulkley melhor no total",
+   "onde": "Journal of Rheology 70, 65 (2026) — Viscosity characterization of uncured rubber compounds via uniaxial compression",
+   "url": "https://pubs.aip.org/sor/jor/article/70/1/65/3374181/"
+  },
+  {
+   "o": "EPDM com negro de fumo: viscosidade/tau_Parede/die swell medidos em capilar; Cox-Merz não vale",
+   "onde": "Polymer 39 (1998) — Rheological properties of EPDM compound",
+   "url": "https://www.sciencedirect.com/science/article/abs/pii/S0032386197002310"
+  }
+ ],
+ "o_que_nao_eh_medido_aqui": [
+  "não há reômetro deste lote específico no repo: K é a família do SSOT deslocada em temperatura e multiplicada por 3/8/20 — os três números têm de ser lidos como intervalo",
+  "o limiar de escoamento (tau_y) é faixa de literatura, não medida: se ele existir de fato, o miolo da fenda para de escoar antes da borda, e é aí que a serra nasce",
+  "a temperatura real do seu cabeçote (EX-030) não foi medida; usamos a da linha análoga (90 C)"
+ ]
+}
