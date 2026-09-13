@@ -42,6 +42,8 @@ a entrega usa as metades separadas, como explicado acima.
 | :--- | ---: | :--- | ---: | ---: | ---: |
 | `Cabecote_EX-030_com_Matriz_Copo.step` | 2 (1 + 1) | `B_ombro_no_degrau` (0,00 mm) | **0,0000 mm³** | 80,70 | -14,30 mm |
 | `Cabecote_EX-030_com_Matriz_Gedeon.step` | 3 (1 + 2) | `B_ombro_no_degrau` (0,00 mm) | **0,0000 mm³** | 109,00 | 14,00 mm |
+| `Cabecote_EX-030_com_Matriz_Desenvolvimento.step` | 3 (1 + 2) | `B_ombro_no_degrau` (0,00 mm) | **0,0000 mm³** | 109,00 | 14,00 mm |
+| `Cabecote_EX-030_com_Matriz_Jonatha_v27.step` | 3 (1 + 2) | `B_ombro_no_degrau` (0,00 mm) | **0,0000 mm³** | 109,00 | 14,00 mm |
 
 ### O que cada arquivo de matriz realmente contém (medido, não narrado)
 
@@ -86,10 +88,12 @@ que a exigência do projeto é 'envelope externo idêntico': é o que faz as dua
 
 | `06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Copo.step` | `B_ombro_no_degrau` (0,00 mm) | **0,0000 mm³** | 80,70 | -14,30 mm |
 | `06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Gedeon.step` | `B_ombro_no_degrau` (0,00 mm) | **0,0000 mm³** | 109,00 | 14,00 mm |
+| `06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Desenvolvimento.step` | `B_ombro_no_degrau` (0,00 mm) | **0,0000 mm³** | 109,00 | 14,00 mm |
+| `06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v27.step` | `B_ombro_no_degrau` (0,00 mm) | **0,0000 mm³** | 109,00 | 14,00 mm |
 
 A diferença de sinal entre as duas linhas é o ponto que o usuário observou na máquina: a Copo termina
 **14,30 mm antes** da face do nariz (falta o nariz de 28,30 mm que a Gedeon tem), e a Gedeon desemboca
-fora dele. Os dois valores são comprimentos medidos nos STEP das próprias peças: 80,70, 109,00 mm.
+fora dele. Os dois valores são comprimentos medidos nos STEP das próprias peças: 80,70, 109,00, 109,00, 109,00 mm.
 
 ## O que foi removido, e como isso foi definido
 

@@ -52,6 +52,8 @@ DIR_CAB = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP")
 DIR_ESTUDO = os.path.join(DIR_CAB, "estudos")
 DIR_HIS = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")   # lido, nunca escrito (regra 2)
 DIR_OFF = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
+DIR_V28 = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v28_1_PROPOSTA")
+DIR_GED = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Gedeon_Certa")
 PERFIS = os.path.join(AQUI, "perfis_matrizes_x_cabecote.json")
 # as montagens que o usuario pediu: o cabecote com a matriz original e com a Gedeon sentadas
 # uma montagem por matriz, todas dentro do CABECOTE COMPLETO (o `Cabecote_EX-030_desenhado.step`: corpo
@@ -203,7 +205,8 @@ def main():
                 continue
             paths = []
             for nome in e["arquivos_lidos"]:
-                pt = next((os.path.join(d, nome) for d in (DIR_HIS, DIR_OFF)
+                # a matriz mora na pasta dela desde 2026-09-13 (02_/ so tem atalho para as historicas)
+                pt = next((os.path.join(d, nome) for d in (DIR_HIS, DIR_OFF, DIR_V28, DIR_GED)
                            if os.path.exists(os.path.join(d, nome))), None)
                 if pt is None:
                     falhas_m = "nao acho o STEP da matriz %s" % nome
