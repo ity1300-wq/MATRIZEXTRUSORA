@@ -195,10 +195,21 @@ cima do trabalho inteiro; `proposta/PRP-0005` continua na estrutura anterior (a 
 não reescrever PR em revisão); `master` é o snapshot legado que ele manteve de reserva, intocado; e as duas
 `arena/01a091ce-*` / `arena/01a096e3-*` são as pontas da cerimônia de auditoria velha, deixadas como estão.
 
+Os scripts descartáveis que executaram a reorganização estão versionados em
+`04_Dados_SSOT_e_Scripts/ferramentas_de_reorganizacao_2026-09-13/` (README na ordem + as duas lições que doem:
+rodar o portão completo depois de mexer caminho, e `git rm --cached` depois de ignorar).
+
 ```bash
 git log --oneline --graph -25 origem/main        # a linha do tempo que desceu para a main
 git tag -l "estado-*"                            # os marcos empurrados
 ```
+
+**Como a `main` foi atualizada em 2026-09-13:** por ordem direta dele (*"atualize o GitHub de forma completa,
+você tem permissão total"*), o estado da sessão entrou na `main` num merge commit — **não** pelo rito de
+proposta → veredito do protocolo v1.0. Isso não é aprovação de nada: `matriz_jonatha_master_files` no SSOT
+continua apontando para `MatrizJonatha.step` (v27.0) e a v28.1 continua na pasta com `PROPOSTA` no nome. A
+PR #3 passou a "merged" como efeito mecânico de a main conter os commits dela; o veredito nunca foi dado e não
+será dado nesse formato (ver item 1 acima).
 
 **O repo é público.** Por isso as capturas dele (`uploads/`, prints de celular) e os rascunhos soltos do
 workspace **não** foram para o GitHub de propósito: o que importa deles já está medido e transcrito em
