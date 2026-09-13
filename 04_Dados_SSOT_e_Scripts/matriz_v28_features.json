@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "z_land": 99.0,
+    "land_paralelo": 8.5,
+    "chanfro": 1.5,
+    "z_saida": 109.0,
+    "z_corte": 98.999
+  },
+  "diametro_pino_mm": 4.0,
+  "profundidade_pino_mm": 12.0,
+  "diametro_cartucho_mm": 9.5,
+  "diametro_termopar_mm": 4.8,
+  "diametro_desmontagem_mm": 0.0,
+  "parede_alvo_cartucho_mm": 4.0,
+  "volume_canal_mm3": 213945.146,
+  "volume_body_a_mm3": 228297.901,
+  "volume_body_b_mm3": 228498.67,
+  "envelope": [
+    [
+      0.0,
+      69.9,
+      93.0
+    ],
+    [
+      69.9,
+      80.7,
+      89.5
+    ],
+    [
+      80.7,
+      109.0,
+      79.5
+    ]
+  ],
+  "furos": [
+    {
+      "tipo": "pino_alinhamento",
+      "diametro": 4.0,
+      "X": -42.1,
+      "Z": 30.0,
+      "comprimento_mm": 24.0,
+      "metade": "ambas",
+      "y_ini_mm": -12.0,
+      "y_fim_mm": 12.0
+    },
+    {
+      "tipo": "pino_alinhamento",
+      "diametro": 4.0,
+      "X": 42.1,
+      "Z": 30.0,
+      "comprimento_mm": 24.0,
+      "metade": "ambas",
+      "y_ini_mm": -12.0,
+      "y_fim_mm": 12.0
+    },
+    {
+      "tipo": "pino_alinhamento",
+      "diametro": 4.0,
+      "X": -42.1,
+      "Z": 60.0,
+      "comprimento_mm": 24.0,
+      "metade": "ambas",
+      "y_ini_mm": -12.0,
+      "y_fim_mm": 12.0
+    },
+    {
+      "tipo": "pino_alinhamento",
+      "diametro": 4.0,
+      "X": 42.1,
+      "Z": 60.0,
+      "comprimento_mm": 24.0,
+      "metade": "ambas",
+      "y_ini_mm": -12.0,
+      "y_fim_mm": 12.0
+    },
+    {
+      "tipo": "cartucho",
+      "diametro": 9.5,
+      "X": 0.0,
+      "Z": 97.0,
+      "comprimento_mm": 29.723,
+      "metade": "Body_B",
+      "y_ini_mm": 12.027,
+      "y_fim_mm": 41.75
+    },
+    {
+      "tipo": "cartucho",
+      "diametro": 9.5,
+      "X": 0.0,
+      "Z": 97.0,
+      "comprimento_mm": 29.723,
+      "metade": "Body_A",
+      "y_ini_mm": -41.75,
+      "y_fim_mm": -12.027
+    },
+    {
+      "tipo": "cartucho",
+      "diametro": 9.5,
+      "X": -22.0,
+      "Z": 97.0,
+      "comprimento_mm": 23.08,
+      "metade": "Body_B",
+      "y_ini_mm": 12.027,
+      "y_fim_mm": 35.107
+    },
+    {
+      "tipo": "cartucho",
+      "diametro": 9.5,
+      "X": -22.0,
+      "Z": 97.0,
+      "comprimento_mm": 23.08,
+      "metade": "Body_A",
+      "y_ini_mm": -35.107,
+      "y_fim_mm": -12.027
+    },
+    {
+      "tipo": "cartucho",
+      "diametro": 9.5,
+      "X": 22.0,
+      "Z": 97.0,
+      "comprimento_mm": 23.08,
+      "metade": "Body_B",
+      "y_ini_mm": 12.027,
+      "y_fim_mm": 35.107
+    },
+    {
+      "tipo": "cartucho",
+      "diametro": 9.5,
+      "X": 22.0,
+      "Z": 97.0,
+      "comprimento_mm": 23.08,
+      "metade": "Body_A",
+      "y_ini_mm": -35.107,
+      "y_fim_mm": -12.027
+    },
+    {
+      "tipo": "termopar",
+      "diametro": 4.8,
+      "X": -11.0,
+      "Z": 103.0,
+      "comprimento_mm": 22.0,
+      "metade": "Body_B",
+      "y_ini_mm": 18.198,
+      "y_fim_mm": 40.198
+    },
+    {
+      "tipo": "termopar",
+      "diametro": 4.8,
+      "X": -11.0,
+      "Z": 103.0,
+      "comprimento_mm": 22.0,
+      "metade": "Body_A",
+      "y_ini_mm": -40.198,
+      "y_fim_mm": -18.198
+    },
+    {
+      "tipo": "termopar",
+      "diametro": 4.8,
+      "X": 11.0,
+      "Z": 103.0,
+      "comprimento_mm": 22.0,
+      "metade": "Body_B",
+      "y_ini_mm": 18.198,
+      "y_fim_mm": 40.198
+    },
+    {
+      "tipo": "termopar",
+      "diametro": 4.8,
+      "X": 11.0,
+      "Z": 103.0,
+      "comprimento_mm": 22.0,
+      "metade": "Body_A",
+      "y_ini_mm": -40.198,
+      "y_fim_mm": -18.198
+    }
+  ]
+}

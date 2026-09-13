@@ -5,7 +5,7 @@
 
 ## 1. Visão Geral do Projeto
 - **Projeto**: Cabeçote/Matriz de Extrusão Plana para Manta de Isolação de Cabos MT.
-- **Modelo Principal Master Oficial**: `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (Volume do Bloco A = $234.255,29\text{ mm}^3$, Bloco B = $234.746,37\text{ mm}^3$).
+- **Modelo Principal Master Oficial**: `07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step` (Volume do Bloco A = $234.255,29\text{ mm}^3$, Bloco B = $234.746,37\text{ mm}^3$).
 - **Dimensão da Manta**: Largura $75,00\text{ mm} \times$ Espessura $1,50\text{ mm}$ com raio total pleno de borda $R = 0,75\text{ mm}$.
 - **Versão SSOT**: `v27.0_MatrizJonatha_Approved_Master`
 - **Status de Produção**: APROVADO PARA FABRICAÇÃO E USINAGEM CNC.
@@ -27,7 +27,7 @@
 
 | Parâmetro de Engenharia | Matriz 2 (Matriz Gedeon) | **Matriz Jonatha Master Aprovada (v27.0)** |
 | :--- | :--- | :--- |
-| **Caminho do Arquivo STEP** | `02_CAD_Modelos_Historicos/MatrizGedeon.step` | **`01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step`** |
+| **Caminho do Arquivo STEP** | `02_CAD_Modelos_Historicos/MatrizGedeon.step` | **`07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step`** |
 | **Encaixe da Entrada ($Z=0$)** | Funil abrupto que sofria refluxo | **Restrito ao diâmetro de acoplamento $\varnothing 75,60\text{ mm}$** |
 | **Comprimento do Land Paralelo** | **$87,60\text{ mm}$** (estrangulamento severo) | **$10,00\text{ mm}$** ($Z=99,00$ a $Z=109,00\text{ mm}$) |
 | **Perda de Carga CFD ($\Delta P$)** | **$268,7\text{ bar}$** (superaquecimento por atrito) | **$68,2\text{ bar}$** (alívio de $74,6\%$ na contrapressão) |
@@ -38,8 +38,8 @@
 ---
 
 ## 4. Arquivos Entregues no Pacote
-- **`01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step`** (Montagem usinada oca bipartida AP214)
-- **`01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Explodida.step`** (Vista explodida +40mm Y)
-- **`01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Com_Fluxo.step`** (Montagem com núcleo de polímero)
-- **`01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Body_A.step`** & **`Body_B.step`** (Sólidos isolados A e B)
-- **`01_CAD_MatrizJonatha_Oficial/MatrizJonatha_Canal_Fluxo.step`** (Macho do canal de polímero)
+- **`07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step`** (Montagem usinada oca bipartida AP214)
+- **`07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha_Explodida.step`** (Vista explodida +40mm Y)
+- **`07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha_Com_Fluxo.step`** (Montagem com núcleo de polímero)
+- **`07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha_Body_A.step`** & **`Body_B.step`** (Sólidos isolados A e B)
+- **`07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha_Canal_Fluxo.step`** (Macho do canal de polímero)

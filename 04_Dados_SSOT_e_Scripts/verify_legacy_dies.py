@@ -34,7 +34,7 @@ except ImportError:  # pragma: no cover
     sys.exit(2)
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-OFICIAL = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+OFICIAL = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
 HIST = os.path.join(RAIZ, "02_CAD_Modelos_Historicos")
 DADOS = os.path.join(RAIZ, "04_Dados_SSOT_e_Scripts")
 

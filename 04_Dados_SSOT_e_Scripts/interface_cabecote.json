@@ -1,0 +1,755 @@
+{
+ "peca": "Interface MatrizJonatha_v28 x Cabeçote EX-030",
+ "data": "2026-09-11",
+ "metodo": "sólido do cabeçote montado do perfil medido no DWG 030-032 (k = 25,534 mm/un, desvio máx. 0,012 % em 5 cotas) + booleanos e BRepExtrema sobre MatrizJonatha_v28.step",
+ "cabecote": {
+  "peca": "Cabecote EX-030 + Bucha conica EX-031 + Pushador EX-032",
+  "origem": "03_Documentacao_e_Relatorios/CAD_Export/030-032- cabecote.dwg (HIDEALL, PED:2257, WESLEY 10/01/2023)",
+  "metodo_medicao": "DWG convertido a DXF (aspose-cad) e geometria extraida com ezdxf; escala calibrada pelo proprias cotas do desenho, nao por suposicao",
+  "calibracao_escala": {
+   "k_mm_por_unidade_dxf": 25.534,
+   "incerteza": "+/- 0.003 (0.012%)",
+   "amarra": [
+    {
+     "feicao": "circulo dos furos do flange (raio medido 3,525 un)",
+     "cota_texto_mm": 90.0,
+     "erro_pct": 0.01
+    },
+    {
+     "feicao": "Ø externo do flange (4,308 un)",
+     "cota_texto_mm": 110.0,
+     "erro_pct": -0.01
+    },
+    {
+     "feicao": "Ø corpo do cabecote (2,546 un)",
+     "cota_texto_mm": 65.0,
+     "erro_pct": 0.0
+    },
+    {
+     "feicao": "Ø furo da matriz (1,860 un)",
+     "cota_texto_mm": 47.5,
+     "erro_pct": -0.01
+    },
+    {
+     "feicao": "Ø furo do nariz (1,762 un)",
+     "cota_texto_mm": 45.0,
+     "erro_pct": -0.01
+    }
+   ],
+   "correcao_registrada": "leituras anteriores usaram k=21,28 obtido de 'C/G Ø150' lido em raster de baixa resolucao; o desenho diz 'C.C Ø180'. Todas as cotas do cabecote foram re-medidas com k=25,534."
+  },
+  "referencia_axial": {
+   "convencao": "d = profundidade a partir da FACE DO NARIZ do cabecote (a face por onde sai a manta), no sentido da massa fundida",
+   "posicao_da_matriz": "Z_matriz = 95 - d  (Z=0 e a face de entrada da matriz; Z=109 a face de saida). A matriz protrui 14,00 mm para fora da face do nariz (109,00 - 95,00); o degrau da matriz esta em d = 14,30 mm, e a diferenca de 0,30 mm e a folga axial do degrau do cabecote (14,02 mm medidos no DXF) - os dois numeros sao de faces diferentes, nao sao a mesma cota lida duas vezes",
+   "comprimento_total_mm": 95.0,
+   "medido": "Ø130 ocupa d=0..42; cubo d=42..52; flange Ø220 d=52..92; resalto d=92..95 (cota 3)"
+  },
+  "corpo": {
+   "designacao": "EX-030 CABECOTE",
+   "material": "SAE8620",
+   "carimbo": "9\"X65MM",
+   "tratamento": "cementacao 0,4-0,6 mm + tempera/reveni 52-55 HRC",
+   "Ø_corpo_mm": 130.0,
+   "comprimento_corpo_mm": 42.0,
+   "Ø_flange_mm": 220.0,
+   "espessura_flange_mm": 40.0,
+   "sobre_faces_flange_mm": 216.0,
+   "chanfro": "10 x 45 graus (na transicao corpo/flange)",
+   "chanfro_corpo_flange": {
+    "cateto_mm": 10.0,
+    "angulo_graus": 45.0,
+    "de_D_mm": 130.0,
+    "para_D_mm": 150.0,
+    "d_inicio_mm": 42.0,
+    "d_fim_mm": 52.0,
+    "medido_no_dxf": [
+     {
+      "vista": 1,
+      "aresta": "(d 42,00; r 65,02) -> (d 52,00; r 75,02)",
+      "angulo_graus": 45.0,
+      "comprimento_mm": 14.14,
+      "camada": "contorno"
+     },
+     {
+      "vista": 2,
+      "aresta": "(d 42,00; r 65,02) -> (d 52,00; r 75,02)",
+      "angulo_graus": 45.0,
+      "comprimento_mm": 14.14,
+      "camada": "contorno"
+     }
+    ],
+    "como_foi_medido": "varredura das arestas da camada 'contorno' nas duas vistas de secao do cabecote (eixos y = 657,7 mm; faces em x = 42,56 e 299,95 mm do desenho; k = 25,534 mm/un). A seta do proprio desenho aponta para essa aresta - ela estava na cota, nao no solido",
+    "correcao_de_leitura": "ate hoje a faixa d 42..52 era modelada como um cilindro 0164 (r = 82). As arestas r = 82,0 e r = 98,0 correm d 52..92 junto das r = 78,5 e r = 101,5: sao as bordas do furo 016 em C.C. 0180 e o bordo externo da fenda de 23,5, lidas como cilindros da peca. 0164 = 2*(90-8), nao uma cota da peça"
+   },
+   "piloto_traseiro": {
+    "Ø_mm": 105.0,
+    "altura_mm": 3.0,
+    "d_inicio_mm": 92.0,
+    "d_fim_mm": 95.0,
+    "o_que_e": "macho de centragem que protrai 3,00 mm atras da face do flange, em Ø105, com o furo Ø95 atravessando ate o fim (por isso a peca mede 95,00 no total e nao 92,00)",
+    "medido_no_dxf": {
+     "parede_do_piloto": "H r = 52,48 / 52,52 correndo d = 92,00..95,00 (comp 3,00 mm, camada contorno)",
+     "face_traseira_do_flange": "V d = 92,00 de r = 52,48 ate r = 110,03",
+     "bolso": "H r = 47,48 / 47,52 correndo d = 25,00..95,00 (comp 70,00 mm)",
+     "carimbo_do_desenho": "Ø105 com desvio negativo cotado na vista; os tres furos cotados no corte sao Ø90 +0,05/+0,1, Ø95 e Ø105"
+    },
+    "substitui": "o `resalto_traseiro: {Ø 203, altura 3}` que estava aqui. A linha r = 101,5 que eu li como ressalto corre d = 52..92 junto do OD do flange - e o bordo externo das fendas de 23,5 (raio 101,75). Ø203 nunca foi cota de ressalto nenhum; e o diametro das fendas."
+   }
+  },
+  "furos_do_cabecote_para_a_matriz": [
+   {
+    "ordem": 1,
+    "nome": "bore do nariz",
+    "Ø_mm": 80.0,
+    "de_d_mm": 0.0,
+    "ate_d_mm": 14.0,
+    "cota_texto": "Ø80"
+   },
+   {
+    "ordem": 2,
+    "nome": "bore intermediario",
+    "Ø_mm": 90.0,
+    "de_d_mm": 14.0,
+    "ate_d_mm": 25.0,
+    "cota_texto": "Ø90 +0,05/+0,10 (print de 2026-09-12 lido girado; antes eu tinha usado +0,05/0 - a confirmar)"
+   },
+   {
+    "ordem": 3,
+    "nome": "bolso de fixacao (assento da bucha conica)",
+    "Ø_mm": 95.0,
+    "de_d_mm": 25.0,
+    "ate_d_mm": 95.0,
+    "cota_texto": "Ø95 (-0,05/-0,1 no assento da bucha)"
+   },
+   {
+    "ordem": 4,
+    "nome": "alargamento traseiro do bolso (o piloto Ø105)",
+    "Ø_mm": 105.0,
+    "de_d_mm": 92.0,
+    "ate_d_mm": 95.0,
+    "cota_texto": "Ø105,00 medido no corte: parede a r = 52,48/52,52 por 3,00 mm, além da face do flange (d 92,00) - e o que fecha o comprimento total em 95,00",
+    "medido_no_dxf": "H r 52,48 e 52,52 em d 92,00..95,00 + V d 92,00 de r 52,48 a 110,03 (contorno)"
+   }
+  ],
+  "anel_na_face": {
+   "de_Ø_mm": 90.0,
+   "para_Ø_mm": 130.0,
+   "largura_radial_mm": 20.0,
+   "nota": "confirma a descricao do cliente: anel de ~20 mm na face; o Ø do nariz (90 na face do corpo / 80 no furo) e menor que a matriz (Ø93) e maior que a fenda (75,8)"
+  },
+  "anel_do_nariz_variante_65mm": {
+   "Ø_interno_mm": 68.3,
+   "de_d_mm": -6.0,
+   "ate_d_mm": 4.0,
+   "protrusao_a_frente_da_face_mm": 6.0,
+   "interpretacao": "peca/anel separado no nariz, com passagem Ø68,3 - compativel com o carimbo 9\"X65MM (manta de 65 mm: folga de 1,65 mm por lado), INCOMPATIVEL com a manta de 75 mm (75,8) e com o nariz da matriz (Ø79,5)",
+   "status": "DESCARTADO para o produto de 75 mm por medição do usuário na máquina (2026-09-11): sobram ~2,5 mm em cada extremidade da fenda, o que exige passagem Ø80,00; com o anel Ø68,30 faltariam 3,35 mm por lado. O Ø68,30 do corte é a variante de 65 mm do carimbo 9\"X65MM"
+  },
+  "junta_cabecote_extrusora": {
+   "furos": 6,
+   "Ø_mm": 16.5,
+   "em_fenda_comprimento_mm": 23.5,
+   "circunferencia_primitiva_mm": 180.0,
+   "folga_angular_total_graus": 14.4,
+   "cota_angular_no_desenho_graus": 15.0,
+   "rosca": "M12",
+   "Ø_central_mm": 25.0,
+   "nota": "furos do FLANGE do cabecote para a extrusora - NAO sao para a matriz; ficam fora do envelope Ø93 da matriz"
+  },
+  "bucha_conica": {
+   "designacao": "EX-031 BUCHA CONICA",
+   "comprimento_mm": 70.0,
+   "Ø_externo_maior_mm": 95.0,
+   "Ø_externo_menor_mm": 86.0,
+   "Ø_interno_ref_mm": 90.0,
+   "cone_graus": 3.0,
+   "Ø_passagem_outro_lado_mm": 86.0,
+   "tolerancias": {
+    "Ø_externo": "-0,05/-0,1",
+    "Ø_interno": "-0,15"
+   },
+   "funcao_interpretada": "collete conico que, assentado no bolso Ø95x70, contrai sobre o corpo Ø93 da matriz; auto-travante (3 deg < arctan 0,15 = 8,6 deg)",
+   "medido_no_dxf": {
+    "Ø_interno_mm": 90.0,
+    "Ø_interno_comprimento_arestas_mm": "63 a 70 (arestas horizontais retas a r = 45,00)",
+    "cone_medido_graus": 3.267,
+    "Ø_externo_menor_mm": 86.0,
+    "como": "as UNICAS 4 geratrizes inclinadas do DXF inteiro, todas a 3,267 deg, silhueta simetrica Ø86,00 (a 0,01 mm) numa ponta; medidas com o eixo LOCAL de cada vista - o corte do cabecote tem eixo em y = 0 e as outras vistas tem eixo proprio, por isso as varreduras antigas nao viam nada",
+    "Ø_externo_maior_extrapolado_mm": 94.0
+   },
+   "conflito_encontrado": "com furo RETO Ø90,00 o collete nao passa sobre a banda Ø93 da matriz: faltam 1,50 mm de raio (3,00 mm de diametro). As saidas possiveis, todas a confirmar na peca ou no desenho de EX-031: (a) o furo do collete tambem e conico e a Ø93 no lado grande; (b) a superficie de aperto nao e a banda Ø93 é sim outro diâmetro a criar na matriz; (c) a vista de 3,267 deg nao e o collete. Enquanto isso, o numero 'pressao do collete fecha a biparticao' e condicional, e o apoio AXIAL no degrau (area de contato medida 431,2 mm2) continua valido por si so - ele nao depende do collete"
+  },
+  "pushador": {
+   "designacao": "EX-032 PUSHADOR DO CABECOTE",
+   "Ø_mm": 25.0,
+   "comprimento_mm": 132.0,
+   "haste_rosca": "M12",
+   "bitola_ponta_mm": 18.0,
+   "repartilhado": true,
+   "chanfro": "3x3",
+   "comprimento_util_mm": 70.0,
+   "funcao_interpretada": "ferramenta (haste partida) para empuxar/retirar o conjunto; nao exige furo roscado na matriz - e por isso que a supressao dos M6 de desmontagem na face de entrada permanece valida"
+  },
+  "encaixe_matriz_x_cabecote": [
+   {
+    "estagio_matriz": "Ø93 x 69,9 (d 25,1..95)",
+    "furo_cabecote": "Ø95 x 70 (d 25..95)",
+    "folga_radial_mm": 1.0,
+    "folga_axial_mm": 0.1
+   },
+   {
+    "estagio_matriz": "Ø89,5 x 10,8 (d 14,3..25,1)",
+    "furo_cabecote": "Ø90 x 11 (d 14..25)",
+    "folga_radial_mm": 0.25,
+    "folga_axial_mm": 0.3,
+    "nota": "o Ø89,5 termina 0,10 antes do fim do furo Ø90 e 0,30 antes do degrau para o Ø80",
+    "tolerancia_cotada_no_desenho": "Ø90 +0,05/+0,10 (lida no print girado de 2026-09-12; a confirmar na peça - meu modelo usou +0,05/0)",
+    "folga_radial_com_tolerancia_mm": 0.325,
+    "o_que_muda": "o furo Ø90 pode sair até Ø90,10, então a folga radial do degrau Ø89,5 da matriz vai de 0,250 a 0,325 mm. Nada trava por causa disso (o engate axial de 0,30 mm é folga de face, não de diâmetro) e o centro continua vindo da banda Ø93 apertada pelo collete - o que essa folga extra deixa de garantir é a concentricidade do nariz Ø79,5, se um dia ela for requisito"
+   },
+   {
+    "estagio_matriz": "Ø79,5 x 28,3 (d -14..14,3)",
+    "furo_cabecote": "Ø80 x 14 (d 0..14)",
+    "folga_radial_mm": 0.25,
+    "protrusao_da_face_de_saida_mm": 14.0,
+    "engate_do_nariz_mm": 14.0
+   }
+  ],
+  "ombro_de_apoio": {
+   "anel_de_contato_de_Ø_mm": 90.0,
+   "para_Ø_mm": 93.0,
+   "area_contato_mm2": 431.2,
+   "nota": "interseccao entre o degrau do cabecote (Ø90->Ø95) e o ombro da matriz (Ø89,5->Ø93); o ombro da matriz e a face que reage a forca de abertura"
+  },
+  "restricao_de_passagem": {
+   "Ø_canal_no_flange_mm": 68.3,
+   "boca_de_entrada_da_matriz_Ø_mm": 75.6,
+   "observacao": "nivel Ø68,3 medido nos trechos d=-6..4 e d=35..64; interpretado como o anel do nariz (variante 65 mm). A area de passagem (3664 mm2) e 18,4% menor que a boca da matriz (4488 mm2)."
+  },
+  "pendencias": [
+   "confirmar se o assento do bolso Ø95x70 e cilindrico ou conico de 3 graus (o desenho mostra o collete com OD Ø95->Ø86)",
+   "ABERTA de novo em 2026-09-12: o '20 mm' do croqui e a posicao do M12 do bolso (contada da face do flange), nao a sobra axial da matriz. Com a protrusao do desenho (14,00 mm) a borda traseira do furo do cartucho em Z=97,00 fica 2,75 mm dentro da luva do nariz. Duas saidas, as duas medidas: cartuchos em Z >= 99,75 mm na matriz, ou alivio no nariz do cabecote. Medidas de conferencia na maquina: quanto a matriz sobressai do cabecote, e se o montador passa o cartucho com a matriz montada",
+   "CONFIRMAR a tolerância do Ø90 do nariz: o print mostra +0,05/+0,10 (os dois positivos), meu modelo usou +0,05/0. Efeito medido: folga radial do degrau da matriz passa de 0,250 para 0,250..0,325 mm; engate axial e contato do ombro não mudam",
+   "CONFERIR o Ø90 do furo do collete EX-031: medido no DXF como furo reto, ele nao passa sobre a banda Ø93 da matriz (falta 1,50 mm de raio). Precisa da peça ou do desenho isolado de EX-031 para dizer se o furo e conico, se a banda de aperto e outra, ou se a vista de 3,267 deg e de outra peca"
+  ],
+  "conferencia_com_a_medicao_do_usuario": {
+   "data": "2026-09-11",
+   "anel_da_face": {
+    "declarado_mm": 20.0,
+    "medido_no_desenho_mm": 20.0,
+    "casou": true
+   },
+   "sobra_na_fenda_por_lado": {
+    "declarado_mm": 2.5,
+    "com_passagem_D80_mm": 2.5,
+    "com_passagem_D80_e_boca_do_chanfro_mm": 2.1000000000000014,
+    "com_anel_D68_30_mm": -3.3500000000000014,
+    "casou": true
+   },
+   "leitura": "os dois números do croqui reproduzem a medição do DXF; a segunda alternativa é a única compatível com 'sobrar 2,5 mm', o que descarta o anel de 65 mm",
+   "linha_axial_ate_o_fim_do_bico": {
+    "declarada_mm": 20.0,
+    "o_que_e_na_verdade": "reclassificada em 2026-09-12 por medicao no DXF: e a posicao do furo M12 do bolso, contada da face do flange (72,02 - 52,02 = 20,00 mm) - nao a sobra axial da matriz. Ver decisoes_usuario.medicao_na_maquina.linha_axial_medida no SSOT",
+    "protrusao_que_governa_mm": 14.0,
+    "numeros_do_booleano": "NAO copiados aqui de proposito. Ler interface_cabecote.json['numeros']['acesso_furacao_cenarios'], gerada por verificar_interface_cabecote.py. Esta chave era uma copia manual e apodreceu: trazia 1372,276 mm3, da epoca em que o bloco [F] somava um so solido da intersecao (o corredor corta as duas paredes opostas do nariz); o valor correto e 2744,550 mm3",
+    "conclusao": "ABERTA: com a protrusao do desenho (14,00 mm) o cartucho esbarra na luva do nariz. As duas saidas estao medidas - recuar os furos para Z >= 99,75 mm (recomendado 100,25 mm; ver 03_Relatorios_e_Documentacao/ESTUDO_RECUO_CARTUCHOS.md) ou alivio no nariz do cabecote"
+   },
+   "regra": "esta chave so guarda o que o USUARIO declarou e se casou com o desenho; numero de booleano mora em interface_cabecote.json e e lido de la por quem gera relatorio - nunca reescrito a mao"
+  },
+  "furos_transversais_no_cabecote": {
+   "medidos_no_dxf": [
+    {
+     "tipo": "furo roscado M12 no bolso",
+     "Ø_broca_mm": 10.5,
+     "Ø_passagem_mm": 12.0,
+     "x_da_face_do_nariz_mm": 72.02,
+     "x_da_face_do_flange_mm": 20.0,
+     "plano_z_na_matriz_mm": 23.0,
+     "como_medido": "dois circulos exatos no eixo (desvio radial 0,002 mm) na vista em corte"
+    }
+   ],
+   "leitura_das_cotas": "o '20' cotado nesta vista e a distancia da face do flange (52.02 mm) ate o centro do furo (72.02 mm): 72,02 - 52,02 = 20,00 mm. Nao e protrusao da matriz - foi assim que eu li antes e estava errado",
+   "faces_axiais_medidas_mm": {
+    "face do nariz": 0.02,
+    "degrau Ø80->Ø90": 14.02,
+    "degrau Ø90->Ø95": 25.02,
+    "face do flange": 52.02,
+    "fundo do bolso": 95.02
+   }
+  },
+  "step_gerado": {
+   "gerador": "04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py",
+   "arquivos": [
+    "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_sem_flange.step",
+    "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_desenhado.step"
+   ],
+   "o_que_e": "cabeçote sem a junta da extrusora = interseção pelo cilindro Ø130 do corpo (r > 65,00 mm removido: o chanfro 10 × 45° da transição corpo→flange, o flange Ø220 × 40 com os 6 × Ø16,5 nas fendas de 23,5 e o piloto de centragem Ø105 × 3 atrás do flange)",
+   "massa_kg": {
+    "fonte": "04_Dados_SSOT_e_Scripts/cabecote_step.json",
+    "chaves": "massa_desenhada_kg | massa_sem_flange_kg | massa_removida_kg",
+    "regra": "número de booleano mora só em 04_Dados_SSOT_e_Scripts/cabecote_step.json, que o gerador regrava a cada rodada; copiar o valor para cá apodrece na primeira mudança de geometria - foi o que aconteceu quando o chanfro 10 × 45° entrou no modelo e a massa desenhada mudou de 13,531 para 13,051 kg. Verificar_cadeia.py [5]/[6] cobra isso."
+   },
+   "provas": {
+    "fonte": "04_Dados_SSOT_e_Scripts/cabecote_step.json",
+    "chaves": "metal_removido_ate_a_banda_da_matriz_mm3 | interferencia_matriz_x_desenhado_mm3 | interferencia_matriz_x_sem_flange_mm3 | comprimento_axial_mm | desvio_round_trip_*",
+    "chanfro_no_modelo": "o cone do chanfro e medido no proprio solido: secao em Z = 48 (d = 47) da raio externo 70,001 mm, geratriz a 45,0000°, 1 face cônica de 5.558 mm2. O STEP sem flange nao ganha face conica (o chanfro esta em r 65..75, fora do corte pelo 0130): 624.430.809809 mm3, 9 faces, como antes - a peca que a matriz ve nao mudou",
+    "regra": "número de booleano mora só em 04_Dados_SSOT_e_Scripts/cabecote_step.json, que o gerador regrava a cada rodada; copiar o valor para cá apodrece na primeira mudança de geometria - foi o que aconteceu quando o chanfro 10 × 45° entrou no modelo e a massa desenhada mudou de 13,531 para 13,051 kg. Verificar_cadeia.py [5]/[6] cobra isso."
+   },
+   "m12_fora_do_modelo": "o Ø10,5/Ø12 a 72,02 mm da face não tem aresta de seção no DXF: natureza e ângulo não determináveis; --com-m12 gera o cenário transversal",
+   "pasta_dos_desenhos": "06_CAD_Cabecote_EX-030/STEP/ - criada em 2026-09-12 para reunir os desenhos STEP do cabecote; o caminho e definido uma so vez em gerar_cabecote_ex030.py (DIR_CAB), e o relatorio imprime o caminho do arquivo a partir dele",
+   "pasta_de_estudos": "06_CAD_Cabecote_EX-030/STEP/estudos/ - para la vao os cenarios nao aprovados (--com-m12); a pasta esta no .gitignore porque cenario nao e decisao, e o conteudo e recriavel com o gerador"
+  },
+  "leitura_impossivel_neste_arquivo": {
+   "fato_robusto": "as 4 UNICAS geratrizes inclinadas do DXF dao 3,267 deg e aparecem em duas vistas, com silhueta simetrica Ø86,00 (a 0,01 mm), dx = 64,00 mm e dy = +/-3,66 mm por lado. Angulo e razao sao invariantes: independem da escala e de saber a que vista pertencem",
+   "o_que_nao_se_consegue": "identificar qual vista e de qual peca (EX-030 / EX-031 / EX-032). O aspose nao preserva blocos nem camadas e devolve so POLYLINE; os dois metodos tentados falham - componentes conexos viram UM grupo (47017 de 47017 segmentos, porque as linhas de centro encostam em tudo) e o voto de espelhamento casa cada aresta consigo mesma (dando 'diametros' de 2500 mm, que sao a legenda). Em 2026-09-12 gastaram-se duas tentativas nisso: nao reincidir",
+   "consequencia": "o 'Ø90,00 reto' e a aresta horizontal mais proxima das geratrizes, NAO uma atribuicao certa ao EX-031 - por isso a pendencia do furo do collete fica ABERTA e o STEP do conjunto montado nao e gerado. Resolve-se em segundos com um paquimetro no furo da bucha: se for conico ate ~Ø93, a pressao radial de 8,6 MPa volta a valer; se for reto, a banda de aperto tem de ser criada na matriz (ou o collete e outra peca)",
+   "instrumento": "python 04_Dados_SSOT_e_Scripts/medir_perfil_cabecote.py --json 04_Dados_SSOT_e_Scripts/cabecote_perfil.json (roda pelas 7 checagens de verificar_cadeia.py); a docstring do medidor lista os metodos que NAO funcionam neste arquivo"
+  },
+  "encosto_na_extrusora": {
+   "decisao_do_usuario": "encosta face a face (2026-09-12) - a face do flange do cabeçote encosta na face da extrusora; o piloto Ø105 × 3,00 é centragem",
+   "o_que_Isso_muda_na_matriz": "nada na posição da matriz. A posição axial da matriz é definida pela escada interna do cabeçote (fundo do bolso + degrau), medida com interferência 0,0000 mm³ no assento; o que a decisão fixa é onde o CONJUNTO cabeçote+matriz para em relação à máquina.",
+   "exigencia_na_maquina": "se a junta fecha na face do flange (d = 92,00), a face da extrusora precisa de um rebaixo que receba o piloto de 3,00 mm (Ø > 105,00); sem ele a junta fica aberta 3,00 mm, e é o rebaixo que define se a traseira da matriz (d = 95,00) entra ou não na máquina",
+   "correcao_de_afirmacao_anterior": "eu escrevi que, com encosto face a face, a protrusão da matriz cairia de 14,00 para 11,00 mm e o NC dos cartuchos viraria +0,250 mm. Isso estava errado: só seria assim se a referência axial da matriz fosse a face do flange, e a medição mostra que ela é o degrau/fundo do bolso do próprio cabeçote. A protrusão continua 14,00 mm e o NC (-2,750 mm, sai com Z >= 99,75) continua de pé."
+  },
+  "matriz_copo_desenhada_no_dxf": {
+   "o_que_e": "a seção do cabeçote no DXF já contém a Matriz 1 Copo montada, com cotas de PROJETO - não as medidas do STEP. Foi o que o usuário apontou, e a geometria confirma.",
+   "medido_no_dxf": {
+    "banda_da_matriz": "H r = 47,48/47,52 sobre d = 25,00..95,00 existe em DUAS camadas: `contorno` (o bolso do cabeçote) e `SL35` (geometria de seção) - linha a linha com o bolso, Ø95,00 desenhado, não Ø93,00",
+    "segundo_estagio": "H r = 45,00 em d = 14,00..25,00 (11,00 = o furo do cabeçote) E outra em d = 14,00..31,00 (17,00) - o estágio desenhado para dentro da matriz é 6,00 mm mais comprido que o furo que o recebe",
+    "unica_aresta_vertical_na_faixa": "V d = 25,00 de r = 44,98 a 47,48 (a quina do degrau do cabeçote); não há outra aresta vertical entre r 36 e 54 no trecho",
+    "face_de_entrada": "V d = 95,00 em SL35, de r = 0,02 a 47,48 - a face de entrada da matriz desenhada no plano mais traseiro do cabeçote (o 'face a face')"
+   },
+   "consequencia": "os 11,00 mm que eu lia como comprimento do degrau do cabeçote são também o canal da fenda, que é peça separada do copo - o corte do DXF mostra os dois estágios lado a lado nessa faixa. No STEP medido: banda 69,909 e estágio 10,80 (total 80,70), ou seja, o corpo medido é 0,091 + 0,20 mm mais curto que o desenhado (70 + 11 = 81,00).",
+   "limitacao_deste_arquivo": "o DXF extraído do DWG tem SÓ geometria: 0 entidades DIMENSION e 0 textos, então os NÚMEROS escritos no desenho não são legíveis aqui. O que o arquivo permite é medir as linhas acima. O DWG é AutoCAD 2016 com seções comprimidas e o leitor .NET não roda neste ambiente (pede OpenSSL 1.1)."
+  }
+ },
+ "numeros": {
+  "pressao_efetiva_MPa": 6.818460031827641,
+  "empuxo_axial_kN": 29.843145966035845,
+  "empuxo_axial_dp1d_kN": 11.642330951432937,
+  "acesso_furacao_cenarios": {
+   "desenho DXF medido": {
+    "protrusao_mm": 14.0,
+    "z_face_cabecote_mm": 95.0,
+    "folga_axial_min_mm": -2.75,
+    "furo_critico": "cartucho em X=-22,0, Z=97,0",
+    "metal_no_caminho_mm3": 2744.55,
+    "n_furos_na_faixa_de_saida": 5
+   },
+   "você mediu na máquina": {
+    "protrusao_mm": 20.0,
+    "z_face_cabecote_mm": 89.0,
+    "folga_axial_min_mm": 3.25,
+    "furo_critico": "cartucho em X=-22,0, Z=97,0",
+    "metal_no_caminho_mm3": 0.0,
+    "n_furos_na_faixa_de_saida": 5
+   }
+  },
+  "protrusao_medida_usuario_mm": 20.0,
+  "cenario_que_governa": "desenho DXF medido",
+  "cartuchos_z_min_mm": 99.75,
+  "dp_1d_bar": 26.6,
+  "area_boca_mm2": 4488.833247155239,
+  "area_fenda_mm2": 112.0171,
+  "area_projetada_mm2": 8169.0,
+  "area_ombro_matriz_mm2": 501.6730768701201,
+  "area_degrau_cabecote_mm2": 726.4933011426397,
+  "area_contato_degrau_mm2": 431.18359170520006,
+  "pressao_contato_degrau_MPa": 69.21215588936322,
+  "pressao_collete_empuxo_axial_MPa": 9.755849684007684,
+  "pressao_collete_fechar_particao_MPa": 8.580583541300797,
+  "pressao_collete_peso_MPa": 0.011500051617728348,
+  "deformacao_radial_canal_mm": 0.0022682350515317866,
+  "forca_abertura_kN": 55.7,
+  "massa_kg": 3.586,
+  "folgas_radiais_mm": [
+   1.0,
+   0.25,
+   0.25
+  ],
+  "folga_axial_apoio_mm": 0.1,
+  "folga_axial_nariz_mm": 0.3,
+  "protrusao_saida_mm": 14.0,
+  "distancia_parafusos_mm": 35.25,
+  "interferencia_mm3": 0.0
+ },
+ "checagens": [
+  {
+   "item": "Interferência matriz ∩ cabeçote",
+   "nominal": 0.0,
+   "medido": 0.0,
+   "desvio": 0.0,
+   "unidade": "mm³",
+   "status": "CONFORME",
+   "observacao": "a matriz tem de entrar e sair sem tocar"
+  },
+  {
+   "item": "Folga radial - Ø93×69,90 no bolso Ø95×70,0",
+   "nominal": 1.0,
+   "medido": 1.0,
+   "desvio": -0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": ""
+  },
+  {
+   "item": "Folga radial - Ø89,5×10,80 no Ø90×11,0",
+   "nominal": 0.25,
+   "medido": 0.25,
+   "desvio": -0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": ""
+  },
+  {
+   "item": "Folga radial - Ø79,5×28,30 no Ø80×14,0",
+   "nominal": 0.25,
+   "medido": 0.25,
+   "desvio": -0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": ""
+  },
+  {
+   "item": "Folga axial no degrau de apoio (ombro)",
+   "nominal": 0.1,
+   "medido": 0.1,
+   "desvio": -0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "o ombro da matriz encosta no degrau: é o apoio da força"
+  },
+  {
+   "item": "Folga axial entre o ombro Ø89,5→Ø79,5 da matriz e o degrau Ø90→Ø80",
+   "nominal": 0.3,
+   "medido": 0.3,
+   "desvio": -0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "o canto do Ø89,5 passa a 0,30 do degrau do nariz: é a folga que evita o encunhamento"
+  },
+  {
+   "item": "Face de entrada da matriz rasa com a traseira do cabeçote",
+   "nominal": 0.0,
+   "medido": -0.0,
+   "desvio": -0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "a boca Ø75,60 fica exposta ao canal de massa do flange"
+  },
+  {
+   "item": "Protrusão da face de saída além da face do nariz",
+   "nominal": 14.0,
+   "medido": 14.0,
+   "desvio": 0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "a fenda trabalha fora do cabeçote: nada de filme congelado na frente da matriz"
+  },
+  {
+   "item": "Anel da face (Ø90 → Ø130)",
+   "nominal": 20.0,
+   "medido": 20.0,
+   "desvio": 0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "confere com o '~20 mm' descrito"
+  },
+  {
+   "item": "Chanfro corpo->flange no sólido (raio na meia-altura do cone)",
+   "nominal": 70.0,
+   "medido": 70.0005,
+   "desvio": 0.0005,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "meça em Z = 48,000 mm (d = 47,000 mm): Ø130 → Ø150 em 10,000 mm a 45,00°, a mesma aresta nas duas vistas de seção do DXF"
+  },
+  {
+   "item": "Menor distância parafuso M12 (C.C Ø180) → corpo da matriz",
+   "nominal": 35.25,
+   "medido": 35.25,
+   "desvio": 0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "nenhum furo da junta cabeçote↔extrusora alcança a matriz"
+  },
+  {
+   "item": "Curso livre da manta após sair da matriz até o cabeçote",
+   "medido": 14.2201,
+   "minimo": 14.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "a manta nasce 14 mm à frente da face do nariz e sai pela diagonal do furo Ø80: não há contato possível"
+  },
+  {
+   "item": "Folga do nariz Ø79,5 no furo Ø80 (a 1 mm das bordas do degrau)",
+   "nominal": 0.25,
+   "medido": 0.25,
+   "desvio": -0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": ""
+  },
+  {
+   "item": "Folga do PRODUTO (75,00) no furo Ø80 - o que voce mediu na maquina",
+   "nominal": 2.5,
+   "medido": 2.5,
+   "desvio": 0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "'sobra 2,5 mm em cada extremidade da fenda' - reproduzido pelo modelo medido"
+  },
+  {
+   "item": "Folga da BOCA da matriz (com o chanfro de D2) no furo Ø80",
+   "medido": "1,000 mm por lado  (boca medida: 78,000 × 4,500 mm)",
+   "observacao": "consequência de manter o chanfro 1,50 × 45: a boca abre para 78,000 mm e a folga cai de 2,50 para 1,000 mm se o bico do cabeçote chegar até a face da matriz - é por isso que o comprimento do bico (14,00 mm no desenho) é a única medida que falta",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Interferência matriz ∩ cabeçote COM anel Ø68,30",
+   "medido": "5098,0 mm³",
+   "observacao": "FECHADO por medição na máquina: sobram 2,5 mm/lado na fenda, entao a passagem e o proprio Ø80 do cabecote - o volume acima so vale se alguem reaproveitar o anel de 65 mm",
+   "status": "PENDENTE_CONFIRMACAO"
+  },
+  {
+   "item": "Sobra na extremidade da fenda × passagem do cabeçote",
+   "medido": "Ø80,00 → sobra 2,500 mm por lado (usuário mediu ~2,5) · Ø68,30 do anel de 65 mm → faltariam 4,850 mm",
+   "observacao": "o número medido na máquina só casa com o Ø80: prova de que o anel de 65 mm não está lá",
+   "status": "PENDENTE_CONFIRMACAO"
+  },
+  {
+   "item": "Passagem do anel × nariz da matriz",
+   "medido": "Ø68,300 contra Ø79,50 → 5,600 mm de interferência radial por lado",
+   "observacao": "p/ 75 mm a passagem teria de ser ≥ Ø79,6, e o furo do nariz já é Ø80: não há espaço para anel",
+   "status": "PENDENTE_CONFIRMACAO"
+  },
+  {
+   "item": "Área de passagem do cabeçote × boca da matriz",
+   "medido": "81,6 %  (3664 mm² / 4489 mm²)",
+   "observacao": "restrição de alimentação e zona morta se o anel de 65 mm for mantido",
+   "status": "PENDENTE_CONFIRMACAO"
+  },
+  {
+   "item": "Furo pino_alinhamento X=-42,1 Z=30,0 não rompe o envelope",
+   "nominal": 0.0,
+   "medido": 0.0,
+   "desvio": 0.0,
+   "unidade": "mm³",
+   "status": "CONFORME",
+   "observacao": "parede até o Ø93 = 0,794 mm"
+  },
+  {
+   "item": "Furo pino_alinhamento X=42,1 Z=30,0 não rompe o envelope",
+   "nominal": 0.0,
+   "medido": 0.0,
+   "desvio": 0.0,
+   "unidade": "mm³",
+   "status": "CONFORME",
+   "observacao": "parede até o Ø93 = 0,794 mm"
+  },
+  {
+   "item": "Furo pino_alinhamento X=-42,1 Z=60,0 não rompe o envelope",
+   "nominal": 0.0,
+   "medido": 0.0,
+   "desvio": 0.0,
+   "unidade": "mm³",
+   "status": "CONFORME",
+   "observacao": "parede até o Ø93 = 0,794 mm"
+  },
+  {
+   "item": "Furo pino_alinhamento X=42,1 Z=60,0 não rompe o envelope",
+   "nominal": 0.0,
+   "medido": 0.0,
+   "desvio": 0.0,
+   "unidade": "mm³",
+   "status": "CONFORME",
+   "observacao": "parede até o Ø93 = 0,794 mm"
+  },
+  {
+   "item": "Furo cartucho X=0,0 Z=97,0 abre na banda livre",
+   "medido": "alcance 42,019 mm x r do nariz 39,750 mm -> escancara 2,269 mm",
+   "observacao": "a 2,000 mm à frente da face do cabeçote: acesso intencional ao cartucho/termopar, sem caminho para o bolso",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Furo cartucho X=0,0 Z=97,0 abre na banda livre",
+   "medido": "alcance 42,019 mm x r do nariz 39,750 mm -> escancara 2,269 mm",
+   "observacao": "a 2,000 mm à frente da face do cabeçote: acesso intencional ao cartucho/termopar, sem caminho para o bolso",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Furo cartucho X=-22,0 Z=97,0 abre na banda livre",
+   "medido": "alcance 44,137 mm x r do nariz 39,750 mm -> escancara 4,387 mm",
+   "observacao": "a 2,000 mm à frente da face do cabeçote: acesso intencional ao cartucho/termopar, sem caminho para o bolso",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Furo cartucho X=-22,0 Z=97,0 abre na banda livre",
+   "medido": "alcance 44,137 mm x r do nariz 39,750 mm -> escancara 4,387 mm",
+   "observacao": "a 2,000 mm à frente da face do cabeçote: acesso intencional ao cartucho/termopar, sem caminho para o bolso",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Furo cartucho X=22,0 Z=97,0 abre na banda livre",
+   "medido": "alcance 44,137 mm x r do nariz 39,750 mm -> escancara 4,387 mm",
+   "observacao": "a 2,000 mm à frente da face do cabeçote: acesso intencional ao cartucho/termopar, sem caminho para o bolso",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Furo cartucho X=22,0 Z=97,0 abre na banda livre",
+   "medido": "alcance 44,137 mm x r do nariz 39,750 mm -> escancara 4,387 mm",
+   "observacao": "a 2,000 mm à frente da face do cabeçote: acesso intencional ao cartucho/termopar, sem caminho para o bolso",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Furo termopar X=-11,0 Z=103,0 abre na banda livre",
+   "medido": "alcance 42,373 mm x r do nariz 39,750 mm -> escancara 2,623 mm",
+   "observacao": "a 8,000 mm à frente da face do cabeçote: acesso intencional ao cartucho/termopar, sem caminho para o bolso",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Furo termopar X=-11,0 Z=103,0 abre na banda livre",
+   "medido": "alcance 42,373 mm x r do nariz 39,750 mm -> escancara 2,623 mm",
+   "observacao": "a 8,000 mm à frente da face do cabeçote: acesso intencional ao cartucho/termopar, sem caminho para o bolso",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Furo termopar X=11,0 Z=103,0 abre na banda livre",
+   "medido": "alcance 42,373 mm x r do nariz 39,750 mm -> escancara 2,623 mm",
+   "observacao": "a 8,000 mm à frente da face do cabeçote: acesso intencional ao cartucho/termopar, sem caminho para o bolso",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Furo termopar X=11,0 Z=103,0 abre na banda livre",
+   "medido": "alcance 42,373 mm x r do nariz 39,750 mm -> escancara 2,623 mm",
+   "observacao": "a 8,000 mm à frente da face do cabeçote: acesso intencional ao cartucho/termopar, sem caminho para o bolso",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Nenhum furo dentro do cabeçote rompe o envelope",
+   "medido": "4 de 4 conformes (os outros 10 abrem na banda livre, à frente do cabeçote)",
+   "observacao": "nenhum caminho de massa do canal para o bolso nem para a banda de aperto",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Menor parede de furo até a superfície apertada pela bucha",
+   "medido": "0,794 mm  (pino_alinhamento em X=-42,1, Z=30,0)",
+   "observacao": "é a parede que o collete vê: manter cego, sem rebaixo, e Ø93 retificado na zona de aperto",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Pressão efetiva no limite",
+   "medido": "6,82 MPa = 68,2 bar",
+   "observacao": "deduzida de 55,7 kN medidos / 8169 mm² de área projetada medida",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Empuxo axial que empurra a matriz para fora do cabeçote",
+   "medido": "29,8 kN no limite · 11,6 kN com o ΔP 1D medido (26,6 bar)",
+   "observacao": "p × (4489 mm² da boca − 112 mm² da fenda)",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Área do anel de apoio - matriz (Ø89,5→Ø93)",
+   "medido": "501,7 mm²",
+   "observacao": "",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Área do anel de apoio - cabeçote (Ø90→Ø95)",
+   "medido": "726,5 mm²",
+   "observacao": "",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Área REAL de contato (interseção das duas faces, booleano)",
+   "nominal": 431.1836,
+   "medido": 431.1836,
+   "desvio": 0.0,
+   "unidade": "mm²",
+   "status": "CONFORME",
+   "observacao": "só onde as duas faces existem há pressão: anel Ø90 → Ø93, não o anel inteiro da matriz"
+  },
+  {
+   "item": "Pressão de contato no degrau (apoio axial)",
+   "medido": "69,2 MPa",
+   "observacao": "29,8 kN sobre 431,2 mm² de contato real; margem de 20,2x sobre o escoamento da matriz temperada",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Pressão radial do collete p/ segurar o empuxo axial só por atrito",
+   "medido": "9,8 MPa sobre 20393 mm²",
+   "observacao": "cenário sem o degrau; com o ombro encostando (folga axial 0,10 mm) não é necessário",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Pressão radial do collete p/ fechar o plano de partição",
+   "medido": "8,6 MPa",
+   "observacao": "55,7 kN de força de abertura equilibrados pela compressão radial aplicada pelo collete sobre a banda Ø93 - CONDICIONAL, ver o alerta do furo Ø90 logo abaixo",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Superfície de aperto do collete EX-031",
+   "medido": "com furo RETO Ø90,00 o collete nao passa sobre a banda Ø93 da matriz: faltam 1,50 mm de raio (3,00 mm de diametro). As saidas possiveis, todas a confirmar na peca ou no desenho de EX-031: (a) o furo do collete tambem e conico e a Ø93 no lado grande; (b) a superficie de aperto nao e a banda Ø93 é sim outro diâmetro a criar na matriz; (c) a vista de 3,267 deg nao e o collete. Enquanto isso, o numero 'pressao do collete fecha a biparticao' e condicional, e o apoio AXIAL no degrau (area de contato medida 431,2 mm2) continua valido por si so - ele nao depende do collete",
+   "observacao": "medido: furo reto Ø90,00 por 63 a 70 (arestas horizontais retas a r = 45,00) mm e cone de 3,267° com silhueta Ø86,00; banda da matriz Ø93,00 -> falta 1,50 mm de raio. O apoio axial no degrau não depende disso (431,2 mm² medidos); o que fica condicionado é a compressão radial e, com ela, o número de pressão acima",
+   "status": "PENDENTE_CONFIRMACAO"
+  },
+  {
+   "item": "Pressão radial p/ segurar só o peso na troca",
+   "medido": "0,0115 MPa",
+   "observacao": "matriz de 3,586 kg",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Cone da bucha × atrito",
+   "medido": "3,00° < arctan(0,15) = 8,5°",
+   "observacao": "auto-travante: a matriz não sai sozinha",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Deformação radial do canal sob a pressão do collete",
+   "medido": "~0,0023 mm por lado",
+   "observacao": "casca de 8,70 mm sobre o canal, E = 200 GPa - ordem de grandeza",
+   "status": "CONFORME"
+  },
+  {
+   "item": "Folga axial da furação de saída à frente do metal do cabeçote (protrusão do desenho)",
+   "medido": -2.75,
+   "minimo": 0.0,
+   "unidade": "mm",
+   "status": "NAO_CONFORME",
+   "observacao": "protrusão 14,00 mm medida no DXF; furo mais crítico: cartucho em X=-22,0, Z=97,0; metal no caminho de inserção: 2744,550 mm³; o cartucho deixa de esbarrar em Z >= 99,75 mm"
+  },
+  {
+   "item": "Folga axial da furação se a protrusão for 20,00 mm (cota '20' do croqui)",
+   "medido": "folga 3,250 mm | 0,000 mm³ de metal no caminho",
+   "observacao": "o '20 mm' do desenho NAO e protrusao: medido no DXF, e a distancia da face do flange (52.02 mm) ao centro do furo M12 do bolso (72.02 mm) = 20,00 mm. Fica registrado como cenario alternativo, porque e a leitura que ele descreveu",
+   "status": "PENDENTE_CONFIRMACAO"
+  },
+  {
+   "item": "O que isso decide sobre a furação de saída",
+   "medido": "aberta: com a protrusão do desenho (14,00 mm) os cartuchos têm de ir para Z >= 99,75 mm, ou o nariz do cabeçote ganha alívio",
+   "observacao": "folga traseira medida -2,750 mm no cenário que vale (desenho) e 3,250 mm se a matriz sobressair 20,00 mm; o cabeçote já é furado transversalmente para o M12 do pushador (72,02 mm da face do nariz, 20,00 mm da face do flange), então alívio no nariz não é inédito na peça - mas aí é o cabeçote que muda, não a matriz",
+   "status": "PENDENTE_CONFIRMACAO"
+  },
+  {
+   "item": "Piloto protrai atrás da face do flange (o rebaixo que a máquina precisa ter)",
+   "nominal": 3.0,
+   "medido": 3.0,
+   "desvio": 0.0,
+   "unidade": "mm",
+   "status": "CONFORME",
+   "observacao": "face do flange e fim do piloto medidos no sólido por varredura de seções de 0,05 mm"
+  },
+  {
+   "item": "Rebaixo na face da extrusora para receber o piloto (decisão 'face a face')",
+   "medido": 3.0,
+   "observacao": "com a junta fechando na face do flange (d = 92,00), a face da máquina precisa de 3,00 mm de rebaixo em Ø > 105,00; sem ele a junta fica aberta 3,00 mm. A posição axial da matriz NÃO muda com isso: ela vem do degrau/fundo do bolso do cabeçote (interferência 0,0000 mm³ no assento), então a protrusão continua 14,00 mm e o NC dos cartuchos também.",
+   "status": "PENDENTE_CONFIRMACAO"
+  }
+ ],
+ "itens": 52,
+ "conformes": 43,
+ "nao_conformes": 1,
+ "pendentes": 8
+}

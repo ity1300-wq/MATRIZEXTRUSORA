@@ -48,7 +48,7 @@ except ImportError as exc:  # pragma: no cover
     sys.exit(2)
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DIR_CAD = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
 DIR_DADOS = os.path.dirname(os.path.abspath(__file__))
 
 K_PL = 18500.0     # Pa.s^n

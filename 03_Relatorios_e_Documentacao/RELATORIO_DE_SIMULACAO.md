@@ -4,7 +4,7 @@
 **Projeto:** Matriz de Extrusão Plana (Modelo Master Aprovado v27.0 - Funil V Restrito)  
 **Produto Final:** Manta de Isolação para Acessórios de Cabos de Média Tensão (MT)  
 **Dimensões da Manta:** Largura $75,00\text{ mm} \times$ Espessura $1,50\text{ mm}$ (Bordas Arredondadas $R = 0,75\text{ mm}$)  
-**Modelo Oficial Master:** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (Aço P20 / AISI H13 Nitretado)  
+**Modelo Oficial Master:** `07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step` (Aço P20 / AISI H13 Nitretado)  
 **Versão SSOT:** `v27.0_MatrizJonatha_Approved_Master`  
 **Data:** 11 de Setembro de 2026
 
@@ -27,7 +27,8 @@ A simulação CFD comprovou que a **Matriz Jonatha** equalizou a distribuição 
 - **Material:** Composto Polimérico Elastomérico para Isolação Elétrica (EPR / XLPE / PVC Modificado).
 - **Vazão Volumétrica de Extrusão ($Q$):** $15,0\text{ cm}^3/\text{s}$ ($54,0\text{ kg/h}$).
 - **Temperatura Nominal de Processamento:** $190^\circ\text{C}$ ($463,15\text{ K}$).
-- **Densidade ($ho$):** $1,40\text{ g/cm}^3$
+- **Densidade ($
+ho$):** $1,40\text{ g/cm}^3$
 
 ### 2.2. Modelo Não-Newtoniano de Lei das Potências (Power-Law)
 Para a análise de perda de carga e perfil de velocidade na cavidade 3D:
@@ -100,4 +101,4 @@ Para manter a **Matriz Jonatha** operando na janela térmica ideal de $50^\circ\
 
 ## 6. Conclusão da Simulação
 
-A **Matriz Jonatha (`01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step`)** é a **solução definitiva e otimizada** para a fabricação da manta de isolação de Média Tensão. Seu canal de fluxo do tipo **Funil V Restrito na Entrada Cilíndrica ($arnothing 75,60\text{ mm}$)** garante distribuição perfeitamente uniforme do elastômero ($99,10\%$), elimina os rasgos de borda, reduz a contrapressão em **$74,6\%$** (de $268,7\text{ bar}$ para $68,2\text{ bar}$) em relação à Matriz 2 e preserva a integridade mecânica e dielétrica do cabo elétrico.
+A **Matriz Jonatha (`07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step`)** é a **solução definitiva e otimizada** para a fabricação da manta de isolação de Média Tensão. Seu canal de fluxo do tipo **Funil V Restrito na Entrada Cilíndrica ($arnothing 75,60\text{ mm}$)** garante distribuição perfeitamente uniforme do elastômero ($99,10\%$), elimina os rasgos de borda, reduz a contrapressão em **$74,6\%$** (de $268,7\text{ bar}$ para $68,2\text{ bar}$) em relação à Matriz 2 e preserva a integridade mecânica e dielétrica do cabo elétrico.

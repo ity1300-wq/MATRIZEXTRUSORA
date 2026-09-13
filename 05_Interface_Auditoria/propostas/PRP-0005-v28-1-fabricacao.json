@@ -1,0 +1,83 @@
+{
+  "protocolo": "1.0",
+  "id": "PRP-0005",
+  "titulo": "v28.1: fabricacao corrigida (pinos conjugados, canal em 1 solido), hidraulica idendica ao v27",
+  "autor": "IA engenheiro (tacada do cabecote EX-030, 2026-09-12)",
+  "data": "2026-09-12",
+  "tipo": "geometria",
+  "base_commit": "75b715382add55fe7a001e8ed20558d67e1b32d3",
+  "objetivo": "Fechar os quatro achados da auditoria que sao de fabricacao e nao de escoamento - G-01 (land declarado), G-03 (pinos so num corpo), G-05 (canal com 3 solidos) e a acao 8 do plano (numeros nao reproduzíveis) - sem tocar em nada que mude o fluxo: a secao da fenda, o envelope, a boca de entrada e o comprimento continuam os do master, entao a previsao desta proposta e que TODAS as metricas hidraulicas fiquem identicas ao baseline. O ganho e de usinagem e de montagem, nao de pressao. Inclui a reconstrucao da Matriz historica Gedeon a partir do backup do usuario (02_/matrizGedeonCerta.step), que era o bloco sem escavar: o par re-cortado com o canal proprio da Gedeon sai com 1 casca por solido, 0,000000 mm3 de sobreposicao e 0,0000 mm3 contra o cabecote, e difere da Jonatha em 155,1 mm3 de canal e 44,9 mm3 de aco (medido nos dois sentidos, nao e a mesma peca).",
+  "arquivos": [
+    {
+      "caminho": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28.step",
+      "sha256": "2d7b49eaea6b098e136bc35716bd801b1845c9fd319737926cd5c355d97fe08e",
+      "operacao": "proposta em paralelo ao master: NAO substitui MatrizJonatha.step (regra 1 do projeto e item 6 do protocolo)"
+    },
+    {
+      "caminho": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Body_A.step",
+      "sha256": "a444def7035389d55238c8ca986489b77b1ac8a71227938d4970b529e9b75c48",
+      "operacao": "entregue - os 4 furos de pino abertos no plano de particao e cegos sob o fundo"
+    },
+    {
+      "caminho": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Body_B.step",
+      "sha256": "44d9ce04b66d7b415c8572281936f8e7577113e056b05da422cf3d5bcd0d57af",
+      "operacao": "entregue - os 4 furos conjugados que o v27 nao tinha (G-03)"
+    },
+    {
+      "caminho": "01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28_Canal_Fluxo.step",
+      "sha256": "ed54361528fbeb814b67fd3e0561ea1894cec5c9d178671c4dfeb5d79ed5a18b",
+      "operacao": "entregue - 1 solido so, util como eletrodo de EDM e como malha de CFD (G-05)"
+    },
+    {
+      "caminho": "04_Dados_SSOT_e_Scripts/cad_die_parameters.json",
+      "sha256": "9d986705d36075e158ec1a95b4f57d4615e3d794fbb882405cd378cc1e12a9bf",
+      "operacao": "ZONA CONGELADA (§8) - declarado aqui porque o check 'SSOT alterado sem estar declarado' existe. Acrescimo: proposta_v28_dfm, fabricao_v28, decisoes_usuario, interface_cabecote, audit.tratamento_auditoria_v28_1, matriz_jonatha_parameters.land_paralelo_mm; e a mescla chave a chave com o main em audit.merge_main_2026_09_12. Nenhum numero de criterio foi alterado: os unicos valores trocados sao os que a MEDICAO produz (land paralelo 8,50 declarado no lugar de 'pendente'). O re-selo nao foi rodado por quem propoe - ver observacoes. | 2026-09-12 (2): triagem P5 REVOGADA por medida e achado 'Matriz historica Gedeon reconstruida' acrescentado - os dois sao texto/medicao, nenhum criterio de aceite foi tocado | (3) causa da diferenca Gedeon x Jonatha corrigida: chanfro de saida, nao funil"
+    },
+    {
+      "caminho": "04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py",
+      "sha256": "b47c743003b781c8932a7f3d119666f3f383fbb8e40b399c475fa8fe8a5e3154",
+      "operacao": "ZONA CONGELADA (§8) - declarado. A alteracao e de REDACAO do relatorio (secao 6 'Tratamento dos achados', lida do SSOT), nao de regua: nenhuma tolerancia, nenhum check, nenhum criterio de aceite foi tocado. Quem quiser conferir: git diff 75b7153 HEAD -- 04_Dados_SSOT_e_Scripts/verify_geometry_ssot.py"
+    }
+  ],
+  "parametros": {
+    "land_total_mm": 10.0,
+    "chanfro_mm": 1.5
+  },
+  "esperado": {
+    "land_util_mm": 8.5,
+    "parede_labio_mm": 0.75,
+    "dp_total_bar": 26.68,
+    "largura_fenda_mm": 75.0,
+    "espessura_fenda_mm": 1.5,
+    "raio_borda_mm": 0.75,
+    "area_fenda_mm2": 112.0171,
+    "boca_entrada_mm": 75.6,
+    "volume_canal_mm3": 213945.1
+  },
+  "nao_muda": [
+    "largura_fenda_mm",
+    "espessura_fenda_mm",
+    "raio_borda_mm",
+    "area_fenda_mm2",
+    "boca_entrada_mm",
+    "volume_canal_mm3",
+    "uniformidade_nucleo_pct",
+    "dp_total_bar",
+    "land_util_mm",
+    "parede_labio_mm",
+    "z_total_mm",
+    "diametro_externo_mm",
+    "interferencia_mm3"
+  ],
+  "justificativa": "O modelo parametrico do auditor (§5) so aceita land_total_mm e chanfro_mm, e os dois valores entregues sao os do proprio master (10,00 e 1,50). Logo a previsao e nula por construção: land_util = 10,0 - 1,5 = 8,50 mm; parede do labio = 2,25 - 1,50 = 0,75 mm; dp_total = 6,73 + 2,187 x 8,50 + 0,907 x 1,50 = 26,68 bar - o numero do v27 medido, conferido em 0,6 % pelo CFD 2D do repositorio (gradiente 2,1761 bar/mm) e batendo com o integrador 1D do STEP (tau 163,8 kPa contra 160,9 kPa do 2D, 1,8 %). A mudanca real esta fora do modelo: (i) os furos de pino foram abertos nos DOIS corpos, abertos no plano de particao e cegos sob o fundo, com parede minima medida de 2,391 a 2,483 mm ate o canal e intersecao com o canal de 0,000000 mm3 - o pino passa a atravessar a biparticao, como a Matriz 2 fazia; (ii) o arquivo do canal virou 1 solido (213.945,1 mm3) em vez de 3; (iii) o SSOT passou a declarar land_paralelo_real_mm = 8,50 com a causa escrita, que e o que fecha G-01 sem mexer em aco. Nada disso altera a secao por onde o polimero passa, e e isso que 'nao_muda' cobra.",
+  "riscos": [
+    "A triagem que originou parte deste trabalho continha um erro meu, e ele esta revogado no proposito: a P5 dizia que MatrizGedeon_Canal_Fluxo.step era o canal errado (213.790,0 contra 43.017,9). Medido com o backup na mao, 213.790,0 = funil (43.017,9) + cavidade cortada nas metades (170.753,7), sobra 19,095 mm3 = 0,009 %. O canal da Gedeon sempre esteve certo; o que estava errado era o Body_A (3 cascas, bolso selado) e o Body_B (sem bolho). Quem conferir a triagem antiga vai encontrar a P5 marcada como REVOGADA com a medição ao lado - nao apaguei o erro, escrevi por cima dele.",
+    "Lamina do labio em 0,75 mm mantida por decisao explicita do usuario (D2): o lascamento na limpeza e no rebarbamento continua sendo o preco aceito, e a instrucao de fabricacao ('sem rebarba', ±0,05) e o unico controle sobre isso.",
+    "O acesso axial dos cartuchos/termopares NO CABECOTE EX-030 esta em nao conforme medido: folga -2,750 mm, 2.744,550 mm3 de metal no caminho de insercao; sai com o nariz em Z >= 99,75 mm. Esta fora do escopo desta proposta (e do corpo do cabeçote, nao da matriz), mas e o unico NC vivo do projeto e fica declarado aqui para nao aparecer como silencio.",
+    "A superficie de aperto do collete EX-031 nao esta confirmada: o furo Ø90,00 reto medido no DXF nao desce sobre a banda Ø93 da matriz (faltam 1,50 mm de raio), entao a pressao de 8,58 MPa que fecha a biparticao e condicional.",
+    "Esta tacada alterou dois arquivos da zona congelada (§8). O veredito deve sair BLOQUEADO no check I4 enquanto o responsavel nao re-selar - e assim que o protocolo quer que seja: quem propoe nao re-afrouxa a propria regua. O re-selo e um ato humano (--atualizar-hashes), nao uma correcao de proposta.",
+    "A medida do auditor (medir()) roda sobre os STEP oficiais: as metricas aqui previstas valem para o master v27 E para a v28.1 exatamente porque os dois compartilham fenda, envelope, boca e comprimento. Se o auditor quiser medir a v28.1 direto, o arquivo esta em 'arquivos' com o sha256; a bateria propria da proposta esta em 04_Dados_SSOT_e_Scripts/verificacao_v28.json (64 itens, 0 nao conformes)."
+  ],
+  "cfd_requerido": false,
+  "observacoes": "Declaracoes de transparencia, na ordem em que o protocolo pede. (1) Arquivos da zona congelada alterados por quem propoe: os dois listados em 'arquivos' com operacao comecando por 'ZONA CONGELADA'. Nada de criterio foi tocado; o re-selo nao foi rodado. (2) `02_CAD_Modelos_Historicos/` foi aberto SO para leitura (e dele que vem a Matriz 1 Copo e a Gedeon medidas nesta tacada); `01_/MatrizJonatha.step` nao foi escrito - os STEP novos tem sufixo _v28 e o master continua o aprovado. (3) O relatorio da auditoria tem agora uma secao 6 ('Tratamento dos achados'), gerada a partir deste SSOT, que responde item a item G-01 a G-06 e as acoes 6 e 8 do plano com numero medido e onde conferir; o portao do projeto (04_Dados_SSOT_e_Scripts/verificar_cadeia.py) compara o tau citado ali com verificacao_v28.json, entao a secao nao pode apodrecer do lado de la do SSOT. (4) Esta proposta e a r1: nao substitui nenhuma proposta anterior - PRP-0001 (chanfro 0,80) e PRP-0002 (chanfro 0,50) continuam com seus vereditos, e a decisao D2 do humano manteve o chanfro do master, que e o que este arquivo declara. (5) z_total_mm e interferencia_mm3 sairam de 'esperado' e entraram em 'nao_muda' depois da rodada previa do auditor (03_Relatorios_e_Documentacao/AUDITORIA_PREVIA_PRP-0005.md): como 'esperado' so aceita as metricas que o auditor sabe recalcular, las elas virariam 'nao_auditavel'; em 'nao_muda' ele mede contra o baseline (109,00 e 0,000) e um desvio vira BLOCKER. A proposta ainda nao foi auditada pelo Auditor, entao editar agora nao viola 'proposta auditada nao se edita'. (6) Segunda rodada de edicao na zona congelada: 04_/cad_die_parameters.json de novo (P5 revogada + achado novo da Gedeon), hash re-declarado acima. Os STEP consertados da Gedeon vivem em 06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/ (fora da zona protegida) e sao gerados por 04_/gerar_gedeon_corrigida.py, que entrou na cadeia do portao com dois pares documento x JSON - 02_/ continua intocado (o portao confere: '02_CAD_Modelos_Historicos/ intocada'). (7) Prancha comparativa entregue com a proposta: 06_CAD_Cabecote_EX-030/STEP/Gedeon_Corrigida/DESENHO_2D_GEDEON_CONSERTADA_X_JONATHA.pdf, gerada por `desenhar_gedeon_consertada.py` a partir das mesmas mediacoes, com as cinco faixas no mesmo escalonamento e os numeros gravados em `desenho_gedeon.json`. Nela se ve o que a medida ja dizia: faixas 2 e 3 com caixa externa identica (093,00 x Z 0,1..109,00, area de seccao 5.885,5 mm2 nas duas) e a diferenca para a v27 (5.883,5 mm2) localizada no anel de saida Z 107,50 -> 109,00 - o chanfro de 1,50 x 45 graus que a Jonatha tem e a Gedeon nao - e nao no funil. A frase 'funil ampliado' que eu havia escrito esta corrigida no relatorio, no check do portao e no SSOT."
+}

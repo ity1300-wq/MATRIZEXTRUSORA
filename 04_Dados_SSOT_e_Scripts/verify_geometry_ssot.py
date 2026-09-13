@@ -30,7 +30,7 @@ except ImportError as exc:  # pragma: no cover
     sys.exit(2)
 
 RAIZ = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DIR_CAD = os.path.join(RAIZ, "01_CAD_MatrizJonatha_Oficial")
+DIR_CAD = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL")
 DIR_DOC = os.path.join(RAIZ, "03_Relatorios_e_Documentacao")
 DIR_DADOS = os.path.join(RAIZ, "04_Dados_SSOT_e_Scripts")
 
@@ -393,6 +393,29 @@ def gerar_markdown(ssot, resultados):
         "*Relatório gerado automaticamente por `verify_geometry_ssot.py --md`.*",
         "",
     ]
+    # ------------------------------------------------------------------ 6. o que foi feito de cada achado
+    # Nao e texto solto: a tabela e lida de `cad_die_parameters.json:audit.tratamento_auditoria_v28_1`, entao
+    # o relatorio da auditoria e o SSOT nao podem divergir (o portao confere o numero de tau citado aqui).
+    try:  # lido do disco de novo: nao dependo do escopo de quem montou as checagens
+        _ssot = json.load(open(os.path.join(DIR_DADOS, "cad_die_parameters.json"), encoding="utf-8"))
+        _tr = _ssot["audit"]["tratamento_auditoria_v28_1"]
+        _tau = _ssot.get("proposta_v28_dfm", {}).get("numeros recalculados", {}).get("tau_parede_land_kPa")
+    except (OSError, KeyError):
+        _tr, _tau = {}, None
+    if _tr:
+        linhas += ["", f"## 6. Tratamento dos achados na proposta v28.1 ({_tr['data']})", "",
+                   _tr["para_quem_e"], "", "> " + _tr["regra_que_limita_o_tratamento"], "",
+                   "| Achado | Status | Tratamento, com o número medido | Onde conferir |",
+                   "| :--- | :--- | :--- | :--- |"]
+        for _k, _v in _tr["achados"].items():
+            linhas.append(f"| **{_k}** | {_v['status']} | {_v['tratamento']} "
+                          f"(medido hoje: {_v['numero_medido_hoje']}) | {_v['onde_confere']} |")
+        linhas += ["", "### O que continua aberto", ""]
+        linhas += [f"* {x}" for x in _tr["o_que_continua_aberto"]]
+        if _tau is not None:
+            linhas += ["", f"τ citado acima: **{f'{_tau:.1f}'.replace('.', ',')} kPa** - o mesmo número que está em "
+                           f"`verificacao_v28.json`; se um mudar sem o outro, o portão fecha.", ""]
+
     destino = os.path.join(DIR_DOC, "AUDITORIA_GEOMETRICA_MATRIZ_JONATHA.md")
     with open(destino, "w", encoding="utf-8") as f:
         f.write("\n".join(linhas))

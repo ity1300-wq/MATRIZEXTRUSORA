@@ -1,7 +1,7 @@
 # Simulação Reológica Numérica (CFD) - Matriz Jonatha
 
 **Documento:** Relatório Técnico de Simulação Reológica CFD  
-**Modelo Oficial Master:** `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step`  
+**Modelo Oficial Master:** `07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step`  
 **Versão SSOT:** `v27.0_MatrizJonatha_Approved_Master`  
 
 ---
