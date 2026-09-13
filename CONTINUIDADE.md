@@ -158,6 +158,9 @@ land 8,500 + chanfro 1,500 × 45°, lâmina 0,750, 3,586 kg, abertura da biparti
    `01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v28*`, que **não tem atalho** (a v28.1 mora em
    `07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/`). A proposta já foi auditada, então **não se edita**:
    quando a auditoria voltar nasce `PRP-0006` com os caminhos certos. Anotado aqui para não surpreender.
+   A branch `proposta/PRP-0005` ficou na estrutura anterior (com o aninhamento `M01..M06`) **de propósito**:
+   PR em revisão não se reescreve. Quem for olhar o diff da PR #3 veja os arquivos em
+   `07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/` na branch `continue`.
 4. PR #3 (nossa) sem comentário de estado no GitHub; PR #4 (`arena/01a096e3-...`, proposta PRP-0006 de outrem:
    land 10,00 mm com chanfro 0,80) está aberta e **não** foi avaliada por nós. O chanfro do master é 1,50 e
    assim fica até ele dizer o contrário.
