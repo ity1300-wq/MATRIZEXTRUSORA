@@ -183,6 +183,17 @@ land 8,500 + chanfro 1,500 × 45°, lâmina 0,750, 3,586 kg, abertura da biparti
 
 ## 8. Pendências abertas (com o que fecha cada uma)
 
+0. **Peça única da v27.0 (2026-09-13, fim de tarde).** `07_CAD_Matrizes/Matriz_Jonatha_v27_Peca_Unica/` com
+   `MatrizJonatha_v27_Peca_Unica.step` (1 sólido, 1 casca, 22 faces, BRepCheck limpo em 22 caras e 90 arestas),
+   o JSON das medidas, o README da pasta e a montagem `06_/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v27_Peca_Unica.step`.
+   É **variante derivada** — o master v27.0 bipartido continua o SSOT (sha256 `7f26c5c5ba238a12…` conferido no
+   fim da rodada). Números: canal idêntico (213.945,1 mm³), fenda no land idêntica (75,000 × 1,500 com R 0,75),
+   boca de entrada Ø 75,60, +351,9 mm³ de aço onde havia bolha selada de pino, linha de partição zerada (a
+   costura corria pelas duas bordas da manta: 372,8 mm de perímetro no plano Y = 0 e 759,5 mm² de contato
+   metal-metal) e **0,00 % da superfície do canal em sombra** — usinável pelas duas faces, sem junta. Recria com
+   `python3 04_Dados_SSOT_e_Scripts/gerar_matriz_v27_peca_unica.py`; relatório em `03_/MATRIZ_V27_PECA_UNICA.md`;
+   a auditoria de correlações já a conhece (sétima peça do índice — e por causa dela a C1 passou a cobrar a
+   fenda no land também de quem não tem `_Canal_Fluxo.step` na pasta, que antes dava falso "divergiu do SSOT").
 0. **Rodada de 2026-09-13 (auditoria de correlações + montagens com flange + reologia do mastique).** O que
    entrou e o que ela achou:
    * `04_/auditar_step_correlacoes.py` → `03_/AUDITORIA_CORRELACOES_STEP.md` + JSON: **64 STEP** abertos e

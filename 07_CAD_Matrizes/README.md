@@ -6,6 +6,7 @@ Regra da casa: **cada matriz tem a sua pasta**, com os arquivos dela dentro. Nem
 |---|---|---|
 | `Matriz_Jonatha_v27_OFICIAL/` | **a master do projeto** (SSOT v27.0), o que a fabrica usa | `MatrizJonatha.step`, `_Body_A`, `_Body_B`, `_Canal_Fluxo`, `_Com_Fluxo`, `_Explodida` |
 | `Matriz_Jonatha_v28_1_PROPOSTA/` | a variante DFM — **proposta, nao promovida** | os seis acima com `_v28_1`; `DESENHO_2D_V28.png` e derivado, fica no disco mas nao vai ao git |
+| `Matriz_Jonatha_v27_Peca_Unica/` | **variante de peça única da v27.0** (as duas metades juntas, sem pinos, sem cavidade selada) — **não é o master** | `MatrizJonatha_v27_Peca_Unica.step`, `peca_unica_v27.json` |
 | `Matriz_Gedeon_Certa/` | **a matriz do usuario**, entregue como esta, mais o que foi medido nela | `matrizGedeonCerta.step` (o arquivo dele, byte a byte), `MatrizGedeon_Certa_Body_A.step` e `_Body_B` (o par aberto no plano de particao), `MatrizGedeon_Certa_Explodida.step`, `DESENHO_2D_GEDEON_CERTA_X_JONATHA.pdf`, `desenho_gedeon.json` |
 | `Matriz_Gedeon_Entregue_HISTORICA/` | a Gedeon **antiga**, a que veio do CAD do cabecote | `MatrizGedeon.step`, `_Body_A`, `_Body_B`, `_Canal_Fluxo` |
 | `Matriz_Copo_HISTORICA/` | a matriz do desenho antigo (Copo) | `Matriz1_Original_Copo*.step` (4) |
