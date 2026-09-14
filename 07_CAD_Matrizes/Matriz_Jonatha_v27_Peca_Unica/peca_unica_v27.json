@@ -1,0 +1,346 @@
+{
+ "peca": "MatrizJonatha_v27_Peca_Unica",
+ "derivada_de": "07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step",
+ "sha256_do_master_inalterado": "7f26c5c5ba238a12667f2bdf974bc15f001c9103fd480ffb144eb2718e67e04e",
+ "volume_mm3": 469303.2488,
+ "massa_kg": 3.684,
+ "volume_master_mm3": 469001.6559,
+ "aco_ganho_ao_fechar_bolhas_mm3": 351.8584,
+ "bolhas_seladas_fechadas": 2,
+ "solidos": 1,
+ "topologia": {
+  "solido_valido": true,
+  "faces": 22,
+  "faces_invalidas": 0,
+  "arestas": 90,
+  "arestas_invalidas": 0,
+  "cascas": 1
+ },
+ "fenda": {
+  "z_do_plano_mm": 107.0,
+  "largura_mm": 75.0,
+  "espessura_mm": 1.5,
+  "raio_borda_mm": 0.75,
+  "area_mm2": 112.0171,
+  "desvio_vs_estadio_pct": -0.0,
+  "borda": "meia-lua (R = espessura/2)"
+ },
+ "boca_entrada_mm": 75.6,
+ "boca_entrada_master_mm": 75.6,
+ "estagios": [
+  [
+   93.0,
+   0.0,
+   69.9
+  ],
+  [
+   89.5,
+   69.9,
+   80.7
+  ],
+  [
+   79.5,
+   80.7,
+   109.0
+  ]
+ ],
+ "comprimento_mm": 109.0,
+ "faces": 22,
+ "vazio_canal_mm3": 213945.1,
+ "vazio_master_mm3": 213945.1,
+ "seccao_unica_no_land": {
+  "z_do_plano_mm": 107.0,
+  "largura_mm": 75.0,
+  "espessura_mm": 1.5,
+  "raio_borda_mm": 0.75,
+  "area_mm2": 112.0171,
+  "desvio_vs_estadio_pct": -0.0,
+  "borda": "meia-lua (R = espessura/2)"
+ },
+ "seccao_master_no_land": {
+  "z_do_plano_mm": 107.0,
+  "largura_mm": 75.0,
+  "espessura_mm": 1.5,
+  "raio_borda_mm": 0.75,
+  "area_mm2": 112.0171,
+  "desvio_vs_estadio_pct": -0.0,
+  "borda": "meia-lua (R = espessura/2)"
+ },
+ "seccao_unica_na_saida": {
+  "z_do_plano_mm": 108.99,
+  "largura_mm": 78.0,
+  "espessura_mm": 4.5,
+  "raio_borda_mm": 2.25,
+  "area_mm2": 346.6543,
+  "desvio_vs_estadio_pct": -0.0,
+  "borda": "meia-lua (R = espessura/2)"
+ },
+ "seccao_master_na_saida": {
+  "z_do_plano_mm": 108.99,
+  "largura_mm": 78.0,
+  "espessura_mm": 4.5,
+  "raio_borda_mm": 2.25,
+  "area_mm2": 346.6543,
+  "desvio_vs_estadio_pct": -0.0,
+  "borda": "meia-lua (R = espessura/2)"
+ },
+ "seccao_de_saida": {
+  "z_do_plano_mm": 108.99,
+  "largura_mm": 78.0,
+  "espessura_mm": 4.5,
+  "raio_borda_mm": 2.25,
+  "area_mm2": 346.6543,
+  "desvio_vs_estadio_pct": -0.0,
+  "borda": "meia-lua (R = espessura/2)"
+ },
+ "caras_do_canal": [
+  {
+   "tipo": "PLANE",
+   "area_mm2": 4488.8,
+   "centro": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "BSPLINE",
+   "area_mm2": 93.3,
+   "centro": [
+    37.45,
+    -0.38,
+    49.6
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "BSPLINE",
+   "area_mm2": 9183.7,
+   "centro": [
+    0.0,
+    -7.88,
+    43.93
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 0.0,
+   "alcanca": "entrada",
+   "amostras": 1
+  },
+  {
+   "tipo": "BSPLINE",
+   "area_mm2": 90.9,
+   "centro": [
+    -37.46,
+    -0.38,
+    49.6
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "BSPLINE",
+   "area_mm2": 90.3,
+   "centro": [
+    -37.46,
+    0.38,
+    49.6
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "BSPLINE",
+   "area_mm2": 9213.0,
+   "centro": [
+    0.08,
+    7.77,
+    43.85
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 0.0,
+   "alcanca": "entrada",
+   "amostras": 1
+  },
+  {
+   "tipo": "BSPLINE",
+   "area_mm2": 0.0,
+   "centro": [
+    37.8,
+    0.0,
+    0.21
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "BSPLINE",
+   "area_mm2": 53.7,
+   "centro": [
+    37.45,
+    0.19,
+    50.0
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "CYLINDER",
+   "area_mm2": 20.0,
+   "centro": [
+    36.85,
+    0.0,
+    103.25
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "PLANE",
+   "area_mm2": 624.8,
+   "centro": [
+    0.0,
+    -0.75,
+    103.25
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "CYLINDER",
+   "area_mm2": 20.0,
+   "centro": [
+    -36.85,
+    0.0,
+    103.25
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "PLANE",
+   "area_mm2": 624.8,
+   "centro": [
+    0.0,
+    0.75,
+    103.25
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "CONE",
+   "area_mm2": 10.0,
+   "centro": [
+    37.57,
+    -0.0,
+    108.51
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "PLANE",
+   "area_mm2": 155.9,
+   "centro": [
+    0.0,
+    -1.5,
+    108.25
+   ],
+   "visivel_pela_entrada_pct": 0.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "CONE",
+   "area_mm2": 10.0,
+   "centro": [
+    -37.57,
+    0.0,
+    108.51
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "PLANE",
+   "area_mm2": 155.9,
+   "centro": [
+    0.0,
+    1.5,
+    108.25
+   ],
+   "visivel_pela_entrada_pct": 0.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "saida",
+   "amostras": 1
+  },
+  {
+   "tipo": "PLANE",
+   "area_mm2": 346.7,
+   "centro": [
+    0.0,
+    0.0,
+    109.0
+   ],
+   "visivel_pela_entrada_pct": 100.0,
+   "visivel_pela_saida_pct": 100.0,
+   "alcanca": "entrada+saida",
+   "amostras": 1
+  }
+ ],
+ "caras_sem_acesso_reto": 0,
+ "sombra": {
+  "area_em_sombra_mm2": 0,
+  "area_total_do_canal_mm2": 25181.8,
+  "pct_em_sombra": 0.0,
+  "caras_em_sombra": []
+ },
+ "costura_da_particao": {
+  "area_de_contato_das_metades_mm2": 759.5,
+  "seccao_do_canal_no_plano_de_particao": {
+   "area_mm2": 8204.4,
+   "largura_x_mm": 78.0,
+   "altura_z_mm": 109.0
+  },
+  "perimetro_da_costura_mm": 372.8,
+  "linhas_de_costura_por_borda": 2
+ },
+ "arquivo": "07_CAD_Matrizes/Matriz_Jonatha_v27_Peca_Unica/MatrizJonatha_v27_Peca_Unica.step",
+ "sha256": "ffa6cc4baa6496c48e1f985f088e605c84588e24bb1f888fc106c37eaca15295",
+ "montagem": {
+  "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v27_Peca_Unica.step",
+  "solidos": 2,
+  "volume_somado_mm3": 2039642.736,
+  "interferencia_mm3": 0.0,
+  "face_de_saida_da_matriz_em_Z": 109.0,
+  "protusao_adem_da_face_do_nariz_mm": 14.0
+ }
+}

@@ -54,6 +54,7 @@ CONTATO = 0.02                      # mm: abaixo disso folga e contato
 TOL = {"largura": 0.05, "espessura": 0.02, "raio": 0.02, "boca": 0.10, "envelope": 0.05}
 # a peca "inteira" de cada pasta (o que vai para a fabrica), e a chave com que o resto do repo a chama
 PECAS = {"Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step": "jonatha_v27_oficial",
+         "Matriz_Jonatha_v27_Peca_Unica/MatrizJonatha_v27_Peca_Unica.step": "jonatha_v27_peca_unica",
          "Matriz_Jonatha_v28_1_PROPOSTA/MatrizJonatha_v28.step": "jonatha_v28_1_proposta",
          "Matriz_Gedeon_Certa/matrizGedeonCerta.step": "gedeon_certa_arquivo_do_usuario",
          "Matriz_Gedeon_Entregue_HISTORICA/MatrizGedeon.step": "gedeon_entregue_historica",
@@ -239,6 +240,24 @@ def boca_por_seccao(void, inv):
     return {"largura_mm": round(b.xmax - b.xmin, 3), "altura_mm": round(b.ymax - b.ymin, 3),
             "area_mm2": area, "Ø_equivalente_mm": round(2.0 * math.sqrt(area / math.pi), 3)}
 
+def seccao_no_land(void, inv, recuo=2.00):
+    """Secao do canal 2,00 mm antes da face de saida - no land paralelo, onde o contrato cobra
+    75,00 x 1,50. Sem esta funcao, a peca que nao tem `_Canal_Fluxo.step` na pasta era comparada pela seccao
+    da saida (78,00 x 4,50, aberta pelo chanfro 1,50 x 45) e dava falso "divergiu do SSOT"."""
+    r = _seccao(void, inv["caixa"]["z"][1] - recuo)
+    if r is None:
+        return None
+    b, area = r
+    w, t = b.xmax - b.xmin, b.ymax - b.ymin
+    estadio = (w - t) * t + math.pi * t * t / 4.0
+    borda = ("meia-lua (R = espessura/2)" if abs(area - estadio) / estadio < 0.01 else
+             ("canto vivo (retangular)" if abs(area - w * t) / (w * t) < 0.01 else "outra"))
+    return {"fonte": "seccao do vazio medido", "z_do_plano_mm": round(inv["caixa"]["z"][1] - recuo, 3),
+            "largura_mm": round(w, 3), "espessura_mm": round(t, 3), "area_mm2": area, "borda": borda,
+            "raio_borda_mm": round(t / 2.0, 3) if borda.startswith("meia-lua") else None,
+            "desvio_area_vs_estadio_pct": round(100.0 * (area - estadio) / estadio, 3)}
+
+
 def boca_entrada(inv):
     """Ø da abertura no plano de entrada (Z minimo da peca)."""
     z0 = inv["caixa"]["z"][0]
@@ -311,8 +330,8 @@ def c6_atalhos():
 
 
 # ------------------------------------------------------------------- C1 cotas medidas x SSOT
-CONTRATO = ("jonatha_v27_oficial", "jonatha_v28_1_proposta", "gedeon_certa_arquivo_do_usuario",
-            "gedeon_entregue_historica")
+CONTRATO = ("jonatha_v27_oficial", "jonatha_v27_peca_unica", "jonatha_v28_1_proposta",
+            "gedeon_certa_arquivo_do_usuario", "gedeon_entregue_historica")
 
 
 def cobra_(chave, div, quebra):
@@ -621,13 +640,17 @@ def main():
             pasta, base = os.path.dirname(p), os.path.basename(p)[:-5]
             sc = seccoes_do_canal(pasta, base, inv) or {}
             inv["_seccao_canal_saida"], inv["_seccao_canal_land"] = sc.get("na_saida"), sc.get("no_land")
+            if not inv["_seccao_canal_land"] and inv.get("_vazio_solido") is not None:
+                inv["_seccao_canal_land"] = seccao_no_land(inv["_vazio_solido"], inv)
+                inv["_seccao_canal_saida"] = inv["_seccao_canal_saida"] or fenda_na_saida(
+                    inv["_vazio_solido"], inv)
         if corpo and not a.so_cotas:
             inv["_fenda_saida"] = fenda_na_saida(inv.get("_vazio_solido"), inv)
         todos.append(inv)
         if corpo:
             principais.append((corpo, rel, inv))
     print("    %d arquivos medidos, %d pecas inteiras nas seis pastas" % (len(todos), len(principais)))
-    cobra(len(principais) == len(PECAS), "C0 as seis pecas inteiras foram encontradas",
+    cobra(len(principais) == len(PECAS), "C0 todas as %d pecas inteiras do indice foram encontradas" % len(PECAS),
           "%d de %d" % (len(principais), len(PECAS)))
 
     med = {"gerado_em": "2026-09-13", "arquivos_conferidos": len(todos),
