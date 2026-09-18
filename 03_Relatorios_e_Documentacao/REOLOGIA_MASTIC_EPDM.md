@@ -6,9 +6,9 @@ Você definiu o material (*"mastic resistivo não linear a base de EPDM"*) e man
 
 | nível | K (Pa·sⁿ) | n | η(0,1 s⁻¹) | η(10 s⁻¹) | η(100 s⁻¹) | η(1000 s⁻¹) (Pa·s) | o que representa |
 |---|---|---|---|---|---|---|---|
-| `otimista` | 694536 | 0.30 | 3480923.0 | 694535.5 | 138578.0 | 5516.9 | banda baixa: o minimo que um mastique resistivo plausivel precisa |
-| `tipico` | 1852094 | 0.30 | 9282461.4 | 1852094.5 | 369541.4 | 14711.7 | centro da faixa: o que a literatura de composto EPDM/carvao pede em 10^2 1/s |
-| `pessimista` | 4630236 | 0.30 | 23206153.5 | 4630236.4 | 923853.6 | 36779.3 | banda alta: mastique frio e muito carregado - o cenario em que nada passa pela fenda |
+| `otimista` | 37678 | 0.30 | 188838.8 | 37678.3 | 7517.8 | 299.3 | banda baixa: mastique quente e bem plastificado - o minimo plausivel para um resistivo |
+| `tipico` | 125594 | 0.30 | 629462.7 | 125594.3 | 25059.4 | 997.6 | centro da faixa: o que a literatura de composto EPDM + negro de fumo pede em 10^2 1/s |
+| `pessimista` | 376783 | 0.30 | 1888388.1 | 376783.0 | 75178.1 | 2992.9 | banda alta: mastique frio e muito carregado - o cenario em que nada passa pela fenda |
 
 Ponto de partida: o SSOT traz K = 18500 Pa·s^0.32 a 190 °C (EPR/XLPE/PVC modificado). Deslocado para 90 °C com a Ea/R do próprio SSOT, dá K = 231512; os três níveis acima são 3×, 8× e 20× esse valor — que é a ordem de grandeza entre um masterbatch e um mastique resistivo muito carregado.
 

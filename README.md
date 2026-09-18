@@ -2,7 +2,22 @@
 
 ![Status](https://img.shields.io/badge/Status-Modelo%20Master%20Aprovado-success)
 ![Revisão proposta](https://img.shields.io/badge/DFM-v28.1_Proposta_Verificada-orange)
-![Versão SSOT](https://img.shields.io/badge/SSOT-v27.0_Master-blue)
+![Versão SSOT](https://img.shields.io/badge/SSOT-v29.0_Mestre-blue)
+
+## ✅ O modelo oficial agora é a **v29.0 — peça única** (2026-09-13)
+
+> Decisão do dono: *"a peça única vira a oficial, também quero todos os materiais e informações para deixar ela
+> pronta para usinagem"*.
+
+| | |
+|---|---|
+| **peça** | `07_CAD_Matrizes/Matriz_Jonatha_v29_OFICIAL/MATRIZ_V29_PECA_UNICA.step` (sha256 `ffa6cc4baa6496c4…`), atalho em `01_CAD_MatrizJonatha_Oficial/MatrizJonatha_v29_PECA_UNICA.step` |
+| **o que é** | a v27.0 com as duas metades unidas em **um sólido**: 22 faces, 1 casca, 469.303,2 mm³ de aço (3,6840 kg), canal de 213.945,1 mm³ **idêntico ao master**, 0,00 % de sombra no canal |
+| **o que NÃO mudou** | nenhum byte dos arquivos selados: `07_/Matriz_Jonatha_v27_OFICIAL/` e `01_/MatrizJonatha.step` seguem como estavam (o portão confere o sha256 contra o baseline do auditor) — a promoção é declarada aqui, no SSOT (`matriz_oficial`) e no índice de `07_/`, não escrita por cima do histórico |
+| **para a fábrica** | `08_Pacote_Usinagem_v29/` — ficha de fábrica, material e tratamento, sequência de usinagem, tabela de tolerâncias e inspeção, RFQ pronto, prancha 2D cotada, os 3 STEP e `CHECKSUMS_SHA256.txt` |
+| **geração** | `python3 04_Dados_SSOT_e_Scripts/gerar_pacote_usinagem_v29.py` — toda cota do pacote é medida no STEP, nada digitado |
+| **por que 109 mm e não 100** | `03_Relatorios_e_Documentacao/SIMULACAO_ROTAS_E_COMPRIMENTO.md`: encurtar a peça não mexe no funil nem no land (as cotas que geram pressão) e encurta a rota de fuga pelo anel — a fração que escapa para trás sobe de 0,067 % para 0,071 % |
+
 ![Formato CAD](https://img.shields.io/badge/Formato-STEP%20AP214-orange)
 ![Linguagem](https://img.shields.io/badge/Python-CadQuery%202.0-green)
 

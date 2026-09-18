@@ -44,7 +44,11 @@ EA_R = P["carreau_yasuda"]["Ea_over_R_K"]
 N_MASTIC = 0.30                       # faixa de 0,25-0,40 para composto de EPDM com negro de fumo; usamos o
                                        # mesmo expoente da família (o repo já tinha 0,32) e arredondamos para
                                        # baixo: composto de mastique é mais cisalhante que o masterbatch
-FATOR_VISCOSIDADE = {"otimista": 3.0, "tipico": 8.0, "pessimista": 20.0}
+# Ancora por VISCOSIDADE APARENTE em 100 1/s (o regime do land), nao por fator sobre o K do termoplastico:
+# deslocar o K de 190 C para 90 C por Arrhenius ja da 12,5x e depois multiplicar por 8 e double-count - dava
+# 820 MPa de dP na matriz, pressao que nenhuma linha de borracha tem. Ordem de grandeza de composto de EPDM
+# carregado e nao vulcanizado, em ~100 C: 10^3-10^4 Pa.s em 10^2 1/s (capilar/RPA).
+ETA100_PA_S = {"otimista": 1500.0, "tipico": 5000.0, "pessimista": 15000.0}
 T_LINHA = 90.0                        # °C: cabeçote de extrusora de borracha (70 °C na matriz + 9-17 °C de
                                        # aquecimento viscoso medido no artigo; o nosso cabeçote é EX-030)
 TAU_SHARKSKIN_MPA = 0.14              # limiar de raspado superficial na saída (Vlachopoulos)
@@ -76,8 +80,9 @@ def main():
 
     K_na_linha = desloca_com_temperatura(K_ATUAL, T_ATUAL, T_LINHA)     # o nosso proprio K, levado a 90 C
     curvas = {}
-    for nome, fator in FATOR_VISCOSIDADE.items():
-        K = K_na_linha * fator
+    for nome, eta100 in ETA100_PA_S.items():
+        fator = eta100 / 5000.0
+        K = eta100 * 100.0 ** (1.0 - N_MASTIC)   # K = eta * gama^(1-n) no ponto de ancora
         n = N_MASTIC
         eta0 = K * (1.0 / 0.02) ** (1.0 - n)          # eta0 lido em gama_dot = 0,02 1/s (plateau baixo)
         curvas[nome] = {
@@ -85,10 +90,12 @@ def main():
             "viscosidade_aparente_Pa_s": {str(g): round(eta_power_law(K, n, g), 1)
                                           for g in (0.1, 1.0, 10.0, 100.0, 1000.0)},
             "eta0_Pa_s": round(eta0, 0),
-            "lambda_s": round(0.85 * (8.0 / fator), 3),   # o tempo de relaxacao encolhe quando o material
-                                                           # e mais carregado (mesma familia, outro fill)
-            "uso": ("banda baixa: o minimo que um mastique resistivo plausivel precisa" if nome == "otimista" else
-                    ("centro da faixa: o que a literatura de composto EPDM/carvao pede em 10^2 1/s"
+            "lambda_s": round(0.85 * (5000.0 / eta100) ** 0.5, 3),   # tempo de relaxacao encolhe com o teor
+                                                                      # de carga: mesmo family, outro fill
+            "ancora_Pa_s_em_100_1_s": eta100,
+            "uso": ("banda baixa: mastique quente e bem plastificado - o minimo plausivel para um resistivo"
+                    if nome == "otimista" else
+                    ("centro da faixa: o que a literatura de composto EPDM + negro de fumo pede em 10^2 1/s"
                      if nome == "tipico" else
                      "banda alta: mastique frio e muito carregado - o cenario em que nada passa pela fenda")),
         }
@@ -103,7 +110,7 @@ def main():
         "temperatura_atual_do_SSOT_C": T_ATUAL,
         "reologia_atual_do_SSOT": {"K_Pa_s_n": K_ATUAL, "n": N_ATUAL,
                                    "deslocada_para_a_linha": round(K_na_linha, 1)},
-        "K_na_temperatura_da_linha_Pa_s_n": round(K_na_linha, 1),
+        "K_na_temperatura_da_linha_Pa_s_n": round(K_na_linha, 1),         "por_que_nao_usar_o_K_deslocado": "o K deslocado por Arrhenius e do master de termoplastico, nao do  mastique: ele so aparece aqui como referencia de ordem de grandeza. A ancora que a simulação usa e a viscosida  de aparente em 100 1/s (ETA100_PA_S), que e como se mede composto de borracha em capilar.",
         "curvas": curvas,
         "limite_de_raspado_na_saida_MPa": TAU_SHARKSKIN_MPA,
         "limite_de_escorregamento_na_parede_MPa": TAU_ESCORREGAMENTO_MPA,

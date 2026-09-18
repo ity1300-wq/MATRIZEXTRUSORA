@@ -5,23 +5,44 @@ com acesso a este repositório consegue continuar exatamente de onde paramos len
 dos commits. Nada de decisão vive só no chat: o que vale está aqui, nos relatórios de
 `03_Relatorios_e_Documentacao/` e nos JSON de `04_Dados_SSOT_e_Scripts/`.
 
-Atualizado em **2026-09-13**, no commit da reorganização #2 (uma pasta por matriz + apagamento da Gedeon
-"corrigida").
+Atualizado em **2026-09-13 (fim do dia)**, na rodada que promoveu a peça única a v29.0 e montou o pacote
+de usinagem `08_Pacote_Usinagem_v29/`.
 
 ---
 
 ## 1. Estado em uma frase
 
-A **Matriz Jonatha v27.0** continua sendo o modelo oficial da fábrica; a variante **v28.1** está verificada
-mas **não promovida** (espera aprovação explícita do dono); a **Gedeon certa é o arquivo do usuário
-entregue como está**, medido face por face; e a auditoria está **pausada por ordem dele**
-("`ignore auditoria agora`") até geometria e repo estarem do agrado dele.
+A **Matriz Jonatha v29.0 (peça única)** é o modelo oficial desde 2026-09-13 e tem **pasta de fábrica pronta**
+(`08_Pacote_Usinagem_v29/`); a v27.0 bipartida continua no disco byte a byte (baseline selado, portão
+verificando), a variante **v28.1** está verificada mas **não promovida**; a **Gedeon certa é o arquivo do
+usuário entregue como está**, medido face por face; a auditoria de correlações roda e acusa 1 divergência
+conhecida (a cara PLANE degenerada do `MatrizJonatha_v28_Body_B.step`, centro [37,02; 0,56; 99,00]) e está
+com o veredito **pausado por ordem dele** ("`ignore auditoria agora`").
+
+**Rodada 2026-09-13 (fim do dia) — promoção, pacote de usinagem e a pergunta do comprimento.**
+* **Promoção:** `gerar_pacote_usinagem_v29.py` copia os três STEP (peça única, canal, montagem no cabeçote) para
+  `07_/Matriz_Jonatha_v29_OFICIAL/` e `08_/3D/`, cria o atalho `01_/MatrizJonatha_v29_PECA_UNICA.step`, declara
+  `matriz_oficial` + `decisoes_usuario.D9` + `usinagem_v29` no SSOT e atualiza os índices. Nada do histórico foi
+  reescrito — `verificar_cadeia.py` confirma o sha256 do master v27.0 (`7f26c5c5ba238a12…`) a cada rodada.
+* **Pacote:** 6 documentos + prancha 2D cotada (PDF e PNG, desenhada a partir das seções medidas no STEP) +
+  JSON + checksums, com as cotas críticas: Ø89,50 e Ø79,50 em 0/−0,02 (fecham o anel de 0,25 mm), fenda
+  1,500 +0,010/−0,000 medida em Z = saída − 2,00, área da seção do canal 112,0171 mm² ±0,5 % como critério de
+  rejeição, 1.2344 (H13) a 50-52 HRC, sem revestimento, e a proibição expressa de furo/flange/pino.
+* **109 × 100:** respondido com conta (não com opinião) em `03_/SIMULACAO_ROTAS_E_COMPRIMENTO.md` — gera por
+  `simular_rotas_e_comprimento.py`, que mede o **land paralelo** de cada matriz no STEP: Gedeon CERTA 88,50 mm
+  (ΔP 963 bar, 9,14 % escapando pelo anel) contra 8,50 mm da Jonatha (ΔP 220 bar, 0,067 %). Encurtar a peça não
+  muda o ΔP e piora a fuga; as alavancas são o land e a folga do anel.
+* **Reologia:** a âncora passou de "fator sobre o K do termoplastico" (dava 820 MPa de ΔP, absurdo) para
+  **η(100 s⁻¹) = 1.500 / 5.000 / 15.000 Pa·s**, com o motivo escrito no JSON.
+* **Ambiente:** o sandbox foi recriado no meio da rodada e levou os atalhos e os pacotes pip de novo —
+  `bash 04_Dados_SSOT_e_Scripts/restaurar_workspace.sh` refez os 6 pontos, e o portão continuou verde.
 
 ## 2. O que está entregue agora
 
 | peça | onde | estado |
 |---|---|---|
-| Matriz Jonatha v27.0 (master) | `07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/` | intocada; `01_CAD_MatrizJonatha_Oficial/` são 6 atalhos para cá; o sha256 do master bate o baseline do auditor |
+| **Matriz Jonatha v29.0 (peça única, OFICIAL)** | `07_CAD_Matrizes/Matriz_Jonatha_v29_OFICIAL/` + `08_Pacote_Usinagem_v29/` | **é o que vai para a fábrica**; gerado por `gerar_pacote_usinagem_v29.py` |
+| Matriz Jonatha v27.0 (master anterior) | `07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/` | intocada; `01_CAD_MatrizJonatha_Oficial/` são 6 atalhos para cá; o sha256 do master bate o baseline do auditor |
 | Matriz Jonatha v28.1 (proposta DFM) | `07_CAD_Matrizes/Matriz_Jonatha_v28_1_PROPOSTA/` | 64/64 conformes em `verificar_v28.py`; **aguarda aprovação**; PR #3 aberta |
 | **Gedeon CERTA (o arquivo do usuário)** | `07_CAD_Matrizes/Matriz_Gedeon_Certa/` + atalho `02_CAD_Modelos_Historicos/matrizGedeonCerta.step` | entregue **como veio**, sem perder aço; o par aberto no plano de partição resolve o único defeito (furos de pino selados) |
 | Gedeon entregue (histórica) | `07_CAD_Matrizes/Matriz_Gedeon_Entregue_HISTORICA/` | histórico, só serve de contraste |
