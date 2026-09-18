@@ -1,0 +1,585 @@
+{
+ "vazao_mm3_s": 15000.0,
+ "fluido": {
+  "otimista": {
+   "K": 37678.3,
+   "n": 0.3,
+   "ancora": 1500.0
+  },
+  "tipico": {
+   "K": 125594.3,
+   "n": 0.3,
+   "ancora": 5000.0
+  },
+  "pessimista": {
+   "K": 376783.0,
+   "n": 0.3,
+   "ancora": 15000.0
+  }
+ },
+ "janela_da_linha_MPa": {
+  "dP_na_matriz": [
+   2.1,
+   9.4
+  ],
+  "vazao_g_min": [
+   41.0,
+   128.0
+  ],
+  "leitura": "fora dessa janela a linha não é mais a linha do artigo; dP acima do topo significa que o material procura outra saída — e no nosso conjunto só existe uma: o anel entre a matriz e o furo do cabeçote, para trás"
+ },
+ "tau_raspado_MPa": 0.14,
+ "geometria": {
+  "Copo (original)": {
+   "comprimento_peca_mm": 80.7,
+   "area_saida_mm2": 112.017,
+   "area_no_land_mm2": 112.017,
+   "land_paralelo_medido_mm": 9.75,
+   "z_onde_o_land_comeca": 80.69,
+   "arquivo": "07_CAD_Matrizes/Matriz_Copo_HISTORICA/Matriz1_Original_Copo.step"
+  },
+  "Gedeon CERTA (a sua)": {
+   "comprimento_peca_mm": 109.0,
+   "area_saida_mm2": 112.017,
+   "area_no_land_mm2": 112.017,
+   "land_paralelo_medido_mm": 88.5,
+   "z_onde_o_land_comeca": 108.99,
+   "arquivo": "07_CAD_Matrizes/Matriz_Gedeon_Certa/matrizGedeonCerta.step"
+  },
+  "Jonatha v27.0 (bipartida)": {
+   "comprimento_peca_mm": 109.0,
+   "area_saida_mm2": 346.654,
+   "area_no_land_mm2": 112.017,
+   "land_paralelo_medido_mm": 8.5,
+   "z_onde_o_land_comeca": 107.49,
+   "arquivo": "07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha.step"
+  },
+  "Jonatha v29.0 (peça única)": {
+   "comprimento_peca_mm": 109.0,
+   "area_saida_mm2": 346.654,
+   "area_no_land_mm2": 112.017,
+   "land_paralelo_medido_mm": 8.5,
+   "z_onde_o_land_comeca": 107.49,
+   "arquivo": "07_CAD_Matrizes/Matriz_Jonatha_v29_OFICIAL/MATRIZ_V29_PECA_UNICA.step"
+  }
+ },
+ "cenarios": {
+  "Copo (original) | como esta": {
+   "otimista": {
+    "dp_bar": 63.4,
+    "trechos_bar": {
+     "funil": 24.01,
+     "transicao": 3.67,
+     "land": 30.98,
+     "saida": 4.71
+    },
+    "land_mm": 9.75,
+    "pct_pelo_anel": 1.327,
+    "q_saida_mm3_s": 14800.9,
+    "v_saida_m_min": 7.89,
+    "tau_land_MPa": 0.238,
+    "q_pelo_anel_mm3_s": 199.1
+   },
+   "tipico": {
+    "dp_bar": 211.2,
+    "trechos_bar": {
+     "funil": 80.04,
+     "transicao": 12.23,
+     "land": 103.26,
+     "saida": 15.7
+    },
+    "land_mm": 9.75,
+    "pct_pelo_anel": 1.327,
+    "q_saida_mm3_s": 14800.9,
+    "v_saida_m_min": 7.89,
+    "tau_land_MPa": 0.794,
+    "q_pelo_anel_mm3_s": 199.1
+   },
+   "pessimista": {
+    "dp_bar": 633.7,
+    "trechos_bar": {
+     "funil": 240.12,
+     "transicao": 36.68,
+     "land": 309.78,
+     "saida": 47.1
+    },
+    "land_mm": 9.75,
+    "pct_pelo_anel": 1.327,
+    "q_saida_mm3_s": 14800.9,
+    "v_saida_m_min": 7.89,
+    "tau_land_MPa": 2.383,
+    "q_pelo_anel_mm3_s": 199.1
+   }
+  },
+  "Gedeon CERTA (a sua) | como esta": {
+   "otimista": {
+    "dp_bar": 288.9,
+    "trechos_bar": {
+     "funil": 6.41,
+     "transicao": 3.58,
+     "land": 274.31,
+     "saida": 4.59
+    },
+    "land_mm": 88.5,
+    "pct_pelo_anel": 9.14,
+    "q_saida_mm3_s": 13629.0,
+    "v_saida_m_min": 7.27,
+    "tau_land_MPa": 0.232,
+    "q_pelo_anel_mm3_s": 1371.0
+   },
+   "tipico": {
+    "dp_bar": 963.0,
+    "trechos_bar": {
+     "funil": 21.36,
+     "transicao": 11.93,
+     "land": 914.36,
+     "saida": 15.32
+    },
+    "land_mm": 88.5,
+    "pct_pelo_anel": 9.14,
+    "q_saida_mm3_s": 13629.0,
+    "v_saida_m_min": 7.27,
+    "tau_land_MPa": 0.775,
+    "q_pelo_anel_mm3_s": 1371.0
+   },
+   "pessimista": {
+    "dp_bar": 2888.9,
+    "trechos_bar": {
+     "funil": 64.08,
+     "transicao": 35.79,
+     "land": 2743.09,
+     "saida": 45.95
+    },
+    "land_mm": 88.5,
+    "pct_pelo_anel": 9.14,
+    "q_saida_mm3_s": 13629.0,
+    "v_saida_m_min": 7.27,
+    "tau_land_MPa": 2.325,
+    "q_pelo_anel_mm3_s": 1371.0
+   }
+  },
+  "Jonatha v27.0 (bipartida) | como esta": {
+   "otimista": {
+    "dp_bar": 66.0,
+    "trechos_bar": {
+     "funil": 34.36,
+     "transicao": 3.68,
+     "land": 27.11,
+     "saida": 0.82
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.067,
+    "q_saida_mm3_s": 14990.0,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 0.239,
+    "q_pelo_anel_mm3_s": 10.0
+   },
+   "tipico": {
+    "dp_bar": 219.9,
+    "trechos_bar": {
+     "funil": 114.53,
+     "transicao": 12.27,
+     "land": 90.36,
+     "saida": 2.72
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.067,
+    "q_saida_mm3_s": 14990.0,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 10.0
+   },
+   "pessimista": {
+    "dp_bar": 659.7,
+    "trechos_bar": {
+     "funil": 343.59,
+     "transicao": 36.82,
+     "land": 271.09,
+     "saida": 8.15
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.067,
+    "q_saida_mm3_s": 14990.0,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 2.392,
+    "q_pelo_anel_mm3_s": 10.0
+   }
+  },
+  "Jonatha v29.0 (peça única) | como esta": {
+   "otimista": {
+    "dp_bar": 66.0,
+    "trechos_bar": {
+     "funil": 34.36,
+     "transicao": 3.68,
+     "land": 27.11,
+     "saida": 0.82
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.067,
+    "q_saida_mm3_s": 14990.0,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 0.239,
+    "q_pelo_anel_mm3_s": 10.0
+   },
+   "tipico": {
+    "dp_bar": 219.9,
+    "trechos_bar": {
+     "funil": 114.53,
+     "transicao": 12.27,
+     "land": 90.36,
+     "saida": 2.72
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.067,
+    "q_saida_mm3_s": 14990.0,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 10.0
+   },
+   "pessimista": {
+    "dp_bar": 659.7,
+    "trechos_bar": {
+     "funil": 343.59,
+     "transicao": 36.82,
+     "land": 271.09,
+     "saida": 8.15
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.067,
+    "q_saida_mm3_s": 14990.0,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 2.392,
+    "q_pelo_anel_mm3_s": 10.0
+   }
+  },
+  "Jonatha v29.0 (peça única) | 109 mm (como está)": {
+   "otimista": {
+    "dp_bar": 66.0,
+    "trechos_bar": {
+     "funil": 34.36,
+     "transicao": 3.68,
+     "land": 27.11,
+     "saida": 0.82
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.067,
+    "q_saida_mm3_s": 14990.0,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 0.239,
+    "q_pelo_anel_mm3_s": 10.0
+   },
+   "tipico": {
+    "dp_bar": 219.9,
+    "trechos_bar": {
+     "funil": 114.53,
+     "transicao": 12.27,
+     "land": 90.36,
+     "saida": 2.72
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.067,
+    "q_saida_mm3_s": 14990.0,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 10.0
+   },
+   "pessimista": {
+    "dp_bar": 659.7,
+    "trechos_bar": {
+     "funil": 343.59,
+     "transicao": 36.82,
+     "land": 271.09,
+     "saida": 8.15
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.067,
+    "q_saida_mm3_s": 14990.0,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 2.392,
+    "q_pelo_anel_mm3_s": 10.0
+   }
+  },
+  "Jonatha v29.0 (peça única) | 100 mm (encurtar a peça)": {
+   "otimista": {
+    "dp_bar": 66.0,
+    "trechos_bar": {
+     "funil": 34.36,
+     "transicao": 3.68,
+     "land": 27.11,
+     "saida": 0.82
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.071,
+    "q_saida_mm3_s": 14989.3,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 0.239,
+    "q_pelo_anel_mm3_s": 10.7
+   },
+   "tipico": {
+    "dp_bar": 219.9,
+    "trechos_bar": {
+     "funil": 114.53,
+     "transicao": 12.27,
+     "land": 90.36,
+     "saida": 2.72
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.071,
+    "q_saida_mm3_s": 14989.3,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 10.7
+   },
+   "pessimista": {
+    "dp_bar": 659.6,
+    "trechos_bar": {
+     "funil": 343.58,
+     "transicao": 36.82,
+     "land": 271.09,
+     "saida": 8.15
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.071,
+    "q_saida_mm3_s": 14989.3,
+    "v_saida_m_min": 7.99,
+    "tau_land_MPa": 2.392,
+    "q_pelo_anel_mm3_s": 10.7
+   }
+  },
+  "Jonatha v29.0 (peça única) | 100 mm + pinça de 0,15 na saída do anel": {
+   "otimista": {
+    "dp_bar": 66.0,
+    "trechos_bar": {
+     "funil": 34.36,
+     "transicao": 3.68,
+     "land": 27.11,
+     "saida": 0.82
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.036,
+    "q_saida_mm3_s": 14994.6,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 0.239,
+    "q_pelo_anel_mm3_s": 5.4
+   },
+   "tipico": {
+    "dp_bar": 219.9,
+    "trechos_bar": {
+     "funil": 114.54,
+     "transicao": 12.28,
+     "land": 90.37,
+     "saida": 2.72
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.036,
+    "q_saida_mm3_s": 14994.6,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 5.4
+   },
+   "pessimista": {
+    "dp_bar": 659.7,
+    "trechos_bar": {
+     "funil": 343.62,
+     "transicao": 36.83,
+     "land": 271.12,
+     "saida": 8.15
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.036,
+    "q_saida_mm3_s": 14994.6,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 2.392,
+    "q_pelo_anel_mm3_s": 5.4
+   }
+  },
+  "Jonatha v29.0 (peça única) | 109 mm + land 6,00": {
+   "otimista": {
+    "dp_bar": 58.9,
+    "trechos_bar": {
+     "funil": 35.23,
+     "transicao": 3.68,
+     "land": 19.14,
+     "saida": 0.82
+    },
+    "land_mm": 6.0,
+    "pct_pelo_anel": 0.045,
+    "q_saida_mm3_s": 14993.2,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 0.239,
+    "q_pelo_anel_mm3_s": 6.8
+   },
+   "tipico": {
+    "dp_bar": 196.2,
+    "trechos_bar": {
+     "funil": 117.43,
+     "transicao": 12.28,
+     "land": 63.79,
+     "saida": 2.72
+    },
+    "land_mm": 6.0,
+    "pct_pelo_anel": 0.045,
+    "q_saida_mm3_s": 14993.2,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 6.8
+   },
+   "pessimista": {
+    "dp_bar": 588.6,
+    "trechos_bar": {
+     "funil": 352.29,
+     "transicao": 36.83,
+     "land": 191.37,
+     "saida": 8.15
+    },
+    "land_mm": 6.0,
+    "pct_pelo_anel": 0.045,
+    "q_saida_mm3_s": 14993.2,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 2.392,
+    "q_pelo_anel_mm3_s": 6.8
+   }
+  },
+  "Jonatha v29.0 (peça única) | 109 mm + land 5,00": {
+   "otimista": {
+    "dp_bar": 56.0,
+    "trechos_bar": {
+     "funil": 35.58,
+     "transicao": 3.68,
+     "land": 15.95,
+     "saida": 0.82
+    },
+    "land_mm": 5.0,
+    "pct_pelo_anel": 0.039,
+    "q_saida_mm3_s": 14994.2,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 0.239,
+    "q_pelo_anel_mm3_s": 5.8
+   },
+   "tipico": {
+    "dp_bar": 186.7,
+    "trechos_bar": {
+     "funil": 118.59,
+     "transicao": 12.28,
+     "land": 53.16,
+     "saida": 2.72
+    },
+    "land_mm": 5.0,
+    "pct_pelo_anel": 0.039,
+    "q_saida_mm3_s": 14994.2,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 5.8
+   },
+   "pessimista": {
+    "dp_bar": 560.2,
+    "trechos_bar": {
+     "funil": 355.76,
+     "transicao": 36.83,
+     "land": 159.48,
+     "saida": 8.15
+    },
+    "land_mm": 5.0,
+    "pct_pelo_anel": 0.039,
+    "q_saida_mm3_s": 14994.2,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 2.392,
+    "q_pelo_anel_mm3_s": 5.8
+   }
+  },
+  "Jonatha v29.0 (peça única) | 109 mm + anel apertado nos 3 estágios (0,40/0,15/0,15)": {
+   "otimista": {
+    "dp_bar": 66.0,
+    "trechos_bar": {
+     "funil": 34.37,
+     "transicao": 3.68,
+     "land": 27.11,
+     "saida": 0.82
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.003,
+    "q_saida_mm3_s": 14999.6,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 0.239,
+    "q_pelo_anel_mm3_s": 0.4
+   },
+   "tipico": {
+    "dp_bar": 219.9,
+    "trechos_bar": {
+     "funil": 114.55,
+     "transicao": 12.28,
+     "land": 90.38,
+     "saida": 2.72
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.003,
+    "q_saida_mm3_s": 14999.6,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 0.4
+   },
+   "pessimista": {
+    "dp_bar": 659.8,
+    "trechos_bar": {
+     "funil": 343.65,
+     "transicao": 36.83,
+     "land": 271.14,
+     "saida": 8.15
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.003,
+    "q_saida_mm3_s": 14999.6,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 2.392,
+    "q_pelo_anel_mm3_s": 0.4
+   }
+  },
+  "Jonatha v29.0 (peça única) | 109 mm + anel apertado só no último estágio (0,10)": {
+   "otimista": {
+    "dp_bar": 66.0,
+    "trechos_bar": {
+     "funil": 34.37,
+     "transicao": 3.68,
+     "land": 27.11,
+     "saida": 0.82
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.002,
+    "q_saida_mm3_s": 14999.8,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 0.239,
+    "q_pelo_anel_mm3_s": 0.2
+   },
+   "tipico": {
+    "dp_bar": 219.9,
+    "trechos_bar": {
+     "funil": 114.55,
+     "transicao": 12.28,
+     "land": 90.38,
+     "saida": 2.72
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.002,
+    "q_saida_mm3_s": 14999.8,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 0.2
+   },
+   "pessimista": {
+    "dp_bar": 659.8,
+    "trechos_bar": {
+     "funil": 343.65,
+     "transicao": 36.83,
+     "land": 271.14,
+     "saida": 8.15
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.002,
+    "q_saida_mm3_s": 14999.8,
+    "v_saida_m_min": 8.0,
+    "tau_land_MPa": 2.392,
+    "q_pelo_anel_mm3_s": 0.2
+   }
+  }
+ }
+}

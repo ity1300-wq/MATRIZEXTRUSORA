@@ -1,0 +1,296 @@
+{
+ "matriz": "JONATHA v29.0 (peca unica)",
+ "gerado_por": "04_Dados_SSOT_e_Scripts/gerar_pacote_usinagem_v29.py",
+ "medido": {
+  "arquivo": "08_Pacote_Usinagem_v29/3D/MATRIZ_V29_PECA_UNICA.step",
+  "bytes": 86725,
+  "sha256": "ffa6cc4baa6496c48e1f985f088e605c84588e24bb1f888fc106c37eaca15295",
+  "solidos": 1,
+  "faces": 22,
+  "arestas": 45,
+  "cascas": 1,
+  "brep_valido": true,
+  "faces_por_tipo": {
+   "CYLINDER": 5,
+   "PLANE": 8,
+   "BSPLINE": 7,
+   "CONE": 2
+  },
+  "volume_aco_mm3": 469303.2,
+  "massa_kg": 3.684,
+  "comprimento_mm": 109.0,
+  "z_min": -0.0,
+  "z_max": 109.0,
+  "envelope_x_mm": 93.0,
+  "envelope_y_mm": 93.0,
+  "volume_canal_mm3": 213945.1,
+  "massa_mastique_por_peca_g": 267.4,
+  "area_face_saida_mm2": 4617.3,
+  "area_face_entrada_mm2": 2304.1,
+  "fenda_no_land": {
+   "z": 107.0,
+   "largura_mm": 74.9995,
+   "abertura_mm": 1.5,
+   "area_mm2": 112.0171,
+   "n_poligonos": 1
+  },
+  "boca_saida": {
+   "z": 108.99,
+   "largura_mm": 77.9986,
+   "abertura_mm": 4.5,
+   "area_mm2": 346.6543
+  },
+  "boca_entrada": {
+   "z": 0.01,
+   "largura_mm": 75.6,
+   "abertura_mm": 75.5845,
+   "area_mm2": 4488.8332
+  },
+  "estagios_medidos": [
+   {
+    "D": 93.0,
+    "z": [
+     0.0,
+     69.9
+    ]
+   },
+   {
+    "D": 89.5,
+    "z": [
+     69.9,
+     80.7
+    ]
+   },
+   {
+    "D": 79.5,
+    "z": [
+     80.7,
+     109.0
+    ]
+   }
+  ],
+  "cones": [
+   [
+    36.75,
+    39.0,
+    107.5,
+    109.0,
+    10.0
+   ]
+  ],
+  "sombra_no_canal_pct": 0.0,
+  "sombra_como_medido": "17 faces do canal, raios de 0,10 mm disparados de 0,60 mm para dentro do vazio: 0,0 mm2 de 25.181,8 mm2 sem acesso = 0,00 %"
+ },
+ "alvo_do_contrato": {
+  "largura_fenda": 75.0,
+  "abertura_fenda": 1.5,
+  "raio_borda": 0.75,
+  "land": 8.5,
+  "chanfro": 1.5,
+  "boca_saida": [
+   78.0,
+   4.5
+  ],
+  "boca_entrada": 75.6,
+  "estagios": [
+   [
+    93.0,
+    0.0,
+    69.9
+   ],
+   [
+    89.5,
+    69.9,
+    80.7
+   ],
+   [
+    79.5,
+    80.7,
+    109.0
+   ]
+  ],
+  "comprimento": 109.0
+ },
+ "aco": {
+  "grupo": "Aço para trabalho a quente, classe H11-H13 (EN ISO 4957 / AISI H13)",
+  "norma": "1.2344 X37CrMoV5-1 (alternativa: 1.2343 / H11, so se a fabrica nao tiver a barra 1.2344 no diametro)",
+  "dureza": "50-52 HRC no núcleo, após têmpera em vácuo e 2 revénios",
+  "densidade": 7.85e-06
+ },
+ "cotas": [
+  {
+   "item": "Diâmetro do 1º estágio (encosto no rebaixo do cabeçote)",
+   "nominal": 93.0,
+   "tolerancia": "0 / −0,10",
+   "medicao": "micrômetro, 3 posições a 120°, no meio do comprimento",
+   "motivo": "tem folga de 1,00 mm radial por construção; não é cota de ajuste"
+  },
+  {
+   "item": "Diâmetro do 2º estágio (Ø89,50 no furo Ø90,00)",
+   "nominal": 89.5,
+   "tolerancia": "0 / −0,02",
+   "medicao": "micrômetro, 3 posições, na saída (Z 69,90-80,70)",
+   "motivo": "define a folga anular de 0,25 mm que segura a fuga de material para trás"
+  },
+  {
+   "item": "Diâmetro do 3º estágio / pescoço (Ø79,50 no furo Ø80,00)",
+   "nominal": 79.5,
+   "tolerancia": "0 / −0,02",
+   "medicao": "micrômetro, 3 posições, junto da face de saída",
+   "motivo": "mesma razão; os dois juntos fecham o anel de 0,25 mm nos dois estágios de product"
+  },
+  {
+   "item": "Excentricidade dos estágios 2 e 3 em relação ao 1",
+   "nominal": 0.02,
+   "tolerancia": "Ø 0,02 total",
+   "medicao": "CMM: cilíndricidade e coaxialidade, suporte no 1º estágio",
+   "motivo": "folga anular desigual é o que faz a manta vir com espessura variando de um lado"
+  },
+  {
+   "item": "Comprimento total",
+   "nominal": 109.0,
+   "tolerancia": "0 / −0,05",
+   "medicao": "comparador com a face de entrada sobre granito",
+   "motivo": "Z = 109,00 é onde o produto sai; sobra de material bate no nariz do cabeçote"
+  },
+  {
+   "item": "Posição axial do degrau 1→2",
+   "nominal": 69.9,
+   "tolerancia": "±0,05",
+   "medicao": "CMM",
+   "motivo": "o degrau é o batente da matriz no rebaixo do cabeçote"
+  },
+  {
+   "item": "Posição axial do degrau 2→3",
+   "nominal": 80.7,
+   "tolerancia": "±0,05",
+   "medicao": "CMM",
+   "motivo": "comprimento do pescoço dentro do furo Ø80"
+  },
+  {
+   "item": "Ângulo de saída do furo do cabeçote / face de assentamento",
+   "nominal": 0.01,
+   "tolerancia": "planeza 0,01 e perpendicularidade 0,01 em A",
+   "medicao": "CMM + lâmina óptica",
+   "motivo": "face ondulada abre junta de material e aparece como risco na manta"
+  },
+  {
+   "item": "Largura da fenda no land",
+   "nominal": 74.9995,
+   "tolerancia": "±0,05",
+   "medicao": "CMM no plano Z = saída − 2,00 (depois do chanfro)",
+   "motivo": "largura da manta: 75,00 constantes do contrato"
+  },
+  {
+   "item": "Abertura da fenda no land",
+   "nominal": 1.5,
+   "tolerancia": "+0,010 / −0,000",
+   "medicao": "calibre de lâminas 1,500; em último caso CMM apalpando as duas faces",
+   "motivo": "É A COTA CRÍTICA: ±0,01 mm = ±0,67 % na espessura e na vazão"
+  },
+  {
+   "item": "Raio das bordas da fenda (meia-círculo nas pontas)",
+   "nominal": 0.75,
+   "tolerancia": "+0,05 / −0,00",
+   "medicao": "perfil óptico ou réplica + microscópio",
+   "motivo": "canto vivo raspa e faz sharkskin; o raio vem de h/2 por contrato"
+  },
+  {
+   "item": "Comprimento do land paralelo (Z 98,50 → 107,00)",
+   "nominal": 8.5,
+   "tolerancia": "±0,05",
+   "medicao": "CMM: onde a seção para de abrir",
+   "motivo": "o land é o que gera pressão; encurtá-lo é a alavanca real de vazão"
+  },
+  {
+   "item": "Chanfro de saída",
+   "nominal": 1.5,
+   "tolerancia": "1,50 × 45° ±0,20 / ângulo ±0,5°",
+   "medicao": "esquadro + perfil óptico",
+   "motivo": "a boca 78,00 × 4,50 é o alívio que deixa o material descolar do land"
+  },
+  {
+   "item": "Boca de entrada do canal (Ø em Z = 0,00)",
+   "nominal": 75.6,
+   "tolerancia": "+0,05 / −0,00",
+   "medicao": "cilindro-padrão (ou CMM apalpando 3 pontos no fio da entrada)",
+   "motivo": "entrada restrita a Ø75,60 pelo contrato; a caixa da seção em Y dá 0,02 mm a menos porque a lâmina de corte a 0,01 mm da face pega corda, não diâmetro — meça pelo X ou pelo cilindro"
+  },
+  {
+   "item": "Raio no fundo da entrada / junção funil-fenda",
+   "nominal": 3.0,
+   "tolerancia": "R 3,0 ±0,5, sem aresta viva",
+   "medicao": "visual + réplica",
+   "motivo": "cantos quadrados dentro do funil são zona morta e material queimado"
+  },
+  {
+   "item": "Estado de superfície do canal e do land",
+   "nominal": 0.4,
+   "tolerancia": "Ra ≤ 0,4 µm, polido na direção da extrusão",
+   "medicao": "rugosímetro por réplica ou perfil óptico",
+   "motivo": "abaixo de 0,4 não melhora nada e custa; acima, o EPDM agarra"
+  },
+  {
+   "item": "Estado de superfície dos furos de envelope",
+   "nominal": 0.8,
+   "tolerancia": "Ra ≤ 0,8 µm",
+   "medicao": "rugosímetro",
+   "motivo": "é onde a matriz desliza no furo do cabeçote; risco vira folga"
+  },
+  {
+   "item": "Rebarba / quebras de aresta",
+   "nominal": 0.1,
+   "tolerancia": "máx. 0,1 × 45° em todas as arestas vivas, inclusive a boca de saída",
+   "medicao": "visual 10×, unha na borda da fenda",
+   "motivo": "rebarba na boca da fenda é risco na manta no primeiro metro"
+  },
+  {
+   "item": "Dureza após o tratamento",
+   "nominal": 51.0,
+   "tolerancia": "50-52 HRC",
+   "medicao": "durômetro em corpo de prova do mesmo lote + leitura na face traseira",
+   "motivo": "abaixo de 50 o land de 8,50 mm abre com 69 MPa de pressão no degrau"
+  },
+  {
+   "item": "Camada REC (refundida) do EDM",
+   "nominal": 0.02,
+   "tolerancia": "remover ≥ 0,02 mm em toda a superfície do canal",
+   "medicao": "ataque leve + medição dimensional antes/depois",
+   "motivo": "camada REC trinca e solta particula no produto"
+  },
+  {
+   "item": "Tensões internas",
+   "nominal": 0.0,
+   "tolerancia": "alívio de tensões antes da têmpera e revenido duplo; sem retocar a fenda depois do último revenido",
+   "medicao": "re-medir a fenda antes e depois do tratamento (relatório anexado)",
+   "motivo": "a fenda de 1,50 mm fecha se a peça for temperada sem alívio"
+  },
+  {
+   "item": "Marcação",
+   "nominal": 0.0,
+   "tolerancia": "a laser: JONATHA v29.0 · EX-031 · 1.2344 · lote · nº de série · data, na face traseira, fora do furo",
+   "medicao": "visual",
+   "motivo": "face traseira é a única que não vê produto; sem gravação profunda (concentrador de tensão)"
+  }
+ ],
+ "arquivos": {
+  "peca_unica": {
+   "origem": "07_CAD_Matrizes/Matriz_Jonatha_v27_Peca_Unica/MatrizJonatha_v27_Peca_Unica.step",
+   "destino": "MATRIZ_V29_PECA_UNICA.step",
+   "bytes": 86725,
+   "sha256": "ffa6cc4baa6496c48e1f985f088e605c84588e24bb1f888fc106c37eaca15295"
+  },
+  "canal": {
+   "origem": "07_CAD_Matrizes/Matriz_Jonatha_v27_OFICIAL/MatrizJonatha_Canal_Fluxo.step",
+   "destino": "MATRIZ_V29_CANAL_DE_FLUXO.step",
+   "bytes": 83860,
+   "sha256": "922073408b1b3a50a9f27240a2451a3c88e7fc9289bc26718f5d26af83c73e90"
+  },
+  "montagem": {
+   "origem": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v27_Peca_Unica.step",
+   "destino": "CONJUNTO_MATRIZ_V29_NO_CABECOTE_EX-030.step",
+   "bytes": 140635,
+   "sha256": "70658e978cccf9cc3538d1339dec42edbeb6a3769af6e2b7b05bf4fbd8e181a0"
+  }
+ }
+}

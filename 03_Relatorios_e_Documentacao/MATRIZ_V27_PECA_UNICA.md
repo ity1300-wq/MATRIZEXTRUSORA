@@ -1,6 +1,6 @@
 # Matriz Jonatha v27.0 como peça única — o que mudou, medido
 
-Gerado por `04_Dados_SSOT_e_Scripts/gerar_matriz_v27_peca_unica.py` em 2026-09-13. É uma **variante derivada**: o master continua `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (sha256 `7f26c5c5ba238a12667f2bdf…` verificado no fim da rodada, regra 1) e a peça única mora em `07_CAD_Matrizes/Matriz_Jonatha_v27_Peca_Unica/`.
+Gerado por `04_Dados_SSOT_e_Scripts/gerar_matriz_v27_peca_unica.py` em 2026-09-13. **ATUALIZAÇÃO DA MESMA RODADA: esta variante foi promovida a oficial como v29.0** — ver `07_CAD_Matrizes/Matriz_Jonatha_v29_OFICIAL/` e o pacote de fábrica `08_Pacote_Usinagem_v29/` (o STEP é byte-idêntico ao desta pasta; a v27.0 bipartida continua selada no disco). Originalmente esta peça era uma **variante derivada**: o master continuava sendo `01_CAD_MatrizJonatha_Oficial/MatrizJonatha.step` (sha256 `7f26c5c5ba238a12667f2bdf…`, regra 1) e a peça única morava em `07_CAD_Matrizes/Matriz_Jonatha_v27_Peca_Unica/`. O texto abaixo é o da medição original, que continua valendo: a geometria da v29.0 é esta, byte a byte.
 
 ## A peça
 
