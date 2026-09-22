@@ -283,6 +283,7 @@ def escreve_docs(m, cotas, movidos):
     crit = [c for c in cotas if "CRÍTICA" in c[4] or "0,25" in c[4] or "pressão" in c[4]]
 
     _f = dict(
+        cab="**MATRIZ JONATHA v27.0 — peça única** · 1 matriz · revisão interna do projeto: v29.0 (sem mudança dimensional)",
         grupo=ACO["grupo"], arquivo=m["arquivo"], faces=m["faces"], arestas=m["arestas"],
         cascas=br(m["cascas"] or 1, 0), volume_aco=br(m["volume_aco_mm3"], 1), massa=br(m["massa_kg"], 4),
         canal=br(m.get("volume_canal_mm3", 0), 1), comp=br(m["comprimento_mm"], 2),
@@ -297,9 +298,12 @@ def escreve_docs(m, cotas, movidos):
                        m.get("boca_entrada", {}).get("largura_mm", 0.0)), 2), be_nom=br(ALVO["boca_entrada"], 2),
         be_z=br(m.get("boca_entrada", {}).get("z", 0.01), 2), sombra=m["sombra_como_medido"],
         area_land=br(m.get("fenda_no_land", {}).get("area_mm2", 112.0171), 4))
-    open(P("01_FICHA_DE_FABRICA.md"), "w", encoding="utf-8").write("""# MATRIZ JONATHA v29.0 — ficha de fábrica (peça única)
+    open(P("01_FICHA_DE_FABRICA.md"), "w", encoding="utf-8").write("""# MATRIZ JONATHA v27.0 — ficha de fábrica (peça única)
 
-%(grupo)s — peça **OFICIAL** do projeto desde 2026-09-13 (v29.0, promovida da v27.0 como peça única).
+%(cab)s
+
+Aço: %(grupo)s. A geometria é a da v27.0 aprovada, entregue num sólido só — o que mudou foi só a eliminação da
+junta do plano de partição da v27.0 bipartida.
 
 | o que | valor | de onde vem |
 |---|---|---|
@@ -484,8 +488,10 @@ O STEP é cego para tudo que não é geometria. Estas são as dez linhas que evi
 > Copiar e enviar. Os anexos estão nesta pasta; nada aqui depende de conversa posterior.
 
 **Peça**: matriz de extrusão plana, sólido único (sem bipartição, sem furo de fixação, sem flange).
-**Quantidade para cotação**: 1 peça piloto + 4 peças de série (lote único), com a piloto aprovada antes do resto.
-**Prazo pedido**: piloto em 15 dias úteis; série em +10.
+**Identificação**: **MATRIZ JONATHA v27.0 — peça única** (v27.0 é a geometria aprovada; v29.0 é só a revisão
+interna do nosso controle de revisão, sem nenhuma mudança dimensional).
+**Quantidade**: **1 (uma) matriz**. Reposição, se um dia houver, é pedido separado.
+**Prazo pedido**: 20 dias úteis, com a medição da fenda re-feita depois do último revenido.
 
 **Arquivos enviados**
 | arquivo | o que é | sha256 (16 primeiros) |
@@ -532,7 +538,8 @@ Pasta pronta para enviar ao fornecedor. **Toda cota aqui é medida no STEP** por
 | `03_SEQUENCIA_DE_USINAGEM.md` | programação | 12 operações, com as armadilhas que já aconteceram no projeto |
 | `04_TOLERANCIAS_E_INSPECAO.md` | qualidade | tabela de %d cotas com tolerância e método, 11 linhas de inspeção, critério de rejeição |
 | `05_O_QUE_O_STEP_NAO_DIZ.md` | todos | as 10 linhas que evitam a primeira peça errada |
-| `06_PEDIDO_DE_COTACAO_RFQ.md` | fornecedor | o pedido de cotação pronto para copiar e enviar |
+| `06_PEDIDO_DE_COTACAO_RFQ.md` | fornecedor | o pedido de cotação pronto para copiar e enviar (1 matriz) |
+| `07_EMAIL_DE_PRIMEIRO_CONTATO.md` | você | a carta de capa do e-mail ao fornecedor — fica fora do zip |
 | `PRANCHA_2D_TOLERANCIADA.pdf` / `.png` | todos | 4 vistas cotadas, geradas das seções medidas no STEP (o PNG é só para abrir rápido) |
 | `3D/` | CAM | o STEP da peça, o do canal (ferramenta de medição) e a montagem no cabeçote |
 | `pacote_usinagem.json` | projeto | os números e as cotas em máquina-legível |
@@ -552,7 +559,8 @@ acaba.
     python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --rapido       # o portao do repo
     python3 04_Dados_SSOT_e_Scripts/auditar_step_correlacoes.py         # as correlacoes C1..C7
 
-O zip para envio: `PACOTE_MATRIZ_V29_PARA_ENVIO.zip` (mesma pasta, mesmo conteúdo).
+O zip para envio: `PACOTE_MATRIZ_V29_PARA_ENVIO.zip` — conteúdo da pasta, menos o e-mail de capa (que é do
+remetente, não material de fábrica).
 """ % (len(cotas), br(m["volume_aco_mm3"], 1), m["massa_kg"],
        br(m.get("volume_canal_mm3", 0), 1)))
 
@@ -669,7 +677,7 @@ def prancha(m, sh, void, cotas, destino):
              "7 · Canal e land polidos Ra ≤ 0,4 µm na direção da extrusão. Sem revestimento: 10 µm mudam a espessura do produto.",
              "8 · Remover a camada REC do EDM (≥ 0,02 mm); alívio de tensões antes da têmpera; 50-52 HRC após 2 revénios.",
              "9 · Re-medir a fenda depois do último revenido. Se sair fora, refugar — não retocar, não re temperar.",
-             "10 · Marcação a laser só na face traseira: JONATHA v29.0 · EX-031 · 1.2344 · lote · nº de série.",
+             "10 · Marcação a laser só na face traseira: JONATHA v27.0 · EX-031 · 1.2344 · lote · nº de série.",
              "11 · Sombra de usinagem no canal 0,00 %% (raios de 0,10 mm disparados de 0,60 mm dentro do vazio: 0,0 de 25.181,8 mm² sem acesso) → o canal inteiro é feito por uma face só.",
              "12 · Comprimento mantido em 109,00 mm: encurtar para 100 não alivia a pressão (funil e land ficam iguais) e encurta a rota de fuga pelo anel.",
              "",
@@ -690,8 +698,8 @@ def prancha(m, sh, void, cotas, destino):
             queb += bloco
     axE.text(0.0, 1.0, "\n".join(queb), fontsize=6.3, va="top", ha="left", family="DejaVu Sans", linespacing=1.45)
 
-    fig.suptitle("MATRIZ JONATHA v29.0 · PEÇA ÚNICA · 1.2344 (H13) 50-52 HRC · Ø93,00 × 109,00 mm · "
-                 "pacote de usinagem — vistas e cotas geradas das seções medidas no STEP", fontsize=12)
+    fig.suptitle("MATRIZ JONATHA v27.0 · PEÇA ÚNICA · 1.2344 (H13) 50-52 HRC · Ø93,00 × 109,00 mm · "
+                 "1 matriz · rev. interna v29.0 — vistas e cotas geradas das seções medidas no STEP", fontsize=12)
     fig.text(0.5, 0.024, "interface com o cabeçote EX-030: folgas radiais 1,00 / 0,25 / 0,25 mm · montagem com "
                          "interseção 0,0000 mm³ · pressão no degrau 69,21 MPa · empuxo axial 29,843 kN · "
                          "detalhes em 04_TOLERANCIAS_E_INSPECAO.md", fontsize=7.0, ha="center", color="#333333")

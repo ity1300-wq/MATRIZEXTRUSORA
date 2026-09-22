@@ -1,6 +1,9 @@
-# MATRIZ JONATHA v29.0 — ficha de fábrica (peça única)
+# MATRIZ JONATHA v27.0 — ficha de fábrica (peça única)
 
-Aço para trabalho a quente, classe H11-H13 (EN ISO 4957 / AISI H13) — peça **OFICIAL** do projeto desde 2026-09-13 (v29.0, promovida da v27.0 como peça única).
+**MATRIZ JONATHA v27.0 — peça única** · 1 matriz · revisão interna do projeto: v29.0 (sem mudança dimensional)
+
+Aço: Aço para trabalho a quente, classe H11-H13 (EN ISO 4957 / AISI H13). A geometria é a da v27.0 aprovada, entregue num sólido só — o que mudou foi só a eliminação da
+junta do plano de partição da v27.0 bipartida.
 
 | o que | valor | de onde vem |
 |---|---|---|
