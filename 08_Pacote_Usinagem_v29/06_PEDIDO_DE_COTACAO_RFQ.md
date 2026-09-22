@@ -3,8 +3,10 @@
 > Copiar e enviar. Os anexos estão nesta pasta; nada aqui depende de conversa posterior.
 
 **Peça**: matriz de extrusão plana, sólido único (sem bipartição, sem furo de fixação, sem flange).
-**Quantidade para cotação**: 1 peça piloto + 4 peças de série (lote único), com a piloto aprovada antes do resto.
-**Prazo pedido**: piloto em 15 dias úteis; série em +10.
+**Identificação**: **MATRIZ JONATHA v27.0 — peça única** (v27.0 é a geometria aprovada; v29.0 é só a revisão
+interna do nosso controle de revisão, sem nenhuma mudança dimensional).
+**Quantidade**: **1 (uma) matriz**. Reposição, se um dia houver, é pedido separado.
+**Prazo pedido**: 20 dias úteis, com a medição da fenda re-feita depois do último revenido.
 
 **Arquivos enviados**
 | arquivo | o que é | sha256 (16 primeiros) |
