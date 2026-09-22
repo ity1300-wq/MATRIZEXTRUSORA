@@ -11,6 +11,7 @@ Pasta pronta para enviar ao fornecedor. **Toda cota aqui é medida no STEP** por
 | `04_TOLERANCIAS_E_INSPECAO.md` | qualidade | tabela de 22 cotas com tolerância e método, 11 linhas de inspeção, critério de rejeição |
 | `05_O_QUE_O_STEP_NAO_DIZ.md` | todos | as 10 linhas que evitam a primeira peça errada |
 | `06_PEDIDO_DE_COTACAO_RFQ.md` | fornecedor | o pedido de cotação pronto para copiar e enviar |
+| `07_EMAIL_DE_PRIMEIRO_CONTATO.md` | você | o e-mail de capa para o fornecedor (não vai no zip: é seu) |
 | `PRANCHA_2D_TOLERANCIADA.pdf` / `.png` | todos | 4 vistas cotadas, geradas das seções medidas no STEP (o PNG é só para abrir rápido) |
 | `3D/` | CAM | o STEP da peça, o do canal (ferramenta de medição) e a montagem no cabeçote |
 | `pacote_usinagem.json` | projeto | os números e as cotas em máquina-legível |
@@ -30,7 +31,8 @@ acaba.
     python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --rapido       # o portao do repo
     python3 04_Dados_SSOT_e_Scripts/auditar_step_correlacoes.py         # as correlacoes C1..C7
 
-O zip para envio: `PACOTE_MATRIZ_V29_PARA_ENVIO.zip` (mesma pasta, mesmo conteúdo).
+O zip para envio: `PACOTE_MATRIZ_V29_PARA_ENVIO.zip` (conteúdo da pasta, menos o e-mail de capa,
+que é seu).
 
 ## Arquivo único para o e-mail
 
