@@ -133,17 +133,19 @@ def tabela(r, m):
         # atencao: casar pelo NOME INTEIRO. Uma versao anterior cortava item[:9] e "Diâmetro do 1" tem 12
         # caracteres - as tres linhas de Ø passavam sem correcao nenhuma e o pacote saia com 93,00/89,50/79,50.
         if item.startswith("Diâmetro do 1"):
-            item = "Diâmetro do 1º estágio — Ø%.2f no furo Ø95,00 do cabeçote" % ds[0]
+            item = "Diâmetro do 1º estágio — Ø%s no furo Ø95,00 do cabeçote" % G.br(ds[0], 2)
             nom, tol = ds[0], "±0,5 (cota alterada em 2026-09-22)"+ "; medição: micrômetro 3 posições"
-            porq = ("folga radial de 0,50 mm no furo; datum A da peça e o cilindro do Ø%.2f, não o degrau" % ds[0])
+            porq = ("folga radial de 0,50 mm no furo; datum A da peça e o cilindro do Ø%s, não o degrau"
+                 % G.br(ds[0], 2))
         elif item.startswith("Diâmetro do 2"):
-            item = "Diâmetro do 2º estágio — Ø%.2f no furo Ø90,00" % ds[1]
+            item = "Diâmetro do 2º estágio — Ø%s no furo Ø90,00" % G.br(ds[1], 2)
             nom, tol = ds[1], "±0,5 (cota alterada em 2026-09-22)"
             porq = "fecha o anel de 0,50 mm entre a matriz e o furo do nariz; é cota de folga, não de produto"
         elif item.startswith("Diâmetro do 3"):
-            item = "Diâmetro do 3º estágio / pescoço — Ø%.2f no furo Ø80,00" % ds[2]
+            item = "Diâmetro do 3º estágio / pescoço — Ø%s no furo Ø80,00" % G.br(ds[2], 2)
             nom, tol = ds[2], "±0,5 (cota alterada em 2026-09-22)"
-            porq = "mesma razão do 2º; o Ø%.2f é o maior Ø que passa no furo Ø80,00 com folga em toda a volta" % ds[2]
+            porq = ("mesma razão do 2º; o Ø%s é o maior Ø que passa no furo Ø80,00 com folga em toda a volta"
+                  % G.br(ds[2], 2))
         elif item == "Comprimento total":
             nom, tol = L, ("±0,5 (cota alterada em 2026-09-22)" if abs(L - 109.00) > 0.01
                            else "0 / −0,05 (não alterada)")

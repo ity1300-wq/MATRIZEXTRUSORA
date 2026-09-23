@@ -273,7 +273,9 @@ def tabela_de_cotas(m):
           "calibre de lâminas 1,500; em último caso CMM apalpando as duas faces", "É A COTA CRÍTICA: ±0,01 mm = ±0,67 % na espessura e na vazão"),
          ("Raio das bordas da fenda (meia-círculo nas pontas)", ALVO["raio_borda"], "+0,05 / −0,00",
           "perfil óptico ou réplica + microscópio", "canto vivo raspa e faz sharkskin; o raio vem de h/2 por contrato"),
-         ("Comprimento do land paralelo (Z 98,50 → 107,00)", ALVO["land"], "±0,05",
+         ("Comprimento do land paralelo (Z %s → %s)"
+          % (br(m["z_max"] - ALVO["chanfro"] - ALVO["land"], 2), br(m["z_max"] - ALVO["chanfro"], 2)),
+          ALVO["land"], "±0,05",
           "CMM: onde a seção para de abrir", "o land é o que gera pressão; encurtá-lo é a alavanca real de vazão"),
          ("Chanfro de saída", ALVO["chanfro"], "1,50 × 45° ±0,20 / ângulo ±0,5°",
           "esquadro + perfil óptico", "a boca 78,00 × 4,50 é o alívio que deixa o material descolar do land"),

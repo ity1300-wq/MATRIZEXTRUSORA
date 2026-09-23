@@ -18,7 +18,7 @@ tolerâncias apertadas de antes, porque são elas que definem a manta de 1,50 mm
 | 9 | Largura da fenda no land | 74.999 | ±0,05 | CMM no plano Z = saída − 2,00 (depois do chanfro) | largura da manta: 75,00 constantes do contrato |
 | 10 | Abertura da fenda no land | 1,5000 | +0,010 / −0,000 | calibre de lâminas 1,500; em último caso CMM apalpando as duas faces | É A COTA CRÍTICA: ±0,01 mm = ±0,67 % na espessura e na vazão |
 | 11 | Raio das bordas da fenda (meia-círculo nas pontas) | 0,7500 | +0,05 / −0,00 | perfil óptico ou réplica + microscópio | canto vivo raspa e faz sharkskin; o raio vem de h/2 por contrato |
-| 12 | Comprimento do land paralelo (Z 98,50 → 107,00) | 8,5000 | ±0,05 | CMM: onde a seção para de abrir | o land é o que gera pressão; encurtá-lo é a alavanca real de vazão |
+| 12 | Comprimento do land paralelo (Z 85,00 → 93,50) | 8,5000 | ±0,05 | CMM: onde a seção para de abrir | o land é o que gera pressão; encurtá-lo é a alavanca real de vazão |
 | 13 | Chanfro de saída | 1,5000 | 1,50 × 45° ±0,20 / ângulo ±0,5° | esquadro + perfil óptico | a boca 78,00 × 4,50 é o alívio que deixa o material descolar do land |
 | 14 | Boca de entrada do canal (Ø em Z = 0,00) | 75.600 | +0,05 / −0,00 | cilindro-padrão (ou CMM apalpando 3 pontos no fio da entrada) | entrada restrita a Ø75,60 pelo contrato; a caixa da seção em Y dá 0,02 mm a menos porque a lâmina de corte a 0,01 mm da face pega corda, não diâmetro — meça pelo X ou pelo cilindro |
 | 15 | Raio no fundo da entrada / junção funil-fenda | 3,0000 | R 3,0 ±0,5, sem aresta viva | visual + réplica | cantos quadrados dentro do funil são zona morta e material queimado |
