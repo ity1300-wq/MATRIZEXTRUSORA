@@ -51,7 +51,7 @@ Os campos entre `{ }` são os únicos que você precisa preencher.
 > Atenciosamente,
 > {nome} · {empresa} · {telefone} · {e-mail}
 
-**Anexo e integridade:** `PACOTE_MATRIZ_V29_PARA_ENVIO.zip`, 608.550 bytes, sha256 `a0d104bb29c83a7df9fda0a210f187f4d274fab0bf30131e27be0c460fa54774`. Dentro do zip vai `CHECKSUMS_SHA256.txt` cobrindo os outros 13 arquivos: rode `sha256sum -c CHECKSUMS_SHA256.txt` na pasta extraída e confira os 13 OK antes de usinar qualquer coisa.
+**Anexo e integridade:** `PACOTE_MATRIZ_V29_PARA_ENVIO.zip`, 608.424 bytes, sha256 `7cab6de97a46546f4b7aae1412d8a66593d30c8616c40eb93fd5780ebb004fa7`. Dentro do zip vai `CHECKSUMS_SHA256.txt` cobrindo os outros 13 arquivos: rode `sha256sum -c CHECKSUMS_SHA256.txt` na pasta extraída e confira os 13 OK antes de usinar qualquer coisa.
 
 ---
 

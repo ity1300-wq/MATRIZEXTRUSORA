@@ -26,7 +26,7 @@ cabeçote). Todas as cotas axiais a partir da **face de saída** (Z = 109.00), q
 | Dureza após o tratamento | **51,000** | 50-52 HRC | durômetro em corpo de prova do mesmo lote + leitura na face traseira | abaixo de 50 o land de 8,50 mm abre com 69 MPa de pressão no degrau |
 | Camada REC (refundida) do EDM | **0,020** | remover ≥ 0,02 mm em toda a superfície do canal | ataque leve + medição dimensional antes/depois | camada REC trinca e solta particula no produto |
 | Tensões internas | **—** | alívio de tensões antes da têmpera e revenido duplo; sem retocar a fenda depois do último revenido | re-medir a fenda antes e depois do tratamento (relatório anexado) | a fenda de 1,50 mm fecha se a peça for temperada sem alívio |
-| Marcação | **—** | a laser: JONATHA v29.0 · EX-031 · 1.2344 · lote · nº de série · data, na face traseira, fora do furo | visual | face traseira é a única que não vê produto; sem gravação profunda (concentrador de tensão) |
+| Marcação | **—** | a laser: JONATHA v27.0 · EX-031 · 1.2344 · lote · nº de série · data, na face traseira, fora do furo | visual | face traseira é a única que não vê produto; sem gravação profunda (concentrador de tensão) |
 
 ## Plano de inspeção
 
