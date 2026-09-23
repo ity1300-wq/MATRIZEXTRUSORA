@@ -1,10 +1,10 @@
 {
- "matriz": "JONATHA JONATHA v27.0 · rev. geom. 2026-09-22",
+ "matriz": "JONATHA JONATHA v27.0 · rev. 30 (2026-09-22)",
  "gerado_por": "04_Dados_SSOT_e_Scripts/gerar_pacote_usinagem_v30.py",
  "medido": {
-  "arquivo": "08_Pacote_Usinagem_v29/3D/MATRIZ_V29_PECA_UNICA.step",
-  "bytes": 81800,
-  "sha256": "107d166874b7ab71316981210ed312445ba71f33de67be486cc05b80f4c89242",
+  "arquivo": "08_Pacote_Usinagem_v30/3D/MATRIZ_V30_PECA_UNICA.step",
+  "bytes": 97198,
+  "sha256": "b42ee2e50a10d43db4b91a22f62e3e4e0aacfdcd8e3ebbacf3eb6cf4a39b818e",
   "solidos": 1,
   "faces": 22,
   "arestas": 45,
@@ -16,26 +16,26 @@
    "BSPLINE": 7,
    "CONE": 2
   },
-  "volume_aco_mm3": 477050.9,
-  "massa_kg": 3.7448,
-  "comprimento_mm": 109.0,
+  "volume_aco_mm3": 438509.9,
+  "massa_kg": 3.4423,
+  "comprimento_mm": 95.0,
   "z_min": -0.0,
-  "z_max": 109.0,
+  "z_max": 95.0,
   "envelope_x_mm": 94.0,
   "envelope_y_mm": 94.0,
-  "volume_canal_mm3": 213945.1,
-  "massa_mastique_por_peca_g": 267.4,
+  "volume_canal_mm3": 183862.6,
+  "massa_mastique_por_peca_g": 229.8,
   "area_face_saida_mm2": 4555.0,
-  "area_face_entrada_mm2": 2450.9,
+  "area_face_entrada_mm2": 2451.4,
   "fenda_no_land": {
-   "z": 107.0,
+   "z": 93.0,
    "largura_mm": 74.9995,
    "abertura_mm": 1.5,
    "area_mm2": 112.0171,
    "n_poligonos": 1
   },
   "boca_saida": {
-   "z": 108.99,
+   "z": 94.99,
    "largura_mm": 77.9986,
    "abertura_mm": 4.5,
    "area_mm2": 346.6543
@@ -43,8 +43,8 @@
   "boca_entrada": {
    "z": 0.01,
    "largura_mm": 75.6,
-   "abertura_mm": 75.5845,
-   "area_mm2": 4488.8332
+   "abertura_mm": 75.5934,
+   "area_mm2": 4488.3173
   },
   "estagios_medidos": [
    {
@@ -65,7 +65,7 @@
     "D": 79.0,
     "z": [
      80.7,
-     109.0
+     95.0
     ]
    }
   ],
@@ -73,8 +73,8 @@
    [
     36.75,
     39.0,
-    107.5,
-    109.0,
+    93.5,
+    95.0,
     10.0
    ]
   ],
@@ -106,10 +106,10 @@
    [
     79.0,
     80.7,
-    109.0
+    95.0
    ]
   ],
-  "comprimento": 109.0
+  "comprimento": 95.0
  },
  "aco": {
   "grupo": "aço carbono SAE 1045 (EN C45E) — decisão do dono em 2026-09-22, substitui o 1.2344 da proposta",
@@ -125,7 +125,7 @@
    79.0
   ],
   "tolerancia_das_cotas_alteradas": "±0,5",
-  "comprimento_mm": 109.0,
+  "comprimento_mm": 95.0,
   "material": "aço 1045",
   "tratamento": "indução ou nitretação a plasma na região da fenda"
  },
@@ -160,10 +160,10 @@
   },
   {
    "item": "Comprimento total",
-   "nominal": 109.0,
-   "tolerancia": "0 / −0,05 (não alterada)",
+   "nominal": 95.0,
+   "tolerancia": "±0,5 (cota alterada em 2026-09-22)",
    "medicao": "comparador com a face de entrada sobre granito",
-   "motivo": "comprimento 109,00 inalterado (cota não alterada: tolerância continua 0 / −0,05)"
+   "motivo": "comprimento 95,00 = 109,00 − 14,00, a face de saída faceada com a face do nariz do cabeçote EX-030; cota ALTERADA, leva ±0,5. Consequência medida: com +0,5 mm a matriz passaria 0,5 mm para fora do nariz, então o aceitável prático é 95,00/−0,50 +0,00 se a fábrica preferir apertar - a decisão de manter ±0,5 é do dono, o alerta é nosso"
   },
   {
    "item": "Posição axial do degrau 1→2",
@@ -280,7 +280,7 @@
   {
    "item": "Marcação",
    "nominal": 0.0,
-   "tolerancia": "a laser: JONATHA v27.0 · EX-031 · 1045 · rev. geom. 2026-09-22 · lote · nº de série · data, na face traseira, fora do furo",
+   "tolerancia": "a laser: JONATHA v27.0 · EX-031 · 1045 · rev. 30 (2026-09-22) · lote · nº de série · data, na face traseira, fora do furo",
    "medicao": "visual",
    "motivo": "a marcação não pode entrar na zona do degrau nem na face de assentamento; a peça é a JONATHA v27.0 para a fábrica - 'rev. 29/30' é carimbo interno do projeto"
   },
@@ -293,21 +293,21 @@
   }
  ],
  "medido_na_revisao": {
-  "rotulo": "v29",
-  "arquivo": "07_CAD_Matrizes/Matriz_Jonatha_v29_OFICIAL/MATRIZ_V29_PECA_UNICA.step",
-  "sha256": "107d166874b7ab71316981210ed312445ba71f33de67be486cc05b80f4c89242",
-  "bytes": 81800,
+  "rotulo": "v30",
+  "arquivo": "07_CAD_Matrizes/Matriz_Jonatha_v30_OFICIAL/MATRIZ_V30_PECA_UNICA.step",
+  "sha256": "b42ee2e50a10d43db4b91a22f62e3e4e0aacfdcd8e3ebbacf3eb6cf4a39b818e",
+  "bytes": 97198,
   "solidos": 1,
   "cascas": [
    1
   ],
   "faces": 22,
   "brep_valido": true,
-  "comprimento": 109.0,
+  "comprimento": 95.0,
   "dx": 94.0,
   "dy": 94.0,
-  "volume_aco_mm3": 477050.9,
-  "massa_kg": 3.7448,
+  "volume_aco_mm3": 438509.9,
+  "massa_kg": 3.4423,
   "estagios_medidos": [
    {
     "Ø": 94.0,
@@ -327,7 +327,7 @@
     "Ø": 79.0,
     "z": [
      80.7,
-     109.0
+     95.0
     ]
    }
   ],
@@ -337,16 +337,16 @@
    "espessura_mm": 2.0,
    "raio_borda_mm": 0.75,
    "z_da_fenda": [
-    99.0,
-    107.5
+    85.0,
+    93.5
    ],
    "passante_ate_a_saida": false
   },
   "canal": {
-   "comprimento": 109.0,
+   "comprimento": 95.0,
    "zmin": -0.0,
-   "zmax": 109.0,
-   "z_land": 99.0,
+   "zmax": 95.0,
+   "z_land": 85.0,
    "land": 8.5,
    "caras_do_land": 2,
    "espessura_entre_caras": 1.5,
@@ -356,8 +356,8 @@
    "chanfro": {
     "raio_max": 1.125,
     "z": [
-     107.5,
-     109.0
+     93.5,
+     95.0
     ],
     "abertura_graus": 45.0
    },
@@ -367,8 +367,8 @@
     346.6543
    ],
    "boca_entrada": 75.6,
-   "area_entrada": 4488.8332,
-   "volume": 213945.1
+   "area_entrada": 4488.3173,
+   "volume": 183862.6
   },
   "vazao_area_saida": [
    78.0,
@@ -377,14 +377,14 @@
   ]
  },
  "montagem": {
-  "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v29.step",
-  "sha256": "d7cb3c3ea294e8e21ddec8b682e7dc4e9c5c0ea3a0e4cd059f6e42ef38c1123e",
-  "bytes": 135725,
+  "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v30.step",
+  "sha256": "725c2f83f26cc6e85331182e8e86d60d5fe9cd172405271228f0b03fbd7128a5",
+  "bytes": 151083,
   "solidos": 2,
-  "volume_somado_mm3": 2047390.4,
+  "volume_somado_mm3": 2008849.4,
   "deslocamento_aplicado_mm": 0.0,
-  "saida_além_da_face_do_nariz_mm": 14.0,
-  "face_de_saida_no_Z": 109.0,
+  "saida_além_da_face_do_nariz_mm": 0.0,
+  "face_de_saida_no_Z": 95.0,
   "z_face_do_nariz": 95.0,
   "interferencia_mm3": 0.0,
   "folgas_por_estagio": [
@@ -420,7 +420,7 @@
     "estagio_Ø": 79.0,
     "z": [
      80.7,
-     109.0
+     95.0
     ],
     "furo_Ø": 80.0,
     "folga_radial": 0.5,
@@ -434,22 +434,22 @@
  },
  "arquivos": {
   "peca_unica": {
-   "origem": "07_CAD_Matrizes/Matriz_Jonatha_v29_OFICIAL/MATRIZ_V29_PECA_UNICA.step",
-   "destino": "3D/MATRIZ_V29_PECA_UNICA.step",
-   "bytes": 81800,
-   "sha256": "107d166874b7ab71316981210ed312445ba71f33de67be486cc05b80f4c89242"
+   "origem": "07_CAD_Matrizes/Matriz_Jonatha_v30_OFICIAL/MATRIZ_V30_PECA_UNICA.step",
+   "destino": "3D/MATRIZ_V30_PECA_UNICA.step",
+   "bytes": 97198,
+   "sha256": "b42ee2e50a10d43db4b91a22f62e3e4e0aacfdcd8e3ebbacf3eb6cf4a39b818e"
   },
   "canal": {
-   "origem": "07_CAD_Matrizes/Matriz_Jonatha_v29_OFICIAL/MATRIZ_V29_CANAL_DE_FLUXO.step",
-   "destino": "3D/MATRIZ_V29_CANAL_DE_FLUXO.step",
-   "bytes": 83860,
-   "sha256": "922073408b1b3a50a9f27240a2451a3c88e7fc9289bc26718f5d26af83c73e90"
+   "origem": "07_CAD_Matrizes/Matriz_Jonatha_v30_OFICIAL/MATRIZ_V30_CANAL_DE_FLUXO.step",
+   "destino": "3D/MATRIZ_V30_CANAL_DE_FLUXO.step",
+   "bytes": 85455,
+   "sha256": "77497bf86c989b23d8eb121c5318904c7ca506a3b580c89ecde134f0873f2154"
   },
   "montagem": {
-   "origem": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v29.step",
-   "destino": "3D/Cabecote_EX-030_com_Matriz_Jonatha_v29.step",
-   "bytes": 135725,
-   "sha256": "d7cb3c3ea294e8e21ddec8b682e7dc4e9c5c0ea3a0e4cd059f6e42ef38c1123e"
+   "origem": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v30.step",
+   "destino": "3D/Cabecote_EX-030_com_Matriz_Jonatha_v30.step",
+   "bytes": 151083,
+   "sha256": "725c2f83f26cc6e85331182e8e86d60d5fe9cd172405271228f0b03fbd7128a5"
   }
  }
 }

@@ -1,19 +1,19 @@
-# Ficha de fábrica — MATRIZ JONATHA v27.0 · rev. geom. 2026-09-22
+# Ficha de fábrica — MATRIZ JONATHA v27.0 · rev. 30 (2026-09-22)
 
 **Peça única, 1 sólido, sem flange, sem furo de fixação, sem linha de junção.** Material: **SAE J404 / EN 10083-2: aço 1045, barra forjada, fibra no eixo, condição de entrega normalizada**.
-Quantidade pedida: **1 matriz** (sem lote). Gerado por medição no STEP `3D/MATRIZ_V29_PECA_UNICA.step` (sha256 `107d166874b7ab71…`).
+Quantidade pedida: **1 matriz** (sem lote). Gerado por medição no STEP `3D/MATRIZ_V30_PECA_UNICA.step` (sha256 `b42ee2e50a10d43d…`).
 
 | o que | valor medido no STEP |
 |---|---|
-| envelope maior (1º estágio) | Ø94,00 × comprimento 109,00 mm |
-| estágios e faixas em Z | Ø94.00 (0→69.90) · Ø89.00 (69.90→80.70) · Ø79.00 (80.70→109.00) |
+| envelope maior (1º estágio) | Ø94,00 × comprimento 95,00 mm |
+| estágios e faixas em Z | Ø94.00 (0→69.90) · Ø89.00 (69.90→80.70) · Ø79.00 (80.70→95.00) |
 | fenda no land | largura 74,9995 mm × abertura **1,500 mm** (R0,75 nas pontas), área 112,0171 mm² |
-| land paralelo | 8,500 mm (Z 99,00 → 107,50) |
-| chanfro de saída | 1,50 × 45°, boca 78,00 × 4,50 mm (cone medido em Z 107.50 → 109.00) |
+| land paralelo | 8,500 mm (Z 85,00 → 93,50) |
+| chanfro de saída | 1,50 × 45°, boca 78,00 × 4,50 mm (cone medido em Z 93.50 → 95.00) |
 | boca de entrada | Ø75,60 (restrita por contrato: não alargar) |
-| volume de aço / massa | 477050,9 mm³ → **3,745 kg** em 1045 (7,85 g/cm³) |
-| canal (vazio de fluxo) | 213945,1 mm³ = 267,4 g de mastique dentro da matriz |
-| protrusão no cabeçote | a face de saída fica 14,00 mm além da face do nariz do cabeçote (é a cota original) |
+| volume de aço / massa | 438509,9 mm³ → **3,442 kg** em 1045 (7,85 g/cm³) |
+| canal (vazio de fluxo) | 183862,6 mm³ = 229,8 g de mastique dentro da matriz |
+| protrusão no cabeçote | protrusão 0,00 mm medida na montagem: a face de saída coincide com a face do nariz |
 
 ## As três coisas que a fábrica precisa saber antes de ligar a máquina
 
@@ -27,11 +27,11 @@ Quantidade pedida: **1 matriz** (sem lote). Gerado por medição no STEP `3D/MAT
    de entrada Ø75,60 e polimento na direção da extrusão. Sombra de usinagem medida no
    modelo: 0,00 % de área sem acesso reto.
 
-## Interface com o EX-030 (medida na montagem `3D/Cabecote_EX-030_com_Matriz_Jonatha_v29.step`)
+## Interface com o EX-030 (medida na montagem `3D/Cabecote_EX-030_com_Matriz_Jonatha_v30.step`)
 
   - Ø94.00 em Z 0.00 → 69.90 · folga radial 0.50 mm no furo Ø95.00
   - Ø89.00 em Z 69.90 → 80.70 · folga radial 0.50 mm no furo Ø90.00
-  - Ø79.00 em Z 80.70 → 109.00 · folga radial 0.50 mm no furo Ø80.00
+  - Ø79.00 em Z 80.70 → 95.00 · folga radial 0.50 mm no furo Ø80.00
 
 Interferência matriz × cabeçote: **0,0000 mm³** (zero é o certo — a matriz desliza nos
 furos e encosta face a face no rebaixo, `deslocamento_aplicado_mm` = 0.00).
