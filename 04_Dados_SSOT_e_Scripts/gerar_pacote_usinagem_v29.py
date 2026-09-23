@@ -74,8 +74,23 @@ ALVO = dict(largura_fenda=75.00, abertura_fenda=1.50, raio_borda=0.75, land=8.50
             boca_saida=(78.00, 4.50), boca_entrada=75.60,
             estagios=[(93.00, 0.00, 69.90), (89.50, 69.90, 80.70), (79.50, 80.70, 109.00)],
             comprimento=109.00)
+# Os rotulos do desenho saem daqui, e NAO de numero chutado: quem re-gera uma revisao com outras cotas
+# troca estas variaveis (ver gerar_pacote_usinagem_v30.py). Deixar literal de 93,00/109,00 no meio da
+# prancha foi como o desenho saiu com a cota velha em cima do modelo novo.
+TOL_D1 = "0/−0,10"
+TOL_D = "0/−0,02"
+TOL_L = "0/−0,05"
+NOTAS_TITULO = "E · NOTAS GERAIS — MATRIZ JONATHA v29.0, peça única (OFICIAL desde 2026-09-13)"
+NOTA_REVEST = "7 · Canal e land polidos Ra ≤ 0,4 µm na direção da extrusão. Sem revestimento: 10 µm mudam a espessura do produto."
+DUREZA_CURTA = "50-52 HRC após 2 revénios"
+MARCACAO_CURTA = "JONATHA v27.0 · EX-031 · 1.2344 · lote · nº de série"
+NOTA_COMPRIMENTO = "12 · Comprimento mantido em 109,00 mm: encurtar para 100 não alivia a pressão (funil e land ficam iguais) e encurta a rota de fuga pelo anel."
 TITULO_FIGURA = ("MATRIZ JONATHA v27.0 · PEÇA ÚNICA · 1.2344 (H13) 50-52 HRC · Ø93,00 × 109,00 mm · "
                  "1 matriz · rev. interna v29.0 — vistas e cotas geradas das seções medidas no STEP")
+TAM_NOTA = 5.2
+TEXTO_LARGURA = 128
+GERADO_POR_FIGURA = ("Gerado por gerar_pacote_usinagem_v30.py (que hoje gera os dois pacotes): todas as "
+                         "cotas medidas no STEP (seções de 0,02 mm).")
 RODAPE_FIGURA = ("interface com o cabeçote EX-030: folgas radiais 1,00 / 0,25 / 0,25 mm · montagem com "
                  "interseção 0,0000 mm³ · pressão no degrau 69,21 MPa · empuxo axial 29,843 kN · "
                  "detalhes em 04_TOLERANCIAS_E_INSPECAO.md")
@@ -607,25 +622,35 @@ def prancha(m, sh, void, cotas, destino):
                     arrowprops=dict(arrowstyle="->", lw=0.6, color=cor), zorder=7)
 
     fig = plt.figure(figsize=(16.5, 10.5))
-    gs = fig.add_gridspec(2, 3, left=0.04, right=0.985, top=0.885, bottom=0.10, wspace=0.26, hspace=0.34)
+    gs = fig.add_gridspec(2, 3, left=0.04, right=0.985, top=0.885, bottom=0.085, wspace=0.26, hspace=0.34)
 
     # ================= A: secao longitudinal no plano X=0 (o plano em que a fenda aparece)
     axA = fig.add_subplot(gs[:, 0])
     fill(axA, face_eixo(sh, 0.0, "x"), "#c2ccd6", hatch="////")
     fill(axA, face_eixo(void, 0.0, "x"), "#fff6da", lw=1.5, zorder=3)
-    axA.set_xlim(-70, 74); axA.set_ylim(-13, 128); axA.set_aspect("equal")
+    axA.set_xlim(-70, 74); axA.set_ylim(-13, z_out + 20); axA.set_aspect("equal")
     axA.tick_params(labelsize=7); axA.grid(alpha=0.16, ls=":")
+    DS = [e["D"] for e in sorted(m.get("estagios_medidos", []), key=lambda e: -e["D"])]
+    if len(DS) < 3:
+        DS = [d for d, _a, _b in ALVO["estagios"]]
+    LT = round(m["z_max"] - m["z_min"], 3)
+    FURO = [95.00, 90.00, 80.00]          # os tres furos do EX-030, medidos no STEP do cabecote
+    ANEL = [round((f - d) / 2.0, 3) for f, d in zip(FURO, DS)]
     axA.set_title("A · SEÇÃO LONGITUDINAL no plano X=0 (1:1) — oco a amarelo", fontsize=10.5)
-    cota(axA, (-46.5, 30), (46.5, 30), "Ø93,00  0/−0,10   (1º estágio = datum A)")
-    cota(axA, (-44.75, 76.5), (44.75, 76.5), "Ø89,50  0/−0,02  (furo Ø90,00 → anel 0,25)")
-    cota(axA, (-39.75, 90.0), (39.75, 90.0), "Ø79,50  0/−0,02  (furo Ø80,00)")
-    cota(axA, (56, 0), (56, z_out), "109,00\n0/−0,05", va="center")
+    cota(axA, (-46.5, 30), (46.5, 30), "Ø%s  %s   (1º estágio = datum A)" % (br(DS[0], 2), TOL_D1))
+    cota(axA, (-44.75, 76.5), (44.75, 76.5),
+         "Ø%s  %s  (furo Ø%s → anel %s)" % (br(DS[1], 2), TOL_D, br(FURO[1], 2), br(ANEL[1], 2)))
+    cota(axA, (-39.75, 90.0), (39.75, 90.0),
+         "Ø%s  %s  (furo Ø%s → anel %s)" % (br(DS[2], 2), TOL_D, br(FURO[2], 2), br(ANEL[2], 2)))
+    cota(axA, (56, 0), (56, z_out), "%s\n%s" % (br(LT, 2), TOL_L), va="center")
     axA.text(-66, 12, "degraus axiais (±0,05):\n69,90 e 80,70\no chanfro de 1,50×45°\nesta no detalhe B",
              fontsize=6.4, color="#8a2f00", ha="left", va="bottom")
-    seta(axA, (0.0, 108.6), "face de saída: planeza 0,01 e ⊥ 0,01 em A — datum axial", (-14, 121), cor="#111111")
+    seta(axA, (0.0, z_out - 0.4), "face de saída: planeza 0,01 e ⊥ 0,01 em A — datum axial",
+         (-14, z_out + 12), cor="#111111")
     seta(axA, (-14, 58), "funil: sem aresta viva, R 3,0 no fundo, Ra ≤ 0,4 µm — o canal\n"
                          "inteiro é feito por esta face só (sombra medida: 0,00 %)", (-30, 44), ha="center")
-    seta(axA, (2.2, 100), "land paralelo %s mm\nusina-se de um lado, sem junta" % br(LAND, 2), (24, 112), ha="left")
+    seta(axA, (2.2, z_out - 15), "land paralelo %s mm\nusina-se de um lado, sem junta" % br(LAND, 2),
+         (24, z_out + 7), ha="left")
 
     # ================= B: detalhe da saida (Z 92 -> 111), onde o produto é decidido
     axB = fig.add_subplot(gs[0, 1])
@@ -656,7 +681,8 @@ def prancha(m, sh, void, cotas, destino):
     cota(axC, (44, -bs.get("abertura_mm", 4.5) / 2.0), (44, bs.get("abertura_mm", 4.5) / 2.0),
          "%.3f" % bs.get("abertura_mm", 4.5), fs=6.8)
     seta(axC, (38.5, 3.0), "R 0,75 nas duas pontas da fenda\n+0,05/−0,00, sem aresta viva", (16, 47), ha="center", fs=6.6)
-    seta(axC, (39.0, -37.0), "Ø79,50 do pescoço · sem rebarba na boca: 0,1×45° máximo", (4, -44), ha="center", fs=6.6)
+    seta(axC, (39.0, -37.0), "Ø%s do pescoço · sem rebarba na boca: 0,1×45° máximo" % br(DS[2], 2),
+         (4, -44), ha="center", fs=6.6)
 
     # ================= D: face de entrada
     axD = fig.add_subplot(gs[0, 2])
@@ -667,26 +693,29 @@ def prancha(m, sh, void, cotas, destino):
     axD.set_title("D · FACE DE ENTRADA (Z=%.2f) — olha o cabeçote" % z_in, fontsize=10.5)
     cota(axD, (-37.8, -46), (37.8, -46), "Ø%s  +0,05/−0,00 (a entrada é restrita por contrato)"
          % br(max(be.get("abertura_mm", 0.0), be.get("largura_mm", ALVO["boca_entrada"])), 2), fs=6.8)
-    cota(axD, (-46.5, 45), (46.5, 45), "Ø93,00  0/−0,10", fs=6.8)
+    cota(axD, (-46.5, 45), (46.5, 45), "Ø%s  %s" % (br(DS[0], 2), TOL_D1), fs=6.8)
     seta(axD, (0.0, 0.0), "sem furo, sem rosca, sem pino:\nqualquer furo aqui é rejeição", (0, -22), fs=6.8, cor="#a30000")
 
     # ================= E: notas
     axE = fig.add_subplot(gs[1, 2])
     axE.axis("off")
-    notas = ["E · NOTAS GERAIS — MATRIZ JONATHA v29.0, peça única (OFICIAL desde 2026-09-13)",
+    notas = [NOTAS_TITULO,
              "",
-             "1 · mm; Z = eixo da matriz, Z crescente para o produto; datum A = Ø93,00; cotas axiais da face de saída.",
+             "1 · mm; Z = eixo da matriz, Z crescente para o produto; datum A = Ø%s; cotas axiais da face de saída." % br(DS[0], 2),
              "2 · NÃO adicionar furo, rosca, rebaixo, pino ou flange de fixação: é rejeição. O aperto é o collete EX-031 + o degrau.",
              "3 · Peça única: não colar, não alinhar metade, não existe plano de partição. %d faces / %d arestas / 1 casca, BRepCheck válido." % (m["faces"], m["arestas"]),
              "4 · A fenda é medida no plano Z = saída − 2,00 (depois do chanfro). Medindo na face você pega a boca, não a fenda.",
-             "5 · Ø89,50 e Ø79,50 em 0/−0,02 fecham o anel de 0,25 mm com o furo do cabeçote; coaxialidade Ø0,02 em A.",
+             "5 · Ø%s e Ø%s em %s fecham o anel de %s mm com o furo do cabeçote; coaxialidade Ø0,02 em A."
+             % (br(DS[1], 2), br(DS[2], 2), TOL_D, br(min(ANEL[1:]), 2)),
              "6 · Área da seção do canal no land = %s mm² ±0,5 %% → rejeição se passar: é a área que converte em vazão." % br(fd.get("area_mm2", 112.0171), 4),
-             "7 · Canal e land polidos Ra ≤ 0,4 µm na direção da extrusão. Sem revestimento: 10 µm mudam a espessura do produto.",
-             "8 · Remover a camada REC do EDM (≥ 0,02 mm); alívio de tensões antes da têmpera; 50-52 HRC após 2 revénios.",
+             NOTA_REVEST,
+             "8 · Remover a camada REC do EDM (≥ 0,02 mm); alívio de tensões antes da têmpera; %s." % DUREZA_CURTA,
              "9 · Re-medir a fenda depois do último revenido. Se sair fora, refugar — não retocar, não re temperar.",
-             "10 · Marcação a laser só na face traseira: JONATHA v27.0 · EX-031 · 1.2344 · lote · nº de série.",
-             "11 · Sombra de usinagem no canal 0,00 %% (raios de 0,10 mm disparados de 0,60 mm dentro do vazio: 0,0 de 25.181,8 mm² sem acesso) → o canal inteiro é feito por uma face só.",
-             "12 · Comprimento mantido em 109,00 mm: encurtar para 100 não alivia a pressão (funil e land ficam iguais) e encurta a rota de fuga pelo anel.",
+             "10 · Marcação a laser só na face traseira: %s." % MARCACAO_CURTA,
+             "11 · Sombra de usinagem no canal %s %% (%s) → o canal é feito por uma face só, sem partir a peça."
+             % (br(m.get("sombra_no_canal_pct", 0.0), 2),
+                m.get("sombra_como_medido", "raios de 0,10 mm verificados dentro do vazio")),
+             NOTA_COMPRIMENTO,
              "",
              "AÇO %s" % ACO["norma"],
              "TRATAMENTO %s · DUREZA %s" % (ACO["grupo"], ACO["dureza"]),
@@ -694,16 +723,24 @@ def prancha(m, sh, void, cotas, destino):
              % (br(m["volume_aco_mm3"], 1), br(m["massa_kg"], 3), br(m.get("volume_canal_mm3", 0), 1),
                 br(m.get("massa_mastique_por_peca_g", 0), 1)),
              "REFERÊNCIA %s · sha256 %s..." % (os.path.basename(m["arquivo"]), m["sha256"][:16]),
-             "Gerado por gerar_pacote_usinagem_v29.py: todas as cotas medidas no STEP (seções de 0,02 mm)."]
+             GERADO_POR_FIGURA]
     import textwrap
     queb = []
     for linha in notas:
         if len(linha) <= 96:
             queb.append(linha)
         else:
-            bloco = textwrap.wrap(linha, width=96, subsequent_indent="     ")
+            bloco = textwrap.wrap(linha, width=TEXTO_LARGURA, subsequent_indent="     ")
             queb += bloco
-    axE.text(0.0, 1.0, "\n".join(queb), fontsize=6.3, va="top", ha="left", family="DejaVu Sans", linespacing=1.45)
+    # quanto texto cabe no painel: altura da linha de eixos (a figura tem H*(top-bottom) de area util e o
+    # hspace come uma parte dela) dividida pela altura de uma linha. Se nao couber, o bloco escorre por cima
+    # do rodape da prancha - foi o que aconteceu com 32 linhas a 5,75 pt antes desta conta existir.
+    alt_pt = fig.get_figheight() * 72.0 * (0.885 - 0.085) / (2 + 0.34)
+    cabem = int(alt_pt / (TAM_NOTA * 1.45))
+    if len(queb) > cabem:
+        raise SystemExit("FALHOU: as notas nao cabem no painel (%d linhas para %d que cabem)"
+                         % (len(queb), cabem))
+    axE.text(0.0, 1.0, "\n".join(queb), fontsize=TAM_NOTA, va="top", ha="left", family="DejaVu Sans", linespacing=1.45)
 
     fig.suptitle(TITULO_FIGURA, fontsize=12)
     fig.text(0.5, 0.024, RODAPE_FIGURA, fontsize=7.0, ha="center", color="#333333")
@@ -805,8 +842,18 @@ def checksums():
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--eu-sei", action="store_true",
+                    help="assume o risco: reescreve 08_Pacote_Usinagem_v29 com a documentacao deste "
+                         "arquivo (material/Ø deste modulo estao desatualizados desde 2026-09-22)")
     ap.add_argument("--semdos", action="store_true", help="nao gera a prancha PDF")
     a = ap.parse_args()
+    if not a.eu_sei:
+        raise SystemExit(
+            "Este gerador foi substituido: os dois pacotes (v29 re-feita e v30) saem de "
+            "04_Dados_SSOT_e_Scripts/gerar_pacote_usinagem_v30.py, que le o STEP de cada pasta oficial "
+            "e escreve a documentacao com o material e as tolerancias da revisao de 2026-09-22. "
+            "Rodar este arquivo aqui por cima traria de volta o 1.2344 e o 93,00. Use --eu-sei se "
+            "for realmente isso que voce quer.")
     print("[1/6] promovendo a peca unica a v29.0 (sem tocar nos arquivos selados)")
     movidos = promove_para_v29()
     for k, v in movidos.items():
