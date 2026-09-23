@@ -5,8 +5,10 @@ com acesso a este repositório consegue continuar exatamente de onde paramos len
 dos commits. Nada de decisão vive só no chat: o que vale está aqui, nos relatórios de
 `03_Relatorios_e_Documentacao/` e nos JSON de `04_Dados_SSOT_e_Scripts/`.
 
-Atualizado em **2026-09-13 (fim do dia)**, na rodada que promoveu a peça única a v29.0 e montou o pacote
-de usinagem `08_Pacote_Usinagem_v29/`.
+Atualizado em **2026-09-23**, na rodada que publicou as revisões de 2026-09-22 (v29 re-feita e v30) com o
+desenho cotado a partir do STEP medido e a regra de publicação do §12 ("sempre atualize o GitHub"). O
+estado anterior desta linha era **2026-09-13 (fim do dia)**, na rodada que promoveu a peça única a v29.0 e
+montou o pacote de usinagem `08_Pacote_Usinagem_v29/`.
 
 ---
 
@@ -64,7 +66,9 @@ cobradas pelo portão:
 3. Entregável CAD é **STEP** (AP214). Nada de STL/SAT/"otimização" sem pedido.
 4. SSOT numérico: `04_Dados_SSOT_e_Scripts/cad_die_parameters.json`. Largura **75,00 constante**, espessura
    **1,50 com R 0,75**, entrada restrita a **Ø 75,60** em Z = 0, envelope **Ø93,00 × 69,90 / Ø89,50 × 10,80 /
-   Ø79,50 × 28,30** (Z total 109,00).
+   Ø79,50 × 28,30** (Z total 109,00). — *o envelope deste item é o do contrato original e não vale mais desde
+   2026-09-22: os Ø de envelope são **94,00 / 89,00 / 79,00** (±0,5) e a v30 tem Z total **95,00**; o que
+   continua rígido é largura, espessura e a boca de entrada, porque é o que vira produto.*
 5. Interface obrigatória: a matriz **casa nos estágios** do cabeçote, **passa pelo nariz sem tocar a fenda**,
    fixação por **collete EX-031 + degrau**; a matriz **não tem flange nem furo de fixação**. Encosto
    **face a face** ⇒ rebaixo de 3,00 mm onde Ø > 105,00 (é usinagem da máquina, não da matriz).
@@ -376,3 +380,68 @@ Pendências que ficam explícitas: (a) o **portão de CFD 3D do funil** continua
 `01_/` não ganhou atalho para a v30 (symlink novo não sobrevive à recriação da sandbox e o script de
 restauração teria de ser ampliado — o SSOT e o índice de `07_/` apontam para o arquivo real); (c) o PAT em
 `/home/user/tmp/.gh` continua exposto e a revogação é dele.
+
+**Rodada 2026-09-23 — o que foi publicado e o que ainda é decisão dele.**
+
+* **Os rótulos do desenho eram fonte de erro tanto quanto a tabela.** `prancha()` carregava `Ø93,00`,
+  `Ø89,50 → anel 0,25`, `109,00`, `50-52 HRC`, `1.2344` e o título "v29.0" como strings fixas: o modelo já era
+  o novo e a folha discordava dele. Agora todo rótulo sai do `pacote_usinagem.json` medido (`TOL_D1`/`TOL_D`/
+  `TOL_L`, `FURO = [95, 90, 80]`, folga do anel calculada, aço e dureza por revisão), as anotações do corte são
+  posicionadas por `z_out` — com a peça de 95 mm elas caíam em cima do título — e o bloco de notas é **medido
+  contra a altura real do painel**: com 32 linhas a 5,75 pt ele escorria por cima do rodapé e a prancha saía
+  assim mesmo; hoje o gerador para com `FALHOU`.
+* **`gerar_pacote_usinagem_v29.py` se recusa a rodar sozinho** (`--eu-sei` força). A documentação daquele módulo
+  ainda descreve 1.2344 e 93,00; um rodar por cima traria os dois de volta para o pacote v29. Os dois pacotes
+  nascem de `gerar_pacote_usinagem_v30.py`.
+* **Numeração:** `_bra()` dos dois scripts estava comendo separador de milhar — a área de junta saía
+  `1,513,1 mm²`. Agora número já escrito no padrão brasileiro com milhar é protegido antes da conversão
+  (inclusive `Q = 15.000 mm³/s`), inteiros de 5+ dígitos são agrupados, e `1.2344`, `EN 10204 3.1`, rótulos de
+  revisão seguem intactos. Não reescrevi os relatórios fechados de `03_` por causa de formatação — a auditoria
+  v1.0 está encerrada.
+* **O pior caso do ±0,5 foi medido** (`04_/revisoes_2026_09_22_folgas_limites.json`): os Ø não travam a
+  montagem (Ø94,00 +0,5 = 94,50 num furo Ø95,00 ⇒ folga radial 0,25 mm), mas a fuga pelo anel vai de
+  0,273 % / 0,212 % no nominal para **2,323 % / 1,810 %** com folga 0,75 (8,5×, porque a fuga escala com o cubo
+  da folga); ΔP mal se move. Eu tinha escrito "encosta com folga 0,00" — estava errado, o texto corrigido está
+  no relatório da v27.
+* Estado publicado: `continue` `e823bc4`, `main` `1b5322b` (árvore idêntica, `git diff continue main` vazio),
+  tag `v30.0-oficial-pacote-usinagem`, releases v30/v29 com os **quatro anexos** re-trocados e re-baixados
+  idênticos ao disco — v30 zip `588.274 B` sha `d4948ebeb2f97bb4…`, v29 zip `584.850 B` sha `143ff628d9a8897f…`,
+  PDFs `49.582 B` / `49.287 B`. Dentro do zip, `sha256sum -c CHECKSUMS_SHA256.txt` = 13 OK.
+* **Duas decisões continuam abertas** (nenhuma muda o que está publicado hoje): o comprimento da v30 como
+  **95,00 −0,50/+0,00** em vez de ±0,5 (com +0,5 a face passa 0,5 mm para fora do nariz) e
+  **indução 55-60 HRC × nitretação a plasma 600-700 HV0,2** na fenda.
+
+## 12. Regra de publicação — "sempre atualize o GitHub" (ordem dele, 2026-09-23)
+
+Nada de trabalho termina no sandbox. **Toda rodada que mexe em arquivo acaba com o estado publicado**, nesta ordem:
+
+```bash
+python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --rapido      # o portao abre a porta; se nao abrir, nao publica
+git add -A -- <pastas tocadas>                                     # NUNCA `git add -A` solto: com sandbox
+                                                                  # recriada ele comeria os atalhos de 01_/ e 02_/
+git commit -F - <<'MSG'                                            # corpo explica o que estava errado e por que
+...
+MSG
+git push "$URL" continue:continue
+git checkout main && git merge --no-ff continue -m "main <- continue: ..." && git push "$URL" main:main
+git tag -f -a v30.0-oficial-pacote-usinagem -m "..." && git push -f "$URL" refs/tags/v30.0-oficial-pacote-usinagem
+```
+
+Se a rodada trocou o **conteúdo de um pacote**, o push não basta: os anexos das releases são parte do estado.
+DELETE no asset antigo + POST em `uploads.github.com/repos/ity1300-wq/MATRIZEXTRUSORA/releases/<rid>/assets?name=`
+(`rid` **394977467** = v30, **391700106** = v29), depois `curl -sSL` do
+`.../releases/download/<tag>/<nome>` e `sha256sum` do disco — tem de sair **idêntico byte a byte**, e o corpo da
+release cita o tamanho/sha do zip vigente. A capa `07_EMAIL_DE_PRIMEIRO_CONTATO.md` fora do zip também cita o sha
+do zip: qualquer re-geração de pacote muda os dois, e o `aplicar_revisoes_2026_09_22.py` propaga o valor para o
+SSOT e para os READMEs das pastas oficiais (rodar o gerador de pacotes **sem** rodar o aplicar deixa o SSOT
+atrasado — o portão pega, mas só depois de você ter publicado coisa errada).
+
+A tag `v30.0-oficial-pacote-usinagem` fica no commit cuja árvore gerou os assets publicados; mudança só de texto
+(este arquivo, relatórios) sobe nas branches e **não** move a tag. O token é repo-local (`/home/user/tmp/.gh`);
+sem ele — sandbox recriada — `bash 04_Dados_SSOT_e_Scripts/restaurar_workspace.sh` refaz remoto e atalhos, e não
+se faz `git config` global.
+
+Por que a regra existe, em uma frase: em 2026-09-23 eu deixei três rodadas só no disco (a tabela dos Ø, os
+rótulos do desenho, a numeração com milhar) e cada uma depois custou uma troca nova de assets; enquanto a troca
+não acontecia, o GitHub servia documento velho com sha novo na capa — exatamente o par que a fábrica confere.
+
