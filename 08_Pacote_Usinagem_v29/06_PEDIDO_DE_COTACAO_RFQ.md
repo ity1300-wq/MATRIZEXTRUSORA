@@ -1,7 +1,7 @@
 # RFQ — 1 matriz de extrusão em **aço 1045**, fenda 1,50 mm aberta a fio EDM, com indução/nitretação no land
 
 Peça: MATRIZ JONATHA v27.0 · rev. geom. 2026-09-22 — 1 sólido, sem flange, sem furo de fixação.
-Quantidade: **1 matriz** (sem lote, sem série). Envelope Ø94.00 × 109.00 mm, 3,74 kg.
+Quantidade: **1 matriz** (sem lote, sem série). Envelope Ø94,00 × 109,00 mm, 3,74 kg.
 
 Escopo:
 1. material 1045 forjado, fibra no eixo, certificado EN 10204 3.1;

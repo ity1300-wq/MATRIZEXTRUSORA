@@ -53,8 +53,25 @@ def sha(p):
     return hashlib.sha256(io.open(p, "rb").read()).hexdigest()
 
 
+_PROTEGER = ("1.2344", "EN 10204 3.1", "ISO 4957", "SAE J404", "EN 10083-2", "X37CrMoV5-1",
+             "v27.0", "v28.1", "v29.0", "v30.0", "EX-030", "EX-031", "C45E", "0.02 mm")
+
+
+def _bra(txt):
+    """Decimais com virgula, que e o padrao dos documentos daqui (a casa escreve 94,00, nao 94.00). So troca o
+    ponto quando ele e separador decimal de um numero solto; os tokens acima (aço 1.2344, norma EN 10204 3.1,
+    rotulos de revisao, codigos de peça) sao protegidos antes da troca."""
+    import re
+    for i, p in enumerate(_PROTEGER):
+        txt = txt.replace(p, "\x00%d\x00" % i)
+    txt = re.sub(r"(\d+)\.(\d{1,4})", lambda m: m.group(1) + "," + m.group(2), txt)
+    for i, p in enumerate(_PROTEGER):
+        txt = txt.replace("\x00%d\x00" % i, p)
+    return txt
+
+
 def escreve(p, txt):
-    io.open(p, "w", encoding="utf-8").write(txt)
+    io.open(p, "w", encoding="utf-8").write(_bra(txt))
 
 
 def readme(tag):

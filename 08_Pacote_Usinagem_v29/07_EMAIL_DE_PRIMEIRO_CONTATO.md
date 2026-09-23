@@ -8,7 +8,7 @@
     STEP da peça, sólido do canal (para o fio EDM), desenho cotado e toleranciado, ficha de fábrica, sequência de
     usinagem e plano de inspeção.
 
-    Resumo do que é: Ø94.00 × 109.00 mm em **aço 1045**, sem flange e sem furo de fixação (segura por collete
+    Resumo do que é: Ø94,00 × 109,00 mm em **aço 1045**, sem flange e sem furo de fixação (segura por collete
     EX-031 e degrau), fenda de 75,00 × **1,500 +0,010/−0,000** com R 0,75 nas pontas, land paralelo de 8,50 mm e
     chanfro de saída 1,50 × 45°. Tolerância ±0,5 nas cotas de envelope que nós alteramos nesta revisão; as cotas do
     produto continuam apertadas.
@@ -24,7 +24,7 @@
     É uma peça só, sem lote. Quem fechar esta matriz fica com a geometria; a segunda vem depois da validação no
     equipamento.
 
-    Anexo: `PACOTE_MATRIZ_V29_PARA_ENVIO.zip` — **sha256 do anexo: `c1cdf617040af38873bc822797e215801061696ce59e085abbecf1837cf79a41`** (616244 bytes). Se o hash não bater, não abram: peça reenvio.
+    Anexo: `PACOTE_MATRIZ_V29_PARA_ENVIO.zip` — **sha256 do anexo: `da72d8ac9f2a9437ec62bdcf2b7e2535dd0836a91f1a685fc02a0048c74168f8`** (616283 bytes). Se o hash não bater, não abram: peça reenvio.
 
     ---
     O que NÃO mandar ainda: o modelo paramétrico, as planilhas de simulação e os relatórios internos de auditoria — nada disso é necessário para orçar ou usinar esta peça.
