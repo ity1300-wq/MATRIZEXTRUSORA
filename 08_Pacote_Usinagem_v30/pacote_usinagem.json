@@ -131,25 +131,25 @@
  },
  "cotas": [
   {
-   "item": "Diâmetro do 1º estágio — Ø94.00 no furo Ø95,00 do cabeçote",
+   "item": "Diâmetro do 1º estágio — Ø94,00 no furo Ø95,00 do cabeçote",
    "nominal": 94.0,
    "tolerancia": "±0,5 (cota alterada em 2026-09-22); medição: micrômetro 3 posições",
    "medicao": "micrômetro, 3 posições a 120°, no meio do comprimento",
-   "motivo": "folga radial de 0,50 mm no furo; datum A da peça e o cilindro do Ø94.00, não o degrau"
+   "motivo": "folga radial de 0,50 mm no furo; datum A da peça e o cilindro do Ø94,00, não o degrau"
   },
   {
-   "item": "Diâmetro do 2º estágio — Ø89.00 no furo Ø90,00",
+   "item": "Diâmetro do 2º estágio — Ø89,00 no furo Ø90,00",
    "nominal": 89.0,
    "tolerancia": "±0,5 (cota alterada em 2026-09-22)",
    "medicao": "micrômetro, 3 posições, na saída (Z 69,90-80,70)",
    "motivo": "fecha o anel de 0,50 mm entre a matriz e o furo do nariz; é cota de folga, não de produto"
   },
   {
-   "item": "Diâmetro do 3º estágio / pescoço — Ø79.00 no furo Ø80,00",
+   "item": "Diâmetro do 3º estágio / pescoço — Ø79,00 no furo Ø80,00",
    "nominal": 79.0,
    "tolerancia": "±0,5 (cota alterada em 2026-09-22)",
    "medicao": "micrômetro, 3 posições, junto da face de saída",
-   "motivo": "mesma razão do 2º; o Ø79.00 é o maior Ø que passa no furo Ø80,00 com folga em toda a volta"
+   "motivo": "mesma razão do 2º; o Ø79,00 é o maior Ø que passa no furo Ø80,00 com folga em toda a volta"
   },
   {
    "item": "Excentricidade dos estágios 2 e 3 em relação ao 1",
@@ -208,7 +208,7 @@
    "motivo": "canto vivo raspa e faz sharkskin; o raio vem de h/2 por contrato"
   },
   {
-   "item": "Comprimento do land paralelo (Z 98,50 → 107,00)",
+   "item": "Comprimento do land paralelo (Z 85,00 → 93,50)",
    "nominal": 8.5,
    "tolerancia": "±0,05",
    "medicao": "CMM: onde a seção para de abrir",

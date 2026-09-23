@@ -24,7 +24,7 @@
     É uma peça só, sem lote. Quem fechar esta matriz fica com a geometria; a segunda vem depois da validação no
     equipamento.
 
-    Anexo: `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` — **sha256 do anexo: `d4948ebeb2f97bb40523211bb9fdef26074586759fb82690126bb8caf9a3d5b3`** (588274 bytes). Se o hash não bater, não abram: peça reenvio.
+    Anexo: `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` — **sha256 do anexo: `0738c4683c80efdb6f3db4903c1d7febe8126ac147d9025c8cfdfbc2dd6fac6e`** (588274 bytes). Se o hash não bater, não abram: peça reenvio.
 
     ---
     O que NÃO mandar ainda: o modelo paramétrico, as planilhas de simulação e os relatórios internos de auditoria — nada disso é necessário para orçar ou usinar esta peça.
