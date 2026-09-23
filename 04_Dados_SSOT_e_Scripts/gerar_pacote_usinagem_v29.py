@@ -271,7 +271,7 @@ def tabela_de_cotas(m):
           "ataque leve + medição dimensional antes/depois", "camada REC trinca e solta particula no produto"),
          ("Tensões internas", 0.0, "alívio de tensões antes da têmpera e revenido duplo; sem retocar a fenda depois do último revenido",
           "re-medir a fenda antes e depois do tratamento (relatório anexado)", "a fenda de 1,50 mm fecha se a peça for temperada sem alívio"),
-         ("Marcação", 0.0, "a laser: JONATHA v29.0 · EX-031 · 1.2344 · lote · nº de série · data, na face traseira, fora do furo",
+         ("Marcação", 0.0, "a laser: JONATHA v27.0 · EX-031 · 1.2344 · lote · nº de série · data, na face traseira, fora do furo",
           "visual", "face traseira é a única que não vê produto; sem gravação profunda (concentrador de tensão)"),
          ]
     return L

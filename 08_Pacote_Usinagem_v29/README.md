@@ -31,9 +31,5 @@ acaba.
     python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --rapido       # o portao do repo
     python3 04_Dados_SSOT_e_Scripts/auditar_step_correlacoes.py         # as correlacoes C1..C7
 
-O zip para envio: `PACOTE_MATRIZ_V29_PARA_ENVIO.zip` — os 12 arquivos do pacote, sem o e-mail de capa
-(que é do remetente, não material de fábrica). O sha256 do zip está anotado em
-`07_EMAIL_DE_PRIMEIRO_CONTATO.md`, fora do arquivo que ele哈希 — um arquivo não pode carregar o próprio hash.
-
-`CHECKSUMS_SHA256.txt` cobre exatamente os arquivos que vão no zip, então `sha256sum -c` funciona nos dois
-lados: na pasta do repo e na pasta que o fornecedor extraiu.
+O zip para envio: `PACOTE_MATRIZ_V29_PARA_ENVIO.zip` — conteúdo da pasta, menos o e-mail de capa (que é do
+remetente, não material de fábrica).

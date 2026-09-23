@@ -483,8 +483,9 @@
     "pressure_drop_bar": 68.2,
     "velocity_uniformity_percent": 99.1,
     "matriz_2_baseline_pressure_drop_bar": 268.7,
-    "material": "Aço Ferramenta P20 / AISI H13 Nitretado",
-    "land_paralelo_mm": 8.5
+    "material": "1.2344 (X37CrMoV5-1 / AISI H13), 50-52 HRC, SEM nitretacao nem PVD",
+    "land_paralelo_mm": 8.5,
+    "material_observacao": "corrigido em 2026-09-22: o campo dizia 'Aço Ferramenta P20 / AISI H13 Nitretado', que e o material do estudo inicial. Nao vale: P20 nao segura 50 HRC no land e nitretacao/PVD adiciona 5-10 um ao canal, o que muda a espessura da manta (tolerancia +0,010 mm). A especificacao vigente de material e de tratamento esta em 08_Pacote_Usinagem_v29/02_MATERIAL_E_TRATAMENTO.md."
   },
   "project_metadata": {
     "title": "MatrizJonatha STEP Deliverables (Approved Master v27.0)",
@@ -815,7 +816,7 @@
       {
         "item": "Marcação",
         "nominal": 0.0,
-        "tolerancia": "a laser: JONATHA v29.0 · EX-031 · 1.2344 · lote · nº de série · data, na face traseira, fora do furo",
+        "tolerancia": "a laser: JONATHA v27.0 · EX-031 · 1.2344 · lote · nº de série · data, na face traseira, fora do furo",
         "medicao": "visual",
         "motivo": "face traseira é a única que não vê produto; sem gravação profunda (concentrador de tensão)"
       }
