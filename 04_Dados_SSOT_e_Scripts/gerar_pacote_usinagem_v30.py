@@ -59,10 +59,27 @@ OBS_MATERIAL = (
 Z12, Z23 = 69.90, 80.70
 
 
+_PROTEGER = ("1.2344", "EN 10204 3.1", "ISO 4957", "SAE J404", "EN 10083-2", "X37CrMoV5-1",
+             "v27.0", "v28.1", "v29.0", "v30.0", "EX-030", "EX-031", "C45E", "0.02 mm")
+
+
+def _bra(txt):
+    """Decimais com virgula, que e o padrao dos documentos daqui (a casa escreve 94,00, nao 94.00). So troca o
+    ponto quando ele e separador decimal de um numero solto; os tokens acima (aço 1.2344, norma EN 10204 3.1,
+    rotulos de revisao, codigos de peça) sao protegidos antes da troca."""
+    import re
+    for i, p in enumerate(_PROTEGER):
+        txt = txt.replace(p, "\x00%d\x00" % i)
+    txt = re.sub(r"(\d+)\.(\d{1,4})", lambda m: m.group(1) + "," + m.group(2), txt)
+    for i, p in enumerate(_PROTEGER):
+        txt = txt.replace("\x00%d\x00" % i, p)
+    return txt
+
+
 def escreve(pacote, nome, txt):
     """escreve um arquivo do pacote (garante UTF-8 e cria a pasta)"""
     os.makedirs(pacote, exist_ok=True)
-    io.open(os.path.join(pacote, nome), "w", encoding="utf-8").write(txt)
+    io.open(os.path.join(pacote, nome), "w", encoding="utf-8").write(_bra(txt))
 REV = {
     "v29": dict(
         pasta="08_Pacote_Usinagem_v29", oficial="Matriz_Jonatha_v29_OFICIAL",
@@ -95,16 +112,17 @@ def tabela(r, m):
         raise SystemExit("FALHOU: os Ø medidos no STEP (%s) não batem com os do perfil (%s)" % (ds, r["D"]))
     out = []
     for item, nom, tol, como, porq in cotas:
-        i0 = item[:9]
-        if i0.startswith("Diâmetro do 1"):
+        # atencao: casar pelo NOME INTEIRO. Uma versao anterior cortava item[:9] e "Diâmetro do 1" tem 12
+        # caracteres - as tres linhas de Ø passavam sem correcao nenhuma e o pacote saia com 93,00/89,50/79,50.
+        if item.startswith("Diâmetro do 1"):
             item = "Diâmetro do 1º estágio — Ø%.2f no furo Ø95,00 do cabeçote" % ds[0]
             nom, tol = ds[0], "±0,5 (cota alterada em 2026-09-22)"+ "; medição: micrômetro 3 posições"
             porq = ("folga radial de 0,50 mm no furo; datum A da peça e o cilindro do Ø%.2f, não o degrau" % ds[0])
-        elif i0.startswith("Diâmetro do 2"):
+        elif item.startswith("Diâmetro do 2"):
             item = "Diâmetro do 2º estágio — Ø%.2f no furo Ø90,00" % ds[1]
             nom, tol = ds[1], "±0,5 (cota alterada em 2026-09-22)"
             porq = "fecha o anel de 0,50 mm entre a matriz e o furo do nariz; é cota de folga, não de produto"
-        elif i0.startswith("Diâmetro do 3"):
+        elif item.startswith("Diâmetro do 3"):
             item = "Diâmetro do 3º estágio / pescoço — Ø%.2f no furo Ø80,00" % ds[2]
             nom, tol = ds[2], "±0,5 (cota alterada em 2026-09-22)"
             porq = "mesma razão do 2º; o Ø%.2f é o maior Ø que passa no furo Ø80,00 com folga em toda a volta" % ds[2]

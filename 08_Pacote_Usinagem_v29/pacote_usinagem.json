@@ -131,25 +131,25 @@
  },
  "cotas": [
   {
-   "item": "Diâmetro do 1º estágio (encosto no rebaixo do cabeçote)",
-   "nominal": 93.0,
-   "tolerancia": "0 / −0,10",
+   "item": "Diâmetro do 1º estágio — Ø94.00 no furo Ø95,00 do cabeçote",
+   "nominal": 94.0,
+   "tolerancia": "±0,5 (cota alterada em 2026-09-22); medição: micrômetro 3 posições",
    "medicao": "micrômetro, 3 posições a 120°, no meio do comprimento",
-   "motivo": "tem folga de 1,00 mm radial por construção; não é cota de ajuste"
+   "motivo": "folga radial de 0,50 mm no furo; datum A da peça e o cilindro do Ø94.00, não o degrau"
   },
   {
-   "item": "Diâmetro do 2º estágio (Ø89,50 no furo Ø90,00)",
-   "nominal": 89.5,
-   "tolerancia": "0 / −0,02",
+   "item": "Diâmetro do 2º estágio — Ø89.00 no furo Ø90,00",
+   "nominal": 89.0,
+   "tolerancia": "±0,5 (cota alterada em 2026-09-22)",
    "medicao": "micrômetro, 3 posições, na saída (Z 69,90-80,70)",
-   "motivo": "define a folga anular de 0,25 mm que segura a fuga de material para trás"
+   "motivo": "fecha o anel de 0,50 mm entre a matriz e o furo do nariz; é cota de folga, não de produto"
   },
   {
-   "item": "Diâmetro do 3º estágio / pescoço (Ø79,50 no furo Ø80,00)",
-   "nominal": 79.5,
-   "tolerancia": "0 / −0,02",
+   "item": "Diâmetro do 3º estágio / pescoço — Ø79.00 no furo Ø80,00",
+   "nominal": 79.0,
+   "tolerancia": "±0,5 (cota alterada em 2026-09-22)",
    "medicao": "micrômetro, 3 posições, junto da face de saída",
-   "motivo": "mesma razão; os dois juntos fecham o anel de 0,25 mm nos dois estágios de product"
+   "motivo": "mesma razão do 2º; o Ø79.00 é o maior Ø que passa no furo Ø80,00 com folga em toda a volta"
   },
   {
    "item": "Excentricidade dos estágios 2 e 3 em relação ao 1",

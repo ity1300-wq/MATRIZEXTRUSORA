@@ -6,10 +6,10 @@ Quantidade pedida: **1 matriz** (sem lote). Gerado por medição no STEP `3D/MAT
 | o que | valor medido no STEP |
 |---|---|
 | envelope maior (1º estágio) | Ø94,00 × comprimento 109,00 mm |
-| estágios e faixas em Z | Ø94.00 (0→69.90) · Ø89.00 (69.90→80.70) · Ø79.00 (80.70→109.00) |
+| estágios e faixas em Z | Ø94,00 (0→69,90) · Ø89,00 (69,90→80,70) · Ø79,00 (80,70→109,00) |
 | fenda no land | largura 74,9995 mm × abertura **1,500 mm** (R0,75 nas pontas), área 112,0171 mm² |
 | land paralelo | 8,500 mm (Z 99,00 → 107,50) |
-| chanfro de saída | 1,50 × 45°, boca 78,00 × 4,50 mm (cone medido em Z 107.50 → 109.00) |
+| chanfro de saída | 1,50 × 45°, boca 78,00 × 4,50 mm (cone medido em Z 107,50 → 109,00) |
 | boca de entrada | Ø75,60 (restrita por contrato: não alargar) |
 | volume de aço / massa | 477050,9 mm³ → **3,745 kg** em 1045 (7,85 g/cm³) |
 | canal (vazio de fluxo) | 213945,1 mm³ = 267,4 g de mastique dentro da matriz |
@@ -21,7 +21,7 @@ Quantidade pedida: **1 matriz** (sem lote). Gerado por medição no STEP `3D/MAT
    degrau do furo do cabeçote. Furo "útil" para segurar a peça é rejeição: entraria na zona de ~69 MPa do
    degrau. Elemento de aperto só no estoque, antes do tratamento térmico, fora do envelope final.
 2. **A peça não é bipartida e isso é o produto.** A v27.0 era um par `Body_A`+`Body_B` colado em Y = 0 com
-   junta de 1.513,1 mm² por metade e uma costura de 372,8 mm passando nas bordas da manta (x = ±37,50) — a
+   junta de 1,513,1 mm² por metade e uma costura de 372,8 mm passando nas bordas da manta (x = ±37,50) — a
    "serra" na borda do produto vinha daí. Aqui a única superfície funcional é a do canal usinado.
 3. **O canal é feito de um lado só.** Proibido partir a peça para usinar: fio EDM com o arame entrando pela boca
    de entrada Ø75,60 e polimento na direção da extrusão. Sombra de usinagem medida no
@@ -29,9 +29,9 @@ Quantidade pedida: **1 matriz** (sem lote). Gerado por medição no STEP `3D/MAT
 
 ## Interface com o EX-030 (medida na montagem `3D/Cabecote_EX-030_com_Matriz_Jonatha_v29.step`)
 
-  - Ø94.00 em Z 0.00 → 69.90 · folga radial 0.50 mm no furo Ø95.00
-  - Ø89.00 em Z 69.90 → 80.70 · folga radial 0.50 mm no furo Ø90.00
-  - Ø79.00 em Z 80.70 → 109.00 · folga radial 0.50 mm no furo Ø80.00
+  - Ø94,00 em Z 0,00 → 69,90 · folga radial 0,50 mm no furo Ø95,00
+  - Ø89,00 em Z 69,90 → 80,70 · folga radial 0,50 mm no furo Ø90,00
+  - Ø79,00 em Z 80,70 → 109,00 · folga radial 0,50 mm no furo Ø80,00
 
 Interferência matriz × cabeçote: **0,0000 mm³** (zero é o certo — a matriz desliza nos
-furos e encosta face a face no rebaixo, `deslocamento_aplicado_mm` = 0.00).
+furos e encosta face a face no rebaixo, `deslocamento_aplicado_mm` = 0,00).
