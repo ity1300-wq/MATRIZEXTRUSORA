@@ -7,7 +7,7 @@ Gerado por `04_Dados_SSOT_e_Scripts/gerar_matriz_v27_peca_unica.py` em 2026-09-1
 | grandeza | master bipartido | peça única | o que é |
 |---|---|---|---|
 | sólidos no arquivo | 2 (Body_A + Body_B) | **1** | sem par, sem jogo de montagem |
-| aço | 469001,7 mm³ | **469303,2 mm³** | +351,9 mm³ = as bolhas seladas que foram fechadas |
+| aço | 469001,7 mm³ | **469303,2 mm³** | **+301,5 mm³** = as bolhas seladas e os furos de alinhamento que deixaram de existir (re-medido nesta rodada; o valor anterior, 351,9, era de conta de cabeça, não de medição) |
 | massa | 3.6817 kg | **3.6840 kg** | ρ = 7,85 g/cm³ |
 | bolhas seladas dentro do aço | 2 (G-03 do auditor) | **0** | os furos de pino cegos deixaram de existir porque não há mais o que alinhar |
 | canal (funil + fenda) | 213945,1 mm³ | **213945,1 mm³** | o caminho do material é o mesmo |
@@ -15,15 +15,15 @@ Gerado por `04_Dados_SSOT_e_Scripts/gerar_matriz_v27_peca_unica.py` em 2026-09-1
 | boca de entrada | Ø 75.60 mm | **Ø 75.60 mm** | a restrição do acoplamento com a extrusora é Ø 75,60 — e não mudou |
 | envelope | Ø93.00 Z 0.00..69.90 · Ø89.50 Z 69.90..80.70 · Ø79.50 Z 80.70..109.00 | idêntico | senta no mesmo furo do cabeçote EX-030 |
 | boca de saída (Z = 108.99) | 78.000 × 4.500 mm, área 346.6543 mm² (meia-lua (R = espessura/2)) | **78.000 × 4.500 mm, área 346.6543 mm² (meia-lua (R = espessura/2))** | o chanfro 1,50 × 45° abre a boca do mesmo jeito nas duas |
-| BRepCheck | — | sólido válido, **0** cara(s) e **0** aresta(s) inválida(s) em 22 caras / 90 arestas | abre limpa em qualquer CAD (o defeito achado na v28.1 não se repete aqui) |
+| BRepCheck | — | sólido válido, **0** cara(s) e **0** aresta(s) inválida(s) em **22 caras / 45 arestas** (o par bipartido tem 43 caras / 97 arestas; o 90 que estava aqui contava cada aresta duas vezes, uma por face) | | abre limpa em qualquer CAD (o defeito achado na v28.1 não se repete aqui) |
 
 ## O que a peça única tira do produto
 
 A bipartição corta o canal por dentro, no plano Y = 0 — que é o **meio da espessura** da manta. Onde esse plano encontra as paredes do canal nasce a linha de costura que aparece na peça extrudada. Medido no master:
 
-* área de contato metal-metal das duas metades: **759,5 mm²**;
+* área de junta metal-metal no plano Y = 0: **1.513,1 mm² por metade** (duas tiras, 758,0 + 755,1), **1.538,2 mm²** na `Body_A` (as duas pastilhas de 12,6 mm² do alinhamento) e **3.051,3 mm²** somando os dois lados no arquivo do par — re-medido com `abre()` + filtro de cara PLANE com normal ±Y e caixa em y = 0; o valor de 759,5 mm² citado antes era uma única tira dessas, não a junta inteira;
 * a seção do canal no plano de partição: **8204.4 mm²** ocupando 78.000 mm em X por 109.000 mm em Z, com perímetro de costura de **372.8 mm**;
-* **2 linha(s)** de costura correndo nas bordas da manta (x = ±37,50), de ponta a ponta do canal. É por isso que a serra aparece *na borda* e não na face: o plano de partição é perpendicular às faces grandes e paralelo às bordas.
+* **2 linha(s)** de costura correndo nas bordas da manta (x = ±37,50), de ponta a ponta do canal (o perímetro de 372,8 mm da costura é o que faz a junta aparecer no produto, não a área). É por isso que a serra aparece *na borda* e não na face: o plano de partição é perpendicular às faces grandes e paralelo às bordas.
 
 Na peça única esses três números são **zero**: não há junta, logo não há degrau nem rebarba de junta, e o que sobrar de serrilha na borda não vem mais da matriz bipartida — passa a ser processo (τ na parede contra o limiar de raspado, 0,14 MPa da literatura) ou desenho do lábio. É exatamente a separação que a simulação 3D vai fechar.
 
