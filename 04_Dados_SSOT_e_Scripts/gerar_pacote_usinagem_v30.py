@@ -433,12 +433,13 @@ def finaliza(r, pacote):
                                                               "CHECKSUMS_SHA256.txt")]
     io.open(os.path.join(pacote, "CHECKSUMS_SHA256.txt"), "w", encoding="utf-8").write(
         "\n".join('%s  %s' % (G.sha256(os.path.join(pacote, x)), x) for x in sorted(nomes)) + "\n")
+    dentro = sorted(nomes + ["CHECKSUMS_SHA256.txt"])   # o CHECKSUMS vai DENTRO do zip; o zip nao se lista
     with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as zf:
-        for nome in sorted(nomes):
+        for nome in dentro:
             zf.write(os.path.join(pacote, nome), nome)
             assert not os.path.abspath(nome).startswith(os.path.abspath(z)), "zip dentro do zip"
     shazip = G.sha256(z)
-    r["_k"] = len(nomes)
+    r["_k"] = len(dentro)
     escreve(pacote, "07_EMAIL_DE_PRIMEIRO_CONTATO.md", """# E-mail de primeiro contato — capa do pacote (não vai no zip)
 
     **Assunto:** Cotação — 1 matriz de extrusão em aço 1045 · fenda 1,50 mm aberta a fio EDM · indução no land
