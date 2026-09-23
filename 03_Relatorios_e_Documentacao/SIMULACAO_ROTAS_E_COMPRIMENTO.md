@@ -43,3 +43,15 @@ Gerado por `04_Dados_SSOT_e_Scripts/simular_rotas_e_comprimento.py`. Geometria *
 
 Janela de referência da linha análoga (EPDM, perfil): ΔP de matriz **2.1–9.4 MPa** a 41–128 g/min; o repo tinha 41.9 bar de ΔP 1D calibrado para a v27.0, que é da ordem da janela — a banda baixa desta tabela bate com ela.
 
+## Re-medido em 2026-09-22 com as folgas novas
+
+Re-executado o mesmo modelo (mesmo mastique, mesma vazão Q = 15000 mm³/s, as três curvas de reometria do arquivo) com o anel de fuga **medido nas montagens novas** e a rota da fenda medida no STEP de cada revisão. Nada foi copiado da tabela anterior.
+
+| revisão | folgas do anel (mm) × comprimento congruente | dP (tipico) | escapa pelo anel | v de saída | τ no land |
+|---|---|---:|---:|---:|---:|
+| v29 | 0.50 × 69.9 (Ø94.5) + 0.50 × 10.7 (Ø89.5) + 0.50 × 14.0 (Ø79.5) | **219.7 bar** | 0.277 % | 7.98 m/min | 0.797 MPa |
+| v30 | 0.50 × 69.9 (Ø94.5) + 0.50 × 10.7 (Ø89.5) + 0.50 × 14.0 (Ø79.5) | **203.6 bar** | 0.215 % | 7.98 m/min | 0.797 MPa |
+
+Leitura honesta: abrir a folga dos estágios 2 e 3 de 0,25 para 0,50 mm **triplica a fração que escapa para trás** nos cenários com a matriz comprida, e o encurtamento da v30 devolve um pouco (menos trecho de anel dentro do nariz). A fenda em si não muda nada: land, área e chanfro são os mesmos medidos, então a vazão de produto e a espessura da manta continuam as da tabela acima. Quem decide a uniformidade da manta é a coaxialidade dos estágios, não o Ø.
+
+Números completos em `04_Dados_SSOT_e_Scripts/revisoes_2026_09_22_simulacao.json` (as três curvas, trecho por trecho).
