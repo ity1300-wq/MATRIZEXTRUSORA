@@ -21,8 +21,8 @@ Gerado por `04_Dados_SSOT_e_Scripts/gerar_matriz_v27_peca_unica.py` em 2026-09-1
 
 A bipartição corta o canal por dentro, no plano Y = 0 — que é o **meio da espessura** da manta. Onde esse plano encontra as paredes do canal nasce a linha de costura que aparece na peça extrudada. Medido no master:
 
-* área de junta metal-metal no plano Y = 0: **1,513,1 mm² por metade** (duas tiras, 758,0 + 755,1), **1,538,2 mm²** na `Body_A` (as duas pastilhas de 12,6 mm² do alinhamento) e **3,051,3 mm²** somando os dois lados no arquivo do par — re-medido com `abre()` + filtro de cara PLANE com normal ±Y e caixa em y = 0; o valor de 759,5 mm² citado antes era uma única tira dessas, não a junta inteira;
-* a seção do canal no plano de partição: **8204,4 mm²** ocupando 78,000 mm em X por 109,000 mm em Z, com perímetro de costura de **372,8 mm**;
+* área de junta metal-metal no plano Y = 0: **1.513,1 mm² por metade** (duas tiras, 758,0 + 755,1), **1.538,2 mm²** na `Body_A` (as duas pastilhas de 12,6 mm² do alinhamento) e **3.051,3 mm²** somando os dois lados no arquivo do par — re-medido com `abre()` + filtro de cara PLANE com normal ±Y e caixa em y = 0; o valor de 759,5 mm² citado antes era uma única tira dessas, não a junta inteira;
+* a seção do canal no plano de partição: **8.204,4 mm²** ocupando 78,000 mm em X por 109,000 mm em Z, com perímetro de costura de **372,8 mm**;
 * **2 linha(s)** de costura correndo nas bordas da manta (x = ±37,50), de ponta a ponta do canal (o perímetro de 372,8 mm da costura é o que faz a junta aparecer no produto, não a área). É por isso que a serra aparece *na borda* e não na face: o plano de partição é perpendicular às faces grandes e paralelo às bordas.
 
 Na peça única esses três números são **zero**: não há junta, logo não há degrau nem rebarba de junta, e o que sobrar de serrilha na borda não vem mais da matriz bipartida — passa a ser processo (τ na parede contra o limiar de raspado, 0,14 MPa da literatura) ou desenho do lábio. É exatamente a separação que a simulação 3D vai fechar.
@@ -74,7 +74,7 @@ O dono mandou alterar os três Ø do envelope e registrar ±0,5 em toda cota alt
 |---|---|---|
 | Ø dos três estágios | 94,00 / 89,00 / 79,00 | 94,00 / 89,00 / 79,00 |
 | comprimento | 109,00 (inalterado) | 95,00 |
-| land / fenda / área no land | 8,500 mm · 75,0000 × 1,500 · 112,0171 mm² | idêntico: 8,500 mm · 75,0000 × 1,500 · 112,0171 mm² |
+| land / fenda / área no land | 8.500 mm · 75,0000 × 1.500 · 112,0171 mm² | idêntico: 8.500 mm · 75,0000 × 1.500 · 112,0171 mm² |
 | faces / sólidos / BRep | 22 / 1 / válido | 22 / 1 / válido |
 | volume de aço → massa | 477050,9 mm³ → 3,745 kg | 438509,9 mm³ → 3,442 kg |
 | canal de fluxo (vazio) | 213945,1 mm³ | 183862,6 mm³ (funil comprimido por s = 0,858586) |
@@ -87,6 +87,6 @@ Consequências que precisam continuar escritas junto da peça:
 
 1. **o envelope deixou de ser idêntico ao da Matriz 2 (Gedeon)** — era essa a justificativa dos Ø93,00/89,50/79,50; agora a coincidência acabou e a peça é própria.
 2. **a folga anular nos três estágios virou 0,50 mm** (antes 1,00 / 0,25 / 0,25). Isso é o que limita a fuga de material para trás; o efeito no escoamento foi re-medido com o modelo de rotas (ver `SIMULACAO_ROTAS_E_COMPRIMENTO.md`, seção de 2026-09-22).
-3. **±0,5 num Ø de envelope não é cota de ajuste fina**, é cota de folga: com Ø94,00 +0,5 o 1º estágio passa a encostar no furo Ø95,00 com folga de 0,00 — o modelo usa o nominal, e a inspeção aceita a faixa. É decisão dele, e o alerta fica aqui.
+3. **±0,5 no Ø de envelope é cota de folga, e é aí que ela cobra**: o Ø94,00 com +0,5 vira 94,50 num furo Ø95,00, então a matriz **ainda entra** (folga radial de 0,25 mm no pior caso, não zero). O que muda é a fuga para trás. Re-medido no modelo de rotas com o mesmo mastique (Q = 15.000 mm³/s, os três estágios com o mesmo valor, comprimentos congruentes 69,90 / 10,80 / 14,00 mm): com folga 0,50 (nominal) escapam 0,273 % pela v29 e 0,212 % pela v30; folga 0,25 (Ø no limite de −0,5) derruba para 0,007 % e 0,005 %; folga 0,75 (Ø no limite de +0,5) leva a 2,323 % e 1,810 % - 8,5 vezes o nominal, porque a fuga escala com o cubo da folga. A pressão de produto mal sente (219,7 bar / 203,6 bar; o land manda), mas 348 mm³/s voltando pelo anel é material parado queimando na entrada. A decisão de manter ±0,5 é dele; o número do pior caso fica registrado em `04_Dados_SSOT_e_Scripts/revisoes_2026_09_22_folgas_limites.json`.
 4. **o 1045 com tratamento na fenda pode mover 1,500** (tolerância +0,010/−0,000): mede-se antes e depois do tratamento, e o retrabalho é re-passar o fio, não aceitar fora.
 5. a face de saída da v30 coincide com a face do nariz (Z 95,00, medido). Com +0,5 mm de sobra na cota do comprimento a matriz passaria 0,5 mm para fora do nariz — por isso o pacote anota que, se a fábrica quiser apertar, o aceitável prático é 95,00 −0,50/+0,00.

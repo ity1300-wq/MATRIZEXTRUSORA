@@ -11,7 +11,7 @@ Gerado por `04_Dados_SSOT_e_Scripts/simular_rotas_e_comprimento.py`. Geometria *
 | matriz | comprimento | **land paralelo medido** | área no land | ΔP típico (bar) | banda baixa | banda alta | escapa pelo anel | saída (m/min) | τ no land (MPa) | raspado? |
 |---|---|---|---|---|---|---|---|---|---|---|
 | `Copo (original)` | 80,70 mm | **9,75 mm** | 112,0170 mm² | **211,2** | 63,4 | 633,7 | 1,327 % | 7,89 | 0,794 | SIM |
-| `Gedeon CERTA (a sua)` | 109,00 mm | **88,50 mm** | 112,0170 mm² | **963,0** | 288,9 | 2888,9 | 9,140 % | 7,27 | 0,775 | SIM |
+| `Gedeon CERTA (a sua)` | 109,00 mm | **88,50 mm** | 112,0170 mm² | **963,0** | 288,9 | 2.888,9 | 9,140 % | 7,27 | 0,775 | SIM |
 | `Jonatha v27.0 (bipartida)` | 109,00 mm | **8,50 mm** | 112,0170 mm² | **219,9** | 66,0 | 659,7 | 0,067 % | 7,99 | 0,797 | SIM |
 | `Jonatha v29.0 (peça única)` | 109,00 mm | **8,50 mm** | 112,0170 mm² | **219,9** | 66,0 | 659,7 | 0,067 % | 7,99 | 0,797 | SIM |
 
@@ -49,8 +49,8 @@ Re-executado o mesmo modelo (mesmo mastique, mesma vazão Q = 15000 mm³/s, as t
 
 | revisão | folgas do anel (mm) × comprimento congruente | dP (tipico) | escapa pelo anel | v de saída | τ no land |
 |---|---|---:|---:|---:|---:|
-| v29 | 0,50 × 69,9 (Ø94,5) + 0,50 × 10,7 (Ø89,5) + 0,50 × 14,0 (Ø79,5) | **219,7 bar** | 0,277 % | 7,98 m/min | 0,797 MPa |
-| v30 | 0,50 × 69,9 (Ø94,5) + 0,50 × 10,7 (Ø89,5) + 0,50 × 14,0 (Ø79,5) | **203,6 bar** | 0,215 % | 7,98 m/min | 0,797 MPa |
+| v29 | 0,50 × 69,9 (Ø94,5) + 0,50 × 10,7 (Ø89,5) + 0,50 × 14,0 (Ø79,5) | **219,7 bar** | 0.277 % | 7,98 m/min | 0.797 MPa |
+| v30 | 0,50 × 69,9 (Ø94,5) + 0,50 × 10,7 (Ø89,5) + 0,50 × 14,0 (Ø79,5) | **203,6 bar** | 0.215 % | 7,98 m/min | 0.797 MPa |
 
 Leitura honesta: abrir a folga dos estágios 2 e 3 de 0,25 para 0,50 mm **triplica a fração que escapa para trás** nos cenários com a matriz comprida, e o encurtamento da v30 devolve um pouco (menos trecho de anel dentro do nariz). A fenda em si não muda nada: land, área e chanfro são os mesmos medidos, então a vazão de produto e a espessura da manta continuam as da tabela acima. Quem decide a uniformidade da manta é a coaxialidade dos estágios, não o Ø.
 
