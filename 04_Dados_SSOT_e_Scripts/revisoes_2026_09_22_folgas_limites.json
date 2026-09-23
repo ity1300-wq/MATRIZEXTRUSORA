@@ -1,0 +1,42 @@
+{
+ "v29": {
+  "nominal_0.50": {
+   "folga": 0.5,
+   "dp_bar": 219.7,
+   "pct": 0.273,
+   "q_anel": 40.9
+  },
+  "pior_caso_apertado_0.25": {
+   "folga": 0.25,
+   "dp_bar": 219.9,
+   "pct": 0.007,
+   "q_anel": 1.0
+  },
+  "pior_caso_solto_0.75": {
+   "folga": 0.75,
+   "dp_bar": 218.4,
+   "pct": 2.323,
+   "q_anel": 348.5
+  }
+ },
+ "v30": {
+  "nominal_0.50": {
+   "folga": 0.5,
+   "dp_bar": 203.6,
+   "pct": 0.212,
+   "q_anel": 31.7
+  },
+  "pior_caso_apertado_0.25": {
+   "folga": 0.25,
+   "dp_bar": 203.7,
+   "pct": 0.005,
+   "q_anel": 0.8
+  },
+  "pior_caso_solto_0.75": {
+   "folga": 0.75,
+   "dp_bar": 202.6,
+   "pct": 1.81,
+   "q_anel": 271.4
+  }
+ }
+}

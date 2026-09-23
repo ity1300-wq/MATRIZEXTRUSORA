@@ -54,7 +54,7 @@ def sha(p):
 
 
 _PROTEGER = ("1.2344", "EN 10204 3.1", "ISO 4957", "SAE J404", "EN 10083-2", "X37CrMoV5-1",
-             "v27.0", "v28.1", "v29.0", "v30.0", "EX-030", "EX-031", "C45E", "0.02 mm")
+             "v27.0", "v28.1", "v29.0", "v30.0", "EX-030", "EX-031", "C45E", "0.02 mm", "15.000 mm")
 
 
 def _bra(txt):
@@ -64,7 +64,21 @@ def _bra(txt):
     import re
     for i, p in enumerate(_PROTEGER):
         txt = txt.replace(p, "\x00%d\x00" % i)
+    # numero que ja vem no padrao brasileiro com milhar ("213.945,1", "1.513,1") nao e decimal: sem
+    # marcar aqui, a troca abaixo transformava "1.513,1" em "1,513,1" - foi o que aconteceu com a area
+    # de junta na ficha de fabrica. Marca, troca o resto, devolve.
+    marcas = []
+
+    def _marca(m):
+        marcas.append(m.group(0))
+        return "\x02%d\x02" % (len(marcas) - 1)
+
+    txt = re.sub(r"\d{1,3}(?:\.\d{3})+(?:,\d+)?(?!\d)", _marca, txt)
     txt = re.sub(r"(\d+)\.(\d{1,4})", lambda m: m.group(1) + "," + m.group(2), txt)
+    txt = re.sub(r"(?<![\d.,])(\d{1,2})(\d{3}),(\d)", lambda m: m.group(1) + "." + m.group(2) + ","
+                 + m.group(3), txt)
+    for i, v in enumerate(marcas):
+        txt = txt.replace("\x02%d\x02" % i, v)
     for i, p in enumerate(_PROTEGER):
         txt = txt.replace("\x00%d\x00" % i, p)
     return txt
@@ -275,9 +289,16 @@ def relatorio_v27():
             "2. **a folga anular nos três estágios virou 0,50 mm** (antes 1,00 / 0,25 / 0,25). Isso é o que "
             "limita a fuga de material para trás; o efeito no escoamento foi re-medido com o modelo de rotas "
             "(ver `SIMULACAO_ROTAS_E_COMPRIMENTO.md`, seção de 2026-09-22).",
-            "3. **±0,5 num Ø de envelope não é cota de ajuste fina**, é cota de folga: com Ø94,00 +0,5 o 1º "
-            "estágio passa a encostar no furo Ø95,00 com folga de 0,00 — o modelo usa o nominal, e a inspeção "
-            "aceita a faixa. É decisão dele, e o alerta fica aqui.",
+            "3. **±0,5 no Ø de envelope é cota de folga, e é aí que ela cobra**: o Ø94,00 com +0,5 vira 94,50 num "
+            "furo Ø95,00, então a matriz **ainda entra** (folga radial de 0,25 mm no pior caso, não zero). O que "
+            "muda é a fuga para trás. Re-medido no modelo de rotas com o mesmo mastique (Q = 15.000 mm³/s, os três "
+            "estágios com o mesmo valor, comprimentos congruentes 69,90 / 10,80 / 14,00 mm): com folga 0,50 "
+            "(nominal) escapam 0,273 % pela v29 e 0,212 % pela v30; folga 0,25 (Ø no limite de −0,5) derruba para "
+            "0,007 % e 0,005 %; folga 0,75 (Ø no limite de +0,5) leva a 2,323 % e 1,810 % - 8,5 vezes o nominal, "
+            "porque a fuga escala com o cubo da folga. A pressão de produto mal sente (219,7 bar / 203,6 bar; o "
+            "land manda), mas 348 mm³/s voltando pelo anel é material parado queimando na entrada. A decisão de "
+            "manter ±0,5 é dele; o número do pior caso fica registrado em "
+            "`04_Dados_SSOT_e_Scripts/revisoes_2026_09_22_folgas_limites.json`.",
             "4. **o 1045 com tratamento na fenda pode mover 1,500** (tolerância +0,010/−0,000): mede-se antes e "
             "depois do tratamento, e o retrabalho é re-passar o fio, não aceitar fora.",
             "5. a face de saída da v30 coincide com a face do nariz (Z 95,00, medido). Com +0,5 mm de "

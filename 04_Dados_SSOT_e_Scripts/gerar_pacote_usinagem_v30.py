@@ -70,7 +70,21 @@ def _bra(txt):
     import re
     for i, p in enumerate(_PROTEGER):
         txt = txt.replace(p, "\x00%d\x00" % i)
+    # numero que ja vem no padrao brasileiro com milhar ("213.945,1", "1.513,1") nao e decimal: sem
+    # marcar aqui, a troca abaixo transformava "1.513,1" em "1,513,1" - foi o que aconteceu com a area
+    # de junta na ficha de fabrica. Marca, troca o resto, devolve.
+    marcas = []
+
+    def _marca(m):
+        marcas.append(m.group(0))
+        return "\x02%d\x02" % (len(marcas) - 1)
+
+    txt = re.sub(r"\d{1,3}(?:\.\d{3})+(?:,\d+)?(?!\d)", _marca, txt)
     txt = re.sub(r"(\d+)\.(\d{1,4})", lambda m: m.group(1) + "," + m.group(2), txt)
+    txt = re.sub(r"(?<![\d.,])(\d{1,2})(\d{3}),(\d)", lambda m: m.group(1) + "." + m.group(2) + ","
+                 + m.group(3), txt)
+    for i, v in enumerate(marcas):
+        txt = txt.replace("\x02%d\x02" % i, v)
     for i, p in enumerate(_PROTEGER):
         txt = txt.replace("\x00%d\x00" % i, p)
     return txt
