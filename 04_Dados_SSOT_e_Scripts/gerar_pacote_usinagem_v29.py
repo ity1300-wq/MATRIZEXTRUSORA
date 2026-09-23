@@ -37,16 +37,18 @@ sys.path.insert(0, AQUI)
 import cadquery as cq                                                    # noqa: E402
 from auditar_step_correlacoes import abre, vol, maior, inventario, vazio_da_peca, n  # noqa: E402
 
-P_Origem = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_Peca_Unica")
+# desde 2026-09-22 a FONTE do pacote e a propria pasta oficial: apontar de volta para
+# Matriz_Jonatha_v27_Peca_Unica sobrescreveria a revisao nova (Ø94/89/79) com a antiga
+P_Origem = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v29_OFICIAL")
 P_Oficial = os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v29_OFICIAL")
 P_Pacote = os.path.join(RAIZ, "08_Pacote_Usinagem_v29")
 P_Cabec = os.path.join(RAIZ, "06_CAD_Cabecote_EX-030", "STEP")
 SSOT = os.path.join(AQUI, "cad_die_parameters.json")
 Mestre_do_Master = "MatrizJonatha.step"                                  # v27.0, fica onde está
 
-FONTE = {"peca_unica": "MatrizJonatha_v27_Peca_Unica.step",
-         "canal": "MatrizJonatha_Canal_Fluxo.step",
-         "montagem": "Cabecote_EX-030_com_Matriz_Jonatha_v27_Peca_Unica.step"}
+FONTE = {"peca_unica": "MATRIZ_V29_PECA_UNICA.step",
+         "canal": "MATRIZ_V29_CANAL_DE_FLUXO.step",
+         "montagem": "Cabecote_EX-030_com_Matriz_Jonatha_v29.step"}
 DESTINO = {"peca_unica": "MATRIZ_V29_PECA_UNICA.step",
            "canal": "MATRIZ_V29_CANAL_DE_FLUXO.step",
            "montagem": "CONJUNTO_MATRIZ_V29_NO_CABECOTE_EX-030.step"}
@@ -72,6 +74,11 @@ ALVO = dict(largura_fenda=75.00, abertura_fenda=1.50, raio_borda=0.75, land=8.50
             boca_saida=(78.00, 4.50), boca_entrada=75.60,
             estagios=[(93.00, 0.00, 69.90), (89.50, 69.90, 80.70), (79.50, 80.70, 109.00)],
             comprimento=109.00)
+TITULO_FIGURA = ("MATRIZ JONATHA v27.0 · PEÇA ÚNICA · 1.2344 (H13) 50-52 HRC · Ø93,00 × 109,00 mm · "
+                 "1 matriz · rev. interna v29.0 — vistas e cotas geradas das seções medidas no STEP")
+RODAPE_FIGURA = ("interface com o cabeçote EX-030: folgas radiais 1,00 / 0,25 / 0,25 mm · montagem com "
+                 "interseção 0,0000 mm³ · pressão no degrau 69,21 MPa · empuxo axial 29,843 kN · "
+                 "detalhes em 04_TOLERANCIAS_E_INSPECAO.md")
 ACO = dict(grupo="Aço para trabalho a quente, classe H11-H13 (EN ISO 4957 / AISI H13)",
            norma="1.2344 X37CrMoV5-1 (alternativa: 1.2343 / H11, so se a fabrica nao tiver a barra 1.2344 no diametro)",
            dureza="50-52 HRC no núcleo, após têmpera em vácuo e 2 revénios",
@@ -162,7 +169,7 @@ def promove_para_v29():
     movidos = {}
     for chave, nome in FONTE.items():
         origem = {"peca_unica": os.path.join(P_Origem, nome),
-                  "canal": os.path.join(RAIZ, "07_CAD_Matrizes", "Matriz_Jonatha_v27_OFICIAL", nome),
+                  "canal": os.path.join(P_Origem, nome),
                   "montagem": os.path.join(P_Cabec, nome)}[chave]
         if not os.path.exists(origem):
             print("   AVISO: %s nao existe, pulando" % origem)
@@ -698,11 +705,8 @@ def prancha(m, sh, void, cotas, destino):
             queb += bloco
     axE.text(0.0, 1.0, "\n".join(queb), fontsize=6.3, va="top", ha="left", family="DejaVu Sans", linespacing=1.45)
 
-    fig.suptitle("MATRIZ JONATHA v27.0 · PEÇA ÚNICA · 1.2344 (H13) 50-52 HRC · Ø93,00 × 109,00 mm · "
-                 "1 matriz · rev. interna v29.0 — vistas e cotas geradas das seções medidas no STEP", fontsize=12)
-    fig.text(0.5, 0.024, "interface com o cabeçote EX-030: folgas radiais 1,00 / 0,25 / 0,25 mm · montagem com "
-                         "interseção 0,0000 mm³ · pressão no degrau 69,21 MPa · empuxo axial 29,843 kN · "
-                         "detalhes em 04_TOLERANCIAS_E_INSPECAO.md", fontsize=7.0, ha="center", color="#333333")
+    fig.suptitle(TITULO_FIGURA, fontsize=12)
+    fig.text(0.5, 0.024, RODAPE_FIGURA, fontsize=7.0, ha="center", color="#333333")
     fig.savefig(destino, dpi=150)
     fig.savefig(destino.rsplit(".", 1)[0] + ".png", dpi=150)
     plt.close(fig)

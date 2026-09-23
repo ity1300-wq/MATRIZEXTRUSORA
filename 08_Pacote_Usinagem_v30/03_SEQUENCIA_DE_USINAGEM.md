@@ -1,9 +1,9 @@
-# Sequência de usinagem sugerida (1045, peça única, Ø94.00 × 109.00 mm)
+# Sequência de usinagem sugerida (1045, peça única, Ø94.00 × 95.00 mm)
 
 | # | operação | até onde | controle |
 |---:|---|---|---|
 | 1 | serrar barra forjada Ø100 mm com folga de 3 mm de topo | — | ver fibra no eixo |
-| 2 | desbocar os três estágios, facear as duas pontas | ±0,3 | comprimento 109.00 +0,5 |
+| 2 | desbocar os três estágios, facear as duas pontas | ±0,3 | comprimento 95.00 +0,5 |
 | 3 | **alívio de tensões** (600 °C, 2 h, ar) | — | obrigatório em 1045 usinado bruto |
 | 4 | tornear o envelope a Ø94.00/Ø89.00/Ø79.00 com degraus em Z 69.90 e 80.70 | ±0,25 | coaxialidade Ø 0,02 no datum A |
 | 5 | abrir a boca de entrada e o funil (broca + fresamento/EDM de penetração) | folga 0,5 no contrato | **não alargar Ø75,60** |
@@ -14,7 +14,7 @@
 | 10 | indução nas arestas do land (ou nitretação a plasma) | 0,6-1,0 mm / 8-18 µm | **re-medir a abertura da fenda** |
 | 11 | retoque a fio, se a abertura tiver fechado; re-polimento local | 1,500 +0,010 | leitura final antes de embalar |
 | 12 | chanfro de saída na boca | 1,50 × 45° ±0,20 / ±0,5° | esquadro + perfil óptico |
-| 13 | marcar a laser na face traseira | fora do furo | `JONATHA v27.0 · EX-031 · 1045 · rev. geom. 2026-09-22 · lote · nº série` |
+| 13 | marcar a laser na face traseira | fora do furo | `JONATHA v27.0 · EX-031 · 1045 · rev. 30 (2026-09-22) · lote · nº série` |
 
 Rejeições automáticas: furo de fixação, flange, pino, peça partida em duas metades, abertura fora de
 1,500 +0,010/−0,000, land com ângulo (tem de ser paralelo em 8,50 mm), Ø maior que o

@@ -66,3 +66,27 @@ Sem as duas metades, o único jeito de abrir o funil e a fenda é entrar por ela
 * **Anel de fuga:** a folga de 1,00/0,25/0,25 mm entre a OD da matriz e o furo do cabeçote é do encaixe, não da bipartição — continua igual nas duas peças, e é a rota que a simulação precisa resolver.
 * **Promoção:** a peça única **não** é o master. Quando ele quiser, se ela entra no lugar da v27 bipartida, é preciso re-sear o baseline (ato do auditor, com o método novo) — e aí vale aproveitar para consertar o `Body_B` da v28.1, que tem uma cara degenerada achada pela auditoria de correlações.
 
+## Revisão de 2026-09-22: Ø novos, ±0,5 e a v30 faceada ao nariz
+
+O dono mandou alterar os três Ø do envelope e registrar ±0,5 em toda cota alterada; o modelo e o desenho foram re-gerados juntos (`04_/gerar_revisoes_v29_v30.py`), com o canal de fluxo herdado 1:1 do STEP aprovado. Medido nos dois STEP novos:
+
+| | v29 (re-feita) | v30 (nova) |
+|---|---|---|
+| Ø dos três estágios | 94.00 / 89.00 / 79.00 | 94.00 / 89.00 / 79.00 |
+| comprimento | 109.00 (inalterado) | 95.00 |
+| land / fenda / área no land | 8.500 mm · 75.0000 × 1.500 · 112.0171 mm² | idêntico: 8.500 mm · 75.0000 × 1.500 · 112.0171 mm² |
+| faces / sólidos / BRep | 22 / 1 / válido | 22 / 1 / válido |
+| volume de aço → massa | 477050,9 mm³ → 3,745 kg | 438509,9 mm³ → 3,442 kg |
+| canal de fluxo (vazio) | 213945,1 mm³ | 183862,6 mm³ (funil comprimido por s = 0.858586) |
+| protrusão além do nariz do cabeçote | +14.00 mm | +0.00 mm |
+| interferência com o cabeçote | 0.0000 mm³ | 0.0000 mm³ |
+| folga radial nos 3 estágios | 0.50 / 0.50 / 0.50 mm | 0.50 / 0.50 / 0.50 mm |
+| material | aço 1045 + indução/nitretação no land | aço 1045 + indução/nitretação no land |
+
+Consequências que precisam continuar escritas junto da peça:
+
+1. **o envelope deixou de ser idêntico ao da Matriz 2 (Gedeon)** — era essa a justificativa dos Ø93,00/89,50/79,50; agora a coincidência acabou e a peça é própria.
+2. **a folga anular nos três estágios virou 0,50 mm** (antes 1,00 / 0,25 / 0,25). Isso é o que limita a fuga de material para trás; o efeito no escoamento foi re-medido com o modelo de rotas (ver `SIMULACAO_ROTAS_E_COMPRIMENTO.md`, seção de 2026-09-22).
+3. **±0,5 num Ø de envelope não é cota de ajuste fina**, é cota de folga: com Ø94,00 +0,5 o 1º estágio passa a encostar no furo Ø95,00 com folga de 0,00 — o modelo usa o nominal, e a inspeção aceita a faixa. É decisão dele, e o alerta fica aqui.
+4. **o 1045 com tratamento na fenda pode mover 1,500** (tolerância +0,010/−0,000): mede-se antes e depois do tratamento, e o retrabalho é re-passar o fio, não aceitar fora.
+5. a face de saída da v30 coincide com a face do nariz (Z 95,00, medido). Com +0,5 mm de sobra na cota do comprimento a matriz passaria 0,5 mm para fora do nariz — por isso o pacote anota que, se a fábrica quiser apertar, o aceitável prático é 95,00 −0,50/+0,00.

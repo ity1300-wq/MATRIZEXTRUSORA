@@ -1,0 +1,184 @@
+{
+ "Q_mm3_s": 15000.0,
+ "curvas": [
+  "otimista",
+  "pessimista",
+  "tipico"
+ ],
+ "rev": {
+  "v29": {
+   "anel": [
+    [
+     0.5,
+     69.9,
+     94.5
+    ],
+    [
+     0.5,
+     10.7,
+     89.5
+    ],
+    [
+     0.5,
+     14.0,
+     79.5
+    ]
+   ],
+   "geo": {
+    "comprimento_mm": 109.0,
+    "land_mm": 8.5,
+    "area_no_land_mm2": 112.017,
+    "area_saida_mm2": 346.654
+   },
+   "resultado": {
+    "otimista": {
+     "dp_bar": 65.9,
+     "trechos_bar": {
+      "funil": 34.34,
+      "transicao": 3.68,
+      "land": 27.09,
+      "saida": 0.81
+     },
+     "land_mm": 8.5,
+     "pct_pelo_anel": 0.277,
+     "q_saida_mm3_s": 14958.5,
+     "v_saida_m_min": 7.98,
+     "tau_land_MPa": 0.239,
+     "q_pelo_anel_mm3_s": 41.5
+    },
+    "tipico": {
+     "dp_bar": 219.7,
+     "trechos_bar": {
+      "funil": 114.46,
+      "transicao": 12.27,
+      "land": 90.31,
+      "saida": 2.72
+     },
+     "land_mm": 8.5,
+     "pct_pelo_anel": 0.277,
+     "q_saida_mm3_s": 14958.5,
+     "v_saida_m_min": 7.98,
+     "tau_land_MPa": 0.797,
+     "q_pelo_anel_mm3_s": 41.5
+    },
+    "pessimista": {
+     "dp_bar": 659.2,
+     "trechos_bar": {
+      "funil": 343.37,
+      "transicao": 36.8,
+      "land": 270.92,
+      "saida": 8.15
+     },
+     "land_mm": 8.5,
+     "pct_pelo_anel": 0.277,
+     "q_saida_mm3_s": 14958.5,
+     "v_saida_m_min": 7.98,
+     "tau_land_MPa": 2.39,
+     "q_pelo_anel_mm3_s": 41.5
+    }
+   },
+   "tipico": {
+    "dp_bar": 219.7,
+    "trechos_bar": {
+     "funil": 114.46,
+     "transicao": 12.27,
+     "land": 90.31,
+     "saida": 2.72
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.277,
+    "q_saida_mm3_s": 14958.5,
+    "v_saida_m_min": 7.98,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 41.5
+   }
+  },
+  "v30": {
+   "anel": [
+    [
+     0.5,
+     69.9,
+     94.5
+    ],
+    [
+     0.5,
+     10.7,
+     89.5
+    ],
+    [
+     0.5,
+     14.0,
+     79.5
+    ]
+   ],
+   "geo": {
+    "comprimento_mm": 95.0,
+    "land_mm": 8.5,
+    "area_no_land_mm2": 112.017,
+    "area_saida_mm2": 346.654
+   },
+   "resultado": {
+    "otimista": {
+     "dp_bar": 61.1,
+     "trechos_bar": {
+      "funil": 29.49,
+      "transicao": 3.68,
+      "land": 27.1,
+      "saida": 0.81
+     },
+     "land_mm": 8.5,
+     "pct_pelo_anel": 0.215,
+     "q_saida_mm3_s": 14967.8,
+     "v_saida_m_min": 7.98,
+     "tau_land_MPa": 0.239,
+     "q_pelo_anel_mm3_s": 32.2
+    },
+    "tipico": {
+     "dp_bar": 203.6,
+     "trechos_bar": {
+      "funil": 98.29,
+      "transicao": 12.27,
+      "land": 90.32,
+      "saida": 2.72
+     },
+     "land_mm": 8.5,
+     "pct_pelo_anel": 0.215,
+     "q_saida_mm3_s": 14967.8,
+     "v_saida_m_min": 7.98,
+     "tau_land_MPa": 0.797,
+     "q_pelo_anel_mm3_s": 32.2
+    },
+    "pessimista": {
+     "dp_bar": 610.8,
+     "trechos_bar": {
+      "funil": 294.87,
+      "transicao": 36.81,
+      "land": 270.97,
+      "saida": 8.15
+     },
+     "land_mm": 8.5,
+     "pct_pelo_anel": 0.215,
+     "q_saida_mm3_s": 14967.8,
+     "v_saida_m_min": 7.98,
+     "tau_land_MPa": 2.391,
+     "q_pelo_anel_mm3_s": 32.2
+    }
+   },
+   "tipico": {
+    "dp_bar": 203.6,
+    "trechos_bar": {
+     "funil": 98.29,
+     "transicao": 12.27,
+     "land": 90.32,
+     "saida": 2.72
+    },
+    "land_mm": 8.5,
+    "pct_pelo_anel": 0.215,
+    "q_saida_mm3_s": 14967.8,
+    "v_saida_m_min": 7.98,
+    "tau_land_MPa": 0.797,
+    "q_pelo_anel_mm3_s": 32.2
+   }
+  }
+ }
+}

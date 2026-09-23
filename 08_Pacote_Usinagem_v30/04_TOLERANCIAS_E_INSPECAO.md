@@ -1,7 +1,7 @@
-# Tolerâncias e inspeção — JONATHA v27.0 · rev. geom. 2026-09-22
+# Tolerâncias e inspeção — JONATHA v27.0 · rev. 30 (2026-09-22)
 
 Política registrada do dono (2026-09-22): **"tolerância de 0,5 para todas as cotas alteradas aqui"**. Cotas
-alteradas nesta revisão: Ø94.00, Ø89.00, Ø79.00.
+alteradas nesta revisão: Ø94.00, Ø89.00, Ø79.00 e comprimento 95.00.
 Nada mais foi tocado: as cotas do produto (fenda, land, chanfro, boca de entrada, rugosidade) continuam com as
 tolerâncias apertadas de antes, porque são elas que definem a manta de 1,50 mm.
 
@@ -11,7 +11,7 @@ tolerâncias apertadas de antes, porque são elas que definem a manta de 1,50 mm
 | 2 | Diâmetro do 2º estágio (Ø89,50 no furo Ø90,00) | 89.500 | 0 / −0,02 | micrômetro, 3 posições, na saída (Z 69,90-80,70) | define a folga anular de 0,25 mm que segura a fuga de material para trás |
 | 3 | Diâmetro do 3º estágio / pescoço (Ø79,50 no furo Ø80,00) | 79.500 | 0 / −0,02 | micrômetro, 3 posições, junto da face de saída | mesma razão; os dois juntos fecham o anel de 0,25 mm nos dois estágios de product |
 | 4 | Excentricidade dos estágios 2 e 3 em relação ao 1 | 0.0200 | Ø 0,02 total | CMM: cilíndricidade e coaxialidade, suporte no 1º estágio | folga anular desigual é o que faz a manta vir com espessura variando de um lado |
-| 5 | Comprimento total | 109.000 | 0 / −0,05 (não alterada) | comparador com a face de entrada sobre granito | comprimento 109,00 inalterado (cota não alterada: tolerância continua 0 / −0,05) |
+| 5 | Comprimento total | 95.000 | ±0,5 (cota alterada em 2026-09-22) | comparador com a face de entrada sobre granito | comprimento 95,00 = 109,00 − 14,00, a face de saída faceada com a face do nariz do cabeçote EX-030; cota ALTERADA, leva ±0,5. Consequência medida: com +0,5 mm a matriz passaria 0,5 mm para fora do nariz, então o aceitável prático é 95,00/−0,50 +0,00 se a fábrica preferir apertar - a decisão de manter ±0,5 é do dono, o alerta é nosso |
 | 6 | Posição axial do degrau 1→2 | 69.900 | ±0,05 | CMM | o degrau é o batente da matriz no rebaixo do cabeçote |
 | 7 | Posição axial do degrau 2→3 | 80.700 | ±0,05 | CMM | comprimento do pescoço dentro do furo Ø80 |
 | 8 | Ângulo de saída do furo do cabeçote / face de assentamento | 0.0100 | planeza 0,01 e perpendicularidade 0,01 em A | CMM + lâmina óptica | face ondulada abre junta de material e aparece como risco na manta |
@@ -28,7 +28,7 @@ tolerâncias apertadas de antes, porque são elas que definem a manta de 1,50 mm
 | 19 | Dureza após o tratamento | 33.000 | corpo 30-36 HRC; arestas do land 55-60 HRC (indução) ou 600-700 HV0,2 (nitretação) | durômetro na face traseira (HRC) + microdureza em seção cortada de corpo de prova do lote | o 1045 não chega a 50 HRC no núcleo de Ø94; a dureza útil desta matriz vive na aresta do land |
 | 20 | Camada REC (refundida) do EDM | 0.0200 | remover ≥ 0,02 mm em toda a superfície do canal | ataque leve + medição dimensional antes/depois | camada REC trinca e solta particula no produto |
 | 21 | Tensões internas | — | alívio de tensões antes da têmpera e revenido duplo; sem retocar a fenda depois do último revenido | re-medir a fenda antes e depois do tratamento (relatório anexado) | a fenda de 1,50 mm fecha se a peça for temperada sem alívio |
-| 22 | Marcação | — | a laser: JONATHA v27.0 · EX-031 · 1045 · rev. geom. 2026-09-22 · lote · nº de série · data, na face traseira, fora do furo | visual | a marcação não pode entrar na zona do degrau nem na face de assentamento; a peça é a JONATHA v27.0 para a fábrica - 'rev. 29/30' é carimbo interno do projeto |
+| 22 | Marcação | — | a laser: JONATHA v27.0 · EX-031 · 1045 · rev. 30 (2026-09-22) · lote · nº de série · data, na face traseira, fora do furo | visual | a marcação não pode entrar na zona do degrau nem na face de assentamento; a peça é a JONATHA v27.0 para a fábrica - 'rev. 29/30' é carimbo interno do projeto |
 | 23 | Tratamento superficial na fenda (pedido do dono) | — | indução nas arestas do land 0,6-1,0 mm OU nitretação a plasma 8-18 µm; sem cobre, sem jato de granalha no canal; Ra do canal continua ≤ 0,4 µm | medir a abertura da fenda ANTES e DEPOIS do tratamento e gravar os dois números no relatório dimensional | qualquer camada em cima de 1,500 mm muda a espessura da manta; se o tratamento abrir ou fechar a fenda, o aceitável continua 1,500 +0,010/−0,000 e o retrabalho é passar o fio de novo, não 'aceitar como está' |
 
 ## Plano de inspeção (o que vem junto com a peça)

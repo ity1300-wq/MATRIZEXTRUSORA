@@ -16,6 +16,6 @@
   vão). Proteger com capa de PE e não empilhar; transporte com a face de entrada apoiada em prato, nunca a de
   saída.
 * **O que mudou em relação à revisão que estava no disco**: Ø93,00 → Ø94.00, Ø89,50 → Ø89.00,
-  Ø79,50 → Ø79.00,
+  Ø79,50 → Ø79.00, comprimento 109,00 → 95.00 (funil encurtado; land e chanfro movidos rigidamente),
   material 1.2344 50-52 HRC → 1045 com tratamento nas arestas. O canal de fluxo continua o mesmo do master
-  aprovado.
+  aprovado (só o trecho do funil foi comprimido axialmente, X e Y intactos).

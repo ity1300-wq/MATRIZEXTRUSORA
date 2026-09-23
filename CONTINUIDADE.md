@@ -338,3 +338,41 @@ Não promova a v28.1 por conta própria, não toque em `02_/` a não ser para le
 recrie a "Gedeon corrigida". Se precisar escrever número em algum lugar, meça primeiro: o portão
 (`verificar_cadeia.py`) compara texto de relatório contra JSON justamente para pegar número que apodreceu.
 E se mudar um caminho, rode o portão completo antes de dizer que está pronto.
+
+## 11. Revisões de 2026-09-22 (o estado atual, sem adivinhação)
+
+O dono mudou as cotas de envelope e o material. O que está em disco agora, tudo medido nos STEP:
+
+* **`07_/Matriz_Jonatha_v30_OFICIAL/` = a peça vigente** (`matriz_oficial` = v30.0 no SSOT): Ø94,00 / Ø89,00 /
+  Ø79,00, comprimento **95,00 mm**, face de saída **faceada com o nariz do EX-030** (protrusão medida +0,00 mm;
+  na v29 é +14,00 mm), interferência com o cabeçote 0,0000 mm³, folga radial 0,50 mm nos três estágios,
+  1 sólido / 22 faces / BRep válido, aço 438.509,9 mm³ = 3,442 kg, canal 183.862,6 mm³.
+* **`07_/Matriz_Jonatha_v29_OFICIAL/` = a v29 re-feita** com os mesmos Ø novos e comprimento 109,00 (a cota de
+  comprimento não foi alterada nela), aço 477.050,9 mm³ = 3,745 kg, canal 213.945,1 mm³ (idêntico ao master).
+* **Produto imutável nas duas**: land 8,500 mm (Z 85,00→93,50 na v30; 99,00→107,50 na v29), fenda
+  75,00 × 1,500 entre caras com R 0,75, área 112,0171 mm², chanfro 1,50 × 45°, boca de entrada Ø75,60.
+* **Tolerância ±0,5 em toda cota alterada** (os três Ø e, na v30, o comprimento), por ordem dele. As cotas do
+  produto continuam apertadas (1,500 +0,010/−0,000 etc.) — o ±0,5 não se estendeu a elas.
+* **Material: aço 1045** com indução (ou nitretação a plasma) na região da fenda/land. O 1.2344 50-52 HRC
+  anterior está anotado como `material_anterior` no SSOT.
+* **Pacotes**: `08_Pacote_Usinagem_v30/` (vigente para envio; zip `PACOTE_MATRIZ_V30_PARA_ENVIO.zip`, o sha está
+  na capa `07_EMAIL_DE_PRIMEIRO_CONTATO.md`) e `08_Pacote_Usinagem_v29/` re-gerado com o STEP novo. Ordem
+  respeitada em ambos: conteúdo → CHECKSUMS → zip → sha na capa (o zip e a capa nunca entram na lista; foi o zip
+  ler a si mesmo que encheu o disco com 19 GB nesta sessão — `finaliza()` já exclui).
+* **Simulação re-executada** com as folgas novas: v29 219,7 bar / 0,277 % escapando pelo anel; v30 203,6 bar /
+  0,215 % (mesmo mastique, Q = 15.000 mm³/s, `04_/revisoes_2026_09_22_simulacao.json`).
+
+Como re-gerar do zero (nesta ordem, é o que a sandbox perdida exige):
+
+```bash
+bash 04_Dados_SSOT_e_Scripts/restaurar_workspace.sh          # pip + symlinks + remoto
+python3 04_Dados_SSOT_e_Scripts/gerar_revisoes_v29_v30.py    # STEP v29 re-feita, v30, montagens, JSON
+python3 04_Dados_SSOT_e_Scripts/gerar_pacote_usinagem_v30.py # os dois pacotes (docs + prancha + zip + capa)
+python3 04_Dados_SSOT_e_Scripts/aplicar_revisoes_2026_09_22.py # READMEs, SSOT, relatorios, simulacao
+python3 04_Dados_SSOT_e_Scripts/verificar_cadeia.py --portao
+```
+
+Pendências que ficam explícitas: (a) o **portão de CFD 3D do funil** continua adiado por ele; (b) o
+`01_/` não ganhou atalho para a v30 (symlink novo não sobrevive à recriação da sandbox e o script de
+restauração teria de ser ampliado — o SSOT e o índice de `07_/` apontam para o arquivo real); (c) o PAT em
+`/home/user/tmp/.gh` continua exposto e a revogação é dele.

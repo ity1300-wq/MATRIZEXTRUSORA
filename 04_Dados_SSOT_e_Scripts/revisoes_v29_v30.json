@@ -1,0 +1,326 @@
+{
+ "decisao": "revisoes de 2026-09-22 pedidas pelo dono",
+ "fonte_do_canal": "07_CAD_Matrizes/Matriz_Jonatha_v29_OFICIAL/MATRIZ_V29_CANAL_DE_FLUXO.step",
+ "canal_herdado": {
+  "comprimento": 109.0,
+  "zmin": -0.0,
+  "zmax": 109.0,
+  "z_land": 99.0,
+  "land": 8.5,
+  "caras_do_land": 2,
+  "espessura_entre_caras": 1.5,
+  "area_no_land": 112.0171,
+  "largura_no_land": 75.0,
+  "abertura_no_land": 1.5,
+  "chanfro": {
+   "raio_max": 1.125,
+   "z": [
+    107.5,
+    109.0
+   ],
+   "abertura_graus": 45.0
+  },
+  "boca_saida": [
+   78.0,
+   4.5,
+   346.6543
+  ],
+  "boca_entrada": 75.6,
+  "area_entrada": 4488.8332,
+  "volume": 213945.1
+ },
+ "z_corte_do_canal": 99.0,
+ "cauda_preservada_mm": 10.0,
+ "escala_axial_do_funil": 0.858586,
+ "diametros_alterados_mm": [
+  94.0,
+  89.0,
+  79.0
+ ],
+ "tolerancia_das_cotas_alteradas": "±0,5 em todas as cotas alteradas (Ø94,00 / Ø89,00 / Ø79,00 e comprimento 95,00)",
+ "aco_novo": "aço 1045 + tratamento superficial por indução (ou nitretação) nas arestas do land",
+ "v29": {
+  "medidas": {
+   "rotulo": "v29",
+   "arquivo": "07_CAD_Matrizes/Matriz_Jonatha_v29_OFICIAL/MATRIZ_V29_PECA_UNICA.step",
+   "sha256": "107d166874b7ab71316981210ed312445ba71f33de67be486cc05b80f4c89242",
+   "bytes": 81800,
+   "solidos": 1,
+   "cascas": [
+    1
+   ],
+   "faces": 22,
+   "brep_valido": true,
+   "comprimento": 109.0,
+   "dx": 94.0,
+   "dy": 94.0,
+   "volume_aco_mm3": 477050.9,
+   "massa_kg": 3.7448,
+   "estagios_medidos": [
+    {
+     "Ø": 94.0,
+     "z": [
+      0.0,
+      69.9
+     ]
+    },
+    {
+     "Ø": 89.0,
+     "z": [
+      69.9,
+      80.7
+     ]
+    },
+    {
+     "Ø": 79.0,
+     "z": [
+      80.7,
+      109.0
+     ]
+    }
+   ],
+   "fenda": {
+    "largura_mm": 75.0,
+    "largura_so_os_planos_mm": 73.5,
+    "espessura_mm": 2.0,
+    "raio_borda_mm": 0.75,
+    "z_da_fenda": [
+     99.0,
+     107.5
+    ],
+    "passante_ate_a_saida": false
+   },
+   "canal": {
+    "comprimento": 109.0,
+    "zmin": -0.0,
+    "zmax": 109.0,
+    "z_land": 99.0,
+    "land": 8.5,
+    "caras_do_land": 2,
+    "espessura_entre_caras": 1.5,
+    "area_no_land": 112.0171,
+    "largura_no_land": 75.0,
+    "abertura_no_land": 1.5,
+    "chanfro": {
+     "raio_max": 1.125,
+     "z": [
+      107.5,
+      109.0
+     ],
+     "abertura_graus": 45.0
+    },
+    "boca_saida": [
+     78.0,
+     4.5,
+     346.6543
+    ],
+    "boca_entrada": 75.6,
+    "area_entrada": 4488.8332,
+    "volume": 213945.1
+   },
+   "vazao_area_saida": [
+    78.0,
+    4.5,
+    346.6543
+   ]
+  },
+  "montagem": {
+   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v29.step",
+   "sha256": "d7cb3c3ea294e8e21ddec8b682e7dc4e9c5c0ea3a0e4cd059f6e42ef38c1123e",
+   "bytes": 135725,
+   "solidos": 2,
+   "volume_somado_mm3": 2047390.4,
+   "deslocamento_aplicado_mm": 0.0,
+   "saida_além_da_face_do_nariz_mm": 14.0,
+   "face_de_saida_no_Z": 109.0,
+   "z_face_do_nariz": 95.0,
+   "interferencia_mm3": 0.0,
+   "folgas_por_estagio": [
+    {
+     "estagio_Ø": 94.0,
+     "z": [
+      0.0,
+      69.9
+     ],
+     "furo_Ø": 95.0,
+     "folga_radial": 0.5,
+     "trecho_congruente_mm": [
+      0.0,
+      69.9
+     ],
+     "comprimento_do_estagio_no_furo_mm": 69.9
+    },
+    {
+     "estagio_Ø": 89.0,
+     "z": [
+      69.9,
+      80.7
+     ],
+     "furo_Ø": 90.0,
+     "folga_radial": 0.5,
+     "trecho_congruente_mm": [
+      70.0,
+      80.7
+     ],
+     "comprimento_do_estagio_no_furo_mm": 10.7
+    },
+    {
+     "estagio_Ø": 79.0,
+     "z": [
+      80.7,
+      109.0
+     ],
+     "furo_Ø": 80.0,
+     "folga_radial": 0.5,
+     "trecho_congruente_mm": [
+      81.0,
+      95.0
+     ],
+     "comprimento_do_estagio_no_furo_mm": 14.0
+    }
+   ]
+  }
+ },
+ "v30": {
+  "medidas": {
+   "rotulo": "v30",
+   "arquivo": "07_CAD_Matrizes/Matriz_Jonatha_v30_OFICIAL/MATRIZ_V30_PECA_UNICA.step",
+   "sha256": "b42ee2e50a10d43db4b91a22f62e3e4e0aacfdcd8e3ebbacf3eb6cf4a39b818e",
+   "bytes": 97198,
+   "solidos": 1,
+   "cascas": [
+    1
+   ],
+   "faces": 22,
+   "brep_valido": true,
+   "comprimento": 95.0,
+   "dx": 94.0,
+   "dy": 94.0,
+   "volume_aco_mm3": 438509.9,
+   "massa_kg": 3.4423,
+   "estagios_medidos": [
+    {
+     "Ø": 94.0,
+     "z": [
+      0.0,
+      69.9
+     ]
+    },
+    {
+     "Ø": 89.0,
+     "z": [
+      69.9,
+      80.7
+     ]
+    },
+    {
+     "Ø": 79.0,
+     "z": [
+      80.7,
+      95.0
+     ]
+    }
+   ],
+   "fenda": {
+    "largura_mm": 75.0,
+    "largura_so_os_planos_mm": 73.5,
+    "espessura_mm": 2.0,
+    "raio_borda_mm": 0.75,
+    "z_da_fenda": [
+     85.0,
+     93.5
+    ],
+    "passante_ate_a_saida": false
+   },
+   "canal": {
+    "comprimento": 95.0,
+    "zmin": -0.0,
+    "zmax": 95.0,
+    "z_land": 85.0,
+    "land": 8.5,
+    "caras_do_land": 2,
+    "espessura_entre_caras": 1.5,
+    "area_no_land": 112.0171,
+    "largura_no_land": 75.0,
+    "abertura_no_land": 1.5,
+    "chanfro": {
+     "raio_max": 1.125,
+     "z": [
+      93.5,
+      95.0
+     ],
+     "abertura_graus": 45.0
+    },
+    "boca_saida": [
+     78.0,
+     4.5,
+     346.6543
+    ],
+    "boca_entrada": 75.6,
+    "area_entrada": 4488.3173,
+    "volume": 183862.6
+   },
+   "vazao_area_saida": [
+    78.0,
+    4.5,
+    346.6543
+   ]
+  },
+  "montagem": {
+   "arquivo": "06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Jonatha_v30.step",
+   "sha256": "725c2f83f26cc6e85331182e8e86d60d5fe9cd172405271228f0b03fbd7128a5",
+   "bytes": 151083,
+   "solidos": 2,
+   "volume_somado_mm3": 2008849.4,
+   "deslocamento_aplicado_mm": 0.0,
+   "saida_além_da_face_do_nariz_mm": 0.0,
+   "face_de_saida_no_Z": 95.0,
+   "z_face_do_nariz": 95.0,
+   "interferencia_mm3": 0.0,
+   "folgas_por_estagio": [
+    {
+     "estagio_Ø": 94.0,
+     "z": [
+      0.0,
+      69.9
+     ],
+     "furo_Ø": 95.0,
+     "folga_radial": 0.5,
+     "trecho_congruente_mm": [
+      0.0,
+      69.9
+     ],
+     "comprimento_do_estagio_no_furo_mm": 69.9
+    },
+    {
+     "estagio_Ø": 89.0,
+     "z": [
+      69.9,
+      80.7
+     ],
+     "furo_Ø": 90.0,
+     "folga_radial": 0.5,
+     "trecho_congruente_mm": [
+      70.0,
+      80.7
+     ],
+     "comprimento_do_estagio_no_furo_mm": 10.7
+    },
+    {
+     "estagio_Ø": 79.0,
+     "z": [
+      80.7,
+      95.0
+     ],
+     "furo_Ø": 80.0,
+     "folga_radial": 0.5,
+     "trecho_congruente_mm": [
+      81.0,
+      95.0
+     ],
+     "comprimento_do_estagio_no_furo_mm": 14.0
+    }
+   ]
+  }
+ }
+}

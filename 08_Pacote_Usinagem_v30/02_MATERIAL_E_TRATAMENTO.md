@@ -5,7 +5,7 @@
 | aço | **SAE J404 / EN 10083-2: aço 1045, barra forjada, fibra no eixo, condição de entrega normalizada (≤ 220 HB)** |
 | condição de entrega | normalizada, ≤ 220 HB, usinar mole; fibra no eixo da peça |
 | dureza final | corpo revenido 30-36 HRC; arestas do land 55-60 HRC em camada de 0,6-1,0 mm por indução (ou nitretação a plasma 520 °C, 8-18 µm, se a fábrica preferir tratar a fenda inteira) — escolha da fábrica, declarada no relatório |
-| densidade | 7,85 g/cm³ → 3,745 kg por peça |
+| densidade | 7,85 g/cm³ → 3,442 kg por peça |
 | certificação | EN 10204 3.1 do calor: composição, granulometria, inclusão, resultado de têmpera/revenimento |
 | tratamento na fenda | **pedido do dono**: indução nas arestas do land **ou** nitretação a plasma na região da fenda, à escolha da fábrica, declarado no relatório |
 

@@ -153,7 +153,12 @@ def main():
             falhas.append(rot + ": " + txt)
 
     ssot = json.load(open(ARQ_SSOT, encoding="utf-8"))
-    env = ssot["envelope_externo_mm"]
+    # 2026-09-22: o "envelope_externo_mm" do SSOT passou a ser o da matriz OFICIAL (Jonatha, com os
+    # Ø 94/89/79 que o dono alterou). A Gedeon tem envelope proprio, medido - e e ele que esta checagem
+    # compara contra o STEP dela; se lesse o da Jonatha, nenhum cilindro seria encontrado e o z_medido
+    # viraria None.
+    env = (ssot.get("matriz_gedeon_certa_parameters") or {}).get("envelope_externo_mm") \
+        or ssot["envelope_externo_mm"]
     par = ssot["matriz_jonatha_parameters"]
 
     print("[1] o arquivo do usuário, aberto só para leitura")
