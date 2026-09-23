@@ -34,6 +34,6 @@ Encosto face a face, `deslocamento_aplicado_mm` = 0,00 · **interferência 0,000
 | `MATRIZ_V30_PECA_UNICA.step` | **a peça** (o que a fábrica usina) | `b42ee2e50a10d43d` |
 | `MATRIZ_V30_CANAL_DE_FLUXO.step` | o sólido do canal de fluxo (para o fio EDM e para conferir o volume) | `77497bf86c989b23` |
 | `CONJUNTO_MATRIZ_V30_NO_CABECOTE_EX-030.step` | a matriz sentada no cabeçote completo, com flange (leitura/medida, sem booleano) | `725c2f83f26cc6e8` |
-| `08_Pacote_Usinagem_v30/` | pacote de usinagem vigente (ficha, material, cotas, sequência, RFQ, prancha) | zip `0ed4642069255a0c` |
+| `08_Pacote_Usinagem_v30/` | pacote de usinagem vigente (ficha, material, cotas, sequência, RFQ, prancha) | zip `09b3299798ddd3ef` |
 
 O que mudou em relação à revisão anterior está anotado em `03_Relatorios_e_Documentacao/MATRIZ_V27_PECA_UNICA.md` (seção de 2026-09-22) e no SSOT (`decisoes_usuario` D10 a D12). Para a fábrica, a peça continua se chamando **JONATHA v27.0**; 'v29'/'v30' é carimbo interno de revisão do projeto.

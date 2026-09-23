@@ -837,7 +837,7 @@
    "decisao": "manter 109,00 mm: encurtar para 100 mm não mexe no funil nem no land (as cotas que geram pressão) e encurta a rota de fuga pelo anel - a fração que escapa para trás sobe de 0,06 % para 0,07 %. Alavancas reais: land (8,50 -> 5,00 derruba ~15 % do dP) e apertar o anel do ultimo estagio para 0,10 mm (fuga 0,00 %). Ver 03_Relatorios_e_Documentacao/SIMULACAO_ROTAS_E_COMPRIMENTO.md"
   },
   "pacote": "08_Pacote_Usinagem_v29",
-  "zip_sha256": "da72d8ac9f2a9437ec62bdcf2b7e2535dd0836a91f1a685fc02a0048c74168f8",
+  "zip_sha256": "53a08b54b75780e3322bb5179248a78bf816f6331519bf56d80be190deaa47b9",
   "observacao": "o pacote v29 foi re-gerado com o STEP novo (Ø94/89/79, ±0,5) e com o material 1045; para envio a fabrica o vigente e 08_Pacote_Usinagem_v30"
  },
  "revisoes_2026_09_22": {
@@ -881,7 +881,7 @@
  "usinagem_v30": {
   "pacote": "08_Pacote_Usinagem_v30",
   "zip": "PACOTE_MATRIZ_V30_PARA_ENVIO.zip",
-  "zip_sha256": "0ed4642069255a0c908cbd1b7e37214be56ee1566dc30a896388c3da43cbc70e",
+  "zip_sha256": "09b3299798ddd3ef2921e358e9cee89ece18abce22114335c3c58fb85c3b729f",
   "gerado_por": "04_Dados_SSOT_e_Scripts/gerar_pacote_usinagem_v30.py",
   "rotulo_na_peca": "JONATHA v27.0 · EX-031 · 1045 · rev. 30 (2026-09-22)",
   "politica_de_tolerancia": "±0,5 nas cotas alteradas (tres Ø e o comprimento); cotas do produto mantidas (fenda 1,500 +0,010/-0,000, land 8,50 ±0,05, chanfro 1,50 x 45 ±0,20/±0,5, Ra <= 0,4)"

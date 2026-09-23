@@ -76,6 +76,10 @@ def _bra(txt):
     return txt
 
 
+def n_str(x):
+    return ("%.2f" % x).replace(".", ",")
+
+
 def escreve(pacote, nome, txt):
     """escreve um arquivo do pacote (garante UTF-8 e cria a pasta)"""
     os.makedirs(pacote, exist_ok=True)
@@ -404,6 +408,18 @@ def main():
                       estagios=[(r["D"][0], 0.00, Z12), (r["D"][1], Z12, Z23), (r["D"][2], Z23, r["L"])],
                       comprimento=r["L"])
         G.ACO = ACO_1045
+        G.TOL_D1 = G.TOL_D = "\u00b10,5"                   # os tres 94/89/79 foram alterados: ±0,5
+        # o comprimento so leva ±0,5 onde ele foi alterado: na v29 o 109,00 e a cota de antes
+        G.TOL_L = "0/\u22120,05" if r["L"] == 109.00 else "\u00b10,5"
+        G.NOTAS_TITULO = ("E \u00b7 NOTAS GERAIS \u2014 MATRIZ JONATHA v27.0, pe\u00e7a \u00fanica, rev. %s (2026-09-22)"
+                           % tag)
+        G.NOTA_REVEST = ("7 \u00b7 Canal e land polidos Ra \u2264 0,4 \u00b5m na dire\u00e7\u00e3o da extrus\u00e3o. O tratamento "
+                         "superficial na fenda foi PEDIDO: medir a abertura de 1,500 antes e depois dele; se mover, "
+                         "o retrabalho \u00e9 passar o fio de novo")
+        G.DUREZA_CURTA = "corpo 30-36 HRC; arestas do land 55-60 HRC (indu\u00e7\u00e3o) ou 600-700 HV0,2 (nitreta\u00e7\u00e3o)"
+        G.MARCACAO_CURTA = "JONATHA v27.0 \u00b7 EX-031 \u00b7 1045 \u00b7 rev. %s \u00b7 lote \u00b7 n\u00ba de s\u00e9rie" % tag
+        G.NOTA_COMPRIMENTO = ("12 \u00b7 Comprimento %s mm medido no STEP: %s"
+                              % (n_str(r["L"]), r["protrusao"]))
         G.TITULO_FIGURA = ("MATRIZ %s · PEÇA ÚNICA · 1045 + indução/nitretação no land · Ø%.2f × %.2f mm · "
                            "1 matriz · ±0,5 nas cotas alteradas em 2026-09-22" % (r["rotulo"], r["D"][0], r["L"]))
         G.RODAPE_FIGURA = ("interface com o cabeçote EX-030: folgas radiais medidas nos três estágios · "
