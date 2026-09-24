@@ -506,3 +506,49 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   desenhado passa por ele - inclusive o que vem do JSON (`<= 220 HB`, `→`, `±`, `≥`). Se algum glifo acima de
   U+00FF sobreviver à substituição, a folha não sai. Checagem final na rodada: 32 strings (material + todas as
   cotas) presentes no `extract_text()` dos dois PDFs e zero caractere U+2000..U+2FFF no texto extraído.
+
+**Rodada 2026-09-24 — saiu o primeiro DXF cotado da matriz (antes não existia nenhum `.dxf` no repo).**
+
+* ordem dele: *"quero um desenho dxf com as cotas, sem poluição visual, sem excesso de informações, enfatize o
+  material que deverá ser feito aço 1045"*. O `find` confirmou que o repo nunca teve DXF de matriz - a única
+  referência era a linha `pacote_cabecote: desenhado DXF medido`. Então foi gerador novo:
+  `04_Dados_SSOT_e_Scripts/gerar_desenho_cotado_dxf_v30.py` (ezdxf 1.4.4, já listado em
+  `04_/restaurar_workspace.sh`), escrevendo `08_Pacote_Usinagem_v30/MATRIZ_V30_DESENHO_COTADO.dxf` e o
+  `MATRIZ_V30_DESENHO_COTADO_PREVIEW.png/.pdf` para quem quiser ver sem abrir CAD. A v29 tem o desenho dela
+  (`PACOTE=08_Pacote_Usinagem_v29 DXF=MATRIZ_V29_DESENHO_COTADO`).
+* folha **A3 paisagem, 1:1, unidades mm** (`$INSUNITS=4`, `$MEASUREMENT=1`), sete camadas
+  (PERFIL 0,50 mm / CANAL / EIXO CENTER2 / COTAS / MATERIAL / NOTAS / CARIMBO) e um dimstyle próprio `COTAS`.
+  Conteúdo: **uma** seção simétrica no plano da abertura (a vista onde o funil aparece), a face de saída com a
+  fenda, **8 cotas no total** (Ø94, Ø89, Ø79, boca de entrada Ø75,60, comprimento, land, abertura 1,500 e
+  largura 75,00), 4 notas de processo e um carimbo. A abertura da fenda é a única cota em corpo grande (5,5 mm)
+  e vermelha; a faixa de MATERIAL ocupa a linha de topo com 8 mm de altura de letra e `MATERIAL / AÇO 1045`
+  repetido no carimbo. Nenhuma tabela de estágios, nenhum balão, nenhum CFD - o resto está no README do pacote.
+* as 8 cotas são `DIMENSION` lineares **de verdade** (`add_linear_dim(...).render()`), com o texto da cota
+  passado por override literal em padrão brasileiro: `text="Ø94,00 ±0,5"`. Geometria nominal exata + texto
+  literal => o que a máquina medir no arquivo bate com o que está escrito. A folha confere isso no fim: reabre
+  o DXF, lê `dxf.text` das 8 DIMENSION e dá `SystemExit` se alguma não estiver lá. `audit()` fecha em
+  **0 erros, 0 correções** nas duas revisões.
+* regra do PDF vale para o DXF também: **só Latin-1**. O `tx()` do gerador substitui `− – — → ≥ ≤ ≈ µ` e dá
+  `SystemExit` em qualquer caractere acima de U+00FF; a checagem final imprime "glifos acima de Latin-1:
+  nenhum". Consequência prática avisada no rodapé da própria folha e no e-mail: o `Ø` (U+00D8) é Latin-1 e vai
+  como caractere mesmo, então em fonte SHX que não o tenha ele some na tela - troca-se a fonte do texto por
+  Arial no CAD.
+* guardas que já pegaram erro real nesta rodada, do mesmo tipo das da folha A4: (1) estimativa de largura de
+  texto (`len(t) * altura * 0,68`) contra a coluna/caixa que recebe, e contagem de linhas de MTEXT com
+  `SystemExit` - pegou 5 estouros (faixa de material, duas legendas de vista e o cabeçalho do carimbo) antes
+  de qualquer arquivo ser gravado; (2) extensão do conteúdo conferida contra a moldura, com o comprimento dos
+  TEXTOS estimado, para nada sair do papel; (3) `if not v` na checagem de chaves do JSON quase matou a v30: a
+  protrusão da v30 **é** 0,00 mm, valor válido - a guarda passou a ser `v is None or v == ""`.
+* três armadilhas do ezdxf 1.4.4 que quebraram o primeiro rascunho, anotadas para a próxima vez que alguém
+  mexer aqui: `add_linear_dim(...).render()` **exige** um dimstyle real (com o `Standard` cru o wrapper
+  explode em `AttributeError: 'DimStyleOverride' object has no attribute 'dxf'`); `render()` devolve o
+  `LinearDimension` **sem** `.dxf`, então a camada se põe em `ent.dimension.dxf.layer` antes de renderizar; e
+  `dimtsel`, `dimadex`, `dimahex`, `dimtht` não são atributos de DIMSTYLE - o gerador tenta um a um, engole o
+  `DXFAttributeError` e avisa quais caíram, em vez de assumir que existem.
+* o DXF e os previews ficam **fora do `PACOTE_MATRIZ_V30_PARA_ENVIO.zip`**, como a folha (a lista de arquivos
+  do zip é explícita no `gerar_pacote_usinagem_v30.py`, não é glob do diretório, então rodar o gerador de
+  pacote não puxa o DXF para dentro). Consequência: `CHECKSUMS_SHA256.txt` continua com 13 arquivos, o sha do
+  zip é `0738c468…`, a tag `v30.0-oficial-pacote-usinagem` **não se move** e os quatro assets da release
+  `394977467` seguem idênticos ao disco (§12). Se um dia ele quiser o DXF dentro do pacote para envio, isso é
+  publicação inteira: adicionar ao `nomes` do gerador de pacote, re-gerar CHECKSUMS/zip/capa, mover a tag e
+  re-trocar os quatro assets com `/home/user/tmp/trocar_assets.py`.
