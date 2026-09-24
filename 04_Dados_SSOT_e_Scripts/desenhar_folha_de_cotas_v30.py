@@ -68,6 +68,9 @@ def main():
     R_in = alv["boca_entrada"] / 2.0
     a_bs, w_bs = bs["abertura_mm"], bs["largura_mm"] / 2.0
     y_f = (z_land0 + z_land1) / 2.0
+    prot = d.get("montagem", {}).get("saida_al\u00e9m_da_face_do_nariz_mm")
+    if prot is None:
+        raise SystemExit("o pacote nao traz a protrusao medida na montagem - nao chuto")
 
     aco = [(0, z0), (r[0], z0), (r[0], zb[1]), (r[1], zb[1]), (r[1], zb[2]), (r[2], zb[2]), (r[2], zf), (0, zf)]
     # funil: Ø75,60 na entrada (Z 0,00) ate a fenda no inicio do land. A parede real e BSpline
@@ -85,7 +88,7 @@ def main():
     ax.plot([0, 0], [z0 - 3, zf + 3], color="#aaaaaa", lw=0.7, ls="--")
     ax.add_patch(MRect((-3.5, z_land0 - 3.5), 22.0, (zf + 1.0) - (z_land0 - 3.5), fill=False,
                        edgecolor=VERDE, lw=1.1, ls="--"))
-    ax.text(-3.5, zf + 2.0, "DETALHE A — ampliado ao lado →", fontsize=8.6, color=VERDE,
+    ax.text(-3.5, zf + 2.0, "DETALHE A - ampliado ao lado » ", fontsize=8.6, color=VERDE,
             ha="left", va="bottom", fontweight="bold")
     for i in range(3):
         yc = (zb[i] + zb[i + 1]) / 2.0
@@ -99,7 +102,7 @@ def main():
             fontsize=11, ha="left", va="center", fontweight="bold", linespacing=1.15)
     ax.annotate("", xy=(-R_in, z0 - 6.0), xytext=(R_in, z0 - 6.0),
                 arrowprops=dict(arrowstyle="<->", color=MARROM, lw=1.0))
-    ax.text(0.0, z0 + 5.5, "boca de entrada Ø%s\n+0,05 / −0,00 — não alargar" % br(2 * R_in),
+    ax.text(0.0, z0 + 5.5, "boca de entrada Ø%s\n+0,05 / -0,00 - não alargar" % br(2 * R_in),
             fontsize=8.6, ha="center", va="center", color=MARROM, linespacing=1.3)
     # ponto sobre a parede do funil (a recta que liga a boca de entrada ao inicio do land)
     y_fun = 0.62 * z_land0
@@ -114,8 +117,8 @@ def main():
     ax.set_ylim(*MAIN_Y)
     ax.set_aspect("equal")
     ax.axis("off")
-    ax.set_title(u"MATRIZ JONATHA v27.0 · rev. %s — MEIA-SEÇÃO NO PLANO DA ABERTURA\n"
-                 u"o funil fecha de Ø%s (Z 0,00) até a fenda %s × %s mm no land (Z %s) — "
+    ax.set_title(u"MATRIZ JONATHA v27.0 · rev. %s - MEIA-SEÇÃO NO PLANO DA ABERTURA\n"
+                 u"o funil fecha de Ø%s (Z 0,00) até a fenda %s × %s mm no land (Z %s) - "
                  u"o perfil exato é a superfície BSpline do STEP\n"
                  u"O STEP é a definição; esta folha é a régua de aceitação."
                  % (REV, br(2 * R_in), br(2 * w_fd), br(a_fd, 3), br(z_land0)),
@@ -137,7 +140,7 @@ def main():
                  arrowprops=dict(arrowstyle="<->", color=VERM, lw=2.4))
     ax4.plot([-2.6, a_fd / 2.0 + 0.3], [y_f - a_fd / 2.0] * 2, color=VERM, lw=0.9, ls=":")
     ax4.plot([-2.6, a_fd / 2.0 + 0.3], [y_f + a_fd / 2.0] * 2, color=VERM, lw=0.9, ls=":")
-    ax4.text(DET_X[0] + 0.3, zf + 5.4, "ABERTURA DA FENDA\n%s mm  \n+0,010 / −0,000" % br(a_fd, 3),
+    ax4.text(DET_X[0] + 0.3, zf + 5.4, "ABERTURA DA FENDA\n%s mm  \n+0,010 / -0,000" % br(a_fd, 3),
              fontsize=10.0, color=VERM, ha="left", va="center", fontweight="bold", linespacing=1.25)
     ax4.annotate("", xy=(4.6, z_land0), xytext=(4.6, z_land1),
                  arrowprops=dict(arrowstyle="<->", color=VERDE, lw=1.3))
@@ -150,7 +153,7 @@ def main():
     # fator de ampliado real (unidades/mm por polegada de caixa, com o aspect "equal")
     in_por_un_main = (CX_MAIN[2] * 11.69) / (MAIN_X[1] - MAIN_X[0])
     in_por_un_det = (CX_DET[2] * 11.69) / (DET_X[1] - DET_X[0])
-    ax4.set_title("DETALHE A — fim do canal, ≈ %d×" % round(in_por_un_det / in_por_un_main),
+    ax4.set_title("DETALHE A - fim do canal, ~ %d×" % round(in_por_un_det / in_por_un_main),
                   fontsize=10.5, loc="left", fontweight="bold", pad=8)
     cap = ("land %s ±0,05: a parede paralela que calibra a espessura · chanfro %s × 45° na face de saída · "
            "R %s nas duas pontas da fenda, aresta viva (sem raio na quina) · fenda aberta a fio EDM depois do "
@@ -194,25 +197,25 @@ def main():
     ax3.set_ylim(0, 1)
     col = [
         [("AÇO E DUREZA", True),
-         ("1045 forjado, fibra no eixo. Corpo revenido 30–36 HRC. Land 55–60 HRC por indução "
-          "(0,6–1,0 mm) ou nitretação a plasma 600–700 HV0,2 — escolha da fábrica, declarada no "
-          "relatório. Sem PVD, sem DLC: 10 µm de revestimento mudam a espessura do produto.", False)],
+         ("1045 forjado, fibra no eixo. Corpo revenido 30 a 36 HRC. Land 55 a 60 HRC por indução "
+          "(0,6 a 1,0 mm) ou nitretação a plasma 600 a 700 HV0,2 - escolha da fábrica, declarada no "
+          "relatório. Sem PVD, sem DLC: 10 µm mudam a espessura do produto.", False)],
         [("ORDEM (não inverter)", True),
-         ("T.T. do corpo → retífica do land → fio EDM do canal pela boca de Ø%s (um lado só) → "
-          "remover camada REC ≥ 0,02 mm → tratamento de superfície → medição final. Medir a abertura "
-          "ANTES e DEPOIS do tratamento: 8–18 µm de camada comem 0,016–0,036 mm da tolerância de "
+         ("T.T. do corpo » retífica do land » fio EDM do canal pela boca de Ø%s (um lado só) » "
+          "remover camada REC >= 0,02 mm » tratamento de superfície » medição final. Medir a abertura "
+          "ANTES e DEPOIS do tratamento: 8 a 18 µm de camada comem 0,016 a 0,036 mm da tolerância de "
           "0,010; se fechar abaixo de %s mm, passar o fio de novo." % (br(2 * R_in), br(a_fd, 3)), False)],
         [("PROIBIDO", True),
-         ("Flange, furo de fixação, rosca, pino e linha de partição — a peça é 1 sólido e o aperto é "
+         ("Flange, furo de fixação, rosca, pino e linha de partição - a peça é 1 sólido e o aperto é "
           "pelo collete EX-031 e pelo degrau do furo do cabeçote (elemento de aperto só no estoque, "
           "fora do envelope final). Não alargar a boca de entrada Ø%s. Não acertar a fenda com raio na "
           "quina nem com polimento transversal." % br(2 * R_in), False)],
         [("ACEITAÇÃO", True),
-         ("Comprimento %s ±0,5 com a face de saída ralada no fim, faceada ao nariz do EX-031 "
-          "(protrusão 0,00). Coaxialidade Ø0,02 nos 3 estágios (datum A = Ø%s). Face de saída: "
-          "planeza 0,01 e perpendicularidade 0,01 em A. Rebarba ≤ 0,1 × 45°. Marcação a laser na "
-          "face traseira. Certificado EN 10204 3.1 + relatório dimensional das cotas desta folha."
-          % (br(L), br(2 * r[0])), False)],
+         ("Comprimento %s ±0,5 com a face de saída ralada no fim (protrusão na montagem: %s mm). "
+          "Coaxialidade Ø0,02 nos 3 estágios (datum A = Ø%s). Face de saída: planeza 0,01 e "
+          "perpendicularidade 0,01 em A. Canal e land: Ra <= 0,4 µm, polido no sentido da extrusão. "
+          "Rebarba <= 0,1 × 45°. Marcação a laser na traseira. Certificado EN 10204 3.1 + relatório "
+          "dimensional desta folha." % (br(L), br(prot), br(2 * r[0])), False)],
     ]
     linhas_max, sobra = 0, []
     for j, bloco in enumerate(col):
@@ -221,12 +224,12 @@ def main():
         for txt, tt in bloco:
             if tt:
                 ax3.text(x0, y, txt, fontsize=9.2, fontweight="bold", va="top", ha="left", color=AZUL)
-                y -= 0.108
+                y -= 0.100
             else:
-                ls = quebra(txt, 47)
+                ls = quebra(txt, 45)
                 for ln in ls:
                     ax3.text(x0, y, ln, fontsize=7.4, va="top", ha="left", color="#111111")
-                    y -= 0.104
+                    y -= 0.098
                 linhas_max = max(linhas_max, len(ls) + 1)
         sobra.append(round(y, 3))
     for j in range(1, 4):
@@ -234,12 +237,12 @@ def main():
     if min(sobra) < -0.02:
         raise SystemExit("regras nao cabem na folha: sobra por coluna = %s" % sobra)
     fig.text(CX_REGRAS[0], CX_REGRAS[1] + CX_REGRAS[3] + 0.008,
-             "REGRAS DA PEÇA — valem tanto quanto as cotas", fontsize=10.5,
+             "REGRAS DA PEÇA - valem tanto quanto as cotas", fontsize=10.5,
              fontweight="bold", va="bottom", ha="left")
 
     peca = os.path.basename(m["arquivo"])
     fig.text(CX_MAIN[0], 0.012, u"Folha gerada por 04_Dados_SSOT_e_Scripts/desenhar_folha_de_cotas_v30.py a "
-                                u"partir de %s/pacote_usinagem.json — cada número é medição no STEP "
+                                u"partir de %s/pacote_usinagem.json - cada número é medição no STEP "
                                 u"(seções de 0,02 mm). Modelo 3D/%s (%s faces, %s sólido, BRep válido) · "
                                 u"volume do canal %s mm³ · aço %s mm³ = %s kg · se o desenho e o STEP "
                                 u"discordarem, vale o STEP."

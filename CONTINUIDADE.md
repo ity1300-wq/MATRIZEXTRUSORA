@@ -469,3 +469,21 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   `SystemExit` se as regras descerem demais, fator de ampliado do DETALHE A **calculado** das caixas (não
   escrito à mão), e os rótulos saem todos de `pacote_usinagem.json` com vírgula decimal (`br()`), inclusive os
   de `Ø` — a string digitada no heredoc perde o `Ø`, o que já tinha virado dois espaços no desenho.
+
+**Rodada 2026-09-23 (noite) — a folha não pode perder sinal quando alguém copia o texto do PDF.**
+
+* `matplotlib` + DejaVu Sans desenha e imprime `−` (U+2212), `–` (U+2013), `—` (U+2014), `→`, `≥`, `≤` e `≈`,
+  mas **esses sete caracteres não vão para o ToUnicode do PDF**: `extract_text()` devolve o resto e come o
+  sinal. Na folha isso era perigoso de verdade: "+0,010 / −0,000" copiava como "+0,010 / 0,000" e
+  "30–36 HRC" copiava como "3036 HRC". O `desenhar_folha_de_cotas_v30.py` agora só usa os que sobrevivem
+  (`± × ° Ø µ ² · »` e o hífen ASCII) e escreve faixas com "a" ("0,6 a 1,0 mm"), comparação com ">=" e "<="
+  e seta de sequência com "»". A checagem é automática: 29 strings (todas as cotas e sinais) são procuradas no
+  texto extraído dos dois PDFs, e o teste falha se sobrar qualquer caractere U+2000–U+206F no texto extraído.
+* **A prancha grande dentro do zip tem o mesmo problema tipográfico** (ela usa `→` e `≤` à vontade, gerados
+  antes dessa descoberta). Não fui trocar: mexer na prancha muda o `pacote_usinagem.json`-filho → o zip → o sha
+  → a tag e os quatro assets. Como a folha é o papel que vai no e-mail, corrigi só ela; se um dia o pacote for
+  re-gerado por outro motivo, vale a mesma sanitização no `prancha()`.
+* segundo erro que a checagem pegou: a coluna ACEITAÇÃO dizia "protrusão 0,00 no nariz do EX-031" escrito à mão.
+  Isso é verdade na v30 e **falso na v29**, onde a face de saída sai 14,00 mm além do nariz. Agora o valor vem
+  de `montagem["saida_além_da_face_do_nariz_mm"]` medido no STEP da montagem, e o gerador para com
+  `SystemExit` se a chave faltar em vez de chutar zero.
