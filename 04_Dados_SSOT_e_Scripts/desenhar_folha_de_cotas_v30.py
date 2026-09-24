@@ -19,16 +19,42 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon as MPoly, Rectangle as MRect
 
+RUIM = {0x2212: "-", 0x2013: " a ", 0x2014: " - ", 0x2192: " \u00bb ",
+        0x2265: ">=", 0x2264: "<=", 0x2248: "~", 0x2011: "-", 0x00a0: " "}
+
+
+def tx(s):
+    """Troca os glifos que o matplotlib desenha mas o PDF nao devolve quando alguem copia o texto
+    (foi assim que '+0,010 / \u22120,000' virou '+0,010 / 0,000' e '30\u201336 HRC' virou '3036 HRC').
+    Depois de trocar, se sobrar qualquer coisa fora do Latin-1 a folha nao sai."""
+    s = str(s)
+    for o, v in RUIM.items():
+        s = s.replace(chr(o), v)
+    sobra = sorted({c for c in s if ord(c) > 0xFF})
+    if sobra:
+        raise SystemExit("glifo que o PDF nao devolve na copia: %s em %r" % (sobra, s))
+    return s
+
+
+_orig_set_text = matplotlib.text.Text.set_text
+
+
+def _set_text(self, s):
+    return _orig_set_text(self, tx(s) if isinstance(s, str) else s)
+
+
+matplotlib.text.Text.set_text = _set_text      # todo texto da folha passa pelo tx(), sem excecao
+
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PACOTE = os.environ.get("PACOTE", "08_Pacote_Usinagem_v30")
 ARQ = os.environ.get("ARQ_FOLHA", "FOLHA_DE_COTAS_V30")
 VERM, AZUL, VERDE, MARROM, CINZA = "#b02418", "#0b4a86", "#0d7a3f", "#7a3d00", "#555555"
 
 # caixas [x, y, larg, alt] em fracao da folha (A4 paisagem)
-CX_MAIN = [0.020, 0.300, 0.460, 0.470]
-CX_DET = [0.500, 0.425, 0.300, 0.345]
-CX_FACE = [0.815, 0.420, 0.180, 0.350]
-CX_REGRAS = [0.020, 0.040, 0.972, 0.235]
+CX_MAIN = [0.020, 0.282, 0.460, 0.468]
+CX_DET = [0.500, 0.408, 0.300, 0.342]
+CX_FACE = [0.815, 0.400, 0.180, 0.350]
+CX_REGRAS = [0.020, 0.028, 0.972, 0.235]
 
 d = json.load(io.open(os.path.join(RAIZ, PACOTE, "pacote_usinagem.json"), encoding="utf-8"))
 m, alv = d["medido"], d["alvo_do_contrato"]
@@ -36,6 +62,17 @@ fd, bs = m["fenda_no_land"], m["boca_saida"]
 
 
 REV = PACOTE.rsplit("_", 1)[-1].lstrip("v")
+
+ACO = d.get("aco", {})
+DEC = d.get("decisoes_2026_09_22", {})
+MATERIAL = str(DEC.get("material") or "").strip()
+NORMA = str(ACO.get("norma") or "").strip()
+DUREZA = str(ACO.get("dureza") or "").strip()
+GRUPO = str(ACO.get("grupo") or "").strip()
+faltando = [k for k, v in (("decisoes_2026_09_22/material", MATERIAL), ("aco/norma", NORMA),
+                          ("aco/dureza", DUREZA), ("aco/grupo", GRUPO)) if not v]
+if faltando:
+    raise SystemExit("o pacote nao traz o material nestas chaves: %s - nao chuto" % ", ".join(faltando))
 
 
 def br(x, dec=2):
@@ -80,6 +117,47 @@ def main():
     fig = plt.figure(figsize=(11.69, 8.27), dpi=150)                      # A4 paisagem
     fig.patch.set_facecolor("white")
 
+    # ------------------------------------------------------------ 0. MATERIAL (a faixa que manda no pedido)
+    BX, BY, BW, BH = 0.020, 0.828, 0.965, 0.148
+    PASSO, FONTE, LARG = 0.0152, 7.6, 49
+    fig.add_artist(MRect((BX, BY), BW, BH, transform=fig.transFigure, facecolor="#fdeeed",
+                         edgecolor=VERM, lw=2.0, zorder=1))
+
+    def faixa(x0, itens, larg=LARG):
+        """itens = [(estilo, texto)]; estilo 'lab' (rótulo vermelho), 'big' (o nome do aço),
+        'h' (título azul), 't' (texto). Devolve a última y - e para a folha se sair da caixa."""
+        y = BY + BH - 0.013
+        for est, txt in itens:
+            if est == "big":
+                fig.text(x0, y, txt, fontsize=20, color="#7a1007", fontweight="bold", ha="left", va="top")
+                y -= 0.037
+            else:
+                cor, fs, fw = {"lab": (VERM, 8.0, "bold"), "h": (AZUL, FONTE + 0.4, "bold"),
+                              "t": ("#111111", FONTE, "normal")}[est]
+                linhas = quebra(txt, larg)
+                for ln in linhas:
+                    fig.text(x0, y, ln, fontsize=fs, color=cor, fontweight=(fw if est != "t" else "normal"),
+                             ha="left", va="top")
+                    y -= PASSO
+        if y < BY + 0.006:
+            raise SystemExit("a faixa de material nao coube: sobrou %s" % round(y - BY, 3))
+        return y
+
+    STD, FORNEC = (NORMA.split(":", 1) + [""])[:2]
+    faixa(BX + 0.014,
+          [("lab", "MATERIAL DA PEÇA - é cota de aceite, não é sugestão"),
+           ("big", MATERIAL.upper()),
+           ("h", STD.strip()),
+           ("t", FORNEC.strip().lstrip(", ") + ".")])
+    faixa(BX + 0.300, [("h", "DUREZA E TRATAMENTO NA FENDA"),
+                      ("t", DUREZA[0].upper() + DUREZA[1:])])
+    faixa(BX + 0.645,
+          [("h", "O QUE NÃO PODE MUDAR"),
+           ("t", "Sem PVD, sem DLC, sem qualquer revestimento: 10 µm mudam a espessura do produto. "
+                 "Troca de aço só com desenho novo assinado por nós. " + GRUPO[0].upper() + GRUPO[1:] + "."),
+           ("t", "O certificado EN 10204 3.1 do lote e o relatório de dureza vão com a peça.")],
+          larg=47)
+
     # ------------------------------------------------------------ 1. MEIA-SECAO
     ax = fig.add_axes(CX_MAIN)
     ax.add_patch(MPoly(aco, closed=True, facecolor="#e9ecf2", edgecolor="#111111", lw=1.8))
@@ -107,7 +185,7 @@ def main():
     # ponto sobre a parede do funil (a recta que liga a boca de entrada ao inicio do land)
     y_fun = 0.62 * z_land0
     x_fun = a_fd / 2.0 + (R_in - a_fd / 2.0) * (z_land0 - y_fun) / z_land0
-    ax.annotate("funil interno\n(o cone que fecha\naté a fenda)",
+    ax.annotate("funil interno\n(o cone que fecha\naté a fenda; a\nparede é BSpline -\no perfil exato\né o STEP)",
                 xy=(x_fun, y_fun), xytext=(-40.0, 0.74 * z_land0), fontsize=8.6,
                 ha="left", va="center", color="#111111", linespacing=1.25,
                 arrowprops=dict(arrowstyle="->", color="#111111", lw=0.9))
@@ -118,9 +196,7 @@ def main():
     ax.set_aspect("equal")
     ax.axis("off")
     ax.set_title(u"MATRIZ JONATHA v27.0 · rev. %s - MEIA-SEÇÃO NO PLANO DA ABERTURA\n"
-                 u"o funil fecha de Ø%s (Z 0,00) até a fenda %s × %s mm no land (Z %s) - "
-                 u"o perfil exato é a superfície BSpline do STEP\n"
-                 u"O STEP é a definição; esta folha é a régua de aceitação."
+                 u"o funil fecha de Ø%s (Z 0,00) até a fenda %s × %s (Z %s)"
                  % (REV, br(2 * R_in), br(2 * w_fd), br(a_fd, 3), br(z_land0)),
                  fontsize=10.5, loc="left", fontweight="bold", pad=12, linespacing=1.5)
 
@@ -182,7 +258,7 @@ def main():
     ax2.text(0, -a_fd / 2 - 12.0, "largura %s ±0,05" % br(2 * w_fd), fontsize=9.0, color=VERM,
              ha="center", va="top", fontweight="bold")
     ax2.text(0, -a_fd / 2 - 22.0, "área %s mm²  ±0,5 %%\nprojetor de perfil ou CMM"
-             % br(fd["area_mm2"], 4), fontsize=7.4, ha="center", va="top", color=CINZA, linespacing=1.25)
+             % br(fd["area_mm2"], 4), fontsize=8.0, ha="center", va="top", color=CINZA, linespacing=1.25)
     ax2.set_xlim(-48, 48)
     ax2.set_ylim(-56, 48)
     ax2.set_aspect("equal")
@@ -196,10 +272,6 @@ def main():
     ax3.set_xlim(0, 1)
     ax3.set_ylim(0, 1)
     col = [
-        [("AÇO E DUREZA", True),
-         ("1045 forjado, fibra no eixo. Corpo revenido 30 a 36 HRC. Land 55 a 60 HRC por indução "
-          "(0,6 a 1,0 mm) ou nitretação a plasma 600 a 700 HV0,2 - escolha da fábrica, declarada no "
-          "relatório. Sem PVD, sem DLC: 10 µm mudam a espessura do produto.", False)],
         [("ORDEM (não inverter)", True),
          ("T.T. do corpo » retífica do land » fio EDM do canal pela boca de Ø%s (um lado só) » "
           "remover camada REC >= 0,02 mm » tratamento de superfície » medição final. Medir a abertura "
@@ -207,33 +279,33 @@ def main():
           "0,010; se fechar abaixo de %s mm, passar o fio de novo." % (br(2 * R_in), br(a_fd, 3)), False)],
         [("PROIBIDO", True),
          ("Flange, furo de fixação, rosca, pino e linha de partição - a peça é 1 sólido e o aperto é "
-          "pelo collete EX-031 e pelo degrau do furo do cabeçote (elemento de aperto só no estoque, "
-          "fora do envelope final). Não alargar a boca de entrada Ø%s. Não acertar a fenda com raio na "
-          "quina nem com polimento transversal." % br(2 * R_in), False)],
+          "pelo collete EX-031 e pelo degrau do furo do cabeçote (elemento de aperto só no estoque, fora "
+          "do envelope final). Não alargar a boca de entrada Ø%s. Não acertar a fenda com raio na quina "
+          "nem com polimento transversal. Sem outro aço, sem outro revestimento." % br(2 * R_in), False)],
         [("ACEITAÇÃO", True),
          ("Comprimento %s ±0,5 com a face de saída ralada no fim (protrusão na montagem: %s mm). "
           "Coaxialidade Ø0,02 nos 3 estágios (datum A = Ø%s). Face de saída: planeza 0,01 e "
           "perpendicularidade 0,01 em A. Canal e land: Ra <= 0,4 µm, polido no sentido da extrusão. "
-          "Rebarba <= 0,1 × 45°. Marcação a laser na traseira. Certificado EN 10204 3.1 + relatório "
-          "dimensional desta folha." % (br(L), br(prot), br(2 * r[0])), False)],
+          "Rebarba <= 0,1 × 45°. Marcação a laser na traseira. Relatório dimensional de todas as cotas "
+          "desta folha." % (br(L), br(prot), br(2 * r[0])), False)],
     ]
     linhas_max, sobra = 0, []
     for j, bloco in enumerate(col):
-        x0 = j * 0.251
+        x0 = j * 0.3335
         y = 1.0
         for txt, tt in bloco:
             if tt:
                 ax3.text(x0, y, txt, fontsize=9.2, fontweight="bold", va="top", ha="left", color=AZUL)
-                y -= 0.100
+                y -= 0.122
             else:
-                ls = quebra(txt, 45)
+                ls = quebra(txt, 60)
                 for ln in ls:
-                    ax3.text(x0, y, ln, fontsize=7.4, va="top", ha="left", color="#111111")
-                    y -= 0.098
+                    ax3.text(x0, y, ln, fontsize=8.0, va="top", ha="left", color="#111111")
+                    y -= 0.114
                 linhas_max = max(linhas_max, len(ls) + 1)
         sobra.append(round(y, 3))
-    for j in range(1, 4):
-        ax3.plot([j * 0.251 - 0.011, j * 0.251 - 0.011], [-0.02, 1.0], color="#d5d8de", lw=0.8)
+    for j in range(1, 3):
+        ax3.plot([j * 0.3335 - 0.012, j * 0.3335 - 0.012], [-0.02, 1.0], color="#d5d8de", lw=0.8)
     if min(sobra) < -0.02:
         raise SystemExit("regras nao cabem na folha: sobra por coluna = %s" % sobra)
     fig.text(CX_REGRAS[0], CX_REGRAS[1] + CX_REGRAS[3] + 0.008,
