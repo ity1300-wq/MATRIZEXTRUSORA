@@ -489,7 +489,7 @@ $SKPOLY
   9
 $TDCREATE
  40
-2461308.725601852
+2461308.792650463
   9
 $TDUCREATE
  40
@@ -497,7 +497,7 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461308.725601852
+2461308.792650463
   9
 $TDUUPDATE
  40
@@ -549,7 +549,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-13B
+17B
   9
 $SURFTAB1
  70
@@ -929,11 +929,11 @@ $PSTYLEMODE
   9
 $FINGERPRINTGUID
   2
-{1F98BEB2-7741-4953-B5A4-8EC2E8702BF2}
+{586459D3-4552-43ED-BD1C-90CF8F5D7ADA}
   9
 $VERSIONGUID
   2
-{6D602804-430B-4562-BBF0-140D1F0E2BF2}
+{96B7CFF0-FB88-4777-8103-7450CC6E1570}
   9
 $EXTNAMES
 290
@@ -2233,7 +2233,7 @@ LAYER
 100
 AcDbSymbolTable
  70
-9
+10
   0
 LAYER
   5
@@ -2391,6 +2391,30 @@ AcDbSymbolTableRecord
 100
 AcDbLayerTableRecord
   2
+TABELA
+ 70
+0
+ 62
+7
+  6
+Continuous
+370
+13
+390
+13
+347
+21
+  0
+LAYER
+  5
+8F
+330
+1
+100
+AcDbSymbolTableRecord
+100
+AcDbLayerTableRecord
+  2
 MATERIAL
  70
 0
@@ -2407,7 +2431,7 @@ Continuous
   0
 LAYER
   5
-8F
+90
 330
 1
 100
@@ -2431,7 +2455,7 @@ Continuous
   0
 LAYER
   5
-90
+91
 330
 1
 100
@@ -3253,7 +3277,7 @@ ACAD
   0
 APPID
   5
-138
+178
 330
 3
 100
@@ -3267,7 +3291,7 @@ HATCHBACKGROUNDCOLOR
   0
 APPID
   5
-139
+179
 330
 3
 100
@@ -4959,7 +4983,7 @@ EZ_CURVED
   0
 DIMSTYLE
 105
-91
+92
 330
 4
 100
@@ -5209,7 +5233,7 @@ _CLOSEDBLANK
   0
 BLOCK_RECORD
   5
-96
+97
 330
 9
 100
@@ -5229,7 +5253,7 @@ AcDbBlockTableRecord
   0
 BLOCK_RECORD
   5
-A5
+A6
 330
 9
 100
@@ -5249,7 +5273,7 @@ AcDbBlockTableRecord
   0
 BLOCK_RECORD
   5
-B4
+B5
 330
 9
 100
@@ -5269,7 +5293,7 @@ AcDbBlockTableRecord
   0
 BLOCK_RECORD
   5
-C3
+C4
 330
 9
 100
@@ -5289,7 +5313,7 @@ AcDbBlockTableRecord
   0
 BLOCK_RECORD
   5
-D2
+D3
 330
 9
 100
@@ -5309,7 +5333,7 @@ AcDbBlockTableRecord
   0
 BLOCK_RECORD
   5
-E1
+E8
 330
 9
 100
@@ -5329,7 +5353,7 @@ AcDbBlockTableRecord
   0
 BLOCK_RECORD
   5
-F7
+FD
 330
 9
 100
@@ -5349,7 +5373,7 @@ AcDbBlockTableRecord
   0
 BLOCK_RECORD
   5
-108
+10C
 330
 9
 100
@@ -5669,9 +5693,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-97
+98
 330
-96
+97
 100
 AcDbEntity
   8
@@ -5695,9 +5719,9 @@ AcDbBlockBegin
   0
 LINE
   5
-99
+9A
 330
-96
+97
 100
 AcDbEntity
   8
@@ -5707,23 +5731,23 @@ AcDbEntity
 100
 AcDbLine
  10
-59.1
+51.1
  20
-121.0
+139.0
  30
 0.0
  11
-30.5
+20.5
  21
-121.0
+139.0
  31
 0.0
   0
 LINE
   5
-9A
+9B
 330
-96
+97
 100
 AcDbEntity
   8
@@ -5733,23 +5757,23 @@ AcDbEntity
 100
 AcDbLine
  10
-59.1
+51.1
  20
-215.0
+233.0
  30
 0.0
  11
-30.5
+20.5
  21
-215.0
+233.0
  31
 0.0
   0
 INSERT
   5
-9B
+9C
 330
-96
+97
 100
 AcDbEntity
   8
@@ -5761,9 +5785,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-32.0
+22.0
  20
-121.0
+139.0
  30
 0.0
  41
@@ -5775,9 +5799,9 @@ _CLOSEDFILLED
   0
 INSERT
   5
-9D
+9E
 330
-96
+97
 100
 AcDbEntity
   8
@@ -5789,9 +5813,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-32.0
+22.0
  20
-215.0
+233.0
  30
 0.0
  41
@@ -5803,9 +5827,9 @@ _CLOSEDFILLED
   0
 LINE
   5
-9F
+A0
 330
-96
+97
 100
 AcDbEntity
   8
@@ -5815,23 +5839,23 @@ AcDbEntity
 100
 AcDbLine
  10
-32.0
+22.0
  20
-123.5
+141.5
  30
 0.0
  11
-32.0
+22.0
  21
-212.5
+230.5
  31
 0.0
   0
 MTEXT
   5
-A0
+A1
 330
-96
+97
 100
 AcDbEntity
   8
@@ -5841,9 +5865,9 @@ COTAS
 100
 AcDbMText
  10
-29.35
+19.35
  20
-168.0
+186.0
  30
 0.0
  40
@@ -5859,27 +5883,9 @@ OpenSansCondensed-Light
   0
 POINT
   5
-A1
-330
-96
-100
-AcDbEntity
-  8
-Defpoints
-100
-AcDbPoint
- 10
-32.0
- 20
-121.0
- 30
-0.0
-  0
-POINT
-  5
 A2
 330
-96
+97
 100
 AcDbEntity
   8
@@ -5887,9 +5893,9 @@ Defpoints
 100
 AcDbPoint
  10
-60.0
+22.0
  20
-121.0
+139.0
  30
 0.0
   0
@@ -5897,7 +5903,7 @@ POINT
   5
 A3
 330
-96
+97
 100
 AcDbEntity
   8
@@ -5905,17 +5911,35 @@ Defpoints
 100
 AcDbPoint
  10
-60.0
+52.0
  20
-215.0
+139.0
+ 30
+0.0
+  0
+POINT
+  5
+A4
+330
+97
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+52.0
+ 20
+233.0
  30
 0.0
   0
 ENDBLK
   5
-98
+99
 330
-96
+97
 100
 AcDbEntity
   8
@@ -5925,9 +5949,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-A6
+A7
 330
-A5
+A6
 100
 AcDbEntity
   8
@@ -5951,9 +5975,9 @@ AcDbBlockBegin
   0
 LINE
   5
-A8
+A9
 330
-A5
+A6
 100
 AcDbEntity
   8
@@ -5963,23 +5987,23 @@ AcDbEntity
 100
 AcDbLine
  10
-59.1
+51.1
  20
-130.2
+148.2
  30
 0.0
  11
-45.5
+35.5
  21
-130.2
+148.2
  31
 0.0
   0
 LINE
   5
-A9
+AA
 330
-A5
+A6
 100
 AcDbEntity
   8
@@ -5989,23 +6013,23 @@ AcDbEntity
 100
 AcDbLine
  10
-59.1
+51.1
  20
-205.8
+223.8
  30
 0.0
  11
-45.5
+35.5
  21
-205.8
+223.8
  31
 0.0
   0
 INSERT
   5
-AA
+AB
 330
-A5
+A6
 100
 AcDbEntity
   8
@@ -6017,9 +6041,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-47.0
+37.0
  20
-130.2
+148.2
  30
 0.0
  41
@@ -6031,9 +6055,9 @@ _CLOSEDFILLED
   0
 INSERT
   5
-AC
+AD
 330
-A5
+A6
 100
 AcDbEntity
   8
@@ -6045,9 +6069,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-47.0
+37.0
  20
-205.8
+223.8
  30
 0.0
  41
@@ -6059,9 +6083,9 @@ _CLOSEDFILLED
   0
 LINE
   5
-AE
+AF
 330
-A5
+A6
 100
 AcDbEntity
   8
@@ -6071,23 +6095,23 @@ AcDbEntity
 100
 AcDbLine
  10
-47.0
+37.0
  20
-132.7
+150.7
  30
 0.0
  11
-47.0
+37.0
  21
-203.3
+221.3
  31
 0.0
   0
 MTEXT
   5
-AF
+B0
 330
-A5
+A6
 100
 AcDbEntity
   8
@@ -6097,9 +6121,9 @@ COTAS
 100
 AcDbMText
  10
-44.35
+34.35
  20
-168.0
+186.0
  30
 0.0
  40
@@ -6115,27 +6139,9 @@ OpenSansCondensed-Light
   0
 POINT
   5
-B0
-330
-A5
-100
-AcDbEntity
-  8
-Defpoints
-100
-AcDbPoint
- 10
-47.0
- 20
-130.2
- 30
-0.0
-  0
-POINT
-  5
 B1
 330
-A5
+A6
 100
 AcDbEntity
   8
@@ -6143,9 +6149,9 @@ Defpoints
 100
 AcDbPoint
  10
-60.0
+37.0
  20
-130.2
+148.2
  30
 0.0
   0
@@ -6153,7 +6159,7 @@ POINT
   5
 B2
 330
-A5
+A6
 100
 AcDbEntity
   8
@@ -6161,17 +6167,35 @@ Defpoints
 100
 AcDbPoint
  10
-60.0
+52.0
  20
-205.8
+148.2
+ 30
+0.0
+  0
+POINT
+  5
+B3
+330
+A6
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+52.0
+ 20
+223.8
  30
 0.0
   0
 ENDBLK
   5
-A7
+A8
 330
-A5
+A6
 100
 AcDbEntity
   8
@@ -6181,9 +6205,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-B5
+B6
 330
-B4
+B5
 100
 AcDbEntity
   8
@@ -6207,9 +6231,9 @@ AcDbBlockBegin
   0
 LINE
   5
-B7
+B8
 330
-B4
+B5
 100
 AcDbEntity
   8
@@ -6219,23 +6243,23 @@ AcDbEntity
 100
 AcDbLine
  10
-155.9
+147.9
  20
-128.5
+146.5
  30
 0.0
  11
-169.5
+163.5
  21
-128.5
+146.5
  31
 0.0
   0
 LINE
   5
-B8
+B9
 330
-B4
+B5
 100
 AcDbEntity
   8
@@ -6245,23 +6269,23 @@ AcDbEntity
 100
 AcDbLine
  10
-155.9
+147.9
  20
-207.5
+225.5
  30
 0.0
  11
-169.5
+163.5
  21
-207.5
+225.5
  31
 0.0
   0
 INSERT
   5
-B9
+BA
 330
-B4
+B5
 100
 AcDbEntity
   8
@@ -6273,9 +6297,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-168.0
+162.0
  20
-128.5
+146.5
  30
 0.0
  41
@@ -6287,9 +6311,9 @@ _CLOSEDFILLED
   0
 INSERT
   5
-BB
+BC
 330
-B4
+B5
 100
 AcDbEntity
   8
@@ -6301,9 +6325,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-168.0
+162.0
  20
-207.5
+225.5
  30
 0.0
  41
@@ -6315,9 +6339,9 @@ _CLOSEDFILLED
   0
 LINE
   5
-BD
+BE
 330
-B4
+B5
 100
 AcDbEntity
   8
@@ -6327,23 +6351,23 @@ AcDbEntity
 100
 AcDbLine
  10
-168.0
+162.0
  20
-131.0
+149.0
  30
 0.0
  11
-168.0
+162.0
  21
-205.0
+223.0
  31
 0.0
   0
 MTEXT
   5
-BE
+BF
 330
-B4
+B5
 100
 AcDbEntity
   8
@@ -6353,9 +6377,9 @@ COTAS
 100
 AcDbMText
  10
-165.35
+159.35
  20
-168.0
+186.0
  30
 0.0
  40
@@ -6371,27 +6395,9 @@ OpenSansCondensed-Light
   0
 POINT
   5
-BF
-330
-B4
-100
-AcDbEntity
-  8
-Defpoints
-100
-AcDbPoint
- 10
-168.0
- 20
-128.5
- 30
-0.0
-  0
-POINT
-  5
 C0
 330
-B4
+B5
 100
 AcDbEntity
   8
@@ -6399,9 +6405,9 @@ Defpoints
 100
 AcDbPoint
  10
-155.0
+162.0
  20
-128.5
+146.5
  30
 0.0
   0
@@ -6409,7 +6415,7 @@ POINT
   5
 C1
 330
-B4
+B5
 100
 AcDbEntity
   8
@@ -6417,17 +6423,35 @@ Defpoints
 100
 AcDbPoint
  10
-155.0
+147.0
  20
-207.5
+146.5
+ 30
+0.0
+  0
+POINT
+  5
+C2
+330
+B5
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+147.0
+ 20
+225.5
  30
 0.0
   0
 ENDBLK
   5
-B6
+B7
 330
-B4
+B5
 100
 AcDbEntity
   8
@@ -6437,9 +6461,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-C4
+C5
 330
-C3
+C4
 100
 AcDbEntity
   8
@@ -6463,9 +6487,9 @@ AcDbBlockBegin
   0
 LINE
   5
-C6
+C7
 330
-C3
+C4
 100
 AcDbEntity
   8
@@ -6475,23 +6499,23 @@ AcDbEntity
 100
 AcDbLine
  10
-130.8
+122.80000000000001
  20
-123.5
+141.5
  30
 0.0
  11
-183.5
+176.5
  21
-123.5
+141.5
  31
 0.0
   0
 LINE
   5
-C7
+C8
 330
-C3
+C4
 100
 AcDbEntity
   8
@@ -6501,23 +6525,23 @@ AcDbEntity
 100
 AcDbLine
  10
-130.8
+122.80000000000001
  20
-212.5
+230.5
  30
 0.0
  11
-183.5
+176.5
  21
-212.5
+230.5
  31
 0.0
   0
 INSERT
   5
-C8
+C9
 330
-C3
+C4
 100
 AcDbEntity
   8
@@ -6529,9 +6553,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-182.0
+175.0
  20
-123.5
+141.5
  30
 0.0
  41
@@ -6543,9 +6567,9 @@ _CLOSEDFILLED
   0
 INSERT
   5
-CA
+CB
 330
-C3
+C4
 100
 AcDbEntity
   8
@@ -6557,9 +6581,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-182.0
+175.0
  20
-212.5
+230.5
  30
 0.0
  41
@@ -6571,9 +6595,9 @@ _CLOSEDFILLED
   0
 LINE
   5
-CC
+CD
 330
-C3
+C4
 100
 AcDbEntity
   8
@@ -6583,23 +6607,23 @@ AcDbEntity
 100
 AcDbLine
  10
-182.0
+175.0
  20
-126.0
+144.0
  30
 0.0
  11
-182.0
+175.0
  21
-210.0
+228.0
  31
 0.0
   0
 MTEXT
   5
-CD
+CE
 330
-C3
+C4
 100
 AcDbEntity
   8
@@ -6609,9 +6633,9 @@ COTAS
 100
 AcDbMText
  10
-179.35
+172.35
  20
-168.0
+186.0
  30
 0.0
  40
@@ -6627,27 +6651,9 @@ OpenSansCondensed-Light
   0
 POINT
   5
-CE
-330
-C3
-100
-AcDbEntity
-  8
-Defpoints
-100
-AcDbPoint
- 10
-182.0
- 20
-123.5
- 30
-0.0
-  0
-POINT
-  5
 CF
 330
-C3
+C4
 100
 AcDbEntity
   8
@@ -6655,9 +6661,9 @@ Defpoints
 100
 AcDbPoint
  10
-129.9
+175.0
  20
-123.5
+141.5
  30
 0.0
   0
@@ -6665,7 +6671,7 @@ POINT
   5
 D0
 330
-C3
+C4
 100
 AcDbEntity
   8
@@ -6673,17 +6679,35 @@ Defpoints
 100
 AcDbPoint
  10
-129.9
+121.9
  20
-212.5
+141.5
+ 30
+0.0
+  0
+POINT
+  5
+D1
+330
+C4
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+121.9
+ 20
+230.5
  30
 0.0
   0
 ENDBLK
   5
-C5
+C6
 330
-C3
+C4
 100
 AcDbEntity
   8
@@ -6693,9 +6717,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-D3
+D4
 330
-D2
+D3
 100
 AcDbEntity
   8
@@ -6719,9 +6743,9 @@ AcDbBlockBegin
   0
 LINE
   5
-D5
+D6
 330
-D2
+D3
 100
 AcDbEntity
   8
@@ -6731,23 +6755,23 @@ AcDbEntity
 100
 AcDbLine
  10
-60.0
+52.0
  20
-120.1
+138.1
  30
 0.0
  11
-60.0
+52.0
  21
-107.5
+125.5
  31
 0.0
   0
 LINE
   5
-D6
+D7
 330
-D2
+D3
 100
 AcDbEntity
   8
@@ -6757,23 +6781,23 @@ AcDbEntity
 100
 AcDbLine
  10
-155.0
+147.0
  20
-120.1
+138.1
  30
 0.0
  11
-155.0
+147.0
  21
-107.5
+125.5
  31
 0.0
   0
 INSERT
   5
-D7
+D8
 330
-D2
+D3
 100
 AcDbEntity
   8
@@ -6785,9 +6809,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-60.0
+52.0
  20
-109.0
+127.0
  30
 0.0
  41
@@ -6799,9 +6823,9 @@ _CLOSEDFILLED
   0
 INSERT
   5
-D9
+DA
 330
-D2
+D3
 100
 AcDbEntity
   8
@@ -6813,9 +6837,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-155.0
+147.0
  20
-109.0
+127.0
  30
 0.0
  41
@@ -6825,9 +6849,9 @@ _CLOSEDFILLED
   0
 LINE
   5
-DB
+DC
 330
-D2
+D3
 100
 AcDbEntity
   8
@@ -6837,23 +6861,23 @@ AcDbEntity
 100
 AcDbLine
  10
-62.5
+54.5
  20
-109.0
+127.0
  30
 0.0
  11
-152.5
+144.5
  21
-109.0
+127.0
  31
 0.0
   0
 MTEXT
   5
-DC
+DD
 330
-D2
+D3
 100
 AcDbEntity
   8
@@ -6863,9 +6887,9 @@ COTAS
 100
 AcDbMText
  10
-107.5
+99.5
  20
-111.65
+129.65
  30
 0.0
  40
@@ -6879,27 +6903,9 @@ OpenSansCondensed-Light
   0
 POINT
   5
-DD
-330
-D2
-100
-AcDbEntity
-  8
-Defpoints
-100
-AcDbPoint
- 10
-60.0
- 20
-109.0
- 30
-0.0
-  0
-POINT
-  5
 DE
 330
-D2
+D3
 100
 AcDbEntity
   8
@@ -6907,9 +6913,9 @@ Defpoints
 100
 AcDbPoint
  10
-60.0
+52.0
  20
-121.0
+127.0
  30
 0.0
   0
@@ -6917,7 +6923,7 @@ POINT
   5
 DF
 330
-D2
+D3
 100
 AcDbEntity
   8
@@ -6925,17 +6931,35 @@ Defpoints
 100
 AcDbPoint
  10
-155.0
+52.0
  20
-121.0
+139.0
+ 30
+0.0
+  0
+POINT
+  5
+E0
+330
+D3
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+147.0
+ 20
+139.0
  30
 0.0
   0
 ENDBLK
   5
-D4
+D5
 330
-D2
+D3
 100
 AcDbEntity
   8
@@ -6945,9 +6969,9 @@ AcDbBlockEnd
   0
 BLOCK
   5
-E2
+E9
 330
-E1
+E8
 100
 AcDbEntity
   8
@@ -6970,622 +6994,62 @@ AcDbBlockBegin
 
   0
 LINE
-  5
-E4
-330
-E1
-100
-AcDbEntity
-  8
-0
- 62
-5
-100
-AcDbLine
- 10
-145.0
- 20
-213.4
- 30
-0.0
- 11
-145.0
- 21
-220.0
- 31
-0.0
-  0
-LINE
-  5
-E5
-330
-E1
-100
-AcDbEntity
-  8
-0
- 62
-5
-100
-AcDbLine
- 10
-153.5
- 20
-213.4
- 30
-0.0
- 11
-153.5
- 21
-220.0
- 31
-0.0
-  0
-INSERT
-  5
-E6
-330
-E1
-100
-AcDbEntity
-  8
-COTAS
- 62
-5
-100
-AcDbBlockReference
-  2
-_CLOSEDFILLED
- 10
-145.0
- 20
-218.5
- 30
-0.0
- 41
-2.5
- 42
-2.5
- 50
-180.0
-  0
-INSERT
-  5
-E8
-330
-E1
-100
-AcDbEntity
-  8
-COTAS
- 62
-5
-100
-AcDbBlockReference
-  2
-_CLOSEDFILLED
- 10
-153.5
- 20
-218.5
- 30
-0.0
- 41
-2.5
- 42
-2.5
-  0
-LINE
-  5
-EA
-330
-E1
-100
-AcDbEntity
-  8
-0
- 62
-5
-100
-AcDbLine
- 10
-147.5
- 20
-218.5
- 30
-0.0
- 11
-151.0
- 21
-218.5
- 31
-0.0
-  0
-MTEXT
   5
 EB
 330
-E1
+E8
 100
 AcDbEntity
   8
-COTAS
+0
  62
 5
 100
-AcDbMText
+AcDbLine
  10
-149.25
+208.5
  20
-222.65
+185.1
  30
 0.0
- 40
-3.5
- 71
-5
-  1
-land 8,50 ±0,05
-  7
-OpenSansCondensed-Light
+ 11
+208.5
+ 21
+134.0
+ 31
+0.0
   0
-POINT
+LINE
   5
 EC
 330
-E1
+E8
 100
 AcDbEntity
   8
-Defpoints
+0
+ 62
+5
 100
-AcDbPoint
+AcDbLine
  10
-145.0
+283.5
  20
-218.5
+185.1
  30
 0.0
+ 11
+283.5
+ 21
+134.0
+ 31
+0.0
   0
-POINT
+INSERT
   5
 ED
 330
-E1
-100
-AcDbEntity
-  8
-Defpoints
-100
-AcDbPoint
- 10
-145.0
- 20
-212.5
- 30
-0.0
-  0
-POINT
-  5
-EE
-330
-E1
-100
-AcDbEntity
-  8
-Defpoints
-100
-AcDbPoint
- 10
-153.5
- 20
-212.5
- 30
-0.0
-  0
-ENDBLK
-  5
-E3
-330
-E1
-100
-AcDbEntity
-  8
-0
-100
-AcDbBlockEnd
-  0
-BLOCK
-  5
-F8
-330
-F7
-100
-AcDbEntity
-  8
-0
-100
-AcDbBlockBegin
-  2
-*D7
- 70
-1
- 10
-0.0
- 20
-0.0
- 30
-0.0
-  3
-*D7
-  1
-
-  0
-LINE
-  5
-FA
-330
-F7
-100
-AcDbEntity
-  8
-0
- 62
-1
-100
-AcDbLine
- 10
-292.9
- 20
-167.25
- 30
-0.0
- 11
-358.0
- 21
-167.25
- 31
-0.0
-  0
-LINE
-  5
-FB
-330
-F7
-100
-AcDbEntity
-  8
-0
- 62
-1
-100
-AcDbLine
- 10
-292.9
- 20
-168.75
- 30
-0.0
- 11
-358.0
- 21
-168.75
- 31
-0.0
-  0
-INSERT
-  5
-FC
-330
-F7
-100
-AcDbEntity
-  8
-COTAS
- 62
-1
-100
-AcDbBlockReference
-  2
-_CLOSEDFILLED
- 10
-356.5
- 20
-167.25
- 30
-0.0
- 41
-3.0
- 42
-3.0
- 50
-90.0
-  0
-INSERT
-  5
-FE
-330
-F7
-100
-AcDbEntity
-  8
-COTAS
- 62
-1
-100
-AcDbBlockReference
-  2
-_CLOSEDFILLED
- 10
-356.5
- 20
-168.75
- 30
-0.0
- 41
-3.0
- 42
-3.0
- 50
-270.0
-  0
-LINE
-  5
-100
-330
-F7
-100
-AcDbEntity
-  8
-0
- 62
-1
-100
-AcDbLine
- 10
-356.5
- 20
-164.25
- 30
-0.0
- 11
-356.5
- 21
-161.25
- 31
-0.0
-  0
-LINE
-  5
-101
-330
-F7
-100
-AcDbEntity
-  8
-0
- 62
-1
-100
-AcDbLine
- 10
-356.5
- 20
-171.75
- 30
-0.0
- 11
-356.5
- 21
-174.75
- 31
-0.0
-  0
-LINE
-  5
-102
-330
-F7
-100
-AcDbEntity
-  8
-0
- 62
-1
-100
-AcDbLine
- 10
-356.5
- 20
-167.25
- 30
-0.0
- 11
-356.5
- 21
-168.75
- 31
-0.0
-  0
-MTEXT
-  5
-103
-330
-F7
-100
-AcDbEntity
-  8
-COTAS
- 62
-1
-100
-AcDbMText
- 10
-351.35
- 20
-168.0
- 30
-0.0
- 40
-5.5
- 71
-5
-  1
-ABERTURA 1,500 +0,010/-0,000
-  7
-OpenSansCondensed-Light
- 50
-90.0
-  0
-POINT
-  5
-104
-330
-F7
-100
-AcDbEntity
-  8
-Defpoints
-100
-AcDbPoint
- 10
-356.5
- 20
-167.25
- 30
-0.0
-  0
-POINT
-  5
-105
-330
-F7
-100
-AcDbEntity
-  8
-Defpoints
-100
-AcDbPoint
- 10
-292.0
- 20
-167.25
- 30
-0.0
-  0
-POINT
-  5
-106
-330
-F7
-100
-AcDbEntity
-  8
-Defpoints
-100
-AcDbPoint
- 10
-292.0
- 20
-168.75
- 30
-0.0
-  0
-ENDBLK
-  5
-F9
-330
-F7
-100
-AcDbEntity
-  8
-0
-100
-AcDbBlockEnd
-  0
-BLOCK
-  5
-109
-330
-108
-100
-AcDbEntity
-  8
-0
-100
-AcDbBlockBegin
-  2
-*D8
- 70
-1
- 10
-0.0
- 20
-0.0
- 30
-0.0
-  3
-*D8
-  1
-
-  0
-LINE
-  5
-10B
-330
-108
-100
-AcDbEntity
-  8
-0
- 62
-5
-100
-AcDbLine
- 10
-254.5
- 20
-167.1
- 30
-0.0
- 11
-254.5
- 21
-116.0
- 31
-0.0
-  0
-LINE
-  5
-10C
-330
-108
-100
-AcDbEntity
-  8
-0
- 62
-5
-100
-AcDbLine
- 10
-329.5
- 20
-167.1
- 30
-0.0
- 11
-329.5
- 21
-116.0
- 31
-0.0
-  0
-INSERT
-  5
-10D
-330
-108
+E8
 100
 AcDbEntity
   8
@@ -7597,9 +7061,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-254.5
+208.5
  20
-117.5
+135.5
  30
 0.0
  41
@@ -7611,9 +7075,9 @@ _CLOSEDFILLED
   0
 INSERT
   5
-10F
+EF
 330
-108
+E8
 100
 AcDbEntity
   8
@@ -7625,9 +7089,9 @@ AcDbBlockReference
   2
 _CLOSEDFILLED
  10
-329.5
+283.5
  20
-117.5
+135.5
  30
 0.0
  41
@@ -7637,9 +7101,9 @@ _CLOSEDFILLED
   0
 LINE
   5
-111
+F1
 330
-108
+E8
 100
 AcDbEntity
   8
@@ -7649,23 +7113,23 @@ AcDbEntity
 100
 AcDbLine
  10
-257.0
+211.0
  20
-117.5
+135.5
  30
 0.0
  11
-327.0
+281.0
  21
-117.5
+135.5
  31
 0.0
   0
 MTEXT
   5
-112
+F2
 330
-108
+E8
 100
 AcDbEntity
   8
@@ -7675,9 +7139,9 @@ COTAS
 100
 AcDbMText
  10
-292.0
+246.0
  20
-120.15
+138.15
  30
 0.0
  40
@@ -7691,9 +7155,9 @@ OpenSansCondensed-Light
   0
 POINT
   5
-113
+F3
 330
-108
+E8
 100
 AcDbEntity
   8
@@ -7701,17 +7165,17 @@ Defpoints
 100
 AcDbPoint
  10
-254.5
+208.5
  20
-117.5
+135.5
  30
 0.0
   0
 POINT
   5
-114
+F4
 330
-108
+E8
 100
 AcDbEntity
   8
@@ -7719,17 +7183,17 @@ Defpoints
 100
 AcDbPoint
  10
-254.5
+208.5
  20
-168.0
+186.0
  30
 0.0
   0
 POINT
   5
-115
+F5
 330
-108
+E8
 100
 AcDbEntity
   8
@@ -7737,17 +7201,525 @@ Defpoints
 100
 AcDbPoint
  10
-329.5
+283.5
  20
-168.0
+186.0
  30
 0.0
   0
 ENDBLK
   5
+EA
+330
+E8
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockEnd
+  0
+BLOCK
+  5
+FE
+330
+FD
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockBegin
+  2
+*D7
+ 70
+1
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  3
+*D7
+  1
+
+  0
+LINE
+  5
+100
+330
+FD
+100
+AcDbEntity
+  8
+0
+ 62
+1
+100
+AcDbLine
+ 10
+313.1
+ 20
+181.5
+ 30
+0.0
+ 11
+300.5
+ 21
+181.5
+ 31
+0.0
+  0
+LINE
+  5
+101
+330
+FD
+100
+AcDbEntity
+  8
+0
+ 62
+1
+100
+AcDbLine
+ 10
+313.1
+ 20
+190.5
+ 30
+0.0
+ 11
+300.5
+ 21
+190.5
+ 31
+0.0
+  0
+INSERT
+  5
+102
+330
+FD
+100
+AcDbEntity
+  8
+COTAS
+ 62
+1
+100
+AcDbBlockReference
+  2
+_CLOSEDFILLED
+ 10
+302.0
+ 20
+181.5
+ 30
+0.0
+ 41
+3.0
+ 42
+3.0
+ 50
+270.0
+  0
+INSERT
+  5
+104
+330
+FD
+100
+AcDbEntity
+  8
+COTAS
+ 62
+1
+100
+AcDbBlockReference
+  2
+_CLOSEDFILLED
+ 10
+302.0
+ 20
+190.5
+ 30
+0.0
+ 41
+3.0
+ 42
+3.0
+ 50
+90.0
+  0
+LINE
+  5
+106
+330
+FD
+100
+AcDbEntity
+  8
+0
+ 62
+1
+100
+AcDbLine
+ 10
+302.0
+ 20
+184.5
+ 30
+0.0
+ 11
+302.0
+ 21
+187.5
+ 31
+0.0
+  0
+MTEXT
+  5
+107
+330
+FD
+100
+AcDbEntity
+  8
+COTAS
+ 62
+1
+100
+AcDbMText
+ 10
+296.6
+ 20
+186.0
+ 30
+0.0
+ 40
+6.0
+ 71
+5
+  1
+1,500
+  7
+OpenSansCondensed-Light
+ 50
+90.0
+  0
+POINT
+  5
+108
+330
+FD
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+302.0
+ 20
+181.5
+ 30
+0.0
+  0
+POINT
+  5
+109
+330
+FD
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+314.0
+ 20
+181.5
+ 30
+0.0
+  0
+POINT
+  5
 10A
 330
-108
+FD
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+314.0
+ 20
+190.5
+ 30
+0.0
+  0
+ENDBLK
+  5
+FF
+330
+FD
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockEnd
+  0
+BLOCK
+  5
+10D
+330
+10C
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockBegin
+  2
+*D8
+ 70
+1
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  3
+*D8
+  1
+
+  0
+LINE
+  5
+10F
+330
+10C
+100
+AcDbEntity
+  8
+0
+ 62
+5
+100
+AcDbLine
+ 10
+318.0
+ 20
+176.6
+ 30
+0.0
+ 11
+318.0
+ 21
+166.0
+ 31
+0.0
+  0
+LINE
+  5
+110
+330
+10C
+100
+AcDbEntity
+  8
+0
+ 62
+5
+100
+AcDbLine
+ 10
+369.0
+ 20
+176.6
+ 30
+0.0
+ 11
+369.0
+ 21
+166.0
+ 31
+0.0
+  0
+INSERT
+  5
+111
+330
+10C
+100
+AcDbEntity
+  8
+COTAS
+ 62
+5
+100
+AcDbBlockReference
+  2
+_CLOSEDFILLED
+ 10
+318.0
+ 20
+167.5
+ 30
+0.0
+ 41
+2.5
+ 42
+2.5
+ 50
+180.0
+  0
+INSERT
+  5
+113
+330
+10C
+100
+AcDbEntity
+  8
+COTAS
+ 62
+5
+100
+AcDbBlockReference
+  2
+_CLOSEDFILLED
+ 10
+369.0
+ 20
+167.5
+ 30
+0.0
+ 41
+2.5
+ 42
+2.5
+  0
+LINE
+  5
+115
+330
+10C
+100
+AcDbEntity
+  8
+0
+ 62
+5
+100
+AcDbLine
+ 10
+320.5
+ 20
+167.5
+ 30
+0.0
+ 11
+366.5
+ 21
+167.5
+ 31
+0.0
+  0
+MTEXT
+  5
+116
+330
+10C
+100
+AcDbEntity
+  8
+COTAS
+ 62
+5
+100
+AcDbMText
+ 10
+343.5
+ 20
+171.65
+ 30
+0.0
+ 40
+3.5
+ 71
+5
+  1
+land 8,50 ±0,05
+  7
+OpenSansCondensed-Light
+  0
+POINT
+  5
+117
+330
+10C
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+318.0
+ 20
+167.5
+ 30
+0.0
+  0
+POINT
+  5
+118
+330
+10C
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+318.0
+ 20
+177.5
+ 30
+0.0
+  0
+POINT
+  5
+119
+330
+10C
+100
+AcDbEntity
+  8
+Defpoints
+100
+AcDbPoint
+ 10
+369.0
+ 20
+177.5
+ 30
+0.0
+  0
+ENDBLK
+  5
+10E
+330
+10C
 100
 AcDbEntity
   8
@@ -7763,7 +7735,7 @@ ENTITIES
   0
 LWPOLYLINE
   5
-92
+93
 330
 17
 100
@@ -7777,57 +7749,57 @@ AcDbPolyline
  70
 1
  10
-60.0
+52.0
  20
-121.0
+139.0
  10
-129.9
+121.9
  20
-121.0
+139.0
  10
-129.9
+121.9
  20
-123.5
+141.5
  10
-140.7
+132.7
  20
-123.5
+141.5
  10
-140.7
+132.7
  20
-128.5
+146.5
  10
-155.0
+147.0
  20
-128.5
+146.5
  10
-155.0
+147.0
  20
-207.5
+225.5
  10
-140.7
+132.7
  20
-207.5
+225.5
  10
-140.7
+132.7
  20
-212.5
+230.5
  10
-129.9
+121.9
  20
-212.5
+230.5
  10
-129.9
+121.9
  20
-215.0
+233.0
  10
-60.0
+52.0
  20
-215.0
+233.0
   0
 LWPOLYLINE
   5
-93
+94
 330
 17
 100
@@ -7841,41 +7813,41 @@ AcDbPolyline
  70
 1
  10
-60.0
+52.0
  20
-130.2
+148.2
  10
-145.0
+137.0
  20
-167.25
+185.25
  10
-153.5
+145.5
  20
-167.25
+185.25
  10
-155.0
+147.0
  20
-165.75
+183.75
  10
-155.0
+147.0
  20
-170.25
+188.25
  10
-153.5
+145.5
  20
-168.75
+186.75
  10
-145.0
+137.0
  20
-168.75
+186.75
  10
-60.0
+52.0
  20
-205.8
+223.8
   0
 LINE
   5
-94
+95
 330
 17
 100
@@ -7885,21 +7857,21 @@ EIXO
 100
 AcDbLine
  10
-46.0
+40.0
  20
-168.0
+186.0
  30
 0.0
  11
-169.0
+159.0
  21
-168.0
+186.0
  31
 0.0
   0
 DIMENSION
   5
-95
+96
 330
 17
 100
@@ -7915,15 +7887,15 @@ AcDbDimension
   3
 COTAS
  10
-32.0
+22.0
  20
-121.0
+139.0
  30
 0.0
  11
-29.35
+19.35
  21
-168.0
+186.0
  31
 0.0
  70
@@ -7935,15 +7907,15 @@ COTAS
 100
 AcDbAlignedDimension
  13
-60.0
+52.0
  23
-121.0
+139.0
  33
 0.0
  14
-60.0
+52.0
  24
-215.0
+233.0
  34
 0.0
  50
@@ -7953,7 +7925,7 @@ AcDbRotatedDimension
   0
 DIMENSION
   5
-A4
+A5
 330
 17
 100
@@ -7969,15 +7941,15 @@ AcDbDimension
   3
 COTAS
  10
-47.0
+37.0
  20
-130.2
+148.2
  30
 0.0
  11
-44.35
+34.35
  21
-168.0
+186.0
  31
 0.0
  70
@@ -7989,15 +7961,15 @@ COTAS
 100
 AcDbAlignedDimension
  13
-60.0
+52.0
  23
-130.2
+148.2
  33
 0.0
  14
-60.0
+52.0
  24
-205.8
+223.8
  34
 0.0
  50
@@ -8007,7 +7979,7 @@ AcDbRotatedDimension
   0
 DIMENSION
   5
-B3
+B4
 330
 17
 100
@@ -8023,15 +7995,15 @@ AcDbDimension
   3
 COTAS
  10
-168.0
+162.0
  20
-128.5
+146.5
  30
 0.0
  11
-165.35
+159.35
  21
-168.0
+186.0
  31
 0.0
  70
@@ -8043,15 +8015,15 @@ COTAS
 100
 AcDbAlignedDimension
  13
-155.0
+147.0
  23
-128.5
+146.5
  33
 0.0
  14
-155.0
+147.0
  24
-207.5
+225.5
  34
 0.0
  50
@@ -8061,7 +8033,7 @@ AcDbRotatedDimension
   0
 DIMENSION
   5
-C2
+C3
 330
 17
 100
@@ -8077,15 +8049,15 @@ AcDbDimension
   3
 COTAS
  10
-182.0
+175.0
  20
-123.5
+141.5
  30
 0.0
  11
-179.35
+172.35
  21
-168.0
+186.0
  31
 0.0
  70
@@ -8097,15 +8069,15 @@ COTAS
 100
 AcDbAlignedDimension
  13
-129.9
+121.9
  23
-123.5
+141.5
  33
 0.0
  14
-129.9
+121.9
  24
-212.5
+230.5
  34
 0.0
  50
@@ -8115,7 +8087,7 @@ AcDbRotatedDimension
   0
 DIMENSION
   5
-D1
+D2
 330
 17
 100
@@ -8131,15 +8103,15 @@ AcDbDimension
   3
 COTAS
  10
-60.0
+52.0
  20
-109.0
+127.0
  30
 0.0
  11
-107.5
+99.5
  21
-111.65
+129.65
  31
 0.0
  70
@@ -8151,15 +8123,15 @@ comprimento 95,00 ±0,5
 100
 AcDbAlignedDimension
  13
-60.0
+52.0
  23
-121.0
+139.0
  33
 0.0
  14
-155.0
+147.0
  24
-121.0
+139.0
  34
 0.0
  50
@@ -8167,9 +8139,181 @@ AcDbAlignedDimension
 100
 AcDbRotatedDimension
   0
+TEXT
+  5
+E1
+330
+17
+100
+AcDbEntity
+  8
+NOTAS
+100
+AcDbText
+ 10
+22.0
+ 20
+239.0
+ 30
+0.0
+ 40
+3.4
+  1
+SEÇÃO NO PLANO DA ABERTURA · 1:1 · funil em spline (a tabela dá o resto)
+ 11
+22.0
+ 21
+239.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+CIRCLE
+  5
+E2
+330
+17
+100
+AcDbEntity
+  8
+PERFIL
+100
+AcDbCircle
+ 10
+246.0
+ 20
+186.0
+ 30
+0.0
+ 40
+39.5
+  0
+LWPOLYLINE
+  5
+E3
+330
+17
+100
+AcDbEntity
+  8
+PERFIL
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+208.125
+ 20
+184.875
+ 10
+283.875
+ 20
+184.875
+ 42
+1.0
+ 10
+283.875
+ 20
+187.125
+ 10
+208.125
+ 20
+187.125
+ 42
+1.0
+  0
+LWPOLYLINE
+  5
+E4
+330
+17
+100
+AcDbEntity
+  8
+CANAL
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+209.25
+ 20
+185.25
+ 10
+282.75
+ 20
+185.25
+ 42
+1.0
+ 10
+282.75
+ 20
+186.75
+ 10
+209.25
+ 20
+186.75
+ 42
+1.0
+  0
+LINE
+  5
+E5
+330
+17
+100
+AcDbEntity
+  8
+EIXO
+100
+AcDbLine
+ 10
+200.5
+ 20
+186.0
+ 30
+0.0
+ 11
+291.5
+ 21
+186.0
+ 31
+0.0
+  0
+LINE
+  5
+E6
+330
+17
+100
+AcDbEntity
+  8
+EIXO
+100
+AcDbLine
+ 10
+246.0
+ 20
+140.5
+ 30
+0.0
+ 11
+246.0
+ 21
+231.5
+ 31
+0.0
+  0
 DIMENSION
   5
-E0
+E7
 330
 17
 100
@@ -8185,15 +8329,15 @@ AcDbDimension
   3
 COTAS
  10
-145.0
+208.5
  20
-218.5
+135.5
  30
 0.0
  11
-149.25
+246.0
  21
-222.65
+138.15
  31
 0.0
  70
@@ -8201,19 +8345,19 @@ COTAS
  71
 5
   1
-land 8,50 ±0,05
+largura 75,00 ±0,05
 100
 AcDbAlignedDimension
  13
-145.0
+208.5
  23
-212.5
+186.0
  33
 0.0
  14
-153.5
+283.5
  24
-212.5
+186.0
  34
 0.0
  50
@@ -8223,7 +8367,7 @@ AcDbRotatedDimension
   0
 TEXT
   5
-EF
+F6
 330
 17
 100
@@ -8233,19 +8377,19 @@ NOTAS
 100
 AcDbText
  10
-34.0
+194.5
  20
-239.0
+232.5
  30
 0.0
  40
-3.2
+3.4
   1
-SEÇÃO SIMÉTRICA NO PLANO DA ABERTURA - só nesta vista o funil aparece
+FACE DE SAÍDA · 1:1
  11
-34.0
+194.5
  21
-239.0
+232.5
  31
 0.0
 100
@@ -8253,9 +8397,9 @@ AcDbText
  73
 1
   0
-MTEXT
+TEXT
   5
-F0
+F7
 330
 17
 100
@@ -8263,77 +8407,31 @@ AcDbEntity
   8
 NOTAS
 100
-AcDbMText
+AcDbText
  10
-34.0
+194.5
  20
-236.0
+228.5
  30
 0.0
  40
-2.8
- 41
-168.0
- 71
-1
+2.6
   1
-Ø75,60 na entrada fecha em funil até a fenda 75,00 × 1,500 - perfil BSpline medido no STEP
-  0
-CIRCLE
-  5
-F1
-330
-17
-100
-AcDbEntity
-  8
-PERFIL
-100
-AcDbCircle
- 10
-292.0
- 20
-168.0
- 30
+boca do chanfro 78,00 × 4,50 · fenda 75,00 × 1,500
+ 11
+194.5
+ 21
+228.5
+ 31
 0.0
- 40
-39.5
-  0
-LWPOLYLINE
-  5
-F2
-330
-17
 100
-AcDbEntity
-  8
-PERFIL
-100
-AcDbPolyline
- 90
-4
- 70
+AcDbText
+ 73
 1
- 10
-253.0
- 20
-166.875
- 10
-331.0
- 20
-166.875
- 10
-331.0
- 20
-169.125
- 10
-253.0
- 20
-169.125
   0
 LWPOLYLINE
   5
-F3
+F8
 330
 17
 100
@@ -8343,29 +8441,109 @@ CANAL
 100
 AcDbPolyline
  90
-4
+6
  70
 1
  10
-254.5
+318.0
  20
-167.25
+181.5
  10
-329.5
+369.0
  20
-167.25
+181.5
  10
-329.5
+378.0
  20
-168.75
+172.5
  10
-254.5
+378.0
  20
-168.75
+199.5
+ 10
+369.0
+ 20
+190.5
+ 10
+318.0
+ 20
+190.5
+  0
+LWPOLYLINE
+  5
+F9
+330
+17
+100
+AcDbEntity
+  8
+PERFIL
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+318.0
+ 20
+203.5
+ 10
+318.0
+ 20
+190.5
+ 10
+369.0
+ 20
+190.5
+ 10
+378.0
+ 20
+199.5
+ 10
+378.0
+ 20
+212.5
+  0
+LWPOLYLINE
+  5
+FA
+330
+17
+100
+AcDbEntity
+  8
+PERFIL
+100
+AcDbPolyline
+ 90
+5
+ 70
+0
+ 10
+318.0
+ 20
+168.5
+ 10
+318.0
+ 20
+181.5
+ 10
+369.0
+ 20
+181.5
+ 10
+378.0
+ 20
+172.5
+ 10
+378.0
+ 20
+159.5
   0
 LINE
   5
-F4
+FB
 330
 17
 100
@@ -8375,45 +8553,21 @@ EIXO
 100
 AcDbLine
  10
-245.5
+312.0
  20
-168.0
+186.0
  30
 0.0
  11
-338.5
+384.0
  21
-168.0
- 31
-0.0
-  0
-LINE
-  5
-F5
-330
-17
-100
-AcDbEntity
-  8
-EIXO
-100
-AcDbLine
- 10
-292.0
- 20
-121.5
- 30
-0.0
- 11
-292.0
- 21
-214.5
+186.0
  31
 0.0
   0
 DIMENSION
   5
-F6
+FC
 330
 17
 100
@@ -8429,15 +8583,15 @@ AcDbDimension
   3
 COTAS
  10
-356.5
+302.0
  20
-167.25
+181.5
  30
 0.0
  11
-351.35
+296.6
  21
-168.0
+186.0
  31
 0.0
  70
@@ -8445,19 +8599,19 @@ COTAS
  71
 5
   1
-ABERTURA 1,500 +0,010/-0,000
+1,500
 100
 AcDbAlignedDimension
  13
-292.0
+314.0
  23
-167.25
+181.5
  33
 0.0
  14
-292.0
+314.0
  24
-168.75
+190.5
  34
 0.0
  50
@@ -8473,7 +8627,7 @@ DSTYLE
 1070
 140
 1040
-5.5
+6.0
 1070
 41
 1040
@@ -8499,7 +8653,7 @@ DSTYLE
   0
 DIMENSION
   5
-107
+10B
 330
 17
 100
@@ -8515,15 +8669,15 @@ AcDbDimension
   3
 COTAS
  10
-254.5
+318.0
  20
-117.5
+167.5
  30
 0.0
  11
-292.0
+343.5
  21
-120.15
+171.65
  31
 0.0
  70
@@ -8531,19 +8685,19 @@ COTAS
  71
 5
   1
-largura 75,00 ±0,05
+land 8,50 ±0,05
 100
 AcDbAlignedDimension
  13
-254.5
+318.0
  23
-168.0
+177.5
  33
 0.0
  14
-329.5
+369.0
  24
-168.0
+177.5
  34
 0.0
  50
@@ -8553,7 +8707,7 @@ AcDbRotatedDimension
   0
 TEXT
   5
-116
+11A
 330
 17
 100
@@ -8563,19 +8717,19 @@ NOTAS
 100
 AcDbText
  10
-210.5
+312.0
  20
-231.5
+223.5
  30
 0.0
  40
-3.2
+3.6
   1
-FACE DE SAÍDA (x = 95,00), olhando ao longo do eixo
+DETALHE A · 6:1
  11
-210.5
+312.0
  21
-231.5
+223.5
  31
 0.0
 100
@@ -8583,9 +8737,43 @@ AcDbText
  73
 1
   0
-MTEXT
+TEXT
   5
-117
+11B
+330
+17
+100
+AcDbEntity
+  8
+COTAS
+ 62
+1
+100
+AcDbText
+ 10
+312.0
+ 20
+215.5
+ 30
+0.0
+ 40
+4.6
+  1
+ABERTURA 1,500 +0,010/-0,000
+ 11
+312.0
+ 21
+215.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+11C
 330
 17
 100
@@ -8593,25 +8781,63 @@ AcDbEntity
   8
 NOTAS
 100
-AcDbMText
+AcDbText
  10
-210.5
+312.0
  20
-228.5
+151.5
  30
 0.0
  40
-2.8
- 41
-132.0
- 71
-1
+2.6
   1
-boca do chanfro 78,00 × 4,50 (chanfro 1,50 × 45°) · fenda 75,00 × 1,500 com R 0,75 vivo nas duas pontas
+chanfro 1,50 × 45° · face de saída em x = 95,00
+ 11
+312.0
+ 21
+151.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
   0
 TEXT
   5
-118
+11D
+330
+17
+100
+AcDbEntity
+  8
+NOTAS
+100
+AcDbText
+ 10
+312.0
+ 20
+146.5
+ 30
+0.0
+ 40
+2.6
+  1
+funil (spline) vem da esquerda; corte em x = 85,00
+ 11
+312.0
+ 21
+146.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+11E
 330
 17
 100
@@ -8623,17 +8849,17 @@ AcDbText
  10
 14.0
  20
-271.0
+272.0
  30
 0.0
  40
-8.0
+7.5
   1
-MATERIAL DA PEÇA: AÇO 1045
+MATERIAL: AÇO 1045 · SEM PVD · SEM DLC · SEM OUTRO AÇO
  11
 14.0
  21
-271.0
+272.0
  31
 0.0
 100
@@ -8643,7 +8869,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-119
+11F
 330
 17
 100
@@ -8663,15 +8889,15 @@ AcDbPolyline
  10
 12.0
  20
-268.0
+269.0
  10
 408.0
  20
-268.0
+269.0
   0
 MTEXT
   5
-11A
+120
 330
 17
 100
@@ -8683,11 +8909,11 @@ AcDbMText
  10
 14.0
  20
-265.0
+266.0
  30
 0.0
  40
-3.0
+3.2
  41
 390.0
  71
@@ -8695,187 +8921,11 @@ AcDbMText
   3
 Norma: SAE J404 / EN 10083-2: aço 1045, barra forjada, fibra no eixo, condição de entrega normalizada (<= 220 HB)\PDureza e tratamento: corpo revenido 30-36 HRC; arestas do land 55-60 HRC em camada de 0,6-1,0 mm por indução (ou nitretação a plasma 52
   3
-0 °C, 8-18 µm, se a fábrica preferir tratar a fenda inteira) - escolha da fábrica, declarada no relatório\PNÃO PODE MUDAR: sem PVD, sem DLC - nenhuma outra camada sem ordem assinada; aço trocado só com desenho novo assinado por nós + certificado EN 1
+0 °C, 8-18 µm, se a fábrica preferir tratar a fenda inteira) - escolha da fábrica, declarada no relatório\PTroca de aço só com desenho novo assinado por nós + certificado EN 10204 3.1 do lote fornecido · marcação a laser na face traseira: JONATHA v27
   1
-0204 3.1 do lote.
+.0 · EX-031 · 1045 · rev. 30
   0
 TEXT
-  5
-11B
-330
-17
-100
-AcDbEntity
-  8
-NOTAS
- 62
-1
-100
-AcDbText
- 10
-22.0
- 20
-106.0
- 30
-0.0
- 40
-3.6
-  1
-NOTAS
- 11
-22.0
- 21
-106.0
- 31
-0.0
-100
-AcDbText
- 73
-1
-  0
-MTEXT
-  5
-11C
-330
-17
-100
-AcDbEntity
-  8
-NOTAS
-100
-AcDbMText
- 10
-22.0
- 20
-97.0
- 30
-0.0
- 40
-2.8
- 41
-178.0
- 71
-1
-  1
-1  A fenda é aberta a fio EDM pelo Ø75,60, de um lado só, DEPOIS do tratamento térmico do corpo. Não tem linha de partição, flange, furo de fixação, rosca nem pino: a peça é 1 sólido e o aperto é pelo collete EX-031 e pelo degrau do furo do cabeçote.
-  0
-MTEXT
-  5
-11D
-330
-17
-100
-AcDbEntity
-  8
-NOTAS
-100
-AcDbMText
- 10
-22.0
- 20
-82.0
- 30
-0.0
- 40
-2.8
- 41
-178.0
- 71
-1
-  3
-2  Medir a abertura da fenda ANTES e DEPOIS do tratamento e gravar os dois números: 8 a 18 µm por face comem 0,016 a 0,036 mm da tolerância de 0,010; se fechar abaixo de 1,500 mm, passar o fio de novo. Remover camada REC >= 0,02 mm; canal e land com 
-  1
-Ra <= 0,4 µm, polido no sentido da extrusão; rebarba <= 0,1 × 45°.
-  0
-MTEXT
-  5
-11E
-330
-17
-100
-AcDbEntity
-  8
-NOTAS
-100
-AcDbMText
- 10
-22.0
- 20
-62.800000000000004
- 30
-0.0
- 40
-2.8
- 41
-178.0
- 71
-1
-  3
-3  Comprimento com a face de saída ralada no fim, faceada ao nariz do EX-031 (protrusão medida na montagem: 0,00 mm). Coaxialidade dos 3 estágios Ø0,02 em A; face de saída com planeza 0,01 e perpendicularidade 0,01 em A; não alargar a boca de entrada
-  1
- Ø75,60.
-  0
-MTEXT
-  5
-11F
-330
-17
-100
-AcDbEntity
-  8
-NOTAS
-100
-AcDbMText
- 10
-22.0
- 20
-47.800000000000004
- 30
-0.0
- 40
-2.8
- 41
-178.0
- 71
-1
-  3
-4  Entregar 1 peça com certificado EN 10204 3.1 do lote (composição, granulometria, inclusões, ensaio mecânico), relatório de dureza e relatório dimensional de todas as cotas desta folha. Marcação a laser na face traseira: JONATHA v27.0 · EX-031 · 10
-  1
-45 · rev. 30 · lote · nº série.
-  0
-LWPOLYLINE
-  5
-120
-330
-17
-100
-AcDbEntity
-  8
-CARIMBO
-100
-AcDbPolyline
- 90
-4
- 70
-1
- 10
-204.0
- 20
-22.0
- 10
-408.0
- 20
-22.0
- 10
-408.0
- 20
-110.0
- 10
-204.0
- 20
-110.0
-  0
-LINE
   5
 121
 330
@@ -8883,21 +8933,29 @@ LINE
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
 100
-AcDbLine
+AcDbText
  10
-204.0
+22.0
  20
-30.0
+118.5
  30
 0.0
+ 40
+3.6
+  1
+ANATOMIA DA PEÇA · cota de contrato e o que a medição no STEP achou
  11
-408.0
+22.0
  21
-30.0
+118.5
  31
 0.0
+100
+AcDbText
+ 73
+1
   0
 LINE
   5
@@ -8907,19 +8965,19 @@ LINE
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
 100
 AcDbLine
  10
-204.0
+20.0
  20
-42.0
+116.0
  30
 0.0
  11
-408.0
+198.0
  21
-42.0
+116.0
  31
 0.0
   0
@@ -8931,23 +8989,23 @@ LINE
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
 100
 AcDbLine
  10
-204.0
+20.0
  20
-63.0
+110.5
  30
 0.0
  11
-408.0
+198.0
  21
-63.0
+110.5
  31
 0.0
   0
-LINE
+TEXT
   5
 124
 330
@@ -8955,23 +9013,33 @@ LINE
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
+ 62
+8
 100
-AcDbLine
+AcDbText
  10
-204.0
+24.0
  20
-78.0
+111.2
  30
 0.0
+ 40
+2.8
+  1
+REGIÃO
  11
-408.0
+24.0
  21
-78.0
+111.2
  31
 0.0
+100
+AcDbText
+ 73
+1
   0
-LINE
+TEXT
   5
 125
 330
@@ -8979,23 +9047,33 @@ LINE
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
+ 62
+8
 100
-AcDbLine
+AcDbText
  10
-204.0
+76.0
  20
-96.0
+111.2
  30
 0.0
+ 40
+2.8
+  1
+COTA
  11
-408.0
+76.0
  21
-96.0
+111.2
  31
 0.0
+100
+AcDbText
+ 73
+1
   0
-LINE
+TEXT
   5
 126
 330
@@ -9003,23 +9081,33 @@ LINE
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
+ 62
+8
 100
-AcDbLine
+AcDbText
  10
-204.0
+140.0
  20
-96.0
+111.2
  30
 0.0
+ 40
+2.8
+  1
+MEDIDO NO STEP
  11
-408.0
+140.0
  21
-96.0
+111.2
  31
 0.0
+100
+AcDbText
+ 73
+1
   0
-LINE
+TEXT
   5
 127
 330
@@ -9027,21 +9115,29 @@ LINE
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
 100
-AcDbLine
+AcDbText
  10
-254.0
+24.0
  20
-96.0
+104.0
  30
 0.0
+ 40
+2.5
+  1
+face de entrada (datum A)
  11
-254.0
+24.0
  21
-22.0
+104.0
  31
 0.0
+100
+AcDbText
+ 73
+1
   0
 TEXT
   5
@@ -9051,23 +9147,23 @@ TEXT
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
 100
 AcDbText
  10
-207.0
+76.0
  20
-105.0
+104.0
  30
 0.0
  40
-4.2
+2.5
   1
-MATRIZ DE EXTRUSÃO · JONATHA v27.0
+plana, planeza 0,01
  11
-207.0
+76.0
  21
-105.0
+104.0
  31
 0.0
 100
@@ -9083,23 +9179,23 @@ TEXT
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
 100
 AcDbText
  10
-207.0
+140.0
  20
-99.5
+104.0
  30
 0.0
  40
-2.6
+2.5
   1
-peça única · 1 peça · escala 1:1 · mm · A3 · rev. 30 de 2026-09-22
+x = 0,00
  11
-207.0
+140.0
  21
-99.5
+104.0
  31
 0.0
 100
@@ -9107,7 +9203,7 @@ AcDbText
  73
 1
   0
-TEXT
+LINE
   5
 12A
 330
@@ -9115,31 +9211,21 @@ TEXT
 100
 AcDbEntity
   8
-CARIMBO
- 62
-8
+TABELA
 100
-AcDbText
+AcDbLine
  10
-207.0
+20.0
  20
-91.0
+102.0
  30
 0.0
- 40
-2.6
-  1
-MATERIAL
  11
-207.0
+198.0
  21
-91.0
+102.0
  31
 0.0
-100
-AcDbText
- 73
-1
   0
 TEXT
   5
@@ -9149,25 +9235,23 @@ TEXT
 100
 AcDbEntity
   8
-CARIMBO
- 62
-8
+TABELA
 100
 AcDbText
  10
-207.0
+24.0
  20
-73.0
+98.5
  30
 0.0
  40
-2.6
+2.5
   1
-COTA CRÍTICA
+Ø dos 3 estágios
  11
-207.0
+24.0
  21
-73.0
+98.5
  31
 0.0
 100
@@ -9183,25 +9267,23 @@ TEXT
 100
 AcDbEntity
   8
-CARIMBO
- 62
-8
+TABELA
 100
 AcDbText
  10
-207.0
+76.0
  20
-58.0
+98.5
  30
 0.0
  40
-2.6
+2.5
   1
-TRATAMENTO
+Ø94 / Ø89 / Ø79 ±0,5
  11
-207.0
+76.0
  21
-58.0
+98.5
  31
 0.0
 100
@@ -9217,25 +9299,23 @@ TEXT
 100
 AcDbEntity
   8
-CARIMBO
- 62
-8
+TABELA
 100
 AcDbText
  10
-207.0
+140.0
  20
-37.0
+98.5
  30
 0.0
  40
-2.6
+2.5
   1
-COTAS
+94,000 / 89,000 / 79,000
  11
-207.0
+140.0
  21
-37.0
+98.5
  31
 0.0
 100
@@ -9243,7 +9323,7 @@ AcDbText
  73
 1
   0
-TEXT
+LINE
   5
 12E
 330
@@ -9251,31 +9331,21 @@ TEXT
 100
 AcDbEntity
   8
-CARIMBO
- 62
-8
+TABELA
 100
-AcDbText
+AcDbLine
  10
-207.0
+20.0
  20
-25.0
+96.5
  30
 0.0
- 40
-2.6
-  1
-SIGILO
  11
-207.0
+198.0
  21
-25.0
+96.5
  31
 0.0
-100
-AcDbText
- 73
-1
   0
 TEXT
   5
@@ -9285,25 +9355,23 @@ TEXT
 100
 AcDbEntity
   8
-CARIMBO
- 62
-1
+TABELA
 100
 AcDbText
  10
-255.0
+24.0
  20
-86.5
+93.0
  30
 0.0
  40
-6.0
+2.5
   1
-AÇO 1045
+degraus 1-2 e 2-3
  11
-255.0
+24.0
  21
-86.5
+93.0
  31
 0.0
 100
@@ -9311,7 +9379,7 @@ AcDbText
  73
 1
   0
-MTEXT
+TEXT
   5
 130
 330
@@ -9319,25 +9387,31 @@ MTEXT
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
 100
-AcDbMText
+AcDbText
  10
-255.0
+76.0
  20
-84.0
+93.0
  30
 0.0
  40
-2.6
- 41
-150.0
- 71
-1
+2.5
   1
-SAE J404 / EN 10083-2 · entrega <= 220 HB · corpo revenido 30-36 HRC
+69,90 ±0,05 · 80,70 ±0,05
+ 11
+76.0
+ 21
+93.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
   0
-MTEXT
+TEXT
   5
 131
 330
@@ -9345,27 +9419,31 @@ MTEXT
 100
 AcDbEntity
   8
-CARIMBO
- 62
-1
+TABELA
 100
-AcDbMText
+AcDbText
  10
-255.0
+140.0
  20
-76.5
+93.0
  30
 0.0
  40
-3.0
- 41
-150.0
- 71
-1
+2.5
   1
-abertura 1,500 +0,010/-0,000 mm · largura 75,00 ±0,05 mm · chanfro 1,50 × 45°
+medidos em 69,90 / 80,70
+ 11
+140.0
+ 21
+93.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
   0
-MTEXT
+LINE
   5
 132
 330
@@ -9373,25 +9451,23 @@ MTEXT
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
 100
-AcDbMText
+AcDbLine
  10
-255.0
+20.0
  20
-61.5
+91.0
  30
 0.0
- 40
-2.6
- 41
-150.0
- 71
-1
-  1
-corpo revenido 30-36 HRC; arestas do land 55-60 HRC em camada de 0,6-1,0 mm por indução (ou nitretação a plasma 520 °C, 8-18 µm, se a fábrica preferir tratar a fenda inteira) - escolha da fábrica, declarada no relatório
+ 11
+198.0
+ 21
+91.0
+ 31
+0.0
   0
-MTEXT
+TEXT
   5
 133
 330
@@ -9399,25 +9475,31 @@ MTEXT
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
 100
-AcDbMText
+AcDbText
  10
-255.0
+24.0
  20
-40.5
+87.5
  30
 0.0
  40
 2.5
- 41
-150.0
- 71
-1
   1
-as 8 cotas desta folha são medição no STEP\P08_Pacote_Usinagem_v30/3D/MATRIZ_V30_PECA_UNICA.step
+coaxialidade 2 e 3 em A
+ 11
+24.0
+ 21
+87.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
   0
-MTEXT
+TEXT
   5
 134
 330
@@ -9425,23 +9507,29 @@ MTEXT
 100
 AcDbEntity
   8
-CARIMBO
+TABELA
 100
-AcDbMText
+AcDbText
  10
-255.0
+76.0
  20
-29.0
+87.5
  30
 0.0
  40
 2.5
- 41
-150.0
- 71
-1
   1
-NDA antes de circular esta folha fora da fábrica
+Ø 0,02 total
+ 11
+76.0
+ 21
+87.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
   0
 TEXT
   5
@@ -9451,23 +9539,79 @@ TEXT
 100
 AcDbEntity
   8
-NOTAS
+TABELA
 100
 AcDbText
  10
-14.0
+140.0
  20
-5.5
+87.5
  30
 0.0
  40
 2.5
   1
-procedência: aço carbono SAE 1045 (EN C45E) - decisão do dono em 2026-09-22, substitui o 1.2344 da proposta · cotas com vírgula decimal (padrão BR)
+-
  11
-14.0
+140.0
  21
-5.5
+87.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+LINE
+  5
+136
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbLine
+ 10
+20.0
+ 20
+85.5
+ 30
+0.0
+ 11
+198.0
+ 21
+85.5
+ 31
+0.0
+  0
+TEXT
+  5
+137
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+24.0
+ 20
+82.0
+ 30
+0.0
+ 40
+2.5
+  1
+boca de entrada do canal
+ 11
+24.0
+ 21
+82.0
  31
 0.0
 100
@@ -9477,7 +9621,1811 @@ AcDbText
   0
 TEXT
   5
-136
+138
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+76.0
+ 20
+82.0
+ 30
+0.0
+ 40
+2.5
+  1
+Ø75,60 +0,05 / -0,00
+ 11
+76.0
+ 21
+82.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+139
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+140.0
+ 20
+82.0
+ 30
+0.0
+ 40
+2.5
+  1
+75,6000 (corte em x = 0,01)
+ 11
+140.0
+ 21
+82.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+LINE
+  5
+13A
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbLine
+ 10
+20.0
+ 20
+80.0
+ 30
+0.0
+ 11
+198.0
+ 21
+80.0
+ 31
+0.0
+  0
+TEXT
+  5
+13B
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+24.0
+ 20
+76.5
+ 30
+0.0
+ 40
+2.5
+  1
+funil (spline do STEP)
+ 11
+24.0
+ 21
+76.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+13C
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+76.0
+ 20
+76.5
+ 30
+0.0
+ 40
+2.5
+  1
+Ø75,60 » 1,500
+ 11
+76.0
+ 21
+76.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+13D
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+140.0
+ 20
+76.5
+ 30
+0.0
+ 40
+2.5
+  1
+de x = 0,01 a 85,00
+ 11
+140.0
+ 21
+76.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+LINE
+  5
+13E
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbLine
+ 10
+20.0
+ 20
+74.5
+ 30
+0.0
+ 11
+198.0
+ 21
+74.5
+ 31
+0.0
+  0
+TEXT
+  5
+13F
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+24.0
+ 20
+71.0
+ 30
+0.0
+ 40
+2.5
+  1
+raio na junção funil-fenda
+ 11
+24.0
+ 21
+71.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+140
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+76.0
+ 20
+71.0
+ 30
+0.0
+ 40
+2.5
+  1
+R 3,0 ±0,5
+ 11
+76.0
+ 21
+71.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+141
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+140.0
+ 20
+71.0
+ 30
+0.0
+ 40
+2.5
+  1
+sem aresta viva
+ 11
+140.0
+ 21
+71.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+LINE
+  5
+142
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbLine
+ 10
+20.0
+ 20
+69.0
+ 30
+0.0
+ 11
+198.0
+ 21
+69.0
+ 31
+0.0
+  0
+TEXT
+  5
+143
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+24.0
+ 20
+65.5
+ 30
+0.0
+ 40
+2.5
+  1
+land calibrado
+ 11
+24.0
+ 21
+65.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+144
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+76.0
+ 20
+65.5
+ 30
+0.0
+ 40
+2.5
+  1
+8,50 ±0,05  de 85,00 a 93,50
+ 11
+76.0
+ 21
+65.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+145
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+140.0
+ 20
+65.5
+ 30
+0.0
+ 40
+2.5
+  1
+2 caras · seção 112,0171 mm²
+ 11
+140.0
+ 21
+65.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+LINE
+  5
+146
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbLine
+ 10
+20.0
+ 20
+63.5
+ 30
+0.0
+ 11
+198.0
+ 21
+63.5
+ 31
+0.0
+  0
+TEXT
+  5
+147
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+ 62
+1
+100
+AcDbText
+ 10
+24.0
+ 20
+60.0
+ 30
+0.0
+ 40
+2.5
+  1
+fenda - abertura
+ 11
+24.0
+ 21
+60.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+148
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+ 62
+1
+100
+AcDbText
+ 10
+76.0
+ 20
+60.0
+ 30
+0.0
+ 40
+2.5
+  1
+1,500 +0,010 / -0,000
+ 11
+76.0
+ 21
+60.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+149
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+ 62
+1
+100
+AcDbText
+ 10
+140.0
+ 20
+60.0
+ 30
+0.0
+ 40
+2.5
+  1
+1,500 em z = 93,00
+ 11
+140.0
+ 21
+60.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+LINE
+  5
+14A
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbLine
+ 10
+20.0
+ 20
+58.0
+ 30
+0.0
+ 11
+198.0
+ 21
+58.0
+ 31
+0.0
+  0
+TEXT
+  5
+14B
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+24.0
+ 20
+54.5
+ 30
+0.0
+ 40
+2.5
+  1
+fenda - largura
+ 11
+24.0
+ 21
+54.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+14C
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+76.0
+ 20
+54.5
+ 30
+0.0
+ 40
+2.5
+  1
+75,00 ±0,05
+ 11
+76.0
+ 21
+54.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+14D
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+140.0
+ 20
+54.5
+ 30
+0.0
+ 40
+2.5
+  1
+74,9995
+ 11
+140.0
+ 21
+54.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+LINE
+  5
+14E
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbLine
+ 10
+20.0
+ 20
+52.5
+ 30
+0.0
+ 11
+198.0
+ 21
+52.5
+ 31
+0.0
+  0
+TEXT
+  5
+14F
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+24.0
+ 20
+49.0
+ 30
+0.0
+ 40
+2.5
+  1
+fenda - ponta (as duas)
+ 11
+24.0
+ 21
+49.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+150
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+76.0
+ 20
+49.0
+ 30
+0.0
+ 40
+2.5
+  1
+R 0,75 +0,05 / -0,00
+ 11
+76.0
+ 21
+49.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+151
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+140.0
+ 20
+49.0
+ 30
+0.0
+ 40
+2.5
+  1
+meia-círculo, aresta viva
+ 11
+140.0
+ 21
+49.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+LINE
+  5
+152
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbLine
+ 10
+20.0
+ 20
+47.0
+ 30
+0.0
+ 11
+198.0
+ 21
+47.0
+ 31
+0.0
+  0
+TEXT
+  5
+153
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+24.0
+ 20
+43.5
+ 30
+0.0
+ 40
+2.5
+  1
+chanfro de saída
+ 11
+24.0
+ 21
+43.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+154
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+76.0
+ 20
+43.5
+ 30
+0.0
+ 40
+2.5
+  1
+1,50 × 45° ±0,20
+ 11
+76.0
+ 21
+43.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+155
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+140.0
+ 20
+43.5
+ 30
+0.0
+ 40
+2.5
+  1
+boca 78,00 × 4,50 (med 77,9986)
+ 11
+140.0
+ 21
+43.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+LINE
+  5
+156
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbLine
+ 10
+20.0
+ 20
+41.5
+ 30
+0.0
+ 11
+198.0
+ 21
+41.5
+ 31
+0.0
+  0
+TEXT
+  5
+157
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+24.0
+ 20
+38.0
+ 30
+0.0
+ 40
+2.5
+  1
+comprimento total
+ 11
+24.0
+ 21
+38.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+158
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+76.0
+ 20
+38.0
+ 30
+0.0
+ 40
+2.5
+  1
+95,00 ±0,5
+ 11
+76.0
+ 21
+38.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+159
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+140.0
+ 20
+38.0
+ 30
+0.0
+ 40
+2.5
+  1
+95,000
+ 11
+140.0
+ 21
+38.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+LINE
+  5
+15A
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbLine
+ 10
+20.0
+ 20
+36.0
+ 30
+0.0
+ 11
+198.0
+ 21
+36.0
+ 31
+0.0
+  0
+TEXT
+  5
+15B
+330
+17
+100
+AcDbEntity
+  8
+TABELA
+100
+AcDbText
+ 10
+22.0
+ 20
+30.5
+ 30
+0.0
+ 40
+2.4
+  1
+traço (-) = cota de projeto sem medição própria no STEP
+ 11
+22.0
+ 21
+30.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+MTEXT
+  5
+15C
+330
+17
+100
+AcDbEntity
+  8
+NOTAS
+100
+AcDbMText
+ 10
+22.0
+ 20
+27.5
+ 30
+0.0
+ 40
+2.6
+ 41
+178.0
+ 71
+1
+  3
+FABRICAÇÃO (o resto está no 03_SEQUENCIA_DE_USINAGEM.md): fenda a fio EDM pelo Ø75,60, de um lado só, depois do T.T.; medir a abertura antes e depois; sem furo, flange, rosca, pino ou linha de partição - aperto pelo collete EX-031; certificado EN 102
+  1
+04 3.1 e relatório dimensional destas cotas.
+  0
+LWPOLYLINE
+  5
+15D
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbPolyline
+ 90
+4
+ 70
+1
+ 10
+210.0
+ 20
+14.0
+ 10
+408.0
+ 20
+14.0
+ 10
+408.0
+ 20
+114.0
+ 10
+210.0
+ 20
+114.0
+  0
+LINE
+  5
+15E
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbLine
+ 10
+210.0
+ 20
+82.0
+ 30
+0.0
+ 11
+408.0
+ 21
+82.0
+ 31
+0.0
+  0
+LINE
+  5
+15F
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbLine
+ 10
+210.0
+ 20
+70.0
+ 30
+0.0
+ 11
+408.0
+ 21
+70.0
+ 31
+0.0
+  0
+LINE
+  5
+160
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbLine
+ 10
+210.0
+ 20
+52.0
+ 30
+0.0
+ 11
+408.0
+ 21
+52.0
+ 31
+0.0
+  0
+LINE
+  5
+161
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbLine
+ 10
+210.0
+ 20
+40.0
+ 30
+0.0
+ 11
+408.0
+ 21
+40.0
+ 31
+0.0
+  0
+LINE
+  5
+162
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbLine
+ 10
+210.0
+ 20
+28.0
+ 30
+0.0
+ 11
+408.0
+ 21
+28.0
+ 31
+0.0
+  0
+LINE
+  5
+163
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbLine
+ 10
+210.0
+ 20
+14.0
+ 30
+0.0
+ 11
+408.0
+ 21
+14.0
+ 31
+0.0
+  0
+LINE
+  5
+164
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbLine
+ 10
+210.0
+ 20
+100.0
+ 30
+0.0
+ 11
+408.0
+ 21
+100.0
+ 31
+0.0
+  0
+LINE
+  5
+165
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbLine
+ 10
+262.0
+ 20
+100.0
+ 30
+0.0
+ 11
+262.0
+ 21
+14.0
+ 31
+0.0
+  0
+TEXT
+  5
+166
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbText
+ 10
+213.0
+ 20
+107.5
+ 30
+0.0
+ 40
+4.2
+  1
+MATRIZ DE EXTRUSÃO · JONATHA v27.0 · rev. 30
+ 11
+213.0
+ 21
+107.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+167
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbText
+ 10
+213.0
+ 20
+101.5
+ 30
+0.0
+ 40
+2.6
+  1
+peça única · 1 peça · escala 1:1 e 6:1 · mm · A3 paisagem
+ 11
+213.0
+ 21
+101.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+168
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+ 62
+8
+100
+AcDbText
+ 10
+213.0
+ 20
+93.0
+ 30
+0.0
+ 40
+2.6
+  1
+MATERIAL
+ 11
+213.0
+ 21
+93.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+169
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+ 62
+8
+100
+AcDbText
+ 10
+213.0
+ 20
+77.0
+ 30
+0.0
+ 40
+2.6
+  1
+COTA CRÍTICA
+ 11
+213.0
+ 21
+77.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+16A
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+ 62
+8
+100
+AcDbText
+ 10
+213.0
+ 20
+59.0
+ 30
+0.0
+ 40
+2.6
+  1
+GEOMETRIA
+ 11
+213.0
+ 21
+59.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+16B
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+ 62
+8
+100
+AcDbText
+ 10
+213.0
+ 20
+47.0
+ 30
+0.0
+ 40
+2.6
+  1
+MONTAGEM
+ 11
+213.0
+ 21
+47.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+16C
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+ 62
+8
+100
+AcDbText
+ 10
+213.0
+ 20
+35.0
+ 30
+0.0
+ 40
+2.6
+  1
+FONTE
+ 11
+213.0
+ 21
+35.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+16D
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+ 62
+8
+100
+AcDbText
+ 10
+213.0
+ 20
+21.0
+ 30
+0.0
+ 40
+2.6
+  1
+ACEITAÇÃO
+ 11
+213.0
+ 21
+21.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+16E
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+ 62
+1
+100
+AcDbText
+ 10
+263.0
+ 20
+90.5
+ 30
+0.0
+ 40
+6.0
+  1
+AÇO 1045
+ 11
+263.0
+ 21
+90.5
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+MTEXT
+  5
+16F
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbMText
+ 10
+263.0
+ 20
+88.0
+ 30
+0.0
+ 40
+2.6
+ 41
+142.0
+ 71
+1
+  1
+SAE J404 / EN 10083-2 · <= 220 HB · corpo revenido 30-36 HRC · sem PVD, sem DLC
+  0
+TEXT
+  5
+170
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+ 62
+1
+100
+AcDbText
+ 10
+263.0
+ 20
+76.0
+ 30
+0.0
+ 40
+3.0
+  1
+abertura 1,500 +0,010 / -0,000 · largura 75,00 ±0,05
+ 11
+263.0
+ 21
+76.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+MTEXT
+  5
+171
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbMText
+ 10
+263.0
+ 20
+67.5
+ 30
+0.0
+ 40
+2.6
+ 41
+142.0
+ 71
+1
+  1
+1 sólido, 22 faces, 45 arestas, B-rep válido · envelope 94,00 × 94,00 × 95,00 · aço 438509,9 mm³ · 3,4423 kg
+  0
+MTEXT
+  5
+172
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbMText
+ 10
+263.0
+ 20
+49.5
+ 30
+0.0
+ 40
+2.6
+ 41
+142.0
+ 71
+1
+  1
+canal 183862,6 mm³ · faceada ao nariz do EX-031 · protrusão medida 0,00 mm
+  0
+MTEXT
+  5
+173
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbMText
+ 10
+263.0
+ 20
+38.0
+ 30
+0.0
+ 40
+2.5
+ 41
+142.0
+ 71
+1
+  1
+as 8 cotas e a tabela são medição no STEP\P08_Pacote_Usinagem_v30/3D/MATRIZ_V30_PECA_UNICA.step
+  0
+MTEXT
+  5
+174
+330
+17
+100
+AcDbEntity
+  8
+CARIMBO
+100
+AcDbMText
+ 10
+263.0
+ 20
+26.0
+ 30
+0.0
+ 40
+2.5
+ 41
+142.0
+ 71
+1
+  1
+NDA antes de circular esta folha · sha256 do STEP b42ee2e50a10...
+  0
+TEXT
+  5
+175
 330
 17
 100
@@ -9489,17 +11437,49 @@ AcDbText
  10
 14.0
  20
-2.0
+6.0
  30
 0.0
  40
 2.5
   1
-se o desenho e o STEP discordarem, vale o STEP · o símbolo Ø só aparece se a fonte do texto tiver Latin-1 (troque para Arial)
+se o desenho e o STEP discordarem, vale o STEP · vírgula decimal padrão BR · o símbolo Ø só aparece se a fonte tiver Latin-1 (trocar para Arial)
  11
 14.0
  21
-2.0
+6.0
+ 31
+0.0
+100
+AcDbText
+ 73
+1
+  0
+TEXT
+  5
+176
+330
+17
+100
+AcDbEntity
+  8
+NOTAS
+100
+AcDbText
+ 10
+14.0
+ 20
+2.5
+ 30
+0.0
+ 40
+2.5
+  1
+procedência da cota: aço carbono SAE 1045 (EN C45E) - decisão do dono em 2026-09-22, substitui o 1.2344 da proposta
+ 11
+14.0
+ 21
+2.5
  31
 0.0
 100
@@ -9509,7 +11489,7 @@ AcDbText
   0
 LWPOLYLINE
   5
-137
+177
 330
 17
 100
@@ -10629,7 +12609,7 @@ CREATED_BY_EZDXF
   3
 WRITTEN_BY_EZDXF
 350
-13A
+17A
   0
 DICTIONARYVAR
   5
@@ -10641,7 +12621,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-24T17:24:52.363192+00:00
+1.4.4 @ 2026-09-24T19:01:25.882228+00:00
   0
 VISUALSTYLE
   5
@@ -11345,7 +13325,7 @@ X-Ray
   0
 DICTIONARYVAR
   5
-13A
+17A
 330
 2D
 100
@@ -11353,7 +13333,7 @@ DictionaryVariables
 280
 0
   1
-1.4.4 @ 2026-09-24T17:24:52.374659+00:00
+1.4.4 @ 2026-09-24T19:01:25.895272+00:00
   0
 ENDSEC
   0

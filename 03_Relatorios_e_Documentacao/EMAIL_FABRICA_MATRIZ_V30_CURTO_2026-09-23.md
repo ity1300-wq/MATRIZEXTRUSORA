@@ -74,18 +74,25 @@ que está escrito acima.
 
 ## Se eles preferirem CAD a PDF, existe agora o DXF cotado da matriz
 
-`08_Pacote_Usinagem_v30/MATRIZ_V30_DESENHO_COTADO.dxf` — A3, **1:1, milímetros, 8 cotas só**, com o
-**MATERIAL escrito grande na linha de topo** (`AÇO 1045`, SAE J404 / EN 10083-2, dureza do corpo e do land, o
-"sem PVD/DLC e sem trocar de aço") e repetido no carimbo. Duas vistas: a seção simétrica no plano da abertura —
-é aí que o funil interno aparece — e a face de saída com a fenda `1,500 +0,010/-0,000` cotada em corpo grande.
-Quatro notas de processo (fio EDM depois do tratamento, medir a fenda antes e depois, faceada ao nariz,
-certificado EN 10204 3.1) e nada além disso. As cotas são `DIMENSION` verdadeiras: eles medem, editam e
-importam no próprio CAD. A geometria é a nominal exata medida no STEP, então o número que a máquina lê no
-arquivo bate com o texto da cota; o `audit()` do ezdxf fechou em zero erros. Dois avisos se você enviar:
-o símbolo `Ø` pode não aparecer se a fonte do texto do CAD não tiver Latin-1 (trocaram para Arial, nada muda no
-arquivo), e o desenho é informativo — o que vincula continuam sendo os STEPs. Saíram junto, para quem quiser
-ver sem abrir CAD: `MATRIZ_V30_DESENHO_COTADO_PREVIEW.png` e `_PREVIEW.pdf`. Nem o DXF nem os previews estão
-dentro do `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` (o zip e os hashes publicados não mudaram).
+`08_Pacote_Usinagem_v30/MATRIZ_V30_DESENHO_COTADO.dxf` — A3, **1:1, milímetros, 8 cotas** e mais nada de
+texto solto. A folha é geometria: três vistas (**seção no plano da abertura 1:1** — é aí que o funil aparece;
+**face de saída 1:1** com a fenda e a boca do chanfro com os raios de verdade; **DETALHE A 6:1** do fim do
+canal, onde a `ABERTURA 1,500 +0,010/-0,000` está escrita grande) e uma **tabela de anatomia de 13 linhas**
+com três colunas: região / cota de contrato / o que a medição no STEP achou. As 13 linhas, na ordem: face de
+entrada (planicidade do datum), Ø dos 3 estágios, posição dos degraus 1→2 e 2→3, coaxialidade, boca de
+entrada, funil em spline, raio da junção funil-fenda, land com a faixa axial, abertura da fenda, largura da
+fenda, raio das duas pontas, chanfro com a boca, comprimento total. O **material** é a linha de topo, em corpo grande: `MATERIAL: AÇO 1045 · SEM PVD ·
+SEM DLC · SEM OUTRO AÇO`, com a norma e a dureza logo abaixo; e ele volta em vermelho no carimbo. Da
+fabricação ficou **uma** linha no rodapé da tabela (fio EDM pelo Ø75,60 de um lado só depois do tratamento,
+medir a abertura antes e depois, sem furo/flange/rosca/pino/linha de partição, certificado EN 10204 3.1 e
+relatório dimensional) — o passo a passo está no `03_SEQUENCIA_DE_USINAGEM.md` do pacote, não na folha.
+As 8 cotas são `DIMENSION` verdadeiras: eles medem, editam e importam no CAD. A geometria é a nominal exata
+medida no STEP, então o número lido no arquivo bate com o texto da cota; o `audit()` do ezdxf fechou em zero
+erros e nenhuma etiqueta da folha se sobrepõe a outra. Dois avisos: o `Ø` pode não aparecer se a fonte do
+texto do CAD não tiver Latin-1 (trocaram para Arial, o arquivo não muda), e o desenho é informativo — o que
+vincula continuam sendo os STEPs. Saíram junto, para ver sem abrir CAD: `_PREVIEW.png` e `_PREVIEW.pdf`.
+Nada disso está dentro do `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` (o zip e os hashes publicados não mudaram).
+A v29 tem o desenho dela na pasta `_v29` (comprimento 109,00, land de 99,00 a 107,50, protrusão 14,00).
 
 **Não mande:** o resto do pacote (a prancha grande, os relatórios, o `pacote_usinagem.json`), os modelos
 históricos, a v29, o DXF do cabeçote (só a matriz tem desenho cotado) e qualquer script daqui. Peça só 1 matriz — se eles oferecerem lote,

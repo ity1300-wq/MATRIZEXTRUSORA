@@ -556,3 +556,43 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   release; "quatro" é o total das duas releases, não de uma. Se um dia ele quiser o DXF dentro do pacote para envio, isso é
   publicação inteira: adicionar ao `nomes` do gerador de pacote, re-gerar CHECKSUMS/zip/capa, mover a tag e
   re-trocar os quatro assets com `/home/user/tmp/trocar_assets.py`.
+
+**Rodada 2026-09-24 (tarde) — o DXF virou folha de ANATOMIA: menos receita de fábrica, mais peça.**
+
+* ordem dele, sobre a primeira versão da folha: *"tem muita informação, deixe mais objetivo, coloque mais
+  informações sobre a anatomia da peça detalhes, do que de como deve ser fabricado"* (ele anexou print das
+  4 notas de processo e da faixa de material). Então a folha foi reescrita: as 4 notas viraram **uma** linha
+  de FABRICAÇÃO no rodapé da tabela, a faixa de material caiu de 4 linhas para **1 linha grande
+  (`MATERIAL: AÇO 1045 · SEM PVD · SEM DLC · SEM OUTRO AÇO`) + 1 parágrafo curto** (norma, dureza, "troca de
+  aço só com desenho novo assinado"), e entrou **uma tabela de anatomia de 13 linhas** com três colunas -
+  região / cota de contrato / medido no STEP - mais o **DETALHE A 6:1** do fim do canal (o `1,500` em corpo
+  grande ali, não repetido em três lugares) e a **face de saída 1:1 desenhada com os raios de verdade**
+  (`stadium`: duas retas + dois semicírculos com `bulge = 1`), fenda 75,00 × 1,500 com R 0,75 e boca do
+  chanfro 78,00 × 4,50. Continua com as mesmas 8 `DIMENSION`, A3, 1:1, mm.
+* a coluna "cota" não é redigitada: ela vem das entradas de `pacote_usinagem.json["cotas"]`, achadas por
+  trecho do `item` (`cota("land paralelo")`, `cota("Raio no fundo")`, ...), usando `nominal` + a
+  `tolerancia` partida no ";" e no "/". Isso trouxe para a folha cotas que o desenho anterior não tinha e
+  que ninguém tinha escrito à mão: posição dos degraus 69,90 / 80,70 ±0,05, coaxialidade Ø0,02 total,
+  R 3,0 ±0,5 na junção funil-fenda "sem aresta viva", planicidade 0,01 da face de entrada. `cota()` dá
+  `SystemExit` se o pacote não tiver aquele item - não inventa.
+* a coluna "medido no STEP" é o que a medição achou, inclusive onde ela **não** confere com a leitura fácil:
+  `fenda - largura` mostra 74,9995 contra 75,00, `boca do chanfro` 77,9986 contra 78,00, e a boca de entrada
+  é reportada como "75,6000 (corte em x = 0,01)" em vez do `abertura_mm` do JSON (75,5934) - aquele número é
+  a corda da seção deslocada 0,01 mm do plano, não o diâmetro, e escrito sem explicação viraria disputa com a
+  fábrica. Linhas sem medição própria levam "-" e há uma nota dizendo que "-" é cota de projeto.
+* duas travas novas no gerador, das que valem o trabalho: (1) **nenhuma etiqueta pode tocar a outra** - o
+  script reabre o DXF, estima a caixa de cada TEXT/MTEXT e dá `SystemExit` se duas caixas se cortarem em mais
+  de 0,8 mm nos dois eixos (a folha fecha com **0 sobreposições**); (2) se qualquer checagem reprovar, o
+  `.dxf` e os previews **recém-escritos são apagados**, para não deixar artefato reprovado dentro da pasta do
+  pacote - testado injetando texto de 9,6 mm de propósito: saiu "folha reprovada (nada publicado)" e a pasta
+  ficou limpa.
+* erros que essas travas e a de largura pegaram nesta rodada, todos reais: `…` (U+2026) no "sha256 ...", que
+  não é Latin-1 e parou a folha; `tf.split(",")` no texto "R 3,0 ±0,5, sem aresta viva" cortando a **vírgula
+  decimal** e escrevendo "R 3" na tabela (agora divide por ", sem "); a tolerância do chanfro já começava com
+  o valor, então "1,50 × 45°" saía como "1,50 1,50 × 45°"; a linha de 7,5 mm do MATERIAL com a frase inteira
+  media 510 mm numa folha de 400 mm; e o valor da última linha do carimbo estava ancorado no topo errado e
+  caiu em cima da linha anterior.
+* nada mudou de publicação: `MATRIZ_V*_DESENHO_COTADO.dxf` + `_PREVIEW.png`/`_PREVIEW.pdf` continuam **fora**
+  do `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` (lista explícita de arquivos, não glob), então CHECKSUMS segue com 13
+  arquivos, o zip `0738c468…` não se moveu, a tag `v30.0-oficial-pacote-usinagem` está em `80167f2` e os dois
+  anexos de cada release (quatro no total) batem com o disco - conferido via API `releases` no fim da rodada.
