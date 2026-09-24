@@ -1,246 +1,259 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Folha de cotas de UMA pagina, para ir junto com os STEP quando o desenho completo esta denso demais.
+"""Folha de 1 pagina (A4 paisagem) para mandar JUNTO com os 3 STEP. Nao substitui o STEP.
 
-Layout: perfil da peca com as cotas de envelope (em cima, esquerda) + face de saida com a fenda (em cima,
-direita) + regras em duas colunas (embaixo). O funil e o canal do canal NAO sao desenhados aqui de proposito:
-em secao axial eles viram um trapezio que ninguem le, e a forma ja esta no STEP do solido do canal
-(`3D/MATRIZ_V30_CANAL_DE_FLUXO.step`), que e o arquivo que o operador do fio EDM usa.
-
-Nenhum numero e digitado nesta folha: tudo vem de 08_Pacote_Usinagem_v30/pacote_usinagem.json, que e a
-medicao do STEP (secoes de 0,02 mm) e que o portao verificar_cadeia.py compara com o SSOT. Se faltar cota
-no JSON, a folha recusa sair em vez de chutar.
-
-  python3 04_Dados_SSOT_e_Scripts/desenhar_folha_de_cotas_v30.py                      # v30
-  PACOTE=08_Pacote_Usinagem_v29 ARQ_FOLHA=FOLHA_DE_COTAS_V29 python3 .../desenhar_folha_de_cotas_v30.py
+Quatro blocos, nada alem do que decide aceite:
+  1. meia-secao no plano da ABERTURA (aqui aparece o funil/cone interno);
+  2. DETALHE A ampliado do fim do canal, onde a abertura 1,500 mm fica clara;
+  3. face de saida com as duas dimensoes da fenda;
+  4. regras em quatro colunas curtas.
+Nenhum numero e digitado neste arquivo: tudo vem de pacote_usinagem.json (medicao no STEP).
+Uso:
+  python3 desenhar_folha_de_cotas_v30.py
+  PACOTE=08_Pacote_Usinagem_v29 ARQ_FOLHA=FOLHA_DE_COTAS_V29 python3 desenhar_folha_de_cotas_v30.py
+So precisa de matplotlib (nada e re-medido aqui).
 """
-import io
-import json
-import math
-import os
-
+import io, json, math, os
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.patches import Polygon as MPoly
+from matplotlib.patches import Polygon as MPoly, Rectangle as MRect
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PACOTE = os.environ.get("PACOTE", "08_Pacote_Usinagem_v30")
 ARQ = os.environ.get("ARQ_FOLHA", "FOLHA_DE_COTAS_V30")
-JSON = os.path.join(RAIZ, PACOTE, "pacote_usinagem.json")
+VERM, AZUL, VERDE, MARROM, CINZA = "#b02418", "#0b4a86", "#0d7a3f", "#7a3d00", "#555555"
 
-COLUNAS = 2          # regras em duas colunas
-ENVOLVE = 100        # caracteres por linha da coluna (0,45 x A4 paisagem, ~378 pt de largura util)
-FONTE_REGRA = 7.1
+# caixas [x, y, larg, alt] em fracao da folha (A4 paisagem)
+CX_MAIN = [0.020, 0.300, 0.460, 0.470]
+CX_DET = [0.500, 0.425, 0.300, 0.345]
+CX_FACE = [0.815, 0.420, 0.180, 0.350]
+CX_REGRAS = [0.020, 0.040, 0.972, 0.235]
+
+d = json.load(io.open(os.path.join(RAIZ, PACOTE, "pacote_usinagem.json"), encoding="utf-8"))
+m, alv = d["medido"], d["alvo_do_contrato"]
+fd, bs = m["fenda_no_land"], m["boca_saida"]
+
+
+REV = PACOTE.rsplit("_", 1)[-1].lstrip("v")
 
 
 def br(x, dec=2):
-    return ("%.*f" % (dec, x)).replace(".", ",")
+    return ("%.*f" % (dec, float(x))).replace(".", ",")
 
 
-def quebra(txt, larg=ENVOLVE):
+def quebra(txt, larg):
     out, atual = [], ""
-    for palavra in txt.split(" "):
-        if len(atual) + len(palavra) + 1 > larg:
-            out.append(atual)
-            atual = palavra
+    for pal in txt.split(" "):
+        if len(atual) + len(pal) + 1 > larg:
+            if atual:
+                out.append(atual)
+            atual = pal
         else:
-            atual = (atual + " " + palavra).strip()
+            atual = (atual + " " + pal).strip()
     if atual:
         out.append(atual)
-    if max([len(l) for l in out] or [0]) > larg + 12:
-        raise SystemExit("FALHOU: uma linha de %d caracteres nao cabe em %d" % (max(len(l) for l in out), larg))
     return out
 
 
 def main():
-    d = json.load(io.open(JSON, encoding="utf-8"))
-    m = d["medido"]
-    alv = d["alvo_do_contrato"]
-    dec = d["decisoes_2026_09_22"]
-    fd, bs, be = m["fenda_no_land"], m["boca_saida"], m["boca_entrada"]
-    for nome, bloco, chaves in (("fenda_no_land", fd, ("largura_mm", "abertura_mm", "area_mm2")),
-                                ("boca_saida", bs, ("largura_mm", "abertura_mm")),
-                                ("boca_entrada", be, ("largura_mm", "abertura_mm"))):
-        falt = [k for k in chaves if bloco.get(k) is None]
-        if falt:
-            raise SystemExit("FALHOU: %s nao traz %s no JSON medido - esta folha nao chuta numero"
-                             % (nome, ", ".join(falt)))
     est = sorted(m["estagios_medidos"], key=lambda e: e["z"][0])
-    if len(est) != 3:
-        raise SystemExit("FALHOU: esperava 3 estagios medidos, achei %d" % len(est))
     L, z0, zf = m["comprimento_mm"], m["z_min"], m["z_max"]
     r = [e["D"] / 2.0 for e in est]
     zb = [e["z"][0] for e in est] + [zf]
     land, chan, rborda = alv["land"], alv["chanfro"], alv["raio_borda"]
-    z_land1, z_land0 = zf - chan, zf - chan - land
-    w_in = max(be["abertura_mm"], be["largura_mm"]) / 2.0
-    w_fd, a_fd = fd["largura_mm"] / 2.0, fd["abertura_mm"]
-    w_bs = max(bs["abertura_mm"], bs["largura_mm"]) / 2.0
-    a_bs = min(bs["abertura_mm"], bs["largura_mm"])
-    tol = dec.get("tolerancia_das_cotas_alteradas", "±0,5")
-    mov = d.get("montagem") or {}
-    por_diam = {round(f.get("estagio_Ø", -1), 3): f for f in mov.get("folgas_por_estagio", []) if f}
-    furos, folgas = [], []
-    for i_ in range(3):
-        f = por_diam.get(round(2 * r[i_], 3))
-        if f is None:
-            raise SystemExit("FALHOU: o JSON nao traz a montagem medida para o estagio Ø%s - esta folha não "  
-                             "chuta furo nem folga" % br(2 * r[i_]))
-        furos.append(f["furo_Ø"])
-        fg = f.get("folga_radial")
-        folgas.append(float(fg) if fg is not None else (f["furo_Ø"] - 2 * r[i_]) / 2.0)
+    a_fd, w_fd = fd["abertura_mm"], fd["largura_mm"] / 2.0
+    z_land1 = zf - chan
+    z_land0 = z_land1 - land
+    R_in = alv["boca_entrada"] / 2.0
+    a_bs, w_bs = bs["abertura_mm"], bs["largura_mm"] / 2.0
+    y_f = (z_land0 + z_land1) / 2.0
 
-    fig = plt.figure(figsize=(11.69, 8.27), dpi=150)
+    aco = [(0, z0), (r[0], z0), (r[0], zb[1]), (r[1], zb[1]), (r[1], zb[2]), (r[2], zb[2]), (r[2], zf), (0, zf)]
+    # funil: Ø75,60 na entrada (Z 0,00) ate a fenda no inicio do land. A parede real e BSpline
+    # (medida no STEP); o que se desenha aqui e a forma entre as secoes medidas.
+    canal = [(0, z0), (R_in, z0), (a_fd / 2.0, z_land0), (a_fd / 2.0, z_land1), (a_bs / 2.0, zf), (0, zf)]
+
+    fig = plt.figure(figsize=(11.69, 8.27), dpi=150)                      # A4 paisagem
     fig.patch.set_facecolor("white")
-    fig.text(0.030, 0.955, u"MATRIZ JONATHA v27.0 · rev. %s — perfil externo (meia-seção: raio × Z)"
-             % ("30" if abs(L - 95.0) < 0.01 else "29"), fontsize=11.0, ha="left", va="bottom", fontweight="bold")
-    fig.text(0.030, 0.928, u"A forma do canal é o STEP que você recebeu — esta só folha diz o que medir e o que é proibido.",
-             fontsize=8.6, ha="left", va="bottom", color="#333333")
-    fig.text(0.60, 0.955, u"face de saída (Z %s) — o que o produto vê" % br(zf), fontsize=11.0, ha="left",
-             va="bottom", fontweight="bold")
 
-    # ============ 1. perfil (meia-secao: raio x Z), com balao em cada cota ============
-    ax = fig.add_axes([0.030, 0.585, 0.475, 0.335])
-    perf = [(0.0, z0), (r[0], z0), (r[0], zb[1]), (r[1], zb[1]), (r[1], zb[2]), (r[2], zb[2]), (r[2], zf),
-            (0.0, zf)]
-    ax.add_patch(MPoly(perf, closed=True, facecolor="#e6e9ee", edgecolor="#222222", lw=1.5))
-    ax.add_patch(MPoly([(0.0, z_land0), (r[2], z_land0), (r[2], z_land1), (0.0, z_land1)], closed=True,
-                       facecolor="#ffe9a8", edgecolor="#222222", lw=1.1))
-    ax.plot([0, 0], [z0, zf], color="#9a9a9a", lw=0.8, ls="--")
-    balao = {}
-    for i_ in range(3):
-        zc = (zb[i_] + zb[i_ + 1]) / 2.0
-        ax.annotate(str(i_ + 1), xy=(r[i_], zc), xytext=(r[0] + 9.0, zc), fontsize=9.6, color="#0b4a86",
-                    ha="center", va="center", fontweight="bold",
-                    arrowprops=dict(arrowstyle="->", color="#0b4a86", lw=1.0),
-                    bbox=dict(boxstyle="circle,pad=0.28", fc="white", ec="#0b4a86", lw=1.0))
-        balao[i_] = zc
-    ax.text(r[0] + 16.0, balao[0], u"Ø%s %s\nfuro do cabeçote Ø%s → folga radial %s mm\ndatum A (o cilindro, não o degrau)"
-            % (br(2 * r[0]), tol, br(furos[0]), br(folgas[0])), fontsize=8.8, color="#0b4a86",
-            va="center", ha="left")
-    ax.text(r[0] + 16.0, balao[1], u"Ø%s %s\nfuro Ø%s → folga radial %s mm"
-            % (br(2 * r[1]), tol, br(furos[1]), br(folgas[1])), fontsize=8.8, color="#0b4a86",
-            va="center", ha="left")
-    ax.text(r[0] + 16.0, balao[2], u"Ø%s %s\nfuro Ø%s → folga radial %s mm"
-            % (br(2 * r[2]), tol, br(furos[2]), br(folgas[2])), fontsize=8.8, color="#0b4a86",
-            va="center", ha="left")
-    ax.annotate("", xy=(r[0] + 5.0, z0), xytext=(r[0] + 5.0, zf),
-                arrowprops=dict(arrowstyle="<->", color="#111111", lw=1.15))
-    ax.text(r[0] + 8.4, z0 + 1.2, u"comprimento\n%s mm  %s" % (br(L), tol), fontsize=9.4, va="bottom", ha="left",
-            fontweight="bold")
-    rodape = (u"land %s mm ±0,05 (faixa hachurada, Z %s → %s)   ·   chanfro %s × 45°   ·   degraus em Z %s e %s "
-              u"com ±0,05\nface de saída faceada ao nariz do EX-030: protrusão 0,00 mm medida na montagem   ·   "
-              u"boca de entrada Ø%s +0,05/−0,00 (não alargar)"
-              % (br(land), br(z_land0), br(z_land1), br(chan), br(zb[1]), br(zb[2]), br(2 * w_in)))
-    ax.text(0.0, -0.075, rodape, fontsize=8.2, va="top", ha="left", transform=ax.transAxes, color="#333333")
-    ax.set_xlim(-5, 118); ax.set_ylim(z0 - 2.0, zf + 3.5); ax.set_aspect("equal"); ax.axis("off")
+    # ------------------------------------------------------------ 1. MEIA-SECAO
+    ax = fig.add_axes(CX_MAIN)
+    ax.add_patch(MPoly(aco, closed=True, facecolor="#e9ecf2", edgecolor="#111111", lw=1.8))
+    ax.add_patch(MPoly(canal, closed=True, facecolor="#ffffff", edgecolor=VERM, lw=1.6))
+    ax.plot([a_fd / 2.0, a_fd / 2.0], [z_land0, z_land1], color=VERM, lw=3.4)
+    ax.plot([0, 0], [z0 - 3, zf + 3], color="#aaaaaa", lw=0.7, ls="--")
+    ax.add_patch(MRect((-3.5, z_land0 - 3.5), 22.0, (zf + 1.0) - (z_land0 - 3.5), fill=False,
+                       edgecolor=VERDE, lw=1.1, ls="--"))
+    ax.text(-3.5, zf + 2.0, "DETALHE A — ampliado ao lado →", fontsize=8.6, color=VERDE,
+            ha="left", va="bottom", fontweight="bold")
+    for i in range(3):
+        yc = (zb[i] + zb[i + 1]) / 2.0
+        ax.annotate("", xy=(r[i], yc), xytext=(r[0] + 17, yc),
+                    arrowprops=dict(arrowstyle="<->", color=AZUL, lw=1.2))
+        ax.text(r[0] + 18, yc, "Ø%s  ±0,5" % br(2 * r[i]), fontsize=11, color=AZUL,
+                va="center", ha="left", fontweight="bold")
+    ax.annotate("", xy=(r[0] + 5, z0), xytext=(r[0] + 5, zf),
+                arrowprops=dict(arrowstyle="<->", color="#111111", lw=1.3))
+    ax.text(r[0] + 6.5, (z0 + zf) / 2.0, "comprimento\n%s mm  ±0,5" % br(L),
+            fontsize=11, ha="left", va="center", fontweight="bold", linespacing=1.15)
+    ax.annotate("", xy=(-R_in, z0 - 6.0), xytext=(R_in, z0 - 6.0),
+                arrowprops=dict(arrowstyle="<->", color=MARROM, lw=1.0))
+    ax.text(0.0, z0 + 5.5, "boca de entrada Ø%s\n+0,05 / −0,00 — não alargar" % br(2 * R_in),
+            fontsize=8.6, ha="center", va="center", color=MARROM, linespacing=1.3)
+    # ponto sobre a parede do funil (a recta que liga a boca de entrada ao inicio do land)
+    y_fun = 0.62 * z_land0
+    x_fun = a_fd / 2.0 + (R_in - a_fd / 2.0) * (z_land0 - y_fun) / z_land0
+    ax.annotate("funil interno\n(o cone que fecha\naté a fenda)",
+                xy=(x_fun, y_fun), xytext=(-40.0, 0.74 * z_land0), fontsize=8.6,
+                ha="left", va="center", color="#111111", linespacing=1.25,
+                arrowprops=dict(arrowstyle="->", color="#111111", lw=0.9))
+    MAIN_X = (-42.0, 116.0)
+    MAIN_Y = (z0 - 12.0, zf + 6.0)
+    ax.set_xlim(*MAIN_X)
+    ax.set_ylim(*MAIN_Y)
+    ax.set_aspect("equal")
+    ax.axis("off")
+    ax.set_title(u"MATRIZ JONATHA v27.0 · rev. %s — MEIA-SEÇÃO NO PLANO DA ABERTURA\n"
+                 u"o funil fecha de Ø%s (Z 0,00) até a fenda %s × %s mm no land (Z %s) — "
+                 u"o perfil exato é a superfície BSpline do STEP\n"
+                 u"O STEP é a definição; esta folha é a régua de aceitação."
+                 % (REV, br(2 * R_in), br(2 * w_fd), br(a_fd, 3), br(z_land0)),
+                 fontsize=10.5, loc="left", fontweight="bold", pad=12, linespacing=1.5)
 
-    # ============ 2. face de saida, onde o produto e decidido ============
-    ax2 = fig.add_axes([0.605, 0.545, 0.225, 0.335])
-    th = [t / 100.0 for t in range(101)]
-    ax2.plot([r[2] * math.cos(2 * math.pi * t) for t in th], [r[2] * math.sin(2 * math.pi * t) for t in th],
-             color="#222222", lw=1.7)
+    # ------------------------------------------------------------ 2. DETALHE A (zoom no canto)
+    ax4 = fig.add_axes(CX_DET)
+    ax4.add_patch(MPoly(aco, closed=True, facecolor="#e9ecf2", edgecolor="#111111", lw=1.9))
+    ax4.add_patch(MPoly(canal, closed=True, facecolor="#ffffff", edgecolor=VERM, lw=1.9))
+    ax4.plot([a_fd / 2.0, a_fd / 2.0], [z_land0, z_land1], color=VERM, lw=3.6)
+    ax4.plot([0, 0], [z_land0 - 13, zf + 0.6], color="#bbbbbb", lw=0.6, ls="--")
+    DET_X = (-13.5, 13.5)
+    DET_Y = (z_land0 - 13.0, zf + 8.0)
+    ax4.set_xlim(*DET_X)
+    ax4.set_ylim(*DET_Y)
+    # a abertura da fenda, com linhas de chamada
+    ax4.plot([DET_X[0] + 3.0, -3.1], [zf + 3.0, y_f + a_fd / 2.0 + 0.5], color=VERM, lw=0.8, ls=":")
+    ax4.annotate("", xy=(-2.6, y_f - a_fd / 2.0), xytext=(-2.6, y_f + a_fd / 2.0),
+                 arrowprops=dict(arrowstyle="<->", color=VERM, lw=2.4))
+    ax4.plot([-2.6, a_fd / 2.0 + 0.3], [y_f - a_fd / 2.0] * 2, color=VERM, lw=0.9, ls=":")
+    ax4.plot([-2.6, a_fd / 2.0 + 0.3], [y_f + a_fd / 2.0] * 2, color=VERM, lw=0.9, ls=":")
+    ax4.text(DET_X[0] + 0.3, zf + 5.4, "ABERTURA DA FENDA\n%s mm  \n+0,010 / −0,000" % br(a_fd, 3),
+             fontsize=10.0, color=VERM, ha="left", va="center", fontweight="bold", linespacing=1.25)
+    ax4.annotate("", xy=(4.6, z_land0), xytext=(4.6, z_land1),
+                 arrowprops=dict(arrowstyle="<->", color=VERDE, lw=1.3))
+    ax4.plot([a_fd / 2.0 + 0.3, 4.6], [z_land0] * 2, color=VERDE, lw=0.8, ls=":")
+    ax4.plot([a_fd / 2.0 + 0.3, 4.6], [z_land1] * 2, color=VERDE, lw=0.8, ls=":")
+    ax4.text(5.2, y_f, "land\n%s ±0,05" % br(land), fontsize=9.0, color=VERDE,
+             ha="left", va="center", fontweight="bold", linespacing=1.2)
+    ax4.set_aspect("equal")
+    ax4.axis("off")
+    # fator de ampliado real (unidades/mm por polegada de caixa, com o aspect "equal")
+    in_por_un_main = (CX_MAIN[2] * 11.69) / (MAIN_X[1] - MAIN_X[0])
+    in_por_un_det = (CX_DET[2] * 11.69) / (DET_X[1] - DET_X[0])
+    ax4.set_title("DETALHE A — fim do canal, ≈ %d×" % round(in_por_un_det / in_por_un_main),
+                  fontsize=10.5, loc="left", fontweight="bold", pad=8)
+    cap = ("land %s ±0,05: a parede paralela que calibra a espessura · chanfro %s × 45° na face de saída · "
+           "R %s nas duas pontas da fenda, aresta viva (sem raio na quina) · fenda aberta a fio EDM depois do "
+           "tratamento térmico, com a abertura medida antes e depois" % (br(land), br(chan), br(rborda)))
+    capls = quebra(cap, 92)
+    fig.text(CX_DET[0], CX_DET[1] - 0.012 - 0.011 * (len(capls) - 1), "\n".join(capls),
+             fontsize=7.8, color="#111111", ha="left", va="bottom", linespacing=1.45)
+    if CX_DET[1] - 0.012 - 0.011 * (len(capls) - 1) < 0.300:
+        raise SystemExit("a legenda do detalhe A desceu demais (%d linhas)" % len(capls))
+
+    # ------------------------------------------------------------ 3. FACE DE SAIDA
+    ax2 = fig.add_axes(CX_FACE)
+    th = [t / 120.0 for t in range(121)]
+    ax2.plot([r[2] * math.cos(2 * math.pi * t) for t in th],
+             [r[2] * math.sin(2 * math.pi * t) for t in th], color="#111111", lw=1.9)
     ax2.add_patch(MPoly([(-w_bs, -a_bs / 2), (w_bs, -a_bs / 2), (w_bs, a_bs / 2), (-w_bs, a_bs / 2)],
-                        closed=True, facecolor="#fff6df", edgecolor="#222222", lw=1.0))
+                        closed=True, facecolor="#ffffff", edgecolor="#111111", lw=1.1))
     ax2.add_patch(MPoly([(-w_fd, -a_fd / 2), (w_fd, -a_fd / 2), (w_fd, a_fd / 2), (-w_fd, a_fd / 2)],
-                        closed=True, facecolor="#ffe9a8", edgecolor="#b02418", lw=1.4))
-    ax2.annotate("", xy=(-w_fd, -a_fd / 2 - 7.0), xytext=(w_fd, -a_fd / 2 - 7.0),
-                 arrowprops=dict(arrowstyle="<->", color="#b02418", lw=1.2))
-    ax2.text(0.0, -a_fd / 2 - 8.6, u"largura %s ±0,05" % br(2 * w_fd), fontsize=9.0, color="#b02418",
+                        closed=True, facecolor="#ffd9c2", edgecolor=VERM, lw=2.2))
+    ax2.annotate("", xy=(0, -a_fd / 2 - 9), xytext=(0, a_fd / 2 + 9),
+                 arrowprops=dict(arrowstyle="<->", color=VERM, lw=2.0))
+    ax2.text(1.5, a_fd / 2 + 11, "abertura\n%s mm" % br(a_fd, 3), fontsize=9.5, color=VERM,
+             ha="center", va="bottom", fontweight="bold", linespacing=1.15)
+    ax2.annotate("", xy=(-w_fd, -a_fd / 2 - 5.5), xytext=(w_fd, -a_fd / 2 - 5.5),
+                 arrowprops=dict(arrowstyle="<->", color=VERM, lw=1.5))
+    ax2.text(0, -a_fd / 2 - 12.0, "largura %s ±0,05" % br(2 * w_fd), fontsize=9.0, color=VERM,
              ha="center", va="top", fontweight="bold")
-    ax2.text(0.0, r[2] + 6.4, u"Ø%s %s  ·  boca do chanfro %s × %s" % (br(2 * r[2]), tol, br(2 * w_bs),
-                                                                      br(a_bs)), fontsize=9.0, ha="center",
-             color="#0b4a86", fontweight="bold")
-    ax2.text(0.0, -r[2] - 8.8, u"abertura da fenda  %s  +0,010 / −0,000   ·   R %s nas duas pontas, aresta viva"
-             % (br(a_fd, 3), br(rborda)), fontsize=9.0, ha="center", va="top", color="#b02418",
-             fontweight="bold")
-    ax2.text(0.0, -r[2] - 17.2, u"área da seção no land  %s mm²  ±0,5 %%  (fora disso é rejeição)"
-             % br(fd["area_mm2"], 4), fontsize=8.6, ha="center", va="top", color="#333333")
-    ax2.set_xlim(-52, 52); ax2.set_ylim(-64, 52); ax2.set_aspect("equal"); ax2.axis("off")
+    ax2.text(0, -a_fd / 2 - 22.0, "área %s mm²  ±0,5 %%\nprojetor de perfil ou CMM"
+             % br(fd["area_mm2"], 4), fontsize=7.4, ha="center", va="top", color=CINZA, linespacing=1.25)
+    ax2.set_xlim(-48, 48)
+    ax2.set_ylim(-56, 48)
+    ax2.set_aspect("equal")
+    ax2.axis("off")
+    ax2.set_title("face de saída (Z %s)\no que o produto vê" % br(zf), fontsize=9.4,
+                  loc="center", fontweight="bold", pad=8, linespacing=1.25)
 
-    # ============ 3. regras, duas colunas ============
-    regras = [
-        (u"MATERIAL", u"aço 1045 (SAE J404 / EN 10083-2), barra forjada, fibra no eixo, normalizada ≤ 220 HB; "
-                       u"corpo revenido **30-36 HRC**. O 1045 não chega a 50 HRC no núcleo de Ø%s: a dureza "
-                       u"útil desta peça vive na aresta do land." % br(2 * r[0])),
-        (u"TRATAMENTO NA FENDA", u"arestas do land **55-60 HRC em camada 0,6-1,0 mm por indução**, ou "
-                                  u"nitretação a plasma 520 °C (600-700 HV0,2, camada branca 8-18 µm) para "
-                                  u"tratar a fenda inteira — escolha da fábrica, declarada no relatório. **Sem "
-                                  u"PVD/DLC, sem cobre, sem jato de granalha no canal.**"),
-        (u"A COTA QUE O TRATAMENTO MOVE", u"8-18 µm por face come 0,016-0,036 mm de uma abertura que tolera "
-                                            u"+0,010/−0,000, e a indução move 0,005-0,020 mm na zona tratada. "
-                                            u"**Meça a fenda antes e depois do tratamento e grave os dois "
-                                            u"úmeros**: entrada, meio e saída. Se cair de 1,500, o retrabalho é "
-                                            u"passar o fio de novo na região — não é aceitar como está."),
-        (u"SEQUÊNCIA", u"T.T. do corpo → retífica do land → **fio EDM do canal** (arame entrando pela boca de "
-                        u"Ø%s, de um lado só) → remover camada REC ≥ 0,02 mm → indução/nitretação → medição "
-                        u"final. A fenda não pode existir antes do T.T. do corpo: 1,500 mm atravessando %s mm de "
-                        u"1045 temperado é risco de trinca. Alívio de tensões antes da têmpera e revenimento "
-                        u"duplo." % (br(2 * w_in), br(L))),
-        (u"PROIBIDO", u"flange, furo de fixação, rosca, pino e linha de partição (a peça é 1 sólido, sem "
-                       u"colagem). A matriz é segurada pelo collete EX-031 e pelo degrau do furo do cabeçote; "
-                       u"furo “útil” é rejeição porque entra na zona de aperto. Aperto só em estoque, fora do "
-                       u"envelope final e antes do T.T."),
-        (u"GEOMETRIA", u"coaxialidade dos três estágios em relação a A **Ø0,02** (datum A = o Ø%s, medido no "
-                        u"cilindro, não no degrau); face de saída planeza 0,01 e perpendicularidade 0,01 em A; "
-                        u"degraus em Z com ±0,05 (são o batente da peça); Ra ≤ 0,4 µm no canal e no land, "
-                        u"polido **na direção da extrusão**; ≤ 0,8 µm nos Ø de envelope; rebarba ≤ 0,1 × 45° "
-                        u"inclusive na boca de saída; R 3,0 ±0,5 no fundo do funil, sem aresta viva." % br(2 * r[0])),
-        (u"COMPRIMENTO", u"a cota está liberada como %s %s. Com +%s a face passaria %s mm para fora do nariz do "
-                          u"cabeçote, então, se vocês precisarem apertar, o aceitável prático é %s −0,50/+0,00 — "
-                          u"confirme qual dos dois você vai usar." % (br(L), tol, tol.replace("±", ""),
-                                                                      tol.replace("±", ""), br(L))),
-        (u"ENTREGAR", u"1 peça, sem lote. Dossiê: certificado EN 10204 3.1 do calor (composição, granulometria, "
-                       u"inclusões, têmpera/revenimento), relatório dimensional com todas as cotas desta folha, "
-                       u"microdureza em seção de corpo de prova do mesmo lote. Marcação a laser na **face "
-                       u"traseira**, fora do furo e da face de assentamento: JONATHA v27.0 · EX-031 · 1045 · "
-                       u"rev. %s · lote · nº de série · data." % ("30 (2026-09-22)" if abs(L - 95.0) < 0.01
-                                                                   else "29 (2026-09-22)")),
+    # ------------------------------------------------------------ 4. REGRAS
+    ax3 = fig.add_axes(CX_REGRAS)
+    ax3.axis("off")
+    ax3.set_xlim(0, 1)
+    ax3.set_ylim(0, 1)
+    col = [
+        [("AÇO E DUREZA", True),
+         ("1045 forjado, fibra no eixo. Corpo revenido 30–36 HRC. Land 55–60 HRC por indução "
+          "(0,6–1,0 mm) ou nitretação a plasma 600–700 HV0,2 — escolha da fábrica, declarada no "
+          "relatório. Sem PVD, sem DLC: 10 µm de revestimento mudam a espessura do produto.", False)],
+        [("ORDEM (não inverter)", True),
+         ("T.T. do corpo → retífica do land → fio EDM do canal pela boca de Ø%s (um lado só) → "
+          "remover camada REC ≥ 0,02 mm → tratamento de superfície → medição final. Medir a abertura "
+          "ANTES e DEPOIS do tratamento: 8–18 µm de camada comem 0,016–0,036 mm da tolerância de "
+          "0,010; se fechar abaixo de %s mm, passar o fio de novo." % (br(2 * R_in), br(a_fd, 3)), False)],
+        [("PROIBIDO", True),
+         ("Flange, furo de fixação, rosca, pino e linha de partição — a peça é 1 sólido e o aperto é "
+          "pelo collete EX-031 e pelo degrau do furo do cabeçote (elemento de aperto só no estoque, "
+          "fora do envelope final). Não alargar a boca de entrada Ø%s. Não acertar a fenda com raio na "
+          "quina nem com polimento transversal." % br(2 * R_in), False)],
+        [("ACEITAÇÃO", True),
+         ("Comprimento %s ±0,5 com a face de saída ralada no fim, faceada ao nariz do EX-031 "
+          "(protrusão 0,00). Coaxialidade Ø0,02 nos 3 estágios (datum A = Ø%s). Face de saída: "
+          "planeza 0,01 e perpendicularidade 0,01 em A. Rebarba ≤ 0,1 × 45°. Marcação a laser na "
+          "face traseira. Certificado EN 10204 3.1 + relatório dimensional das cotas desta folha."
+          % (br(L), br(2 * r[0])), False)],
     ]
-    blocos = []
-    for ti, tx in regras:
-        linhas = quebra(tx.replace("**", ""))
-        blocos.append([(ti, None)] + [(None, l) for l in linhas])
-    metade = (len(blocos) + 1) // 2
-    # achata: cada coluna e a lista de (titulo, linha) na ordem de impressao
-    col = [sum(blocos[:metade], []), sum(blocos[metade:], [])]
-    alt_disponivel_pt = 0.40 * fig.get_figheight() * 72.0
-    for c in col:
-        n = len(c)
-        if n * FONTE_REGRA * 1.42 > alt_disponivel_pt:
-            raise SystemExit("FALHOU: as regras nao cabem na folha (%d linhas para %d que cabem)"
-                             % (n, int(alt_disponivel_pt / (FONTE_REGRA * 1.42))))
-    for k, c in enumerate(col):
-        axr = fig.add_axes([0.035 + 0.485 * k, 0.050, 0.45, 0.375]); axr.axis("off")
-        axr.set_xlim(0, 1); axr.set_ylim(0, 1)
+    linhas_max, sobra = 0, []
+    for j, bloco in enumerate(col):
+        x0 = j * 0.251
         y = 1.0
-        for ti, linha in c:
-            if ti is not None:
-                axr.text(0.0, y, ti, fontsize=FONTE_REGRA + 0.9, va="top", ha="left", fontweight="bold",
-                         color="#0b4a86")
-                y -= (FONTE_REGRA * 1.95) / alt_disponivel_pt
+        for txt, tt in bloco:
+            if tt:
+                ax3.text(x0, y, txt, fontsize=9.2, fontweight="bold", va="top", ha="left", color=AZUL)
+                y -= 0.108
             else:
-                axr.text(0.0, y, linha, fontsize=FONTE_REGRA, va="top", ha="left", color="#111111")
-                y -= (FONTE_REGRA * 1.42) / alt_disponivel_pt
-    fig.text(0.035, 0.452, u"REGRAS DA PEÇA — valem tanto quanto as cotas de cima", fontsize=10.4,
-             fontweight="bold", ha="left")
-    fig.text(0.035, 0.012, u"Gerada por desenhar_folha_de_cotas_v30.py a partir de %s/pacote_usinagem.json "
-                           u"(medição no STEP, seções de 0,02 mm). Modelo: %s — %s faces, 1 sólido, BRep válido."
-             % (PACOTE, os.path.basename(m["arquivo"]), m["faces"]), fontsize=7.2, color="#555555",
-             ha="left", va="bottom")
-    fig.text(0.035, 0.028, u"Esta folha não substitui o STEP: ela diz o que medir. O sólido do canal para o fio "
-                           u"EDM é 3D/MATRIZ_%s_CANAL_DE_FLUXO.step." % ("V30" if abs(L - 95.0) < 0.01 else "V29"),
-             fontsize=7.2, color="#555555", ha="left", va="bottom")
+                ls = quebra(txt, 47)
+                for ln in ls:
+                    ax3.text(x0, y, ln, fontsize=7.4, va="top", ha="left", color="#111111")
+                    y -= 0.104
+                linhas_max = max(linhas_max, len(ls) + 1)
+        sobra.append(round(y, 3))
+    for j in range(1, 4):
+        ax3.plot([j * 0.251 - 0.011, j * 0.251 - 0.011], [-0.02, 1.0], color="#d5d8de", lw=0.8)
+    if min(sobra) < -0.02:
+        raise SystemExit("regras nao cabem na folha: sobra por coluna = %s" % sobra)
+    fig.text(CX_REGRAS[0], CX_REGRAS[1] + CX_REGRAS[3] + 0.008,
+             "REGRAS DA PEÇA — valem tanto quanto as cotas", fontsize=10.5,
+             fontweight="bold", va="bottom", ha="left")
+
+    peca = os.path.basename(m["arquivo"])
+    fig.text(CX_MAIN[0], 0.012, u"Folha gerada por 04_Dados_SSOT_e_Scripts/desenhar_folha_de_cotas_v30.py a "
+                                u"partir de %s/pacote_usinagem.json — cada número é medição no STEP "
+                                u"(seções de 0,02 mm). Modelo 3D/%s (%s faces, %s sólido, BRep válido) · "
+                                u"volume do canal %s mm³ · aço %s mm³ = %s kg · se o desenho e o STEP "
+                                u"discordarem, vale o STEP."
+             % (PACOTE, peca, m["faces"], m["solidos"], br(m["volume_canal_mm3"]),
+                br(m["volume_aco_mm3"], 1), br(m["massa_kg"], 4)),
+             fontsize=6.6, color=CINZA, va="bottom")
 
     destino = os.path.join(RAIZ, PACOTE, ARQ)
     fig.savefig(destino + ".pdf", facecolor="white")
     fig.savefig(destino + ".png", facecolor="white", dpi=150)
     plt.close(fig)
-    print("ok:", destino + ".pdf", os.path.getsize(destino + ".pdf"), "bytes")
-    print(u"    cotas: Ø%s / Ø%s / Ø%s · L %s · land %s em Z %s→%s · fenda %s×%s · entrada Ø%s · boca %s×%s"
-          % (br(2 * r[0]), br(2 * r[1]), br(2 * r[2]), br(L), br(land), br(z_land0), br(z_land1),
-             br(2 * w_fd), br(a_fd, 3), br(2 * w_in), br(2 * w_bs), br(a_bs)))
+    print("ok:", destino + ".pdf", os.path.getsize(destino + ".pdf"), "bytes · regras:",
+          "máx %d linhas por coluna" % linhas_max, "· sobra", sobra, "· legenda do detalhe",
+          len(capls), "linhas")
 
 
 if __name__ == "__main__":

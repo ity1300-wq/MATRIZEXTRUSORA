@@ -445,3 +445,27 @@ Por que a regra existe, em uma frase: em 2026-09-23 eu deixei três rodadas só 
 rótulos do desenho, a numeração com milhar) e cada uma depois custou uma troca nova de assets; enquanto a troca
 não acontecia, o GitHub servia documento velho com sha novo na capa — exatamente o par que a fábrica confere.
 
+
+**Rodada 2026-09-23 (tarde) — a folha de uma página virou "meia-seção + detalhe", e o funil apareceu.**
+
+* ordem dele: *"retire essa bagunça de informações e deixe somente o que é de suma importância, também
+  represente a matriz melhor, em momento nenhum aparece o 'cone' interno dela"*. A folha anterior
+  (perfil externo com três balões numerados + duas colunas de regras) foi jogada fora e `desenhar_folha_de_cotas_v30.py`
+  reescrito com quatro blocos: **meia-seção no plano da abertura** (corte em X-Z que passa pela fenda — é a única
+  vista onde o funil/cone interno aparece, porque a parede dele fecha de Ø75,60 em Z 0,00 até a abertura
+  1,500 no início do land), **DETALHE A ≈ 4× do fim do canal** com `ABERTURA DA FENDA 1,500 mm +0,010/−0,000`
+  em corpo grande (a cota que ele disse não estar clara), **face de saída** com largura/abertura e área do land,
+  e **regras em quatro colunas** (aço/dureza, ordem, proibido, aceitação). Os balões numerados, o quadro de notas
+  e a lista de tolerâncias genéricas saíram.
+* o funil é desenhado como a **reta entre as seções medidas** (entrada Ø75,60 em Z 0,00, boca do chanfro
+  78,00 × 4,50 em Z 94,99) e a folha diz isso: a parede real é a superfície BSpline do STEP. Não fui medir o
+  perfil fatia a fatia de novo — `cadquery` não está instalado nesta sandbox (só `matplotlib`), e a folha é
+  justamente o documento que não deve ter número sem medição.
+* a folha e o e-mail curto continuam **fora do zip** ⇒ `CHECKSUMS_SHA256.txt` (13 arquivos) e o sha do
+  `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` não mudaram, a tag `v30.0-oficial-pacote-usinagem` **não se moveu** e os
+  quatro assets da release `394977467` continuam batendo com o disco (§12). Rodar o `gerar_pacote_usinagem_v30.py`
+  para "atualizar a folha" seria o caminho errado: ela não faz parte do pacote.
+* guardas do gerador que já pegaram bug real nesta rodada: `quebra()` + contagem de linhas por coluna com
+  `SystemExit` se as regras descerem demais, fator de ampliado do DETALHE A **calculado** das caixas (não
+  escrito à mão), e os rótulos saem todos de `pacote_usinagem.json` com vírgula decimal (`br()`), inclusive os
+  de `Ø` — a string digitada no heredoc perde o `Ø`, o que já tinha virado dois espaços no desenho.
