@@ -28,6 +28,10 @@ STEP anexos definem a geometria: `MATRIZ_V30_PECA_UNICA.step` é a peça, `MATRI
 sólido do canal (para o fio EDM) e `Cabecote_EX-030_com_Matriz_Jonatha_v30.step` mostra como a peça senta no
 cabeçote. O que tem de sair:
 
+· **MATERIAL: aço 1045** (SAE J404 / EN 10083-2), barra forjada, fibra no eixo, normalizada ≤ 220 HB; corpo revenido
+30-36 HRC; **arestas do land 55-60 HRC em camada 0,6-1,0 mm por indução**, ou nitretação a plasma 600-700 HV0,2
+— escolha de vocês, declarada no relatório; sem PVD/DLC.
+
 · **Ø94,00 ±0,5** (datum A, Z 0 → 69,90) · **Ø89,00 ±0,5** (69,90 → 80,70) · **Ø79,00 ±0,5** (80,70 → 95,00) ·
 comprimento **95,00 ±0,5** · degraus com ±0,05 · coaxialidade dos três estágios **Ø0,02** · face de saída
 planeza 0,01 e perpendicularidade 0,01 em A.
@@ -35,9 +39,6 @@ planeza 0,01 e perpendicularidade 0,01 em A.
 aresta viva · área da seção no land **112,0171 mm² ±0,5 %** (fora disso é rejeição) · chanfro 1,50 × 45°
 (boca 78,00 × 4,50) · boca de entrada **Ø75,60 +0,05/−0,00, não alargar** · Ra ≤ 0,4 µm no canal e no land,
 polido na direção da extrusão · Ra ≤ 0,8 µm nos Ø de envelope · rebarba ≤ 0,1 × 45°.
-· **Aço 1045** (SAE J404 / EN 10083-2), barra forjada, fibra no eixo, normalizada ≤ 220 HB; corpo revenido
-30-36 HRC; **arestas do land 55-60 HRC em camada 0,6-1,0 mm por indução**, ou nitretação a plasma 600-700 HV0,2
-— escolha de vocês, declarada no relatório; sem PVD/DLC.
 · **Sequência:** T.T. do corpo → retífica do land → **fio EDM do canal** (arame pela boca de Ø75,60, de um lado
 só) → remover camada REC ≥ 0,02 mm → indução/nitretação → medição final. **Meçam a abertura da fenda antes e
 depois do tratamento e gravem os dois números**; camada de 8-18 µm por face come 0,016-0,036 mm de uma
@@ -59,11 +60,13 @@ Att,
 ## Opcional, e só se você quiser uma folha na mão deles
 
 `08_Pacote_Usinagem_v30/FOLHA_DE_COTAS_V30.pdf` — uma página, refeita hoje (23/09) para o tamanho de letra e o
-pouco texto que você pediu. Quatro blocos: **meia-seção no plano da abertura** (é onde aparece o funil/cone
-interno, que na versão anterior não aparecia), **DETALHE A ampliado do fim do canal** com a abertura
-1,500 +0,010/−0,000 escrita grande, **face de saída** com largura e abertura da fenda, e **regras** em quatro
-colunas curtas (aço/dureza, ordem de fabricação, proibido, aceitação). Saíram da folha a prancha densa, os
-balões numerados e o quadro de notas — nada de número chutado: a folha é gerada do mesmo
+pouco texto que você pediu. Cinco blocos: **faixa de MATERIAL no topo** — o aço 1045 em corpo grande, com a
+norma (SAE J404 / EN 10083-2, barra forjada, fibra no eixo, normalizada ≤ 220 HB), a dureza do corpo e do land,
+indução × nitretação como escolha de vocês, e o "sem PVD/DLC e sem trocar de aço"; **meia-seção no plano da
+abertura** (é onde aparece o funil/cone interno, que na versão anterior não aparecia); **DETALHE A ampliado do
+fim do canal** com a abertura 1,500 +0,010/−0,000 escrita grande; **face de saída** com largura e abertura da
+fenda; e **regras** em três colunas curtas (ordem de fabricação, proibido, aceitação). Saíram da folha a prancha
+densa, os balões numerados e o quadro de notas — nada de número chutado: a folha é gerada do mesmo
 `pacote_usinagem.json` medido no STEP (`desenhar_folha_de_cotas_v30.py`), e por isso bate com as cotas deste
 e-mail. Não está dentro do `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` (o zip e os hashes publicados não mudaram). Se
 você anexar a folha, mande junto o `CHECKSUMS_SHA256.txt`? Não — ela é informativa; o que vincula é o STEP e o

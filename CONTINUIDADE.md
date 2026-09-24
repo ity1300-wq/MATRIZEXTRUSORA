@@ -487,3 +487,22 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   Isso é verdade na v30 e **falso na v29**, onde a face de saída sai 14,00 mm além do nariz. Agora o valor vem
   de `montagem["saida_além_da_face_do_nariz_mm"]` medido no STEP da montagem, e o gerador para com
   `SystemExit` se a chave faltar em vez de chutar zero.
+
+**Rodada 2026-09-23 (madrugada) — o MATERIAL ganhou faixa própria no topo da folha.**
+
+* ordem dele: *"faltou somente enfatizar com qual material se deverá ser fabricado"*. A folha agora abre com
+  uma **faixa vermelha de página inteira** (`fig.text` na figura, não dentro de um eixo): rótulo "MATERIAL DA
+  PEÇA - é cota de aceite, não é sugestão", o nome do aço em 20 pt (`decisoes_2026_09_22/material`), a norma
+  partida do `aco/norma` no dois-pontos (padrão de um lado, "barra forjada, fibra no eixo, normalizada <= 220 HB"
+  do outro), `DUREZA E TRATAMENTO NA FENDA` com o `aco/dureza` integral, e `O QUE NÃO PODE MUDAR` com o
+  `aco/grupo` (que é o texto que diz que o 1045 substituiu o 1.2344 da proposta) + o certificado EN 10204 3.1.
+  Nenhuma dessas frases foi redigitada: vêm todas do `pacote_usinagem.json`, e se faltar alguma chave o gerador
+  para com `SystemExit("o pacote nao traz o material nestas chaves...")` em vez de escrever aço na mão.
+* conseqüência no resto da folha: as regras caíram de quatro colunas para **três** (aço/dureza saiu de lá, pois
+  agora está na faixa), e a coluna que sobrava foi usada para o "sem outro aço, sem outro revestimento" do
+  PROIBIDO. As larguras de quebra (49/47 na faixa, 60 nas regras) e a altura da faixa são checadas por
+  contador de linhas com `raise SystemExit` - foi assim que três estouro de texto foram pegos antes de sair PDF.
+* o `tx()` deixou de ser convenção: ele está instalado em `matplotlib.text.Text.set_text`, então **todo** texto
+  desenhado passa por ele - inclusive o que vem do JSON (`<= 220 HB`, `→`, `±`, `≥`). Se algum glifo acima de
+  U+00FF sobreviver à substituição, a folha não sai. Checagem final na rodada: 32 strings (material + todas as
+  cotas) presentes no `extract_text()` dos dois PDFs e zero caractere U+2000..U+2FFF no texto extraído.
