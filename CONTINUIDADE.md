@@ -463,7 +463,10 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   justamente o documento que não deve ter número sem medição.
 * a folha e o e-mail curto continuam **fora do zip** ⇒ `CHECKSUMS_SHA256.txt` (13 arquivos) e o sha do
   `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` não mudaram, a tag `v30.0-oficial-pacote-usinagem` **não se moveu** e os
-  quatro assets da release `394977467` continuam batendo com o disco (§12). Rodar o `gerar_pacote_usinagem_v30.py`
+  anexos publicados continuam batendo com o disco (§12) - cada release tem DOIS anexos: a `394977467` (v30)
+  traz o zip de 588.274 B `0738c468…` e a prancha de 49.582 B `4b0e6ef1…`; a `391700106` (v29) traz o zip de
+  584.850 B `d6966b14…` e a prancha de 49.287 B `a8f7a50a…`. Quatro anexos no total, todos conferidos no disco.
+  Rodar o `gerar_pacote_usinagem_v30.py`
   para "atualizar a folha" seria o caminho errado: ela não faz parte do pacote.
 * guardas do gerador que já pegaram bug real nesta rodada: `quebra()` + contagem de linhas por coluna com
   `SystemExit` se as regras descerem demais, fator de ampliado do DETALHE A **calculado** das caixas (não
@@ -481,7 +484,7 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   texto extraído dos dois PDFs, e o teste falha se sobrar qualquer caractere U+2000–U+206F no texto extraído.
 * **A prancha grande dentro do zip tem o mesmo problema tipográfico** (ela usa `→` e `≤` à vontade, gerados
   antes dessa descoberta). Não fui trocar: mexer na prancha muda o `pacote_usinagem.json`-filho → o zip → o sha
-  → a tag e os quatro assets. Como a folha é o papel que vai no e-mail, corrigi só ela; se um dia o pacote for
+  → a tag e os quatro anexos (dois por release). Como a folha é o papel que vai no e-mail, corrigi só ela; se um dia o pacote for
   re-gerado por outro motivo, vale a mesma sanitização no `prancha()`.
 * segundo erro que a checagem pegou: a coluna ACEITAÇÃO dizia "protrusão 0,00 no nariz do EX-031" escrito à mão.
   Isso é verdade na v30 e **falso na v29**, onde a face de saída sai 14,00 mm além do nariz. Agora o valor vem
@@ -548,7 +551,8 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
 * o DXF e os previews ficam **fora do `PACOTE_MATRIZ_V30_PARA_ENVIO.zip`**, como a folha (a lista de arquivos
   do zip é explícita no `gerar_pacote_usinagem_v30.py`, não é glob do diretório, então rodar o gerador de
   pacote não puxa o DXF para dentro). Consequência: `CHECKSUMS_SHA256.txt` continua com 13 arquivos, o sha do
-  zip é `0738c468…`, a tag `v30.0-oficial-pacote-usinagem` **não se move** e os quatro assets da release
-  `394977467` seguem idênticos ao disco (§12). Se um dia ele quiser o DXF dentro do pacote para envio, isso é
+  zip é `0738c468…`, a tag `v30.0-oficial-pacote-usinagem` **não se move** e os dois anexos da release
+  `394977467` seguem idênticos ao disco - como os dois da v29 (`d6966b14…` + `a8f7a50a…`). São DOIS anexos por
+  release; "quatro" é o total das duas releases, não de uma. Se um dia ele quiser o DXF dentro do pacote para envio, isso é
   publicação inteira: adicionar ao `nomes` do gerador de pacote, re-gerar CHECKSUMS/zip/capa, mover a tag e
   re-trocar os quatro assets com `/home/user/tmp/trocar_assets.py`.
