@@ -58,11 +58,16 @@ Att,
 
 ## Opcional, e só se você quiser uma folha na mão deles
 
-`08_Pacote_Usinagem_v30/FOLHA_DE_COTAS_V30.pdf` — uma página, meia-seção + face de saída + regras, sem o bloco
-de notas da prancha completa (que você achou densa). É gerada a partir do mesmo JSON medido do STEP
-(`desenhar_folha_de_cotas_v30.py`), e por isso bate com as cotas do e-mail. Não está dentro do
-`PACOTE_MATRIZ_V30_PARA_ENVIO.zip` (o zip e os hashes publicados não mudaram). Se você anexar a folha, mande
-junto o `CHECKSUMS_SHA256.txt`? Não — ela é informativa; o que vincula é o STEP e o que está escrito acima.
+`08_Pacote_Usinagem_v30/FOLHA_DE_COTAS_V30.pdf` — uma página, refeita hoje (23/09) para o tamanho de letra e o
+pouco texto que você pediu. Quatro blocos: **meia-seção no plano da abertura** (é onde aparece o funil/cone
+interno, que na versão anterior não aparecia), **DETALHE A ampliado do fim do canal** com a abertura
+1,500 +0,010/−0,000 escrita grande, **face de saída** com largura e abertura da fenda, e **regras** em quatro
+colunas curtas (aço/dureza, ordem de fabricação, proibido, aceitação). Saíram da folha a prancha densa, os
+balões numerados e o quadro de notas — nada de número chutado: a folha é gerada do mesmo
+`pacote_usinagem.json` medido no STEP (`desenhar_folha_de_cotas_v30.py`), e por isso bate com as cotas deste
+e-mail. Não está dentro do `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` (o zip e os hashes publicados não mudaram). Se
+você anexar a folha, mande junto o `CHECKSUMS_SHA256.txt`? Não — ela é informativa; o que vincula é o STEP e o
+que está escrito acima.
 
 **Não mande:** o resto do pacote (a prancha grande, os relatórios, o `pacote_usinagem.json`), os modelos
 históricos, a v29, o DXF do cabeçote e qualquer script daqui. Peça só 1 matriz — se eles oferecerem lote,
