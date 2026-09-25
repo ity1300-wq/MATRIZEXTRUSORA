@@ -178,13 +178,16 @@ O ponto alcançável mais quente e mais ligado a ela é a **face do nariz do cab
 *Atualizadas depois das fotos dele (§10): das quatro perguntas que eu tinha aberto, três foram respondidas pela
 própria máquina — a banda está **livre** (item 1), **não existe água** no cabeçote (item 3, e a linha de água
 passa a ser serviço novo, pequeno) e **não existe puxador** (o que eu tinha lido como puxador é a estação de
-papel siliconado; a manta sai da matriz e entra na esteira). Sobram as de baixo — e a do `T_limiar` agora usa o
-mostrador que já existe, não um termômetro comprado.*
+papel siliconado; a manta sai da matriz e entra na esteira). E o `T_limiar` **precisa** de instrumento comprado:
+o mostrador de 0-150 °C das fotos está no corpo de trás, não no cabeçote (§10.1.3). Sobram as de baixo.*
 
-1. **O que é o cano curto (Ø ~25 mm) apontando para baixo** na faixa sem tinta da frente do cabeçote? Se for
-   respiro/dreno de camisa, a refrigeração já existe fundida na máquina e o trabalho é ligar uma mangueira.
-2. **A que °C o mostrador de 0-150 fica em produção**, e em que faixa ele é mantido? Baixar a zona dianteira é
-   meia resposta sem fabricar nada.
+1. **O cabeçote é aquecido hoje, ou só recebe calor da adjunta de trás?** Nas cinco fotos e no vídeo a faixa sem
+   tinta do cabeçote está **sem abraçadeira de aquecimento, sem manta térmica e sem instrumento**. Se na máquina
+   quente for igual, a temperatura da matriz hoje **não é medida nem controlada por ninguém**, e "baixar a zona
+   dianteira" nem é opção — porque não existe zona dianteira.
+2. **O cano curto (Ø ~25 mm) na frente da faixa: respondido pelo desenho, não pela foto.** O EX-030 não tem
+   camisa d'água nem dreno (§10.3.1). O que quer que aquilo seja, não muda o plano: a refrigeração tem de ser
+   criada.
 3. **O rolo de papel siliconado fica encostado em parte quente?** Afastá-lo é de graça e é a única coisa na linha
    que hoje toca a face da manta logo depois da boca.
 4. Continuam valendo da 8ª: `T_limiar` com o teste das três velocidades (100/80/60 %), o giro de 180° da matriz
@@ -210,7 +213,12 @@ baixadas e conferidas por sha256. **Procedência** (o arquivo fica no repo dele;
 
 **Regra que eu mesmo me dei depois do erro do disco de corte:** foto responde *o que está onde*; foto não
 responde *como o processo roda*. Tudo abaixo está escrito como "aparece na foto", e onde há dedução ela está
-marcada como hipótese.
+marcada como hipótese. Nenhuma mídia foi commitada (o repo é público e as fotos são da linha dele). Como os
+objetos foram localizados: sem segmentação por cor e sem "pixel vira cota" — a foto 14.08.53 foi reimpressa com
+**grade de 100 px** e relida, depois marcada (`grade_53.png` e `anotado_53.png`, na mesma pasta de uploads); foi
+isso que tirou o mostrador de cima do cabeçote. O vídeo (848 × 478 px, 15 quadros extraídos) só sustenta
+"existe / não existe". O áudio não foi transcrito — não há transcritor neste ambiente —, então nenhuma fala foi
+usada aqui.
 
 ### 10.1 O que aparece, e o que isso fecha
 
@@ -225,9 +233,20 @@ marcada como hipótese.
    colar mede na máquina. Então o colar pode ser abraçado ali, sem tirar nada de lugar. **Atenção a
    um item só:** aparece um **cano curto, de Ø ~25 mm, apontando para baixo** na borda dessa faixa (fotos
    14.08.53 e 14.08.531) — ver §10.3.
-3. **Não precisa comprar termômetro de infravermelho.** Existe um **mostrador redondo de 0 a 150 °C (classe 1)**
-   rosqueado no corpo azul, logo atrás do flange da matriz. Ele é a régua do teste da §7. Nas fotos ele marca
-   ~25–30 °C, ou seja, **máquina fria**: nenhuma temperatura de processo pode ser lida nessas imagens.
+3. **Aqui eu errei, e ele corrigiu: os manômetros ficam longe do cabeçote.** Na primeira versão desta §10 escrevi
+   que o mostrador de 0 a 150 °C estava "no corpo, logo atrás do flange da matriz" e que ele servia de régua para
+   o teste da §7. Remedi a foto 14.08.53 com grade de coordenadas por cima da imagem: o mostrador está no **corpo
+   azul de trás**, depois do flange aparafusado — é a adjunta/cilindro, **não o cabeçote**. Ele não mede a matriz,
+   e nas fotos marca ~25-30 °C, que é temperatura de sala com a máquina parada.
+   * O que sobe daí, e é a coisa mais acionável desta rodada: no que aparece nas cinco fotos e no vídeo, o
+     **cabeçote não tem instrumento, não tem abraçadeira de aquecimento e não tem isolamento** — a faixa dele está
+     de aço nu. Se na máquina quente for igual, então hoje **a temperatura da matriz não é medida nem controlada
+     por ninguém**: ela é o resultado da condução que vem da adjunta de trás, do atrito na fenda e do que o ar
+     leva. É a **P3 da `03_/TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md`** ("matriz sem controle térmico") aberta na
+     máquina dele, e o "sai boa no começo, depois piora" é a assinatura disso.
+   * **Consequência para o plano:** o infravermelho **volta a ser necessário** (ou termopar de contato/ponteira
+     magnética encostado na faixa sem tinta), porque não há nada instalado que responda "a que °C está a matriz
+     agora". É o instrumento mais barato do projeto inteiro, e é ele que fecha o teste da §7.
 4. **Não há água no cabeçote.** As mangueiras pretas que aparecem em cima dos corpos azuis entram por **cupom
    de aperto tipo prensa-cabo (conduíte)**, não por conexão de água; não há torneira, mangueira de água nem
    dreno no conjunto da matriz. Ou seja: se a opção C (colar d'água) for escolhida, a linha de água é trabalho
@@ -249,10 +268,14 @@ marcada como hipótese.
 
 ### 10.2 Correção que as fotos fazem no meu plano
 
-* **Item da §7 que muda:** eu tinha escrito "compre um IR e aponte na face do nariz". Não precisa: use o
-  mostrador que já está no corpo, atrás do flange, e marque o valor no instante do primeiro dente. Se ele quiser
-  saber a diferença entre o mostrador e a boca, aí sim um IR (ou termopar de contato) na face da matriz numa
-  parada — e a calibração fica para sempre.
+* **Item da §7 que NÃO muda — e por que eu achei que mudava:** eu escrevi nesta §10 que o IR era dispensável
+  porque "o mostrador do corpo serve". **Não serve: ele me corrigiu, os manômetros ficam longe do cabeçote.**
+  Conferido na foto com uma grade de pixels por cima — o mostrador de 0-150 °C está no corpo azul de trás, depois
+  do flange aparafusado, e mede a adjunta. Então a §7 continua como foi escrita na 8ª rodada: **IR (ou termopar de
+  ponteira) na face do nariz do cabeçote**, que é o ponto mais próximo da boca que se alcança. O que muda a favor
+  dele é outro: se hoje o cabeçote não tem instrumento nem aquecedor, o teste das três velocidades pode ser rodado
+  **sem mexer em nada do processo**, e o `T_limiar` que sair dali é o primeiro número de temperatura de matriz que
+  esta máquina já deu.
 * **Item da §6 que ganha detalhe:** o colar (opção C) tem que **terminar antes do cano de Ø ~25** e **não pode
   estorvar o garfo onde o papel é aplicado**. Faixa útil provável: da face do flange azul para trás, na parte lisa do corpo.
 * **Hipótese que eu levantei e ele derrubou (registrada para ninguém ressuscitar):** eu escrevi que a tira do
@@ -264,12 +287,18 @@ marcada como hipótese.
   pixel de mídia da máquina vira afirmação de processo — a regra fica: **mídia da máquina parada não prova nada
   sobre o que acontece na saída.**
 
-### 10.3 As perguntas que sobraram (agora são três, todas de resposta curta)
+### 10.3 As perguntas desta §10: duas abertas, duas fechadas no caminho
 
-1. **O que é o cano curto que aponta para baixo na faixa sem tinta na frente do cabeçote?** Se for respiro ou
-   dreno de camisa, **a refrigeração que eu propus já existe fundida na máquina** e o trabalho passa a ser ligar
-   uma mangueira nela — que é outro patamar de custo. Se for alça de girar, ignora.
-2. **A que °C o mostrador de 0-150 fica com a linha em produção**, e em que faixa ele é mantido hoje?
+1. ~~O cano curto de Ø ~25 é dreno de camisa?~~ **Fechado pelo desenho, não pela foto.** O
+   `04_Dados_SSOT_e_Scripts/cabecote_ex030.json`, lido do DWG 030-032, dá no cabeçote **quatro furos coaxiais**
+   (nariz Ø80,00 em d 0-14 · intermediário Ø90,00 em d 14-25 · bolso Ø95,00 em d 25-95 · piloto Ø105,00 em
+   d 92-95) e **um único furo transversal**: o roscado **M12 do bolso** (Ø10,50 de broca, centro a 72,02 mm da
+   face do nariz), pelo qual o pushador EX-032 expulsa a matriz. **Não há camisa d'água, dreno ou respiro no
+   EX-030** — a palavra "água" não aparece uma vez no arquivo de medição do cabeçote. Então a refrigeração **não
+   está escondida na máquina esperando um mangueira**: ela tem de ser criada, e o colar da §6-C (abraçado, sem
+   furar nada) continua o caminho mais curto até isso.
+2. **O cabeçote é aquecido hoje, ou só recebe calor da adjunta de trás?** É a pergunta que a correção do item 3
+   abriu, e a única que pode mudar o plano sem fabricar nada.
 3. ~~O branco da bobina é tecido laminado ou filme de transporte?~~ **Respondido por ele: papel siliconado, e a
    manta sai da matriz e entra na esteira.**
 4. Uma nova, e é a única pergunta de foto que ainda vale: **o rolo de papel siliconado fica encostado em alguma

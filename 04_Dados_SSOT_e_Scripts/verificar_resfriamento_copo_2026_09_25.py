@@ -95,5 +95,23 @@ for tag,aleg in [('Cabecote_EX-030_com_Matriz_Jonatha_v30',0.00),('Cabecote_EX-0
     T=list(cq.importers.importStep('06_CAD_Cabecote_EX-030/STEP/%s.step'%tag).solids().vals())
     d2=[s for s in T if s.Volume()<1e6][0]; h2=[s for s in T if s.Volume()>1e6][0]
     chk('protrusao da boca, '+tag[-3:],d2.BoundingBox().zmax-h2.BoundingBox().zmax,aleg,1e-3 if aleg else 1e-9) if aleg else print('%-52s medido %.3f  no doc %.3f  (rasa)'%('protrusao da boca, '+tag[-3:],d2.BoundingBox().zmax-h2.BoundingBox().zmax,aleg))
+# 13. 9a rodada, parte 4: a pergunta do "cano com dreno" foi fechada pelo DWG, nao pela foto
+import json as _js
+_hc=_js.load(open('04_Dados_SSOT_e_Scripts/cabecote_ex030.json'))
+_ft=_hc["furos_transversais_no_cabecote"]["medidos_no_dxf"]
+chk('furos transversais no cabecote (contagem)',float(len(_ft)),1.0,0.0)
+chk('o unico furo transversal e o M12 (Ø broca)',_ft[0]["Ø_broca_mm"],10.50,1e-6)
+chk('Z do M12 na matriz (face do nariz - x)',95.00-_ft[0]["x_da_face_do_nariz_mm"],22.98,1e-6)
+_txt=open('03_Relatorios_e_Documentacao/RESFRIAMENTO_MATRIZ_COPO_2026-09-25.md',encoding='utf-8').read()
+for _f,_q in [("doc: quatro furos coaxiais listados","quatro furos coaxiais"),
+              ("doc: um unico furo transversal","um único furo transversal"),
+              ("doc: agua nao aparece no arquivo do cabecote",'a palavra "água" não aparece'),
+              ("doc: manometro nao esta no cabecote","não mede a matriz"),
+              ("doc: IR volta a ser necessario","infravermelho **volta a ser necessário**"),
+              ("doc: sem chao - distancia inventada fora","15–20 cm" ),
+              ("doc: faixa sem puxador","o inchaço acontece")]:
+    _p = _q in _txt
+    _espera = 0.0 if "sem chao" in _f else 1.0
+    chk(_f, 1.0 if _p else 0.0, _espera, 0.0)
 print('== PASS (%d)'%len(ok)); [print('  ok ',x.strip()) for x in ok]
 print('== DIVERGE (%d)'%len(fail)); [print('  XX ',x.strip()) for x in fail]
