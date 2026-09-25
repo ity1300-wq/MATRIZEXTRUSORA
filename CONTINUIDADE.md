@@ -768,9 +768,18 @@ linha do tempo.
   baixados e conferidos por sha256; vídeo lido em quadros com ffmpeg do `imageio-ffmpeg`): a ponta do cabeçote é
   uma **face plana de aço sem tinta com furo redondo** por onde a manta passa, sem nenhuma boca de matriz para
   fora ⇒ **confirma visualmente a boca enterrada de 14,30 mm e o túnel Ø80 × 14,00**. A faixa sem tinta está
-  **livre de abraçadeira de aquecimento e de manta térmica** (dá para abraçar o colar ali), há um **mostrador
-  0-150 °C classe 1** rosqueado no corpo atrás do flange (não precisa de IR para o teste), **não há água** no
-  conjunto (as mangueiras pretas entram por prensa-cabo, são conduíte). **Corrigido na mesma rodada, por ele:**
+  **livre de abraçadeira de aquecimento e de manta térmica** (dá para abraçar o colar ali), e **não há água** no
+  conjunto (as mangueiras pretas entram por prensa-cabo, são conduíte). Eu escrevi ali que o **mostrador 0-150 °C
+  classe 1** do corpo dispensava o termômetro de infravermelho no teste — **ele corrigiu: os manômetros ficam
+  longe do cabeçote**. Re-li a foto com grade de 100 px por cima e ele está certo: o mostrador fica no corpo azul
+  de trás, depois do flange aparafusado, e mede a adjunta. **O IR (ou termopar de ponteira na face do nariz)
+  volta a ser item obrigatório**, e sobe daí uma coisa melhor: pelo que aparece, o cabeçote não tem instrumento,
+  aquecedor nem isolamento — ou seja, **a temperatura da matriz não é medida nem controlada por ninguém**, que é
+  a P3 da triagem aberta na máquina dele e a assinatura do "sai boa, depois piora". A pergunta do **cano curto
+  Ø ~25** na frente da faixa foi fechada pelo desenho, não pela foto: `04_/cabecote_ex030.json` (lido do DWG
+  030-032) dá no cabeçote quatro furos coaxiais e **um único furo transversal** — o M12 do bolso (Ø10,50 de
+  broca, centro a 72,02 mm da face do nariz, Z 22,98 na matriz), pelo qual o pushador expulsa a matriz. **Não há
+  camisa d'água no EX-030**: a refrigeração não está escondida na máquina, tem de ser criada. **Corrigido na mesma rodada, por ele:**
   o par de rolos de aço nus com fuso e mola + bobina de material branco que eu tinha lido como **puxador** é a
   **estação de papel siliconado**, e **a manta sai da matriz e entra na esteira**. Então **não há puxador
   fechando ciclo de estiramento**, a pendência da 7ª continua do jeito que estava (linha sem puxador ⇒ inchaço

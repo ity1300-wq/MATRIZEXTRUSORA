@@ -162,8 +162,11 @@ Legenda: `sha` = commit na branch `continue`. `01_`…`08_` = `01_CAD_MatrizJona
    refrigeração **dá tempo, não tira a tração da borda**.
 4. Para abrir a rev. 31 (**PRP-0007**: gotas nos extremos da fenda + arco do sorriso com flecha 1,50 mm + chanfro
    0,50 × 45) falta o **sim** dele. A escolha do caminho é dele.
-5. Pendências do lado dele, depois das fotos: **o que é o cano curto na frente da faixa sem tinta** (se for
-   camisa d'água, a refrigeração já existe na máquina); a °C do mostrador em produção e a faixa em que ele é
-   mantido; se o rolo de papel siliconado fica encostado em parte quente; `T_limiar` no mostrador com o teste
-   100/80/60 %; girar a matriz 180° e remedir; e a área real da amostra. **Já respondidas pelas fotos:** a banda
-   do cabeçote está livre, não há água no cabeçote, e não há puxador (é papel siliconado + esteira).
+5. Pendências do lado dele, depois das fotos: **o cabeçote é aquecido hoje ou só recebe calor de trás** (no que
+   aparece nas fotos ele não tem instrumento, nem abraçadeira, nem isolamento — se for assim, a temperatura da
+   matriz não é medida nem controlada por ninguém); `T_limiar` **com IR ou termopar de ponteira na face do nariz**
+   no teste 100/80/60 % (os manômetros da máquina **não** servem: ele confirmou que ficam longe do cabeçote, e o
+   IR volta a ser item do teste); se o rolo de papel siliconado fica encostado em parte quente; girar a matriz
+   180° e remedir; e a área real da amostra. **Já respondidas:** a banda do cabeçote está livre para receber o
+   colar, não há água no cabeçote (e o cano curto da foto não é dreno — o EX-030 tem um único furo transversal, o
+   M12 do pushador, conferido no DWG), e não há puxador (é papel siliconado + esteira).
