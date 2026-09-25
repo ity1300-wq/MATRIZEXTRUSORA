@@ -185,9 +185,9 @@ o mostrador de 0-150 °C das fotos está no corpo de trás, não no cabeçote (�
    tinta do cabeçote está **sem abraçadeira de aquecimento, sem manta térmica e sem instrumento**. Se na máquina
    quente for igual, a temperatura da matriz hoje **não é medida nem controlada por ninguém**, e "baixar a zona
    dianteira" nem é opção — porque não existe zona dianteira.
-2. **O cano curto (Ø ~25 mm) na frente da faixa: respondido pelo desenho, não pela foto.** O EX-030 não tem
-   camisa d'água nem dreno (§10.3.1). O que quer que aquilo seja, não muda o plano: a refrigeração tem de ser
-   criada.
+2. ~~O cano curto na frente da faixa~~ — **fechado duas vezes, e a segunda por ele.** Primeiro pelo desenho: o
+   EX-030 não tem camisa d'água nem dreno (§10.3.1). Depois pela resposta dele: **"alça de ferro"**. Não muda
+   nada no plano da refrigeração — muda um detalhe da abraçadeira, que é o recorte por onde a alça passa.
 3. **O rolo de papel siliconado fica encostado em parte quente?** Afastá-lo é de graça e é a única coisa na linha
    que hoje toca a face da manta logo depois da boca.
 4. Continuam valendo da 8ª: `T_limiar` com o teste das três velocidades (100/80/60 %), o giro de 180° da matriz
@@ -231,8 +231,11 @@ usada aqui.
    cabeçote) está **sem abraçadeira de aquecimento e sem manta térmica**; o que há em volta é o garfo azul onde
    o papel é aplicado, à frente da matriz — **a distância não dá para medir nessas fotos**, então quem fabricar o
    colar mede na máquina. Então o colar pode ser abraçado ali, sem tirar nada de lugar. **Atenção a
-   um item só:** aparece um **cano curto, de Ø ~25 mm, apontando para baixo** na borda dessa faixa (fotos
-   14.08.53 e 14.08.531) — ver §10.3.
+   um item só:** na borda dessa faixa (fotos 14.08.53 e 14.08.531) aparece uma peça curta de Ø ~25 mm apontando
+   para baixo, e eu perguntei o que era. **Resposta dele: é alça de ferro.** Não é tubo, não tem furo, não drena
+   nada — é ponto de pega para manusear o cabeçote. Para o colar isso é detalhe de projeto, não obstáculo: a
+   abraçadeira precisa de um **recorte para passar a alça** (ou terminar antes dela), e o pano encharcado (opção
+   A) pode continuar passando por cima sem problema nenhum.
 3. **Aqui eu errei, e ele corrigiu: os manômetros ficam longe do cabeçote.** Na primeira versão desta §10 escrevi
    que o mostrador de 0 a 150 °C estava "no corpo, logo atrás do flange da matriz" e que ele servia de régua para
    o teste da §7. Remedi a foto 14.08.53 com grade de coordenadas por cima da imagem: o mostrador está no **corpo
@@ -276,8 +279,10 @@ usada aqui.
   dele é outro: se hoje o cabeçote não tem instrumento nem aquecedor, o teste das três velocidades pode ser rodado
   **sem mexer em nada do processo**, e o `T_limiar` que sair dali é o primeiro número de temperatura de matriz que
   esta máquina já deu.
-* **Item da §6 que ganha detalhe:** o colar (opção C) tem que **terminar antes do cano de Ø ~25** e **não pode
-  estorvar o garfo onde o papel é aplicado**. Faixa útil provável: da face do flange azul para trás, na parte lisa do corpo.
+* **Item da §6 que ganha detalhe:** o colar (opção C) tem que **dar um recorte na alça de ferro** (o item de
+  Ø ~25 mm na frente da faixa — ele confirmou que é alça, não tubo) **ou terminar antes dela**, e **não pode
+  estorvar o garfo onde o papel é aplicado**. Faixa útil provável: da face do flange azul para trás, na parte lisa
+  do corpo. A alça **não** atrapalha a opção A (pano/gotejador), que é só envolver e não precisa fechar.
 * **Hipótese que eu levantei e ele derrubou (registrada para ninguém ressuscitar):** eu escrevi que a tira do
   vídeo encostava no fio do furo e que, se a manta corresse descentrada, a quina raspava no furo do nariz — o que
   daria ao serrilhado uma causa mecânica além da térmica. **Resposta dele: "ignore isso, é resquício de manta
@@ -297,6 +302,8 @@ usada aqui.
    EX-030** — a palavra "água" não aparece uma vez no arquivo de medição do cabeçote. Então a refrigeração **não
    está escondida na máquina esperando um mangueira**: ela tem de ser criada, e o colar da §6-C (abraçado, sem
    furar nada) continua o caminho mais curto até isso.
+   *E ele respondeu o que é a peça: **alça de ferro** de manuseio — sem furo, sem função no processo. Fecha a
+   pergunta, e o único efeito prático é o recorte na abraçadeira (§10.2).*
 2. **O cabeçote é aquecido hoje, ou só recebe calor da adjunta de trás?** É a pergunta que a correção do item 3
    abriu, e a única que pode mudar o plano sem fabricar nada.
 3. ~~O branco da bobina é tecido laminado ou filme de transporte?~~ **Respondido por ele: papel siliconado, e a

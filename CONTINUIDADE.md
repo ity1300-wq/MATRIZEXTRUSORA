@@ -779,7 +779,12 @@ linha do tempo.
   Ø ~25** na frente da faixa foi fechada pelo desenho, não pela foto: `04_/cabecote_ex030.json` (lido do DWG
   030-032) dá no cabeçote quatro furos coaxiais e **um único furo transversal** — o M12 do bolso (Ø10,50 de
   broca, centro a 72,02 mm da face do nariz, Z 22,98 na matriz), pelo qual o pushador expulsa a matriz. **Não há
-  camisa d'água no EX-030**: a refrigeração não está escondida na máquina, tem de ser criada. **Corrigido na mesma rodada, por ele:**
+  camisa d'água no EX-030**: a refrigeração não está escondida na máquina, tem de ser criada. E a última
+  pergunta que eu tinha aberto sobre a foto foi respondida por ele no fim da rodada: a peça de Ø ~25 mm é
+  **"alça de ferro"** — pega de manuseio do cabeçote, sem furo e sem função no processo; o único efeito prático é
+  o **recorte na abraçadeira** para ela passar (§10.2). Continua aberta, e é a que importa, a pergunta sobre o
+  cabeçote ser ou não aquecido hoje (ele tem abraçadeira/termopar, ou só recebe calor da adjunta de trás?).
+  **Corrigido na mesma rodada, por ele:**
   o par de rolos de aço nus com fuso e mola + bobina de material branco que eu tinha lido como **puxador** é a
   **estação de papel siliconado**, e **a manta sai da matriz e entra na esteira**. Então **não há puxador
   fechando ciclo de estiramento**, a pendência da 7ª continua do jeito que estava (linha sem puxador ⇒ inchaço

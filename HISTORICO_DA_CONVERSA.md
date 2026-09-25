@@ -154,6 +154,10 @@ Legenda: `sha` = commit na branch `continue`. `01_`…`08_` = `01_CAD_MatrizJona
 
 ## Onde estamos agora (estado desta rodada)
 
+0. **Fechado no fim da rodada, por ele:** a peça curta de Ø ~25 mm na frente da faixa sem tinta é **alça de
+   ferro** — pega de manuseio do cabeçote, não tubo e não dreno. Só muda o desenho da abraçadeira (recorte para a
+   alça passar). A pergunta que continua do lado dele, e é a que pode mudar o plano sem fabricar nada: **o
+   cabeçote é aquecido hoje, ou só recebe calor da adjunta de trás?**
 1. A matriz oficial para a fábrica continua a **v30** (pacote `08_Pacote_Usinagem_v30`, tag `v30.0-oficial-pacote-usinagem`,
    zip 588.274 B, sha `0738c468…`) — **nenhuma cota foi tocada por causa do serrilhado**; nenhuma forma nova foi cortada.
 2. O que a linha mostrou: defeito cresce com **tempo e velocidade** e some quando a matriz é resfriada. Isso é
