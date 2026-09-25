@@ -175,13 +175,20 @@ O ponto alcançável mais quente e mais ligado a ela é a **face do nariz do cab
 
 ## 9. Pendências desta rodada
 
-1. A banda Ø130 × 42,00 do cabeçote está **livre** hoje, ou está tomada pelas abraçadeiras de aquecimento e
-   pelos termopares? Isto decide se o colar (item C) pode ser feito ou se vai só o pano (A).
-2. Quantos °C a cabeça de aquecimento está hoje, e em que faixa de Z ela está ligada? Baixar a zona
-   dianteira é meia resposta sem fabricar nada.
-3. O que a máquina tem de água: torneira com tanque, ou torre/anel de água correndo? (define A e C.)
-4. Continuam valendo da 8ª: `T_limiar` com o teste das três velocidades, o giro de 180° da matriz antes de
-   cortar, a resposta sobre existir puxador, e a área real da amostra (para devolver a densidade medida).
+*Atualizadas depois das fotos dele (§10): das quatro perguntas que eu tinha aberto, três foram respondidas pela
+própria máquina — a banda está **livre** (item 1), **não existe água** no cabeçote (item 3, e a linha de água
+passa a ser serviço novo, pequeno) e **não existe puxador** (o que eu tinha lido como puxador é a estação de
+papel siliconado; a manta sai da matriz e entra na esteira). Sobram as de baixo — e a do `T_limiar` agora usa o
+mostrador que já existe, não um termômetro comprado.*
+
+1. **O que é o cano curto (Ø ~25 mm) apontando para baixo** na faixa sem tinta da frente do cabeçote? Se for
+   respiro/dreno de camisa, a refrigeração já existe fundida na máquina e o trabalho é ligar uma mangueira.
+2. **A que °C o mostrador de 0-150 fica em produção**, e em que faixa ele é mantido? Baixar a zona dianteira é
+   meia resposta sem fabricar nada.
+3. **O rolo de papel siliconado fica encostado em parte quente?** Afastá-lo é de graça e é a única coisa na linha
+   que hoje toca a face da manta logo depois da boca.
+4. Continuam valendo da 8ª: `T_limiar` com o teste das três velocidades (100/80/60 %), o giro de 180° da matriz
+   antes de cortar, e a área real da amostra (para eu devolver a densidade medida).
 
 ---
 
@@ -208,13 +215,14 @@ marcada como hipótese.
 ### 10.1 O que aparece, e o que isso fecha
 
 1. **A boca enterrada está confirmada.** Na ponta do cabeçote aparece uma **face plana de aço sem tinta com um
-   furo redondo**, e é por esse furo que a chapa passa (vídeo, ~22 s: há uma tira cinza atravessada no furo,
-   com a borda picotada, — aparentemente resto de material — a máquina estava parada). **Nenhuma boca de matriz
-   aparece fora do cabeçote.** É exatamente o que a medição do CAD deu: face da matriz em Z 80,70 contra a face
+   furo redondo**, e é por esse furo que a chapa passa. No vídeo (~22 s) há uma tira cinza atravessada ali, e
+   **ele respondeu o que é: resquício de manta velha**, com a máquina parada — não é produto em processo e não
+   vale como evidência. **Nenhuma boca de matriz aparece fora do cabeçote.** É exatamente o que a medição do CAD deu: face da matriz em Z 80,70 contra a face
    do nariz em Z 95,00, e um túnel Ø80,00 × 14,00 mm na frente.
 2. **A faixa onde eu propus o colar d'água está livre.** A faixa de aço sem tinta na ponta (o corpo do
-   cabeçote) está **sem abraçadeira de aquecimento e sem manta térmica**; o que há em volta é o garfo azul do
-   puxador, uns 15–20 cm à frente. Então o colar pode ser abraçado ali, sem tirar nada de lugar. **Atenção a
+   cabeçote) está **sem abraçadeira de aquecimento e sem manta térmica**; o que há em volta é o garfo azul onde
+   o papel é aplicado, à frente da matriz — **a distância não dá para medir nessas fotos**, então quem fabricar o
+   colar mede na máquina. Então o colar pode ser abraçado ali, sem tirar nada de lugar. **Atenção a
    um item só:** aparece um **cano curto, de Ø ~25 mm, apontando para baixo** na borda dessa faixa (fotos
    14.08.53 e 14.08.531) — ver §10.3.
 3. **Não precisa comprar termômetro de infravermelho.** Existe um **mostrador redondo de 0 a 150 °C (classe 1)**
@@ -224,11 +232,16 @@ marcada como hipótese.
    de aperto tipo prensa-cabo (conduíte)**, não por conexão de água; não há torneira, mangueira de água nem
    dreno no conjunto da matriz. Ou seja: se a opção C (colar d'água) for escolhida, a linha de água é trabalho
    novo — mas pequeno: 1 L/min, §5.
-5. **Existe puxador, e existe tecido/filme.** À frente da matriz há um **par de rolos de aço nus** num garfo azul
-   com fuso de ajuste e mola, e uma **bobina de material branco** (tecido ou filme) guiada por roletes de nylon
-   que chega nesse par. Isso **fecha a pendência do puxador** que eu tinha aberto na 7ª: a linha puxa a manta, e
-   o swelling não é livre. Consequência prática: a flecha do sorriso não precisa ser limitada em 2,2 mm por falta
-   de puxador, e o "esticar no puxador" é variável de processo real.
+5. **O que eu li como puxador é a estação de papel — e a manta vai para a esteira.** Correção dada por ele nesta
+   rodada: a primeira versão desta §10 dizia "existe puxador", e estava errado. O que aparece: um **par de rolos de aço nus** num garfo azul com fuso e mola, e uma **bobina de papel
+   siliconado** guiada por roletes de nylon. **A manta sai da matriz e entra na esteira**, com o papel aplicado
+   sobre ela. O que muda:
+   * **não há puxador fechando ciclo de estiramento.** Então volta a valer o que estava na 7ª: o inchaço acontece
+     livre depois da boca. O teto de 2,20 mm que usei para a flecha do sorriso — justificado por "sem puxador" —
+     **continha**, e eu retiro a frase que escrevi na primeira versão desta seção dizendo que ele caía.
+   * papel siliconado é **papel de liberação**, não tecido colado: ele cobre uma face da manta logo na saída. É
+     um contato de resfriamento que já existe na linha, de graça. **Não li nas fotos a que temperatura papel e
+     rolos chegam** e não vou deduzir isso de pixel — mas é regulável: ver a pergunta 4 da §10.3.
 6. **O que controla a rosca é inversor.** O painel tem keypad WEG com "ajuste de velocidade", botão de esteira e
    alerta; o outro painel (caixa bege na plataforma) tem chave rotativa e um controlador digital — presumo ser
    o de temperatura. Isso importa para o teste da §7.4: baixar a velocidade em 80/60 % é só mexer no keypad, e
@@ -241,12 +254,15 @@ marcada como hipótese.
   saber a diferença entre o mostrador e a boca, aí sim um IR (ou termopar de contato) na face da matriz numa
   parada — e a calibração fica para sempre.
 * **Item da §6 que ganha detalhe:** o colar (opção C) tem que **terminar antes do cano de Ø ~25** e **não pode
-  estorvar o garfo do puxador**. Faixa útil provável: da face do flange azul para trás, na parte lisa do corpo.
-* **Um risco que a foto 14.08.531 levanta e que eu não vou afirmar:** a tira cinza que aparece no furo redondo
-  está encostando na borda do furo em um lado. Se a manta correr descentrada, a quina raspa no fio do furo do
-  nariz. **Isso não é conclusão — é uma checagem de 30 segundos:** vídeo da saída com a máquina em produção, e
-  se a manta encostar no furo, o serrilhado tem uma segunda causa (mecânica) além da térmica. Medido no CAD, o
-  espaço é 2,50 mm por lado.
+  estorvar o garfo onde o papel é aplicado**. Faixa útil provável: da face do flange azul para trás, na parte lisa do corpo.
+* **Hipótese que eu levantei e ele derrubou (registrada para ninguém ressuscitar):** eu escrevi que a tira do
+  vídeo encostava no fio do furo e que, se a manta corresse descentrada, a quina raspava no furo do nariz — o que
+  daria ao serrilhado uma causa mecânica além da térmica. **Resposta dele: "ignore isso, é resquício de manta
+  velha, é filme papel siliconado, a manta sai da matriz e entra na esteira".** A peça do vídeo não é produto em
+  processo. A folga medida no CAD (2,50 mm por lado) continua sem contra-evidência, e o diagnóstico da 8ª
+  permanece com as duas causas dele: tração na borda e saturação térmica. É a segunda vez nesta conversa que
+  pixel de mídia da máquina vira afirmação de processo — a regra fica: **mídia da máquina parada não prova nada
+  sobre o que acontece na saída.**
 
 ### 10.3 As perguntas que sobraram (agora são três, todas de resposta curta)
 
@@ -254,5 +270,8 @@ marcada como hipótese.
    dreno de camisa, **a refrigeração que eu propus já existe fundida na máquina** e o trabalho passa a ser ligar
    uma mangueira nela — que é outro patamar de custo. Se for alça de girar, ignora.
 2. **A que °C o mostrador de 0-150 fica com a linha em produção**, e em que faixa ele é mantido hoje?
-3. **O branco que vem na bobina é tecido a ser laminado na manta ou filme de transporte?** (muda o quanto o par
-   de rolos segura a borda, e é a única peça da linha que hoje toca a manta depois da matriz.)
+3. ~~O branco da bobina é tecido laminado ou filme de transporte?~~ **Respondido por ele: papel siliconado, e a
+   manta sai da matriz e entra na esteira.**
+4. Uma nova, e é a única pergunta de foto que ainda vale: **o rolo de papel siliconado fica encostado em alguma
+   parte quente da máquina?** Se ficar, o papel chega quente e a face da manta que ele cobre não esfria nada na
+   saída — e afastar o rolo é de graça.

@@ -770,15 +770,22 @@ linha do tempo.
   fora ⇒ **confirma visualmente a boca enterrada de 14,30 mm e o túnel Ø80 × 14,00**. A faixa sem tinta está
   **livre de abraçadeira de aquecimento e de manta térmica** (dá para abraçar o colar ali), há um **mostrador
   0-150 °C classe 1** rosqueado no corpo atrás do flange (não precisa de IR para o teste), **não há água** no
-  conjunto (as mangueiras pretas entram por prensa-cabo, são conduíte), e **existe puxador**: par de rolos de
-  aço nus com fuso e mola, mais bobina de material branco guiada por roletes de nylon ⇒ **fecha a pendência do
-  puxador da 7ª** (o swelling não é livre, e o teto de 2,2 mm por falta de puxador cai). Na máquina parada o
+  conjunto (as mangueiras pretas entram por prensa-cabo, são conduíte). **Corrigido na mesma rodada, por ele:**
+  o par de rolos de aço nus com fuso e mola + bobina de material branco que eu tinha lido como **puxador** é a
+  **estação de papel siliconado**, e **a manta sai da matriz e entra na esteira**. Então **não há puxador
+  fechando ciclo de estiramento**, a pendência da 7ª continua do jeito que estava (linha sem puxador ⇒ inchaço
+  livre ⇒ o teto de 2,20 mm da flecha do sorriso **continha**, e a frase que eu escrevi dizendo que ele caía foi
+  retirada do documento). O que a estação de papel deixa como oportunidade: o papel cobre uma face da manta logo
+  na saída — contato de resfriamento que já existe de graça, e que só funciona se o rolo não estiver encostado
+  em parte quente (pergunta nova, §10.3.4 dele). Na máquina parada o
   mostrador marca ~25-30 °C, então **nenhuma temperatura de processo foi lida nas fotos** — regra que eu me dei
   depois do erro do disco de corte: foto responde o que está onde, não como o processo roda.
-* e uma checagem que **não é conclusão**, escrita como checagem: no vídeo (~22 s) a tira cinza no furo redondo
-  encosta na borda do furo de um lado. Se a manta correr descentrada, a quina raspa no fio do furo do nariz e o
-  serrilhado ganha uma causa mecânica além da térmica. Custo da checagem: 30 s de vídeo da saída em produção. No
-  CAD o espaço é 2,50 mm por lado.
+* e uma hipótese minha que **ele derrubou**: eu tinha levantado que a tira vista no furo redondo do vídeo (~22 s)
+  encostava no fio do furo, o que daria ao serrilhado uma causa mecânica (raspo) além da térmica. Resposta dele:
+  *"ignore isso, é resquício de manta velha"*. A mídia é da máquina parada, não do processo. Fica registrada como
+  hipótese encerrada — **é a segunda vez nesta conversa** (a primeira foi o "disco de corte", 4ª rodada) que um
+  pixel de máquina vira afirmação de processo na minha mão. A regra do §10 do relatório do contato vale para as
+  duas: **mídia da máquina parada não prova nada sobre o que acontece na saída.**
 * publicação: `03_/RESFRIAMENTO_MATRIZ_COPO_2026-09-25.md` (novo, com a §10 das fotos), `HISTORICO_DA_CONVERSA.md`
   (novo) e este bloco. **Nenhuma cota tocada; pacote, DXF, zip, CHECKSUMS e a tag seguem intocados** (`80167f2`);
   `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.
