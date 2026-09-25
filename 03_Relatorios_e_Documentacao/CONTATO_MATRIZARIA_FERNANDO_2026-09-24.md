@@ -75,6 +75,42 @@ uma ferramenta para virar a matriz no cabeçote". (E ele corrige: "melhor, são 
 passantes".) **Não confundir com furo de fixação**: a nossa interface continua collete EX-031 + degrau, sem
 furo, sem flange — e isso não está em discussão por causa dessa foto.
 
+## 3b. O que as fotos embutidas no PDF mostram (extraídas e abertas nesta rodada)
+
+O PDF traz 13 imagens embutidas (`pypdf` as extraiu em resolução real, até 1500 × 1500 px; em
+`/home/user/tmp/pdfimg/` na sandbox, descartável). Abri as cinco que importam para a decisão. **É leitura de
+olho em fotografia com perspectiva: nenhum número abaixo é medição, e nenhum pode virar cota** - serve para
+saber o que copiar quando a escolha for o caminho A.
+
+* **IMG-11 (a matriz velha, lado das costas) - e aqui está o recurso 1 dele em forma física:** um disco de aço
+  plano, **sem degrau, sem chanfro, sem land**, com um **rebaixo retangular de cantos arredondados fresado em
+  volta da fenda**, do comprimento da própria fenda, raso e corrido (não são duas bolhas nas pontas: é uma
+  janela larga e rasa atrás da fenda). A fenda em si é corte reto com as duas pontas arredondadas. É o
+  "recurso de casa" de que ele falou: tirando material atrás, abre-se passagem onde falta pressão.
+* **IMG-10 (a mesma matriz, face de saída):** disco com cara de corte a maçarico/plasma e superfície
+  oxidada; a fenda passa no diâmetro e **os dois furos redondos estão nesta mesma face, acima da fenda,
+  simétricos em torno do centro** - batem com a explicação dele de que servem para encaixar uma ferramenta e
+  virar a matriz no cabeçote. **Não** são furo de fixação nem de fluxo, e o nosso desenho continua sem furo
+  nenhum.
+* **IMG-08 (a matriz montada no cabeçote):** o disco está **afundado dentro de um copo com assento cônico**,
+  com uma câmara anelar em volta e a fenda bem abaixo da borda do cabeçote. É outro arranjo de interface - na
+  nossa v30 a face de saída fica **rasante ao nariz** (protrusão 0,00 mm, collete EX-031 + degrau). Nada a
+  mudar por causa da foto, mas fica registrado que a matriz que ele descreve não é montada como a nossa.
+* **IMG-06 (a amostra com defeito):** a chapa de mástique cinza tem **denteado fino e periódico nas duas
+  bordas longas** e, na face, umas **crestas transversais periódicas** - as "ondinhas". O denteado é igualzinho
+  nas duas bordas, o que é a assinatura de um corte, não de fluxo.
+* **E os dois quadros que o PDF guarda do vídeo de 9,7 s mostram o corte de acabamento:** um **disco girando
+  encostado na borda** do perfil, com a borda serrilhada exatamente no ponto de contato do disco - e a
+  superfície do perfil no mesmo quadro é **lisa**. O resumo do próprio documento diz "o perfil saindo da matriz
+  com borda lateral serrilhada", mas **nenhum dos dois quadros representativos mostra a saída da matriz**.
+
+Consequência prática, e ela é barata: **antes de mexer na geometria da matriz, confira o disco/faca de corte da
+linha** (fio do disco, rotação contra velocidade de linha, pressão, alinhamento) e veja o vídeo completo em
+`midia_extraida/VID-20260924-WA0011.mp4`, que está no repo `ity1300-wq/ACESS`. Se o serrilhado da borda vier do
+corte, a matriz nova não vai tirar isso da peça, e a conversa sobre "freio no centro" fica só para o ondulado do
+centro. Isto é hipótese levantada por foto, não diagnóstico - quem elimina é o teste na linha, em 20 minutos,
+sem usinar nada.
+
 ## 4. O que este repositório já tinha (e o que a conversa fez agora)
 
 * O **DXF cotado da matriz** existia desde a rodada de 24/09 (`08_/MATRIZ_V30_DESENHO_COTADO.dxf`, A3, 1:1, mm,
@@ -107,8 +143,14 @@ nasce de projeto + medição, não de chute.
 
 ## 6. Pendências, com dono
 
-1. **Fernando → Engenharia**: foto/exemplo do rebaixo nas costas (combinado "amanhã", 25/09) e, se sobrar
-   tempo, o desenho da opção "sorriso".
+0. **Engenharia, antes de qualquer usinagem**: testar o disco/faca de corte da linha e ver o vídeo
+   completo (`VID-20260924-WA0011.mp4`, no repo `ACESS`). Os únicos dois quadros do vídeo que o PDF embute
+   são o disco cortando a borda serrilhada, e as duas bordas da amostra têm o mesmo denteado (§3b). Fecha
+   com um "não é o corte" por escrito; aí sim a matrizes entra como causa única.
+1. **Fernando → Engenharia**: foto/exemplo do rebaixo nas costas (combinado "amanhã", 25/09) - já vista aqui
+   (§3b, IMG-11): é rebaixo retangular raso e corrido atrás da fenda, não duas cavidades nas pontas - e, se
+   sobrar tempo, o desenho da opção "sorriso". Faltam as **cotas** do rebaixo (profundidade, largura, distância
+   da fenda), que foto nenhuma dá: quem mede é ele, ou é com paquímetro na peça dele.
 2. **Engenharia → Fernando**: responder qual caminho (A ou B); se B, mandar o **DXF** (AC1015 para CAD antigo,
    AC1024 se o CAD dele for recente) junto com a folha de material, e pedir a cotação da v30 que ele já se
    dispôs a fazer.
@@ -149,4 +191,7 @@ nasce de projeto + medição, não de chute.
   triângulos. As outras seis são do mesmo lote de 11–12/09 (três Chrome, três Visualizador) e não foram
   abertas uma a uma. **Nada nelas acrescenta ou contraria cota da matriz**, e nenhuma é a foto da matriz velha
   com o rebaixo nas costas: IMG-10/IMG-11 estão no repo `ity1300-wq/ACESS` (`midia_extraida/`), e é essa foto
-  que falta para reproduzirmos internamente o recurso 1 do §3.
+  que falta para reproduzirmos o recurso 1 com medida - porque a foto reduzida do PDF mostra o rebaixo, não
+  o dimensiona (§3b). As 13 imagens embutidas no próprio PDF foram extraídas com `pypdf` e as cinco relevantes,
+  vistas: IMG-06, IMG-08, IMG-10, IMG-11 e os dois quadros do vídeo. O que elas mostram está no §3b; o que elas
+  **não** mostram é qualquer cota legível, e nada delas entrou em JSON, tabela ou desenho.
