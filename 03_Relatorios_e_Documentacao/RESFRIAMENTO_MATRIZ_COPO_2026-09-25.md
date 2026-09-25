@@ -73,6 +73,10 @@ As três consequências, todas medidas:
   **32,8 W**. O teto da rodada 8ª (simulação do pacote, 203,6 bar) foi **305 W**.
 - Com esse calor preso: **33 W sobem o lábio 20 °C em 8,7 min**; **300 W em 0,95 min**. Isso é o sintoma dele:
   sai boa no começo, e "aos poucos, quando acelera a produção, vai enchendo de calor".
+- **Leia a linha de cima como teto, não como previsão** (corrigido nesta rodada, §11.1): ela vale só se o calor
+  não tiver por onde sair. Tem. Com a massa entrando 0,9 °C mais fria que a matriz, a própria manta leva os 32,8 W
+  embora (§6-D). Então o "enchendo de calor" não é o canal gerando mais do que o canal exporta — é o **bloco do
+  cabeçote ensopando de calor vindo de trás**, que é o que a §11 mede agora.
 
 ## 4. Os caminhos que o calor tem — e o gargalo de verdade
 
@@ -160,8 +164,12 @@ O ponto alcançável mais quente e mais ligado a ela é a **face do nariz do cab
 3. Regra operacional: **segurar a face em `T_limiar − 10 °C`** com o pano ou com o colar, ligando e desligando.
 4. Confirmação do mecanismo: tempo até o primeiro dente em 100 / 80 / 60 % da velocidade. Se escalar
    ~1× / 2,0× / 4,6× (o escalonamento 1/v³ da rodada 8ª), é aquecimento viscoso mandando, e o colar resolve.
-5. Não congele demais: o lábio frio sobe a pressão e impede a casca de soldar no R 0,75 — alvo 10–25 °C
-   abaixo da cabeça de aquecimento, não água gelada contínua.
+   Se **não** escalar assim — se depender mais do tempo de máquina ligada do que da velocidade — é o bloco
+   ensopando (§11.1), e aí o remédio não é esfregar menos, é **segurar a temperatura do cabeçote**.
+5. Não congele demais: o lábio frio sobe a pressão e impede a casca de soldar no R 0,75 — não água gelada
+   contínua. **O "10–25 °C abaixo da cabeça de aquecimento" que eu tinha escrito aqui não tem o que referenciar:
+   ele confirmou que o cabeçote não tem abraçadeira (§11).** A referência passa a ser **o °C da adjunta que o
+   mostrador de trás mede** — que não é a temperatura da matriz, mas é o teto de onde ela vem.
 
 ## 8. O que isto tem a ver com o serrilhado (e o que não tem)
 
@@ -181,10 +189,10 @@ passa a ser serviço novo, pequeno) e **não existe puxador** (o que eu tinha li
 papel siliconado; a manta sai da matriz e entra na esteira). E o `T_limiar` **precisa** de instrumento comprado:
 o mostrador de 0-150 °C das fotos está no corpo de trás, não no cabeçote (§10.1.3). Sobram as de baixo.*
 
-1. **O cabeçote é aquecido hoje, ou só recebe calor da adjunta de trás?** Nas cinco fotos e no vídeo a faixa sem
-   tinta do cabeçote está **sem abraçadeira de aquecimento, sem manta térmica e sem instrumento**. Se na máquina
-   quente for igual, a temperatura da matriz hoje **não é medida nem controlada por ninguém**, e "baixar a zona
-   dianteira" nem é opção — porque não existe zona dianteira.
+1. ~~O cabeçote é aquecido hoje?~~ **Respondido por ele: "NÃO TEM".** A pergunta deixou de ser pendência e virou
+   o §11 inteiro: sem aquecedor, sem instrumento e sem isolamento, o cabeçote é 12,327 kg subindo livremente com
+   **0,254 W/K** de perda para o ar, e isso bate com a escala de tempo do defeito (§11.1). A ação que sobra dele
+   é o teste de seis leituras da §11.3.
 2. ~~O cano curto na frente da faixa~~ — **fechado duas vezes, e a segunda por ele.** Primeiro pelo desenho: o
    EX-030 não tem camisa d'água nem dreno (§10.3.1). Depois pela resposta dele: **"alça de ferro"**. Não muda
    nada no plano da refrigeração — muda um detalhe da abraçadeira, que é o recorte por onde a alça passa.
@@ -304,10 +312,78 @@ usada aqui.
    furar nada) continua o caminho mais curto até isso.
    *E ele respondeu o que é a peça: **alça de ferro** de manuseio — sem furo, sem função no processo. Fecha a
    pergunta, e o único efeito prático é o recorte na abraçadeira (§10.2).*
-2. **O cabeçote é aquecido hoje, ou só recebe calor da adjunta de trás?** É a pergunta que a correção do item 3
-   abriu, e a única que pode mudar o plano sem fabricar nada.
+2. ~~O cabeçote é aquecido hoje?~~ **Fechada por ele: "NÃO TEM".** Foi a resposta que abriu a §11: o cabeçote não
+   tem abraçadeira, não tem termopar e está sem isolamento — a perda dele para o ar é 0,254 W/K e é só isso que
+   limita a subida.
 3. ~~O branco da bobina é tecido laminado ou filme de transporte?~~ **Respondido por ele: papel siliconado, e a
    manta sai da matriz e entra na esteira.**
 4. Uma nova, e é a única pergunta de foto que ainda vale: **o rolo de papel siliconado fica encostado em alguma
    parte quente da máquina?** Se ficar, o papel chega quente e a face da manta que ele cobre não esfria nada na
    saída — e afastar o rolo é de graça.
+
+---
+
+## 11. "Não tem abraçadeira" — o que a resposta dele muda, com o cabeçote re-medido agora
+
+Ele respondeu a pergunta da §9.1: **o cabeçote não tem abraçadeira de aquecimento.** Nem termopar, nem
+isolamento — a faixa está de aço nu, como já aparecia nas fotos. Isso não é um detalhe da máquina: é o motivo
+pelo qual o defeito tem hora. Números abaixo cortados agora, no STEP da montagem
+(`06_CAD_Cabecote_EX-030/STEP/Cabecote_EX-030_com_Matriz_Copo.step`), fatiando o sólido do cabeçote entre os
+planos Z indicados (Z = 0 no plano traseiro, face do nariz em Z 95,00).
+
+### 11.1 O cabeçote é um radiador pequeno, encostado numa adjunta quente, sem ninguém olhando
+
+| o que | valor medido |
+|---|---|
+| metal solto da faixa livre (Z 53→95) | 296.625,3 mm³ = **2,329 kg**, C = **1.131,7 J/K** |
+| nariz sozinho (Z 81→95) | 115.453,5 mm³ = 0,906 kg, C = 440,5 J/K |
+| cabeçote inteiro | 1.570.339,5 mm³ = **12,327 kg**, C = **5.991,0 J/K** |
+| área exposta (faixa Ø130 × 42,00 + anel da face Ø80→Ø130) | **25.399,8 mm²** = 0,0254 m² |
+| perda só para o ar, h ≈ 10 W/m²K | **0,254 W por 1 K** (com radiação, h ≈ 15: 0,381 W/K) |
+| para jogar fora os 32,8 W do land assim | a faixa teria de estar **129 K acima da sala** |
+
+**Conclusão 1 — o atrito não é o disparador do "com o tempo piora".** O calor gerado na fenda tem saída barata:
+a própria manta levando embora 37,5 W por 1 °C. Um **0,9 °C** de diferença entre a matriz e a massa que entra já leva os
+32,8 W. O "+20 °C em 8,7 min" da §3 é teto adiabático (nada saindo), não previsão — rebaixado lá.
+
+**Conclusão 2 — sobra uma explicação, e ela bate com a escala de tempo dele.** O cabeçote está recebendo calor
+de trás (junta do flange Ø220 e contato com a adjunta aquecida) e a única coisa que ele tem para perder é
+**0,254 W/K de ar**. A constante de tempo dessa faixa é 1.131,7 ÷ 0,254 = **4.455 s = 74 min**. Comparação que
+decide: o pior caso do atrito na matriz é 8,7 min; o bloco perdendo só para o ar é 74 min — **8× mais lento**, e
+é a ordem de grandeza que ele descreve ("depois de um tempo enche de calor"). Sem aquecedor, sem instrumento e
+sem isolamento, **ninguém vê isso acontecer e nada limita**: é um corpo de 12,3 kg subindo livremente durante
+meia jornada, e a matriz está enterrada nele.
+
+**Por que esfregar pano no nariz funciona rápido, medido:** a matriz está ligada ao nariz por um filme de massa
+de 0,30 mm, R = **0,194 K/W** (§4). Segurar a **face do nariz 6,4 K abaixo da matriz** já exporta os 32,8 W
+inteiros por ali. É um ΔT de 6 °C — não precisa de água gelada nem de chiller, e é por isso que a §7 manda medir
+a face e não a boca.
+
+### 11.2 O que NÃO fazer, agora com o motivo
+
+* **Não encapar o cabeçote com manta térmica e não pôr abraçadeira de aquecimento nele.** A faixa de aço nu é a
+  **única** perda que existe entre a adjunta quente e o ar. Cortar 0,254 W/K empurra a matriz para cima — é o
+  contrário do que o defeito pede. (Isso não vale para a adjunta de trás: ali o aquecimento é controlado e é
+  onde se mexe na regulagem.)
+* **Não baixar a vazão de massa fria como primeira alavanca** (§6-D): cada °C a menos na entrada vale 37,5 W, é
+  a alavanca mais forte que existe, e o preço é a pressão já alta e a casca soldando pior no R 0,75 — que é
+  justamente onde a manta arrebenta.
+* **Não contar com o mostrador de trás como se fosse a matriz** (§10.1.3): ele mede a adjunta.
+
+### 11.3 O teste que fecha a questão, com um IR de R$ 100 e zero usinagem
+
+Partida fria, velocidade travada num ponto, mesma regulagem a manhã inteira. **Seis leituras na face do nariz do
+cabeçote** (o anel Ø80→Ø130, Z 95,00) aos 0 / 10 / 20 / 40 / 60 / 90 min, e ao lado o °C do mostrador da adjunta.
+
+* **Se a face do nariz sobe monotonicamente** e o primeiro dente de serra aparece sempre no mesmo °C ⇒ é o bloco
+  ensopando. O remédio é **segurar** (pano/gotejador na faixa, faca de ar na manta, e o set-point = esse °C
+  menos 10), e a **geometria não é culpada dessa parte** do defeito. Nesse caso o número que sai do teste é a
+  primeira especificação térmica que esta matriz nunca teve, e ele vale para as três Jonatha também.
+* **Se a face do nariz estiver chata** e o dente vier do mesmo jeito ⇒ não é térmico, e a bola volta para a
+  **rev. 31** (freio no centro + alívio nas costas dos extremos + o gota no extremo), que é o que a matrizaria já
+  ofereceu e é o caminho do serrilhado nas pontas.
+* **Se T(face) subir junto com o mostrador da adjunta** a mesma subida, a fonte é a adjunta e o serviço é
+  baixar a zona dianteira dela — meia resposta, sem fabricar nada.
+
+Anotar em cada leitura, junto do °C: espessura nos cinco pontos e o **comprimento da faixa sem tinta** na
+ponta (§9.4). Sem esse par (°C × defeito) o número de `T_limiar` não vira regulagem.

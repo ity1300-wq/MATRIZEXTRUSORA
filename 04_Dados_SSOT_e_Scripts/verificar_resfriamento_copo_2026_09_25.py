@@ -95,6 +95,42 @@ for tag,aleg in [('Cabecote_EX-030_com_Matriz_Jonatha_v30',0.00),('Cabecote_EX-0
     T=list(cq.importers.importStep('06_CAD_Cabecote_EX-030/STEP/%s.step'%tag).solids().vals())
     d2=[s for s in T if s.Volume()<1e6][0]; h2=[s for s in T if s.Volume()>1e6][0]
     chk('protrusao da boca, '+tag[-3:],d2.BoundingBox().zmax-h2.BoundingBox().zmax,aleg,1e-3 if aleg else 1e-9) if aleg else print('%-52s medido %.3f  no doc %.3f  (rasa)'%('protrusao da boca, '+tag[-3:],d2.BoundingBox().zmax-h2.BoundingBox().zmax,aleg))
+# 14. SS11 - "o cabecote nao tem abracoadeira": fatiar o STEP e conferir os numeros da secao nova
+from OCP.BRepPrimAPI import BRepPrimAPI_MakeBox
+from OCP.BRepAlgoAPI import BRepAlgoAPI_Common
+from OCP.GProp import GProp_GProps
+from OCP.BRepGProp import BRepGProp
+from OCP.gp import gp_Pnt
+def _props(sh,i):
+    pr=GProp_GProps()
+    (BRepGProp.VolumeProperties_s if i==0 else BRepGProp.SurfaceProperties_s)(sh,pr)
+    return pr.Mass()
+def _slice(z0,z1):
+    bx=BRepPrimAPI_MakeBox(gp_Pnt(-200.0,-200.0,float(z0)),400.0,400.0,float(z1-z0)).Shape()
+    c=BRepAlgoAPI_Common(head.wrapped,bx); c.Build(); return c.Shape()
+Vf=_props(_slice(53.0,95.0),0); Vh=_props(_slice(0.0,95.0),0)
+chk('SS11 massa da faixa Z53-95 (kg)',Vf*RHO_ACO,2.329,2e-3)
+chk('SS11 C da faixa (J/K)',Vf*RHO_ACO*CP_ACO,1131.7,2e-3)
+chk('SS11 C do cabecote inteiro (J/K)',Vh*RHO_ACO*CP_ACO,5991.0,2e-3)
+Aexp=math.pi*130.0*42.0+8246.7
+chk('SS11 area exposta faixa+face (mm2)',Aexp,25399.8,1e-3)
+G=10.0*Aexp/1e6
+chk('SS11 perda natural (W por 1 K)',G,0.254,0.01)
+chk('SS11 deltaT para jogar 32,8 W fora',32.8/G,129.1,0.01)
+chk('SS11 tau da faixa (min)',1131.7/G/60.0,74.0,0.01)
+chk('SS11 deltaT no filme de 0,30 mm (K)',32.8*0.194,6.36,0.01)
+chk('SS11 resfriamento da massa que paga 32,8 W (C)',32.8/37.5,0.875,0.01)
+_txt=open('03_Relatorios_e_Documentacao/RESFRIAMENTO_MATRIZ_COPO_2026-09-25.md',encoding='utf-8').read()
+for _f,_q in [("doc: massa do cabecote 12,327 kg","12,327 kg"),
+              ("doc: C da faixa 1.131,7","1.131,7 J/K"),
+              ("doc: 0,254 W por 1 K","0,254 W por 1 K"),
+              ("doc: 129 K acima da sala","129 K acima da sala"),
+              ("doc: 74 min de constante de tempo","74 min"),
+              ("doc: 6,4 K na face do nariz","6,4 K"),
+              ("doc: ele respondeu NAO TEM",'Respondido por ele: "NÃO TEM"'),
+              ("doc: teto adiabatico rebaixado","teto adiabático")]:
+    chk(_f,1.0 if _q in _txt else 0.0,1.0,0.0)
+
 # 13. 9a rodada, parte 4: a pergunta do "cano com dreno" foi fechada pelo DWG, nao pela foto
 import json as _js
 _hc=_js.load(open('04_Dados_SSOT_e_Scripts/cabecote_ex030.json'))

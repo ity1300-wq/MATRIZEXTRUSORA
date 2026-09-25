@@ -782,8 +782,21 @@ linha do tempo.
   camisa d'água no EX-030**: a refrigeração não está escondida na máquina, tem de ser criada. E a última
   pergunta que eu tinha aberto sobre a foto foi respondida por ele no fim da rodada: a peça de Ø ~25 mm é
   **"alça de ferro"** — pega de manuseio do cabeçote, sem furo e sem função no processo; o único efeito prático é
-  o **recorte na abraçadeira** para ela passar (§10.2). Continua aberta, e é a que importa, a pergunta sobre o
-  cabeçote ser ou não aquecido hoje (ele tem abraçadeira/termopar, ou só recebe calor da adjunta de trás?).
+  o **recorte na abraçadeira** para ela passar (§10.2). **E a pergunta do aquecimento ele respondeu no mesmo dia: "NÃO TEM"** — o cabeçote não tem
+  abraçadeira, nem termopar, nem isolamento. Fatiando o sólido do cabeçote no STEP agora: faixa Z 53→95 =
+  296.625,3 mm³ = **2,329 kg, C = 1.131,7 J/K**; cabeçote inteiro 12,327 kg, C = 5.991,0 J/K; área exposta
+  (faixa + anel da face) **25.399,8 mm²**; perda para o ar **0,254 W por 1 K** — para ele jogar fora os 32,8 W do
+  land por conta própria a faixa teria de estar **129 K acima da sala**. Duas conclusões, e a primeira vai contra
+  o que eu escrevi na 8ª: (i) o atrito **não** é o disparador do "com o tempo piora" — a manta leva os 32,8 W
+  embora com 0,9 °C de diferença, e o "+20 °C em 8,7 min" era teto adiabático (rebaixado na §3 do relatório);
+  (ii) sobra o **bloco ensopando de calor vindo da adjunta**, com constante de tempo de **74 min** na faixa —
+  8× mais lento que o pior caso do atrito e da ordem de grandeza do sintoma dele, e ninguém vê porque não há
+  instrumento ali. Por isso o pano funciona: segurar a **face do nariz 6,4 K abaixo da matriz** exporta os 32,8 W
+  pelo filme de 0,30 mm (R 0,194 K/W). Consequência contrainuitiva registrada: **não encapar o cabeçote com
+  manta térmica, não pôr aquecedor nele** — a faixa nua é a única perda que existe entre a adjunta e o ar. O
+  teste que decide é a §11.3: seis leituras de IR na face do nariz aos 0/10/20/40/60/90 min de partida fria.
+  Se T sobe e o dente aparece sempre no mesmo °C, é térmico e o remédio é segurar; se a face fica chata e o
+  dente vem, a bola volta para a rev. 31.
   **Corrigido na mesma rodada, por ele:**
   o par de rolos de aço nus com fuso e mola + bobina de material branco que eu tinha lido como **puxador** é a
   **estação de papel siliconado**, e **a manta sai da matriz e entra na esteira**. Então **não há puxador
