@@ -813,6 +813,29 @@ linha do tempo.
   hipótese encerrada — **é a segunda vez nesta conversa** (a primeira foi o "disco de corte", 4ª rodada) que um
   pixel de máquina vira afirmação de processo na minha mão. A regra do §10 do relatório do contato vale para as
   duas: **mídia da máquina parada não prova nada sobre o que acontece na saída.**
+* **Correção de rumo pedida por ele, no fim da 9ª (ele: *"você está viajando… precisamos resolver o serrilhado da
+  manta, objetivo primordial"*).** Saiu `03_/REVALORACAO_FOCO_SERRILHADO_2026-09-25.md`, escrito como um
+  avaliador novo, e a roda foi re-medida no STEP com código novo (`04_/medir_alivio_pontas.py`, varredura de
+  ponto em sólido; e `04_/verificar_revaloracao_serrilhado_2026_09_25.py`, **28 conformes / 0 divergentes**).
+  O que a medição derrubou e o que ela pôs no lugar:
+  - **nenhuma** das três matrizes tem alívio/rebaixo nas pontas (Copo, v30 e **Gedeon CERTA** — inclusive a
+    que ele diz que dá certo): boca 1,50 em todas as estações, de ±0 a ±36,60. Cai a frase "o recurso dele é o
+    alívio nas costas" como *causa* do bom funcionamento da Gedeon.
+  - o que a Gedeon tem, medido: **fenda cortada atravessando a peça** (entra em Z 0,17, vira paralela em
+    Z 20,98, sai em Z 109,00) ⇒ **88,00 mm de land** e a fenda alimentada **ao longo dos 75,00 mm num plano só**.
+    Preço: **193 bar** a 2,187 bar/mm com Q = 15.000 mm³/s. Deficit implied pela mesma δR da copo: **1,7 %**
+    contra **14,3 %** da copo e **12,3 %** da v30.
+  - o que a v30 tem de pior que a copo, medido a 11 mm atrás da boca na ponta: **1,52 mm** de canal (a boca,
+    sem abrir nada) contra **18,90 mm** da copo. Ou seja, no eixo do serrilhado a v30 andou para trás. Fernando
+    estava certo, e agora isso é número, não opinião de matrizaria.
+  - a aritmética que ordena tudo: δR (resistência extra fixa nas pontas, calibrada no perfil medido por ele =
+    **1,50 mm equivalentes de land**) ÷ resistência total = fração que vira defeito. Alongar o land não muda
+    δR, dilui. Saídas possíveis, e só duas: **alimentar a fenda ao longo do comprimento** (sem pagar pressão)
+    ou **comprar land** (31,60 mm → 4,5 % e 69 bar; 52,70 mm → 2,7 % e 115 bar).
+  - **o que fica estacionado**: todo o fio da refrigeração/cabeçote/manômetro dos itens anteriores — não
+    apagado, mas rebaixado a *paliativo que muda a hora em que rasga, não a quantidade de material na ponta*.
+  - primeiro passo, grátis e dele: **medir a manta da Gedeon nos mesmos 5 pontos** (e girar 180° a matriz, e
+    medir o passo das ondinhas com régua). É o único experimento que decide A×B sem usinar nada.
 * publicação: `03_/RESFRIAMENTO_MATRIZ_COPO_2026-09-25.md` (novo, com a §10 das fotos), `HISTORICO_DA_CONVERSA.md`
   (novo) e este bloco. **Nenhuma cota tocada; pacote, DXF, zip, CHECKSUMS e a tag seguem intocados** (`80167f2`);
   `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.

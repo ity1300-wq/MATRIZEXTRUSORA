@@ -154,6 +154,13 @@ Legenda: `sha` = commit na branch `continue`. `01_`…`08_` = `01_CAD_MatrizJona
 
 ## Onde estamos agora (estado desta rodada)
 
+0. **Correção de rumo (25/09, fim da rodada):** ele disse que eu estava viajando e reafirmou o alvo —
+   **o serrilhado nas duas bordas da manta**. Reavaliação completa, escrita como avaliador novo, em
+   `03_/REVALORACAO_FOCO_SERRILHADO_2026-09-25.md`, com as três matrizes re-medidas no STEP. Resultado em uma
+   linha: **nenhuma delas tem alívio nas pontas** (nem a Gedeon CERTA), e a diferença da Gedeon é ser
+   **alimentada ao longo dos 75,00 mm num plano só** com **88,00 mm de land** (193 bar) — deficit implied
+   1,7 % contra 14,3 % da copo e 12,3 % da v30. Refrigeração passa a constar como paliativo estacionado.
+   Primeiro passo, grátis, do lado dele: **medir a manta da Gedeon nos mesmos 5 pontos**.
 0. **Fechado no fim da rodada, por ele:** a peça curta de Ø ~25 mm na frente da faixa sem tinta é **alça de
    ferro** — pega de manuseio do cabeçote, não tubo e não dreno. Só muda o desenho da abraçadeira (recorte para a
    alça passar). A pergunta que continua do lado dele, e é a que pode mudar o plano sem fabricar nada: **o
