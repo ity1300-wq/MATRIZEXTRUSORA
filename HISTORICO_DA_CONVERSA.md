@@ -158,6 +158,12 @@ Legenda: `sha` = commit na branch `continue`. `01_`…`08_` = `01_CAD_MatrizJona
    ferro** — pega de manuseio do cabeçote, não tubo e não dreno. Só muda o desenho da abraçadeira (recorte para a
    alça passar). A pergunta que continua do lado dele, e é a que pode mudar o plano sem fabricar nada: **o
    cabeçote é aquecido hoje, ou só recebe calor da adjunta de trás?**
+0b. **E ele respondeu o que faltava: o cabeçote NÃO TEM abraçadeira de aquecimento** (nem termopar, nem
+   isolamento). Isso abriu a §11 do plano de resfriamento e mudou o diagnóstico: 12,327 kg de aço com **0,254
+   W/K** de perda para o ar e constante de tempo de **74 min** na faixa — o "sai boa e depois piora" é o bloco
+   ensopando de calor vindo da adjunta, não o atrito da fenda (a manta leva os 32,8 W embora com 0,9 °C). Não
+   encapar, não aquecer; medir a face do nariz com IR (6,4 K abaixo da matriz já exporta o calor todo); e o teste
+   das seis leituras aos 0/10/20/40/60/90 min decide entre "segurar temperatura" e "rev. 31".
 1. A matriz oficial para a fábrica continua a **v30** (pacote `08_Pacote_Usinagem_v30`, tag `v30.0-oficial-pacote-usinagem`,
    zip 588.274 B, sha `0738c468…`) — **nenhuma cota foi tocada por causa do serrilhado**; nenhuma forma nova foi cortada.
 2. O que a linha mostrou: defeito cresce com **tempo e velocidade** e some quando a matriz é resfriada. Isso é
