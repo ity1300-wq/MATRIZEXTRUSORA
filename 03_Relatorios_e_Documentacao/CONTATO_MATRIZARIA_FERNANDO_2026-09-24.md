@@ -141,6 +141,11 @@ face traseira** (recurso 1 dele), deixando margem para abrir/fechar as extremida
 muda a folha e o STEP (nova cota, nova revisão) — não fiz nada nesse sentido: só você decide, e aí a cota
 nasce de projeto + medição, não de chute.
 
+**Avaliação técnica completa desta seção, com os números do próprio repo (uniformidade 52,3% no land, núcleo ±5%,
+τ 160,9 kPa contra o limiar de 140 kPa, +141% de ΔP do cabide de verdade), está em
+`AVALIACAO_V30_X_FLUXO_2026-09-25.md` — incluindo onde o Fernando está certo, onde a comparação dele é injusta e
+o que nenhum modelo deste repositório é capaz de responder.
+
 ## 6. Pendências, com dono
 
 0. **Engenharia, antes de qualquer usinagem**: testar o disco/faca de corte da linha e ver o vídeo
