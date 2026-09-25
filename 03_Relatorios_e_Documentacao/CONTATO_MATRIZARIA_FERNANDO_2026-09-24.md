@@ -98,18 +98,23 @@ saber o que copiar quando a escolha for o caminho A.
   mudar por causa da foto, mas fica registrado que a matriz que ele descreve não é montada como a nossa.
 * **IMG-06 (a amostra com defeito):** a chapa de mástique cinza tem **denteado fino e periódico nas duas
   bordas longas** e, na face, umas **crestas transversais periódicas** - as "ondinhas". O denteado é igualzinho
-  nas duas bordas, o que é a assinatura de um corte, não de fluxo.
-* **E os dois quadros que o PDF guarda do vídeo de 9,7 s mostram o corte de acabamento:** um **disco girando
-  encostado na borda** do perfil, com a borda serrilhada exatamente no ponto de contato do disco - e a
-  superfície do perfil no mesmo quadro é **lisa**. O resumo do próprio documento diz "o perfil saindo da matriz
-  com borda lateral serrilhada", mas **nenhum dos dois quadros representativos mostra a saída da matriz**.
+  nas duas bordas, e **sai assim da matriz** (confirmado por ele, 25/09): é falta de material chegando às pontas,
+  que o centro mais rápido rasga - não é um defeito de acabamento posterior.
+* **Os dois quadros que o PDF guarda do vídeo de 9,7 s não são a linha dele, e eu errei ao lê-los.** Ampliados
+  (recorte ampliado, gerado na sandbox e descartavel), eles mostram uma **lâmina/disco de metal encostado numa tira clara,
+  de borda esfiapada** - material **branco**, enquanto a manta de mastique nas fotos ao lado é **cinza-chumbo**.
+  Eu tinha concluído dali que o serrilhado vinha do corte de acabamento. **Conclusão retirada**, com a resposta
+  dele na régua: *"que disco de corte? não tem disco de corte nenhum, a manta sai serrilhada da matriz"*.
 
-Consequência prática, e ela é barata: **antes de mexer na geometria da matriz, confira o disco/faca de corte da
-linha** (fio do disco, rotação contra velocidade de linha, pressão, alinhamento) e veja o vídeo completo em
-`midia_extraida/VID-20260924-WA0011.mp4`, que está no repo `ity1300-wq/ACESS`. Se o serrilhado da borda vier do
-corte, a matriz nova não vai tirar isso da peça, e a conversa sobre "freio no centro" fica só para o ondulado do
-centro. Isto é hipótese levantada por foto, não diagnóstico - quem elimina é o teste na linha, em 20 minutos,
-sem usinar nada.
+Consequência, agora sem a hipótese do corte: **o serrilhado é da saída da matriz, e é a matriz que conserta.**
+Rasgo de borda por **desequilíbrio** (falta vazão nas pontas, o centro arrasta e rasga) é exatamente o que freio
+no centro / alívio nas pontas / "sorriso" fazem - os três recursos que ele ofereceu. Isto é diferente de
+fratura de superfície por excesso de cisalhamento (*sharkskin*), essa sim pouco sensível ao canal: ver
+`AVALIACAO_V30_X_FLUXO_2026-09-25.md` §5, que foi reescrito por causa desta correção. O que ainda vale dos
+"20 minutos grátis" é **assistir ao vídeo completo no trecho em que a chapa sai da matriz**
+(`midia_extraida/VID-20260924-WA0011.mp4`, no repo `ity1300-wq/ACESS`) e **medir com régua o espaçamento das
+ondinhas do centro** - se o período bater com o passo da rosca, uma parte do defeito é pulsação da extrusora, e
+freio nenhum resolve essa parte.
 
 ## 4. O que este repositório já tinha (e o que a conversa fez agora)
 
@@ -148,10 +153,10 @@ o que nenhum modelo deste repositório é capaz de responder.
 
 ## 6. Pendências, com dono
 
-0. **Engenharia, antes de qualquer usinagem**: testar o disco/faca de corte da linha e ver o vídeo
-   completo (`VID-20260924-WA0011.mp4`, no repo `ACESS`). Os únicos dois quadros do vídeo que o PDF embute
-   são o disco cortando a borda serrilhada, e as duas bordas da amostra têm o mesmo denteado (§3b). Fecha
-   com um "não é o corte" por escrito; aí sim a matrizes entra como causa única.
+0. **Engenharia, antes de qualquer usinagem**: o **freio na matriz em uso**, que é o teste que decide se a
+   causa é equilíbrio de fluxo (§5, caminho A). A pendência que estava aqui - "caçar o disco de corte da linha" -
+   foi **retirada em 25/09** por erro meu: os quadros do vídeo embutidos no PDF não são da linha dele (§3b).
+   O que sobra do teste grátis é ver o vídeo no trecho da saída da matriz e medir o período das ondinhas.
 1. **Fernando → Engenharia**: foto/exemplo do rebaixo nas costas (combinado "amanhã", 25/09) - já vista aqui
    (§3b, IMG-11): é rebaixo retangular raso e corrido atrás da fenda, não duas cavidades nas pontas - e, se
    sobrar tempo, o desenho da opção "sorriso". Faltam as **cotas** do rebaixo (profundidade, largura, distância

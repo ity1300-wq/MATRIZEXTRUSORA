@@ -62,20 +62,20 @@ centro e o caminho longo da borda, que é um efeito de coletor 3D). Então:
 * **a única coisa que fecha essa questão é CFD 3D com o mastique medido, que você mesmo adiou em 22/09** (CFD
   adiado, decisão registrada). Sem isso, o que se decide abaixo é por risco e custo, não por simulação.
 
-## 5. Dois números que a v30 não muda, e que a conversa não tocou
+## 5. O que a matriz pode e o que ela não pode (corrigido em 25/09, depois da resposta dele)
 
-1. **τ na parede na saída: 160,9 kPa, e o limiar que o projeto adota é 140 kPa** (`masti_epdm_reologia.py`).
-   Para um fluido em regime, `τ_parede` no land depende de **vazão por unidade de largura e da folga** — não do
-   comprimento do land nem da forma do funil. Como a peça é 1,50 mm de espessura e a linha é a mesma,
-   **nenhuma matriz nova derruba o τ**: o que mexe nele é vazão da linha, temperatura da matriz/fundido e aids de
-   processo. Isso vale para a v30 e para o "sorriso" dele igualmente.
-2. **Serrilhado de borda ≠ *sharkskin*.** Na foto da amostra (IMG-06 do PDF) o denteado é **idêntico nas duas
-   bordas longas** — assinatura de faca/disco; e os dois quadros do vídeo que o PDF embute mostram um **disco
-   girando encostado na borda**, com a superfície do perfil lisa ao lado (`03_/CONTATO_MATRIZARIA_FERNANDO_2026-09-24.md`, §3b). Se o
-   denteado vem do corte ou da puxada, **matriz nenhuma resolve**, e a v30 seria fabricada para "não ter
-   funcionado" injustamente. As "ondinhas" no centro são outra coisa (aí sim, fluxo/pulsação) — e crista
-   transversal periódica é também a assinatura de pulsação da rosca, que se trata com tela/filtro, não com
-   land.
+1. **Onde eu errei, e é boa notícia.** Eu tinha escrito que "nenhuma matriz derruba o rasgo de borda" e apoiado
+   isso numa foto de vídeo com um disco de corte. **Não existe disco de corte, e a manta sai serrilhada da
+   matriz** - dito por ele, que é quem vê. Retiro o argumento: **rasgo de borda por desequilíbrio é conserto de
+   matriz**, e é exatamente o que o freio no centro, o alívio nas costas e o "sorriso" fazem.
+2. **O que o argumento do τ continua valendo, mas só para uma parte.** τ na parede no land = 160,9 kPa (tabela do
+   `avaliacao_matriz3_uniformidade.py`) e o limiar de fratura que o projeto adota é 0,14 MPa. Num canal reto, o τ
+   local depende da **vazão por mm de largura** e da folga. Ou seja: **a forma do funil não mexe no τ, mas a
+   distribuição de vazão na largura mexe** - e é isso que o freio/alívio ajusta. Conclusão honesta: o centro
+   trabalha acima do limiar e as pontas abaixo, com q nas bordas a 23 % do núcleo. O gradiente é o defeito.
+3. **Ondinhas do centro ≠ serrilhado da borda.** Podem ter causas diferentes: a crista transversal periódica é a
+   assinatura de pulsação da rosca (tela/filtro/temperatura), e aí matriz nenhuma resolve essa parte. Medir o
+   espaçamento com régua e comparar com o passo da rosca leva 5 minutos e separa as duas causas.
 
 ## 6. Onde o veredito dele é injusto com a v30
 
@@ -90,16 +90,16 @@ matriz.
 
 | # | ação | o que decide | custo |
 |---|---|---|---|
-| 0 | Medir o período das cristas e comparar com o passo da rosca (régua na manta, 5 min) e ver o vídeo completo do corte | é fluxo, é pulsação ou é o disco de corte? | zero |
+| 0 | Régua no espaçamento das ondinhas (5 min) e o vídeo completo no trecho da saída da matriz | o que é desequilíbrio (matriz resolve) e o que é pulsação da rosca (não resolve) | zero |
 | 1 | **Freio na matriz que está em uso** (a oferta dele: cantoneira/disco) | se a manta melhora com freio no centro, **a causa é equilíbrio** e a v30 sem freio não resolveria mesmo | o menor que existe; reversível |
 | 2 | Se (1) ajudar: **rev. 31 = v30 + janela de alívio na face traseira** | mantém peça única e sem junta no fluxo, e devolve o "recurso de bancada" que ele diz ser impossível num corpo cônico | desenho novo, mesma fabricação |
 | 3 | Em paralelo, pedir a cotação da v30 como está, **com a ressalva escrita de que ela não promete equilíbrio** | preço e prazo reais para decidir com número | zero |
 | 4 | Só depois disto, CFD 3D (o que ficou adiado) para dimensionar asas decrescentes | se vale pagar o +141 % de ΔP que o D3 mediu | o caro, e mexe no dimensionamento da extrusora |
 
-**Recomendação:** não mandar fabricar a v30 como "cura do serrilhado" agora. Mande como **fabricação da matriz
-limpa de peça única** se você quer o ganho da junta zerada de qualquer forma — mas feche primeiro o passo 0 e o
-passo 1, porque são dias e quase nada de dinheiro, e eles é que dizem se a geometria de canal merece +40 % de
-usinagem. E se o caminho for "freio", prefiro a **rev. 31 com alívio na traseira** ao corpo cônico seco: é o
+**Recomendação (com a correção acima):** o serrilhado da borda **é** de matriz, e a v30 como está não trata dele.
+Então o caminho não é "fabricar a v30 e ver no que dá" - é **fazer o teste do freio na matriz em uso** (passo 1,
+barato e reversível) e, dando certo, **fabricar a rev. 31 já com o freio/alívio embutido**. A v30 sem isso passa
+a ser só a matriz limpa: vale pela junta zerada e pela purga, não pelo defeito que tirou o sono. E se o caminho for "freio", prefiro a **rev. 31 com alívio na traseira** ao corpo cônico seco: é o
 único jeito de não ficar sem recurso depois, que é exatamente o medo que ele formulou.
 
 ## 8. Correção que eu devo ao próprio repositório
