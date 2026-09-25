@@ -184,6 +184,11 @@ land 8,500 + chanfro 1,500 × 45°, lâmina 0,750, 3,586 kg, abertura da biparti
   é 14,00 mm.
 * *"está demorando muito seu retorno"* ⇒ prancha e portão só rodam quando há mexida real; verificação CAD
   completa uma vez antes do push; números vindos de cache são marcados como não re-medidos.
+* *"Entrei em contato com rapaz para fazer a matriz e essa foi a conversa, sempre atualize o GitHub"*
+  (25/09, com o PDF `TRANSCRICAO-matrizaria-COM-IMAGENS.pdf`) ⇒ lida por inteiro e registrada em
+  `03_/CONTATO_MATRIZARIA_FERNANDO_2026-09-24.md`. **A matrizaria disse que o canal em funil da v30 não
+  equilibra o fluxo do mastique e que "a matriz nunca dá para garantir"; os 4 recursos que ele propõe e a
+  decisão A/B que ele abriu estão lá.** Nenhuma cota foi tocada por causa da conversa - decisão é dele.
 
 ## 7. Becos fechados — não re-cave (custaram dias)
 
@@ -277,6 +282,18 @@ land 8,500 + chanfro 1,500 × 45°, lâmina 0,750, 3,586 kg, abertura da biparti
    foi removido do repo em setembro e **voltou rastreado** em 2026-09-13, com a rodada de "tire as travas":
    os 4 arquivos estão em `06_/STEP/estudos/` no git, e recria com
    `python3 04_Dados_SSOT_e_Scripts/gerar_cabecote_ex030.py --com-m12`.
+6. **Caminho do equilíbrio de fluxo (aberto em 24/09 pela matrizaria, decisão dele).** Fecha com um "A" ou um
+   "B" no `03_/CONTATO_MATRIZARIA_FERNANDO_2026-09-24.md` §5: **A** = pôr freio na matriz que está em uso hoje
+   (caminho que ele chama de mais barato, e a foto do rebaixo nas costas que ele prometeu manda o exemplo);
+   **B** = fabricar a v30 com canal de fluxo mesmo com ele declarando que não garante - e aí vale perguntar se
+   ele orça junto o rebaixo de ajuste na face traseira, que é o "recurso" que ele diz ser impossível depois de
+   cônico. Se a resposta for "refaça o desenho com o freio", isso é revisão nova (cota medida no STEP, SSOT,
+   pacote, tag) - não se faz de ouvido.
+7. **Enviar o DXF ao Fernando.** Ele pediu DXF/DWG em 24/09 10:01 e até hoje ninguém mandou (o Jonatha só
+   respondeu "esses arquivos são .STEP"). Fecha anexando `MATRIZ_V30_DESENHO_COTADO_AC1015.dxf` (CAD velho) ou
+   `MATRIZ_V30_DESENHO_COTADO.dxf` (AC1024) + o `_PREVIEW.pdf`, com o texto pronto no §7 do relatório de
+   contato. Cuidado: **isso não entra no zip nem move a tag**; e o NDA continua pendente de assinatura mesmo
+   com os STEP já no celular dele.
 
 ## 9. Como ler o histórico
 
@@ -596,3 +613,41 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   do `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` (lista explícita de arquivos, não glob), então CHECKSUMS segue com 13
   arquivos, o zip `0738c468…` não se moveu, a tag `v30.0-oficial-pacote-usinagem` está em `80167f2` e os dois
   anexos de cada release (quatro no total) batem com o disco - conferido via API `releases` no fim da rodada.
+
+**Rodada 2026-09-25 — a conversa com a matrizaria lida, registrada, e o DXF ganhou gêmeo AC1015.**
+
+* veio o PDF `TRANSCRICAO-matrizaria-COM-IMAGENS.pdf` (13 pág., 58 mensagens, 22.687 caracteres extraídos com
+  `pypdf` e lidos por inteiro). Registrado em `03_/CONTATO_MATRIZARIA_FERNANDO_2026-09-24.md`, que separa o que
+  é **fato de chat** (texto literal) do que é **áudio transcrito por whisper** e do que é **legenda de IA sobre
+  foto** - o próprio documento avisa que as descrições de imagem não são medição, e de fato uma delas diz
+  "JONATHA V2.0" no nosso desenho: **não existe v2.0**, é má leitura do `v27.0` (conferido nos geradores).
+* o que a fábrica disse, em uma linha cada: **não abriu os STEP no celular** e pediu DWG/DXF; a matriz dele fez
+  a que está em uso e o defeito é **desequilíbrio de fluxo** (pressão no centro, compactação de menos nas
+  pontas); "o projeto de vocês não vai resolver"; "a matriz nunca dá para garantir, porque não é o molde";
+  "se não der certo não tem recurso, não tem como pôr um freio porque está cônico"; e a alternativa mais barata
+  dele: **freio na matriz atual**, depois peça nova certificada. Os 4 recursos (rebaixo nas costas, cantoneira,
+  "bolacha" de disco, perfil "sorriso") estão descritos no §3 do relatório com a implicação de cada um.
+* conferido antes de escrever qualquer coisa: os três `.STEP` que ele recebeu **são os do pacote publicado**
+  (mesmos nomes, 97.198 / 85.455 / 151.083 bytes, shas da tabela do e-mail curto) e **são ASCII**
+  `ISO-10303-21` - 0 byte não-ASCII, `head -c 22` = `ISO-10303-21;\nHEADER;`. Ou seja: "fonte binária" foi o
+  visualizador do telefone. Isso estava escrito no e-mail como "Se eles preferirem CAD a PDF"; agora o pedido é
+  explícito, e o bloco do e-mail foi reescrito com os dois DXF e a frase para ele.
+* **`DXF_SERIE=R2000` no gerador do desenho** produz o gêmeo da mesma folha em AutoCAD 2000 (`AC1015`), para
+  CAD de oficina: `08_/MATRIZ_V30_DESENHO_COTADO_AC1015.dxf` (67.519 B) e o da v29 (67.533 B), sem preview
+  próprio (a folha é idêntica; o `_PREVIEW.*` da série principal serve). A trava que fiz para isso: o primeiro
+  gêmeo saiu **reprovado** porque em AC1015 o ezdxf escapa todo acento (`\U+00D8`) e a cota lida no round-trip
+  deixava de bater com o JSON - 1 de 8 conferidas. Correção no `novo_doc()`: `$DWGCODEPAGE = ANSI_1252` +
+  `doc.saveas(..., encoding="cp1252")`, que escreve `Ø` (0xD8) e `±` (0xB1) como byte simples, do jeito que CAD
+  velho espera. Depois: `audit()` 0 erros, **8/8 cotas conferidas**, 0 etiquetas sobrepostas, e verificado no
+  binário que não sobrou `\U+` nenhum.
+* nada de publicação se moveu, e foi decisão consciente: o `.dxf`/previews ficam **fora** do
+  `PACOTE_MATRIZ_V30_PARA_ENVIO.zip`, então CHECKSUMS segue em 13 arquivos, o zip `0738c468…`/`d6966b14…` não
+  mudou, a tag `v30.0-oficial-pacote-usinagem` continua em `80167f2` e os dois anexos de cada release batem com
+  o disco. Detalhe que a régua de 12 bytes me obrigou a ver: **regenerar o DXF muda o arquivo mesmo sem mudar a
+  folha** (o cabeçalho do ezdxf grava `$TDCREATE` com hora, e o `_PREVIEW.pdf` do matplotlib carrega metadados),
+  então o `.dxf`/PDF publicados foram **revertidos ao que está no git** em vez de commitados de novo por
+  churn - só entraram os dois AC1015 novos, o gerador e os documentos.
+* armadilha de ambiente que repetiu: `ezdxf`/`pypdf` **não sobrevivem ao snapshot** (`pip install --quiet
+  ezdxf pypdf` de novo no começo da rodada) e os **symlinks das pastas de CAD somem** (`git checkout HEAD --
+  01_CAD_MatrizJonatha_Oficial 02_CAD_Modelos_Historicos` antes de rodar o portão, senão ele morre em
+  `FileNotFoundError` no STEP).
