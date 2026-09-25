@@ -182,3 +182,77 @@ O ponto alcançável mais quente e mais ligado a ela é a **face do nariz do cab
 3. O que a máquina tem de água: torneira com tanque, ou torre/anel de água correndo? (define A e C.)
 4. Continuam valendo da 8ª: `T_limiar` com o teste das três velocidades, o giro de 180° da matriz antes de
    cortar, a resposta sobre existir puxador, e a área real da amostra (para devolver a densidade medida).
+
+---
+
+## 10. O que as fotos da máquina respondem (repo `ity1300-wq/ACESS`, 25/09 14:08)
+
+Ele mandou ver o repo `ACESS` — seis fotos e um vídeo da extrusora. Lidas uma a uma, com as sete mídias
+baixadas e conferidas por sha256. **Procedência** (o arquivo fica no repo dele; a cópia local está em
+`/home/user/uploads/ACESS_2026-09-25/`, que não é versionada):
+
+| arquivo | bytes | sha256 (16 primeiros) |
+|---|---|---|
+| `WhatsApp Image 2026-09-25 at 14.08.52.jpeg` | 123.600 | `d79c7707ba13acae` |
+| `WhatsApp Image 2026-09-25 at 14.08.53.jpeg` | 115.007 | `aa009a98e66acbc6` |
+| `WhatsApp Image 2026-09-25 at 14.08.531.jpeg` | 125.383 | `7bfb59b74a92abba` |
+| `WhatsApp Image 2026-09-25 at 14.08.54.jpeg` | 78.476 | `80d7641f777f9977` |
+| `WhatsApp Image 2026-09-25 at 14.08.542.jpeg` | 106.625 | `09508b24f2b7b8e0` |
+| `WhatsApp Image 2026-09-25 at 5.jpeg` | 67.229 | `e8116319be8f0181` |
+| `WhatsApp Video 2026-09-25 at 14.08.52.mp4` | 7.731.854 | `ee4a17a249b9efb5` |
+
+**Regra que eu mesmo me dei depois do erro do disco de corte:** foto responde *o que está onde*; foto não
+responde *como o processo roda*. Tudo abaixo está escrito como "aparece na foto", e onde há dedução ela está
+marcada como hipótese.
+
+### 10.1 O que aparece, e o que isso fecha
+
+1. **A boca enterrada está confirmada.** Na ponta do cabeçote aparece uma **face plana de aço sem tinta com um
+   furo redondo**, e é por esse furo que a chapa passa (vídeo, ~22 s: há uma tira cinza atravessada no furo,
+   com a borda picotada, — aparentemente resto de material — a máquina estava parada). **Nenhuma boca de matriz
+   aparece fora do cabeçote.** É exatamente o que a medição do CAD deu: face da matriz em Z 80,70 contra a face
+   do nariz em Z 95,00, e um túnel Ø80,00 × 14,00 mm na frente.
+2. **A faixa onde eu propus o colar d'água está livre.** A faixa de aço sem tinta na ponta (o corpo do
+   cabeçote) está **sem abraçadeira de aquecimento e sem manta térmica**; o que há em volta é o garfo azul do
+   puxador, uns 15–20 cm à frente. Então o colar pode ser abraçado ali, sem tirar nada de lugar. **Atenção a
+   um item só:** aparece um **cano curto, de Ø ~25 mm, apontando para baixo** na borda dessa faixa (fotos
+   14.08.53 e 14.08.531) — ver §10.3.
+3. **Não precisa comprar termômetro de infravermelho.** Existe um **mostrador redondo de 0 a 150 °C (classe 1)**
+   rosqueado no corpo azul, logo atrás do flange da matriz. Ele é a régua do teste da §7. Nas fotos ele marca
+   ~25–30 °C, ou seja, **máquina fria**: nenhuma temperatura de processo pode ser lida nessas imagens.
+4. **Não há água no cabeçote.** As mangueiras pretas que aparecem em cima dos corpos azuis entram por **cupom
+   de aperto tipo prensa-cabo (conduíte)**, não por conexão de água; não há torneira, mangueira de água nem
+   dreno no conjunto da matriz. Ou seja: se a opção C (colar d'água) for escolhida, a linha de água é trabalho
+   novo — mas pequeno: 1 L/min, §5.
+5. **Existe puxador, e existe tecido/filme.** À frente da matriz há um **par de rolos de aço nus** num garfo azul
+   com fuso de ajuste e mola, e uma **bobina de material branco** (tecido ou filme) guiada por roletes de nylon
+   que chega nesse par. Isso **fecha a pendência do puxador** que eu tinha aberto na 7ª: a linha puxa a manta, e
+   o swelling não é livre. Consequência prática: a flecha do sorriso não precisa ser limitada em 2,2 mm por falta
+   de puxador, e o "esticar no puxador" é variável de processo real.
+6. **O que controla a rosca é inversor.** O painel tem keypad WEG com "ajuste de velocidade", botão de esteira e
+   alerta; o outro painel (caixa bege na plataforma) tem chave rotativa e um controlador digital — presumo ser
+   o de temperatura. Isso importa para o teste da §7.4: baixar a velocidade em 80/60 % é só mexer no keypad, e
+   o tempo até o dente pode ser cronometrado com o painel na mão.
+
+### 10.2 Correção que as fotos fazem no meu plano
+
+* **Item da §7 que muda:** eu tinha escrito "compre um IR e aponte na face do nariz". Não precisa: use o
+  mostrador que já está no corpo, atrás do flange, e marque o valor no instante do primeiro dente. Se ele quiser
+  saber a diferença entre o mostrador e a boca, aí sim um IR (ou termopar de contato) na face da matriz numa
+  parada — e a calibração fica para sempre.
+* **Item da §6 que ganha detalhe:** o colar (opção C) tem que **terminar antes do cano de Ø ~25** e **não pode
+  estorvar o garfo do puxador**. Faixa útil provável: da face do flange azul para trás, na parte lisa do corpo.
+* **Um risco que a foto 14.08.531 levanta e que eu não vou afirmar:** a tira cinza que aparece no furo redondo
+  está encostando na borda do furo em um lado. Se a manta correr descentrada, a quina raspa no fio do furo do
+  nariz. **Isso não é conclusão — é uma checagem de 30 segundos:** vídeo da saída com a máquina em produção, e
+  se a manta encostar no furo, o serrilhado tem uma segunda causa (mecânica) além da térmica. Medido no CAD, o
+  espaço é 2,50 mm por lado.
+
+### 10.3 As perguntas que sobraram (agora são três, todas de resposta curta)
+
+1. **O que é o cano curto que aponta para baixo na faixa sem tinta na frente do cabeçote?** Se for respiro ou
+   dreno de camisa, **a refrigeração que eu propus já existe fundida na máquina** e o trabalho passa a ser ligar
+   uma mangueira nela — que é outro patamar de custo. Se for alça de girar, ignora.
+2. **A que °C o mostrador de 0-150 fica com a linha em produção**, e em que faixa ele é mantido hoje?
+3. **O branco que vem na bobina é tecido a ser laminado na manta ou filme de transporte?** (muda o quanto o par
+   de rolos segura a borda, e é a única peça da linha que hoje toca a manta depois da matriz.)

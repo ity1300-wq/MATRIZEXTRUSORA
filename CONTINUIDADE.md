@@ -764,8 +764,23 @@ linha do tempo.
   entrada de ar, espaçador para protruir.
 * **arquivo novo, por ordem dele:** `HISTORICO_DA_CONVERSA.md` na raiz — linha do tempo leve de toda a conversa
   (11/09 até aqui), **uma entrada por rodada**, atualizada e publicada a cada interação. A regra entrou no §12.
-* publicação: `03_/RESFRIAMENTO_MATRIZ_COPO_2026-09-25.md` (novo), `HISTORICO_DA_CONVERSA.md` (novo) e este
-  bloco. **Nenhuma cota tocada; pacote, DXF, zip, CHECKSUMS e a tag seguem intocados** (`80167f2`);
+* **acréscimo da mesma rodada, com as fotos dele no repo `ity1300-wq/ACESS`** (6 JPEG + 1 MP4 de 25/09 14:08,
+  baixados e conferidos por sha256; vídeo lido em quadros com ffmpeg do `imageio-ffmpeg`): a ponta do cabeçote é
+  uma **face plana de aço sem tinta com furo redondo** por onde a manta passa, sem nenhuma boca de matriz para
+  fora ⇒ **confirma visualmente a boca enterrada de 14,30 mm e o túnel Ø80 × 14,00**. A faixa sem tinta está
+  **livre de abraçadeira de aquecimento e de manta térmica** (dá para abraçar o colar ali), há um **mostrador
+  0-150 °C classe 1** rosqueado no corpo atrás do flange (não precisa de IR para o teste), **não há água** no
+  conjunto (as mangueiras pretas entram por prensa-cabo, são conduíte), e **existe puxador**: par de rolos de
+  aço nus com fuso e mola, mais bobina de material branco guiada por roletes de nylon ⇒ **fecha a pendência do
+  puxador da 7ª** (o swelling não é livre, e o teto de 2,2 mm por falta de puxador cai). Na máquina parada o
+  mostrador marca ~25-30 °C, então **nenhuma temperatura de processo foi lida nas fotos** — regra que eu me dei
+  depois do erro do disco de corte: foto responde o que está onde, não como o processo roda.
+* e uma checagem que **não é conclusão**, escrita como checagem: no vídeo (~22 s) a tira cinza no furo redondo
+  encosta na borda do furo de um lado. Se a manta correr descentrada, a quina raspa no fio do furo do nariz e o
+  serrilhado ganha uma causa mecânica além da térmica. Custo da checagem: 30 s de vídeo da saída em produção. No
+  CAD o espaço é 2,50 mm por lado.
+* publicação: `03_/RESFRIAMENTO_MATRIZ_COPO_2026-09-25.md` (novo, com a §10 das fotos), `HISTORICO_DA_CONVERSA.md`
+  (novo) e este bloco. **Nenhuma cota tocada; pacote, DXF, zip, CHECKSUMS e a tag seguem intocados** (`80167f2`);
   `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.
 
 **Rodada 2026-09-25 (8ª) — ele mudou o alvo ("PRINCIPAL PROBLEMA" = serrilhado nas pontas) e deu a pista que
