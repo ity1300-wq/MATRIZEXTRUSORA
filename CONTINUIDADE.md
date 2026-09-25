@@ -712,6 +712,33 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   ponteiro no relatório de contato e este bloco. **Pacote, DXF, zip, CHECKSUMS e a tag seguem intocados**
   (`80167f2`); `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.
 
+**Rodada 2026-09-25 (5ª) — "nosso objetivo é justamente tirar o serrilhado": a conta do centro×pontas.**
+
+* ele cobriu o ponto: se os nossos estudos já diziam que a v30 não tiraria o serrilhado, então o projeto errou o
+  alvo. Novo documento de discussão, `03_/FLUXO_CENTRO_X_PONTAS_2026-09-25.md`, com o que se pode afirmar com o
+  que existe no repo e o preço de cada remédio. As três contas que ele carrega:
+* **amplificação** - `n = 0,32` (`cad_die_parameters.json`), entao vazao local escala com `(1/R)^(1/n)` e
+  `1/n = 3,125`: **+10% de caminho/resistencia na ponta = -26% de vazao na ponta**, +20% = -43%. E a conta ao
+  contrario (a util, a que da a cota do alivio): para a ponta entregar `k` vezes mais, a resistencia dela cai para
+  `k^-n` -> ponta 10% mais fina pede **apenas -3,3% de resistencia**, e 20% mais fina pede -6,9%. Daqui a
+  discussao de "quanto fresar" sai de um paquimetro de 5 pontos na manta, nao de CFD.
+* **para onde vai a pressao hoje** (metodo 1D do projeto, mesmo dos PRP-0002/0004): land 8,50 mm = **18,59 bar
+  (69,7%)**, chanfro 1,50x45 = 1,36 bar (5,1%), funil+entrada = 6,73 bar (**25,2%**), total 26,68 bar. So o trecho
+  de baixo e onde nasce o desequilibrio - e a folha nao e "a boa" so por isso.
+* **preco de cada alavanca**: abrir as pontas vale **+39% de vazao na mesma pressao** (no limite de -56% da ponta);
+  frear o centro ate equalizar custa **-39% de producao** - por isso o freio dele e teste, nao projeto. E a
+  saida da marmitaria-padrao (variar a folga) esta **bloqueada pela peca**: equalizar por folga pediria 1,7644 mm
+  na ponta contra 1,500 no centro, e 1,500 +0,010/-0,000 e contrato. O "sorriso" dele e a mesma ideia aplicada ao
+  contorno, nao a espessura - por isso e ajustavel na bancada.
+* proposta de rev. 31 em discussion (nada no SSOT): **chanfro 1,50 -> 0,50** (PRP-0002 ja calculado: 27,96 bar,
+  +4,8%, e parede do labio 0,75 -> 1,75 mm, o que fecha o P7 da triagem) **+ janela de alivio rasa na face de
+  entrada, mais funda nas pontas, com sobra de aco para ajustar depois**. Se ele topar, isso entra como
+  `PRP-0007` no protocolo, com o metodo do projeto por tras, e o CFD 3D adiado decide se precisa asa de verdade.
+* honestidade que o documento repete: **os 52,3% do `avaliacao_matriz3_uniformidade.py` nao sao o gradiente
+  centro-ponta** (sao o R 0,75 nas pontas, com 0,63% da vazao nos ultimos 1,00 mm) e o modelo 2D por seccao
+  **pressupoe pressao igual na largura**, entao e cego ao efeito de coletor. Ordem de grandeza e o que se pode
+  afirmar; quem fecha e o paquimetro na manta e o teste do freio.
+
 **Rodada 2026-09-25 (4ª) — a correção dele: "que disco de corte? não tem disco de corte nenhum, a manta sai
 serrilhada da matriz".**
 
