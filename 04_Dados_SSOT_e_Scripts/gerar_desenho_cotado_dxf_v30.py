@@ -20,6 +20,7 @@ de chutar. Todo texto tem largura estimada e linhas contadas contra a coluna/cai
 Uso:
   python3 gerar_desenho_cotado_dxf_v30.py
   PACOTE=08_Pacote_Usinagem_v29 DXF=MATRIZ_V29_DESENHO_COTADO python3 gerar_desenho_cotado_dxf_v30.py
+  DXF_SERIE=R2000 python3 gerar_desenho_cotado_dxf_v30.py   # gêmeo em AutoCAD 2000 (AC1015)
 Depende de ezdxf (listado no 04_/restaurar_workspace.sh); o preview usa matplotlib.
 """
 import io, json, math, os
@@ -30,6 +31,12 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PACOTE = os.environ.get("PACOTE", "08_Pacote_Usinagem_v30")
 DXF = os.environ.get("DXF", "MATRIZ_V30_DESENHO_COTADO")
 REV = PACOTE.rsplit("_", 1)[-1].lstrip("v")
+# R2010 (AC1024) é o padrão; R2000 (AC1015) sai para CAD antigo - foi o que a matrizaria pediu
+# ("não consigo abrir arquivos BIN, teria como enviar em DWG ou DXF?"), e AutoCAD 2000 abre tudo.
+SERIE = os.environ.get("DXF_SERIE", "R2010")
+if SERIE not in ("R2010", "R2000", "R2018"):
+    raise SystemExit("DXF_SERIE deve ser R2010, R2018 ou R2000, veio %r" % SERIE)
+SUFIXO = "" if SERIE == "R2010" else "_AC1015" if SERIE == "R2000" else "_AC1032"
 
 FOLHA = (420.0, 297.0)
 B = (10.0, 10.0, FOLHA[0] - 10.0, FOLHA[1] - 10.0)          # moldura A3
@@ -94,7 +101,11 @@ DUZ = [c.strip() for c in str(ACO["dureza"]).split(";")]
 
 
 def novo_doc():
-    doc = ezdxf.new("R2010", setup=True)
+    doc = ezdxf.new(SERIE, setup=True)
+    if SERIE == "R2000":
+        # AC1015 nao guarda Unicode: sem dizer a pagina de codigo, o ezdxf escapa tudo em \U+XXXX
+        # e o CAD antigo mostra o escape. cp1252 escreve o 0 e o ± como byte simples, como sempre foi.
+        doc.header["$DWGCODEPAGE"] = "ANSI_1252"
     doc.header["$INSUNITS"] = 4
     doc.header["$MEASUREMENT"] = 1
     doc.header["$LTSCALE"] = 1.0
@@ -369,8 +380,8 @@ def main():
 
     msp.add_lwpolyline([(B[0], B[1]), (B[2], B[1]), (B[2], B[3]), (B[0], B[3])], close=True,
                        dxfattribs={"layer": "CARIMBO"})
-    destino = os.path.join(RAIZ, PACOTE, DXF + ".dxf")
-    doc.saveas(destino, encoding="utf-8")
+    destino = os.path.join(RAIZ, PACOTE, DXF + SUFIXO + ".dxf")
+    doc.saveas(destino, encoding=("cp1252" if SERIE == "R2000" else "utf-8"))
     print("gravado:", destino, os.path.getsize(destino), "bytes ·", len(msp), "entidades")
 
     auditado = ezdxf.readfile(destino).audit()
@@ -444,6 +455,10 @@ def main():
     if foroo:
         raise SystemExit("conteúdo fora da moldura: %s" % " | ".join(foroo))
 
+    if SUFIXO:                       # o gemeo AC1015 e a mesma folha: preview so na serie principal
+        print("preview pulado no gume %s (a folha e identica a serie principal)" % SUFIXO)
+        return
+
     try:
         import matplotlib
         matplotlib.use("Agg")
@@ -472,8 +487,8 @@ if __name__ == "__main__":
         main()
     except SystemExit as exc:
         # nao deixa artefato reprovado na pasta do pacote
-        for sufixo in (".dxf", "_PREVIEW.png", "_PREVIEW.pdf"):
-            c = os.path.join(RAIZ, PACOTE, DXF + sufixo)
+        for sufixo in (".dxf", "_PREVIEW.png", "_PREVIEW.pdf"):   # nada reprovado fica na pasta
+            c = os.path.join(RAIZ, PACOTE, DXF + SUFIXO + sufixo)
             if os.path.exists(c):
                 os.remove(c)
         raise SystemExit("folha reprovada (nada publicado em %s/%s): %s" % (PACOTE, DXF, exc))

@@ -45,6 +45,12 @@ depois do tratamento e gravem os dois números**; camada de 8-18 µm por face co
 tolerância de +0,010/−0,000.
 · **Proibido:** furo de fixação, flange, rosca, pino e linha de partição. A peça é 1 sólido e é segurada pelo
 collete EX-031 e pelo degrau do furo do cabeçote.
+· **Desenho em CAD, como você pediu:** vão junto dois DXF da mesma folha A3 (três vistas, 8 cotas, tabela de
+anatomia, MATERIAL em destaque) — `MATRIZ_V30_DESENHO_COTADO_AC1015.dxf` para CAD antigo e
+`MATRIZ_V30_DESENHO_COTADO.dxf` (AC1024) para AutoCAD recente — mais o `MATRIZ_V30_DESENHO_COTADO_PREVIEW.pdf`
+para ver no celular. Os `.STEP` são texto ASCII `ISO-10303-21`: se abriu como "binário", foi o visualizador.
+DWG você tira deles em Abrir → Salvar como, a geometria não muda. **O que vincula continuam sendo os STEP** —
+o desenho é convenção de leitura, se divergir de mim avise antes de usinar.
 
 Preciso de: prazo, preço, e a confirmação de se vocês fecham o comprimento em **95,00 −0,50/+0,00** (com +0,5
 a face passaria 0,5 mm para fora do nariz). Dossiê na entrega: certificado EN 10204 3.1 do calor + relatório
@@ -57,7 +63,7 @@ Att,
 
 ---
 
-## Opcional, e só se você quiser uma folha na mão deles
+## A folha em PDF é opcional — para o celular dele já basta o `PREVIEW.pdf` do DXF
 
 `08_Pacote_Usinagem_v30/FOLHA_DE_COTAS_V30.pdf` — uma página, refeita hoje (23/09) para o tamanho de letra e o
 pouco texto que você pediu. Cinco blocos: **faixa de MATERIAL no topo** — o aço 1045 em corpo grande, com a
@@ -72,7 +78,7 @@ e-mail. Não está dentro do `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` (o zip e os hash
 você anexar a folha, mande junto o `CHECKSUMS_SHA256.txt`? Não — ela é informativa; o que vincula é o STEP e o
 que está escrito acima.
 
-## Se eles preferirem CAD a PDF, existe agora o DXF cotado da matriz
+## O DXF cotado da matriz — foi exatamente o que a matrizaria pediu (24/09, 10:01)
 
 `08_Pacote_Usinagem_v30/MATRIZ_V30_DESENHO_COTADO.dxf` — A3, **1:1, milímetros, 8 cotas** e mais nada de
 texto solto. A folha é geometria: três vistas (**seção no plano da abertura 1:1** — é aí que o funil aparece;
@@ -91,6 +97,14 @@ medida no STEP, então o número lido no arquivo bate com o texto da cota; o `au
 erros e nenhuma etiqueta da folha se sobrepõe a outra. Dois avisos: o `Ø` pode não aparecer se a fonte do
 texto do CAD não tiver Latin-1 (trocaram para Arial, o arquivo não muda), e o desenho é informativo — o que
 vincula continuam sendo os STEPs. Saíram junto, para ver sem abrir CAD: `_PREVIEW.png` e `_PREVIEW.pdf`.
+Há dois arquivos da mesma folha, e a escolha é pela idade do CAD deles: `MATRIZ_V30_DESENHO_COTADO_AC1015.dxf`
+(AutoCAD 2000, acentos em cp1252 de um byte, sem escape `\U+`) abre em qualquer coisa que exista na oficina;
+`MATRIZ_V30_DESENHO_COTADO.dxf` (AC1024) é o padrão para CAD recente. **Se você tiver de mandar um só, mande
+o AC1015.** Os dois passam as mesmas travas (0 erros de `audit()`, 8/8 cotas conferidas, 0 etiquetas
+sobrepostas) e o conteúdo é byte a byte a mesma folha; quem os gerou foi o mesmo script, `DXF_SERIE=R2000` no
+segundo caso. E por escrito o pedido dele: "se não abrir o DXF aí, diga qual versão de AutoCAD vocês usam que
+eu te mando a mesma folha nela" — nós não inventamos DWG, mas DXF em qualquer versão do AC1015 para cima é só
+rodar o script.
 Nada disso está dentro do `PACOTE_MATRIZ_V30_PARA_ENVIO.zip` (o zip e os hashes publicados não mudaram).
 A v29 tem o desenho dela na pasta `_v29` (comprimento 109,00, land de 99,00 a 107,50, protrusão 14,00).
 
