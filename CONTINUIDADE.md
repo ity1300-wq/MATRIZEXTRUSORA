@@ -672,3 +672,42 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   não diagnóstico — e o ondulado do centro ela não explica.
 * publicação: só documento (relatório de contato + este bloco). **Zero arquivo de pacote, zero DXF, zero zip**,
   então CHECKSUMS, os dois zips e a tag `v30.0-oficial-pacote-usinagem` (`80167f2`) não se movem; `verificar_cadeia.py --rapido` rodou antes do push.
+
+**Rodada 2026-09-25 (3ª) - "és a origem do projeto, avalia": a v30 resolve o serrilhado? Não, e agora está escrito.**
+
+* pergunta dele: a v30 veio da bipartida (peça única, resto igual), eu pedi sugestão de matriz para o problema da
+  manta, e o Fernando acha que não resolve — **avalia**. A avaliação está em `03_/AVALIACAO_V30_X_FLUXO_2026-09-25.md`
+  **usando só o que o repo já media**, e o veredito é: **ele está certo no essencial** — nenhum elemento da v30
+  redistribui vazão na largura (funil cônico + land de largura constante não são coletor), e o único mecanismo que
+  faria isso — asas com altura decrescente do centro para as pontas — já estava diagnosticado no D3
+  (`ESTUDO_FUNIL_COATHANGER.md`) com o preço medido de **+141% de ΔP**.
+* números que rodei nesta rodada (não copiei de memória): `python3 04_/avaliacao_matriz3_uniformidade.py` dá no
+  land **uniformidade q_min/q_max = 52,3%**, núcleo com **92,3% da vazão dentro de ±5%**, últimos 1,00 mm de cada
+  lado levando **0,63%** da vazão com q = **23,2% do núcleo**, e **τ parede 160,9 kPa** contra o limiar de rasgo de
+  borda que o projeto adota (**0,14 MPa**, `masti_epdm_reologia.py`). É o canto R 0,75 esfaimando, que é o que ele
+  descreve como "falta de compactação nas extremidades" — e o modelo é **2D por seção**, que pressupõe pressão
+  igual na largura e portanto **é cego** ao efeito de coletor: nem defende nem acusa a v30. Fechado por CFD 3D,
+  que ele adiou.
+* duas contas que a conversa ninguém tocou e que valem dinheiro: **τ na parede do land não depende da forma do
+  canal** (depende de vazão por mm e da folga — fixos pela peça e pela linha), então matriz nova não derruba o rasgo
+  de borda nem na v30 nem no "sorriso" dele; e o **denteado é idêntico nas duas bordas** com o disco de corte no
+  quadro do vídeo — se vem do corte/puxada, nenhuma matriz resolve e a v30 seria culpada por algo que não é dela.
+* **débito meu, registrado no §8 do relatório:** `03_/PLANO_DE_VALIDACAO_E_SIMULACAO.md` dizia "*prova
+  matematicamente* ... sem o efeito serrilhado (*sharkskin*)" e "*NÃO ocorrerão os rasgos de borda*" sem nenhum
+  resultado atrás (o critério de <2% centro×bordas nunca foi medido; os ΔP daquele documento já estavam marcados
+  como não reproduzíveis em P6 da triagem) e ainda chamando rasgo de borda de *sharkskin*. **Não reescrevi o
+  plano**: inseri uma **nota de correção datada** depois do título, com o texto original intacto abaixo — apagar o
+  erro é pior do que exibi-lo. Se algum dia alguém citar "a matriz elimina o serrilhado", o documento que desmonta
+  a frase é o `AVALIACAO_V30_X_FLUXO_2026-09-25.md`.
+* o que a v30 continua entregando, e não é pouco (medido): junta de partição zerada (372,8 mm de costura e
+  759,5 mm² de contato metal-metal a menos), 0,00% do canal em sombra, face rasante ao nariz e ΔP 8% menor que a
+  v29 (203,6 × 219,7 bar com o anel de fuga medido). É matriz **limpa e reprodutível**, não matriz **equilibrada**.
+* recomendação executável, do mais barato: (0) régua no período das cristas + vídeo do corte; (1) **freio na matriz
+  atual** (oferta dele) como *experimento que compra informação*, não como solução; (2) se melhorar, rev. 31 = v30 +
+  **janela de alívio na face traseira** (o “recurso de bancada” que ele diz ser impossível num corpo cônico); (3)
+  pedir a cotação da v30 já com a ressalva escrita de que ela não promete equilíbrio; (4) CFD 3D só se formos mesmo ao
+  cabide.
+* publicação: `03_/AVALIACAO_V30_X_FLUXO_2026-09-25.md` (novo), nota no `PLANO_DE_VALIDACAO_E_SIMULACAO.md`,
+  ponteiro no relatório de contato e este bloco. **Pacote, DXF, zip, CHECKSUMS e a tag seguem intocados**
+  (`80167f2`); `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.
+
