@@ -120,8 +120,17 @@ chk('SS11 deltaT para jogar 32,8 W fora',32.8/G,129.1,0.01)
 chk('SS11 tau da faixa (min)',1131.7/G/60.0,74.0,0.01)
 chk('SS11 deltaT no filme de 0,30 mm (K)',32.8*0.194,6.36,0.01)
 chk('SS11 resfriamento da massa que paga 32,8 W (C)',32.8/37.5,0.875,0.01)
+MC=18.75*2.0
+chk('SS11 manta +0,9 C com 32,8 W',32.8/MC,0.875,0.01)
+chk('SS11 manta +8,1 C com 305 W',305.0/MC,8.13,0.01)
+chk('SS11 filme exige 59 K com 305 W',305.0*0.194,59.17,0.005)
+chk('SS11 energia por kg no land (J/g)',32.8/18.75,1.75,0.005)
 _txt=open('03_Relatorios_e_Documentacao/RESFRIAMENTO_MATRIZ_COPO_2026-09-25.md',encoding='utf-8').read()
-for _f,_q in [("doc: massa do cabecote 12,327 kg","12,327 kg"),
+for _f,_q in [("doc: 8,1 C no caso 305 W","**8,1 °C**"),
+              ("doc: 59 K de volta pelo filme","**59 K**"),
+              ("doc: 1,75 J/g","1,75 J/g"),
+              ("doc: os dois lados do teste","assinatura do bloco ensopando"),
+              ("doc: massa do cabecote 12,327 kg","12,327 kg"),
               ("doc: C da faixa 1.131,7","1.131,7 J/K"),
               ("doc: 0,254 W por 1 K","0,254 W por 1 K"),
               ("doc: 129 K acima da sala","129 K acima da sala"),

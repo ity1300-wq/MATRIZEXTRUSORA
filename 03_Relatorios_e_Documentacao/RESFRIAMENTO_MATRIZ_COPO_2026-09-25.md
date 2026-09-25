@@ -342,9 +342,15 @@ planos Z indicados (Z = 0 no plano traseiro, face do nariz em Z 95,00).
 | perda só para o ar, h ≈ 10 W/m²K | **0,254 W por 1 K** (com radiação, h ≈ 15: 0,381 W/K) |
 | para jogar fora os 32,8 W do land assim | a faixa teria de estar **129 K acima da sala** |
 
-**Conclusão 1 — o atrito não é o disparador do "com o tempo piora".** O calor gerado na fenda tem saída barata:
-a própria manta levando embora 37,5 W por 1 °C. Um **0,9 °C** de diferença entre a matriz e a massa que entra já leva os
-32,8 W. O "+20 °C em 8,7 min" da §3 é teto adiabático (nada saindo), não previsão — rebaixado lá.
+**Conclusão 1 — a 33 W, o atrito não é o disparador do "com o tempo piora".** A conta honesta é por kg de
+produto, não por bloco: 32,8 W ÷ 18,75 g/s = **1,75 J/g**, e com cp = 2,0 J/g·K isso é a manta saindo
+**0,9 °C** mais quente do que entrou. Não é preciso a matriz acumular nada para esse calor sair — ele vai embora
+no produto. O "+20 °C em 8,7 min" da §3 é teto adiabático (hipótese de nada saindo), não previsão; rebaixado lá.
+* **E para não trocar um erro por outro:** se o consumo real de pressão for o da simulação do pacote
+  (203,6 bar ⇒ **305 W**, 9,3× os 32,8 W), o quadro muda de lado — a manta subiria **8,1 °C** e o caminho de
+  volta pelo filme de 0,30 mm exigiria **59 K** entre a matriz e a face do nariz, que é uma coisa que a
+  refrigeração nenhuma segura. É por isso que o teste de §7.4 (tempo até o dente em 100 / 80 / 60 %) não é
+  decoração: 1/v³ é a assinatura do atrito mandando; escalonamento mais lento é a assinatura do bloco ensopando.
 
 **Conclusão 2 — sobra uma explicação, e ela bate com a escala de tempo dele.** O cabeçote está recebendo calor
 de trás (junta do flange Ø220 e contato com a adjunta aquecida) e a única coisa que ele tem para perder é
