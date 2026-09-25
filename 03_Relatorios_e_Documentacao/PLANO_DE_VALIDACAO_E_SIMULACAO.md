@@ -1,4 +1,17 @@
 # PLANO DE VALIDAÇÃO CIENTÍFICA E SIMULAÇÃO PREVENTIVA
+
+> **⚠️ Nota de correção — 2026-09-25.** Este é o plano como foi escrito no começo do projeto, e ele **promete o
+> que não foi medido**. As frases "Prova matematicamente que a fita sairá perfeitamente retilínea, sem arrasto
+> nas pontas e sem o efeito serrilhado (*sharkskin*)", "NÃO haverá refluxo pelo funil de alimentação" e "NÃO
+> ocorrerão os rasgos de borda" **não têm resultado atrás**: o CFD com o critério de "diferença de velocidade
+> centro×bordas < 2 %" nunca foi rodado (e em 2026-09-22 o dono do projeto adiou o CFD de propósito), e os
+> números de ΔP que este plano citava já estavam marcados como não reproduzíveis em
+> `TRIAGEM_DE_PROBLEMAS_DAS_MATRIZES.md` (P6). Some a isso um erro de conceito: o denteado que aparece na manta
+> é **rasgo de borda**, não *sharkskin* (fratura de superfície do fundido), e têm remédios diferentes. O estado
+> real, medido, está em `AVALIACAO_V30_X_FLUXO_2026-09-25.md`. O texto abaixo fica **como estava**, sem edição,
+> para que se veja de onde o projeto partiu — leia as "Promessas" deste arquivo como hipóteses de plano, não
+> como resultados.
+>
 **Projeto**: MatrizJonatha Master  
 **Objetivo**: Eliminar o "achismo" e validar matematicamente/computacionalmente a `MatrizJonatha.step` antes do investimento em usinagem CNC de aço.  
 
