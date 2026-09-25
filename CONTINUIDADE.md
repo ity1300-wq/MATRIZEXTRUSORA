@@ -712,6 +712,33 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   ponteiro no relatório de contato e este bloco. **Pacote, DXF, zip, CHECKSUMS e a tag seguem intocados**
   (`80167f2`); `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.
 
+**Rodada 2026-09-25 (6ª) — ele MEDEU o perfil da manta e o Fernando mandou as duas soluções em foto.**
+
+* medição dele em 5 pontos (A→B, mm): **1,50 · 2,00 · 2,57 · 1,80 · 1,50** nos `y = -37,5 / -18,75 / 0 / +18,75
+  / +37,5`. Assumindo velocidade de linha igual na largura, q/q_centro = **0,584 / 0,778 / 1,000 / 0,700 /
+  0,584** - e com `n = 0,32` isso corresponde a **+18,8% de resistencia nas bordas**, nao a 71% de diferenca.
+  Registrado em `03_/PERFIL_DE_ESPESSURA_E_SORRISO_2026-09-25.md`, com o limite escrito (se a manta cai solta,
+  sem puxador, espessura nao e vazao e 18,8% vira teto; a ite­racão de bancada e o metodo).
+* com o numero dele a conclusao fica mais dura do que a minha frase anterior: **frear o centro = +5,02 bar e a
+  linha caindo a 80% da producao; abrir as bordas = -4,2 bar dentro dos 6,73 bar que o funil+entrada gastam
+  (75% do orcado) e a producao subindo a 137%**. Freio compra informacao, alivio e o que se fabrica.
+* as duas fotos do Fernando, vistas em zoom (nao e a legenda de IA, e o que esta na imagem): **disco azul com a
+  fenda em arco de sorriso, relevo `90 x 2mm` na face e os dois furos de virar a matriz acima do arco** (cor
+  azulada = tempra/oxide de revenimento), e **disco de aco com fenda reta de pontas em gota + um tampo quadrado
+  em relevo no centro** (setas verdes: o tampo = freio; as gotas = "abrir mais nas pontas" feito na propria
+  fenda). A conta que torna o sorriso fabricavel sem briga com a peca: **corda 75,00 nao muda** (a largura da
+  manta fica a contratada) e a fenda desenvolvida cresce so **+0,19% a sagita 2,00 mm** e +0,43% a 3,00 mm -
+  trajetoria de fio EDM, nao forma nova. Sagita e cota de ajuste, comecando em 1,00 mm.
+* **o achado que nao e de fluxo:** -18,75 mede 2,00 e +18,75 mede 1,80 - **10% de assimetria entre os lados,
+  mesma distancia do centro**, e funil simetrico + fenda reta nao produzem isso (no modelo os dois lados sao o
+  solido espelhado). Antes de cortar metal: **girar a matriz 180° e remedir os 5 pontos**. Se a assimetria
+  acompanha a matriz, e matriz/assento; se fica no mesmo lado da maquina, e maquina e desenho nenhum conserta.
+* metrologia melhor que paquimetro em massa: 5 amostras de 50x50 mm pesadas; com rho 1,25 g/cm3 (SSOT) cada
+  1,50 mm de espessura pesa 4,688 g, entao **balanca de 0,01 g resolve 0,0032 mm** sem achatar nada.
+* rev. 31 proposta no documento (nada no SSOT): fenda em arco (corda 75,00, sagita 1,00 como cota de ajuste) +
+  janela de alivio na face de entrada mais funda nas bordas + chanfro 1,50 -> 0,50 (PRP-0002: 27,96 bar, labio
+  0,75 -> 1,75 mm, land de 69,7% para 74,3% do DeltaP). Entra como `PRP-0007` no protocolo quando ele decidir.
+
 **Rodada 2026-09-25 (5ª) — "nosso objetivo é justamente tirar o serrilhado": a conta do centro×pontas.**
 
 * ele cobriu o ponto: se os nossos estudos já diziam que a v30 não tiraria o serrilhado, então o projeto errou o
