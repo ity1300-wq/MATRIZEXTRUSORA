@@ -712,6 +712,37 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   ponteiro no relatório de contato e este bloco. **Pacote, DXF, zip, CHECKSUMS e a tag seguem intocados**
   (`80167f2`); `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.
 
+**Rodada 2026-09-25 (8ª) — ele mudou o alvo ("PRINCIPAL PROBLEMA" = serrilhado nas pontas) e deu a pista que
+fechou o diagnóstico: "sempre que esfria sai boa, depois esquenta e sai ruim".**
+
+* **recado que fica para quem assumir:** o alvo do projeto, na cabeça dele, e **o serrilhado nas extremidades**.
+  Espessura **nao** e o problema a resolver, e eu gastei duas rodadas falando de perfil de espessura. Leia
+  "igualizar vazao" como *meio* para tirar tracao da borda, nunca como fim.
+* o sintoma novo (limpa no comeco, piora ao longo da producao e com velocidade) **descarta defeito de forma**
+  (forma serra desde o primeiro metro) e aponta para saturacao termica da matriz. Contas em
+  `03_/RESFRIAMENTO_DA_MATRIZ_2026-09-25.md`: 40 W (1D do projeto, 26,68 bar) a 305 W (modelo com anel de fuga,
+  203,6 bar) de dissipacao, dos quais **28 a 213 W na parede do land** (69,7% do DeltaP e land); o bolo de
+  mastique sobe so **+0,7 a +5,7 K**, mas a matriz de 3,442 kg de aco tem **1,69 kJ/K** de capacidade e sobe
+  **20 C em 2,6 min a 20 min** sem resfriamento nenhum. **E o "aos poucos" dele, em minutos - bate.**
+* entao refrigeraçao aqui e um problema de 30 a 200 W: **1 L/min de agua de rede sobe 3 C com 213 W**. Ordem de
+  opcoes, da de graca para a cara: copo de gotejamento / pano encharcado no nariz > faca de ar (air knife) na
+  manta nos primeiros 30-50 cm (e o unico item que resfria E segura a borda contra a tracao) > cuneta de agua no
+  nariz do **cabecote** (mexe em 06_, nao na matriz) > mastique chegando mais frio > furo de agua dentro da
+  matriz.
+* **por que a agua dentro da matriz e a ultima opcao, com numero:** boca do canal 075,60 em Z=0, primeiro estagio
+  094,00 -> 9,20 mm de aco no raio; furo 04 mm com parede minima de 4,00 mm ate o canal (o mesmo criterio do
+  `ESTUDO_RECUO_CARTUCHOS.md`) deixa **1,2 mm de janela** de posicionamento, longe do land (que e em Z 85 a
+  93,50, onde o aco que sobra e o do labio), e tem de ser furado **antes** do T.T. (55-60 HRC). Carissimo para
+  ganhar pouco: nao faca isso primeiro.
+* controle que vale mais que equipamento: termometro de **infravermelho no labio**, cronometrar o primeiro dente
+  em 3 velocidades e com/sem resfriamento -> sai o `T_limiar` dele (aposto em 55-75 C, mas o numero e medido, nao
+  meu). Regra operacional: segurar o labio em `T_limiar - 10 C`. Contrapeso escrito no doc: **nao congelar
+  demais** (pressao sobe e a casca pode nao soldar nos cantos R 0,75, que e justamente onde a manta arrebenta);
+  alvo 10 a 25 C abaixo da cabeca.
+* e o ponto que impedi de virar vendedor de matriz: **resfriar da tempo, nao tira a tracao da borda.** Os dois
+  andam juntos - gotas nos extremos + arco do sorriso na fenda para tirar a carga, resfriamento para segurar a
+  janela de tempo. Escrito assim no documento para o portao nao deixar alguem prometer o contrario depois.
+
 **Rodada 2026-09-25 (7ª) - segunda medicao, agora com balanca: o perfil e real, a saga fecha em 2 mm de flecha.**
 
 * ele remedeu 5 pontos (1,50 / 2,50 / 2,50 / 2,00 / 1,50 mm) E pesou (0,80 / 1,30 / 1,40 / 1,10 / 0,80 g).
