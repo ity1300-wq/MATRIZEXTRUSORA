@@ -664,12 +664,12 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   ferramenta de virar a matriz (IMG-10); montada, ela fica **afundada num copo com assento cônico** (IMG-08), que
   é outro arranjo - a nossa v30 sai rasante ao nariz; e a amostra com defeito tem **denteado idêntico nas duas
   bordas** (IMG-06).
-* **a descoberta que pode poupar dinheiro:** os dois únicos quadros do vídeo de 9,7 s que o PDF embute **não
-  mostram a saída da matriz**, mostram um **disco girando cortando a borda** do perfil, com o serrilhado no ponto
-  de contato e a superfície do perfil lisa ao lado. Ninguém na conversa citou o disco de corte como causa. Por
-  isso entrou como **pendência nº 0** no §6 do relatório: conferir fio/rotação/pressão do corte e ver o vídeo
-  inteiro (`midia_extraida/VID-20260924-WA0011.mp4`, no repo `ACESS`) antes de usinar matriz. É hipótese de foto,
-  não diagnóstico — e o ondulado do centro ela não explica.
+* ~~**a descoberta que pode poupar dinheiro**: o serrilhado viria do **disco de corte** da linha, não da matriz~~
+  — **CONCLUSÃO RETIRADA na 4ª rodada desta data, era minha e estava errada.** O que eu vi nos dois quadros
+  embutidos no PDF (lâmina encostada numa tira **branca**, com a borda esfiapada no ponto de contato) existe nos
+  quadros; o que **não** existe é a inferência de que aquilo é a linha da manta. Não é: os quadros são de outra
+  mídia e o material ali nem é cinza-chumbo como a amostra. Fica anotado o erro porque ele é o exemplo do que
+  **não** se faz neste repo: concluir causa a partir de imagem reduzida e descrita por IA.
 * publicação: só documento (relatório de contato + este bloco). **Zero arquivo de pacote, zero DXF, zero zip**,
   então CHECKSUMS, os dois zips e a tag `v30.0-oficial-pacote-usinagem` (`80167f2`) não se movem; `verificar_cadeia.py --rapido` rodou antes do push.
 
@@ -688,10 +688,11 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   descreve como "falta de compactação nas extremidades" — e o modelo é **2D por seção**, que pressupõe pressão
   igual na largura e portanto **é cego** ao efeito de coletor: nem defende nem acusa a v30. Fechado por CFD 3D,
   que ele adiou.
-* duas contas que a conversa ninguém tocou e que valem dinheiro: **τ na parede do land não depende da forma do
-  canal** (depende de vazão por mm e da folga — fixos pela peça e pela linha), então matriz nova não derruba o rasgo
-  de borda nem na v30 nem no "sorriso" dele; e o **denteado é idêntico nas duas bordas** com o disco de corte no
-  quadro do vídeo — se vem do corte/puxada, nenhuma matriz resolve e a v30 seria culpada por algo que não é dela.
+* uma conta que a conversa não tocou, **e o limite dela**: τ na parede do land não depende da forma do funil nem
+  do comprimento do land, e sim da **vazão por mm de largura** e da folga. Isso valia para a minha frase "nenhuma
+  matriz derruba o rasgo de borda" — mas o q por mm **é** justamente o que o freio/alívio redistribui, então a
+  frase estava errada por excesso: **o desequilíbrio é conserto de matriz sim**. Corrigido no §5 do relatório de
+  avaliação. (A "assinatura de corte" que eu usava como segunda perna deste argumento caiu junto — ver acima.)
 * **débito meu, registrado no §8 do relatório:** `03_/PLANO_DE_VALIDACAO_E_SIMULACAO.md` dizia "*prova
   matematicamente* ... sem o efeito serrilhado (*sharkskin*)" e "*NÃO ocorrerão os rasgos de borda*" sem nenhum
   resultado atrás (o critério de <2% centro×bordas nunca foi medido; os ΔP daquele documento já estavam marcados
@@ -710,4 +711,29 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
 * publicação: `03_/AVALIACAO_V30_X_FLUXO_2026-09-25.md` (novo), nota no `PLANO_DE_VALIDACAO_E_SIMULACAO.md`,
   ponteiro no relatório de contato e este bloco. **Pacote, DXF, zip, CHECKSUMS e a tag seguem intocados**
   (`80167f2`); `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.
+
+**Rodada 2026-09-25 (4ª) — a correção dele: "que disco de corte? não tem disco de corte nenhum, a manta sai
+serrilhada da matriz".**
+
+* lida e aplicada nos três documentos que carregavam a inferência errada: `03_/CONTATO_MATRIZARIA_FERNANDO_2026-09-24.md`
+  (§3b e a pendência nº 0), `03_/AVALIACAO_V30_X_FLUXO_2026-09-25.md` (§5 reescrito, linha 0 da tabela de passos e
+  a recomendação final) e este arquivo. Verifiquei antes de reescrever: recorte ampliado dos dois quadros
+  (recorte ampliado na sandbox, descartavel) mostra **material branco** e uma lâmina — e o mastique das fotos ao lado é
+  **cinza-chumbo**, então o quadro não é da linha dele de todo.
+* o que muda no conteúdo técnico, sem rodeio: **o serrilhado nasce na saída da matriz**, portanto **a matriz
+  conserta**. A parte que eu defendi com o τ (o canal não muda a fratura por cisalhamento) continua verdadeira,
+  mas vale para *sharkskin*, não para rasgo por desequilíbrio — e o dado do repo que apoia o Fernando é
+  justamente `q = 23,2 % do núcleo` nos últimos 1,00 mm de cada lado, com o centro a 215,5 mm³/s/mm contra 112,7
+  na beirada (`avaliacao_matriz3_uniformidade.py`).
+* o que muda na recomendação: sai "olhe o disco de corte" e entra, na ordem, **freio na matriz em uso** (teste
+  barato que decide), depois **rev. 31 com freio/alívio embutido**; o teste de régua no período das ondinhas fica
+  só para separar pulsação da rosca da parte que é de matriz.
+* nada de pacote/DXF/zip/tag mexido; `verificar_cadeia.py --rapido` volta a rodar antes do push desta rodada.
+* **lição de git, e ela quase me custou a rodada:** eu emendei a mensagem do commit *depois* de já ter escrito o
+  sha da versão antiga na linha do merge (`git merge --no-ff aeabfdb`), e o merge foi buscar o commit **órfão** —
+  deu conflito "both added" em dois arquivos porque `main` e `continue` passaram a ter duas cópias irmãs do mesmo
+  conteúdo. `main` voltou a `continue` (conteúdo de `17f53a9`) e a árvore foi conferida igual ao final. Regra que
+  fica: **nunca citar sha literal em comando de publicação depois de um `--amend`; use o nome do branch** — o sha
+  deixa de existir como ancestral e o merge deixa de ser um merge.
+
 
