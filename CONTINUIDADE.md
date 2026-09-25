@@ -712,6 +712,34 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   ponteiro no relatório de contato e este bloco. **Pacote, DXF, zip, CHECKSUMS e a tag seguem intocados**
   (`80167f2`); `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.
 
+**Rodada 2026-09-25 (7ª) - segunda medicao, agora com balanca: o perfil e real, a saga fecha em 2 mm de flecha.**
+
+* ele remedeu 5 pontos (1,50 / 2,50 / 2,50 / 2,00 / 1,50 mm) E pesou (0,80 / 1,30 / 1,40 / 1,10 / 0,80 g).
+  `m/t` nas cinco estacoes: media 0,539 g/mm, desvio-padrao **2,9%**, afastamento maximo entre os dois metodos
+  7,1% -> **o perfil nao e o paquimetro afundando no mastique**. Registrado em
+  `03_/MEDIDA_2_PERFIL_E_PESO_2026-09-25.md`.
+* seccao integrada pelos 5 pontos: **159,4 mm2** contra 112,5 mm2 nominais = **+42% de seccao**; com a vazao de
+  referencia (Q = 15.000 mm3/s) isso sai a **5,6 m/min** em vez de 8,0 m/min. Enquadramento que me corrigi no
+  meio do raciocinio: com rosca fixando a vazao, ele **nao esta queimando material** - esta entregando ~30% menos
+  metro por hora com a mesma maquina. Igualizar a 1,50 e tambem producao.
+* **a assimetria piorou e isso e o diagnostico principal agora:** -18,75 da 2,50 e +18,75 da 2,00 (**+25%**, na
+  primeira mediacao era 10%), e o maximo nao esta mais no centro (2,50 em -18,75 E em 0,00) - a barriga migrou.
+  Funil simetrico + fenda reta **nao faz isso** (centroide medido a -0,0071 mm do plano de simetria). Pendencia
+  nº 1, antes de qualquer desenho: **girar a matriz 180 graus e remedir os 5 pontos**.
+* a conta que a medicao dele produz, com `n = 0,32` e o gradiente de land do projeto (2,187 bar/mm): centro de
+  2,50 para 1,50 = 1,67x menos vazao = **+18% de resistencia local = +4,74 bar = 2,2 mm de land a mais no
+  centro**. Isso e o **arco do sorriso** (flecha ~2 mm, raio ~353 mm, corda 75,00 intacta, fenda desenvolvida
+  +0,19%): afasta o meio da entrada e aproxima as pontas ao mesmo tempo - o alivio nas costas so abre as pontas,
+  o que neste perfil empurraria tudo para 2,5 mm e obrigaria a esticar a manta no puxador. **Primeiro passo 1,5
+  mm de flecha, nao 2,2**, porque sem puxador medido o swelling infla a diferenca de espessura (teto, nao alvo).
+* subproduto pedido a ele: area real da amostra (saiu ~431 mm2 com rho 1,25 de literatura) - com a area medida eu
+  devolvo a **densidade medida do mastique**, numero que este projeto nunca teve.
+* publicacao: dois documentos em `03_` + este bloco. **Nada de SSOT, STEP, pacote, DXF, zip ou CHECKSUMS** - a
+  tag `v30.0-oficial-pacote-usinagem` segue em `80167f2`; `verificar_cadeia.py --rapido` com PORTA ABERTA antes
+  do push (e as duas travas de sempre re-aplicadas no comeco: `git config user.name/user.email` e
+  `git checkout HEAD -- 01_CAD_MatrizJonatha_Oficial 02_CAD_Modelos_Historicos`, sem o que o portao morre em
+  `FileNotFoundError` no STEP).
+
 **Rodada 2026-09-25 (6ª) — ele MEDEU o perfil da manta e o Fernando mandou as duas soluções em foto.**
 
 * medição dele em 5 pontos (A→B, mm): **1,50 · 2,00 · 2,57 · 1,80 · 1,50** nos `y = -37,5 / -18,75 / 0 / +18,75
