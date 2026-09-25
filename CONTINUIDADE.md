@@ -462,6 +462,15 @@ Por que a regra existe, em uma frase: em 2026-09-23 eu deixei três rodadas só 
 rótulos do desenho, a numeração com milhar) e cada uma depois custou uma troca nova de assets; enquanto a troca
 não acontecia, o GitHub servia documento velho com sha novo na capa — exatamente o par que a fábrica confere.
 
+**Linhas de 2026-09-25 — o histórico da conversa virou arquivo próprio, por ordem dele** (*"faça um arquivo leve
+que contenha toda nossa conversa histórico e seja atualizado a cada interação; este deve ser sempre atualizado no
+GitHub"*). O arquivo é **`HISTORICO_DA_CONVERSA.md`**, na raiz: linha do tempo com **uma entrada por rodada**
+(o que ele pediu, o que saiu, o sha), escrita no fim da seção do dia, sem reescrever entrada antiga — correção de
+rodada passada entra como linha nova dizendo "corrigindo a rodada X". É `.md` solto, **fora** do zip dos pacotes:
+atualizá-lo sobe nas branches mas **não** move a tag nem re-publica asset, pela mesma regra acima. Quem assumir
+não troca o documento gordo pelo leve: o `CONTINUIDADE.md` continua sendo o estado do projeto; o histórico é só a
+linha do tempo.
+
 
 **Rodada 2026-09-23 (tarde) — a folha de uma página virou "meia-seção + detalhe", e o funil apareceu.**
 
@@ -711,6 +720,53 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
 * publicação: `03_/AVALIACAO_V30_X_FLUXO_2026-09-25.md` (novo), nota no `PLANO_DE_VALIDACAO_E_SIMULACAO.md`,
   ponteiro no relatório de contato e este bloco. **Pacote, DXF, zip, CHECKSUMS e a tag seguem intocados**
   (`80167f2`); `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.
+
+**Rodada 2026-09-25 (9ª) — "hoje usamos a matriz copo; veja como ela fica no cabeçote e pense em como resfriar".**
+
+* medido nesta rodada, no arquivo da montagem `06_/STEP/Cabecote_EX-030_com_Matriz_Copo.step` (cadquery, distância
+  de peça a peça por `BRepExtrema`, volume por `GProp`): corpo **Ø93,00 × 80,70 mm**, volume **224.289,0 mm³**
+  = 1,761 kg; o "copo" é um furo **Ø75,60 × 70,70 mm** entrando pela **traseira**; a fenda 75,00 × 1,500 (R 0,75)
+  atravessa o fundo, com **land de 10,00 mm** (Z 70,70 → 80,70) e **sem chanfro e sem funil** (o fundo é um degrau
+  de 90°). A boca fica em **Z 80,70** contra a face do nariz do cabeçote em **Z 95,00** ⇒ **14,30 mm enterrada**
+  dentro do túnel Ø80,00 × 14,00 mm, que tem **70.371,7 mm³** livres e trabalham cheios de massa.
+* folgas medidas, e elas são o resultado: banda Ø93,00 no bolso Ø95,00 = **1,00 mm de ar** (e é a banda do
+  collete); ombro no degrau = **0,10 mm** (anel de 501,7 mm², contato real 431,2 mm²); estágio Ø89,50 = **0,25 mm**;
+  face frontal até o plano do degrau = **0,30 mm**. Casca total **55.129,7 mm²**: **37,0 %** na banda, **30,5 %** no
+  furo do copo, e **52,4 %** (28.864,7 mm², contando fundo e land) molhados de massa ⇒ **nenhum ponto da copo vê o
+  ar**. Consequência: não existe onde pôr
+  refrigeração na matriz, e **não existe posição** para furo de água (centro teria de cair entre 43,80 e
+  40,50 mm de raio — faixa vazia). Também **não dá para fazê-la protruir**: faltam 1,50 mm de raio para a banda
+  Ø93,00 passar do degrau Ø90,00.
+* comparado no mesmo cabeçote, medido agora: **copo boca −14,30 mm**, **v30 boca rasa com a face (0,00)**,
+  **v29/v27 boca +14,00 mm para fora**. Ou seja: a refrigeração "na boca da matriz" que dá na v30/v29 **não dá**
+  na copo. Escrito na §2 de `03_/RESFRIAMENTO_MATRIZ_COPO_2026-09-25.md` com as três linhas medidas.
+* física do "enche de calor", agora com o número da copo: capacidade **855,7 J/K** (a metade da v30, que tem
+  1.673 J/K) + **398 g** de massa parada dentro do copo (318.480,7 mm³, renovados a cada **21,2 s**) que é outro
+  reservatório de 796 J/K tocando 33 % da casca. Calor do land: ΔP 2,187 bar/mm × 10,00 = **21,87 bar** ⇒
+  **32,8 W** a Q = 15.000 mm³/s (teto da 8ª com a simulação do pacote: 305 W). Com o calor preso: 20 °C em
+  **8,7 min** (33 W) a **0,95 min** (300 W).
+* o caminho que existe é o **filme de 0,30 mm entre a face da matriz e o degrau do cabeçote** (R ≈ 0,194 K/W com
+  massa no vão; 1,87 K/W se for ar) e o de 0,25 mm do estágio (0,329 K/W). Logo **resfrie o nariz do cabeçote na
+  faixa lisa Ø130,00 de Z 53,00 a 81,00** (11.435,4 mm², a 18,50 mm da matriz, sem furo nenhum ali — os 6 Ø16,5
+  ficam em Z 3..43 e o M12 do pushador em Z 22,98): 40 °C de diferença puxam ≈ **330 W** por esses filmes, e
+  **300 W são +4,3 °C em 1 L/min de água**. Colar parado (duas conchas, canal de 3 mm) não fura o cabeçote, que
+  é cementado 52-55 HRC. **Por que parar em Z 81,00:** Z 81..95 é o túnel por onde a manta sai, e gelar o túnel é
+  incrustrar massa no Ø80 — o motivo pelo qual o projeto sempre quis a boca fora do cabeçote.
+* **corrigindo a 8ª num ponto:** lá escrevi "IR no lábio da matriz" e "cuneta de água no nariz do cabeçote" como
+  opção 3. Com a copo **o lábio não é visível** (está a 14,30 mm dentro do furo): o IR vai na **face do nariz do
+  cabeçote** (anel Ø80→Ø130, 8.246,7 mm², 14,30 mm da boca e colada nela pelo filme de 0,30 mm), com o offset
+  boca↔face calibrado uma vez só com termopar de ponteira. E o "furo de água na matriz", que na 8ª era "última
+  opção", na copo passa a **impossível** (a faixa vazia de raio acima).
+* ordem executável que ficou para ele: (A) pano encharcado/gotejador na banda (0 R/W extra, leva os 33 W com
+  10-30 °C de diferença, não leva os 300 W); (B) faca de ar **depois** da face do nariz, nunca na boca;
+  (C) colar d'água Z 53→81; (D) mastiche 1 °C mais frio = **37,5 W embora** (18,75 g/s × 2 J/g·K) — a alavanca
+  mais forte e de graça, com o preço escrito (pressão e solda no R 0,75). Não: furo na matriz, furo M12 como
+  entrada de ar, espaçador para protruir.
+* **arquivo novo, por ordem dele:** `HISTORICO_DA_CONVERSA.md` na raiz — linha do tempo leve de toda a conversa
+  (11/09 até aqui), **uma entrada por rodada**, atualizada e publicada a cada interação. A regra entrou no §12.
+* publicação: `03_/RESFRIAMENTO_MATRIZ_COPO_2026-09-25.md` (novo), `HISTORICO_DA_CONVERSA.md` (novo) e este
+  bloco. **Nenhuma cota tocada; pacote, DXF, zip, CHECKSUMS e a tag seguem intocados** (`80167f2`);
+  `verificar_cadeia.py --rapido` rodou com os documentos no lugar antes do push.
 
 **Rodada 2026-09-25 (8ª) — ele mudou o alvo ("PRINCIPAL PROBLEMA" = serrilhado nas pontas) e deu a pista que
 fechou o diagnóstico: "sempre que esfria sai boa, depois esquenta e sai ruim".**
