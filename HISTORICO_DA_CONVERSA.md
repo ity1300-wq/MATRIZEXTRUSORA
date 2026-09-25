@@ -124,6 +124,11 @@ Legenda: `sha` = commit na branch `continue`. `01_`…`08_` = `01_CAD_MatrizJona
   (furo de água é geometricamente impossível: a faixa do centro seria 43,80…40,50 mm de raio, vazia), e o
   resfriamento tem de entrar **pelo nariz do cabeçote** — pano molhado, colar d'água na banda Ø130 de Z 53 a 81,
   e faca de ar depois da face. Documento: `03_Relatorios_e_Documentacao/RESFRIAMENTO_MATRIZ_COPO_2026-09-25.md`.
+  **Mesma rodada, com as 6 fotos + 1 vídeo dele no repo `ity1300-wq/ACESS`** (sha256 conferidos): a ponta do
+  cabeçote é uma face lisa de aço sem tinta com **furo redondo por onde a manta passa** — nada de matriz para
+  fora, o que confirma a boca enterrada; a faixa está **livre** para o colar d'água; existe **mostrador 0-150 °C**
+  no corpo (não precisa de IR); **não há água** no cabeçote (as mangueiras são conduíte); e **existe puxador** com
+  rolos de aço e bobina de branco — o que fecha a pendência do puxador da 7ª. Registrado na §10 do documento.
 
 ---
 
