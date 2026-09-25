@@ -127,8 +127,10 @@ Legenda: `sha` = commit na branch `continue`. `01_`…`08_` = `01_CAD_MatrizJona
   **Mesma rodada, com as 6 fotos + 1 vídeo dele no repo `ity1300-wq/ACESS`** (sha256 conferidos): a ponta do
   cabeçote é uma face lisa de aço sem tinta com **furo redondo por onde a manta passa** — nada de matriz para
   fora, o que confirma a boca enterrada; a faixa está **livre** para o colar d'água; existe **mostrador 0-150 °C**
-  no corpo (não precisa de IR); **não há água** no cabeçote (as mangueiras são conduíte); e **existe puxador** com
-  rolos de aço e bobina de branco — o que fecha a pendência do puxador da 7ª. Registrado na §10 do documento.
+  no corpo (não precisa de IR); **não há água** no cabeçote (as mangueiras são conduíte). Eu li o par de rolos de
+  aço como **puxador** e ele corrigiu: é **papel siliconado** aplicado na manta, que **sai da matriz e entra na
+  esteira** ⇒ continua sem puxador, e o teto da flecha da 7ª permanece. Ele também derrubou a minha hipótese de
+  raspo no furo do nariz (*"ignore isso, é resquício de manta velha"*). Registrado na §10 do documento.
 
 ---
 
@@ -160,6 +162,8 @@ Legenda: `sha` = commit na branch `continue`. `01_`…`08_` = `01_CAD_MatrizJona
    refrigeração **dá tempo, não tira a tração da borda**.
 4. Para abrir a rev. 31 (**PRP-0007**: gotas nos extremos da fenda + arco do sorriso com flecha 1,50 mm + chanfro
    0,50 × 45) falta o **sim** dele. A escolha do caminho é dele.
-5. Pendências do lado dele: `T_limiar` medido na face do nariz + tempo até o primeiro dente em 100/80/60 %;
-   girar a matriz 180° e remedir; se existe puxador; área real da amostra; e se a banda Ø130 × 42,00 do cabeçote
-   está livre para receber um colar d'água.
+5. Pendências do lado dele, depois das fotos: **o que é o cano curto na frente da faixa sem tinta** (se for
+   camisa d'água, a refrigeração já existe na máquina); a °C do mostrador em produção e a faixa em que ele é
+   mantido; se o rolo de papel siliconado fica encostado em parte quente; `T_limiar` no mostrador com o teste
+   100/80/60 %; girar a matriz 180° e remedir; e a área real da amostra. **Já respondidas pelas fotos:** a banda
+   do cabeçote está livre, não há água no cabeçote, e não há puxador (é papel siliconado + esteira).
