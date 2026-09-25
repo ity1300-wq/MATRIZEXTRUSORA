@@ -651,3 +651,24 @@ não acontecia, o GitHub servia documento velho com sha novo na capa — exatame
   ezdxf pypdf` de novo no começo da rodada) e os **symlinks das pastas de CAD somem** (`git checkout HEAD --
   01_CAD_MatrizJonatha_Oficial 02_CAD_Modelos_Historicos` antes de rodar o portão, senão ele morre em
   `FileNotFoundError` no STEP).
+
+**Rodada 2026-09-25 (2ª) — as fotos dentro do PDF do contato, extraídas e lidas.**
+
+* ele reenviou a conversa sem responder à pergunta do caminho A/B, então em vez de mexer em cota eu abri o que
+  faltava: `pypdf` extraiu as **13 imagens embutidas** do `TRANSCRICAO-matrizaria-COM-IMAGENS.pdf` (resolução
+  real, até 1500 × 1500 px) e eu vi as cinco que importam. Registrado no §3b do relatório de contato, com o aviso
+  de que **foto com perspectiva não dá cota** e de que nada disso entrou em JSON/tabela/desenho.
+* o que elas decidem, em uma linha cada: o recurso 1 dele **não são duas cavidades nas pontas**, é um **rebaixo
+  retangular raso, de cantos arredondados, corrido atrás da fenda** na matriz velha (IMG-11) - e a matriz velha é
+  um disco **plano, sem degrau/chanfro/land**, oxidada; na face de saída os dois furos redondos simétricos são da
+  ferramenta de virar a matriz (IMG-10); montada, ela fica **afundada num copo com assento cônico** (IMG-08), que
+  é outro arranjo - a nossa v30 sai rasante ao nariz; e a amostra com defeito tem **denteado idêntico nas duas
+  bordas** (IMG-06).
+* **a descoberta que pode poupar dinheiro:** os dois únicos quadros do vídeo de 9,7 s que o PDF embute **não
+  mostram a saída da matriz**, mostram um **disco girando cortando a borda** do perfil, com o serrilhado no ponto
+  de contato e a superfície do perfil lisa ao lado. Ninguém na conversa citou o disco de corte como causa. Por
+  isso entrou como **pendência nº 0** no §6 do relatório: conferir fio/rotação/pressão do corte e ver o vídeo
+  inteiro (`midia_extraida/VID-20260924-WA0011.mp4`, no repo `ACESS`) antes de usinar matriz. É hipótese de foto,
+  não diagnóstico — e o ondulado do centro ela não explica.
+* publicação: só documento (relatório de contato + este bloco). **Zero arquivo de pacote, zero DXF, zero zip**,
+  então CHECKSUMS, os dois zips e a tag `v30.0-oficial-pacote-usinagem` (`80167f2`) não se movem; `verificar_cadeia.py --rapido` rodou antes do push.
