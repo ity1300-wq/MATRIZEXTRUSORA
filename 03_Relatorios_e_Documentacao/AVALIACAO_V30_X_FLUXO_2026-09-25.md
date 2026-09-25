@@ -77,6 +77,11 @@ centro e o caminho longo da borda, que é um efeito de coletor 3D). Então:
    assinatura de pulsação da rosca (tela/filtro/temperatura), e aí matriz nenhuma resolve essa parte. Medir o
    espaçamento com régua e comparar com o passo da rosca leva 5 minutos e separa as duas causas.
 
+**Desdobramento (mesma data, pedido por ele: "nosso objetivo é justamente esse"):** o documento que diz o
+que uma matriz precisa ter para tirar o serrilhado, com as contas de ordem de grandeza e o jeito de dimensionar o
+alívio com paquímetro em vez de CFD, é `FLUXO_CENTRO_X_PONTAS_2026-09-25.md`. Aquele §2 que você está lendo é o
+diagnóstico; aquele documento é a receita e o preço dela.
+
 ## 6. Onde o veredito dele é injusto com a v30
 
 Ele comparou nosso projeto com a matriz que **ele mesmo** fabricou: disco plano, sem degrau, sem chanfro, sem
